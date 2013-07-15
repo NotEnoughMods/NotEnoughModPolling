@@ -62,7 +62,7 @@ def list(self, name, params, channel, userdata, rank):
         i = -1
         for mod in jsonres:
             i = i + 1
-            if str(params[1]).lower() in str(mod["name"]).lower():
+            if str(params[1]).lower() in mod["name"].lower():
                 results.append(i)
                 continue
             else:
