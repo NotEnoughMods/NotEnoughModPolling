@@ -320,13 +320,13 @@ def ChatEvent(self, channels, userdata, message, currChannel):
     match = re.match("^Current list: (.+?)$",message)
     if match:
         NEM.nemVersion = match.group(1)
-        self.sendChatMessage(self.send, currChannel, "Confirming latest version is: "+match.group(1))
+        #self.sendChatMessage(self.send, currChannel, "Confirming latest version is: "+match.group(1))
     else:
         #detect list change
         match = re.match("^switched list to: \002\00312(.+?)\003\002$",message)
         if match:
             NEM.nemVersion = match.group(1)
-            self.sendChatMessage(self.send, currChannel, "Confirming list change to: "+match.group(1))
+            #self.sendChatMessage(self.send, currChannel, "Confirming list change to: "+match.group(1))
 
 def running(self, name, params, channel, userdata, rank):
     if len(params) == 2 and (params[1] == "true" or params[1] == "on"):
