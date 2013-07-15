@@ -11,7 +11,7 @@ permission = 1
 
 class NotEnoughClasses():
     nemVersions = []
-    nemVersion = "1.6.2" #TODO: automate somehow
+    nemVersion = ""
     def __init__(self):
         self.QueryNEM()
     def QueryNEM(self):
@@ -119,6 +119,9 @@ class NotEnoughClasses():
         for promotion in promotionArray:
             if promotion["name"] == self.mods[mod]["mcforge"]["promotion"]:
                 info = promotion["files"][0]["url"]
+                match = re.search(self.mods[mod]["mcforge"]["regex"],info)
+                if match:
+                    print(m.group(0,1,2))
                 info = info[self.mods[mod]["mcforge"]["prefix"]:self.mods[mod]["mcforge"]["suffix"]].split(self.mods[mod]["mcforge"]["split"])              
                 return {
                     "version" : info[1],
@@ -150,6 +153,7 @@ class NotEnoughClasses():
             "mcforge" : {
                 "name" : "minecraftforge",
                 "promotion" : "latest",
+                "regex" : "minecraftforge-src-(.+?)-(.+?).zip$",
                 "prefix" : 66,
                 "suffix" : -4,
                 "split"  : "-"
@@ -164,6 +168,7 @@ class NotEnoughClasses():
             "dev"    : True,
             "mcforge" : {
                 "name" : "IronChests2",
+                "regex" : "ironchest-universal-(.+?)-(.+?).zip$",
                 "promotion" : "latest",
                 "prefix" : 64,
                 "suffix" : -4,
@@ -318,12 +323,31 @@ class NotEnoughClasses():
     }
 NEM = NotEnoughClasses()
 
+def ChatEvent(self, channels, userdata, message, currChannel):
+    #detect initial list
+    match = re.match("^Current list: (.+?)$",message)
+    if match:
+        NEM.nemVersion = match.group(1)
+        self.sendChatMessage(self.send, currChannel, "Confirming latest version is: "+match.group(1))
+    else:
+        #detect list change
+        match = re.match("^switched list to: \002\00312(.+?)\003\002$",message)
+        if match:
+            NEM.nemVersion = match.group(1)
+            self.sendChatMessage(self.send, currChannel, "Confirming list change to: "+match.group(1))
+
 def running(self, name, params, channel, userdata, rank):
     if len(params) == 2 and (params[1] == "true" or params[1] == "on"):
         if not self.events["time"].doesExist("NotEnoughModPolling"):
             self.sendChatMessage(self.send, channel, "Turning NotEnoughModPolling on.")
             NEM.InitiateVersions()
             self.events["time"].addEvent("NotEnoughModPolling", 60*5, TimerEvent, [channel])
+            
+            #Detect current list (and future changes)
+            if self.events["chat"].doesExist("NEMP"):
+                self.events["chat"].removeEvent("NEMP")
+            self.events["chat"].addEvent("NEMP", ChatEvent, [channel])
+            self.sendChatMessage(self.send, channel, "!current")
         else:
             self.sendChatMessage(self.send, channel, "NotEnoughMods-Polling is already running.")
     if len(params) == 2 and (params[1] == "false" or params[1] == "off"):
@@ -345,7 +369,8 @@ def TimerEvent(self,channels):
                         tempVersion = [mod]
                         tempList[NEM.mods[mod]["mc"]] = tempVersion
         for version in tempList:
-            self.sendChatMessage(self.send, channel, "!setlist "+version)
+            if version != NEM.nemVersion and setList == "null":
+                self.sendChatMessage(self.send, channel, "!setlist "+version)
             for mod in tempList[version]:
                 if NEM.mods[mod]["dev"] == True:
                     self.sendChatMessage(self.send, channel, "!dev "+mod+" "+NEM.mods[mod]["version"])
