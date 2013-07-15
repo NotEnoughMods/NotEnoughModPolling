@@ -120,13 +120,11 @@ class NotEnoughClasses():
             if promotion["name"] == self.mods[mod]["mcforge"]["promotion"]:
                 info = promotion["files"][0]["url"]
                 match = re.search(self.mods[mod]["mcforge"]["regex"],info)
-                if match:
-                    print(m.group(0,1,2))
-                info = info[self.mods[mod]["mcforge"]["prefix"]:self.mods[mod]["mcforge"]["suffix"]].split(self.mods[mod]["mcforge"]["split"])              
-                return {
-                    "version" : info[1],
-                    "mc" : info[0]
-                }
+                if match:   
+                    return {
+                        "version" : match.group(2),
+                        "mc" : match.group(1)
+                    } 
         
     def CheckMod(self, mod):
         try:
@@ -153,10 +151,7 @@ class NotEnoughClasses():
             "mcforge" : {
                 "name" : "minecraftforge",
                 "promotion" : "latest",
-                "regex" : "minecraftforge-src-(.+?)-(.+?).zip$",
-                "prefix" : 66,
-                "suffix" : -4,
-                "split"  : "-"
+                "regex" : "minecraftforge-src-(.+?)-(.+?).zip$"
             }
         },
         "IronChests" : {
@@ -168,11 +163,8 @@ class NotEnoughClasses():
             "dev"    : True,
             "mcforge" : {
                 "name" : "IronChests2",
-                "regex" : "ironchest-universal-(.+?)-(.+?).zip$",
                 "promotion" : "latest",
-                "prefix" : 64,
-                "suffix" : -4,
-                "split"  : "-"
+                "regex" : "ironchest-universal-(.+?)-(.+?).zip$"
             }
         },
         #"OpenCCSensors" : { #Will rewrite when Mikee gives me a mod flag for http://openperipheral.info/releases
