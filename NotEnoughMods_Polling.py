@@ -363,6 +363,9 @@ def TimerEvent(self,channels):
         for version in tempList:
             if version != NEM.nemVersion and setList == "null":
                 self.sendChatMessage(self.send, channel, "!setlist "+version)
+            elif version != setList:
+                self.sendChatMessage(self.send, channel, "!setlist "+version)
+                    
             for mod in tempList[version]:
                 if NEM.mods[mod]["dev"] == True:
                     self.sendChatMessage(self.send, channel, "!dev "+mod+" "+NEM.mods[mod]["version"])
