@@ -77,14 +77,6 @@ class NotEnoughClasses():
         return {
             "version" : result[i+1:]
         }      
-    def CheckNEMVC(self,mod):
-        result = self.QueryJenkins("http://ci.thezorro266.com/job/NEM-VersionChecker/lastSuccessfulBuild/artifact/build/dist/", "-", ".jar")
-        i = result.rfind("-")
-        j = result.find("-")
-        return {
-            "version" : result[i+1:],
-            "mc" : result[j+3:i]
-        }
     def CheckInvTweaks(self,mod):
         result = self.QueryJenkins("http://build.technicpack.net/job/Inventory-Tweaks/lastSuccessfulBuild/artifact/build/out/", "-", ".jar")
         i = result.find("-")
@@ -109,6 +101,14 @@ class NotEnoughClasses():
         return {
             "version" : version,
             "mc" : mcver
+        }
+    def CheckJenkinsMC2(self,mod): #foo-bar-1.6.2-x.x.x
+        result = self.QueryJenkins(self.mods[mod]["jenkins"]["url"],self.mods[mod]["jenkins"]["start"],self.mods[mod]["jenkins"]["extention"])
+        i = result.rfind("-")
+        j = result.find("-")
+        return {
+            "version" : result[i+1:],
+            "mc" : result[j+3:i]
         }
     def CheckMCForge(self,mod):
         forgeFeed = urllib2.urlopen("http://files.minecraftforge.net/"+self.mods[mod]["mcforge"]["name"]+"/json", timeout = 10)
@@ -305,12 +305,30 @@ class NotEnoughClasses():
             }
         },
         "NEM-VersionChecker" : {
-            "function" : CheckNEMVC,
+            "function" : CheckJenkinsMC2,
             "version" : "",
-            "mc" : "NOT_USED",
+            "mc" : "",
             "change" : "NOT_USED",
             "active" : True,
-            "dev"    : False
+            "dev"    : False,
+            "jenkins" : {
+                "url" : "http://ci.thezorro266.com/job/NEM-VersionChecker/lastSuccessfulBuild/artifact/build/dist/",
+                "start" : "-",
+                "extention" : ".jar"
+            }
+        },
+        "Buildcraft" : {
+            "function" : CheckJenkinsMC2,
+            "version" : "",
+            "mc" : "",
+            "change" : "NOT_USED",
+            "active" : True,
+            "dev" : True,
+            "jenkins" : {
+                "url" : "http://nallar.me/buildservice/job/Buildcraft/lastSuccessfulBuild/artifact/bin/",
+                "start" : "-",
+                "extention" : ".jar"
+            }
         }
     }
 NEM = NotEnoughClasses()
