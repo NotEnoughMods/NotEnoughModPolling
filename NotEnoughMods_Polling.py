@@ -108,7 +108,7 @@ class NotEnoughClasses():
         j = result.find("-")
         return {
             "version" : result[i+1:],
-            "mc" : result[j+3:i]
+            "mc" : result[j+1+len(self.mods[mod]["prefix"]):i]
         }
     def CheckMCForge(self,mod):
         forgeFeed = urllib2.urlopen("http://files.minecraftforge.net/"+self.mods[mod]["mcforge"]["name"]+"/json", timeout = 10)
@@ -315,7 +315,8 @@ class NotEnoughClasses():
                 "url" : "http://ci.thezorro266.com/job/NEM-VersionChecker/lastSuccessfulBuild/artifact/build/dist/",
                 "start" : "-",
                 "extention" : ".jar"
-            }
+            },
+            "prefix" : "MC"
         },
         "Buildcraft" : {
             "function" : CheckJenkinsMC2,
@@ -328,7 +329,8 @@ class NotEnoughClasses():
                 "url" : "http://nallar.me/buildservice/job/Buildcraft/lastSuccessfulBuild/artifact/bin/",
                 "start" : "-",
                 "extention" : ".jar"
-            }
+            },
+            "prefix" : ""
         }
     }
 NEM = NotEnoughClasses()
