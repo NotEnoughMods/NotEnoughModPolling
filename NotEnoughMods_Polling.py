@@ -44,14 +44,14 @@ class NotEnoughClasses():
                             self.mods[mod["name"]]["version"] = mod["version"]
                         templist.remove(mod["name"])
         
-    def QueryJenkins(self, url, start, type):
+    def QueryJenkins(self, url, start, end):
         jenkinFeed = urllib2.urlopen(url, timeout = 10)
         result = jenkinFeed.read()
         jenkinFeed.close()
         lines = result.split()
         result = ""
         for line in lines:
-            if type in line.lower():
+            if end in line.lower():
                 result = line
                 break
         result = result[6:]
@@ -88,7 +88,21 @@ class NotEnoughClasses():
             "version" : result,
             "mc" : version
         }
-    
+    def CheckJenkinsNew(self, mod):
+        print("Starting JenkinsNew for "+mod)
+        jenkinFeed = urllib2.urlopen(url, timeout = 10)
+        print("Download success")
+        jsonres = simplejson.loads(jenkinFeed, strict = False )
+        print("Success json conversion")
+        #result = jsonres["artifacts"][self.mods[mod]["jenkins"]["item"]]
+        i = result.find(self.mods[mod]["jenkins"]["start"])
+        print(i)
+        j = result.rfind(self.mods[mod]["jenkins"]["end"])
+        print(j)
+        return {
+            "version" : result[i+1:j],
+            "change" : jsonres["changeSet"]["items"][0]["comment"]
+        }
     def CheckJenkins(self, mod): # foo-x.x.x
         return {
             "version" : self.QueryJenkins(self.mods[mod]["jenkins"]["url"],self.mods[mod]["jenkins"]["start"],self.mods[mod]["jenkins"]["extention"])
@@ -167,6 +181,19 @@ class NotEnoughClasses():
                 "regex" : "ironchest-universal-(.+?)-(.+?).zip$"
             }
         },
+        "ForgeMultipart" : {
+            "function" : CheckMCForge,
+            "version" : "",
+            "mc" : "",
+            "change" : "NOT_USED",
+            "active" : True,
+            "dev"    : True,
+            "mcforge" : {
+                "name" : "ForgeMultipart",
+                "promotion" : "latest",
+                "regex" : "ForgeMultipart-universal-(.+?)-(.+?).jar$"
+            }
+        },
         #"OpenCCSensors" : { #Will rewrite when Mikee gives me a mod flag for http://openperipheral.info/releases
         #    "function" : CheckOCS,
         #    "version" : "",
@@ -182,16 +209,17 @@ class NotEnoughClasses():
         #    "active" : False
         #},
         "MineFactoryReloaded" : {
-            "function" : CheckJenkins,
+            "function" : CheckJenkinsNew,
             "version" : "",
             "mc" : "NOT_USED",
-            "change" : "NOT_USED",
+            "change" : "",
             "active" : True,
             "dev"    : True,
             "jenkins" : {
-                "url" : "http://build.technicpack.net/view/PowerCrystals/job/MineFactoryReloaded/lastSuccessfulBuild/artifact/build/dist/",
+                "url" : "http://build.technicpack.net/view/PowerCrystals/job/MineFactoryReloaded/lastSuccessfulBuild/api/json",
                 "start" : "-",
-                "extention" : ".jar"
+                "end" : ".jar",
+                "item": 1
             }
         },
         "IndustrialCraft2" : {
