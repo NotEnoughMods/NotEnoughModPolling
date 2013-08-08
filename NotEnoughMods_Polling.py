@@ -22,6 +22,8 @@ class NotEnoughClasses():
             self.nemVersions = reversed(simplejson.loads(result, strict = False))
         except:
             print("Failed to get NEM versions, falling back to hard-coded")
+            traceb = str(traceback.format_exc())
+            print(traceb)
             self.nemVersions = reversed(["1.4.5","1.4.6-1.4.7","1.5.1","1.5.2","1.6.1","1.6.2"])
             
     def InitiateVersions(self):
@@ -480,17 +482,25 @@ def help(self, name, params, channel, userdata, rank):
             self.sendChatMessage(self.send, channel, name+ ": Invalid command provided")
 
 def list(self,name,params,channel,userdata,rank):
-    tempList = []
+    tempList = {}
     for key in NEM.mods:
         dev = ""
+        mcver = NEM.mods[key]["mc"]
         if NEM.mods[key]["dev"] == True:
             dev = "(dev)"
-        tempList.append(key+dev+" for MC:"+NEM.mods[key]["mc"])
-    self.sendChatMessage(self.send,channel, "I check: "+", ".join(tempList))
+        if not mcver in tempList:
+            tempList[mcver] = []
+        tempList[mcver].append("{0}{1}".format(key,dev))
+    
+    del mcver
+    for mcver in tempList:
+        self.sendChatMessage(self.send,channel, "Mods checked for MC{0}: {1}".format(mcver, ', '.join(tempList[mcver])))
+
 def refresh(self,name,params,channel,userdata,rank):
     NEM.QueryNEM()
     NEM.InitiateVersions()
     self.sendChatMessage(self.send,channel, "Queried NEM for \"latest\" versions")
+
 commands = {
     "running" : running,
     "poll" : poll,
@@ -500,6 +510,7 @@ commands = {
     "setversion" : setversion,
     "refresh" : refresh
 }
+
 help = {
     "list" : ["=nemp list", "Lists the mods that NotEnoughModPolling checks"],
     "about": ["=nemp about", "Shows some info about this plugin."],
