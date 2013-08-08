@@ -89,18 +89,16 @@ class NotEnoughClasses():
             "mc" : version
         }
     def CheckJenkinsNew(self, mod):
-        print("Starting JenkinsNew for "+mod)
-        jenkinFeed = urllib2.urlopen(url, timeout = 10)
-        print("Download success")
-        jsonres = simplejson.loads(jenkinFeed, strict = False )
-        print("Success json conversion")
-        #result = jsonres["artifacts"][self.mods[mod]["jenkins"]["item"]]
-        i = result.find(self.mods[mod]["jenkins"]["start"])
-        print(i)
-        j = result.rfind(self.mods[mod]["jenkins"]["end"])
-        print(j)
+        jenkinFeed = urllib2.urlopen(self.mods[mod]["jenkins"]["url"], timeout = 10)
+        result = jenkinFeed.read()
+        jenkinFeed.close()
+        
+        jsonres = simplejson.loads(result, strict = False )
+        filename = jsonres["artifacts"][self.mods[mod]["jenkins"]["item"]]["fileName"]
+        print("|"+filename)
+        match = re.search(self.mods[mod]["jenkins"]["regex"],filename)
         return {
-            "version" : result[i+1:j],
+            "version" : match.group("version"),
             "change" : jsonres["changeSet"]["items"][0]["comment"]
         }
     def CheckJenkins(self, mod): # foo-x.x.x
@@ -217,8 +215,7 @@ class NotEnoughClasses():
             "dev"    : True,
             "jenkins" : {
                 "url" : "http://build.technicpack.net/view/PowerCrystals/job/MineFactoryReloaded/lastSuccessfulBuild/api/json",
-                "start" : "-",
-                "end" : ".jar",
+                "regex": "MineFactoryReloaded-(?P<version>.+?).jar$",
                 "item": 1
             }
         },
@@ -420,6 +417,8 @@ def TimerEvent(self,channels):
                     self.sendChatMessage(self.send, channel, "!dev "+mod+" "+NEM.mods[mod]["version"])
                 else:
                     self.sendChatMessage(self.send, channel, "!mod "+mod+" "+NEM.mods[mod]["version"])
+                if NEM.mods[mod]["change"] != "NOT_USED":
+                    self.sendChatMessage(self.send, channel, " * "+NEM.mods[mod]["change"])
             setList = version
         if (setList != NEM.nemVersion):
             if setList != "null":
