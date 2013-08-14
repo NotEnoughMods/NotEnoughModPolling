@@ -468,7 +468,8 @@ def setversion(self, name, params, channel, userdata, rank):
         self.sendChatMessage(self.send, channel, "set default list to: "+colourblue+params[1]+colour)
         
 def about(self, name, params, channel, userdata, rank):
-    self.sendChatMessage(self.send, channel, "Not Enough Mods: Polling for IRC by SinZ v1.0")
+    self.sendChatMessage(self.send, channel, "Not Enough Mods: Polling for IRC by SinZ v1.2")
+    self.sendChatMessage(self.send, channel, "Source code available at: http://github.com/SinZ163/NotEnoughMods")
     
 def help(self, name, params, channel, userdata, rank):
     if len(params) == 1:
