@@ -386,7 +386,7 @@ def ChatEvent(self, channels, userdata, message, currChannel):
     #detect initial list
     match = re.match("^Current list: (.+?)$",message)
     if match:
-        NEM.nemVersion = match.group(1)
+        NEM.nemVersion = match.group(1).split(" ")[0]
         #self.sendChatMessage(self.send, currChannel, "Confirming latest version is: "+match.group(1))
     else:
         #detect list change
@@ -488,6 +488,9 @@ def setversion(self, name, params, channel, userdata, rank):
         NEM.nemVersion = str(params[1])
         self.sendChatMessage(self.send, channel, "set default list to: "+colourblue+params[1]+colour)
         
+def getversion(self,name,params,channel,userdata,rank):
+    self.sendChatMessage(self.send, channel, NEM.nemVersion)
+        
 def about(self, name, params, channel, userdata, rank):
     self.sendChatMessage(self.send, channel, "Not Enough Mods: Polling for IRC by SinZ v1.2")
     self.sendChatMessage(self.send, channel, "Source code available at: http://github.com/SinZ163/NotEnoughMods")
@@ -530,6 +533,7 @@ commands = {
     "about": about,
     "help" : help,
     "setversion" : setversion,
+    "getversion" : getversion,
     "refresh" : refresh
 }
 
