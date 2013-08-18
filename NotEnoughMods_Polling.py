@@ -28,6 +28,7 @@ class NotEnoughClasses():
             
     def InitiateVersions(self):
         templist = self.mods.keys()
+        
         for version in self.nemVersions:
             if "-dev" not in version:
                 versionFeed = urllib2.urlopen("http://bot.notenoughmods.com/"+version+".json", timeout = 10)
@@ -40,11 +41,15 @@ class NotEnoughClasses():
                     if mod["name"] in templist:
                         print(mod["name"]+" has versions for "+version)
                         self.mods[mod["name"]]["mc"] = version
+                        #print("a")
                         if self.mods[mod["name"]]["dev"] == True:
                             self.mods[mod["name"]]["version"] = mod["dev"]
+                            #print("b")
                         else:
                             self.mods[mod["name"]]["version"] = mod["version"]
+                        #print("c")
                         templist.remove(mod["name"])
+                        #print("d")
         
     def QueryJenkins(self, url, start, end):
         jenkinFeed = urllib2.urlopen(url, timeout = 10)
@@ -99,10 +104,12 @@ class NotEnoughClasses():
         filename = jsonres["artifacts"][self.mods[mod]["jenkins"]["item"]]["fileName"]
         print("|"+filename)
         match = re.search(self.mods[mod]["jenkins"]["regex"],filename)
-        return {
-            "version" : match.group("version"),
-            "change" : jsonres["changeSet"]["items"][0]["comment"]
-        }
+        print("huzzah")
+        output = match.groupdict()
+        print("yay")         
+        output["change"] = jsonres["changeSet"]["items"][0]["comment"]
+        print("YESSS")
+        return output
     def CheckJenkins(self, mod): # foo-x.x.x
         return {
             "version" : self.QueryJenkins(self.mods[mod]["jenkins"]["url"],self.mods[mod]["jenkins"]["start"],self.mods[mod]["jenkins"]["extention"])
@@ -358,6 +365,19 @@ class NotEnoughClasses():
                 "extention" : ".jar"
             },
             "prefix" : ""
+        },
+        "MCPC-PLUS" : {
+            "function" : CheckJenkinsNew,
+            "version" : "",
+            "mc" : "",
+            "active" : True,
+            "dev" : True,
+            "jenkins" : {
+                "url" : "http://ci.md-5.net/job/MCPC-Plus/lastSuccessfulBuild/api/json",
+                #mcpc-plus-1.6.2-R0.2-forge819-B53.jar
+                "regex": "mcpc-plus-(?P<mc>.+?)-(.+?)-(.+?)-(?P<version>.+?).jar$",
+                "item": 0
+            }
         }
     }
 NEM = NotEnoughClasses()
@@ -452,9 +472,10 @@ def execute(self, name, params, channel, userdata, rank):
     try:
         command = commands[params[0]]
         command(self, name, params, channel, userdata, rank)
-    except:
+    except Exception as e:
         self.sendChatMessage(self.send, channel, "invalid command!")
         self.sendChatMessage(self.send, channel, "see =nemp help for a list of commands")
+        print(e)
 
 def setversion(self, name, params, channel, userdata, rank):
     if len(params) != 2:
