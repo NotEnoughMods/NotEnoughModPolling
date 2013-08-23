@@ -102,13 +102,13 @@ class NotEnoughClasses():
         
         jsonres = simplejson.loads(result, strict = False )
         filename = jsonres["artifacts"][self.mods[mod]["jenkins"]["item"]]["fileName"]
-        print("|"+filename)
         match = re.search(self.mods[mod]["jenkins"]["regex"],filename)
-        print("huzzah")
         output = match.groupdict()
-        print("yay")         
-        output["change"] = jsonres["changeSet"]["items"][0]["comment"]
-        print("YESSS")
+        try:
+            output["change"] = jsonres["changeSet"]["items"][0]["comment"]
+        except:
+            print("Aww, no changelog for "+mod)
+            output["change"] = "NOT_USED"
         return output
     def CheckJenkins(self, mod): # foo-x.x.x
         return {
@@ -237,16 +237,16 @@ class NotEnoughClasses():
             "dev"    : True
         },
         "ModularPowersuits" : {
-            "function" : CheckJenkins,
+            "function" : CheckJenkinsNew,
             "version" : "",
-            "mc" : "NOT_USED",
-            "change" : "NOT_USED",
+            "mc" : "",
+            "change" : "",
             "active" : True,
             "dev"    : True,
             "jenkins" : {
-                "url" : "http://build.technicpack.net/job/Machine-Muse-Power-Suits/lastSuccessfulBuild/artifact/build/dist/",
-                "start" : "-",
-                "extention" : ".jar"
+                "url" : "http://build.technicpack.net/job/Machine-Muse-Power-Suits/lastSuccessfulBuild/api/json",
+                "regex" : "ModularPowersuits-(?P<mc>.+?)-(?P<version>.+?).jar$",
+                "item" : 0
             }
         },
         "ModularPowersuits-Addons" : {
@@ -339,30 +339,30 @@ class NotEnoughClasses():
             }
         },
         "NEM-VersionChecker" : {
-            "function" : CheckJenkinsMC2,
+            "function" : CheckJenkinsNew,
             "version" : "",
             "mc" : "",
             "change" : "NOT_USED",
             "active" : True,
             "dev"    : False,
             "jenkins" : {
-                "url" : "http://ci.thezorro266.com/job/NEM-VersionChecker/lastSuccessfulBuild/artifact/build/dist/",
-                "start" : "-",
-                "extention" : ".jar"
+                "url" : "http://ci.thezorro266.com/job/NEM-VersionChecker/lastSuccessfulBuild/api/json",
+                "regex" : "NEM-VersionChecker-MC(?P<mc>.+?)-(?P<version>.+?).jar$",
+                "item" : 0
             },
             "prefix" : "MC"
         },
         "Buildcraft" : {
-            "function" : CheckJenkinsMC2,
+            "function" : CheckJenkinsNew,
             "version" : "",
             "mc" : "",
             "change" : "NOT_USED",
             "active" : True,
             "dev" : True,
             "jenkins" : {
-                "url" : "http://nallar.me/buildservice/job/Buildcraft/lastSuccessfulBuild/artifact/bin/",
-                "start" : "-",
-                "extention" : ".jar"
+                "url" : "http://nallar.me/buildservice/job/Buildcraft/lastSuccessfulBuild/api/json",
+                "regex" : "buildcraft-universal-(?P<mc>.+?)-(?P<version>.+?).jar$",
+                "item" : 0
             },
             "prefix" : ""
         },
@@ -378,7 +378,20 @@ class NotEnoughClasses():
                 "regex": "mcpc-plus-(?P<mc>.+?)-(.+?)-(.+?)-(?P<version>.+?).jar$",
                 "item": 0
             }
-        }
+        },
+        "Artifice" : {
+            "function" : CheckJenkinsNew,
+            "version" : "",
+            "mc" : "",
+            "change" : "",
+            "active" : True,
+            "dev"    : True,
+            "jenkins" : {
+                "url" : "http://build.technicpack.net/job/Artifice/lastSuccessfulBuild/api/json",
+                "regex": "Artifice-(?P<version>.+?).jar$",
+                "item": 0
+            }
+        },
     }
 NEM = NotEnoughClasses()
 
