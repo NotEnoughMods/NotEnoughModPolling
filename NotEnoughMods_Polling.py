@@ -72,13 +72,7 @@ class NotEnoughClasses():
         k = result.find("_")
         return {
             "version" : result[0:k]
-        }
-    def CheckABO(self,mod):
-        result = self.QueryJenkins("https://jenkins.ra-doersch.de/job/AdditionalBuildcraftObjects/lastSuccessfulBuild/artifact/bin/", "-", ".jar")
-        i = result.rfind("-")
-        return {
-            "version" : result[i+1:]
-        }      
+        } 
     def CheckInvTweaks(self,mod):
         result = self.QueryJenkins("http://build.technicpack.net/job/Inventory-Tweaks/lastSuccessfulBuild/artifact/build/out/", "-", ".jar")
         i = result.find("-")
@@ -318,12 +312,17 @@ class NotEnoughClasses():
             }
         },
         "AdditionalBuildcraftObjects" : {
-            "function" : CheckABO,
+            "function" : CheckJenkinsNew,
             "version" : "",
             "mc" : "NOT_USED",
-            "change" : "NOT_USED",
+            "change" : "",
             "active" : True,
             "dev"    : True,
+            "jenkins" : {
+                "url" : "https://jenkins.ra-doersch.de/job/AdditionalBuildcraftObjects/lastSuccessfulBuild/api/json",
+                "regex" : "buildcraft-Z-additional-buildcraft-objects-(?P<version>.+?).jar$",
+                "item" : 1
+            }
         },
         "Galacticraft" : {
             "function" : CheckJenkinsNew,
