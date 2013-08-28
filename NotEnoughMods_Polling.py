@@ -226,7 +226,7 @@ class NotEnoughClasses():
             "dev"    : True,
             "jenkins" : {
                 "url" : "http://ic2api.player.to:8080/job/IC2_lf/lastSuccessfulBuild/api/json",
-                "regex" : "industrialcraft-(?P<version>.+?)-lf.jar$",
+                "regex" : "industrialcraft-2_(?P<version>.+?)-lf.jar$",
                 "item" : 2
             }
         },
