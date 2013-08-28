@@ -67,11 +67,6 @@ class NotEnoughClasses():
         result = result[j+1:i-4]
         return result
         
-    def CheckIC2(self,mod):
-        result = self.QueryJenkins("http://ic2api.player.to:8080/job/IC2_lf/lastSuccessfulBuild/artifact/packages/","_",".jar")
-        return {
-            "version" : result[0:-3]
-        }
     def CheckMPSA(self,mod):
         result = self.QueryJenkins("http://build.technicpack.net/job/ModularPowersuitsAddons/lastSuccessfulBuild/artifact/build/dist/","-",".jar") # TODO: FIX!
         k = result.find("_")
@@ -229,12 +224,17 @@ class NotEnoughClasses():
             }
         },
         "IndustrialCraft2" : {
-            "function" : CheckIC2,
+            "function" : CheckJenkinsNew,
             "version" : "",
             "mc" : "NOT_USED",
-            "change" : "NOT_USED",
+            "change" : "",
             "active" : True,
-            "dev"    : True
+            "dev"    : True,
+            "jenkins" : {
+                "url" : "http://ic2api.player.to:8080/job/IC2_lf/lastSuccessfulBuild/api/json",
+                "regex" : "industrialcraft-(?P<version>.+?)-lf.jar$",
+                "item" : 2
+            }
         },
         "ModularPowersuits" : {
             "function" : CheckJenkinsNew,
@@ -326,45 +326,43 @@ class NotEnoughClasses():
             "dev"    : True,
         },
         "Galacticraft" : {
-            "function" : CheckJenkinsMC,
+            "function" : CheckJenkinsNew,
             "version" : "",
-            "mc" : "NOT_USED",
-            "change" : "NOT_USED",
+            "mc" : "",
+            "change" : "",
             "active" : True,
             "dev"    : True,
             "jenkins" : {
-                "url" : "http://2.iongaming.org:8080/job/Galacticraft/lastSuccessfulBuild/artifact/builds/",
-                "start" : "-",
-                "extention" : ".jar"
+                "url" : "http://2.iongaming.org:8080/job/Galacticraft/lastSuccessfulBuild/api/json",
+                "regex" : "Galacticraft-(?P<mc>.+?)-(?P<version>.+?).jar$",
+                "item" : 0
             }
         },
         "NEM-VersionChecker" : {
             "function" : CheckJenkinsNew,
             "version" : "",
             "mc" : "",
-            "change" : "NOT_USED",
+            "change" : "",
             "active" : True,
             "dev"    : False,
             "jenkins" : {
                 "url" : "http://ci.thezorro266.com/job/NEM-VersionChecker/lastSuccessfulBuild/api/json",
                 "regex" : "NEM-VersionChecker-MC(?P<mc>.+?)-(?P<version>.+?).jar$",
                 "item" : 0
-            },
-            "prefix" : "MC"
+            }
         },
         "Buildcraft" : {
             "function" : CheckJenkinsNew,
             "version" : "",
             "mc" : "",
-            "change" : "NOT_USED",
+            "change" : "",
             "active" : True,
             "dev" : True,
             "jenkins" : {
                 "url" : "http://nallar.me/buildservice/job/Buildcraft/lastSuccessfulBuild/api/json",
                 "regex" : "buildcraft-universal-(?P<mc>.+?)-(?P<version>.+?).jar$",
                 "item" : 0
-            },
-            "prefix" : ""
+            }
         },
         "MCPC-PLUS" : {
             "function" : CheckJenkinsNew,
@@ -511,6 +509,7 @@ def about(self, name, params, channel, userdata, rank):
 def help(self, name, params, channel, userdata, rank):
     if len(params) == 1:
         self.sendChatMessage(self.send, channel, name+ ": Available commands: " + ", ".join(help))
+        self.sendChatMessage(self.send, channel, name+ ": For command usage, use \"=nemp help <command>\".")
     else:
         command = params[1]
         if command in help:
