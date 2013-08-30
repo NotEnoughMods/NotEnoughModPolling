@@ -135,7 +135,15 @@ class NotEnoughClasses():
                         "version" : match.group(2),
                         "mc" : match.group(1)
                     } 
-        
+    def CheckChickenBones(self,mod):
+        chickenFeed = urllib2.urlopen("http://www.chickenbones.craftsaddle.org/Files/New_Versions/version.php?file="+mod+"&version="+self.mods[mod]["mc"], timeout = 10)
+        result = chickenFeed.read()
+        chickenFeed.close()
+        if result.startswith("Ret: "): #Hacky I know, but this is how ChickenBones does it in his mod
+            print(mod+": "+result[5:]) #This is also hacky, but ^
+            return {
+                "version" : result[5:]
+            }
     def CheckMod(self, mod):
         try:
             output = self.mods[mod]["function"](self,mod)
@@ -389,6 +397,55 @@ class NotEnoughClasses():
                 "item": 0
             }
         },
+        "CodeChickenCore" : {
+            "function" : CheckChickenBones,
+            "version" : "",
+            "mc" : "NOT_USED",
+            "change" : "NOT_USED",
+            "active" : True,
+            "dev"    : False
+        },
+        "ChickenChunks" : {
+            "function" : CheckChickenBones,
+            "version" : "",
+            "mc" : "NOT_USED",
+            "change" : "NOT_USED",
+            "active" : True,
+            "dev"    : False
+        },
+        "NotEnoughItems" : {
+            "function" : CheckChickenBones,
+            "version" : "",
+            "mc" : "NOT_USED",
+            "change" : "NOT_USED",
+            "active" : True,
+            "dev"    : False
+        },
+        "EnderStorage" : {
+            "function" : CheckChickenBones,
+            "version" : "",
+            "mc" : "NOT_USED",
+            "change" : "NOT_USED",
+            "active" : True,
+            "dev"    : False
+        },
+        "Translocator" : {
+            "function" : CheckChickenBones,
+            "version" : "",
+            "mc" : "NOT_USED",
+            "change" : "NOT_USED",
+            "active" : True,
+            "dev"    : False
+        },
+        "WR-CBE" : {
+            "function" : CheckChickenBones,
+            "version" : "",
+            "mc" : "NOT_USED",
+            "change" : "NOT_USED",
+            "active" : True,
+            "dev"    : False
+        }
+        
     }
 NEM = NotEnoughClasses()
 
