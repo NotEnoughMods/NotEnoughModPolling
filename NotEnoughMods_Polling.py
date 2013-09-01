@@ -198,6 +198,19 @@ class NotEnoughClasses():
                 "regex" : "ForgeMultipart-universal-(.+?)-(.+?).jar$"
             }
         },
+        "CompactSolars" : {
+            "function" : CheckMCForge,
+            "version" : "",
+            "mc" : "",
+            "change" : "NOT_USED",
+            "active" : True,
+            "dev"    : True,
+            "mcforge" : {
+                "name" : "ComapactSolars",
+                "promotion" : "latest",
+                "regex" : "compactsolars-universal-(.+?)-(.+?).zip$"
+            }
+        },
         #"OpenCCSensors" : { #Will rewrite when Mikee gives me a mod flag for http://openperipheral.info/releases
         #    "function" : CheckOCS,
         #    "version" : "",
