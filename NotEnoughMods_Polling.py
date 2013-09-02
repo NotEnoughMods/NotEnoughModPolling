@@ -461,7 +461,6 @@ class NotEnoughClasses():
         
     }
 NEM = NotEnoughClasses()
-
 def ChatEvent(self, channels, userdata, message, currChannel):
     #detect initial list
     match = re.match("^Current list: (.+?)$",message)
@@ -480,7 +479,7 @@ def running(self, name, params, channel, userdata, rank):
         if not self.events["time"].doesExist("NotEnoughModPolling"):
             self.sendChatMessage(self.send, channel, "Turning NotEnoughModPolling on.")
             NEM.InitiateVersions()
-            self.events["time"].addEvent("NotEnoughModPolling", 60*5, TimerEvent, [channel])
+            self.events["time"].addEvent("NotEnoughModPolling", 60*5, MainTimerEvent, [channel])
             
             #Detect current list (and future changes)
             if self.events["chat"].doesExist("NEMP"):
@@ -495,36 +494,46 @@ def running(self, name, params, channel, userdata, rank):
             self.events["time"].removeEvent("NotEnoughModPolling")
         else:
             self.sendChatMessage(self.send, channel, "NotEnoughModPolling isn't running!")
-def TimerEvent(self,channels):
-    for channel in channels:
-        tempList = {}
-        setList = "null"
-        for mod in NEM.mods:
-            if NEM.mods[mod]["active"]:
-                if NEM.CheckMod(mod):
-                    if NEM.mods[mod]["mc"] in tempList:
-                        tempList[NEM.mods[mod]["mc"]].append(mod)
-                    else:
-                        tempVersion = [mod]
-                        tempList[NEM.mods[mod]["mc"]] = tempVersion
-        for version in tempList:
-            if setList == "null":
-                if version != NEM.nemVersion:
-                    self.sendChatMessage(self.send, channel, "!setlist "+version)
-            elif version != setList:
-                self.sendChatMessage(self.send, channel, "!setlist "+version)
-                    
-            for mod in tempList[version]:
-                if NEM.mods[mod]["dev"] == True:
-                    self.sendChatMessage(self.send, channel, "!dev "+mod+" "+NEM.mods[mod]["version"])
+def PollingThread(self, pipe):
+    tempList = {}
+    for mod in NEM.mods:
+        if NEM.mods[mod]["active"]:
+            if NEM.CheckMod(mod):
+                if NEM.mods[mod]["mc"] in tempList:
+                    tempList[NEM.mods[mod]["mc"]].append(mod)
                 else:
-                    self.sendChatMessage(self.send, channel, "!mod "+mod+" "+NEM.mods[mod]["version"])
-                if NEM.mods[mod]["change"] != "NOT_USED":
-                    self.sendChatMessage(self.send, channel, " * "+NEM.mods[mod]["change"])
-            setList = version
-        if (setList != NEM.nemVersion):
-            if setList != "null":
-                self.sendChatMessage(self.send,channel, "!setlist "+NEM.nemVersion)
+                    tempVersion = [mod]
+                    tempList[NEM.mods[mod]["mc"]] = tempVersion
+    pipe.send(tempList)
+def MainTimerEvent(self,channels):
+    self.threading.addThread("NEMP", PollingThread)
+    self.events["time"].addEvent("NEMP_ThreadClock", 10, MicroTimerEvent, channels, from_event = True)
+def MicroTimerEvent(self,channels):
+    yes = self.threading.poll("NEMP")
+    if yes:
+        tempList = self.threading.recv("NEMP")
+        self.threading.sigquitThread("NEMP")
+        self.events["time"].removeEvent("NEMP_ThreadClock", from_event = True)
+        for channel in channels:
+            setList = "null"
+            for version in tempList:
+                if setList == "null":
+                    if version != NEM.nemVersion:
+                        self.sendChatMessage(self.send, channel, "!setlist "+version)
+                elif version != setList:
+                    self.sendChatMessage(self.send, channel, "!setlist "+version)
+                        
+                for mod in tempList[version]:
+                    if NEM.mods[mod]["dev"] == True:
+                        self.sendChatMessage(self.send, channel, "!dev "+mod+" "+NEM.mods[mod]["version"])
+                    else:
+                        self.sendChatMessage(self.send, channel, "!mod "+mod+" "+NEM.mods[mod]["version"])
+                    if NEM.mods[mod]["change"] != "NOT_USED":
+                        self.sendChatMessage(self.send, channel, " * "+NEM.mods[mod]["change"])
+                setList = version
+            if (setList != NEM.nemVersion):
+                if setList != "null":
+                    self.sendChatMessage(self.send,channel, "!setlist "+NEM.nemVersion)
                 
 def poll(self, name, params, channel, userdata, rank):
     if len(params) != 3:
