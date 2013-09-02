@@ -494,11 +494,13 @@ def PollingThread(self, pipe):
     pipe.send(tempList)
 def MainTimerEvent(self,channels):
     self.threading.addThread("NEMP", PollingThread)
-    self.events["time"].addEvent("NEMP_ThreadClock", 10, MicroTimerEvent, channels)
+    self.events["time"].addEvent("NEMP_ThreadClock", 10, MicroTimerEvent, channels, from_event = True)
 def MicroTimerEvent(self,channels):
     yes = self.threading.poll("NEMP")
     if yes:
         tempList = self.threading.recv("NEMP")
+        self.threading.sigquitThread("NEMP")
+        self.events["time"].removeEvent("NEMP_ThreadClock", from_event = True)
         for channel in channels:
             setList = "null"
             for version in tempList:
