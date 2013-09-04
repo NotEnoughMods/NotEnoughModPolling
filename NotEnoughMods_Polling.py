@@ -42,10 +42,10 @@ class NotEnoughClasses():
                         print(mod["name"]+" has versions for "+version)
                         self.mods[mod["name"]]["mc"] = version
                         #print("a")
-                        if self.mods[mod["name"]]["dev"] == True:
-                            self.mods[mod["name"]]["version"] = mod["dev"]
+                        if self.mods[mod["name"]]["dev"] != "NOT_USED":
+                            self.mods[mod["name"]]["dev"] = mod["dev"]
                             #print("b")
-                        else:
+                        if self.mods[mod["name"]]["version"] != "NOT_USED":
                             self.mods[mod["name"]]["version"] = mod["version"]
                         #print("c")
                         templist.remove(mod["name"])
@@ -71,7 +71,7 @@ class NotEnoughClasses():
         result = self.QueryJenkins("http://build.technicpack.net/job/ModularPowersuitsAddons/lastSuccessfulBuild/artifact/build/dist/","-",".jar") # TODO: FIX!
         k = result.find("_")
         return {
-            "version" : result[0:k]
+            "dev" : result[0:k]
         } 
     def CheckInvTweaks(self,mod):
         result = self.QueryJenkins("http://build.technicpack.net/job/Inventory-Tweaks/lastSuccessfulBuild/artifact/build/out/", "-", ".jar")
@@ -81,7 +81,7 @@ class NotEnoughClasses():
         version = result[2:j]
         result = result[j+1:]
         return {
-            "version" : result,
+            "dev" : result,
             "mc" : version
         }
     def CheckJenkinsNew(self, mod):
@@ -101,7 +101,7 @@ class NotEnoughClasses():
         return output
     def CheckJenkins(self, mod): # foo-x.x.x
         return {
-            "version" : self.QueryJenkins(self.mods[mod]["jenkins"]["url"],self.mods[mod]["jenkins"]["start"],self.mods[mod]["jenkins"]["extention"])
+            "dev" : self.QueryJenkins(self.mods[mod]["jenkins"]["url"],self.mods[mod]["jenkins"]["start"],self.mods[mod]["jenkins"]["extention"])
         }
     def CheckJenkinsMC(self,mod): # foo-1.6.1-x.x.x
         output = self.QueryJenkins(self.mods[mod]["jenkins"]["url"],self.mods[mod]["jenkins"]["start"],self.mods[mod]["jenkins"]["extention"])
@@ -109,7 +109,7 @@ class NotEnoughClasses():
         version = output[i+1:]
         mcver = output[0:i]
         return {
-            "version" : version,
+            "dev" : version,
             "mc" : mcver
         }
     def CheckJenkinsMC2(self,mod): #foo-bar-1.6.2-x.x.x
@@ -117,7 +117,7 @@ class NotEnoughClasses():
         i = result.rfind("-")
         j = result.find("-")
         return {
-            "version" : result[i+1:],
+            "dev" : result[i+1:],
             "mc" : result[j+1+len(self.mods[mod]["prefix"]):i]
         }
     def CheckMCForge(self,mod):
@@ -126,15 +126,29 @@ class NotEnoughClasses():
         forgeFeed.close()
         jsonres = simplejson.loads(result, strict = False )
         promotionArray = jsonres["promotions"]
+        devMatch = ""
+        recMatch = ""
         for promotion in promotionArray:
-            if promotion["name"] == self.mods[mod]["mcforge"]["promotion"]:
+            if promotion["name"] == self.mods[mod]["mcforge"]["dev"]:
                 info = promotion["files"][0]["url"]
-                match = re.search(self.mods[mod]["mcforge"]["regex"],info)
-                if match:   
-                    return {
-                        "version" : match.group(2),
-                        "mc" : match.group(1)
-                    } 
+                devMatch = re.search(self.mods[mod]["mcforge"]["regex"],info)
+            elif promotion["name"] == self.mods[mod]["mcforge"]["rec"]:
+                info = promotion["files"][0]["url"]
+                recMatch = research(self.mods[mod]["mcforge"]["regex"],info)
+        if devMatch:
+            output = {}
+            tmpMC = "null"
+            if recMatch:
+                output["version"] = recMatch.group(2)
+                tmpMC = recMatch.group(1)
+            if devMatch.group(1) != tmpMC:
+                output["version"] = "NOT_USED"
+                output["mc"] = devMatch.group(1)
+            else:
+                output["mc"] = tmpMC
+            output["dev"] = devMatch.group(2)
+            return output
+            
     def CheckChickenBones(self,mod):
         chickenFeed = urllib2.urlopen("http://www.chickenbones.craftsaddle.org/Files/New_Versions/version.php?file="+mod+"&version="+self.mods[mod]["mc"], timeout = 10)
         result = chickenFeed.read()
@@ -157,14 +171,21 @@ class NotEnoughClasses():
         return output
     def CheckMod(self, mod):
         try:
+            status = False
             output = self.mods[mod]["function"](self,mod)
-            if self.mods[mod]["version"] != output["version"]:
-                self.mods[mod]["version"] = output["version"]
-                if "mc" in output:
-                    self.mods[mod]["mc"] = output["mc"]
-                if "change" in output:
-                    self.mods[mod]["change"] = output["change"]
-                return True
+            if "dev" in output:
+                if self.mods[mod]["dev"] != output["dev"]:
+                    self.mods[mod]["dev"] = output["dev"]
+                    status = True
+            if "version" in output:
+                if self.mods[mod]["version"] != output["version"]:
+                    self.mods[mod]["version"] = output["version"]
+                    status = True
+            if "mc" in output:
+                self.mods[mod]["mc"] = output["mc"]
+            if "change" in output:
+                self.mods[mod]["change"] = output["change"]
+            return status
         except:
             print mod+" failed to be polled..."
     #def CheckOpenMod(self,mod):
@@ -173,13 +194,14 @@ class NotEnoughClasses():
         "MinecraftForge" : {
             "function" : CheckMCForge,
             "version" : "",
+            "dev"    : "",
             "mc" : "",
             "change" : "NOT_USED",
             "active" : True,
-            "dev"    : True,
             "mcforge" : {
                 "name" : "minecraftforge",
-                "promotion" : "latest",
+                "dev" : "latest",
+                "rec" : "recommended",
                 "regex" : "minecraftforge-src-(.+?)-(.+?).zip$"
             }
         },
@@ -187,25 +209,27 @@ class NotEnoughClasses():
             "function" : CheckMCForge,
             "version" : "",
             "mc" : "",
+            "dev"    : "",
             "change" : "NOT_USED",
             "active" : True,
-            "dev"    : True,
             "mcforge" : {
                 "name" : "IronChests2",
                 "promotion" : "latest",
+                "rec" : "recommended",
                 "regex" : "ironchest-universal-(.+?)-(.+?).zip$"
             }
         },
         "ForgeMultipart" : {
             "function" : CheckMCForge,
             "version" : "",
+            "dev"    : "",
             "mc" : "",
             "change" : "NOT_USED",
             "active" : True,
-            "dev"    : True,
             "mcforge" : {
                 "name" : "ForgeMultipart",
                 "promotion" : "latest",
+                "rec" : "recommended",
                 "regex" : "ForgeMultipart-universal-(.+?)-(.+?).jar$"
             }
         },
@@ -213,12 +237,13 @@ class NotEnoughClasses():
             "function" : CheckMCForge,
             "version" : "",
             "mc" : "",
+            "dev"    : "",
             "change" : "NOT_USED",
             "active" : True,
-            "dev" : True,
             "mcforge" : {
                 "name" : "CompactSolars",
                 "promotion" : "latest",
+                "rec" : "recommended",
                 "regex" : "compactsolars-universal-(.+?)-(.+?).zip$"
             }
         },
@@ -239,57 +264,57 @@ class NotEnoughClasses():
         "MineFactoryReloaded" : {
             "function" : CheckJenkinsNew,
             "version" : "",
+            "dev"    : "",
             "mc" : "NOT_USED",
             "change" : "",
             "active" : True,
-            "dev"    : True,
             "jenkins" : {
                 "url" : "http://build.technicpack.net/view/PowerCrystals/job/MineFactoryReloaded/lastSuccessfulBuild/api/json",
-                "regex": "MineFactoryReloaded-(?P<version>.+?).jar$",
+                "regex": "MineFactoryReloaded-(?P<dev>.+?).jar$",
                 "item": 1
             }
         },
         "IndustrialCraft2" : {
             "function" : CheckJenkinsNew,
-            "version" : "",
+            "version" : "NOT_USED",
+            "dev"    : "",
             "mc" : "NOT_USED",
             "change" : "",
             "active" : True,
-            "dev"    : True,
             "jenkins" : {
                 "url" : "http://ic2api.player.to:8080/job/IC2_lf/lastSuccessfulBuild/api/json",
-                "regex" : "industrialcraft-2_(?P<version>.+?)-lf.jar$",
+                "regex" : "industrialcraft-2_(?P<dev>.+?)-lf.jar$",
                 "item" : 2
             }
         },
         "ModularPowersuits" : {
             "function" : CheckJenkinsNew,
-            "version" : "",
+            "version" : "NOT_USED",
+            "dev"    : "",
             "mc" : "",
             "change" : "",
             "active" : True,
-            "dev"    : True,
             "jenkins" : {
                 "url" : "http://build.technicpack.net/job/Machine-Muse-Power-Suits/lastSuccessfulBuild/api/json",
-                "regex" : "ModularPowersuits-(?P<mc>.+?)-(?P<version>.+?).jar$",
+                "regex" : "ModularPowersuits-(?P<mc>.+?)-(?P<dev>.+?).jar$",
                 "item" : 0
             }
         },
         "ModularPowersuits-Addons" : {
             "function" : CheckMPSA,
-            "version" : "",
+            "version" : "NOT_USED",
+            "dev"    : "",
             "mc" : "NOT_USED",
             "change" : "NOT_USED",
-            "active" : True,
-            "dev"    : True
+            "active" : True
         },
         "MFFSv2Classic" : {
             "function" : CheckJenkins,
-            "version" : "",
+            "version" : "NOT_USED",
+            "dev"    : "",
             "mc" : "NOT_USED",
             "change" : "NOT_USED",
             "active" : True,
-            "dev"    : True,
             "jenkins" : {
                 "url" : "http://minalien.com:8080/job/Modular%20Forcefield%20System/lastSuccessfulBuild/artifact/bin/",
                 "start" : "-",
@@ -298,19 +323,19 @@ class NotEnoughClasses():
         },
         "InventoryTweaks" : {
             "function" : CheckInvTweaks,
-            "version" : "",
+            "version" : "NOT_USED",
+            "dev"    : "",
             "mc" : "",
             "change" : "NOT_USED",
             "active" : True,
-            "dev"    : True
         },
         "DimensionalDoors" : {
             "function" : CheckJenkins,
-            "version" : "",
+            "version" : "NOT_USED",
+            "dev"    : "",
             "mc" : "NOT_USED",
             "change" : "NOT_USED",
             "active" : True,
-            "dev"    : True,
             "jenkins" : {
                 "url" : "http://build.technicpack.net/job/DimDoors/lastSuccessfulBuild/artifact/build/dist/",
                 "start" : "R",
@@ -319,11 +344,11 @@ class NotEnoughClasses():
         },
         "PowerCrystalsCore" : {
             "function" : CheckJenkins,
-            "version" : "",
+            "version" : "NOT_USED",
+            "dev"    : "",
             "mc" : "NOT_USED",
             "change" : "NOT_USED",
             "active" : True,
-            "dev"    : True,
             "jenkins" : {
                 "url" : "http://build.technicpack.net/job/PowerCrystalsCore/lastSuccessfulBuild/artifact/build/dist/",
                 "start" : "-",
@@ -332,11 +357,11 @@ class NotEnoughClasses():
         },
         "PowerConverters" : {
             "function" : CheckJenkins,
-            "version" : "",
+            "version" : "NOT_USED",
+            "dev"    : "",
             "mc" : "NOT_USED",
             "change" : "NOT_USED",
             "active" : True,
-            "dev"    : True,
             "jenkins" : {
                 "url" : "http://build.technicpack.net/job/PowerConverters/lastSuccessfulBuild/artifact/build/dist/",
                 "start" : "-",
@@ -345,37 +370,37 @@ class NotEnoughClasses():
         },
         "AdditionalBuildcraftObjects" : {
             "function" : CheckJenkinsNew,
-            "version" : "",
+            "version" : "NOT_USED",
+            "dev"    : "",
             "mc" : "NOT_USED",
             "change" : "",
             "active" : True,
-            "dev"    : True,
             "jenkins" : {
                 "url" : "https://jenkins.ra-doersch.de/job/AdditionalBuildcraftObjects/lastSuccessfulBuild/api/json",
-                "regex" : "buildcraft-Z-additional-buildcraft-objects-(?P<version>.+?).jar$",
+                "regex" : "buildcraft-Z-additional-buildcraft-objects-(?P<dev>.+?).jar$",
                 "item" : 1
             }
         },
         "Galacticraft" : {
             "function" : CheckJenkinsNew,
-            "version" : "",
+            "version" : "NOT_USED",
+            "dev"    : "",
             "mc" : "",
             "change" : "",
             "active" : True,
-            "dev"    : True,
             "jenkins" : {
                 "url" : "http://2.iongaming.org:8080/job/Galacticraft/lastSuccessfulBuild/api/json",
-                "regex" : "Galacticraft-(?P<mc>.+?)-(?P<version>.+?).jar$",
+                "regex" : "Galacticraft-(?P<mc>.+?)-(?P<dev>.+?).jar$",
                 "item" : 0
             }
         },
         "NEM-VersionChecker" : {
             "function" : CheckJenkinsNew,
             "version" : "",
+            "dev"    : "NOT_USED",
             "mc" : "",
             "change" : "",
             "active" : True,
-            "dev"    : False,
             "jenkins" : {
                 "url" : "http://ci.thezorro266.com/job/NEM-VersionChecker/lastSuccessfulBuild/api/json",
                 "regex" : "NEM-VersionChecker-MC(?P<mc>.+?)-(?P<version>.+?).jar$",
@@ -384,101 +409,101 @@ class NotEnoughClasses():
         },
         "Buildcraft" : {
             "function" : CheckJenkinsNew,
-            "version" : "",
+            "version" : "NOT_USED",
+            "dev"    : "",
             "mc" : "",
             "change" : "",
             "active" : True,
-            "dev" : True,
             "jenkins" : {
                 "url" : "http://nallar.me/buildservice/job/Buildcraft/lastSuccessfulBuild/api/json",
-                "regex" : "buildcraft-universal-(?P<mc>.+?)-(?P<version>.+?).jar$",
+                "regex" : "buildcraft-universal-(?P<mc>.+?)-(?P<dev>.+?).jar$",
                 "item" : 0
             }
         },
         "MCPC-PLUS" : {
             "function" : CheckJenkinsNew,
-            "version" : "",
+            "version" : "NOT_USED",
+            "dev"    : "",
             "mc" : "",
             "active" : True,
-            "dev" : True,
             "jenkins" : {
                 "url" : "http://ci.md-5.net/job/MCPC-Plus/lastSuccessfulBuild/api/json",
                 #mcpc-plus-1.6.2-R0.2-forge819-B53.jar
-                "regex": "mcpc-plus-(?P<mc>.+?)-(.+?)-(.+?)-(?P<version>.+?).jar$",
+                "regex": "mcpc-plus-(?P<mc>.+?)-(.+?)-(.+?)-(?P<dev>.+?).jar$",
                 "item": 0
             }
         },
         "Artifice" : {
             "function" : CheckJenkinsNew,
-            "version" : "",
+            "version" : "NOT_USED",
+            "dev"    : "",
             "mc" : "",
             "change" : "",
             "active" : True,
-            "dev"    : True,
             "jenkins" : {
                 "url" : "http://build.technicpack.net/job/Artifice/lastSuccessfulBuild/api/json",
-                "regex": "Artifice-(?P<version>.+?).jar$",
+                "regex": "Artifice-(?P<dev>.+?).jar$",
                 "item": 0
             }
         },
         "CodeChickenCore" : {
             "function" : CheckChickenBones,
             "version" : "",
+            "dev"    : "NOT_USED",
             "mc" : "NOT_USED",
             "change" : "NOT_USED",
-            "active" : True,
-            "dev"    : False
+            "active" : True
         },
         "ChickenChunks" : {
             "function" : CheckChickenBones,
             "version" : "",
+            "dev"    : "NOT_USED",
             "mc" : "NOT_USED",
             "change" : "NOT_USED",
-            "active" : True,
-            "dev"    : False
+            "active" : True
         },
         "NotEnoughItems" : {
             "function" : CheckChickenBones,
             "version" : "",
+            "dev"    : "NOT_USED",
             "mc" : "NOT_USED",
             "change" : "NOT_USED",
-            "active" : True,
-            "dev"    : False
+            "active" : True
         },
         "EnderStorage" : {
             "function" : CheckChickenBones,
             "version" : "",
+            "dev"    : "NOT_USED",
             "mc" : "NOT_USED",
             "change" : "NOT_USED",
-            "active" : True,
-            "dev"    : False
+            "active" : True
         },
         "Translocator" : {
             "function" : CheckChickenBones,
             "version" : "",
+            "dev"    : "NOT_USED",
             "mc" : "NOT_USED",
             "change" : "NOT_USED",
-            "active" : True,
-            "dev"    : False
+            "active" : True
         },
         "WR-CBE" : {
             "function" : CheckChickenBones,
             "version" : "",
+            "dev"    : "NOT_USED",
             "mc" : "NOT_USED",
             "change" : "NOT_USED",
-            "active" : True,
-            "dev"    : False
+            "active" : True
         },
         "TinkersConstruct" : {
             "function" : CheckmDiyo,
-            "version" : "",
+            "version" : "NOT_USED",
+            "dev"    : "",
             "mc" : "",
             "change" : "NOT_USED",
             "active" : True,
-            "dev"    : True,
             "mDiyo" : {
                 "location" : "TConstruct/development/",
-                "regex" : "TConstruct_(?P<mc>.+?)_(?P<version>.+?).jar"
+                "regex" : "TConstruct_(?P<mc>.+?)_(?P<dev>.+?).jar"
             }
         }
     }
@@ -546,9 +571,9 @@ def MicroTimerEvent(self,channels):
                     self.sendChatMessage(self.send, channel, "!setlist "+version)
                         
                 for mod in tempList[version]:
-                    if NEM.mods[mod]["dev"] == True:
-                        self.sendChatMessage(self.send, channel, "!dev "+mod+" "+NEM.mods[mod]["version"])
-                    else:
+                    if NEM.mods[mod]["dev"] != "NOT_USED":
+                        self.sendChatMessage(self.send, channel, "!dev "+mod+" "+NEM.mods[mod]["dev"])
+                    if NEM.mods[mod]["version"]  != "NOT_USED":
                         self.sendChatMessage(self.send, channel, "!mod "+mod+" "+NEM.mods[mod]["version"])
                     if NEM.mods[mod]["change"] != "NOT_USED":
                         self.sendChatMessage(self.send, channel, " * "+NEM.mods[mod]["change"])
@@ -621,13 +646,15 @@ def help(self, name, params, channel, userdata, rank):
 def list(self,name,params,channel,userdata,rank):
     tempList = {}
     for key in NEM.mods:
-        dev = ""
+        type = ""
         mcver = NEM.mods[key]["mc"]
-        if NEM.mods[key]["dev"] == True:
-            dev = "(dev)"
+        if NEM.mods[key]["dev"] != "NOT_USED":
+            type = type + "(dev)"
+        if NEM.mods[key]["version"] != "NOT_USED":
+            type = type + "(rec)"
         if not mcver in tempList:
             tempList[mcver] = []
-        tempList[mcver].append("{0}{1}".format(key,dev))
+        tempList[mcver].append("{0}{1}".format(key,type))
     
     del mcver
     for mcver in tempList:
