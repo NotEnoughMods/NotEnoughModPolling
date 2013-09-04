@@ -140,10 +140,21 @@ class NotEnoughClasses():
         result = chickenFeed.read()
         chickenFeed.close()
         if result.startswith("Ret: "): #Hacky I know, but this is how ChickenBones does it in his mod
-            print(mod+": "+result[5:]) #This is also hacky, but ^
             return {
                 "version" : result[5:]
             }
+    def CheckmDiyo(self,mod):
+        mDiyoFeed = urllib2.urlopen("http://tanis.sunstrike.io/"+self.mods[mod]["mDiyo"]["location"],timeout = 10)
+        result = mDiyoFeed.read()
+        mDiyoFeed.close()
+        lines = result.split()
+        result = ""
+        for line in lines:
+            if ".jar" in line.lower(): #TODO: Dynamic this thing if changes
+                result = line
+        match = re.search(self.mods[mod]["mDiyo"]["regex"],result)
+        output = match.groupdict()
+        return output
     def CheckMod(self, mod):
         try:
             output = self.mods[mod]["function"](self,mod)
@@ -457,8 +468,19 @@ class NotEnoughClasses():
             "change" : "NOT_USED",
             "active" : True,
             "dev"    : False
+        },
+        "TinkersConstruct" : {
+            "function" : CheckmDiyo,
+            "version" : "",
+            "mc" : "",
+            "change" : "NOT_USED",
+            "active" : True,
+            "dev"    : True,
+            "mDiyo" : {
+                "location" : "TConstruct/development/",
+                "regex" : "TConstruct_(?P<mc>.+?)_(?P<version>.+?).jar"
+            }
         }
-        
     }
 NEM = NotEnoughClasses()
 def ChatEvent(self, channels, userdata, message, currChannel):
