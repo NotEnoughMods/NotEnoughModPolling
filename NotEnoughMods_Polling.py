@@ -41,15 +41,11 @@ class NotEnoughClasses():
                     if mod["name"] in templist:
                         print(mod["name"]+" has versions for "+version)
                         self.mods[mod["name"]]["mc"] = version
-                        #print("a")
                         if self.mods[mod["name"]]["dev"] != "NOT_USED":
                             self.mods[mod["name"]]["dev"] = mod["dev"]
-                            #print("b")
                         if self.mods[mod["name"]]["version"] != "NOT_USED":
                             self.mods[mod["name"]]["version"] = mod["version"]
-                        #print("c")
                         templist.remove(mod["name"])
-                        #print("d")
         
     def QueryJenkins(self, url, start, end):
         jenkinFeed = urllib2.urlopen(url, timeout = 10)
@@ -130,11 +126,15 @@ class NotEnoughClasses():
         recMatch = ""
         for promotion in promotionArray:
             if promotion["name"] == self.mods[mod]["mcforge"]["dev"]:
-                info = promotion["files"][0]["url"]
-                devMatch = re.search(self.mods[mod]["mcforge"]["regex"],info)
+                for entry in promotion["files"]:
+                    if entry["type"] == "universal":
+                        info = entry["url"]
+                        devMatch = re.search(self.mods[mod]["mcforge"]["regex"],info)
             elif promotion["name"] == self.mods[mod]["mcforge"]["rec"]:
-                info = promotion["files"][0]["url"]
-                recMatch = research(self.mods[mod]["mcforge"]["regex"],info)
+                for entry in promotion["files"]:
+                    if entry["type"] == "universal":
+                        info = entry["url"]
+                        recMatch = re.search(self.mods[mod]["mcforge"]["regex"],info)
         if devMatch:
             output = {}
             tmpMC = "null"
@@ -187,7 +187,7 @@ class NotEnoughClasses():
                 self.mods[mod]["change"] = output["change"]
             return status
         except:
-            print mod+" failed to be polled..."
+            print(mod+" failed to be polled...")
     #def CheckOpenMod(self,mod):
         
     mods = {
@@ -202,7 +202,7 @@ class NotEnoughClasses():
                 "name" : "minecraftforge",
                 "dev" : "latest",
                 "rec" : "recommended",
-                "regex" : "minecraftforge-src-(.+?)-(.+?).zip$"
+                "regex" : "minecraftforge-universal-(.+?)-(.+?).jar$"
             }
         },
         "IronChests" : {
@@ -214,7 +214,7 @@ class NotEnoughClasses():
             "active" : True,
             "mcforge" : {
                 "name" : "IronChests2",
-                "promotion" : "latest",
+                "dev" : "latest",
                 "rec" : "recommended",
                 "regex" : "ironchest-universal-(.+?)-(.+?).zip$"
             }
@@ -228,7 +228,7 @@ class NotEnoughClasses():
             "active" : True,
             "mcforge" : {
                 "name" : "ForgeMultipart",
-                "promotion" : "latest",
+                "dev" : "latest",
                 "rec" : "recommended",
                 "regex" : "ForgeMultipart-universal-(.+?)-(.+?).jar$"
             }
@@ -242,7 +242,7 @@ class NotEnoughClasses():
             "active" : True,
             "mcforge" : {
                 "name" : "CompactSolars",
-                "promotion" : "latest",
+                "dev" : "latest",
                 "rec" : "recommended",
                 "regex" : "compactsolars-universal-(.+?)-(.+?).zip$"
             }
@@ -628,7 +628,7 @@ def getversion(self,name,params,channel,userdata,rank):
     self.sendChatMessage(self.send, channel, NEM.nemVersion)
         
 def about(self, name, params, channel, userdata, rank):
-    self.sendChatMessage(self.send, channel, "Not Enough Mods: Polling for IRC by SinZ v1.2")
+    self.sendChatMessage(self.send, channel, "Not Enough Mods: Polling for IRC by SinZ, with help from NightKev - v1.2")
     self.sendChatMessage(self.send, channel, "Source code available at: http://github.com/SinZ163/NotEnoughMods")
     
 def help(self, name, params, channel, userdata, rank):
@@ -680,7 +680,7 @@ commands = {
     "help" : help,
     "setversion" : setversion,
     "getversion" : getversion,
-    "refresh" : refresh
+    "refresh" : refresh,
 }
 
 help = {
@@ -690,5 +690,5 @@ help = {
     "setversion" : ["=nemp setversion <version>", "Sets the version to <version> for polling to assume."],
     "running" : ["=nemp running <true/false>", "Enables or Disables the polling of latest builds."],
     "poll" : ["=nemp poll <mod> <true/false>", "Enables or Disables the polling of <mod>."],
-    "refresh" : ["=nemp refresh", "Queries NEM to get the \"latest\" versions"]
+    "refresh" : ["=nemp refresh", "Queries NEM to get the \"latest\" versions"],
 }
