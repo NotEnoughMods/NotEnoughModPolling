@@ -644,8 +644,8 @@ def help(self, name, params, channel, userdata, rank):
             self.sendChatMessage(self.send, channel, name+ ": Invalid command provided")
 
 def list(self,name,params,channel,userdata,rank):
+    darkgreen = "3"
     red = "4"
-    green = "9"
     blue = "12"
     bold = unichr(2)
     color = unichr(3)
@@ -653,10 +653,11 @@ def list(self,name,params,channel,userdata,rank):
     for key in NEM.mods:
         type = ""
         mcver = NEM.mods[key]["mc"]
-        if NEM.mods[key]["dev"] != "NOT_USED":
-            type = type + color + red + "[D]" + color
         if NEM.mods[key]["version"] != "NOT_USED":
-            type = type + color + green + "[R]" + color
+            type = type + bold + color + darkgreen + "[R]" + color + bold
+        if NEM.mods[key]["dev"] != "NOT_USED":
+            type = type + bold + color + red + "[D]" + color + bold
+        
         if not mcver in tempList:
             tempList[mcver] = []
         tempList[mcver].append("{0}{1}".format(key,type))
