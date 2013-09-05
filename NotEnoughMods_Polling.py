@@ -295,7 +295,7 @@ class NotEnoughClasses():
             "change" : "",
             "active" : True,
             "jenkins" : {
-                "url" : "http://build.technicpack.net/job/Machine-Muse-Power-Suits/lastSuccessfulBuild/api/json",
+                "url" : "http://build.technicpack.net/job/ModularPowersuits/lastSuccessfulBuild/api/json",
                 "regex" : "ModularPowersuits-(?P<mc>.+?)-(?P<dev>.+?).jar$",
                 "item" : 0
             }
