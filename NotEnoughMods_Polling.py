@@ -191,9 +191,9 @@ class NotEnoughClasses():
             if "change" in output:
                 self.mods[mod]["change"] = output["change"]
             return status
-    except:
-        print(mod+" failed to be polled...")
-        return [False, False, False]
+        except:
+            print(mod+" failed to be polled...")
+            return [False, False, False]
     #def CheckOpenMod(self,mod):
         
     mods = {
