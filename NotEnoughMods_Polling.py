@@ -468,6 +468,19 @@ class NotEnoughClasses():
                 "location" : "TConstruct/development/",
                 "regex" : "TConstruct_(?P<mc>.+?)_(?P<dev>.+?).jar"
             }
+        },
+        "LogisticsPipes" : {
+            "function" : CheckJenkins,
+            "version" : "NOT_USED",
+            "dev" : "",
+            "mc" : "",
+            "change" : "",
+            "active" : True,
+            "jenkins" : {
+                "url" : "http://ci.thezorro266.com/job/LogisticsPipesMC1.6.2-Dev/lastSuccessfulBuild/api/json",
+                "regex" : "LogisticsPipes-MC(?P<mc>.+?)-(?P<dev>.+?).jar",
+                "item" : 0
+            }
         }
     }
 NEM = NotEnoughClasses()
