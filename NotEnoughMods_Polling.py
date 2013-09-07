@@ -47,7 +47,7 @@ class NotEnoughClasses():
                             self.mods[mod["name"]]["version"] = mod["version"]
                         templist.remove(mod["name"])
         
-    def CheckJenkinsNew(self, mod):
+    def CheckJenkins(self, mod):
         jenkinFeed = urllib2.urlopen(self.mods[mod]["jenkins"]["url"], timeout = 10)
         result = jenkinFeed.read()
         jenkinFeed.close()
@@ -215,7 +215,7 @@ class NotEnoughClasses():
         #    "active" : False
         #},
         "MineFactoryReloaded" : {
-            "function" : CheckJenkinsNew,
+            "function" : CheckJenkins,
             "version" : "",
             "dev"    : "",
             "mc" : "NOT_USED",
@@ -228,7 +228,7 @@ class NotEnoughClasses():
             }
         },
         "IndustrialCraft2" : {
-            "function" : CheckJenkinsNew,
+            "function" : CheckJenkins,
             "version" : "NOT_USED",
             "dev"    : "",
             "mc" : "NOT_USED",
@@ -241,7 +241,7 @@ class NotEnoughClasses():
             }
         },
         "ModularPowersuits" : {
-            "function" : CheckJenkinsNew,
+            "function" : CheckJenkins,
             "version" : "NOT_USED",
             "dev"    : "",
             "mc" : "",
@@ -254,7 +254,7 @@ class NotEnoughClasses():
             }
         },
         "ModularPowersuits-Addons" : {
-            "function" : CheckJenkinsNew,
+            "function" : CheckJenkins,
             "version" : "NOT_USED",
             "dev"    : "",
             "mc" : "NOT_USED",
@@ -267,7 +267,7 @@ class NotEnoughClasses():
             }
         },
         "MFFSv2Classic" : {
-            "function" : CheckJenkinsNew,
+            "function" : CheckJenkins,
             "version" : "NOT_USED",
             "dev"    : "",
             "mc" : "NOT_USED",
@@ -280,7 +280,7 @@ class NotEnoughClasses():
             }
         },
         "InventoryTweaks" : {
-            "function" : CheckJenkinsNew,
+            "function" : CheckJenkins,
             "version" : "NOT_USED",
             "dev"    : "",
             "mc" : "",
@@ -293,7 +293,7 @@ class NotEnoughClasses():
             }
         },
         "DimensionalDoors" : {
-            "function" : CheckJenkinsNew,
+            "function" : CheckJenkins,
             "version" : "NOT_USED",
             "dev"    : "",
             "mc" : "",
@@ -306,7 +306,7 @@ class NotEnoughClasses():
             }
         },
         "PowerCrystalsCore" : {
-            "function" : CheckJenkinsNew,
+            "function" : CheckJenkins,
             "version" : "NOT_USED",
             "dev"    : "",
             "mc" : "NOT_USED",
@@ -319,7 +319,7 @@ class NotEnoughClasses():
             }
         },
         "PowerConverters" : {
-            "function" : CheckJenkinsNew,
+            "function" : CheckJenkins,
             "version" : "NOT_USED",
             "dev"    : "",
             "mc" : "NOT_USED",
@@ -332,7 +332,7 @@ class NotEnoughClasses():
             }
         },
         "AdditionalBuildcraftObjects" : {
-            "function" : CheckJenkinsNew,
+            "function" : CheckJenkins,
             "version" : "NOT_USED",
             "dev"    : "",
             "mc" : "NOT_USED",
@@ -345,7 +345,7 @@ class NotEnoughClasses():
             }
         },
         "Galacticraft" : {
-            "function" : CheckJenkinsNew,
+            "function" : CheckJenkins,
             "version" : "NOT_USED",
             "dev"    : "",
             "mc" : "",
@@ -358,7 +358,7 @@ class NotEnoughClasses():
             }
         },
         "NEM-VersionChecker" : {
-            "function" : CheckJenkinsNew,
+            "function" : CheckJenkins,
             "version" : "",
             "dev"    : "NOT_USED",
             "mc" : "",
@@ -371,7 +371,7 @@ class NotEnoughClasses():
             }
         },
         "Buildcraft" : {
-            "function" : CheckJenkinsNew,
+            "function" : CheckJenkins,
             "version" : "NOT_USED",
             "dev"    : "",
             "mc" : "",
@@ -384,7 +384,7 @@ class NotEnoughClasses():
             }
         },
         "MCPC-PLUS" : {
-            "function" : CheckJenkinsNew,
+            "function" : CheckJenkins,
             "version" : "NOT_USED",
             "dev"    : "",
             "mc" : "",
@@ -397,7 +397,7 @@ class NotEnoughClasses():
             }
         },
         "Artifice" : {
-            "function" : CheckJenkinsNew,
+            "function" : CheckJenkins,
             "version" : "NOT_USED",
             "dev"    : "",
             "mc" : "",
