@@ -171,23 +171,29 @@ class NotEnoughClasses():
         return output
     def CheckMod(self, mod):
         try:
-            status = False
+            # First False is for if there was an update.
+            # Next two Falses are for if there was an dev or version change
+            status = [False, 
+                      False, False]
             output = self.mods[mod]["function"](self,mod)
             if "dev" in output:
                 if self.mods[mod]["dev"] != output["dev"]:
                     self.mods[mod]["dev"] = output["dev"]
-                    status = True
+                    status[0] = True
+                    status[1] = True
             if "version" in output:
                 if self.mods[mod]["version"] != output["version"]:
                     self.mods[mod]["version"] = output["version"]
-                    status = True
+                    status[0] = True
+                    status[2] = True
             if "mc" in output:
                 self.mods[mod]["mc"] = output["mc"]
             if "change" in output:
                 self.mods[mod]["change"] = output["change"]
             return status
-        except:
-            print(mod+" failed to be polled...")
+    except:
+        print(mod+" failed to be polled...")
+        return [False, False, False]
     #def CheckOpenMod(self,mod):
         
     mods = {
@@ -545,11 +551,12 @@ def PollingThread(self, pipe):
     tempList = {}
     for mod in NEM.mods:
         if NEM.mods[mod]["active"]:
-            if NEM.CheckMod(mod):
+            result = NEM.CheckMod(mod)
+            if result[0]:
                 if NEM.mods[mod]["mc"] in tempList:
-                    tempList[NEM.mods[mod]["mc"]].append(mod)
+                    tempList[NEM.mods[mod]["mc"]].append((mod, result[1:]))
                 else:
-                    tempVersion = [mod]
+                    tempVersion = [(mod, result[1:])]
                     tempList[NEM.mods[mod]["mc"]] = tempVersion
     pipe.send(tempList)
 def MainTimerEvent(self,channels):
@@ -570,10 +577,16 @@ def MicroTimerEvent(self,channels):
                 elif version != setList:
                     self.sendChatMessage(self.send, channel, "!setlist "+version)
                         
-                for mod in tempList[version]:
-                    if NEM.mods[mod]["dev"] != "NOT_USED":
+                for item in tempList[version]:
+                    # item[0] = name of mod
+                    # item[1] = flags for dev/release change
+                    # flags[0] = has release version changed?
+                    # flags[1] = has dev version changed?
+                    mod = item[0]
+                    flags = item[1]
+                    if NEM.mods[mod]["dev"] != "NOT_USED" and flags[0]:
                         self.sendChatMessage(self.send, channel, "!dev "+mod+" "+NEM.mods[mod]["dev"])
-                    if NEM.mods[mod]["version"]  != "NOT_USED":
+                    if NEM.mods[mod]["version"]  != "NOT_USED" and flags[1]:
                         self.sendChatMessage(self.send, channel, "!mod "+mod+" "+NEM.mods[mod]["version"])
                     if NEM.mods[mod]["change"] != "NOT_USED":
                         self.sendChatMessage(self.send, channel, " * "+NEM.mods[mod]["change"])
