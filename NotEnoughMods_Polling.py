@@ -47,39 +47,6 @@ class NotEnoughClasses():
                             self.mods[mod["name"]]["version"] = mod["version"]
                         templist.remove(mod["name"])
         
-    def QueryJenkins(self, url, start, end):
-        jenkinFeed = urllib2.urlopen(url, timeout = 10)
-        result = jenkinFeed.read()
-        jenkinFeed.close()
-        lines = result.split()
-        result = ""
-        for line in lines:
-            if end in line.lower():
-                result = line
-                break
-        result = result[6:]
-        i = result.find('"')
-        j = result.find(start)
-        result = result[j+1:i-4]
-        return result
-        
-    def CheckMPSA(self,mod):
-        result = self.QueryJenkins("http://build.technicpack.net/job/ModularPowersuitsAddons/lastSuccessfulBuild/artifact/build/dist/","-",".jar") # TODO: FIX!
-        k = result.find("_")
-        return {
-            "dev" : result[0:k]
-        } 
-    def CheckInvTweaks(self,mod):
-        result = self.QueryJenkins("http://build.technicpack.net/job/Inventory-Tweaks/lastSuccessfulBuild/artifact/build/out/", "-", ".jar")
-        i = result.find("-")
-        result = result[i+1:]
-        j = result.find("-")
-        version = result[2:j]
-        result = result[j+1:]
-        return {
-            "dev" : result,
-            "mc" : version
-        }
     def CheckJenkinsNew(self, mod):
         jenkinFeed = urllib2.urlopen(self.mods[mod]["jenkins"]["url"], timeout = 10)
         result = jenkinFeed.read()
@@ -95,27 +62,7 @@ class NotEnoughClasses():
             print("Aww, no changelog for "+mod)
             output["change"] = "NOT_USED"
         return output
-    def CheckJenkins(self, mod): # foo-x.x.x
-        return {
-            "dev" : self.QueryJenkins(self.mods[mod]["jenkins"]["url"],self.mods[mod]["jenkins"]["start"],self.mods[mod]["jenkins"]["extention"])
-        }
-    def CheckJenkinsMC(self,mod): # foo-1.6.1-x.x.x
-        output = self.QueryJenkins(self.mods[mod]["jenkins"]["url"],self.mods[mod]["jenkins"]["start"],self.mods[mod]["jenkins"]["extention"])
-        i = output.find("-")
-        version = output[i+1:]
-        mcver = output[0:i]
-        return {
-            "dev" : version,
-            "mc" : mcver
-        }
-    def CheckJenkinsMC2(self,mod): #foo-bar-1.6.2-x.x.x
-        result = self.QueryJenkins(self.mods[mod]["jenkins"]["url"],self.mods[mod]["jenkins"]["start"],self.mods[mod]["jenkins"]["extention"])
-        i = result.rfind("-")
-        j = result.find("-")
-        return {
-            "dev" : result[i+1:],
-            "mc" : result[j+1+len(self.mods[mod]["prefix"]):i]
-        }
+
     def CheckMCForge(self,mod):
         forgeFeed = urllib2.urlopen("http://files.minecraftforge.net/"+self.mods[mod]["mcforge"]["name"]+"/json", timeout = 10)
         result = forgeFeed.read()
@@ -307,71 +254,81 @@ class NotEnoughClasses():
             }
         },
         "ModularPowersuits-Addons" : {
-            "function" : CheckMPSA,
+            "function" : CheckJenkinsNew,
             "version" : "NOT_USED",
             "dev"    : "",
             "mc" : "NOT_USED",
-            "change" : "NOT_USED",
-            "active" : True
-        },
-        "MFFSv2Classic" : {
-            "function" : CheckJenkins,
-            "version" : "NOT_USED",
-            "dev"    : "",
-            "mc" : "NOT_USED",
-            "change" : "NOT_USED",
+            "change" : "",
             "active" : True,
             "jenkins" : {
-                "url" : "http://minalien.com:8080/job/Modular%20Forcefield%20System/lastSuccessfulBuild/artifact/bin/",
-                "start" : "-",
-                "extention" : ".jar"
+                "url" : "http://build.technicpack.net/job/ModularPowersuitsAddons/lastSuccessfulBuild/api/json",
+                "regex" : "MPSA-(?P<dev>.+?)_(.+?).jar$",
+                "item" : 0
+            }
+        },
+        "MFFSv2Classic" : {
+            "function" : CheckJenkinsNew,
+            "version" : "NOT_USED",
+            "dev"    : "",
+            "mc" : "NOT_USED",
+            "change" : "",
+            "active" : True,
+            "jenkins" : {
+                "url" : "http://minalien.com:8080/job/Modular%20Forcefield%20System/lastSuccessfulBuild/api/json",
+                "regex" : "ModularForcefieldSystem-(?P<dev>.+?).jar$",
+                "item" : 0
             }
         },
         "InventoryTweaks" : {
-            "function" : CheckInvTweaks,
+            "function" : CheckJenkinsNew,
             "version" : "NOT_USED",
             "dev"    : "",
             "mc" : "",
-            "change" : "NOT_USED",
-            "active" : True,
-        },
-        "DimensionalDoors" : {
-            "function" : CheckJenkins,
-            "version" : "NOT_USED",
-            "dev"    : "",
-            "mc" : "NOT_USED",
-            "change" : "NOT_USED",
+            "change" : "",
             "active" : True,
             "jenkins" : {
-                "url" : "http://build.technicpack.net/job/DimDoors/lastSuccessfulBuild/artifact/build/dist/",
-                "start" : "R",
-                "extention" : ".zip"
+                "url" : "http://build.technicpack.net/job/Inventory-Tweaks/lastSuccessfulBuild/api/json",
+                "regex" : "InventoryTweaks-MC(?P<mc>.+?)-(?P<dev>.+?).jar",
+                "item" : 1
+            }
+        },
+        "DimensionalDoors" : {
+            "function" : CheckJenkinsNew,
+            "version" : "NOT_USED",
+            "dev"    : "",
+            "mc" : "",
+            "change" : "",
+            "active" : True,
+            "jenkins" : {
+                "url" : "http://build.technicpack.net/job/DimDoors/lastSuccessfulBuild/api/json",
+                "regex" : "DimensionalDoors-(?P<mc>.+?)R(?P<dev>.+?).zip$",
+                "item" : 0
             }
         },
         "PowerCrystalsCore" : {
-            "function" : CheckJenkins,
+            "function" : CheckJenkinsNew,
             "version" : "NOT_USED",
             "dev"    : "",
             "mc" : "NOT_USED",
-            "change" : "NOT_USED",
+            "change" : "",
             "active" : True,
             "jenkins" : {
-                "url" : "http://build.technicpack.net/job/PowerCrystalsCore/lastSuccessfulBuild/artifact/build/dist/",
-                "start" : "-",
-                "extention" : ".jar"
+                "url" : "http://build.technicpack.net/job/PowerCrystalsCore/lastSuccessfulBuild/api/json",
+                "regex" : "PowerCrystalsCore-(?P<dev>.+?).jar$",
+                "item" : 0
             }
         },
         "PowerConverters" : {
-            "function" : CheckJenkins,
+            "function" : CheckJenkinsNew,
             "version" : "NOT_USED",
             "dev"    : "",
             "mc" : "NOT_USED",
-            "change" : "NOT_USED",
+            "change" : "",
             "active" : True,
             "jenkins" : {
-                "url" : "http://build.technicpack.net/job/PowerConverters/lastSuccessfulBuild/artifact/build/dist/",
-                "start" : "-",
-                "extention" : ".jar"
+                "url" : "http://build.technicpack.net/job/PowerConverters/lastSuccessfulBuild/api/json",
+                "regex" : "PowerConverters-(?P<dev>.+?).jar$",
+                "item" : 0
             }
         },
         "AdditionalBuildcraftObjects" : {
