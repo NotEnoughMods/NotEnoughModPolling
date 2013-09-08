@@ -662,8 +662,11 @@ commands = {
     "about": about,
     "help" : help,
     "setversion" : setversion,
+    "setv" : setversion,
     "getversion" : getversion,
+    "getv" : getversion,
     "refresh" : refresh,
+    "polling" : running,
 }
 
 help = {
