@@ -116,6 +116,31 @@ class NotEnoughClasses():
         match = re.search(self.mods[mod]["mDiyo"]["regex"],result)
         output = match.groupdict()
         return output
+    def CheckAE(self,mod):
+        aeFeed = urllib2.urlopen("http://ae-mod.info/releases", timeout=10)
+        result = aeFeed.read()
+        aeFeed.close()
+        jsonres = simplejson.loads(result, strict = False )
+        jsonres = sorted(jsonres, key=lambda k: k['Released'])
+        relVersion = ""
+        relMC = ""
+        devVersion = ""
+        devMC = ""
+        for version in jsonres:
+            print(version)
+            if version["Channel"] == "Stable":
+                relVersion = version["Version"]
+                relMC = version["Minecraft"]
+            else:
+                devVersion = version["Version"]
+                devMC = version["Minecraft"]
+            print(" |"+relVersion+" || "+relMC)
+            print("~|"+devVersion+"~||~"+devMC)
+        return {
+            "version" : relVersion,
+            "dev" : devVersion,
+            "mc" : devMC
+        }
     def CheckMod(self, mod):
         try:
             # First False is for if there was an update.
@@ -481,6 +506,14 @@ class NotEnoughClasses():
                 "regex" : "LogisticsPipes-MC(?P<mc>.+?)-(?P<dev>.+?).jar",
                 "item" : 0
             }
+        },
+        "AppliedEnergistics" : {
+            "function" : CheckAE,
+            "version" : "",
+            "dev" : "",
+            "mc" : "",
+            "change" : "NOT_USED",
+            "active" : True
         }
     }
 NEM = NotEnoughClasses()
@@ -654,6 +687,22 @@ def refresh(self,name,params,channel,userdata,rank):
     NEM.QueryNEM()
     NEM.InitiateVersions()
     self.sendChatMessage(self.send,channel, "Queried NEM for \"latest\" versions")
+    
+def test(self,name,params,channel,userdata,rank):
+    if len(params) > 0:
+        try:
+            result = NEM.mods[params[1]]["function"](NEM,params[1])
+            print(result)
+            if "mc" in result:
+                self.sendChatMessage(self.send,channel, "MC: "+result["mc"])
+            if "version" in result:
+                self.sendChatMessage(self.send,channel, "!mod "+result["version"])
+            if "dev" in result:
+                self.sendChatMessage(self.send,channel, "!dev "+result["dev"])
+            if "change" in result:
+                self.sendChatMessage(self.send,channel, " * "+result["change"])
+        except:
+            self.sendChatMessage(self.send,channel, params[1]+" failed to be polled")
 
 commands = {
     "running" : running,
@@ -667,6 +716,7 @@ commands = {
     "getv" : getversion,
     "refresh" : refresh,
     "polling" : running,
+    "test" : test
 }
 
 help = {
