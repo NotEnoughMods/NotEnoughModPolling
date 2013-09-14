@@ -514,6 +514,18 @@ class NotEnoughClasses():
             "mc" : "",
             "change" : "NOT_USED",
             "active" : True
+        },
+        "IndustrialCraft2-EXP" : {
+            "function" : CheckJenkins,
+            "version" : "", #Should be dev, but meh
+            "dev" : "NOT_USED",
+            "mc" : "NOT_USED",
+            "change" : "",
+            "jenkins" : {
+                "url" : "http://ic2api.player.to:8080/job/IC2_experimental/lastSuccessfulBuild/api/json",
+                "regex" : "industrialcraft-2_(?P<version>.+?)-experimental.jar",
+                "item" : 2
+            }
         }
     }
 NEM = NotEnoughClasses()
