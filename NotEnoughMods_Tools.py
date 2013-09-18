@@ -30,8 +30,9 @@ def execute(self, name, params, channel, userdata, rank):
     try:
         command = commands[params[0]]
         command(self, name, params, channel, userdata, rank)
-    except KeyError:
-        self.sendChatMessage(self.send, channel, "Invalid arguments!")
+    except:
+        self.sendChatMessage(self.send, channel, "Invalid sub-command!")
+        self.sendChatMessage(self.send, channel, "See \"=nem help\" for help")
 
 def setlist(self, name, params, channel, userdata, rank):
     if len(params) != 2:

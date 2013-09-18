@@ -521,6 +521,7 @@ class NotEnoughClasses():
             "dev" : "NOT_USED",
             "mc" : "NOT_USED",
             "change" : "",
+            "active" : True,
             "jenkins" : {
                 "url" : "http://ic2api.player.to:8080/job/IC2_experimental/lastSuccessfulBuild/api/json",
                 "regex" : "industrialcraft-2_(?P<version>.+?)-experimental.jar",
