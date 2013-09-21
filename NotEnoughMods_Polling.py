@@ -538,7 +538,7 @@ def ChatEvent(self, channels, userdata, message, currChannel):
         #self.sendChatMessage(self.send, currChannel, "Confirming latest version is: "+match.group(1))
     else:
         #detect list change
-        match = re.match("^switched list to: \002\00312(.+?)\003\002$",message)
+        match = re.match("^switched list to: \002\00312(.+?)\003\002",message)
         if match:
             NEM.nemVersion = match.group(1)
             #self.sendChatMessage(self.send, currChannel, "Confirming list change to: "+match.group(1))
