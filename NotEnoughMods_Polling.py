@@ -297,7 +297,7 @@ class NotEnoughClasses():
             "dev"    : "",
             "mc" : "NOT_USED",
             "change" : "",
-            "active" : True,
+            "active" : False,
             "jenkins" : {
                 "url" : "http://minalien.com:8080/job/Modular%20Forcefield%20System/lastSuccessfulBuild/api/json",
                 "regex" : "ModularForcefieldSystem-(?P<dev>.+?).jar$",
