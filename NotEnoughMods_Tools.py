@@ -14,15 +14,16 @@ class NotEnoughClasses():
         try:
             NEMfeed = urllib2.urlopen("http://bot.notenoughmods.com/?json", timeout = 10)
             result = NEMfeed.read()
-            NEMfeed.close()
-            jsonres = simplejson.loads(result, strict = False )
-            keys = jsonres.keys() #is different in Python 3.x
-            return keys[0]
+            NEMfeed.close() 
+            return simplejson.loads(result, strict = False)
         except:
-            print "dafuq, getting version failed, falling back to hard-coded"
-            return "1.5.2"
+            print("Failed to get NEM versions, falling back to hard-coded")
+            traceb = str(traceback.format_exc())
+            print(traceb)
+            return ["1.4.5","1.4.6-1.4.7","1.5.1","1.5.2","1.6.1","1.6.2", "1.6.4"]
     def __init__(self):
-        self.version = self.getLatestVersion()
+        self.versions = self.getLatestVersion()
+        self.version = self.versions[len(self.versions)-1]
         
 NEM = NotEnoughClasses()
      
@@ -44,7 +45,67 @@ def setlist(self, name, params, channel, userdata, rank):
         
         NEM.version = str(params[1])
         self.sendChatMessage(self.send, channel, "switched list to: "+colourblue+params[1]+colour)
-        
+def multilist(self,name,params,channel,userdata,rank):
+    if len(params) != 2:
+        self.sendChatMessage(self.send, channel, name+ ": Insufficent amount of parameters provided.")
+        self.sendChatMessage(self.send, channel, name+ ": "+help["multilist"][1])
+    else:
+        try:
+            jsonres = {}
+            results = {}
+            for version in NEM.versions:
+                NEMfeed = urllib.urlopen("http://bot.notenoughmods.com/"+urllib.quote(version)+".json")
+                result = NEMfeed.read()
+                NEMfeed.close()
+                jsonres[version] = simplejson.loads(result, strict = False )
+                i = -1
+                for mod in jsonres[version]:
+                    i = i + 1
+                    if str(params[1]).lower() == mod["name"].lower():
+                        results[version] = i
+                        break
+                    else:
+                        aliases = mod["aliases"].split(" ")
+                        for alias in aliases:
+                            if params[1].lower() == alias.lower():
+                                results[version] = i
+                                break
+            red = "04"
+            purple = "06"
+            orange = "07"
+            blue = "12"
+            gray = "14"
+            lightgray = "15"
+            bold = unichr(2)
+            colour = unichr(3)
+            count = len(results)
+            if count == 0:
+                self.sendChatMessage(self.send, channel, name+ ": mod not present in NEM.")
+                return
+            elif count == 1:
+                count = str(count)+" MC version"
+            else:
+                count = str(count)+" MC versions"
+            self.sendChatMessage(self.send, channel, "Listing "+count+" for \""+params[1]+"\":")
+            for line in results:
+                alias = colour
+                if jsonres[line][results[line]]["aliases"] != "":
+                    alias = colour+"("+colour+gray+str(re.sub(" ", ', ', jsonres[line][results[line]]["aliases"]))+colour+") "
+                comment = colour
+                if jsonres[line][results[line]]["comment"] != "":
+                    comment = str(colour+"["+colour+gray+jsonres[line][results[line]]["comment"]+colour+"] ")
+                dev = colour
+                try:
+                    if jsonres[line][results[line]]["dev"] != "":
+                        dev = str(colour+"("+colour+red+"dev: "+jsonres[line][results[line]]["dev"]+colour+")")
+                except Exception as error:
+                    print(error)
+                    traceback.print_exc()
+                    #lol
+                self.sendChatMessage(self.send, channel, colour+purple+line+colour+": "+colour+gray+jsonres[line][results[line]]["name"]+" "+alias+colour+lightgray+jsonres[line][results[line]]["version"]+dev+" "+comment+colour+orange+jsonres[line][results[line]]["shorturl"]+colour)    
+        except Exception as error:
+            self.sendChatMessage(self.send, channel, name+": "+str(error))
+            traceback.print_exc()
 def list(self, name, params, channel, userdata, rank):
     if len(params) < 2:
         self.sendChatMessage(self.send, channel, name+ ": Insufficent amount of parameters provided.")
@@ -114,6 +175,7 @@ def help(self, name, params, channel, userdata, rank):
             self.sendChatMessage(self.send, channel, name+ ": Invalid command provided")
 commands = {
     "list" : list,
+    "multilist": multilist,
     "about": about,
     "help" : help,
     "setlist" : setlist
