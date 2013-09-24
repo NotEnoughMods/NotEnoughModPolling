@@ -707,11 +707,11 @@ def test(self,name,params,channel,userdata,rank):
             result = NEM.mods[params[1]]["function"](NEM,params[1])
             print(result)
             if "mc" in result:
-                self.sendChatMessage(self.send,channel, "MC: "+result["mc"])
+                self.sendChatMessage(self.send,channel, "!setlist "+result["mc"])
             if "version" in result:
-                self.sendChatMessage(self.send,channel, "!mod "+result["version"])
+                self.sendChatMessage(self.send,channel, "!mod "+params[1]+" "+result["version"])
             if "dev" in result:
-                self.sendChatMessage(self.send,channel, "!dev "+result["dev"])
+                self.sendChatMessage(self.send,channel, "!dev "+params[1]+" "+result["dev"])
             if "change" in result:
                 self.sendChatMessage(self.send,channel, " * "+result["change"])
         except:
