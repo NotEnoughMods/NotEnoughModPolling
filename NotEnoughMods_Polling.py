@@ -13,10 +13,13 @@ class NotEnoughClasses():
     nemVersions = []
     nemVersion = ""
     def __init__(self):
+        self.useragent = urllib2.build_opener()
+        self.useragent.addheaders = [('User-agent', 'NotEnoughMods:Polling/1.X (+http://github.com/SinZ163/NotEnoughMods)')]
+        
         self.QueryNEM()
     def QueryNEM(self):
         try:
-            NEMfeed = urllib2.urlopen("http://bot.notenoughmods.com/?json", timeout = 10)
+            NEMfeed = self.useragent.open("http://bot.notenoughmods.com/?json", timeout = 10)
             result = NEMfeed.read()
             NEMfeed.close() 
             self.nemVersions = reversed(simplejson.loads(result, strict = False))
@@ -31,7 +34,7 @@ class NotEnoughClasses():
         
         for version in self.nemVersions:
             if "-dev" not in version:
-                versionFeed = urllib2.urlopen("http://bot.notenoughmods.com/"+version+".json", timeout = 10)
+                versionFeed = self.useragent.open("http://bot.notenoughmods.com/"+version+".json", timeout = 10)
                 rawJson = versionFeed.read()
                 versionFeed.close()
                 
@@ -48,7 +51,7 @@ class NotEnoughClasses():
                         templist.remove(mod["name"])
         
     def CheckJenkins(self, mod):
-        jenkinFeed = urllib2.urlopen(self.mods[mod]["jenkins"]["url"], timeout = 10)
+        jenkinFeed = self.useragent.open(self.mods[mod]["jenkins"]["url"], timeout = 10)
         result = jenkinFeed.read()
         jenkinFeed.close()
         
@@ -64,7 +67,7 @@ class NotEnoughClasses():
         return output
 
     def CheckMCForge(self,mod):
-        forgeFeed = urllib2.urlopen("http://files.minecraftforge.net/"+self.mods[mod]["mcforge"]["name"]+"/json", timeout = 10)
+        forgeFeed = self.useragent.open("http://files.minecraftforge.net/"+self.mods[mod]["mcforge"]["name"]+"/json", timeout = 10)
         result = forgeFeed.read()
         forgeFeed.close()
         jsonres = simplejson.loads(result, strict = False )
@@ -97,7 +100,7 @@ class NotEnoughClasses():
             return output
             
     def CheckChickenBones(self,mod):
-        chickenFeed = urllib2.urlopen("http://www.chickenbones.craftsaddle.org/Files/New_Versions/version.php?file="+mod+"&version="+self.mods[mod]["mc"], timeout = 10)
+        chickenFeed = self.useragent.open("http://www.chickenbones.craftsaddle.org/Files/New_Versions/version.php?file="+mod+"&version="+self.mods[mod]["mc"], timeout = 10)
         result = chickenFeed.read()
         chickenFeed.close()
         if result.startswith("Ret: "): #Hacky I know, but this is how ChickenBones does it in his mod
@@ -105,7 +108,7 @@ class NotEnoughClasses():
                 "version" : result[5:]
             }
     def CheckmDiyo(self,mod):
-        mDiyoFeed = urllib2.urlopen("http://tanis.sunstrike.io/"+self.mods[mod]["mDiyo"]["location"],timeout = 10)
+        mDiyoFeed = self.useragent.open("http://tanis.sunstrike.io/"+self.mods[mod]["mDiyo"]["location"],timeout = 10)
         result = mDiyoFeed.read()
         mDiyoFeed.close()
         lines = result.split()
@@ -117,7 +120,7 @@ class NotEnoughClasses():
         output = match.groupdict()
         return output
     def CheckAE(self,mod):
-        aeFeed = urllib2.urlopen("http://ae-mod.info/releases", timeout=10)
+        aeFeed = self.useragent.open("http://ae-mod.info/releases", timeout=10)
         result = aeFeed.read()
         aeFeed.close()
         jsonres = simplejson.loads(result, strict = False )

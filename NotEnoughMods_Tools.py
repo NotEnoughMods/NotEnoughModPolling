@@ -1,4 +1,3 @@
-import urllib
 import urllib2
 import simplejson
 import re
@@ -12,7 +11,7 @@ permission = 1
 class NotEnoughClasses(): 
     def getLatestVersion(self):
         try:
-            NEMfeed = urllib2.urlopen("http://bot.notenoughmods.com/?json", timeout = 10)
+            NEMfeed = self.useragent.open("http://bot.notenoughmods.com/?json", timeout = 10)
             result = NEMfeed.read()
             NEMfeed.close() 
             return simplejson.loads(result, strict = False)
@@ -22,6 +21,9 @@ class NotEnoughClasses():
             print(traceb)
             return ["1.4.5","1.4.6-1.4.7","1.5.1","1.5.2","1.6.1","1.6.2", "1.6.4"]
     def __init__(self):
+        self.useragent = urllib2.build_opener()
+        self.useragent.addheaders = [('User-agent', 'NotEnoughMods:Tools/1.X (+http://github.com/SinZ163/NotEnoughMods)')]
+        
         self.versions = self.getLatestVersion()
         self.version = self.versions[len(self.versions)-1]
         
@@ -54,7 +56,7 @@ def multilist(self,name,params,channel,userdata,rank):
             jsonres = {}
             results = {}
             for version in NEM.versions:
-                NEMfeed = urllib.urlopen("http://bot.notenoughmods.com/"+urllib.quote(version)+".json")
+                NEMfeed = NEM.useragent.open("http://bot.notenoughmods.com/"+urllib.quote(version)+".json")
                 result = NEMfeed.read()
                 NEMfeed.close()
                 jsonres[version] = simplejson.loads(result, strict = False )
@@ -116,7 +118,7 @@ def list(self, name, params, channel, userdata, rank):
     else:
         version = NEM.version
     try:
-        NEMfeed = urllib.urlopen("http://bot.notenoughmods.com/"+urllib.quote(version)+".json")
+        NEMfeed = NEM.useragent.open("http://bot.notenoughmods.com/"+urllib.quote(version)+".json")
         result = NEMfeed.read()
         NEMfeed.close()
         jsonres = simplejson.loads(result, strict = False )
@@ -184,5 +186,6 @@ help = {
     "list" : ["=nem list <search> <version>", "Searchs the NotEnoughMods database for <search> and returns all results to IRC"],
     "about": ["=nem about", "Shows some info about this plugin."],
     "help" : ["=nem help [command]", "Shows this help info about [command] or lists all commands for this plugin."],
-    "setlist" : ["=nem setlist <version>", "Sets the default version to <version> for the other commands."]
+    "setlist" : ["=nem setlist <version>", "Sets the default version to <version> for the other commands."],
+    "multilist" : ["=nem multilist <modName or alias>", "Searchs the NotEnoughMods database for a version per MC version"]
 }
