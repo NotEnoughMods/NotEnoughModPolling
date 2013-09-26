@@ -515,7 +515,7 @@ class NotEnoughClasses():
             "dev" : "",
             "mc" : "",
             "change" : "NOT_USED",
-            "active" : True
+            "active" : False
         },
         "IndustrialCraft2-EXP" : {
             "function" : CheckJenkins,

@@ -56,7 +56,7 @@ def multilist(self,name,params,channel,userdata,rank):
             jsonres = {}
             results = {}
             for version in NEM.versions:
-                NEMfeed = NEM.useragent.open("http://bot.notenoughmods.com/"+urllib.quote(version)+".json")
+                NEMfeed = NEM.useragent.open("http://bot.notenoughmods.com/"+urllib2.quote(version)+".json")
                 result = NEMfeed.read()
                 NEMfeed.close()
                 jsonres[version] = simplejson.loads(result, strict = False )
@@ -118,7 +118,7 @@ def list(self, name, params, channel, userdata, rank):
     else:
         version = NEM.version
     try:
-        NEMfeed = NEM.useragent.open("http://bot.notenoughmods.com/"+urllib.quote(version)+".json")
+        NEMfeed = NEM.useragent.open("http://bot.notenoughmods.com/"+urllib2.quote(version)+".json")
         result = NEMfeed.read()
         NEMfeed.close()
         jsonres = simplejson.loads(result, strict = False )
