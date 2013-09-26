@@ -1,4 +1,3 @@
-import urllib
 import urllib2
 import simplejson
 import re
@@ -683,16 +682,17 @@ def list(self,name,params,channel,userdata,rank):
     color = unichr(3)
     tempList = {}
     for key in NEM.mods:
-        type = ""
-        mcver = NEM.mods[key]["mc"]
-        if NEM.mods[key]["version"] != "NOT_USED":
-            type = type + bold + color + darkgreen + "[R]" + color + bold
-        if NEM.mods[key]["dev"] != "NOT_USED":
-            type = type + bold + color + red + "[D]" + color + bold
-        
-        if not mcver in tempList:
-            tempList[mcver] = []
-        tempList[mcver].append("{0}{1}".format(key,type))
+        if NEM.mods[key]["active"]:
+            type = ""
+            mcver = NEM.mods[key]["mc"]
+            if NEM.mods[key]["version"] != "NOT_USED":
+                type = type + bold + color + darkgreen + "[R]" + color + bold
+            if NEM.mods[key]["dev"] != "NOT_USED":
+                type = type + bold + color + red + "[D]" + color + bold
+            
+            if not mcver in tempList:
+                tempList[mcver] = []
+            tempList[mcver].append("{0}{1}".format(key,type))
     
     del mcver
     for mcver in tempList:
