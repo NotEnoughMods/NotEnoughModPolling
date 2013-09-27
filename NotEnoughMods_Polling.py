@@ -142,6 +142,17 @@ class NotEnoughClasses():
             "dev" : devVersion,
             "mc" : devMC
         }
+    def CheckHTML(self,mod):
+        bmFeed = self.useragent.open(self.mods[mod]["html"]["url"], timeout=10)
+        result = bmFeed.read()
+        bmFeed.close()
+        output = {}
+        for line in result.split():
+            match = re.search(self.mods[mod]["html"]["regex"], line)
+            if match:
+                output = match.groupdict()
+        return output
+        
     def CheckMod(self, mod):
         try:
             # First False is for if there was an update.
@@ -540,6 +551,18 @@ class NotEnoughClasses():
                 "url" : "https://samrg474.ci.cloudbees.com/job/MFR/lastSuccessfulBuild/api/json",
                 "regex" : "MFR-(?P<mc>.+?)-(?P<dev>.+?).zip",
                 "item" : 0
+            }
+        },
+        "BloodMagic" : {
+            "function" : CheckHTML,
+            "version" : "",
+            "dev" : "NOT_USED",
+            "mc" : "NOT_USED",
+            "change" : "NOT_USED",
+            "active" : True,
+            "html" : {
+                "url" : "https://www.dropbox.com/sh/zb1c910p0sifm3r/cvi84SoKN9",
+                "regex" : "Blood%20Magic%20v(?P<version>.+?).zip"
             }
         }
     }
