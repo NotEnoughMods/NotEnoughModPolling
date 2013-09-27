@@ -53,7 +53,6 @@ class NotEnoughClasses():
         jenkinFeed = self.useragent.open(self.mods[mod]["jenkins"]["url"], timeout = 10)
         result = jenkinFeed.read()
         jenkinFeed.close()
-        
         jsonres = simplejson.loads(result, strict = False )
         filename = jsonres["artifacts"][self.mods[mod]["jenkins"]["item"]]["fileName"]
         match = re.search(self.mods[mod]["jenkins"]["regex"],filename)
@@ -403,7 +402,7 @@ class NotEnoughClasses():
             "dev"    : "",
             "mc" : "",
             "change" : "",
-            "active" : True,
+            "active" : False,
             "jenkins" : {
                 "url" : "http://nallar.me/buildservice/job/Buildcraft/lastSuccessfulBuild/api/json",
                 "regex" : "buildcraft-universal-(?P<mc>.+?)-(?P<dev>.+?).jar$",
@@ -528,6 +527,19 @@ class NotEnoughClasses():
                 "url" : "http://ic2api.player.to:8080/job/IC2_experimental/lastSuccessfulBuild/api/json",
                 "regex" : "industrialcraft-2_(?P<version>.+?)-experimental.jar",
                 "item" : 2
+            }
+        },
+        "MinefactoryReloadedUnoffical" : {
+            "function" : CheckJenkins,
+            "version" : "NOT_USED",
+            "dev" : "",
+            "mc" : "",
+            "change" : "",
+            "active" : True,
+            "jenkins" : {
+                "url" : "https://samrg474.ci.cloudbees.com/job/MFR/lastSuccessfulBuild/api/json",
+                "regex" : "MFR-(?P<mc>.+?)-(?P<dev>.+?).zip",
+                "item" : 0
             }
         }
     }
@@ -717,7 +729,9 @@ def test(self,name,params,channel,userdata,rank):
                 self.sendChatMessage(self.send,channel, "!dev "+params[1]+" "+result["dev"])
             if "change" in result:
                 self.sendChatMessage(self.send,channel, " * "+result["change"])
-        except:
+        except Exception as error:
+            self.sendChatMessage(self.send, channel, name+": "+str(error))
+            traceback.print_exc()
             self.sendChatMessage(self.send,channel, params[1]+" failed to be polled")
 
 commands = {
