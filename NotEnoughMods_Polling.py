@@ -675,8 +675,8 @@ def help(self, name, params, channel, userdata, rank):
             self.sendChatMessage(self.send, channel, name+ ": Invalid command provided")
 
 def list(self,name,params,channel,userdata,rank):
-    darkgreen = "3"
-    red = "4"
+    darkgreen = "03"
+    red = "04"
     blue = "12"
     bold = unichr(2)
     color = unichr(3)
@@ -727,20 +727,25 @@ commands = {
     "about": about,
     "help" : help,
     "setversion" : setversion,
-    "setv" : setversion,
     "getversion" : getversion,
-    "getv" : getversion,
     "refresh" : refresh,
-    "polling" : running,
-    "test" : test
+    "test" : test,
+    
+    ###  ALIASES ###
+    "setv" : setversion,
+    "getv" : getversion,
+    "polling" : running
+    ### END ALIASES ###
 }
 
 help = {
+    "running" : ["=nemp running <true/false>", "Enables or Disables the polling of latest builds."],
+    "poll" : ["=nemp poll <mod> <true/false>", "Enables or Disables the polling of <mod>."],
     "list" : ["=nemp list", "Lists the mods that NotEnoughModPolling checks"],
     "about": ["=nemp about", "Shows some info about this plugin."],
     "help" : ["=nemp help [command]", "Shows this help info about [command] or lists all commands for this plugin."],
     "setversion" : ["=nemp setversion <version>", "Sets the version to <version> for polling to assume."],
-    "running" : ["=nemp running <true/false>", "Enables or Disables the polling of latest builds."],
-    "poll" : ["=nemp poll <mod> <true/false>", "Enables or Disables the polling of <mod>."],
+    "getversion" : ["=nemp getversion", "gets the version for polling to assume."],
     "refresh" : ["=nemp refresh", "Queries NEM to get the \"latest\" versions"],
+    "test" : ["=nemp test <mod>", "Runs CheckMod for <mod> and outputs the contents to IRC"]
 }
