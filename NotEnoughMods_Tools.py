@@ -89,7 +89,7 @@ def multilist(self,name,params,channel,userdata,rank):
             else:
                 count = str(count)+" MC versions"
             self.sendChatMessage(self.send, channel, "Listing "+count+" for \""+params[1]+"\":")
-            for line in results:
+            for line in sorted(results.iterkeys()):
                 alias = colour
                 if jsonres[line][results[line]]["aliases"] != "":
                     alias = colour+"("+colour+gray+str(re.sub(" ", ', ', jsonres[line][results[line]]["aliases"]))+colour+") "

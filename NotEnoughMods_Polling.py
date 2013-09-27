@@ -695,7 +695,7 @@ def list(self,name,params,channel,userdata,rank):
             tempList[mcver].append("{0}{1}".format(key,type))
     
     del mcver
-    for mcver in tempList:
+    for mcver in sorted(tempList.iterkeys()):
         tempList[mcver].sort()
         self.sendChatMessage(self.send,channel, "Mods checked for {0}: {1}".format(color+blue+bold+mcver+color+bold, ', '.join(tempList[mcver])))
 
