@@ -152,7 +152,17 @@ class NotEnoughClasses():
             if match:
                 output = match.groupdict()
         return output
-        
+    def CheckSpacechase(self,mod):
+        spaceFeed = self.useragent.open("http://spacechase0.com/wp-content/plugins/mc-mod-manager/nem.php?mc=6", timeout=10)
+        result = spaceFeed.read()
+        spaceFeed.close()
+        for line in result.split():
+            if mod in line:
+                info = line.split(',')
+                #0 = ID, 1=NEM ID, 2=ModID, 3=Author, 4=Link, 5=Version, 6=Comment
+                return {
+                    "version" : info[5]
+                }
     def CheckMod(self, mod):
         try:
             # First False is for if there was an update.
@@ -564,6 +574,150 @@ class NotEnoughClasses():
                 "url" : "https://www.dropbox.com/sh/zb1c910p0sifm3r/cvi84SoKN9",
                 "regex" : "Blood%20Magic%20v(?P<version>.+?).zip"
             }
+        },
+        "CheaperArrows" : {
+            "function" : CheckSpacechase,
+            "version" : "",
+            "dev" : "NOT_USED",
+            "mc" : "NOT_USED",
+            "change" : "NOT_USED",
+            "active" : True
+        },
+        "EverlastingTools" : {
+            "function" : CheckSpacechase,
+            "version" : "",
+            "dev" : "NOT_USED",
+            "mc" : "NOT_USED",
+            "change" : "NOT_USED",
+            "active" : True
+        },
+        "CondensedPotions" : {
+            "function" : CheckSpacechase,
+            "version" : "",
+            "dev" : "NOT_USED",
+            "mc" : "NOT_USED",
+            "change" : "NOT_USED",
+            "active" : True
+        },
+        "OldBookRecipe" : {
+            "function" : CheckSpacechase,
+            "version" : "",
+            "dev" : "NOT_USED",
+            "mc" : "NOT_USED",
+            "change" : "NOT_USED",
+            "active" : True
+        },
+        "TextFormatting" : {
+            "function" : CheckSpacechase,
+            "version" : "",
+            "dev" : "NOT_USED",
+            "mc" : "NOT_USED",
+            "change" : "NOT_USED",
+            "active" : True
+        },
+        "StoneBrickFormatting" : {
+            "function" : CheckSpacechase,
+            "version" : "",
+            "dev" : "NOT_USED",
+            "mc" : "NOT_USED",
+            "change" : "NOT_USED",
+            "active" : True
+        },
+        "SurvivalWings" : {
+            "function" : CheckSpacechase,
+            "version" : "",
+            "dev" : "NOT_USED",
+            "mc" : "NOT_USED",
+            "change" : "NOT_USED",
+            "active" : True
+        },
+        "ThirdPersonCamera" : {
+            "function" : CheckSpacechase,
+            "version" : "",
+            "dev" : "NOT_USED",
+            "mc" : "NOT_USED",
+            "change" : "NOT_USED",
+            "active" : True
+        },
+        "BiomeWand" : {
+            "function" : CheckSpacechase,
+            "version" : "",
+            "dev" : "NOT_USED",
+            "mc" : "NOT_USED",
+            "change" : "NOT_USED",
+            "active" : True
+        },
+        "DecorativeStuff" : {
+            "function" : CheckSpacechase,
+            "version" : "",
+            "dev" : "NOT_USED",
+            "mc" : "NOT_USED",
+            "change" : "NOT_USED",
+            "active" : True
+        },
+        "CraftableEnchantmentBooks" : {
+            "function" : CheckSpacechase,
+            "version" : "",
+            "dev" : "NOT_USED",
+            "mc" : "NOT_USED",
+            "change" : "NOT_USED",
+            "active" : True
+        },
+        "ToggleSpawners" : {
+            "function" : CheckSpacechase,
+            "version" : "",
+            "dev" : "NOT_USED",
+            "mc" : "NOT_USED",
+            "change" : "NOT_USED",
+            "active" : True
+        },
+        "ToxicRain" : {
+            "function" : CheckSpacechase,
+            "version" : "",
+            "dev" : "NOT_USED",
+            "mc" : "NOT_USED",
+            "change" : "NOT_USED",
+            "active" : True
+        },
+        "Auto-Fisher" : {
+            "function" : CheckSpacechase,
+            "version" : "",
+            "dev" : "NOT_USED",
+            "mc" : "NOT_USED",
+            "change" : "NOT_USED",
+            "active" : True
+        },
+        "UsefulPets" : {
+            "function" : CheckSpacechase,
+            "version" : "",
+            "dev" : "NOT_USED",
+            "mc" : "NOT_USED",
+            "change" : "NOT_USED",
+            "active" : True
+        },
+        "SpaceCore" : {
+            "function" : CheckSpacechase,
+            "version" : "",
+            "dev" : "NOT_USED",
+            "mc" : "NOT_USED",
+            "change" : "NOT_USED",
+            "active" : True
+        },
+        "SpelunkerDimension" : {
+            "function" : CheckSpacechase,
+            "version" : "",
+            "dev" : "NOT_USED",
+            "mc" : "NOT_USED",
+            "change" : "NOT_USED",
+            "active" : True
+        },
+        "ComponentEquipment" : {
+            "function" : CheckSpacechase,
+            "version" : "",
+            "dev" : "NOT_USED",
+            "mc" : "NOT_USED",
+            "change" : "NOT_USED",
+            "active" : True
         }
     }
 NEM = NotEnoughClasses()
