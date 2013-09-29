@@ -77,6 +77,7 @@ def multilist(self,name,params,channel,userdata,rank):
             purple = "06"
             orange = "07"
             blue = "12"
+            pink = "13"
             gray = "14"
             lightgray = "15"
             bold = unichr(2)
@@ -93,7 +94,7 @@ def multilist(self,name,params,channel,userdata,rank):
             for line in sorted(results.iterkeys()):
                 alias = colour
                 if jsonres[line][results[line]]["aliases"] != "":
-                    alias = colour+"("+colour+gray+str(re.sub(" ", ', ', jsonres[line][results[line]]["aliases"]))+colour+") "
+                    alias = colour+"("+colour+pink+str(re.sub(" ", colour+', '+colour+pink, jsonres[line][results[line]]["aliases"]))+colour+") "
                 comment = colour
                 if jsonres[line][results[line]]["comment"] != "":
                     comment = str(colour+"["+colour+gray+jsonres[line][results[line]]["comment"]+colour+"] ")
