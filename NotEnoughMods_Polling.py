@@ -734,19 +734,6 @@ class NotEnoughClasses():
         }
     }
 NEM = NotEnoughClasses()
-def ChatEvent(self, channels, userdata, message, currChannel):
-    #detect initial list
-    match = re.match("^Current list: (.+?)$",message)
-    if match:
-        NEM.nemVersion = match.group(1).split(" ")[0]
-        #self.sendChatMessage(self.send, currChannel, "Confirming latest version is: "+match.group(1))
-    else:
-        #detect list change
-        match = re.match("^switched list to: \002\00312(.+?)\003\002",message)
-        if match:
-            NEM.nemVersion = match.group(1)
-            #self.sendChatMessage(self.send, currChannel, "Confirming list change to: "+match.group(1))
-
 def running(self, name, params, channel, userdata, rank):
     if len(params) >= 2 and (params[1] == "true" or params[1] == "on"):
         if not self.events["time"].doesExist("NotEnoughModPolling"):
@@ -754,14 +741,8 @@ def running(self, name, params, channel, userdata, rank):
             NEM.InitiateVersions()
             timerForPolls = 60*5
             if len(params) == 3:
-                timerForPolls = params[2]
+                timerForPolls = int(params[2])
             self.events["time"].addEvent("NotEnoughModPolling", timerForPolls, MainTimerEvent, [channel])
-            
-            #Detect current list (and future changes)
-            if self.events["chat"].doesExist("NEMP"):
-                self.events["chat"].removeEvent("NEMP")
-            self.events["chat"].addEvent("NEMP", ChatEvent, [channel])
-            self.sendChatMessage(self.send, channel, "!current")
         else:
             self.sendChatMessage(self.send, channel, "NotEnoughMods-Polling is already running.")
     if len(params) == 2 and (params[1] == "false" or params[1] == "off"):
