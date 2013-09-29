@@ -447,7 +447,7 @@ class NotEnoughClasses():
             "function" : CheckJenkins,
             "version" : "NOT_USED",
             "dev"    : "",
-            "mc" : "",
+            "mc" : "NOT_USED",
             "change" : "",
             "active" : True,
             "jenkins" : {
@@ -748,11 +748,14 @@ def ChatEvent(self, channels, userdata, message, currChannel):
             #self.sendChatMessage(self.send, currChannel, "Confirming list change to: "+match.group(1))
 
 def running(self, name, params, channel, userdata, rank):
-    if len(params) == 2 and (params[1] == "true" or params[1] == "on"):
+    if len(params) >= 2 and (params[1] == "true" or params[1] == "on"):
         if not self.events["time"].doesExist("NotEnoughModPolling"):
             self.sendChatMessage(self.send, channel, "Turning NotEnoughModPolling on.")
             NEM.InitiateVersions()
-            self.events["time"].addEvent("NotEnoughModPolling", 60*5, MainTimerEvent, [channel])
+            timerForPolls = 60*5
+            if len(params) == 3:
+                timerForPolls = params[2]
+            self.events["time"].addEvent("NotEnoughModPolling", timerForPolls, MainTimerEvent, [channel])
             
             #Detect current list (and future changes)
             if self.events["chat"].doesExist("NEMP"):
@@ -791,12 +794,6 @@ def MicroTimerEvent(self,channels):
         for channel in channels:
             setList = "null"
             for version in tempList:
-                if setList == "null":
-                    if version != NEM.nemVersion:
-                        self.sendChatMessage(self.send, channel, "!setlist "+version)
-                elif version != setList:
-                    self.sendChatMessage(self.send, channel, "!setlist "+version)
-                        
                 for item in tempList[version]:
                     # item[0] = name of mod
                     # item[1] = flags for dev/release change
@@ -805,20 +802,17 @@ def MicroTimerEvent(self,channels):
                     mod = item[0]
                     flags = item[1]
                     if NEM.mods[mod]["dev"] != "NOT_USED" and flags[0]:
-                        self.sendChatMessage(self.send, channel, "!dev "+mod+" "+NEM.mods[mod]["dev"])
+                        self.sendChatMessage(self.send, channel, "!ldev "+version+" "+mod+" "+NEM.mods[mod]["dev"])
                     if NEM.mods[mod]["version"]  != "NOT_USED" and flags[1]:
-                        self.sendChatMessage(self.send, channel, "!mod "+mod+" "+NEM.mods[mod]["version"])
+                        self.sendChatMessage(self.send, channel, "!lmod "+version+" "+mod+" "+NEM.mods[mod]["version"])
                     if NEM.mods[mod]["change"] != "NOT_USED":
                         self.sendChatMessage(self.send, channel, " * "+NEM.mods[mod]["change"])
-                setList = version
-            if (setList != NEM.nemVersion):
-                if setList != "null":
-                    self.sendChatMessage(self.send,channel, "!setlist "+NEM.nemVersion)
                 
 def poll(self, name, params, channel, userdata, rank):
     if len(params) != 3:
         self.sendChatMessage(self.send, channel, name+ ": Insufficent amount of parameters provided.")
         self.sendChatMessage(self.send, channel, name+ ": "+help["poll"][1])
+        
     else:
         setting = False
         if params[1] in NEM.mods:
