@@ -156,10 +156,10 @@ class NotEnoughClasses():
         spaceFeed = self.useragent.open("http://spacechase0.com/wp-content/plugins/mc-mod-manager/nem.php?mc=6", timeout=10)
         result = spaceFeed.read()
         spaceFeed.close()
-        for line in result.split():
-            if mod in line:
-                info = line.split(',')
-                #0 = ID, 1=NEM ID, 2=ModID, 3=Author, 4=Link, 5=Version, 6=Comment
+        for line in result.splitlines():
+            info = line.split(',')
+            #0 = ID, 1=NEM ID, 2=ModID, 3=Author, 4=Link, 5=Version, 6=Comment
+            if info[1] == mod:
                 return {
                     "version" : info[5]
                 }
