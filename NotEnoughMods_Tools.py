@@ -72,7 +72,8 @@ def multilist(self,name,params,channel,userdata,rank):
                             if params[1].lower() == alias.lower():
                                 results[version] = i
                                 break
-            red = "04"
+            darkgreen = "03"
+            red = "05"
             purple = "06"
             orange = "07"
             blue = "12"
@@ -99,12 +100,12 @@ def multilist(self,name,params,channel,userdata,rank):
                 dev = colour
                 try:
                     if jsonres[line][results[line]]["dev"] != "":
-                        dev = str(colour+"("+colour+red+"dev: "+jsonres[line][results[line]]["dev"]+colour+")")
+                        dev = str(colour+" ("+colour+gray+"dev"+colour+": "+colour+red+jsonres[line][results[line]]["dev"]+colour+")")
                 except Exception as error:
                     print(error)
                     traceback.print_exc()
                     #lol
-                self.sendChatMessage(self.send, channel, colour+purple+line+colour+": "+colour+gray+jsonres[line][results[line]]["name"]+" "+alias+colour+lightgray+jsonres[line][results[line]]["version"]+dev+" "+comment+colour+orange+jsonres[line][results[line]]["shorturl"]+colour)    
+                self.sendChatMessage(self.send, channel, bold+colour+blue+line+colour+bold+": "+colour+purple+jsonres[line][results[line]]["name"]+" "+alias+colour+darkgreen+jsonres[line][results[line]]["version"]+dev+" "+comment+colour+orange+jsonres[line][results[line]]["shorturl"]+colour)    
         except Exception as error:
             self.sendChatMessage(self.send, channel, name+": "+str(error))
             traceback.print_exc()
@@ -135,10 +136,13 @@ def list(self, name, params, channel, userdata, rank):
                     if params[1].lower() in alias.lower():
                         results.append(i)
                         break
+        darkgreen = "03"
+        red = "05"
+        purple = "06"
         orange = "7"
         blue = "12"
+        pink = "13"
         gray = "14"
-        lightgray = "15"
         bold = unichr(2)
         colour = unichr(3)
         count = len(results)
@@ -153,11 +157,19 @@ def list(self, name, params, channel, userdata, rank):
         for line in results:
             alias = colour
             if jsonres[line]["aliases"] != "":
-                alias = colour+"("+colour+gray+str(re.sub(" ", ', ', jsonres[line]["aliases"]))+colour+") "
+                alias = colour+"("+colour+pink+str(re.sub(" ", colour+', '+colour+pink, jsonres[line]["aliases"]))+colour+") "
             comment = colour
             if jsonres[line]["comment"] != "":
-                comment = str(colour+"["+colour+gray+jsonres[line]["comment"]+colour+"] ")
-            self.sendChatMessage(self.send, channel, colour+gray+jsonres[line]["name"]+" "+alias+colour+lightgray+jsonres[line]["version"]+" "+comment+colour+orange+jsonres[line]["shorturl"]+colour)
+                comment = str(colour+"("+colour+gray+jsonres[line]["comment"]+colour+") ")
+            dev = colour
+            try:
+                if jsonres[line]["dev"] != "":
+                    dev = str(colour+" ("+colour+gray+"dev"+colour+": "+colour+red+jsonres[line]["dev"]+colour+")")
+            except Exception as error:
+                print(error)
+                traceback.print_exc()
+                #lol
+            self.sendChatMessage(self.send, channel, colour+purple+jsonres[line]["name"]+" "+alias+colour+darkgreen+jsonres[line]["version"]+dev+" "+comment+colour+orange+jsonres[line]["shorturl"]+colour)  
     except Exception as error:
         self.sendChatMessage(self.send, channel, name+": "+str(error))
         traceback.print_exc()

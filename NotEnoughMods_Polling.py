@@ -550,7 +550,7 @@ class NotEnoughClasses():
                 "item" : 2
             }
         },
-        "MinefactoryReloadedUnoffical" : {
+        "MinefactoryReloadedUnofficial" : {
             "function" : CheckJenkins,
             "version" : "NOT_USED",
             "dev" : "",
@@ -561,6 +561,19 @@ class NotEnoughClasses():
                 "url" : "https://samrg474.ci.cloudbees.com/job/MFR/lastSuccessfulBuild/api/json",
                 "regex" : "MFR-(?P<mc>.+?)-(?P<dev>.+?).zip",
                 "item" : 0
+            }
+        },
+        "PowerCrystalsCoreUnofficial" : {
+            "function" : CheckJenkins,
+            "version" : "NOT_USED",
+            "dev" : "",
+            "mc" : "",
+            "change" : "",
+            "active" : True,
+            "jenkins" : {
+                "url" : "https://samrg474.ci.cloudbees.com/job/PCC/lastSuccessfulBuild/api/json",
+                "regex" : "PowerCrystalsCore-(?P<mc>.+?)-(?P<dev>.+?).jar",
+                "item" : 1
             }
         },
         "BloodMagic" : {
@@ -615,7 +628,7 @@ class NotEnoughClasses():
             "change" : "NOT_USED",
             "active" : True
         },
-        "StoneBrickFormatting" : {
+        "StoneBrickRecipes" : {
             "function" : CheckSpacechase,
             "version" : "",
             "dev" : "NOT_USED",
@@ -865,7 +878,7 @@ def help(self, name, params, channel, userdata, rank):
 
 def list(self,name,params,channel,userdata,rank):
     darkgreen = "03"
-    red = "04"
+    red = "05"
     blue = "12"
     bold = unichr(2)
     color = unichr(3)
@@ -875,9 +888,9 @@ def list(self,name,params,channel,userdata,rank):
             type = ""
             mcver = NEM.mods[key]["mc"]
             if NEM.mods[key]["version"] != "NOT_USED":
-                type = type + bold + color + darkgreen + "[R]" + color + bold
+                type = type + color + darkgreen + "[R]" + color
             if NEM.mods[key]["dev"] != "NOT_USED":
-                type = type + bold + color + red + "[D]" + color + bold
+                type = type + color + red + "[D]" + color
             
             if not mcver in tempList:
                 tempList[mcver] = []
