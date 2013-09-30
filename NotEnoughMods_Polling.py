@@ -731,7 +731,151 @@ class NotEnoughClasses():
             "mc" : "NOT_USED",
             "change" : "NOT_USED",
             "active" : True
-        }
+        },
+        "StatusEffectHUD" : {
+            "function" : CheckHTML,
+            "version" : "",
+            "dev" : "NOT_USED",
+            "mc" : "",
+            "change" : "NOT_USED",
+            "active" : True,
+            "html" : {
+                "url" : "http://dl.dropboxusercontent.com/u/20748481/Minecraft/1.6.4/statusEffectHud.version",
+                "regex" : "v(?P<version>.+?)\((?P<mc>.+?)\)"
+            }
+        },
+        "ArmorStatusHUD" : {
+            "function" : CheckHTML,
+            "version" : "",
+            "dev" : "NOT_USED",
+            "mc" : "",
+            "change" : "NOT_USED",
+            "active" : True,
+            "html" : {
+                "url" : "http://dl.dropboxusercontent.com/u/20748481/Minecraft/1.6.4/armorStatusHud.version",
+                "regex" : "v(?P<version>.+?)\((?P<mc>.+?)\)"
+            }
+        },
+        "BlockBreaker" : {
+            "function" : CheckHTML,
+            "version" : "",
+            "dev" : "NOT_USED",
+            "mc" : "NOT_USED",
+            "change" : "NOT_USED",
+            "active" : True,
+            "html" : {
+                "url" : "http://dl.dropboxusercontent.com/u/20748481/Minecraft/1.6.4/blockBreakerForge.version",
+                "regex" : "Forge (?P<version>.+?)"
+            }
+        },
+        "bspkrsCore" : {
+            "function" : CheckHTML,
+            "version" : "",
+            "dev" : "NOT_USED",
+            "mc" : "",
+            "change" : "NOT_USED",
+            "active" : True,
+            "html" : {
+                "url" : "http://dl.dropboxusercontent.com/u/20748481/Minecraft/1.6.4/bspkrsCore.version",
+                "regex" : "v(?P<version>.+?)\((?P<mc>.+?)\)"
+            }
+        },
+        "CrystalWing" : {
+            "function" : CheckHTML,
+            "version" : "",
+            "dev" : "NOT_USED",
+            "mc" : "NOT_USED",
+            "change" : "NOT_USED",
+            "active" : True,
+            "html" : {
+                "url" : "http://dl.dropboxusercontent.com/u/20748481/Minecraft/1.6.4/crystalWing.version",
+                "regex" : "ML (?P<version>.+?)"
+            }
+        },
+        "DirectionHUD" : {
+            "function" : CheckHTML,
+            "version" : "",
+            "dev" : "NOT_USED",
+            "mc" : "",
+            "change" : "NOT_USED",
+            "active" : True,
+            "html" : {
+                "url" : "http://dl.dropboxusercontent.com/u/20748481/Minecraft/1.6.4/directionHUD.version",
+                "regex" : "v(?P<version>.+?)\((?P<mc>.+?)\)"
+            }
+        },
+        "FloatingRuins" : {
+            "function" : CheckHTML,
+            "version" : "",
+            "dev" : "NOT_USED",
+            "mc" : "NOT_USED",
+            "change" : "NOT_USED",
+            "active" : True,
+            "html" : {
+                "url" : "http://dl.dropboxusercontent.com/u/20748481/Minecraft/1.6.4/floatingRuinsForge.version",
+                "regex" : "Forge (?P<version>.+?)"
+            }
+        },      
+        "IngameInfo" : {
+            "function" : CheckHTML,
+            "version" : "",
+            "dev" : "NOT_USED",
+            "mc" : "NOT_USED",
+            "change" : "NOT_USED",
+            "active" : True,
+            "html" : {
+                "url" : "http://dl.dropboxusercontent.com/u/20748481/Minecraft/1.6.4/ingameInfo.version",
+                "regex" : "ML (?P<version>.+?)"
+            }
+        },
+        "FloatingRuins" : {
+            "function" : CheckHTML,
+            "version" : "",
+            "dev" : "NOT_USED",
+            "mc" : "NOT_USED",
+            "change" : "NOT_USED",
+            "active" : True,
+            "html" : {
+                "url" : "http://dl.dropboxusercontent.com/u/20748481/Minecraft/1.6.4/floatingRuinsForge.version",
+                "regex" : "Forge (?P<version>.+?)"
+            }
+        }, 
+        "StartingInventory" : {
+            "function" : CheckHTML,
+            "version" : "",
+            "dev" : "NOT_USED",
+            "mc" : "NOT_USED",
+            "change" : "NOT_USED",
+            "active" : True,
+            "html" : {
+                "url" : "http://dl.dropboxusercontent.com/u/20748481/Minecraft/1.6.4/startingInventory.version",
+                "regex" : "ML (?P<version>.+?)"
+            }
+        },
+        "TreeCapitator" : {
+            "function" : CheckHTML,
+            "version" : "",
+            "dev" : "NOT_USED",
+            "mc" : "NOT_USED",
+            "change" : "NOT_USED",
+            "active" : True,
+            "html" : {
+                "url" : "http://dl.dropboxusercontent.com/u/20748481/Minecraft/1.6.4/treeCapitatorForge.version",
+                "regex" : "Forge (?P<version>.+?)"
+            }
+        },
+        "WorldStateCheckpoints" : {
+            "function" : CheckHTML,
+            "version" : "",
+            "dev" : "NOT_USED",
+            "mc" : "NOT_USED",
+            "change" : "NOT_USED",
+            "active" : True,
+            "html" : {
+                "url" : "http://dl.dropboxusercontent.com/u/20748481/Minecraft/1.6.4/worldStateCheckpoints.version",
+                "regex" : "ML (?P<version>.+?)"
+            }
+        } 
     }
 NEM = NotEnoughClasses()
 def running(self, name, params, channel, userdata, rank):
