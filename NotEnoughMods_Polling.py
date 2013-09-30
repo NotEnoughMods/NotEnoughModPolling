@@ -147,7 +147,7 @@ class NotEnoughClasses():
         result = bmFeed.read()
         bmFeed.close()
         output = {}
-        for line in result.split():
+        for line in result.splitlines():
             match = re.search(self.mods[mod]["html"]["regex"], line)
             if match:
                 output = match.groupdict()
@@ -765,7 +765,7 @@ class NotEnoughClasses():
             "active" : True,
             "html" : {
                 "url" : "http://dl.dropboxusercontent.com/u/20748481/Minecraft/1.6.4/blockBreakerForge.version",
-                "regex" : "Forge (?P<version>.+?)"
+                "regex" : "Forge (?P<version>.+?)$"
             }
         },
         "bspkrsCore" : {
@@ -789,7 +789,7 @@ class NotEnoughClasses():
             "active" : True,
             "html" : {
                 "url" : "http://dl.dropboxusercontent.com/u/20748481/Minecraft/1.6.4/crystalWing.version",
-                "regex" : "ML (?P<version>.+?)"
+                "regex" : "ML (?P<version>.+?)$"
             }
         },
         "DirectionHUD" : {
@@ -813,7 +813,7 @@ class NotEnoughClasses():
             "active" : True,
             "html" : {
                 "url" : "http://dl.dropboxusercontent.com/u/20748481/Minecraft/1.6.4/floatingRuinsForge.version",
-                "regex" : "Forge (?P<version>.+?)"
+                "regex" : "Forge (?P<version>.+?)$"
             }
         },      
         "IngameInfo" : {
@@ -825,7 +825,7 @@ class NotEnoughClasses():
             "active" : True,
             "html" : {
                 "url" : "http://dl.dropboxusercontent.com/u/20748481/Minecraft/1.6.4/ingameInfo.version",
-                "regex" : "ML (?P<version>.+?)"
+                "regex" : "ML (?P<version>.+?)$"
             }
         },
         "FloatingRuins" : {
@@ -837,7 +837,7 @@ class NotEnoughClasses():
             "active" : True,
             "html" : {
                 "url" : "http://dl.dropboxusercontent.com/u/20748481/Minecraft/1.6.4/floatingRuinsForge.version",
-                "regex" : "Forge (?P<version>.+?)"
+                "regex" : "Forge (?P<version>.+?)$"
             }
         }, 
         "StartingInventory" : {
@@ -849,7 +849,7 @@ class NotEnoughClasses():
             "active" : True,
             "html" : {
                 "url" : "http://dl.dropboxusercontent.com/u/20748481/Minecraft/1.6.4/startingInventory.version",
-                "regex" : "ML (?P<version>.+?)"
+                "regex" : "ML (?P<version>.+?)$"
             }
         },
         "TreeCapitator" : {
@@ -861,7 +861,7 @@ class NotEnoughClasses():
             "active" : True,
             "html" : {
                 "url" : "http://dl.dropboxusercontent.com/u/20748481/Minecraft/1.6.4/treeCapitatorForge.version",
-                "regex" : "Forge (?P<version>.+?)"
+                "regex" : "Forge (?P<version>.+?)$"
             }
         },
         "WorldStateCheckpoints" : {
@@ -873,7 +873,7 @@ class NotEnoughClasses():
             "active" : True,
             "html" : {
                 "url" : "http://dl.dropboxusercontent.com/u/20748481/Minecraft/1.6.4/worldStateCheckpoints.version",
-                "regex" : "ML (?P<version>.+?)"
+                "regex" : "ML (?P<version>.+?)$"
             }
         } 
     }
