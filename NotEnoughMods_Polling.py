@@ -908,8 +908,11 @@ def PollingThread(self, pipe):
                     tempList[NEM.mods[mod]["mc"]] = tempVersion
     pipe.send(tempList)
 def MainTimerEvent(self,channels):
-    self.threading.addThread("NEMP", PollingThread)
-    self.events["time"].addEvent("NEMP_ThreadClock", 10, MicroTimerEvent, channels, from_event = True)
+    try:
+        self.threading.addThread("NEMP", PollingThread)
+        self.events["time"].addEvent("NEMP_ThreadClock", 10, MicroTimerEvent, channels, from_event = True)
+    except FunctionNameAlreadyExists as e:
+        print(e)
 def MicroTimerEvent(self,channels):
     yes = self.threading.poll("NEMP")
     if yes:
