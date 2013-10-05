@@ -350,7 +350,7 @@ def list(self,name,params,channel,userdata,rank):
     
     del mcver
     for mcver in sorted(tempList.iterkeys()):
-        tempList[mcver].sort()
+        tempList[mcver] = sorted(tempList[mcver], key=lambda s: s.lower())
         self.sendChatMessage(self.send,channel, "Mods checked for {0}: {1}".format(color+blue+bold+mcver+color+bold, ', '.join(tempList[mcver])))
 
 def refresh(self,name,params,channel,userdata,rank):
