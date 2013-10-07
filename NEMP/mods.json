@@ -369,6 +369,19 @@
             "item" : 1
         }
     },
+    "PowerConvertersUnofficial" : {
+        "function" : "CheckJenkins",
+        "version" : "NOT_USED",
+        "dev" : "",
+        "mc" : "",
+        "change" : "",
+        "active" : true,
+        "jenkins" : {
+            "url" : "https://samrg474.ci.cloudbees.com/job/PowerConverters/lastSuccessfulBuild/api/json",
+            "regex" : "PowerConverters-(?P<mc>.+?)-(?P<dev>.+?).jar",
+            "item" : 1
+        }
+    },
     "BloodMagic" : {
         "function" : "CheckHTML",
         "version" : "",
