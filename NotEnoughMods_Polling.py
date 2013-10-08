@@ -14,6 +14,7 @@ class NotEnoughClasses():
     nemVersions = []
     nemVersion = ""
     
+    newMods = False
     mods = {}
     def __init__(self):
         self.useragent = urllib2.build_opener()
@@ -226,6 +227,9 @@ def running(self, name, params, channel, userdata, rank):
         else:
             self.sendChatMessage(self.send, channel, "NotEnoughModPolling isn't running!")
 def PollingThread(self, pipe):
+    if NEM.newMods:
+        NEM.mods = NEM.newMods
+        NEM.InitiateVersions()
     tempList = {}
     for mod in NEM.mods:
         if NEM.mods[mod]["active"]:
@@ -296,7 +300,7 @@ def execute(self, name, params, channel, userdata, rank):
     except Exception as e:
         self.sendChatMessage(self.send, channel, "invalid command!")
         self.sendChatMessage(self.send, channel, "see =nemp help for a list of commands")
-        print(e)
+        traceback.print_exc()
 
 def setversion(self, name, params, channel, userdata, rank):
     if len(params) != 2:
@@ -357,6 +361,17 @@ def refresh(self,name,params,channel,userdata,rank):
     NEM.QueryNEM()
     NEM.InitiateVersions()
     self.sendChatMessage(self.send,channel, "Queried NEM for \"latest\" versions")
+def reload(self,name,params,channel,userdata,rank):
+    file = open("commands/NEMP/mods.json", "r")
+    fileInfo = file.read()
+    
+    if "NEMP" not in self.threading.pool:
+        NEM.mods = simplejson.loads(fileInfo, strict = False)
+        NEM.InitiateVersions()
+    else:
+        NEM.newMods = simplejson.loads(fileInfo, strict = False)
+    
+    self.sendChatMessage(self.send,channel, "Reloaded the NEMP Database")
     
 def test(self,name,params,channel,userdata,rank):
     if len(params) > 0:
@@ -386,6 +401,7 @@ commands = {
     "getversion" : getversion,
     "refresh" : refresh,
     "test" : test,
+    "reload" : reload,
     
     ###  ALIASES ###
     "setv" : setversion,
