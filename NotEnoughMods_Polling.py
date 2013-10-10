@@ -333,6 +333,9 @@ def help(self, name, params, channel, userdata, rank):
             self.sendChatMessage(self.send, channel, name+ ": Invalid command provided")
 
 def list(self,name,params,channel,userdata,rank):
+    dest = userdata[0]
+    if len(params) > 1 and params[1] == "broadcast":
+        dest = channel
     darkgreen = "03"
     red = "05"
     blue = "12"
@@ -355,7 +358,7 @@ def list(self,name,params,channel,userdata,rank):
     del mcver
     for mcver in sorted(tempList.iterkeys()):
         tempList[mcver] = sorted(tempList[mcver], key=lambda s: s.lower())
-        self.sendChatMessage(self.send,channel, "Mods checked for {0}: {1}".format(color+blue+bold+mcver+color+bold, ', '.join(tempList[mcver])))
+        self.sendChatMessage(self.send, dest, "Mods checked for {0}: {1}".format(color+blue+bold+mcver+color+bold, ', '.join(tempList[mcver])))
 
 def refresh(self,name,params,channel,userdata,rank):
     NEM.QueryNEM()
@@ -391,6 +394,9 @@ def test(self,name,params,channel,userdata,rank):
             traceback.print_exc()
             self.sendChatMessage(self.send,channel, params[1]+" failed to be polled")
 
+def nktest(self,name,params,channel,userdata,rank):
+    pass
+
 commands = {
     "running" : running,
     "poll" : poll,
@@ -402,6 +408,7 @@ commands = {
     "refresh" : refresh,
     "test" : test,
     "reload" : reload,
+    "nktest" : nktest,
     
     ###  ALIASES ###
     "setv" : setversion,
