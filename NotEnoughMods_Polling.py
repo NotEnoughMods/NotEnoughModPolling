@@ -16,6 +16,7 @@ class NotEnoughClasses():
     
     newMods = False
     mods = {}
+    
     def __init__(self):
         self.useragent = urllib2.build_opener()
         self.useragent.addheaders = [('User-agent', 'NotEnoughMods:Polling/1.X (+http://github.com/SinZ163/NotEnoughMods)')]
@@ -25,6 +26,7 @@ class NotEnoughClasses():
         self.mods = simplejson.loads(fileInfo, strict = False)
         
         self.QueryNEM()
+        
     def QueryNEM(self):
         try:
             NEMfeed = self.useragent.open("http://bot.notenoughmods.com/?json", timeout = 10)
@@ -35,7 +37,7 @@ class NotEnoughClasses():
             print("Failed to get NEM versions, falling back to hard-coded")
             traceb = str(traceback.format_exc())
             print(traceb)
-            self.nemVersions = reversed(["1.4.5","1.4.6-1.4.7","1.5.1","1.5.2","1.6.1","1.6.2"])
+            self.nemVersions = reversed(["1.4.5","1.4.6-1.4.7","1.5.1","1.5.2","1.6.1","1.6.2","1.6.4"])
             
     def InitiateVersions(self):
         templist = self.mods.keys()
@@ -114,6 +116,7 @@ class NotEnoughClasses():
             return {
                 "version" : result[5:]
             }
+            
     def CheckmDiyo(self,mod):
         mDiyoFeed = self.useragent.open("http://tanis.sunstrike.io/"+self.mods[mod]["mDiyo"]["location"],timeout = 10)
         result = mDiyoFeed.read()
@@ -126,6 +129,7 @@ class NotEnoughClasses():
         match = re.search(self.mods[mod]["mDiyo"]["regex"],result)
         output = match.groupdict()
         return output
+        
     def CheckAE(self,mod):
         aeFeed = self.useragent.open("http://ae-mod.info/releases", timeout=10)
         result = aeFeed.read()
@@ -137,20 +141,21 @@ class NotEnoughClasses():
         devVersion = ""
         devMC = ""
         for version in jsonres:
-            print(version)
+            #print(version)
             if version["Channel"] == "Stable":
                 relVersion = version["Version"]
                 relMC = version["Minecraft"]
             else:
                 devVersion = version["Version"]
                 devMC = version["Minecraft"]
-            print(" |"+relVersion+" || "+relMC)
-            print("~|"+devVersion+"~||~"+devMC)
+            #print(" |"+relVersion+" || "+relMC)
+            #print("~|"+devVersion+"~||~"+devMC)
         return {
             "version" : relVersion,
             "dev" : devVersion,
             "mc" : devMC
         }
+        
     def CheckHTML(self,mod):
         bmFeed = self.useragent.open(self.mods[mod]["html"]["url"], timeout=10)
         result = bmFeed.read()
@@ -161,6 +166,7 @@ class NotEnoughClasses():
             if match:
                 output = match.groupdict()
         return output
+        
     def CheckSpacechase(self,mod):
         spaceFeed = self.useragent.open("http://spacechase0.com/wp-content/plugins/mc-mod-manager/nem.php?mc=6", timeout=10)
         result = spaceFeed.read()
@@ -172,6 +178,7 @@ class NotEnoughClasses():
                 return {
                     "version" : info[5]
                 }
+                
     def CheckMod(self, mod):
         try:
             # First False is for if there was an update.
@@ -197,7 +204,9 @@ class NotEnoughClasses():
         except:
             print(mod+" failed to be polled...")
             return [False, False, False]
+            
     #def CheckOpenMod(self,mod):
+    
     parsers = {
         "CheckMCForge" : CheckMCForge,
         "CheckJenkins" : CheckJenkins,
@@ -205,7 +214,7 @@ class NotEnoughClasses():
         "CheckmDiyo" : CheckmDiyo,
         "CheckAE" : CheckAE,
         "CheckHTML" : CheckHTML,
-        "CheckSpacechase" : CheckSpacechase
+        "CheckSpacechase" : CheckSpacechase,
     }
     
 NEM = NotEnoughClasses()
