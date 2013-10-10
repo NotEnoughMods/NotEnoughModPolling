@@ -343,7 +343,7 @@
             "item" : 2
         }
     },
-    "MinefactoryReloadedUnofficial" : {
+    "MinefactoryReloaded-Samrg472" : {
         "function" : "CheckJenkins",
         "version" : "NOT_USED",
         "dev" : "",
@@ -356,7 +356,7 @@
             "item" : 0
         }
     },
-    "PowerCrystalsCoreUnofficial" : {
+    "PowerCrystalsCore-Samrg472" : {
         "function" : "CheckJenkins",
         "version" : "NOT_USED",
         "dev" : "",
@@ -369,7 +369,7 @@
             "item" : 1
         }
     },
-    "PowerConvertersUnofficial" : {
+    "PowerConverters-Samrg472" : {
         "function" : "CheckJenkins",
         "version" : "NOT_USED",
         "dev" : "",
@@ -594,8 +594,8 @@
         "change" : "NOT_USED",
         "active" : true,
         "html" : {
-            "url" : "http://dl.dropboxusercontent.com/u/20748481/Minecraft/1.6.4/crystalWing.version",
-            "regex" : "ML (?P<version>.+?)$"
+            "url" : "http://dl.dropboxusercontent.com/u/20748481/Minecraft/1.6.4/crystalWingForge.version",
+            "regex" : "Forge (?P<version>.+?)$"
         }
     },
     "DirectionHUD" : {
