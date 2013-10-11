@@ -240,14 +240,18 @@ def PollingThread(self, pipe):
         NEM.mods = NEM.newMods
         NEM.InitiateVersions()
     tempList = {}
-    for mod in NEM.mods:
+    for mod, info in NEM.mods.iteritems():
+        if 'name' in info:
+            real_name = info['name']
+        else:
+            real_name = mod
         if NEM.mods[mod]["active"]:
             result = NEM.CheckMod(mod)
             if result[0]:
                 if NEM.mods[mod]["mc"] in tempList:
-                    tempList[NEM.mods[mod]["mc"]].append((mod, result[1:]))
+                    tempList[NEM.mods[mod]["mc"]].append((real_name, result[1:]))
                 else:
-                    tempVersion = [(mod, result[1:])]
+                    tempVersion = [(real_name, result[1:])]
                     tempList[NEM.mods[mod]["mc"]] = tempVersion
     pipe.send(tempList)
 def MainTimerEvent(self,channels):
@@ -351,7 +355,8 @@ def list(self,name,params,channel,userdata,rank):
     bold = unichr(2)
     color = unichr(3)
     tempList = {}
-    for key in NEM.mods:
+    for key, info in NEM.mods.iteritems():
+        real_name = info.get('name', key)
         if NEM.mods[key]["active"]:
             type = ""
             mcver = NEM.mods[key]["mc"]
@@ -362,7 +367,7 @@ def list(self,name,params,channel,userdata,rank):
             
             if not mcver in tempList:
                 tempList[mcver] = []
-            tempList[mcver].append("{0}{1}".format(key,type))
+            tempList[mcver].append("{0}{1}".format(real_name,type))
     
     del mcver
     for mcver in sorted(tempList.iterkeys()):
