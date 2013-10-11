@@ -355,7 +355,8 @@ def list(self,name,params,channel,userdata,rank):
     bold = unichr(2)
     color = unichr(3)
     tempList = {}
-    for key in NEM.mods:
+    for key, info in NEM.mods.iteritems():
+        real_name = info.get('name', key)
         if NEM.mods[key]["active"]:
             type = ""
             mcver = NEM.mods[key]["mc"]
@@ -366,7 +367,7 @@ def list(self,name,params,channel,userdata,rank):
             
             if not mcver in tempList:
                 tempList[mcver] = []
-            tempList[mcver].append("{0}{1}".format(key,type))
+            tempList[mcver].append("{0}{1}".format(real_name,type))
     
     del mcver
     for mcver in sorted(tempList.iterkeys()):
