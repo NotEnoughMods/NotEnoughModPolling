@@ -343,32 +343,6 @@
             "item" : 2
         }
     },
-    "MinefactoryReloaded-Samrg472" : {
-        "function" : "CheckJenkins",
-        "version" : "NOT_USED",
-        "dev" : "",
-        "mc" : "",
-        "change" : "",
-        "active" : true,
-        "jenkins" : {
-            "url" : "https://samrg474.ci.cloudbees.com/job/MFR/lastSuccessfulBuild/api/json",
-            "regex" : "MFR-(?P<mc>.+?)-(?P<dev>.+?).zip",
-            "item" : 0
-        }
-    },
-    "PowerCrystalsCore-Samrg472" : {
-        "function" : "CheckJenkins",
-        "version" : "NOT_USED",
-        "dev" : "",
-        "mc" : "",
-        "change" : "",
-        "active" : true,
-        "jenkins" : {
-            "url" : "https://samrg474.ci.cloudbees.com/job/PCC/lastSuccessfulBuild/api/json",
-            "regex" : "PowerCrystalsCore-(?P<mc>.+?)-(?P<dev>.+?).jar",
-            "item" : 1
-        }
-    },
     "PowerConverters-Samrg472" : {
         "function" : "CheckJenkins",
         "version" : "NOT_USED",
