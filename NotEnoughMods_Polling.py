@@ -2,10 +2,8 @@ import urllib2
 import simplejson
 import re
 import traceback
-import threading
-import time
 
-from centralizedThreading import FunctionNameAlreadyExists
+from centralizedThreading import FunctionNameAlreadyExists  # @UnresolvedImport (this makes my IDE happy <_<)
 
 ID = "nemp"
 permission = 1
@@ -21,8 +19,8 @@ class NotEnoughClasses():
         self.useragent = urllib2.build_opener()
         self.useragent.addheaders = [('User-agent', 'NotEnoughMods:Polling/1.X (+http://github.com/SinZ163/NotEnoughMods)')]
         
-        file = open("commands/NEMP/mods.json", "r")
-        fileInfo = file.read()
+        modList = open("commands/NEMP/mods.json", "r")
+        fileInfo = modList.read()
         self.mods = simplejson.loads(fileInfo, strict = False)
         
         self.QueryNEM()
@@ -137,14 +135,14 @@ class NotEnoughClasses():
         jsonres = simplejson.loads(result, strict = False )
         jsonres = sorted(jsonres, key=lambda k: k['Released'])
         relVersion = ""
-        relMC = ""
+        #relMC = ""
         devVersion = ""
         devMC = ""
         for version in jsonres:
             #print(version)
             if version["Channel"] == "Stable":
                 relVersion = version["Version"]
-                relMC = version["Minecraft"]
+                #relMC = version["Minecraft"]
             else:
                 devVersion = version["Version"]
                 devMC = version["Minecraft"]
@@ -153,7 +151,7 @@ class NotEnoughClasses():
         return {
             "version" : relVersion,
             "dev" : devVersion,
-            "mc" : devMC
+            "mc" : devMC #TODO: this doesn't seem reliable...
         }
         
     def CheckHTML(self,mod):
@@ -267,7 +265,6 @@ def MicroTimerEvent(self,channels):
         self.threading.sigquitThread("NEMP")
         self.events["time"].removeEvent("NEMP_ThreadClock")
         for channel in channels:
-            setList = "null"
             for version in tempList:
                 for item in tempList[version]:
                     # item[0] = name of mod
@@ -310,10 +307,9 @@ def execute(self, name, params, channel, userdata, rank):
     try:
         command = commands[params[0]]
         command(self, name, params, channel, userdata, rank)
-    except Exception as e:
+    except KeyError:
         self.sendChatMessage(self.send, channel, "invalid command!")
         self.sendChatMessage(self.send, channel, "see =nemp help for a list of commands")
-        traceback.print_exc()
 
 def setversion(self, name, params, channel, userdata, rank):
     if len(params) != 2:
@@ -333,19 +329,19 @@ def about(self, name, params, channel, userdata, rank):
     self.sendChatMessage(self.send, channel, "Not Enough Mods: Polling for IRC by SinZ, with help from NightKev - v1.2")
     self.sendChatMessage(self.send, channel, "Source code available at: http://github.com/SinZ163/NotEnoughMods")
     
-def help(self, name, params, channel, userdata, rank):
+def nemp_help(self, name, params, channel, userdata, rank):
     if len(params) == 1:
-        self.sendChatMessage(self.send, channel, name+ ": Available commands: " + ", ".join(help))
+        self.sendChatMessage(self.send, channel, name+ ": Available commands: " + ", ".join(helpDict))
         self.sendChatMessage(self.send, channel, name+ ": For command usage, use \"=nemp help <command>\".")
     else:
         command = params[1]
-        if command in help:
-            for line in help[command]:
+        if command in helpDict:
+            for line in helpDict[command]:
                 self.sendChatMessage(self.send, channel, name+ ": "+line)
         else:
             self.sendChatMessage(self.send, channel, name+ ": Invalid command provided")
 
-def list(self,name,params,channel,userdata,rank):
+def nemp_list(self,name,params,channel,userdata,rank):
     dest = userdata[0]
     if len(params) > 1 and params[1] == "broadcast":
         dest = channel
@@ -358,16 +354,16 @@ def list(self,name,params,channel,userdata,rank):
     for key, info in NEM.mods.iteritems():
         real_name = info.get('name', key)
         if NEM.mods[key]["active"]:
-            type = ""
+            relType = ""
             mcver = NEM.mods[key]["mc"]
             if NEM.mods[key]["version"] != "NOT_USED":
-                type = type + color + darkgreen + "[R]" + color
+                relType = relType + color + darkgreen + "[R]" + color
             if NEM.mods[key]["dev"] != "NOT_USED":
-                type = type + color + red + "[D]" + color
+                relType = relType + color + red + "[D]" + color
             
             if not mcver in tempList:
                 tempList[mcver] = []
-            tempList[mcver].append("{0}{1}".format(real_name,type))
+            tempList[mcver].append("{0}{1}".format(real_name,relType))
     
     del mcver
     for mcver in sorted(tempList.iterkeys()):
@@ -378,9 +374,9 @@ def refresh(self,name,params,channel,userdata,rank):
     NEM.QueryNEM()
     NEM.InitiateVersions()
     self.sendChatMessage(self.send,channel, "Queried NEM for \"latest\" versions")
-def reload(self,name,params,channel,userdata,rank):
-    file = open("commands/NEMP/mods.json", "r")
-    fileInfo = file.read()
+def nemp_reload(self,name,params,channel,userdata,rank):
+    modList = open("commands/NEMP/mods.json", "r")
+    fileInfo = modList.read()
     
     if "NEMP" not in self.threading.pool:
         NEM.mods = simplejson.loads(fileInfo, strict = False)
@@ -414,14 +410,14 @@ def nktest(self,name,params,channel,userdata,rank):
 commands = {
     "running" : running,
     "poll" : poll,
-    "list" : list,
+    "list" : nemp_list,
     "about": about,
-    "help" : help,
+    "help" : nemp_help,
     "setversion" : setversion,
     "getversion" : getversion,
     "refresh" : refresh,
     "test" : test,
-    "reload" : reload,
+    "reload" : nemp_reload,
     "nktest" : nktest,
     
     ###  ALIASES ###
@@ -431,7 +427,7 @@ commands = {
     ### END ALIASES ###
 }
 
-help = {
+helpDict = {
     "running" : ["=nemp running <true/false>", "Enables or Disables the polling of latest builds."],
     "poll" : ["=nemp poll <mod> <true/false>", "Enables or Disables the polling of <mod>."],
     "list" : ["=nemp list", "Lists the mods that NotEnoughModPolling checks"],
