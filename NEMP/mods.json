@@ -382,6 +382,19 @@
             "item" : 0
         }
     },
+    "VanityBlocks" : {
+        "function" : "CheckJenkins",
+        "version" : "NOT_USED",
+        "dev" : "",
+        "mc" : "",
+        "change" : "",
+        "active" : true,
+        "jenkins" : {
+            "url" : "http://172.245.35.43:8080/job/VanityBlocks/lastSuccessfulBuild/api/json",
+            "regex" : "VanityBlocks-(?P<mc>.+?)-(?P<dev>.+?).jar",
+            "item" : 0
+        }
+    },
     "BloodMagic" : {
         "function" : "CheckHTML",
         "version" : "",
