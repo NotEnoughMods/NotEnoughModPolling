@@ -343,7 +343,7 @@
             "item" : 2
         }
     },
-    "PowerConverters-Samrg472" : {
+    "PowerConverters" : {
         "function" : "CheckJenkins",
         "version" : "NOT_USED",
         "dev" : "",
