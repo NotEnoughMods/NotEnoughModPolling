@@ -502,7 +502,7 @@
         "active" : true
     },
     "BloodMagic" : {
-        "function" : "CheckHTML",
+        "function" : "CheckBM",
         "version" : "",
         "dev" : "NOT_USED",
         "mc" : "NOT_USED",

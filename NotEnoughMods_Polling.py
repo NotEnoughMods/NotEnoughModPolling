@@ -151,7 +151,7 @@ class NotEnoughClasses():
             "mc" : devMC #TODO: this doesn't seem reliable...
         }
         
-    def CheckHTML(self,mod): # I knew this was a bad idea
+    def CheckBM(self,mod): # I knew this was a bad idea
         bmFeed = self.useragent.open(self.mods[mod]["html"]["url"], timeout=10)
         result = bmFeed.read()
         bmFeed.close()
@@ -159,6 +159,17 @@ class NotEnoughClasses():
         match = re.findall(self.mods[mod]["html"]["regex"], result)
         if match:
             output = {"dev":match[-1]}
+        return output
+        
+    def CheckHTML(self,mod):
+        htmlFeed = self.useragent.open(self.mods[mod]["html"]["url"], timeout=10)
+        result = htmlFeed.read()
+        htmlFeed.close()
+        output = {}
+        for line in result.splitlines():
+            match = re.search(self.mods[mod]["html"]["regex"], line)
+            if match:
+                output = match.groupdict()
         return output
         
     def CheckSpacechase(self,mod):
@@ -209,6 +220,7 @@ class NotEnoughClasses():
         "CheckAE" : CheckAE,
         "CheckHTML" : CheckHTML,
         "CheckSpacechase" : CheckSpacechase,
+        "CheckBM" : CheckBM,
     }
     
 NEM = NotEnoughClasses()
