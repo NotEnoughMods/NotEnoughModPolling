@@ -159,6 +159,46 @@
             "item" : 0
         }
     },
+    "PowerConverters" : {
+        "comment" : "should be called PowerConverters-Samrg472 or PowerConvertersUnofficial, but meh",
+        "function" : "CheckJenkins",
+        "version" : "NOT_USED",
+        "dev" : "",
+        "mc" : "",
+        "change" : "",
+        "active" : true,
+        "jenkins" : {
+            "url" : "https://samrg474.ci.cloudbees.com/job/PowerConverters/lastSuccessfulBuild/api/json",
+            "regex" : "PowerConverters-(?P<mc>.+?)-(?P<dev>.+?).zip",
+            "item" : 0
+        }
+    },
+        "IndustrialCraft2-EXP" : {
+        "function" : "CheckJenkins",
+        "version" : "",
+        "dev" : "NOT_USED",
+        "mc" : "NOT_USED",
+        "change" : "",
+        "active" : true,
+        "jenkins" : {
+            "url" : "http://ic2api.player.to:8080/job/IC2_experimental/lastSuccessfulBuild/api/json",
+            "regex" : "industrialcraft-2_(?P<version>.+?)-experimental.jar",
+            "item" : 2
+        }
+    },
+    "VanityBlocks" : {
+        "function" : "CheckJenkins",
+        "version" : "NOT_USED",
+        "dev" : "",
+        "mc" : "",
+        "change" : "",
+        "active" : true,
+        "jenkins" : {
+            "url" : "http://172.245.35.43:8080/job/VanityBlocks/lastSuccessfulBuild/api/json",
+            "regex" : "VanityBlocks-(?P<mc>.+?)-(?P<dev>.+?).jar",
+            "item" : 0
+        }
+    },
     "AdditionalBuildcraftObjects" : {
         "function" : "CheckJenkins",
         "version" : "NOT_USED",
@@ -236,6 +276,19 @@
             "item": 0
         }
     },
+    "LogisticsPipes" : {
+        "function" : "CheckJenkins",
+        "version" : "NOT_USED",
+        "dev" : "",
+        "mc" : "",
+        "change" : "",
+        "active" : true,
+        "jenkins" : {
+            "url" : "http://ci.thezorro266.com/job/LogisticsPipesMC1.6.2-Dev/lastSuccessfulBuild/api/json",
+            "regex" : "LogisticsPipes-MC(?P<mc>.+?)-(?P<dev>.+?).jar",
+            "item" : 0
+        }
+    },
     "CodeChickenCore" : {
         "function" : "CheckChickenBones",
         "version" : "",
@@ -296,19 +349,6 @@
             "regex" : "TConstruct_(?P<mc>.+?)_(?P<dev>.+?).jar"
         }
     },
-    "LogisticsPipes" : {
-        "function" : "CheckJenkins",
-        "version" : "NOT_USED",
-        "dev" : "",
-        "mc" : "",
-        "change" : "",
-        "active" : true,
-        "jenkins" : {
-            "url" : "http://ci.thezorro266.com/job/LogisticsPipesMC1.6.2-Dev/lastSuccessfulBuild/api/json",
-            "regex" : "LogisticsPipes-MC(?P<mc>.+?)-(?P<dev>.+?).jar",
-            "item" : 0
-        }
-    },
     "AppliedEnergistics" : {
         "function" : "CheckAE",
         "version" : "",
@@ -316,57 +356,6 @@
         "mc" : "",
         "change" : "NOT_USED",
         "active" : false
-    },
-    "IndustrialCraft2-EXP" : {
-        "function" : "CheckJenkins",
-        "version" : "",
-        "dev" : "NOT_USED",
-        "mc" : "NOT_USED",
-        "change" : "",
-        "active" : true,
-        "jenkins" : {
-            "url" : "http://ic2api.player.to:8080/job/IC2_experimental/lastSuccessfulBuild/api/json",
-            "regex" : "industrialcraft-2_(?P<version>.+?)-experimental.jar",
-            "item" : 2
-        }
-    },
-    "PowerConverters" : {
-        "function" : "CheckJenkins",
-        "version" : "NOT_USED",
-        "dev" : "",
-        "mc" : "",
-        "change" : "",
-        "active" : true,
-        "jenkins" : {
-            "url" : "https://samrg474.ci.cloudbees.com/job/PowerConverters/lastSuccessfulBuild/api/json",
-            "regex" : "PowerConverters-(?P<mc>.+?)-(?P<dev>.+?).zip",
-            "item" : 0
-        }
-    },
-    "VanityBlocks" : {
-        "function" : "CheckJenkins",
-        "version" : "NOT_USED",
-        "dev" : "",
-        "mc" : "",
-        "change" : "",
-        "active" : true,
-        "jenkins" : {
-            "url" : "http://172.245.35.43:8080/job/VanityBlocks/lastSuccessfulBuild/api/json",
-            "regex" : "VanityBlocks-(?P<mc>.+?)-(?P<dev>.+?).jar",
-            "item" : 0
-        }
-    },
-    "BloodMagic" : {
-        "function" : "CheckHTML",
-        "version" : "",
-        "dev" : "NOT_USED",
-        "mc" : "NOT_USED",
-        "change" : "NOT_USED",
-        "active" : true,
-        "html" : {
-            "url" : "https://www.dropbox.com/sh/zb1c910p0sifm3r/cvi84SoKN9",
-            "regex" : "Blood%20Magic%20v(?P<version>.+?).zip"
-        }
     },
     "CheaperArrows" : {
         "function" : "CheckSpacechase",
@@ -511,6 +500,18 @@
         "mc" : "NOT_USED",
         "change" : "NOT_USED",
         "active" : true
+    },
+    "BloodMagic" : {
+        "function" : "CheckHTML",
+        "version" : "",
+        "dev" : "NOT_USED",
+        "mc" : "NOT_USED",
+        "change" : "NOT_USED",
+        "active" : true,
+        "html" : {
+            "url" : "https://www.dropbox.com/sh/zb1c910p0sifm3r/cvi84SoKN9",
+            "regex" : "Blood%20Magic%20v(?P<version>.+?).zip"
+        }
     },
     "StatusEffectHUD" : {
         "function" : "CheckHTML",
