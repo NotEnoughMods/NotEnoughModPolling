@@ -159,19 +159,6 @@
             "item" : 0
         }
     },
-    "PowerConverters" : {
-        "function" : "CheckJenkins",
-        "version" : "NOT_USED",
-        "dev"    : "",
-        "mc" : "NOT_USED",
-        "change" : "",
-        "active" : true,
-        "jenkins" : {
-            "url" : "http://build.technicpack.net/job/PowerConverters/lastSuccessfulBuild/api/json",
-            "regex" : "PowerConverters-(?P<dev>.+?).jar$",
-            "item" : 0
-        }
-    },
     "AdditionalBuildcraftObjects" : {
         "function" : "CheckJenkins",
         "version" : "NOT_USED",
