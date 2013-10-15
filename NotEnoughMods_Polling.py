@@ -139,30 +139,26 @@ class NotEnoughClasses():
         devVersion = ""
         devMC = ""
         for version in jsonres:
-            #print(version)
             if version["Channel"] == "Stable":
                 relVersion = version["Version"]
                 #relMC = version["Minecraft"]
             else:
                 devVersion = version["Version"]
                 devMC = version["Minecraft"]
-            #print(" |"+relVersion+" || "+relMC)
-            #print("~|"+devVersion+"~||~"+devMC)
         return {
             "version" : relVersion,
             "dev" : devVersion,
             "mc" : devMC #TODO: this doesn't seem reliable...
         }
         
-    def CheckHTML(self,mod):
+    def CheckHTML(self,mod): # I knew this was a bad idea
         bmFeed = self.useragent.open(self.mods[mod]["html"]["url"], timeout=10)
         result = bmFeed.read()
         bmFeed.close()
         output = {}
-        for line in result.splitlines():
-            match = re.search(self.mods[mod]["html"]["regex"], line)
-            if match:
-                output = match.groupdict()
+        match = re.findall(self.mods[mod]["html"]["regex"], result)
+        if match:
+            output = {"dev":match[-1]}
         return output
         
     def CheckSpacechase(self,mod):
