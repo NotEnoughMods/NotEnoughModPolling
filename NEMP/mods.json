@@ -159,7 +159,8 @@
             "item" : 0
         }
     },
-    "PowerConverters" : {#should be called PowerConverters-Samrg472 or PowerConvertersUnofficial, but meh
+    "PowerConverters" : {
+        "comment" : "should be called PowerConverters-Samrg472 or PowerConvertersUnofficial, but meh",
         "function" : "CheckJenkins",
         "version" : "NOT_USED",
         "dev" : "",
