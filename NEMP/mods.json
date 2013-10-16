@@ -1,10 +1,6 @@
 {
     "MinecraftForge" : {
         "function" : "CheckMCForge",
-        "version" : "",
-        "dev"    : "",
-        "mc" : "",
-        "change" : "NOT_USED",
         "active" : true,
         "mcforge" : {
             "name" : "minecraftforge",
@@ -15,10 +11,6 @@
     },
     "IronChests" : {
         "function" : "CheckMCForge",
-        "version" : "",
-        "mc" : "",
-        "dev"    : "",
-        "change" : "NOT_USED",
         "active" : true,
         "mcforge" : {
             "name" : "IronChests2",
@@ -29,10 +21,6 @@
     },
     "ForgeMultipart" : {
         "function" : "CheckMCForge",
-        "version" : "",
-        "dev"    : "",
-        "mc" : "",
-        "change" : "NOT_USED",
         "active" : true,
         "mcforge" : {
             "name" : "ForgeMultipart",
@@ -43,10 +31,6 @@
     },
     "CompactSolars" : {
         "function" : "CheckMCForge",
-        "version" : "",
-        "mc" : "",
-        "dev"    : "",
-        "change" : "NOT_USED",
         "active" : true,
         "mcforge" : {
             "name" : "CompactSolars",
@@ -57,10 +41,6 @@
     },
     "MineFactoryReloaded" : {
         "function" : "CheckJenkins",
-        "version" : "",
-        "dev"    : "",
-        "mc" : "NOT_USED",
-        "change" : "",
         "active" : true,
         "jenkins" : {
             "url" : "http://build.technicpack.net/view/PowerCrystals/job/MineFactoryReloaded/lastSuccessfulBuild/api/json",
@@ -70,10 +50,6 @@
     },
     "IndustrialCraft2" : {
         "function" : "CheckJenkins",
-        "version" : "NOT_USED",
-        "dev"    : "",
-        "mc" : "NOT_USED",
-        "change" : "",
         "active" : true,
         "jenkins" : {
             "url" : "http://ic2api.player.to:8080/job/IC2_lf/lastSuccessfulBuild/api/json",
@@ -83,10 +59,6 @@
     },
     "ModularPowersuits" : {
         "function" : "CheckJenkins",
-        "version" : "NOT_USED",
-        "dev"    : "",
-        "mc" : "",
-        "change" : "",
         "active" : true,
         "jenkins" : {
             "url" : "http://build.technicpack.net/job/ModularPowersuits/lastSuccessfulBuild/api/json",
@@ -96,10 +68,6 @@
     },
     "ModularPowersuits-Addons" : {
         "function" : "CheckJenkins",
-        "version" : "NOT_USED",
-        "dev"    : "",
-        "mc" : "NOT_USED",
-        "change" : "",
         "active" : true,
         "jenkins" : {
             "url" : "http://build.technicpack.net/job/ModularPowersuitsAddons/lastSuccessfulBuild/api/json",
@@ -109,10 +77,6 @@
     },
     "MFFSv2Classic" : {
         "function" : "CheckJenkins",
-        "version" : "NOT_USED",
-        "dev"    : "",
-        "mc" : "NOT_USED",
-        "change" : "",
         "active" : false,
         "jenkins" : {
             "url" : "http://minalien.com:8080/job/Modular%20Forcefield%20System/lastSuccessfulBuild/api/json",
@@ -122,10 +86,6 @@
     },
     "InventoryTweaks" : {
         "function" : "CheckJenkins",
-        "version" : "NOT_USED",
-        "dev"    : "",
-        "mc" : "",
-        "change" : "",
         "active" : true,
         "jenkins" : {
             "url" : "http://build.technicpack.net/job/Inventory-Tweaks/lastSuccessfulBuild/api/json",
@@ -135,10 +95,6 @@
     },
     "DimensionalDoors" : {
         "function" : "CheckJenkins",
-        "version" : "NOT_USED",
-        "dev"    : "",
-        "mc" : "",
-        "change" : "",
         "active" : true,
         "jenkins" : {
             "url" : "http://build.technicpack.net/job/DimDoors/lastSuccessfulBuild/api/json",
@@ -148,10 +104,6 @@
     },
     "PowerCrystalsCore" : {
         "function" : "CheckJenkins",
-        "version" : "NOT_USED",
-        "dev"    : "",
-        "mc" : "NOT_USED",
-        "change" : "",
         "active" : true,
         "jenkins" : {
             "url" : "http://build.technicpack.net/job/PowerCrystalsCore/lastSuccessfulBuild/api/json",
@@ -162,10 +114,6 @@
     "PowerConverters" : {
         "comment" : "should be called PowerConverters-Samrg472 or PowerConvertersUnofficial, but meh",
         "function" : "CheckJenkins",
-        "version" : "NOT_USED",
-        "dev" : "",
-        "mc" : "",
-        "change" : "",
         "active" : true,
         "jenkins" : {
             "url" : "https://samrg474.ci.cloudbees.com/job/PowerConverters/lastSuccessfulBuild/api/json",
@@ -175,10 +123,6 @@
     },
         "IndustrialCraft2-EXP" : {
         "function" : "CheckJenkins",
-        "version" : "",
-        "dev" : "NOT_USED",
-        "mc" : "NOT_USED",
-        "change" : "",
         "active" : true,
         "jenkins" : {
             "url" : "http://ic2api.player.to:8080/job/IC2_experimental/lastSuccessfulBuild/api/json",
@@ -188,10 +132,6 @@
     },
     "VanityBlocks" : {
         "function" : "CheckJenkins",
-        "version" : "NOT_USED",
-        "dev" : "",
-        "mc" : "",
-        "change" : "",
         "active" : true,
         "jenkins" : {
             "url" : "http://172.245.35.43:8080/job/VanityBlocks/lastSuccessfulBuild/api/json",
@@ -201,10 +141,6 @@
     },
     "AdditionalBuildcraftObjects" : {
         "function" : "CheckJenkins",
-        "version" : "NOT_USED",
-        "dev"    : "",
-        "mc" : "NOT_USED",
-        "change" : "",
         "active" : true,
         "jenkins" : {
             "url" : "https://jenkins.ra-doersch.de/job/AdditionalBuildcraftObjects/lastSuccessfulBuild/api/json",
@@ -214,10 +150,6 @@
     },
     "Galacticraft" : {
         "function" : "CheckJenkins",
-        "version" : "NOT_USED",
-        "dev"    : "",
-        "mc" : "",
-        "change" : "",
         "active" : true,
         "jenkins" : {
             "url" : "http://2.iongaming.org:8080/job/Galacticraft/lastSuccessfulBuild/api/json",
@@ -227,10 +159,6 @@
     },
     "NEM-VersionChecker" : {
         "function" : "CheckJenkins",
-        "version" : "",
-        "dev"    : "NOT_USED",
-        "mc" : "",
-        "change" : "",
         "active" : true,
         "jenkins" : {
             "url" : "http://ci.thezorro266.com/job/NEM-VersionChecker/lastSuccessfulBuild/api/json",
@@ -240,10 +168,6 @@
     },
     "Buildcraft" : {
         "function" : "CheckJenkins",
-        "version" : "NOT_USED",
-        "dev"    : "",
-        "mc" : "",
-        "change" : "",
         "active" : false,
         "jenkins" : {
             "url" : "http://nallar.me/buildservice/job/Buildcraft/lastSuccessfulBuild/api/json",
@@ -253,9 +177,6 @@
     },
     "MCPC-PLUS" : {
         "function" : "CheckJenkins",
-        "version" : "NOT_USED",
-        "dev"    : "",
-        "mc" : "",
         "active" : true,
         "jenkins" : {
             "url" : "http://ci.md-5.net/job/MCPC-Plus/lastSuccessfulBuild/api/json",
@@ -265,10 +186,6 @@
     },
     "Artifice" : {
         "function" : "CheckJenkins",
-        "version" : "NOT_USED",
-        "dev"    : "",
-        "mc" : "NOT_USED",
-        "change" : "",
         "active" : true,
         "jenkins" : {
             "url" : "http://build.technicpack.net/job/Artifice/lastSuccessfulBuild/api/json",
@@ -278,10 +195,6 @@
     },
     "LogisticsPipes" : {
         "function" : "CheckJenkins",
-        "version" : "NOT_USED",
-        "dev" : "",
-        "mc" : "",
-        "change" : "",
         "active" : true,
         "jenkins" : {
             "url" : "http://ci.thezorro266.com/job/LogisticsPipesMC1.6.2-Dev/lastSuccessfulBuild/api/json",
@@ -291,58 +204,30 @@
     },
     "CodeChickenCore" : {
         "function" : "CheckChickenBones",
-        "version" : "",
-        "dev"    : "NOT_USED",
-        "mc" : "NOT_USED",
-        "change" : "NOT_USED",
         "active" : true
     },
     "ChickenChunks" : {
         "function" : "CheckChickenBones",
-        "version" : "",
-        "dev"    : "NOT_USED",
-        "mc" : "NOT_USED",
-        "change" : "NOT_USED",
         "active" : true
     },
     "NotEnoughItems" : {
         "function" : "CheckChickenBones",
-        "version" : "",
-        "dev"    : "NOT_USED",
-        "mc" : "NOT_USED",
-        "change" : "NOT_USED",
         "active" : true
     },
     "EnderStorage" : {
         "function" : "CheckChickenBones",
-        "version" : "",
-        "dev"    : "NOT_USED",
-        "mc" : "NOT_USED",
-        "change" : "NOT_USED",
         "active" : true
     },
     "Translocator" : {
         "function" : "CheckChickenBones",
-        "version" : "",
-        "dev"    : "NOT_USED",
-        "mc" : "NOT_USED",
-        "change" : "NOT_USED",
         "active" : true
     },
     "WR-CBE" : {
         "function" : "CheckChickenBones",
-        "version" : "",
-        "dev"    : "NOT_USED",
-        "mc" : "NOT_USED",
-        "change" : "NOT_USED",
         "active" : true
     },
     "TinkersConstruct" : {
         "function" : "CheckmDiyo",
-        "version" : "NOT_USED",
-        "dev"    : "",
-        "mc" : "",
-        "change" : "NOT_USED",
         "active" : true,
         "mDiyo" : {
             "location" : "TConstruct/development/",
@@ -351,162 +236,82 @@
     },
     "AppliedEnergistics" : {
         "function" : "CheckAE",
-        "version" : "",
-        "dev" : "",
-        "mc" : "",
-        "change" : "NOT_USED",
         "active" : false
     },
     "CheaperArrows" : {
         "function" : "CheckSpacechase",
-        "version" : "",
-        "dev" : "NOT_USED",
-        "mc" : "NOT_USED",
-        "change" : "NOT_USED",
         "active" : true
     },
     "EverlastingTools" : {
         "function" : "CheckSpacechase",
-        "version" : "",
-        "dev" : "NOT_USED",
-        "mc" : "NOT_USED",
-        "change" : "NOT_USED",
         "active" : true
     },
     "CondensedPotions" : {
         "function" : "CheckSpacechase",
-        "version" : "",
-        "dev" : "NOT_USED",
-        "mc" : "NOT_USED",
-        "change" : "NOT_USED",
         "active" : true
     },
     "OldBookRecipe" : {
         "function" : "CheckSpacechase",
-        "version" : "",
-        "dev" : "NOT_USED",
-        "mc" : "NOT_USED",
-        "change" : "NOT_USED",
         "active" : true
     },
     "TextFormatting" : {
         "function" : "CheckSpacechase",
-        "version" : "",
-        "dev" : "NOT_USED",
-        "mc" : "NOT_USED",
-        "change" : "NOT_USED",
         "active" : true
     },
     "StoneBrickRecipes" : {
         "function" : "CheckSpacechase",
-        "version" : "",
-        "dev" : "NOT_USED",
-        "mc" : "NOT_USED",
-        "change" : "NOT_USED",
         "active" : true
     },
     "SurvivalWings" : {
         "function" : "CheckSpacechase",
-        "version" : "",
-        "dev" : "NOT_USED",
-        "mc" : "NOT_USED",
-        "change" : "NOT_USED",
         "active" : true
     },
     "ThirdPersonCamera" : {
         "function" : "CheckSpacechase",
-        "version" : "",
-        "dev" : "NOT_USED",
-        "mc" : "NOT_USED",
-        "change" : "NOT_USED",
         "active" : true
     },
     "BiomeWand" : {
         "function" : "CheckSpacechase",
-        "version" : "",
-        "dev" : "NOT_USED",
-        "mc" : "NOT_USED",
-        "change" : "NOT_USED",
         "active" : true
     },
     "DecorativeStuff" : {
         "function" : "CheckSpacechase",
-        "version" : "",
-        "dev" : "NOT_USED",
-        "mc" : "NOT_USED",
-        "change" : "NOT_USED",
         "active" : true
     },
     "CraftableEnchantmentBooks" : {
         "function" : "CheckSpacechase",
-        "version" : "",
-        "dev" : "NOT_USED",
-        "mc" : "NOT_USED",
-        "change" : "NOT_USED",
         "active" : true
     },
     "ToggleSpawners" : {
         "function" : "CheckSpacechase",
-        "version" : "",
-        "dev" : "NOT_USED",
-        "mc" : "NOT_USED",
-        "change" : "NOT_USED",
         "active" : true
     },
     "ToxicRain" : {
         "function" : "CheckSpacechase",
-        "version" : "",
-        "dev" : "NOT_USED",
-        "mc" : "NOT_USED",
-        "change" : "NOT_USED",
         "active" : true
     },
     "Auto-Fisher" : {
         "function" : "CheckSpacechase",
-        "version" : "",
-        "dev" : "NOT_USED",
-        "mc" : "NOT_USED",
-        "change" : "NOT_USED",
         "active" : true
     },
     "UsefulPets" : {
         "function" : "CheckSpacechase",
-        "version" : "",
-        "dev" : "NOT_USED",
-        "mc" : "NOT_USED",
-        "change" : "NOT_USED",
         "active" : true
     },
     "SpaceCore" : {
         "function" : "CheckSpacechase",
-        "version" : "",
-        "dev" : "NOT_USED",
-        "mc" : "NOT_USED",
-        "change" : "NOT_USED",
         "active" : true
     },
     "SpelunkerDimension" : {
         "function" : "CheckSpacechase",
-        "version" : "",
-        "dev" : "NOT_USED",
-        "mc" : "NOT_USED",
-        "change" : "NOT_USED",
         "active" : true
     },
     "ComponentEquipment" : {
         "function" : "CheckSpacechase",
-        "version" : "",
-        "dev" : "NOT_USED",
-        "mc" : "NOT_USED",
-        "change" : "NOT_USED",
         "active" : true
     },
     "BloodMagic" : {
         "function" : "CheckBM",
-        "version" : "",
-        "dev" : "NOT_USED",
-        "mc" : "NOT_USED",
-        "change" : "NOT_USED",
         "active" : true,
         "html" : {
             "url" : "https://www.dropbox.com/sh/zb1c910p0sifm3r/cvi84SoKN9",
@@ -515,10 +320,6 @@
     },
     "StatusEffectHUD" : {
         "function" : "CheckHTML",
-        "version" : "",
-        "dev" : "NOT_USED",
-        "mc" : "",
-        "change" : "NOT_USED",
         "active" : true,
         "html" : {
             "url" : "http://dl.dropboxusercontent.com/u/20748481/Minecraft/1.6.4/statusEffectHud.version",
@@ -527,10 +328,6 @@
     },
     "ArmorStatusHUD" : {
         "function" : "CheckHTML",
-        "version" : "",
-        "dev" : "NOT_USED",
-        "mc" : "",
-        "change" : "NOT_USED",
         "active" : true,
         "html" : {
             "url" : "http://dl.dropboxusercontent.com/u/20748481/Minecraft/1.6.4/armorStatusHud.version",
@@ -539,10 +336,6 @@
     },
     "BlockBreaker" : {
         "function" : "CheckHTML",
-        "version" : "",
-        "dev" : "NOT_USED",
-        "mc" : "NOT_USED",
-        "change" : "NOT_USED",
         "active" : true,
         "html" : {
             "url" : "http://dl.dropboxusercontent.com/u/20748481/Minecraft/1.6.4/blockBreakerForge.version",
@@ -551,10 +344,6 @@
     },
     "bspkrsCore" : {
         "function" : "CheckHTML",
-        "version" : "",
-        "dev" : "NOT_USED",
-        "mc" : "",
-        "change" : "NOT_USED",
         "active" : true,
         "html" : {
             "url" : "http://dl.dropboxusercontent.com/u/20748481/Minecraft/1.6.4/bspkrsCore.version",
@@ -564,10 +353,7 @@
     "bspkrsCore-1.6.2" : {
         "name" : "bspkrsCore",
         "function" : "CheckHTML",
-        "version" : "",
-        "dev" : "NOT_USED",
         "mc" : "1.6.2",
-        "change" : "NOT_USED",
         "active" : true,
         "html" : {
             "url" : "http://dl.dropboxusercontent.com/u/20748481/Minecraft/1.6.2/bspkrsCore.version",
@@ -576,10 +362,6 @@
     },
     "CrystalWing" : {
         "function" : "CheckHTML",
-        "version" : "",
-        "dev" : "NOT_USED",
-        "mc" : "NOT_USED",
-        "change" : "NOT_USED",
         "active" : true,
         "html" : {
             "url" : "http://dl.dropboxusercontent.com/u/20748481/Minecraft/1.6.4/crystalWingForge.version",
@@ -588,10 +370,6 @@
     },
     "DirectionHUD" : {
         "function" : "CheckHTML",
-        "version" : "",
-        "dev" : "NOT_USED",
-        "mc" : "",
-        "change" : "NOT_USED",
         "active" : true,
         "html" : {
             "url" : "http://dl.dropboxusercontent.com/u/20748481/Minecraft/1.6.4/directionHUD.version",
@@ -600,10 +378,6 @@
     },
     "FloatingRuins" : {
         "function" : "CheckHTML",
-        "version" : "",
-        "dev" : "NOT_USED",
-        "mc" : "NOT_USED",
-        "change" : "NOT_USED",
         "active" : true,
         "html" : {
             "url" : "http://dl.dropboxusercontent.com/u/20748481/Minecraft/1.6.4/floatingRuinsForge.version",
@@ -612,10 +386,6 @@
     },      
     "IngameInfo" : {
         "function" : "CheckHTML",
-        "version" : "",
-        "dev" : "NOT_USED",
-        "mc" : "NOT_USED",
-        "change" : "NOT_USED",
         "active" : true,
         "html" : {
             "url" : "http://dl.dropboxusercontent.com/u/20748481/Minecraft/1.6.4/ingameInfo.version",
@@ -624,10 +394,6 @@
     },
     "FloatingRuins" : {
         "function" : "CheckHTML",
-        "version" : "",
-        "dev" : "NOT_USED",
-        "mc" : "NOT_USED",
-        "change" : "NOT_USED",
         "active" : true,
         "html" : {
             "url" : "http://dl.dropboxusercontent.com/u/20748481/Minecraft/1.6.4/floatingRuinsForge.version",
@@ -636,10 +402,6 @@
     }, 
     "StartingInventory" : {
         "function" : "CheckHTML",
-        "version" : "",
-        "dev" : "NOT_USED",
-        "mc" : "NOT_USED",
-        "change" : "NOT_USED",
         "active" : true,
         "html" : {
             "url" : "http://dl.dropboxusercontent.com/u/20748481/Minecraft/1.6.4/startingInventory.version",
@@ -648,10 +410,6 @@
     },
     "TreeCapitator" : {
         "function" : "CheckHTML",
-        "version" : "",
-        "dev" : "NOT_USED",
-        "mc" : "NOT_USED",
-        "change" : "NOT_USED",
         "active" : true,
         "html" : {
             "url" : "http://dl.dropboxusercontent.com/u/20748481/Minecraft/1.6.4/treeCapitatorForge.version",
@@ -660,10 +418,6 @@
     },
     "WorldStateCheckpoints" : {
         "function" : "CheckHTML",
-        "version" : "",
-        "dev" : "NOT_USED",
-        "mc" : "NOT_USED",
-        "change" : "NOT_USED",
         "active" : true,
         "html" : {
             "url" : "http://dl.dropboxusercontent.com/u/20748481/Minecraft/1.6.4/worldStateCheckpoints.version",

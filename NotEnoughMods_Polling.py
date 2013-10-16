@@ -50,12 +50,18 @@ class NotEnoughClasses():
                 
                 for mod in jsonres:
                     if mod["name"] in templist:
-                        print(mod["name"]+" has versions for "+version)
                         self.mods[mod["name"]]["mc"] = version
-                        if self.mods[mod["name"]]["dev"] != "NOT_USED":
+                        
+                        if "dev" in self.mods[mod["name"]]:
                             self.mods[mod["name"]]["dev"] = mod["dev"]
-                        if self.mods[mod["name"]]["version"] != "NOT_USED":
+                        else:
+                            self.mods[mod["name"]]["dev"] = "NOT_USED"
+                        
+                        if "version" in self.mods[mod["name"]]:
                             self.mods[mod["name"]]["version"] = mod["version"]
+                        else:
+                            self.mods[mod["name"]]["version"] = "NOT_USED"
+                        
                         templist.remove(mod["name"])
         
     def CheckJenkins(self, mod):
@@ -69,7 +75,6 @@ class NotEnoughClasses():
         try:
             output["change"] = jsonres["changeSet"]["items"][0]["comment"]
         except:
-            print("Aww, no changelog for "+mod)
             output["change"] = "NOT_USED"
         return output
 
@@ -151,7 +156,7 @@ class NotEnoughClasses():
             "mc" : devMC #TODO: this doesn't seem reliable...
         }
         
-    def CheckBM(self,mod): # I knew this was a bad idea
+    def CheckBM(self,mod):
         bmFeed = self.useragent.open(self.mods[mod]["html"]["url"], timeout=10)
         result = bmFeed.read()
         bmFeed.close()
