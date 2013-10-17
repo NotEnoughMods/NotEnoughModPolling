@@ -310,6 +310,10 @@
         "function" : "CheckSpacechase",
         "active" : true
     },
+    "MorePotionTypes" : {
+        "function" : "CheckSpacechase",
+        "active" : true
+    },
     "BloodMagic" : {
         "function" : "CheckBM",
         "active" : true,
