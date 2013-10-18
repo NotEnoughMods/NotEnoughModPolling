@@ -358,6 +358,8 @@
         "name" : "bspkrsCore",
         "function" : "CheckHTML",
         "mc" : "1.6.2",
+        "dev" : "NOT_USED",
+        "version" : "",
         "active" : true,
         "html" : {
             "url" : "http://dl.dropboxusercontent.com/u/20748481/Minecraft/1.6.2/bspkrsCore.version",

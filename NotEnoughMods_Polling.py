@@ -52,12 +52,12 @@ class NotEnoughClasses():
                     if mod["name"] in templist:
                         self.mods[mod["name"]]["mc"] = version
                         
-                        if "dev" in self.mods[mod["name"]]:
+                        if "dev" in mod:
                             self.mods[mod["name"]]["dev"] = mod["dev"]
                         else:
                             self.mods[mod["name"]]["dev"] = "NOT_USED"
                         
-                        if "version" in self.mods[mod["name"]]:
+                        if "version" in mod:
                             self.mods[mod["name"]]["version"] = mod["version"]
                         else:
                             self.mods[mod["name"]]["version"] = "NOT_USED"
