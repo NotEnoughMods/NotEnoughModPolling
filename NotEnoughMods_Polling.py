@@ -19,7 +19,7 @@ class NotEnoughClasses():
         self.useragent = urllib2.build_opener()
         self.useragent.addheaders = [('User-agent', 'NotEnoughMods:Polling/1.X (+http://github.com/SinZ163/NotEnoughMods)')]
         
-        self.buildModDict(self)
+        self.buildModDict()
         self.QueryNEM()
     def buildModDict(self):
         modList = open("commands/NEMP/mods.json", "r")
