@@ -28,6 +28,7 @@ class NotEnoughClasses():
         for mod in self.mods:
             if "change" not in self.mods[mod]:
                 self.mods[mod]["change"] = "NOT_USED"
+    
     def QueryNEM(self):
         try:
             NEMfeed = self.useragent.open("http://bot.notenoughmods.com/?json", timeout = 10)
@@ -217,8 +218,6 @@ class NotEnoughClasses():
         except:
             print(mod+" failed to be polled...")
             return [False, False, False]
-            
-    #def CheckOpenMod(self,mod):
     
     parsers = {
         "CheckMCForge" : CheckMCForge,
@@ -249,6 +248,7 @@ def running(self, name, params, channel, userdata, rank):
             self.events["time"].removeEvent("NotEnoughModPolling")
         else:
             self.sendChatMessage(self.send, channel, "NotEnoughModPolling isn't running!")
+
 def PollingThread(self, pipe):
     if NEM.newMods:
         NEM.mods = NEM.newMods
@@ -268,12 +268,14 @@ def PollingThread(self, pipe):
                     tempVersion = [(real_name, result[1:])]
                     tempList[NEM.mods[mod]["mc"]] = tempVersion
     pipe.send(tempList)
+
 def MainTimerEvent(self,channels):
     try:
         self.threading.addThread("NEMP", PollingThread)
         self.events["time"].addEvent("NEMP_ThreadClock", 10, MicroTimerEvent, channels)
     except FunctionNameAlreadyExists as e:
         print(e)
+
 def MicroTimerEvent(self,channels):
     yes = self.threading.poll("NEMP")
     if yes:
@@ -395,7 +397,7 @@ def nemp_reload(self,name,params,channel,userdata,rank):
     
     self.sendChatMessage(self.send,channel, "Reloaded the NEMP Database")
     
-def test(self,name,params,channel,userdata,rank):
+def test_parser(self,name,params,channel,userdata,rank):
     if len(params) > 0:
         try:
             result = NEM.parsers[NEM.mods[params[1]]["function"]](NEM,params[1])
@@ -413,6 +415,51 @@ def test(self,name,params,channel,userdata,rank):
             traceback.print_exc()
             self.sendChatMessage(self.send,channel, params[1]+" failed to be polled")
 
+def test_polling(self,name,params,channel,userdata,rank):
+    try:
+        # PollingThread()
+        if NEM.newMods:
+            NEM.mods = NEM.newMods
+            NEM.InitiateVersions()
+        else:
+            NEM.InitiateVersions()
+        
+        tempList = {}
+        for mod, info in NEM.mods.iteritems():
+            if 'name' in info:
+                real_name = info['name']
+            else:
+                real_name = mod
+            if NEM.mods[mod]["active"]:
+                result = NEM.CheckMod(mod)
+                if result[0]:
+                    if NEM.mods[mod]["mc"] in tempList:
+                        tempList[NEM.mods[mod]["mc"]].append((real_name, result[1:]))
+                    else:
+                        tempVersion = [(real_name, result[1:])]
+                        tempList[NEM.mods[mod]["mc"]] = tempVersion
+        # MicroTimerEvent()
+        yes = bool(tempList)
+        if yes:
+            for version in tempList:
+                for item in tempList[version]:
+                    # item[0] = name of mod
+                    # item[1] = flags for dev/release change
+                    # flags[0] = has release version changed?
+                    # flags[1] = has dev version changed?
+                    mod = item[0]
+                    flags = item[1]
+                    if NEM.mods[mod]["dev"] != "NOT_USED" and flags[0]:
+                        self.sendChatMessage(self.send, channel, "!ldev "+version+" "+mod+" "+NEM.mods[mod]["dev"])
+                    if NEM.mods[mod]["version"]  != "NOT_USED" and flags[1]:
+                        self.sendChatMessage(self.send, channel, "!lmod "+version+" "+mod+" "+NEM.mods[mod]["version"])
+                    if NEM.mods[mod]["change"] != "NOT_USED":
+                        self.sendChatMessage(self.send, channel, " * "+NEM.mods[mod]["change"])
+    
+    except:
+        self.sendChatMessage(self.send, channel, "An exception has occurred, check the console for more information.")
+        traceback.print_exc()
+
 def nktest(self,name,params,channel,userdata,rank):
     pass
 
@@ -425,14 +472,16 @@ commands = {
     "setversion" : setversion,
     "getversion" : getversion,
     "refresh" : refresh,
-    "test" : test,
+    "testparse" : test_parser,
+    "testpolling" : test_polling,
     "reload" : nemp_reload,
     "nktest" : nktest,
     
     ###  ALIASES ###
     "setv" : setversion,
     "getv" : getversion,
-    "polling" : running
+    "polling" : running,
+    "testpoll" : test_polling,
     ### END ALIASES ###
 }
 
@@ -445,5 +494,5 @@ helpDict = {
     "setversion" : ["=nemp setversion <version>", "Sets the version to <version> for polling to assume."],
     "getversion" : ["=nemp getversion", "gets the version for polling to assume."],
     "refresh" : ["=nemp refresh", "Queries NEM to get the \"latest\" versions"],
-    "test" : ["=nemp test <mod>", "Runs CheckMod for <mod> and outputs the contents to IRC"]
+    "testparse" : ["=nemp testparse <mod>", "Tests the parser for <mod> and outputs the contents to IRC"],
 }
