@@ -39,6 +39,16 @@
             "regex" : "compactsolars-universal-(.+?)-(.+?).zip$"
         }
     },
+    "BiomesOPlenty" : {
+        "function" : "CheckMCForge",
+        "active" : true,
+        "mcforge" : {
+            "name" : "BiomesOPlenty",
+            "dev" : "latest",
+            "rec" : "recommended",
+            "regex" : "BiomesOPlenty-universal-(.+?)-(.+?).jar$"
+        }
+    },
     "MineFactoryReloaded" : {
         "function" : "CheckJenkins",
         "active" : true,
