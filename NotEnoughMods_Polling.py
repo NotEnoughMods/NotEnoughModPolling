@@ -22,7 +22,9 @@ class NotEnoughClasses():
         modList = open("commands/NEMP/mods.json", "r")
         fileInfo = modList.read()
         self.mods = simplejson.loads(fileInfo, strict = False)
-        
+        for mod in self.mods:
+            if "change" not in self.mods[mod]:
+                self.mods[mod]["change"] = "NOT_USED"
         self.QueryNEM()
         
     def QueryNEM(self):
