@@ -121,7 +121,7 @@
             "item" : 0
         }
     },
-        "IndustrialCraft2-EXP" : {
+    "IndustrialCraft2-EXP" : {
         "function" : "CheckJenkins",
         "active" : true,
         "jenkins" : {
@@ -145,7 +145,7 @@
         "jenkins" : {
             "url" : "https://jenkins.ra-doersch.de/job/AdditionalBuildcraftObjects/lastSuccessfulBuild/api/json",
             "regex" : "buildcraft-Z-additional-buildcraft-objects-(?P<dev>.+?).jar$",
-            "item" : 1
+            "item" : 0
         }
     },
     "Galacticraft" : {

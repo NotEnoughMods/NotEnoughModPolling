@@ -19,14 +19,15 @@ class NotEnoughClasses():
         self.useragent = urllib2.build_opener()
         self.useragent.addheaders = [('User-agent', 'NotEnoughMods:Polling/1.X (+http://github.com/SinZ163/NotEnoughMods)')]
         
+        self.buildModDict(self)
+        self.QueryNEM()
+    def buildModDict(self):
         modList = open("commands/NEMP/mods.json", "r")
         fileInfo = modList.read()
         self.mods = simplejson.loads(fileInfo, strict = False)
         for mod in self.mods:
             if "change" not in self.mods[mod]:
                 self.mods[mod]["change"] = "NOT_USED"
-        self.QueryNEM()
-        
     def QueryNEM(self):
         try:
             NEMfeed = self.useragent.open("http://bot.notenoughmods.com/?json", timeout = 10)
@@ -390,14 +391,7 @@ def refresh(self,name,params,channel,userdata,rank):
     NEM.InitiateVersions()
     self.sendChatMessage(self.send,channel, "Queried NEM for \"latest\" versions")
 def nemp_reload(self,name,params,channel,userdata,rank):
-    modList = open("commands/NEMP/mods.json", "r")
-    fileInfo = modList.read()
-    
-    if "NEMP" not in self.threading.pool:
-        NEM.mods = simplejson.loads(fileInfo, strict = False)
-        NEM.InitiateVersions()
-    else:
-        NEM.newMods = simplejson.loads(fileInfo, strict = False)
+    NEM.buildModDict()
     
     self.sendChatMessage(self.send,channel, "Reloaded the NEMP Database")
     
