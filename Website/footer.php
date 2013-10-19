@@ -1,2 +1,2 @@
 <?php
-echo("this is the footer!");
+echo("Website by SinZ");

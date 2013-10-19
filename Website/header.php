@@ -1,2 +1,2 @@
 <?php
-echo("This is the header! <br/>");
+echo("Welcome to the site of NotEnoughModPolling");
