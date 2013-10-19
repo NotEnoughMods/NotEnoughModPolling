@@ -160,14 +160,30 @@ class NotEnoughClasses():
             "mc" : devMC #TODO: this doesn't seem reliable...
         }
         
-    def CheckBM(self,mod):
-        bmFeed = self.useragent.open(self.mods[mod]["html"]["url"], timeout=10)
-        result = bmFeed.read()
-        bmFeed.close()
+    def CheckDropBox(self,mod):
+        dbFeed = self.useragent.open(self.mods[mod]["html"]["url"], timeout=10)
+        result = dbFeed.read()
+        dbFeed.close()
         output = {}
-        match = re.findall(self.mods[mod]["html"]["regex"], result)
-        if match:
-            output = {"dev":match[-1]}
+        matches = re.finditer(self.mods[mod]["html"]["regex"], result)
+        for match in matches:
+            result = match
+        if "result" in locals():
+            try:
+                output["mc"] = result.expand("\g<mc>")
+            except IndexError:
+                output["mc"] = self.mods[mod]["mc"]
+            
+            try:
+                output["dev"] = result.expand("\g<dev>")
+            except IndexError:
+                pass
+            
+            try:
+                output["version"] = result.expand("\g<version>")
+            except IndexError:
+                pass
+            
         return output
         
     def CheckHTML(self,mod):
@@ -217,6 +233,7 @@ class NotEnoughClasses():
             return status
         except:
             print(mod+" failed to be polled...")
+            traceback.print_exc()
             return [False, False, False]
     
     parsers = {
@@ -227,7 +244,7 @@ class NotEnoughClasses():
         "CheckAE" : CheckAE,
         "CheckHTML" : CheckHTML,
         "CheckSpacechase" : CheckSpacechase,
-        "CheckBM" : CheckBM,
+        "CheckDropBox" : CheckDropBox,
     }
     
 NEM = NotEnoughClasses()

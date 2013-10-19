@@ -325,11 +325,83 @@
         "active" : true
     },
     "BloodMagic" : {
-        "function" : "CheckBM",
+        "function" : "CheckDropBox",
         "active" : true,
         "html" : {
             "url" : "https://www.dropbox.com/sh/zb1c910p0sifm3r/cvi84SoKN9",
             "regex" : "Blood%20Magic%20v(?P<version>.+?).zip"
+        }
+    },
+    "CreeperCollateral" : {
+        "function" : "CheckDropBox",
+        "active" : true,
+        "html" : {
+            "url" : "https://www.dropbox.com/sh/qqgsswnyxh2mq9f/k4n0iMK6e-/CreeperCollateral",
+            "regex" : "CreeperCollateral-(?P<mc>.+?)-(?P<version>.+?).jar"
+        }
+    },
+    "denLib" : {
+        "function" : "CheckDropBox",
+        "active" : true,
+        "html" : {
+            "url" : "https://www.dropbox.com/sh/qqgsswnyxh2mq9f/6m9vj5lzEQ/denLib",
+            "regex" : "denLib-(?P<mc>.+?)-(?P<version>.+?).jar"
+        }
+    },
+    "DenPipes" : {
+        "function" : "CheckDropBox",
+        "active" : true,
+        "html" : {
+            "url" : "https://www.dropbox.com/sh/qqgsswnyxh2mq9f/KBRRnClA4f/DenPipes",
+            "regex" : "DenPipes-(?P<mc>.+?)-(?P<version>.+?).jar"
+        }
+    },
+    "DenPipesEmerald" : {
+        "function" : "CheckDropBox",
+        "active" : true,
+        "html" : {
+            "url" : "https://www.dropbox.com/sh/qqgsswnyxh2mq9f/B9lEpmV2zD/DenPipes/Addons",
+            "regex" : "DenPipes-Emerald-(?P<mc>.+?)-(?P<version>.+?).jar"
+        }
+    },
+    "HDSkinsandCloaks" : {
+        "function" : "CheckDropBox",
+        "active" : true,
+        "html" : {
+            "url" : "https://www.dropbox.com/sh/qqgsswnyxh2mq9f/TE07WSyTWP/HDSAC",
+            "regex" : "HDSAC-(?P<mc>.+?)-(?P<version>.+?).jar"
+        }
+    },
+    "GateCopy" : {
+        "function" : "CheckDropBox",
+        "active" : true,
+        "html" : {
+            "url" : "https://www.dropbox.com/sh/qqgsswnyxh2mq9f/PIj33yv4Gd/GateCopy",
+            "regex" : "GateCopy-(?P<mc>.+?)-(?P<version>.+?).jar"
+        }
+    },
+    "INpureTools" : {
+        "function" : "CheckDropBox",
+        "active" : true,
+        "html" : {
+            "url" : "https://www.dropbox.com/sh/qqgsswnyxh2mq9f/3X9h2iJEcc/INpureTools",
+            "regex" : "INpureTools-(?P<mc>.+?)-(?P<version>.+?).jar"
+        }
+    },
+    "INpureTools_CCTurtle" : {
+        "function" : "CheckDropBox",
+        "active" : true,
+        "html" : {
+            "url" : "https://www.dropbox.com/sh/qqgsswnyxh2mq9f/3pg3Hi0xaX/INpureTools/Turtles",
+            "regex" : "INpureTools_CCTurtle-(?P<mc>.+?)-(?P<version>.+?).jar"
+        }
+    },
+    "PluginsForForestry" : {
+        "function" : "CheckDropBox",
+        "active" : true,
+        "html" : {
+            "url" : "https://www.dropbox.com/sh/qqgsswnyxh2mq9f/ikQ1Gl-YDM/PluginsforForestry",
+            "regex" : "PluginsforForestry-(?P<mc>.+?)-(?P<version>.+?).jar"
         }
     },
     "StatusEffectHUD" : {
