@@ -2,6 +2,8 @@ import urllib2
 import simplejson
 import re
 import traceback
+from StringIO import StringIO
+import gzip
 
 from centralizedThreading import FunctionNameAlreadyExists  # @UnresolvedImport (this makes my IDE happy <_<)
 
@@ -17,10 +19,24 @@ class NotEnoughClasses():
     
     def __init__(self):
         self.useragent = urllib2.build_opener()
-        self.useragent.addheaders = [('User-agent', 'NotEnoughMods:Polling/1.X (+http://github.com/SinZ163/NotEnoughMods)')]
+        self.useragent.addheaders = [
+            ('User-agent', 'NotEnoughMods:Polling/1.X (+http://github.com/SinZ163/NotEnoughMods)'),
+            ('Accept-encoding', 'gzip')
+        ]
         
         self.buildModDict()
         self.QueryNEM()
+
+    def fetch_page(self, url, decompress=True, timeout=10):
+        response = self.useragent.open(url, timeout=timeout)
+        if response.info().get('Content-Encoding') == 'gzip' and decompress:
+            buf = StringIO(response.read())
+            f = gzip.GzipFile(fileobj=buf, mode='rb')
+            data = f.read()
+        else:
+            data = response.read()
+        return data
+
     def buildModDict(self):
         modList = open("commands/NEMP/mods.json", "r")
         fileInfo = modList.read()
@@ -31,9 +47,7 @@ class NotEnoughClasses():
     
     def QueryNEM(self):
         try:
-            NEMfeed = self.useragent.open("http://bot.notenoughmods.com/?json", timeout = 10)
-            result = NEMfeed.read()
-            NEMfeed.close() 
+            result = self.fetch_page("http://bot.notenoughmods.com/?json")
             self.nemVersions = reversed(simplejson.loads(result, strict = False))
         except:
             print("Failed to get NEM versions, falling back to hard-coded")
@@ -46,9 +60,7 @@ class NotEnoughClasses():
         
         for version in self.nemVersions:
             if "-dev" not in version:
-                versionFeed = self.useragent.open("http://bot.notenoughmods.com/"+version+".json", timeout = 10)
-                rawJson = versionFeed.read()
-                versionFeed.close()
+                rawJson = self.fetch_page("http://bot.notenoughmods.com/"+version+".json")
                 
                 jsonres = simplejson.loads(rawJson, strict = False)
                 
@@ -69,9 +81,7 @@ class NotEnoughClasses():
                         templist.remove(mod["name"])
         
     def CheckJenkins(self, mod):
-        jenkinFeed = self.useragent.open(self.mods[mod]["jenkins"]["url"], timeout = 10)
-        result = jenkinFeed.read()
-        jenkinFeed.close()
+        result = self.fetch_page(self.mods[mod]["jenkins"]["url"])
         jsonres = simplejson.loads(result, strict = False )
         filename = jsonres["artifacts"][self.mods[mod]["jenkins"]["item"]]["fileName"]
         match = re.search(self.mods[mod]["jenkins"]["regex"],filename)
@@ -83,9 +93,7 @@ class NotEnoughClasses():
         return output
 
     def CheckMCForge(self,mod):
-        forgeFeed = self.useragent.open("http://files.minecraftforge.net/"+self.mods[mod]["mcforge"]["name"]+"/json", timeout = 10)
-        result = forgeFeed.read()
-        forgeFeed.close()
+        result = self.fetch_page("http://files.minecraftforge.net/"+self.mods[mod]["mcforge"]["name"]+"/json")
         jsonres = simplejson.loads(result, strict = False )
         promotionArray = jsonres["promotions"]
         devMatch = ""
@@ -116,18 +124,14 @@ class NotEnoughClasses():
             return output
             
     def CheckChickenBones(self,mod):
-        chickenFeed = self.useragent.open("http://www.chickenbones.craftsaddle.org/Files/New_Versions/version.php?file="+mod+"&version="+self.mods[mod]["mc"], timeout = 10)
-        result = chickenFeed.read()
-        chickenFeed.close()
+        result = self.fetch_page("http://www.chickenbones.craftsaddle.org/Files/New_Versions/version.php?file="+mod+"&version="+self.mods[mod]["mc"])
         if result.startswith("Ret: "): #Hacky I know, but this is how ChickenBones does it in his mod
             return {
                 "version" : result[5:]
             }
             
     def CheckmDiyo(self,mod):
-        mDiyoFeed = self.useragent.open("http://tanis.sunstrike.io/"+self.mods[mod]["mDiyo"]["location"],timeout = 10)
-        result = mDiyoFeed.read()
-        mDiyoFeed.close()
+        result = self.fetch_page("http://tanis.sunstrike.io/"+self.mods[mod]["mDiyo"]["location"])
         lines = result.split()
         result = ""
         for line in lines:
@@ -138,9 +142,7 @@ class NotEnoughClasses():
         return output
         
     def CheckAE(self,mod):
-        aeFeed = self.useragent.open("http://ae-mod.info/releases", timeout=10)
-        result = aeFeed.read()
-        aeFeed.close()
+        result = self.fetch_page("http://ae-mod.info/releases")
         jsonres = simplejson.loads(result, strict = False )
         jsonres = sorted(jsonres, key=lambda k: k['Released'])
         relVersion = ""
@@ -161,9 +163,7 @@ class NotEnoughClasses():
         }
         
     def CheckDropBox(self,mod):
-        dbFeed = self.useragent.open(self.mods[mod]["html"]["url"], timeout=10)
-        result = dbFeed.read()
-        dbFeed.close()
+        result = self.fetch_page(self.mods[mod]["html"]["url"])
         output = {}
         matches = re.finditer(self.mods[mod]["html"]["regex"], result)
         for match in matches:
@@ -187,9 +187,7 @@ class NotEnoughClasses():
         return output
         
     def CheckHTML(self,mod):
-        htmlFeed = self.useragent.open(self.mods[mod]["html"]["url"], timeout=10)
-        result = htmlFeed.read()
-        htmlFeed.close()
+        result = self.fetch_page(self.mods[mod]["html"]["url"])
         output = {}
         for line in result.splitlines():
             match = re.search(self.mods[mod]["html"]["regex"], line)
@@ -198,9 +196,7 @@ class NotEnoughClasses():
         return output
         
     def CheckSpacechase(self,mod):
-        spaceFeed = self.useragent.open("http://spacechase0.com/wp-content/plugins/mc-mod-manager/nem.php?mc=6", timeout=10)
-        result = spaceFeed.read()
-        spaceFeed.close()
+        result = self.fetch_page("http://spacechase0.com/wp-content/plugins/mc-mod-manager/nem.php?mc=6")
         for line in result.splitlines():
             info = line.split(',')
             #0 = ID, 1=NEM ID, 2=ModID, 3=Author, 4=Link, 5=Version, 6=Comment
