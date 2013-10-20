@@ -332,7 +332,7 @@
         "function" : "CheckDropBox",
         "active" : true,
         "html" : {
-            "url" : "https://www.dropbox.com/sh/zb1c910p0sifm3r/cvi84SoKN9",
+            "url" : "https://www.dropbox.com/sh/hda611lfjpm9fco/dMTKWT48wQ",
             "regex" : "Blood%20Magic%20v(?P<version>.+?).zip"
         }
     },
