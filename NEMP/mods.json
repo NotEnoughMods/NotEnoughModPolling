@@ -53,7 +53,7 @@
         "function" : "CheckJenkins",
         "active" : true,
         "jenkins" : {
-            "url" : "http://build.technicpack.net/view/PowerCrystals/job/MineFactoryReloaded/lastSuccessfulBuild/api/json",
+            "url" : "http://jenkins.dev.dryware.org/job/skyboy-MineFactoryReloaded/lastSuccessfulBuild/api/json",
             "regex": "MineFactoryReloaded-(?P<dev>.+?).jar$",
             "item": 1
         }

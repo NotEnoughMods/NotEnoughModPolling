@@ -66,6 +66,7 @@ class NotEnoughClasses():
                 
                 for mod in jsonres:
                     if mod["name"] in templist:
+                        #print(mod["name"]+" has versions for "+version)
                         self.mods[mod["name"]]["mc"] = version
                         
                         if "dev" in mod:
@@ -341,6 +342,7 @@ def execute(self, name, params, channel, userdata, rank):
     except KeyError:
         self.sendChatMessage(self.send, channel, "invalid command!")
         self.sendChatMessage(self.send, channel, "see =nemp help for a list of commands")
+        #traceback.print_exc()
 
 def setversion(self, name, params, channel, userdata, rank):
     if len(params) != 2:
