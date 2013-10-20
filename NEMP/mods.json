@@ -324,6 +324,10 @@
         "function" : "CheckSpacechase",
         "active" : true
     },
+    "UsefulPetsAddon_PainterlyTextures" : {
+        "function" : "CheckSpacechase",
+        "active" : true
+    },
     "BloodMagic" : {
         "function" : "CheckDropBox",
         "active" : true,
