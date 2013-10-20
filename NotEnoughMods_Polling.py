@@ -26,6 +26,7 @@ class NotEnoughClasses():
         
         self.buildModDict()
         self.QueryNEM()
+        self.InitiateVersions()
 
     def fetch_page(self, url, decompress=True, timeout=10):
         response = self.useragent.open(url, timeout=timeout)
@@ -69,12 +70,12 @@ class NotEnoughClasses():
                         #print(mod["name"]+" has versions for "+version)
                         self.mods[mod["name"]]["mc"] = version
                         
-                        if "dev" in mod:
+                        if "dev" in mod and mod["dev"]:
                             self.mods[mod["name"]]["dev"] = mod["dev"]
                         else:
                             self.mods[mod["name"]]["dev"] = "NOT_USED"
                         
-                        if "version" in mod:
+                        if "version" in mod and mod["version"]:
                             self.mods[mod["name"]]["version"] = mod["version"]
                         else:
                             self.mods[mod["name"]]["version"] = "NOT_USED"
