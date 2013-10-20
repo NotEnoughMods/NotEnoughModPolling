@@ -213,7 +213,7 @@ class NotEnoughClasses():
             # Next two Falses are for if there was an dev or version change
             status = [False, 
                       False, False]
-            output = self.parsers[self.mods[mod]["function"]](self,mod)
+            output = getattr(self, self.mods[mod]["function"])(mod)
             if "dev" in output:
                 if self.mods[mod]["dev"] != output["dev"]:
                     self.mods[mod]["dev"] = output["dev"]
@@ -234,18 +234,8 @@ class NotEnoughClasses():
             traceback.print_exc()
             return [False, False, False]
     
-    parsers = {
-        "CheckMCForge" : CheckMCForge,
-        "CheckJenkins" : CheckJenkins,
-        "CheckChickenBones" : CheckChickenBones,
-        "CheckmDiyo" : CheckmDiyo,
-        "CheckAE" : CheckAE,
-        "CheckHTML" : CheckHTML,
-        "CheckSpacechase" : CheckSpacechase,
-        "CheckDropBox" : CheckDropBox,
-    }
-    
 NEM = NotEnoughClasses()
+
 def running(self, name, params, channel, userdata, rank):
     if len(params) >= 2 and (params[1] == "true" or params[1] == "on"):
         if not self.events["time"].doesExist("NotEnoughModPolling"):
@@ -343,7 +333,6 @@ def execute(self, name, params, channel, userdata, rank):
     except KeyError:
         self.sendChatMessage(self.send, channel, "invalid command!")
         self.sendChatMessage(self.send, channel, "see =nemp help for a list of commands")
-        #traceback.print_exc()
 
 def setversion(self, name, params, channel, userdata, rank):
     if len(params) != 2:
@@ -416,7 +405,7 @@ def nemp_reload(self,name,params,channel,userdata,rank):
 def test_parser(self,name,params,channel,userdata,rank):
     if len(params) > 0:
         try:
-            result = NEM.parsers[NEM.mods[params[1]]["function"]](NEM,params[1])
+            result = getattr(NEM,NEM.mods[params[1]]["function"])(params[1])
             print(result)
             if "mc" in result:
                 self.sendChatMessage(self.send,channel, "!setlist "+result["mc"])
