@@ -328,6 +328,10 @@
         "function" : "CheckSpacechase",
         "active" : true
     },
+    "Hookshot" : {
+        "function" : "CheckSpacechase",
+        "active" : true
+    },
     "BloodMagic" : {
         "function" : "CheckDropBox",
         "active" : true,
