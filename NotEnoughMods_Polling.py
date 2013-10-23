@@ -67,7 +67,6 @@ class NotEnoughClasses():
                 
                 for mod in jsonres:
                     if mod["name"] in templist:
-                        #print(mod["name"]+" has versions for "+version)
                         self.mods[mod["name"]]["mc"] = version
                         
                         if "dev" in mod and mod["dev"]:
@@ -168,6 +167,7 @@ class NotEnoughClasses():
         result = self.fetch_page(self.mods[mod]["html"]["url"])
         output = {}
         matches = re.finditer(self.mods[mod]["html"]["regex"], result)
+        del(result)
         for match in matches:
             result = match
         if "result" in locals():
@@ -399,6 +399,7 @@ def refresh(self,name,params,channel,userdata,rank):
     self.sendChatMessage(self.send,channel, "Queried NEM for \"latest\" versions")
 def nemp_reload(self,name,params,channel,userdata,rank):
     NEM.buildModDict()
+    NEM.InitiateVersions()
     
     self.sendChatMessage(self.send,channel, "Reloaded the NEMP Database")
     
