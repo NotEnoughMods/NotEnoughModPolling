@@ -166,25 +166,19 @@ class NotEnoughClasses():
     def CheckDropBox(self,mod):
         result = self.fetch_page(self.mods[mod]["html"]["url"])
         output = {}
-        matches = re.finditer(self.mods[mod]["html"]["regex"], result)
-        del(result)
-        for match in matches:
-            result = match
-        if "result" in locals():
-            try:
-                output["mc"] = result.expand("\g<mc>")
-            except IndexError:
-                output["mc"] = self.mods[mod]["mc"]
+        match = None
+        for match in re.finditer(self.mods[mod]["html"]["regex"], result):
+            pass
+        # "match" is still in this scope
+        if match:
+            match = match.groupdict()
+            output["mc"] = match.get("mc", self.mods[mod]["mc"])
             
-            try:
-                output["dev"] = result.expand("\g<dev>")
-            except IndexError:
-                pass
+            if 'dev' in match:
+                output["dev"] = match.get("dev")
             
-            try:
-                output["version"] = result.expand("\g<version>")
-            except IndexError:
-                pass
+            if 'version' in match:
+                output["version"] = match.get("version")
             
         return output
         
