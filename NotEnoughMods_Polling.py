@@ -385,12 +385,14 @@ def nemp_list(self,name,params,channel,userdata,rank):
         tempList[mcver] = sorted(tempList[mcver], key=lambda s: s.lower())
         self.sendChatMessage(self.send, dest, "Mods checked for {0}: {1}".format(color+blue+bold+mcver+color+bold, ', '.join(tempList[mcver])))
 
-def refresh(self,name,params,channel,userdata,rank):
-    NEM.QueryNEM()
-    NEM.InitiateVersions()
-    self.sendChatMessage(self.send,channel, "Queried NEM for \"latest\" versions")
+#def refresh(self,name,params,channel,userdata,rank):
+#    NEM.QueryNEM()
+#    NEM.InitiateVersions()
+#    self.sendChatMessage(self.send,channel, "Queried NEM for \"latest\" versions")
+    
 def nemp_reload(self,name,params,channel,userdata,rank):
     NEM.buildModDict()
+    NEM.QueryNEM()
     NEM.InitiateVersions()
     
     self.sendChatMessage(self.send,channel, "Reloaded the NEMP Database")
@@ -469,18 +471,19 @@ commands = {
     "help" : nemp_help,
     "setversion" : setversion,
     "getversion" : getversion,
-    "refresh" : refresh,
+    #"refresh" : refresh,
     "testparse" : test_parser,
     "testpolling" : test_polling,
     "reload" : nemp_reload,
     "nktest" : nktest,
     
-    ###  ALIASES ###
+    # -- ALIASES -- #
     "setv" : setversion,
     "getv" : getversion,
     "polling" : running,
     "testpoll" : test_polling,
-    ### END ALIASES ###
+    "refresh" : nemp_reload
+    # -- END ALIASES -- #
 }
 
 helpDict = {
