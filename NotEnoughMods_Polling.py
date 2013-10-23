@@ -166,6 +166,7 @@ class NotEnoughClasses():
     def CheckDropBox(self,mod):
         result = self.fetch_page(self.mods[mod]["html"]["url"])
         output = {}
+        match = None
         for match in re.finditer(self.mods[mod]["html"]["regex"], result):
             pass
         # "match" is still in this scope
