@@ -171,20 +171,14 @@ class NotEnoughClasses():
             pass
         # "match" is still in this scope
         if match:
-            try:
-                output["mc"] = match.group("mc")
-            except IndexError:
-                output["mc"] = self.mods[mod]["mc"]
+            match = match.groupdict()
+            output["mc"] = match.get("mc", self.mods[mod]["mc"])
             
-            try:
+            if 'dev' in match:
                 output["dev"] = match.group("dev")
-            except IndexError:
-                pass
             
-            try:
+            if 'version' in match:
                 output["version"] = match.group("version")
-            except IndexError:
-                pass
             
         return output
         
