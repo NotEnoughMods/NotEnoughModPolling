@@ -165,22 +165,20 @@ class NotEnoughClasses():
         
     def CheckDropBox(self,mod):
         result = self.fetch_page(self.mods[mod]["html"]["url"])
-        output = {}
         match = None
         for match in re.finditer(self.mods[mod]["html"]["regex"], result):
             pass
         # "match" is still in this scope
         if match:
             match = match.groupdict()
-            output["mc"] = match.get("mc", self.mods[mod]["mc"])
-            
-            if 'dev' in match:
-                output["dev"] = match.get("dev")
-            
-            if 'version' in match:
-                output["version"] = match.get("version")
-            
-        return output
+
+            if 'mc' not in match:
+                match['mc'] = self.mods[mod]['mc']
+
+            # we already have the 'version', 'dev' and 'mc' fields from the regex
+            return match
+        else:
+            return {}
         
     def CheckHTML(self,mod):
         result = self.fetch_page(self.mods[mod]["html"]["url"])
