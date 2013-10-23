@@ -328,6 +328,10 @@
         "function" : "CheckSpacechase",
         "active" : true
     },
+    "Chunk-in-a-Jar" : {
+        "function" : "CheckSpacechase",
+        "active" : true
+    },
     "Hookshot" : {
         "function" : "CheckSpacechase",
         "active" : true
