@@ -384,11 +384,6 @@ def nemp_list(self,name,params,channel,userdata,rank):
     for mcver in sorted(tempList.iterkeys()):
         tempList[mcver] = sorted(tempList[mcver], key=lambda s: s.lower())
         self.sendChatMessage(self.send, dest, "Mods checked for {0}: {1}".format(color+blue+bold+mcver+color+bold, ', '.join(tempList[mcver])))
-
-#def refresh(self,name,params,channel,userdata,rank):
-#    NEM.QueryNEM()
-#    NEM.InitiateVersions()
-#    self.sendChatMessage(self.send,channel, "Queried NEM for \"latest\" versions")
     
 def nemp_reload(self,name,params,channel,userdata,rank):
     NEM.buildModDict()
@@ -471,7 +466,6 @@ commands = {
     "help" : nemp_help,
     "setversion" : setversion,
     "getversion" : getversion,
-    #"refresh" : refresh,
     "testparse" : test_parser,
     "testpolling" : test_polling,
     "reload" : nemp_reload,
