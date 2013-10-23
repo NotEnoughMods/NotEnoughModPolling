@@ -175,10 +175,10 @@ class NotEnoughClasses():
             output["mc"] = match.get("mc", self.mods[mod]["mc"])
             
             if 'dev' in match:
-                output["dev"] = match.group("dev")
+                output["dev"] = match.get("dev")
             
             if 'version' in match:
-                output["version"] = match.group("version")
+                output["version"] = match.get("version")
             
         return output
         
