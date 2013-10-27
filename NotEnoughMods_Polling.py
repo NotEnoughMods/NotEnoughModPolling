@@ -383,7 +383,7 @@ def nemp_list(self,name,params,channel,userdata,rank):
     del mcver
     for mcver in sorted(tempList.iterkeys()):
         tempList[mcver] = sorted(tempList[mcver], key=lambda s: s.lower())
-        self.sendChatMessage(self.send, dest, "Mods checked for {0}: {1}".format(color+blue+bold+mcver+color+bold, ', '.join(tempList[mcver])))
+        self.sendChatMessage(self.send, dest, "Mods checked for {} ({}): {}".format(color+blue+bold+mcver+color+bold, len(tempList[mcver]), ', '.join(tempList[mcver])))
     
 def nemp_reload(self,name,params,channel,userdata,rank):
     NEM.buildModDict()
