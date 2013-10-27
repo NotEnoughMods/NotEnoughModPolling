@@ -345,19 +345,21 @@
         }
     },
     "CreeperCollateral" : {
-        "function" : "CheckDropBox",
+        "function" : "CheckJenkins",
         "active" : true,
-        "html" : {
-            "url" : "https://www.dropbox.com/sh/qqgsswnyxh2mq9f/k4n0iMK6e-/CreeperCollateral",
-            "regex" : "CreeperCollateral-(?P<mc>.+?)-(?P<version>.+?).jar"
+        "jenkins" : {
+            "url" : "http://denoflions.servehttp.com:8080/view/All/job/Creeper%20Collateral/lastSuccessfulBuild/api/json",
+            "regex" : "CreeperCollateral-(?P<mc>.+?)-(?P<version>.+?).jar",
+            "item" : 0
         }
     },
     "denLib" : {
-        "function" : "CheckDropBox",
+        "function" : "CheckJenkins",
         "active" : true,
-        "html" : {
-            "url" : "https://www.dropbox.com/sh/qqgsswnyxh2mq9f/6m9vj5lzEQ/denLib",
-            "regex" : "denLib-(?P<mc>.+?)-(?P<version>.+?).jar"
+        "jenkins" : {
+            "url" : "http://denoflions.servehttp.com:8080/view/All/job/denLib%203.X/lastSuccessfulBuild/api/json",
+            "regex" : "denLib-(?P<mc>.+?)-(?P<version>.+?).jar",
+            "item" : 0
         }
     },
     "DenPipes" : {
@@ -376,20 +378,21 @@
             "regex" : "DenPipes-Emerald-(?P<mc>.+?)-(?P<version>.+?).jar"
         }
     },
-    "HDSkinsandCloaks" : {
-        "function" : "CheckDropBox",
-        "active" : true,
-        "html" : {
-            "url" : "https://www.dropbox.com/sh/qqgsswnyxh2mq9f/TE07WSyTWP/HDSAC",
-            "regex" : "HDSAC-(?P<mc>.+?)-(?P<version>.+?).jar"
-        }
-    },
     "GateCopy" : {
         "function" : "CheckDropBox",
         "active" : true,
         "html" : {
             "url" : "https://www.dropbox.com/sh/qqgsswnyxh2mq9f/PIj33yv4Gd/GateCopy",
             "regex" : "GateCopy-(?P<mc>.+?)-(?P<version>.+?).jar"
+        }
+    },
+    "HDSkinsandCloaks" : {
+        "function" : "CheckJenkins",
+        "active" : true,
+        "jenkins" : {
+            "url" : "http://denoflions.servehttp.com:8080/view/All/job/HDSAC%201.6.2/lastSuccessfulBuild/api/json",
+            "regex" : "HDSAC-(?P<mc>.+?)-(?P<version>.+?).jar",
+            "item" : 0
         }
     },
     "INpureTools" : {
@@ -409,11 +412,12 @@
         }
     },
     "PluginsForForestry" : {
-        "function" : "CheckDropBox",
+        "function" : "CheckJenkins",
         "active" : true,
-        "html" : {
-            "url" : "https://www.dropbox.com/sh/qqgsswnyxh2mq9f/ikQ1Gl-YDM/PluginsforForestry",
-            "regex" : "PluginsforForestry-(?P<mc>.+?)-(?P<version>.+?).jar"
+        "jenkins" : {
+            "url" : "http://denoflions.servehttp.com:8080/view/All/job/Plugins%20for%20Forestry%203.X/lastSuccessfulBuild/api/json",
+            "regex" : "PluginsforForestry-(?P<mc>.+?)-(?P<version>.+?).jar",
+            "item" : 0
         }
     },
     "StatusEffectHUD" : {
