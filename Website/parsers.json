@@ -1,0 +1,41 @@
+{
+    "CheckMCForge" : {
+        "mcforge" : [
+            "name",
+            "dev",
+            "rec",
+            "regex"
+        ]
+    },
+    "CheckJenkins" : {
+        "jenkins" : [
+            "url",
+            "regex",
+            "item"
+        ]
+    },
+    "CheckChickenBones" : {
+    },
+    "CheckmDiyo" : {
+        "mDiyo" : [
+            "location",
+            "regex"
+        ]
+    },
+    "CheckAE" : {
+    },
+    "CheckHTML" : {
+        "html" : [
+            "url",
+            "regex"
+        ]
+    },
+    "CheckSpacechase" : {
+    },
+    "CheckDropBox" : {
+        "html" : [
+            "url",
+            "regex"
+        ]
+    }
+}

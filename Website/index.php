@@ -1,6 +1,6 @@
 <html>
 <head>
-<title>NEMP</title>
+    <title>Not Enough Mods: Polling</title>
 </head>
 <body>
 <?php
