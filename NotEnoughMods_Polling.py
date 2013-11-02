@@ -54,7 +54,7 @@ class NotEnoughClasses():
             print("Failed to get NEM versions, falling back to hard-coded")
             traceb = str(traceback.format_exc())
             print(traceb)
-            self.nemVersions = reversed(["1.4.5","1.4.6-1.4.7","1.5.1","1.5.2","1.6.1","1.6.2","1.6.4"])
+            self.nemVersions = reversed(["1.4.5","1.4.6-1.4.7","1.5.1","1.5.2","1.6.1","1.6.2","1.6.4","1.7.2"])
             
     def InitiateVersions(self):
         templist = self.mods.keys()
@@ -136,7 +136,7 @@ class NotEnoughClasses():
         lines = result.split()
         result = ""
         for line in lines:
-            if ".jar" in line.lower(): #TODO: Dynamic this thing if changes
+            if ".jar" in line.lower():
                 result = line
         match = re.search(self.mods[mod]["mDiyo"]["regex"],result)
         output = match.groupdict()
@@ -493,6 +493,7 @@ helpDict = {
     "help" : ["=nemp help [command]", "Shows this help info about [command] or lists all commands for this plugin."],
     "setversion" : ["=nemp setversion <version>", "Sets the version to <version> for polling to assume."],
     "getversion" : ["=nemp getversion", "gets the version for polling to assume."],
-    "refresh" : ["=nemp refresh", "Queries NEM to get the \"latest\" versions"],
+    "refresh" : ["'=nemp refresh' or '=nemp reload'", "Reloads the various data stores (mods list, versions list, etc)"],
+    "reload" : ["'=nemp refresh' or '=nemp reload'", "Reloads the various data stores (mods list, versions list, etc)"],
     "testparse" : ["=nemp testparse <mod>", "Tests the parser for <mod> and outputs the contents to IRC"],
 }
