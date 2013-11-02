@@ -242,7 +242,12 @@ def running(self, name, params, channel, userdata, rank):
     if len(params) == 2 and (params[1] == "false" or params[1] == "off"):
         if self.events["time"].doesExist("NotEnoughModPolling"):
             self.sendChatMessage(self.send, channel, "Turning NotEnoughPolling off.") 
-            self.events["time"].removeEvent("NotEnoughModPolling")
+            try:
+                self.events["time"].removeEvent("NotEnoughModPolling")
+                self.events["time"].removeEvent("NEMP_ThreadClock")
+                self.threading.sigquitThread("NEMP")
+            except:
+                pass
         else:
             self.sendChatMessage(self.send, channel, "NotEnoughModPolling isn't running!")
 
