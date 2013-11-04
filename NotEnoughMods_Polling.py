@@ -257,6 +257,8 @@ def PollingThread(self, pipe):
         NEM.InitiateVersions()
     tempList = {}
     for mod, info in NEM.mods.iteritems():
+        if self.signal:
+            return
         if 'name' in info:
             real_name = info['name']
         else:
@@ -298,7 +300,7 @@ def MicroTimerEvent(self,channels):
                     if NEM.mods[mod]["version"]  != "NOT_USED" and flags[1]:
                         self.sendChatMessage(self.send, channel, "!lmod "+version+" "+mod+" "+NEM.mods[mod]["version"])
                     if NEM.mods[mod]["change"] != "NOT_USED":
-                        self.sendChatMessage(self.send, channel, " * "+NEM.mods[mod]["change"])
+                        self.sendChatMessage(self.send, channel, " * "+NEM.mods[mod]["change"].encode("utf-8"))
                 
 def poll(self, name, params, channel, userdata, rank):
     if len(params) != 3:
