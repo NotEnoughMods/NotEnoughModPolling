@@ -461,19 +461,6 @@
             "regex" : "v(?P<version>.+?)\\((?P<mc>.+?)\\)"
         }
     },
-    "bspkrsCore-1.6.2" : {
-        "name" : "bspkrsCore",
-        "function" : "CheckHTML",
-        "mc" : "1.6.2",
-        "dev" : "NOT_USED",
-        "version" : "",
-        "change" : "NOT_USED",
-        "active" : true,
-        "html" : {
-            "url" : "http://dl.dropboxusercontent.com/u/20748481/Minecraft/1.6.2/bspkrsCore.version",
-            "regex" : "v(?P<version>.+?)\\((?P<mc>.+?)\\)"
-        }
-    },
     "CrystalWing" : {
         "function" : "CheckHTML",
         "active" : true,
