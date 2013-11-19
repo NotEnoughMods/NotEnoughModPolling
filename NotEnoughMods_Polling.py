@@ -29,14 +29,18 @@ class NotEnoughClasses():
         self.InitiateVersions()
 
     def fetch_page(self, url, decompress=True, timeout=10):
-        response = self.useragent.open(url, timeout=timeout)
-        if response.info().get('Content-Encoding') == 'gzip' and decompress:
-            buf = StringIO(response.read())
-            f = gzip.GzipFile(fileobj=buf, mode='rb')
-            data = f.read()
-        else:
-            data = response.read()
-        return data
+        try:
+            response = self.useragent.open(url, timeout=timeout)
+            if response.info().get('Content-Encoding') == 'gzip' and decompress:
+                buf = StringIO(response.read())
+                f = gzip.GzipFile(fileobj=buf, mode='rb')
+                data = f.read()
+            else:
+                data = response.read()
+            return data
+        except:
+            pass
+            #most likely a timeout
 
     def buildModDict(self):
         modList = open("commands/NEMP/mods.json", "r")
@@ -58,28 +62,31 @@ class NotEnoughClasses():
             
     def InitiateVersions(self):
         templist = self.mods.keys()
-        
-        for version in self.nemVersions:
-            if "-dev" not in version:
-                rawJson = self.fetch_page("http://bot.notenoughmods.com/"+version+".json")
-                
-                jsonres = simplejson.loads(rawJson, strict = False)
-                
-                for mod in jsonres:
-                    if mod["name"] in templist:
-                        self.mods[mod["name"]]["mc"] = version
-                        
-                        if "dev" in mod and mod["dev"]:
-                            self.mods[mod["name"]]["dev"] = mod["dev"]
-                        else:
-                            self.mods[mod["name"]]["dev"] = "NOT_USED"
-                        
-                        if "version" in mod and mod["version"]:
-                            self.mods[mod["name"]]["version"] = mod["version"]
-                        else:
-                            self.mods[mod["name"]]["version"] = "NOT_USED"
-                        
-                        templist.remove(mod["name"])
+        try:
+            for version in self.nemVersions:
+                if "-dev" not in version:
+                    rawJson = self.fetch_page("http://bot.notenoughmods.com/"+version+".json")
+                    
+                    jsonres = simplejson.loads(rawJson, strict = False)
+                    
+                    for mod in jsonres:
+                        if mod["name"] in templist:
+                            self.mods[mod["name"]]["mc"] = version
+                            
+                            if "dev" in mod and mod["dev"]:
+                                self.mods[mod["name"]]["dev"] = mod["dev"]
+                            else:
+                                self.mods[mod["name"]]["dev"] = "NOT_USED"
+                            
+                            if "version" in mod and mod["version"]:
+                                self.mods[mod["name"]]["version"] = mod["version"]
+                            else:
+                                self.mods[mod["name"]]["version"] = "NOT_USED"
+                            
+                            templist.remove(mod["name"])
+        except:
+            pass
+            #most likely a timeout
         
     def CheckJenkins(self, mod):
         result = self.fetch_page(self.mods[mod]["jenkins"]["url"])
@@ -198,6 +205,7 @@ class NotEnoughClasses():
                 return {
                     "version" : info[5]
                 }
+        return {}
                 
     def CheckMod(self, mod):
         try:
@@ -473,7 +481,7 @@ commands = {
     "help" : nemp_help,
     "setversion" : setversion,
     "getversion" : getversion,
-    "testparse" : test_parser,
+    "test" : test_parser,
     "testpolling" : test_polling,
     "reload" : nemp_reload,
     "nktest" : nktest,

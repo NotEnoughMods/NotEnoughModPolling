@@ -253,6 +253,14 @@
             "regex" : "TConstruct_(?P<mc>.+?)_(?P<dev>.+?).jar"
         }
     },
+    "TMechworks" : {
+        "function" : "CheckmDiyo",
+        "active" : true,
+        "mDiyo" : {
+            "location" : "TMechworks/development/",
+            "regex" : "TMechworks_(?P<mc>.+?)_(?P<dev>.+?).jar"
+        }
+    },
     "AppliedEnergistics" : {
         "function" : "CheckAE",
         "active" : false
