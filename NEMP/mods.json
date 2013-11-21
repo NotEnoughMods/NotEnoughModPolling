@@ -1,12 +1,11 @@
 {
     "MinecraftForge" : {
-        "function" : "CheckMCForge",
+        "function" : "CheckMCForge2",
         "active" : true,
         "mcforge" : {
-            "name" : "minecraftforge",
-            "dev" : "latest",
-            "rec" : "recommended",
-            "regex" : "minecraftforge-universal-(.+?)-(.+?).jar$"
+            "url" : "http://files.minecraftforge.net/maven/net/minecraftforge/forge/promotions.json",
+            "promo" : "latest",
+            "promoType" : "dev"
         }
     },
     "IronChests" : {
@@ -253,7 +252,7 @@
             "regex" : "TConstruct_(?P<mc>.+?)_(?P<dev>.+?).jar"
         }
     },
-    "TMechworks" : {
+    "Mechworks" : {
         "function" : "CheckmDiyo",
         "active" : true,
         "mDiyo" : {

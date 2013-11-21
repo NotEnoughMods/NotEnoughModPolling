@@ -99,6 +99,17 @@ class NotEnoughClasses():
         except:
             output["change"] = "NOT_USED"
         return output
+    def CheckMCForge2(self,mod):
+        result = self.fetch_page(self.mods[mod]["mcforge"]["url"])
+        jsonres = simplejson.loads(result, strict=False)
+        
+        for promo in jsonres["promos"]:
+            if promo == self.mods[mod]["mcforge"]["promo"]:
+                return {
+                    self.mods[mod]["mcforge"]["promoType"] : jsonres["promos"][promo]["version"],
+                    "mc" : jsonres["promos"][promo]["mcversion"]
+                }
+        return {}
 
     def CheckMCForge(self,mod):
         result = self.fetch_page("http://files.minecraftforge.net/"+self.mods[mod]["mcforge"]["name"]+"/json")
