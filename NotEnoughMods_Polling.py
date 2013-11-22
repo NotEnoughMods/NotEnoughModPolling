@@ -322,24 +322,26 @@ def MicroTimerEvent(self,channels):
                         self.sendChatMessage(self.send, channel, " * "+NEM.mods[mod]["change"].encode("utf-8"))
                 
 def poll(self, name, params, channel, userdata, rank):
-    if len(params) != 3:
-        self.sendChatMessage(self.send, channel, name+ ": Insufficent amount of parameters provided.")
+    if len(params) < 3:
+        self.sendChatMessage(self.send, channel, name+ ": Insufficient amount of parameters provided. Required: 2")
         self.sendChatMessage(self.send, channel, name+ ": "+help["poll"][1])
         
     else:
         setting = False
-        if params[1] in NEM.mods:
-            if params[2].lower() == "true" or params[2].lower() == "yes" or params[2].lower() == "on":
+        if params[2].lower() in ("true","yes","on"):
                 setting = True
-            elif params[2].lower() == "false" or params[2].lower() == "no" or params[2].lower() == "off":
-                setting = False
+        elif params[2].lower() in ("false","no","off"):
+            setting = False
+        
+        if params[1][0:2].lower() == "c:":
+            for mod in NEM.mods:
+                if "category" in NEM.mods[mod] and NEM.mods[mod]["category"] == params[1][2:]:
+                    NEM.mods[mod]["active"] = setting
+                    self.sendChatMessage(self.send, channel, name+ ": "+mod+"'s poll status is now "+str(setting))
+        elif params[1] in NEM.mods:
             NEM.mods[params[1]]["active"] = setting
             self.sendChatMessage(self.send, channel, name+ ": "+params[1]+"'s poll status is now "+str(setting))
         elif params[1].lower() == "all":
-            if params[2].lower() == "true" or params[2].lower() == "yes":
-                setting = True
-            elif params[2].lower() == "false" or params[2].lower() == "no":
-                setting = False
             for mod in NEM.mods:
                 NEM.mods[mod]["active"] = setting
             self.sendChatMessage(self.send, channel, name+ ": All mods are now set to "+str(setting))
@@ -367,7 +369,7 @@ def getversion(self,name,params,channel,userdata,rank):
     self.sendChatMessage(self.send, channel, NEM.nemVersion)
         
 def about(self, name, params, channel, userdata, rank):
-    self.sendChatMessage(self.send, channel, "Not Enough Mods: Polling for IRC by SinZ, with help from NightKev - v1.2")
+    self.sendChatMessage(self.send, channel, "Not Enough Mods: Polling for IRC by SinZ, with help from NightKev - v1.3")
     self.sendChatMessage(self.send, channel, "Source code available at: http://github.com/SinZ163/NotEnoughMods")
     
 def nemp_help(self, name, params, channel, userdata, rank):
