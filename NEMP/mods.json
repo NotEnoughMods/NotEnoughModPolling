@@ -413,6 +413,11 @@
         "category" : "sc0",
         "active" : true
     },
+    "LargerInventoryAndHotbar" : {
+        "function" : "CheckSpacechase",
+        "category" : "sc0",
+        "active" : true
+    },
     "BloodMagic" : {
         "function" : "CheckDropBox",
         "active" : true,
