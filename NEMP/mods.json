@@ -48,6 +48,24 @@
             "regex" : "BiomesOPlenty-universal-(.+?)-(.+?).jar$"
         }
     },
+    "OpenPeripheral" : {
+        "function" : "CheckJenkins",
+        "active" : true,
+        "jenkins" : {
+            "url" : "http://openmods.info:8080/job/OpenPeripheral/lastSuccessfulBuild/api/json",
+            "regex" : "OpenPeripheral-(?P<dev>.+?)-forge(.+?).jar$",
+            "item" : 0
+        }
+    },
+    "OpenBlocks" : {
+        "function" : "CheckJenkins",
+        "active" : true,
+        "jenkins" : {
+            "url" : "http://openmods.info:8080/job/OpenBlocks-Experimental/lastSuccessfulBuild/api/json",
+            "regex" : "OpenBlocks-Experimental-(?P<dev>.+?).jar$",
+            "item" : 0
+        }
+    },
     "MineFactoryReloaded" : {
         "function" : "CheckJenkins",
         "active" : true,
@@ -184,7 +202,7 @@
             "item" : 0
         }
     },
-    "MCPC-PLUS" : {
+    "MCPC-Plus" : {
         "function" : "CheckJenkins",
         "active" : true,
         "jenkins" : {
