@@ -1,6 +1,7 @@
 {
     "MinecraftForge" : {
         "function" : "CheckMCForge2",
+        "category" : "forge",
         "active" : true,
         "mcforge" : {
             "url" : "http://files.minecraftforge.net/maven/net/minecraftforge/forge/promotions.json",
@@ -10,6 +11,7 @@
     },
     "IronChests" : {
         "function" : "CheckMCForge",
+        "category" : "forge",
         "active" : true,
         "mcforge" : {
             "name" : "IronChests2",
@@ -20,6 +22,7 @@
     },
     "ForgeMultipart" : {
         "function" : "CheckMCForge",
+        "category" : "forge",
         "active" : true,
         "mcforge" : {
             "name" : "ForgeMultipart",
@@ -30,6 +33,7 @@
     },
     "CompactSolars" : {
         "function" : "CheckMCForge",
+        "category" : "forge",
         "active" : true,
         "mcforge" : {
             "name" : "CompactSolars",
@@ -40,6 +44,7 @@
     },
     "BiomesOPlenty" : {
         "function" : "CheckMCForge",
+        "category" : "forge",
         "active" : true,
         "mcforge" : {
             "name" : "BiomesOPlenty",
@@ -50,6 +55,7 @@
     },
     "OpenPeripheral" : {
         "function" : "CheckJenkins",
+        "category" : "openmods",
         "active" : true,
         "jenkins" : {
             "url" : "http://openmods.info:8080/job/OpenPeripheral/lastSuccessfulBuild/api/json",
@@ -59,6 +65,7 @@
     },
     "OpenBlocks" : {
         "function" : "CheckJenkins",
+        "category" : "openmods",
         "active" : true,
         "jenkins" : {
             "url" : "http://openmods.info:8080/job/OpenBlocks-Experimental/lastSuccessfulBuild/api/json",
@@ -77,7 +84,7 @@
     },
     "IndustrialCraft2" : {
         "function" : "CheckJenkins",
-        "active" : true,
+        "active" : false,
         "jenkins" : {
             "url" : "http://ic2api.player.to:8080/job/IC2_lf/lastSuccessfulBuild/api/json",
             "regex" : "industrialcraft-2_(?P<dev>.+?)-lf.jar$",
@@ -86,6 +93,7 @@
     },
     "ModularPowersuits" : {
         "function" : "CheckJenkins",
+        "category" : "technic-ci",
         "active" : true,
         "jenkins" : {
             "url" : "http://build.technicpack.net/job/ModularPowersuits/lastSuccessfulBuild/api/json",
@@ -95,6 +103,7 @@
     },
     "ModularPowersuits-Addons" : {
         "function" : "CheckJenkins",
+        "category" : "technic-ci",
         "active" : true,
         "jenkins" : {
             "url" : "http://build.technicpack.net/job/ModularPowersuitsAddons/lastSuccessfulBuild/api/json",
@@ -113,6 +122,7 @@
     },
     "InventoryTweaks" : {
         "function" : "CheckJenkins",
+        "category" : "technic-ci",
         "active" : true,
         "jenkins" : {
             "url" : "http://build.technicpack.net/job/Inventory-Tweaks/lastSuccessfulBuild/api/json",
@@ -122,6 +132,7 @@
     },
     "DimensionalDoors" : {
         "function" : "CheckJenkins",
+        "category" : "technic-ci",
         "active" : true,
         "jenkins" : {
             "url" : "http://build.technicpack.net/job/DimDoors/lastSuccessfulBuild/api/json",
@@ -131,6 +142,7 @@
     },
     "PowerCrystalsCore" : {
         "function" : "CheckJenkins",
+        "category" : "technic-ci",
         "active" : true,
         "jenkins" : {
             "url" : "http://build.technicpack.net/job/PowerCrystalsCore/lastSuccessfulBuild/api/json",
@@ -213,6 +225,7 @@
     },
     "Artifice" : {
         "function" : "CheckJenkins",
+        "category" : "technic-ci",
         "active" : true,
         "jenkins" : {
             "url" : "http://build.technicpack.net/job/Artifice/lastSuccessfulBuild/api/json",
@@ -240,30 +253,37 @@
     },
     "CodeChickenCore" : {
         "function" : "CheckChickenBones",
+        "category" : "cb",
         "active" : true
     },
     "ChickenChunks" : {
         "function" : "CheckChickenBones",
+        "category" : "cb",
         "active" : true
     },
     "NotEnoughItems" : {
         "function" : "CheckChickenBones",
+        "category" : "cb",
         "active" : true
     },
     "EnderStorage" : {
         "function" : "CheckChickenBones",
+        "category" : "cb",
         "active" : true
     },
     "Translocator" : {
         "function" : "CheckChickenBones",
+        "category" : "cb",
         "active" : true
     },
     "WR-CBE" : {
         "function" : "CheckChickenBones",
+        "category" : "cb",
         "active" : true
     },
     "TinkersConstruct" : {
         "function" : "CheckmDiyo",
+        "category" : "mdiyo",
         "active" : true,
         "mDiyo" : {
             "location" : "TConstruct/development/",
@@ -272,6 +292,7 @@
     },
     "Mechworks" : {
         "function" : "CheckmDiyo",
+        "category" : "mdiyo",
         "active" : true,
         "mDiyo" : {
             "location" : "TMechworks/development/",
@@ -284,90 +305,112 @@
     },
     "CheaperArrows" : {
         "function" : "CheckSpacechase",
+        "category" : "sc0",
         "active" : true
     },
     "EverlastingTools" : {
         "function" : "CheckSpacechase",
+        "category" : "sc0",
         "active" : true
     },
     "CondensedPotions" : {
         "function" : "CheckSpacechase",
+        "category" : "sc0",
         "active" : true
     },
     "OldBookRecipe" : {
         "function" : "CheckSpacechase",
+        "category" : "sc0",
         "active" : true
     },
     "TextFormatting" : {
         "function" : "CheckSpacechase",
+        "category" : "sc0",
         "active" : true
     },
     "StoneBrickRecipes" : {
         "function" : "CheckSpacechase",
+        "category" : "sc0",
         "active" : true
     },
     "SurvivalWings" : {
         "function" : "CheckSpacechase",
+        "category" : "sc0",
         "active" : true
     },
     "ThirdPersonCamera" : {
         "function" : "CheckSpacechase",
+        "category" : "sc0",
         "active" : true
     },
     "BiomeWand" : {
         "function" : "CheckSpacechase",
+        "category" : "sc0",
         "active" : true
     },
     "DecorativeStuff" : {
         "function" : "CheckSpacechase",
+        "category" : "sc0",
         "active" : true
     },
     "CraftableEnchantmentBooks" : {
         "function" : "CheckSpacechase",
+        "category" : "sc0",
         "active" : true
     },
     "ToggleSpawners" : {
         "function" : "CheckSpacechase",
+        "category" : "sc0",
         "active" : true
     },
     "ToxicRain" : {
         "function" : "CheckSpacechase",
+        "category" : "sc0",
         "active" : true
     },
     "Auto-Fisher" : {
         "function" : "CheckSpacechase",
+        "category" : "sc0",
         "active" : true
     },
     "UsefulPets" : {
         "function" : "CheckSpacechase",
+        "category" : "sc0",
         "active" : true
     },
     "SpaceCore" : {
         "function" : "CheckSpacechase",
+        "category" : "sc0",
         "active" : true
     },
     "SpelunkerDimension" : {
         "function" : "CheckSpacechase",
+        "category" : "sc0",
         "active" : true
     },
     "ComponentEquipment" : {
         "function" : "CheckSpacechase",
+        "category" : "sc0",
         "active" : true
     },
     "MorePotionTypes" : {
         "function" : "CheckSpacechase",
+        "category" : "sc0",
         "active" : true
     },
     "UsefulPetsAddon_PainterlyTextures" : {
         "function" : "CheckSpacechase",
+        "category" : "sc0",
         "active" : true
     },
     "Chunk-in-a-Jar" : {
         "function" : "CheckSpacechase",
+        "category" : "sc0",
         "active" : true
     },
     "Hookshot" : {
         "function" : "CheckSpacechase",
+        "category" : "sc0",
         "active" : true
     },
     "BloodMagic" : {
@@ -380,6 +423,7 @@
     },
     "CreeperCollateral" : {
         "function" : "CheckJenkins",
+        "category" : "den",
         "active" : true,
         "jenkins" : {
             "url" : "http://denoflions.servehttp.com:8080/view/All/job/Creeper%20Collateral/lastSuccessfulBuild/api/json",
@@ -389,6 +433,7 @@
     },
     "denLib" : {
         "function" : "CheckJenkins",
+        "category" : "den",
         "active" : true,
         "jenkins" : {
             "url" : "http://denoflions.servehttp.com:8080/view/All/job/denLib%203.X/lastSuccessfulBuild/api/json",
@@ -398,6 +443,7 @@
     },
     "DenPipes" : {
         "function" : "CheckDropBox",
+        "category" : "den",
         "active" : true,
         "html" : {
             "url" : "https://www.dropbox.com/sh/qqgsswnyxh2mq9f/KBRRnClA4f/DenPipes",
@@ -406,6 +452,7 @@
     },
     "DenPipesEmerald" : {
         "function" : "CheckDropBox",
+        "category" : "den",
         "active" : true,
         "html" : {
             "url" : "https://www.dropbox.com/sh/qqgsswnyxh2mq9f/B9lEpmV2zD/DenPipes/Addons",
@@ -414,6 +461,7 @@
     },
     "GateCopy" : {
         "function" : "CheckDropBox",
+        "category" : "den",
         "active" : true,
         "html" : {
             "url" : "https://www.dropbox.com/sh/qqgsswnyxh2mq9f/PIj33yv4Gd/GateCopy",
@@ -422,6 +470,7 @@
     },
     "HDSkinsandCloaks" : {
         "function" : "CheckJenkins",
+        "category" : "den",
         "active" : true,
         "jenkins" : {
             "url" : "http://denoflions.servehttp.com:8080/view/All/job/HDSAC%201.6.2/lastSuccessfulBuild/api/json",
@@ -431,6 +480,7 @@
     },
     "INpureTools" : {
         "function" : "CheckDropBox",
+        "category" : "den",
         "active" : true,
         "html" : {
             "url" : "https://www.dropbox.com/sh/qqgsswnyxh2mq9f/3X9h2iJEcc/INpureTools",
@@ -439,6 +489,7 @@
     },
     "INpureTools_CCTurtle" : {
         "function" : "CheckDropBox",
+        "category" : "den",
         "active" : true,
         "html" : {
             "url" : "https://www.dropbox.com/sh/qqgsswnyxh2mq9f/3pg3Hi0xaX/INpureTools/Turtles",
@@ -447,6 +498,7 @@
     },
     "PluginsForForestry" : {
         "function" : "CheckJenkins",
+        "category" : "den",
         "active" : true,
         "jenkins" : {
             "url" : "http://denoflions.servehttp.com:8080/view/All/job/Plugins%20for%20Forestry%203.X/lastSuccessfulBuild/api/json",
@@ -456,6 +508,7 @@
     },
     "StatusEffectHUD" : {
         "function" : "CheckHTML",
+        "category" : "bspkrs",
         "active" : true,
         "html" : {
             "url" : "http://dl.dropboxusercontent.com/u/20748481/Minecraft/1.6.4/statusEffectHud.version",
@@ -464,6 +517,7 @@
     },
     "ArmorStatusHUD" : {
         "function" : "CheckHTML",
+        "category" : "bspkrs",
         "active" : true,
         "html" : {
             "url" : "http://dl.dropboxusercontent.com/u/20748481/Minecraft/1.6.4/armorStatusHud.version",
@@ -472,6 +526,7 @@
     },
     "BlockBreaker" : {
         "function" : "CheckHTML",
+        "category" : "bspkrs",
         "active" : true,
         "html" : {
             "url" : "http://dl.dropboxusercontent.com/u/20748481/Minecraft/1.6.4/blockBreakerForge.version",
@@ -480,6 +535,7 @@
     },
     "bspkrsCore" : {
         "function" : "CheckHTML",
+        "category" : "bspkrs",
         "active" : true,
         "html" : {
             "url" : "http://dl.dropboxusercontent.com/u/20748481/Minecraft/1.6.4/bspkrsCore.version",
@@ -488,6 +544,7 @@
     },
     "CrystalWing" : {
         "function" : "CheckHTML",
+        "category" : "bspkrs",
         "active" : true,
         "html" : {
             "url" : "http://dl.dropboxusercontent.com/u/20748481/Minecraft/1.6.4/crystalWingForge.version",
@@ -496,6 +553,7 @@
     },
     "DirectionHUD" : {
         "function" : "CheckHTML",
+        "category" : "bspkrs",
         "active" : true,
         "html" : {
             "url" : "http://dl.dropboxusercontent.com/u/20748481/Minecraft/1.6.4/directionHUD.version",
@@ -504,6 +562,7 @@
     },
     "FloatingRuins" : {
         "function" : "CheckHTML",
+        "category" : "bspkrs",
         "active" : true,
         "html" : {
             "url" : "http://dl.dropboxusercontent.com/u/20748481/Minecraft/1.6.4/floatingRuinsForge.version",
@@ -512,6 +571,7 @@
     },      
     "IngameInfo" : {
         "function" : "CheckHTML",
+        "category" : "bspkrs",
         "active" : true,
         "html" : {
             "url" : "http://dl.dropboxusercontent.com/u/20748481/Minecraft/1.6.4/ingameInfo.version",
@@ -520,6 +580,7 @@
     },
     "FloatingRuins" : {
         "function" : "CheckHTML",
+        "category" : "bspkrs",
         "active" : true,
         "html" : {
             "url" : "http://dl.dropboxusercontent.com/u/20748481/Minecraft/1.6.4/floatingRuinsForge.version",
@@ -528,6 +589,7 @@
     }, 
     "StartingInventory" : {
         "function" : "CheckHTML",
+        "category" : "bspkrs",
         "active" : true,
         "html" : {
             "url" : "http://dl.dropboxusercontent.com/u/20748481/Minecraft/1.6.4/startingInventory.version",
@@ -536,6 +598,7 @@
     },
     "TreeCapitator" : {
         "function" : "CheckHTML",
+        "category" : "bspkrs",
         "active" : true,
         "html" : {
             "url" : "http://dl.dropboxusercontent.com/u/20748481/Minecraft/1.6.4/treeCapitatorForge.version",
@@ -544,6 +607,7 @@
     },
     "WorldStateCheckpoints" : {
         "function" : "CheckHTML",
+        "category" : "bspkrs",
         "active" : true,
         "html" : {
             "url" : "http://dl.dropboxusercontent.com/u/20748481/Minecraft/1.6.4/worldStateCheckpoints.version",
