@@ -25,6 +25,7 @@ class NotEnoughClasses():
         ]
         
         self.buildModDict()
+        self.buildHTML()
         self.QueryNEM()
         self.InitiateVersions()
 
@@ -49,7 +50,29 @@ class NotEnoughClasses():
         for mod in self.mods:
             if "change" not in self.mods[mod]:
                 self.mods[mod]["change"] = "NOT_USED"
-    
+    def buildHTML(self):
+        headerText = ""
+        with open("commands/NEMP/header.txt", "r") as f:
+            headerText = f.read()
+        footerText = ""
+        with open("commands/NEMP/footer.txt", "r") as f:
+            footerText = f.read()
+        with open("commands/NEMP/website/index.html", "w") as f:
+            f.write(re.sub("~MOD_COUNT~", str(len(self.mods)), headerText))
+            for modName, info in sorted(self.mods.iteritems()):
+                f.write("""
+        <tr>
+            <td class='name'>{}</td>""".format(modName))
+                f.write("""
+            <td class='function'>{}</td>
+""".format(info["function"]))
+                try:
+                    f.write("            <td class='category'>{}</td>\r\n".format(info["category"]))
+                except:
+                    pass
+                f.write("        </tr>\r\n")
+            f.write(footerText)
+            
     def QueryNEM(self):
         try:
             result = self.fetch_page("http://bot.notenoughmods.com/?json")

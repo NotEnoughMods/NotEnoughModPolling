@@ -1,0 +1,13 @@
+<html>
+<head>
+<title>Not Enough Mods:Polling</title>
+</head>
+<body>
+<p>Welcome to NotEnoughMods:Polling, The bot that keeps ~MOD_COUNT~ mods up to date</p>
+<table>
+    <thead><tr>
+        <th>Mod Name</th>
+        <th>Function</th>
+        <th>Category</th>
+    </tr></thead>
+    <tbody>
