@@ -19,8 +19,11 @@ Contributors:
 - [Helinus][4]
 - [Spacechase0][5]
 
+Website CSS by [GenPage][6]
+
 [1]: https://github.com/SinZ163
 [2]: https://github.com/NightKev
 [3]: https://github.com/Pyker
 [4]: https://github.com/helinus
 [5]: https://github.com/spacechase0
+[6]: https://github.com/GenPage
