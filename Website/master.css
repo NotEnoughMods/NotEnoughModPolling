@@ -1,0 +1,13 @@
+body {
+	font-family: 'Open Sans', sans-serif;
+	text-align: center;
+}
+table {
+	border: 0;
+	margin-left: auto;
+	margin-right: auto;
+}
+td,th {
+	padding-left: 10px;
+	padding-right: 10px;
+}

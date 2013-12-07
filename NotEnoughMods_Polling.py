@@ -508,6 +508,8 @@ def test_polling(self,name,params,channel,userdata,rank):
 
 def nktest(self,name,params,channel,userdata,rank):
     pass
+def genHTML(self,name,params,channel,userdata,rank):
+    NEM.buildHTML()
 
 commands = {
     "running" : running,
@@ -521,6 +523,7 @@ commands = {
     "testpolling" : test_polling,
     "reload" : nemp_reload,
     "nktest" : nktest,
+    "html" : genHTML,
     
     # -- ALIASES -- #
     "setv" : setversion,

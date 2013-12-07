@@ -1,10 +1,10 @@
 <html>
 <head>
 <title>Not Enough Mods:Polling</title>
-<link rel="stylesheet" type="text/css" href="./master.css">
+<link rel="stylesheet" type="text/css" href="/master.css">
 </head>
 <body>
-<p>Welcome to NotEnoughMods:Polling, The bot that keeps ~MOD_COUNT~ mods up to date</p>
+<h1>Welcome to NotEnoughMods:Polling, The bot that keeps ~MOD_COUNT~ mods up to date</h1>
 <table>
     <thead><tr>
         <th>Mod Name</th>
