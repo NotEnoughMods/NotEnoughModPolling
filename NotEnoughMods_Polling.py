@@ -17,6 +17,8 @@ class NotEnoughClasses():
     newMods = False
     mods = {}
     
+    updatequeue = []
+    
     def __init__(self):
         self.useragent = urllib2.build_opener()
         self.useragent.addheaders = [
@@ -59,7 +61,7 @@ class NotEnoughClasses():
             footerText = f.read()
         with open("commands/NEMP/website/index.html", "w") as f:
             f.write(re.sub("~MOD_COUNT~", str(len(self.mods)), headerText))
-            for modName, info in sorted(self.mods.iteritems()):
+            for modName, info in sorted(self.mods.iteritems()): # TODO: make this not terrible
                 f.write("""
         <tr>
             <td class='name'>{}</td>""".format(modName))
@@ -508,8 +510,65 @@ def test_polling(self,name,params,channel,userdata,rank):
 
 def nktest(self,name,params,channel,userdata,rank):
     pass
+
 def genHTML(self,name,params,channel,userdata,rank):
     NEM.buildHTML()
+
+def queue(self,name,params,channel,userdata,rank):
+    if len(params) < 2:
+        self.sendChatMessage(self.send, channel, "{} item(s) in the queue.".format(len(NEM.updatequeue)))
+        
+    elif params[1] in ("show","list","display"):
+        i = 0
+        for item in NEM.updatequeue:
+            self.sendChatMessage(self.send, name, "{}: {}".format(i, item))
+            i += 1
+            
+    elif params[1] in ("add","new") and len(params) > 2:
+        NEM.updatequeue.append(" ".join(params[2:]))
+        self.sendChatMessage(self.send, channel, "Success!")
+    
+    elif params[1] in ("del","delete","rem","remove","rm") and len(params) > 2:
+        if rank > 0:
+            if params[2].isdigit():
+                del NEM.updatequeue[int(params[2])]
+                self.sendChatMessage(self.send, channel, "Success!")
+            else:
+                self.sendChatMessage(self.send, channel, "'{}' is not a number.".format(params[2]))
+                
+    elif params[1] in ("execute","update") and len(params) > 2:
+        if params[2].isdigit():
+            index = int(params[2])
+        else:
+            self.sendChatMessage(self.send, channel, "'{}' is not a number.".format(params[2]))
+            return
+        
+        if len(NEM.updatequeue) >= index and rank > 0:
+            self.sendChatMessage(self.send, channel, NEM.updatequeue[index])
+            del NEM.updatequeue[index]
+            self.sendChatMessage(self.send, channel, "Success!")
+            
+    elif params[1] in ("help","?","info"):
+        if len(params) == 2:
+            self.sendChatMessage(self.send, channel, "Possible sub-commands include: show/list/display, add/new, del/delete/rem/remove/rm, execute/update, help/?/info. You can also type '=nemp queue' by itself to get the number of items in the queue.")
+            self.sendChatMessage(self.send, channel, "Type =nemp queue help <sub-command> for more information about that specific sub-command.")
+            
+        else:
+            if params[2] in ("show","list","display"):
+                self.sendChatMessage(self.send, channel, "This will query you with the contents of the queue.")
+                
+            elif params[2] in ("add","new"):
+                self.sendChatMessage(self.send, channel, "This will add a new item to the queue. Usage: '=nemp queue add [modinfo]'")
+            
+            elif params[2] in ("del","delete","rem","remove","rm"):
+                self.sendChatMessage(self.send, channel, "This will remove an item from the queue. Usage: '=nemp queue del [index]'. Requires voiced or higher rank.")
+            
+            elif params[2] in ("execute","update"):
+                self.sendChatMessage(self.send, channel, "This will send the queue item as a message to the channel and then remove it from the queue, it can be used if the queue item is a properly formatted ModBot command. Usage: '=nemp queue update [index]'")
+                self.sendChatMessage(self.send, channel, "Example: If the second queue item is the string '!lmod 1.6.4 RedLogic 58.1.2', then you would type '=nemp queue update 1' (the queue starts at 0) and the bot would output that exact string to the channel.")
+            
+            elif params[2] in ("help","?","info"):
+                self.sendChatMessage(self.send, channel, "Yes, that's the name of the help command, congrats.")
 
 commands = {
     "running" : running,
@@ -524,6 +583,7 @@ commands = {
     "reload" : nemp_reload,
     "nktest" : nktest,
     "html" : genHTML,
+    "queue" : queue,
     
     # -- ALIASES -- #
     "setv" : setversion,
@@ -544,5 +604,6 @@ helpDict = {
     "getversion" : ["=nemp getversion", "gets the version for polling to assume."],
     "refresh" : ["'=nemp refresh' or '=nemp reload'", "Reloads the various data stores (mods list, versions list, etc)"],
     "reload" : ["'=nemp refresh' or '=nemp reload'", "Reloads the various data stores (mods list, versions list, etc)"],
-    "testparse" : ["=nemp testparse <mod>", "Tests the parser for <mod> and outputs the contents to IRC"],
+    "test" : ["=nemp test <mod>", "Tests the parser for <mod> and outputs the contents to IRC"],
+    "queue" : ["=nemp queue [sub-command]", "Shows or modifies the update queue; its main use is for non-voiced users in #NotEnoughMods to more easily help update the list. Type '=nemp queue help' for detailed information about this command"]
 }
