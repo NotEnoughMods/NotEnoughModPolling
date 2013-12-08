@@ -9,6 +9,7 @@ from centralizedThreading import FunctionNameAlreadyExists  # @UnresolvedImport 
 
 ID = "nemp"
 permission = 1
+privmsgEnabled = True
 
 class NotEnoughClasses():
     nemVersions = []
@@ -371,7 +372,7 @@ def poll(self, name, params, channel, userdata, rank):
                 NEM.mods[mod]["active"] = setting
             self.sendChatMessage(self.send, channel, name+ ": All mods are now set to "+str(setting))
      
-def execute(self, name, params, channel, userdata, rank):
+def execute(self, name, params, channel, userdata, rank, chan):
     try:
         command = commands[params[0]]
         command(self, name, params, channel, userdata, rank)
