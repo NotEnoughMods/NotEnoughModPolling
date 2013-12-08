@@ -60,7 +60,7 @@ class NotEnoughClasses():
         footerText = ""
         with open("commands/NEMP/footer.txt", "r") as f:
             footerText = f.read()
-        with open("commands/NEMP/website/index.html", "w") as f:
+        with open("commands/NEMP/htdocs/index.html", "w") as f:
             f.write(re.sub("~MOD_COUNT~", str(len(self.mods)), headerText))
             for modName, info in sorted(self.mods.iteritems()): # TODO: make this not terrible
                 f.write("""
