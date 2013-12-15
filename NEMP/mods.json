@@ -94,7 +94,7 @@
     "ModularPowersuits" : {
         "function" : "CheckJenkins",
         "category" : "technic-ci",
-        "active" : true,
+        "active" : false,
         "jenkins" : {
             "url" : "http://build.technicpack.net/job/ModularPowersuits/lastSuccessfulBuild/api/json",
             "regex" : "ModularPowersuits-(?P<mc>.+?)-(?P<dev>.+?).jar$",
