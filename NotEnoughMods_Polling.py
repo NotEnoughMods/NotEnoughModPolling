@@ -255,6 +255,13 @@ class NotEnoughClasses():
             "version" : info["version"],
             "mc" : info["mc"]
         }
+    def CheckBigReactors(self,mod):
+        result = self.fetch_page("http://big-reactors.com/version.json")
+        info = simplejson.loads(result, strict = False)
+        return {
+            "version" : info["version"],
+            "mc" : info["version-minecraft"]
+        }
     def CheckMod(self, mod):
         try:
             # First False is for if there was an update.

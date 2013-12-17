@@ -643,5 +643,9 @@
         "function" : "CheckLunatrius",
         "category" : "lunatrius",
         "active" : true
+    },
+    "BigReactors" : {
+        "function" : "CheckBigReactors",
+        "active" : true
     }
 }
