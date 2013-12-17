@@ -63,9 +63,13 @@ class NotEnoughClasses():
         with open("commands/NEMP/htdocs/index.html", "w") as f:
             f.write(re.sub("~MOD_COUNT~", str(len(self.mods)), headerText))
             for modName, info in sorted(self.mods.iteritems()): # TODO: make this not terrible
+                if info["active"]:
+                    isDisabled = "active"
+                else:
+                    isDisabled = "disabled"
                 f.write("""
-        <tr>
-            <td class='name'>{}</td>""".format(modName))
+        <tr class='{}'>
+            <td class='name'>{}</td>""".format(isDisabled,modName))
                 f.write("""
             <td class='function'>{}</td>
 """.format(info["function"]))
@@ -243,7 +247,14 @@ class NotEnoughClasses():
                     "version" : info[5]
                 }
         return {}
-                
+    def CheckLunatrius(self,mod):
+        result = self.fetch_page("http://mc.lunatri.us/json")
+        jsonres = simplejson.loads(result, strict = False )
+        info = jsonres["mods"][mod]["latest"]
+        return {
+            "version" : info["version"],
+            "mc" : info["mc"]
+        }
     def CheckMod(self, mod):
         try:
             # First False is for if there was an update.
@@ -411,9 +422,15 @@ def nemp_help(self, name, params, channel, userdata, rank):
             self.sendChatMessage(self.send, channel, name+ ": Invalid command provided")
 
 def nemp_list(self,name,params,channel,userdata,rank):
-    dest = userdata[0]
-    if len(params) > 1 and params[1] == "broadcast":
-        dest = channel
+    dest = ""
+    if len(params) > 1:
+        if params[1] == "pm":
+            dest = userdata[0]
+        elif params[1] == "broadcast":
+            dest = channel
+    if dest == "":
+        self.sendChatMessage(self.send, channel, "http://nemp.mca.d3s.co/")
+        return
     darkgreen = "03"
     red = "05"
     blue = "12"

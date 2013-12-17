@@ -623,5 +623,25 @@
             "url" : "http://dl.dropboxusercontent.com/u/20748481/Minecraft/1.6.4/worldStateCheckpoints.version",
             "regex" : "ML (?P<version>.+?)$"
         }
-    } 
+    },
+    "InGameInfoXML" : {
+        "function"  : "CheckLunatrius",
+        "category" : "lunatrius",
+        "active" : true
+    },
+    "MonsterSpawnHighlighter" : {
+        "function" : "CheckLunatrius",
+        "category" : "lunatrius",
+        "active" : true
+    },
+    "Stackie" : {
+        "function" : "CheckLunatrius",
+        "category" : "lunatrius",
+        "active" : true
+    },
+    "Schematica" : {
+        "function" : "CheckLunatrius",
+        "category" : "lunatrius",
+        "active" : true
+    }
 }
