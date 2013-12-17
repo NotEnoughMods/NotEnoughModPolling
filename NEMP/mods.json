@@ -434,7 +434,7 @@
     "CreeperCollateral" : {
         "function" : "CheckJenkins",
         "category" : "den",
-        "active" : true,
+        "active" : false,
         "jenkins" : {
             "url" : "http://denoflions.servehttp.com:8080/view/All/job/Creeper%20Collateral/lastSuccessfulBuild/api/json",
             "regex" : "CreeperCollateral-(?P<mc>.+?)-(?P<version>.+?).jar",
@@ -444,7 +444,7 @@
     "denLib" : {
         "function" : "CheckJenkins",
         "category" : "den",
-        "active" : true,
+        "active" : false,
         "jenkins" : {
             "url" : "http://denoflions.servehttp.com:8080/view/All/job/denLib%203.X/lastSuccessfulBuild/api/json",
             "regex" : "denLib-(?P<mc>.+?)-(?P<version>.+?).jar",
@@ -481,7 +481,7 @@
     "HDSkinsandCloaks" : {
         "function" : "CheckJenkins",
         "category" : "den",
-        "active" : true,
+        "active" : false,
         "jenkins" : {
             "url" : "http://denoflions.servehttp.com:8080/view/All/job/HDSAC%201.6.2/lastSuccessfulBuild/api/json",
             "regex" : "HDSAC-(?P<mc>.+?)-(?P<version>.+?).jar",
@@ -511,7 +511,7 @@
         "category" : "den",
         "active" : true,
         "jenkins" : {
-            "url" : "http://denoflions.servehttp.com:8080/view/All/job/Plugins%20for%20Forestry%203.X/lastSuccessfulBuild/api/json",
+            "url" : "http://denoflions.servehttp.com:8080/job/PluginsForForestry/lastSuccessfulBuild/api/json",
             "regex" : "PluginsforForestry-(?P<mc>.+?)-(?P<version>.+?).jar",
             "item" : 0
         }
