@@ -104,7 +104,7 @@
     "ModularPowersuits-Addons" : {
         "function" : "CheckJenkins",
         "category" : "technic-ci",
-        "active" : true,
+        "active" : false,
         "jenkins" : {
             "url" : "http://build.technicpack.net/job/ModularPowersuitsAddons/lastSuccessfulBuild/api/json",
             "regex" : "MPSA-(?P<dev>.+?)_(.+?).jar$",
@@ -133,7 +133,7 @@
     "DimensionalDoors" : {
         "function" : "CheckJenkins",
         "category" : "technic-ci",
-        "active" : true,
+        "active" : false,
         "jenkins" : {
             "url" : "http://build.technicpack.net/job/DimDoors/lastSuccessfulBuild/api/json",
             "regex" : "DimensionalDoors-(?P<mc>.+?)R(?P<dev>.+?).zip$",
