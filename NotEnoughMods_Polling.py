@@ -521,6 +521,9 @@ def queue(self,name,params,channel,userdata,rank):
         
     elif params[1] in ("show","list","display"):
         i = 0
+        if len(NEM.updatequeue) == 0:
+            self.sendChatMessage(self.send, channel, "There are no items currently in the queue.")
+            return
         for item in NEM.updatequeue:
             self.sendChatMessage(self.send, name, "{}: {}".format(i, item))
             i += 1
