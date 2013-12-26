@@ -588,15 +588,6 @@
             "regex" : "ML (?P<version>.+?)$"
         }
     },
-    "FloatingRuins" : {
-        "function" : "CheckHTML",
-        "category" : "bspkrs",
-        "active" : true,
-        "html" : {
-            "url" : "http://dl.dropboxusercontent.com/u/20748481/Minecraft/1.6.4/floatingRuinsForge.version",
-            "regex" : "Forge (?P<version>.+?)$"
-        }
-    }, 
     "StartingInventory" : {
         "function" : "CheckHTML",
         "category" : "bspkrs",
