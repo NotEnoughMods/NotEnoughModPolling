@@ -82,7 +82,7 @@ class NotEnoughClasses():
             
     def QueryNEM(self):
         try:
-            result = self.fetch_page("http://nem.pyker.net/?json")
+            result = self.fetch_page("http://bot.notenoughmods.com/?json")
             self.nemVersions = reversed(simplejson.loads(result, strict = False))
         except:
             print("Failed to get NEM versions, falling back to hard-coded")
@@ -95,7 +95,7 @@ class NotEnoughClasses():
         try:
             for version in self.nemVersions:
                 if "-dev" not in version:
-                    rawJson = self.fetch_page("http://nem.pyker.net/"+version+".json")
+                    rawJson = self.fetch_page("http://bot.notenoughmods.com/"+version+".json")
                     
                     jsonres = simplejson.loads(rawJson, strict = False)
                     

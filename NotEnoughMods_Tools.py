@@ -11,7 +11,7 @@ permission = 1
 class NotEnoughClasses(): 
     def getLatestVersion(self):
         try:
-            NEMfeed = self.useragent.open("http://nem.pyker.net/?json", timeout = 10)
+            NEMfeed = self.useragent.open("http://bot.notenoughmods.com/?json", timeout = 10)
             result = NEMfeed.read()
             NEMfeed.close() 
             return simplejson.loads(result, strict = False)
@@ -56,7 +56,7 @@ def multilist(self,name,params,channel,userdata,rank):
             jsonres = {}
             results = {}
             for version in NEM.versions:
-                NEMfeed = NEM.useragent.open("http://nem.pyker.net/"+urllib2.quote(version)+".json")
+                NEMfeed = NEM.useragent.open("http://bot.notenoughmods.com/"+urllib2.quote(version)+".json")
                 result = NEMfeed.read()
                 NEMfeed.close()
                 jsonres[version] = simplejson.loads(result, strict = False )
@@ -120,7 +120,7 @@ def list(self, name, params, channel, userdata, rank):
     else:
         version = NEM.version
     try:
-        NEMfeed = NEM.useragent.open("http://nem.pyker.net/"+urllib2.quote(version)+".json")
+        NEMfeed = NEM.useragent.open("http://bot.notenoughmods.com/"+urllib2.quote(version)+".json")
         result = NEMfeed.read()
         NEMfeed.close()
         jsonres = simplejson.loads(result, strict = False )
