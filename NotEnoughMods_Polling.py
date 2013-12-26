@@ -359,9 +359,9 @@ def MicroTimerEvent(self,channels):
                     mod = item[0]
                     flags = item[1]
                     if NEM.mods[mod]["dev"] != "NOT_USED" and flags[0]:
-                        self.sendChatMessage(self.send, channel, "!ldev "+version+" "+mod+" "+NEM.mods[mod]["dev"])
+                        self.sendChatMessage(self.send, channel, "!ldev "+version+" "+mod+" "+unicode(NEM.mods[mod]["dev"]))
                     if NEM.mods[mod]["version"]  != "NOT_USED" and flags[1]:
-                        self.sendChatMessage(self.send, channel, "!lmod "+version+" "+mod+" "+NEM.mods[mod]["version"])
+                        self.sendChatMessage(self.send, channel, "!lmod "+version+" "+mod+" "+unicode(NEM.mods[mod]["version"]))
                     if NEM.mods[mod]["change"] != "NOT_USED":
                         self.sendChatMessage(self.send, channel, " * "+NEM.mods[mod]["change"].encode("utf-8"))
                 
@@ -481,9 +481,9 @@ def test_parser(self,name,params,channel,userdata,rank):
             if "mc" in result:
                 self.sendChatMessage(self.send,channel, "!setlist "+result["mc"])
             if "version" in result:
-                self.sendChatMessage(self.send,channel, "!mod "+params[1]+" "+result["version"])
+                self.sendChatMessage(self.send,channel, "!mod "+params[1]+" "+unicode(result["version"]))
             if "dev" in result:
-                self.sendChatMessage(self.send,channel, "!dev "+params[1]+" "+result["dev"])
+                self.sendChatMessage(self.send,channel, "!dev "+params[1]+" "+unicode(result["dev"]))
             if "change" in result:
                 self.sendChatMessage(self.send,channel, " * "+result["change"])
         except Exception as error:
@@ -526,9 +526,9 @@ def test_polling(self,name,params,channel,userdata,rank):
                     mod = item[0]
                     flags = item[1]
                     if NEM.mods[mod]["dev"] != "NOT_USED" and flags[0]:
-                        self.sendChatMessage(self.send, channel, "!ldev "+version+" "+mod+" "+NEM.mods[mod]["dev"])
+                        self.sendChatMessage(self.send, channel, "!ldev "+version+" "+mod+" "+unicode(NEM.mods[mod]["dev"]))
                     if NEM.mods[mod]["version"]  != "NOT_USED" and flags[1]:
-                        self.sendChatMessage(self.send, channel, "!lmod "+version+" "+mod+" "+NEM.mods[mod]["version"])
+                        self.sendChatMessage(self.send, channel, "!lmod "+version+" "+mod+" "+unicode(NEM.mods[mod]["version"]))
                     if NEM.mods[mod]["change"] != "NOT_USED":
                         self.sendChatMessage(self.send, channel, " * "+NEM.mods[mod]["change"])
     
