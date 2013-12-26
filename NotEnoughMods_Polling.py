@@ -472,6 +472,9 @@ def nemp_reload(self,name,params,channel,userdata,rank):
     
 def test_parser(self,name,params,channel,userdata,rank):
     if len(params) > 0:
+        if params[1] not in NEM.mods:
+            self.sendChatMessage(self.send, channel, name+": No polling info for \""+params[1]+"\"")
+            return
         try:
             result = getattr(NEM,NEM.mods[params[1]]["function"])(params[1])
             print(result)
