@@ -638,5 +638,14 @@
     "BigReactors" : {
         "function" : "CheckBigReactors",
         "active" : true
+    },
+    "AppliedThermodynamics" : {
+        "function" : "CheckJenkins",
+        "active" : true,
+        "jenkins" : {
+            "url" : "http://themattabase.com:9090/job/Applied%20Thermodynamics/lastSuccessfulBuild/api/json",
+            "regex": "apptherm-(?P<dev>.+?).jar$",
+            "item": 0
+        }
     }
 }
