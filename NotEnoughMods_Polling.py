@@ -391,12 +391,15 @@ def poll(self, name, params, channel, userdata, rank):
             self.sendChatMessage(self.send, channel, name+ ": All mods are now set to "+str(setting))
      
 def execute(self, name, params, channel, userdata, rank, chan):
-    try:
-        command = commands[params[0]]
-        command(self, name, params, channel, userdata, rank)
-    except KeyError:
-        self.sendChatMessage(self.send, channel, "invalid command!")
-        self.sendChatMessage(self.send, channel, "see =nemp help for a list of commands")
+    if len(params) > 0:
+        try:
+            command = commands[params[0]]
+            command(self, name, params, channel, userdata, rank)
+        except KeyError:
+            self.sendChatMessage(self.send, channel, "invalid command!")
+            self.sendChatMessage(self.send, channel, "see =nemp help for a list of commands")
+    else:
+        self.sendChatMessage(self.send, channel, name+": see \"=nemp help\" for a list of commands")
 
 def setversion(self, name, params, channel, userdata, rank):
     if len(params) != 2:
