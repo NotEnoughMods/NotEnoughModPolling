@@ -358,11 +358,16 @@ def MicroTimerEvent(self,channels):
                     # flags[1] = has dev version changed?
                     mod = item[0]
                     flags = item[1]
+                    
+                    
                     if NEM.mods[mod]["dev"] != "NOT_USED" and flags[0]:
+                        self.writeQueue("Updating DevMod {0}, Flags: {1}".format(mod, flags), "NEMP")
                         self.sendChatMessage(self.send, channel, "!ldev "+version+" "+mod+" "+unicode(NEM.mods[mod]["dev"]))
                     if NEM.mods[mod]["version"]  != "NOT_USED" and flags[1]:
+                        self.writeQueue("Updating Mod {0}, Flags: {1}".format(mod, flags), "NEMP")
                         self.sendChatMessage(self.send, channel, "!lmod "+version+" "+mod+" "+unicode(NEM.mods[mod]["version"]))
                     if NEM.mods[mod]["change"] != "NOT_USED":
+                        self.writeQueue("Sending text for Mod {0}".format(mod), "NEMP")
                         self.sendChatMessage(self.send, channel, " * "+NEM.mods[mod]["change"].encode("utf-8"))
                 
 def poll(self, name, params, channel, userdata, rank):
@@ -528,6 +533,9 @@ def test_polling(self,name,params,channel,userdata,rank):
                     # flags[1] = has dev version changed?
                     mod = item[0]
                     flags = item[1]
+                    
+                    
+                    
                     if NEM.mods[mod]["dev"] != "NOT_USED" and flags[0]:
                         self.sendChatMessage(self.send, channel, "!ldev "+version+" "+mod+" "+unicode(NEM.mods[mod]["dev"]))
                     if NEM.mods[mod]["version"]  != "NOT_USED" and flags[1]:
