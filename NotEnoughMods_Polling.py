@@ -94,7 +94,7 @@ class NotEnoughClasses():
         templist = self.mods.keys()
         try:
             for version in self.nemVersions:
-                if "-dev" not in version:
+                if "-dev" not in version: #is this still needed?
                     rawJson = self.fetch_page("http://bot.notenoughmods.com/"+version+".json")
                     
                     jsonres = simplejson.loads(rawJson, strict = False)
@@ -104,12 +104,12 @@ class NotEnoughClasses():
                             self.mods[mod["name"]]["mc"] = version
                             
                             if "dev" in mod and mod["dev"]:
-                                self.mods[mod["name"]]["dev"] = mod["dev"]
+                                self.mods[mod["name"]]["dev"] = str(mod["dev"])         #Inconsistant JSON is bad, and Pyker should feel bad.
                             else:
                                 self.mods[mod["name"]]["dev"] = "NOT_USED"
                             
                             if "version" in mod and mod["version"]:
-                                self.mods[mod["name"]]["version"] = mod["version"]
+                                self.mods[mod["name"]]["version"] = str(mod["version"]) #Inconsistant JSON is bad, and Pyker should feel bad.
                             else:
                                 self.mods[mod["name"]]["version"] = "NOT_USED"
                             

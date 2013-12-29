@@ -126,8 +126,8 @@
         "active" : true,
         "jenkins" : {
             "url" : "http://build.technicpack.net/job/Inventory-Tweaks/lastSuccessfulBuild/api/json",
-            "regex" : "InventoryTweaks-MC(?P<mc>.+?)-(?P<dev>.+?).jar",
-            "item" : 1
+            "regex" : "InventoryTweaks-(?P<dev>.+?).jar",
+            "item" : 0
         }
     },
     "DimensionalDoors" : {
