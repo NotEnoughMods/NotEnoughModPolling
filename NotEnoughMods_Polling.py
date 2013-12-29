@@ -248,7 +248,7 @@ class NotEnoughClasses():
                 }
         return {}
     def CheckLunatrius(self,mod):
-        result = self.fetch_page("http://mc.lunatri.us/json")
+        result = self.fetch_page("http://mc.lunatri.us/json?latest&mod="+mod)
         jsonres = simplejson.loads(result, strict = False )
         info = jsonres["mods"][mod]["latest"]
         return {
@@ -553,7 +553,7 @@ def nktest(self,name,params,channel,userdata,rank):
 def genHTML(self,name,params,channel,userdata,rank):
     NEM.buildHTML()
 
-def queue(self,name,params,channel,userdata,rank):
+def queue(self,name,params,channel,userdata,rank): #Why is this still here
     if len(params) < 2:
         self.sendChatMessage(self.send, channel, "{} item(s) in the queue.".format(len(NEM.updatequeue)))
         
