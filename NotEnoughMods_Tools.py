@@ -174,7 +174,38 @@ def list(self, name, params, channel, userdata, rank):
     except Exception as error:
         self.sendChatMessage(self.send, channel, name+": "+str(error))
         traceback.print_exc()
+def compare(self, name, params, channel, userdata, rank):
+    try:
+        data = {
+            params[1] : {},
+            params[2] : {}
+        }
+        oldFeed = NEM.useragent.open("http://bot.notenoughmods.com/"+urllib2.quote(params[1])+".json")
+        oldData = oldFeed.read()
+        oldFeed.close()
+        oldJson = simplejson.loads(oldData, strict = False )
         
+        for modInfo in oldJson:
+            modName = modInfo["name"].lower()
+            data[params[1]][modName] = modInfo
+        newFeed = NEM.useragent.open("http://bot.notenoughmods.com/"+urllib2.quote(params[2])+".json")
+        newData = newFeed.read()
+        newFeed.close()
+        newJson = simplejson.loads(newData, strict = False )
+        
+        for modInfo in newJson:
+            modName = modInfo["name"].lower()
+            data[params[2]][modName] = modInfo
+        missingMods = []
+        for key in data[params[1]].iterkeys():
+            if key not in data[params[2]]:
+                missingMods.append(data[params[1]][key]["name"])
+        with open("commands/modbot.mca.d3s.co/htdocs/compare/"+params[1]+"..."+params[2]+".json", "w") as f:
+            f.write(simplejson.dumps(missingMods, sort_keys=True, indent=4 * ' '))
+        self.sendChatMessage(self.send, channel, str(len(missingMods))+" mods died trying to update to "+params[2])
+    except Exception as error:
+        self.sendChatMessage(self.send, channel, name+": "+str(error))
+        traceback.print_exc()
 def about(self, name, params, channel, userdata, rank):
     self.sendChatMessage(self.send, channel, "Not Enough Mods toolkit for IRC by SinZ v3.0")
     
@@ -193,7 +224,8 @@ commands = {
     "multilist": multilist,
     "about": about,
     "help" : help,
-    "setlist" : setlist
+    "setlist" : setlist,
+    "compare" : compare
 }
 help = {
     "list" : ["=nem list <search> <version>", "Searchs the NotEnoughMods database for <search> and returns all results to IRC"],

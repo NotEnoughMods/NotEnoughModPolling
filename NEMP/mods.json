@@ -237,7 +237,7 @@
         "function" : "CheckJenkins",
         "active" : true,
         "jenkins" : {
-            "url" : "http://ci.thezorro266.com/job/LogisticsPipesMC1.6.2-Dev/lastSuccessfulBuild/api/json",
+            "url" : "http://ci.thezorro266.com/job/LogisticsPipes-Dev/lastSuccessfulBuild/api/json",
             "regex" : "LogisticsPipes-MC(?P<mc>.+?)-(?P<dev>.+?).jar",
             "item" : 0
         }
@@ -251,26 +251,6 @@
             "item" : 0
         }
     },
-    "AtomicScience" : {
-        "function" : "CheckJenkins",
-        "category" : "calclavia",
-        "active" : true,
-        "jenkins" : {
-            "url" : "http://calclavia.com:8080/job/Atomic%20Science/lastSuccessfulBuild/api/json",
-            "regex" : "Atomic_Science_v(?P<dev>.+?).jar",
-            "item" : 1
-        }
-    },
-    "ICBM" : {
-        "function" : "CheckJenkins",
-        "category" : "calclavia",
-        "active" : true,
-        "jenkins" : {
-            "url" : "http://calclavia.com:8080/job/ICBM/lastSuccessfulBuild/api/json",
-            "regex" : "ICBM_API_v(?P<dev>.+?).zip",
-            "item" : 1
-        }
-    },
     "Mekanism" : {
         "function" : "CheckJenkins",
         "category" : "calclavia",
@@ -278,16 +258,6 @@
         "jenkins" : {
             "url" : "http://calclavia.com:8080/job/Mekanism/lastSuccessfulBuild/api/json",
             "regex" : "Mekanism-v(?P<dev>.+?).jar",
-            "item" : 2
-        }
-    },
-    "ModularForceFieldSystem" : {
-        "function" : "CheckJenkins",
-        "category" : "calclavia",
-        "active" : true,
-        "jenkins" : {
-            "url" : "http://calclavia.com:8080/job/Modular%20Force%20Field%20System/lastSuccessfulBuild/api/json",
-            "regex" : "MFFS_v(?P<dev>.+?).jar",
             "item" : 2
         }
     },
