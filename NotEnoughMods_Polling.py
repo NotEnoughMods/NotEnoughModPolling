@@ -50,9 +50,9 @@ class NotEnoughClasses():
         modList = open("commands/NEMP/mods.json", "r")
         fileInfo = modList.read()
         self.mods = simplejson.loads(fileInfo, strict = False)
-        for mod in self.mods:
-            if "change" not in self.mods[mod]:
-                self.mods[mod]["change"] = "NOT_USED"
+        # for mod in self.mods:
+            # if "change" not in self.mods[mod]:
+               # self.mods[mod]["change"] = "NOT_USED"
     def buildHTML(self):
         headerText = ""
         with open("commands/NEMP/header.txt", "r") as f:
@@ -124,10 +124,10 @@ class NotEnoughClasses():
         filename = jsonres["artifacts"][self.mods[mod]["jenkins"]["item"]]["fileName"]
         match = re.search(self.mods[mod]["jenkins"]["regex"],filename)
         output = match.groupdict()
-        try:
-            output["change"] = jsonres["changeSet"]["items"][0]["comment"]
-        except:
-            output["change"] = "NOT_USED"
+        # try:
+            # output["change"] = jsonres["changeSet"]["items"][0]["comment"]
+        # except:
+            # output["change"] = "NOT_USED"
         return output
     def CheckMCForge2(self,mod):
         result = self.fetch_page(self.mods[mod]["mcforge"]["url"])
@@ -281,8 +281,8 @@ class NotEnoughClasses():
                     status[2] = True
             if "mc" in output:
                 self.mods[mod]["mc"] = output["mc"]
-            if "change" in output:
-                self.mods[mod]["change"] = output["change"]
+            # if "change" in output:
+                # self.mods[mod]["change"] = output["change"]
             return status
         except:
             print(mod+" failed to be polled...")
@@ -366,9 +366,9 @@ def MicroTimerEvent(self,channels):
                     if NEM.mods[mod]["version"]  != "NOT_USED" and flags[1]:
                         self.writeQueue("Updating Mod {0}, Flags: {1}".format(mod, flags), "NEMP")
                         self.sendChatMessage(self.send, channel, "!lmod "+version+" "+mod+" "+unicode(NEM.mods[mod]["version"]))
-                    if NEM.mods[mod]["change"] != "NOT_USED":
-                        self.writeQueue("Sending text for Mod {0}".format(mod), "NEMP")
-                        self.sendChatMessage(self.send, channel, " * "+NEM.mods[mod]["change"].encode("utf-8"))
+                    # if NEM.mods[mod]["change"] != "NOT_USED":
+                        # self.writeQueue("Sending text for Mod {0}".format(mod), "NEMP")
+                        # self.sendChatMessage(self.send, channel, " * "+NEM.mods[mod]["change"].encode("utf-8"))
                 
 def poll(self, name, params, channel, userdata, rank):
     if len(params) < 3:
@@ -492,8 +492,8 @@ def test_parser(self,name,params,channel,userdata,rank):
                 self.sendChatMessage(self.send,channel, "!mod "+params[1]+" "+unicode(result["version"]))
             if "dev" in result:
                 self.sendChatMessage(self.send,channel, "!dev "+params[1]+" "+unicode(result["dev"]))
-            if "change" in result:
-                self.sendChatMessage(self.send,channel, " * "+result["change"])
+            # if "change" in result:
+                # self.sendChatMessage(self.send,channel, " * "+result["change"])
         except Exception as error:
             self.sendChatMessage(self.send, channel, name+": "+str(error))
             traceback.print_exc()
@@ -540,8 +540,8 @@ def test_polling(self,name,params,channel,userdata,rank):
                         self.sendChatMessage(self.send, channel, "!ldev "+version+" "+mod+" "+unicode(NEM.mods[mod]["dev"]))
                     if NEM.mods[mod]["version"]  != "NOT_USED" and flags[1]:
                         self.sendChatMessage(self.send, channel, "!lmod "+version+" "+mod+" "+unicode(NEM.mods[mod]["version"]))
-                    if NEM.mods[mod]["change"] != "NOT_USED":
-                        self.sendChatMessage(self.send, channel, " * "+NEM.mods[mod]["change"])
+                    # if NEM.mods[mod]["change"] != "NOT_USED":
+                        # self.sendChatMessage(self.send, channel, " * "+NEM.mods[mod]["change"])
     
     except:
         self.sendChatMessage(self.send, channel, "An exception has occurred, check the console for more information.")
@@ -625,7 +625,7 @@ commands = {
     "reload" : nemp_reload,
     "nktest" : nktest,
     "html" : genHTML,
-    "queue" : queue,
+    #"queue" : queue, # TODO: move this into its own file
     
     # -- ALIASES -- #
     "setv" : setversion,
