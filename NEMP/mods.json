@@ -294,7 +294,7 @@
     "TinkersConstruct" : {
         "function" : "CheckmDiyo",
         "category" : "mdiyo",
-        "active" : true,
+        "active" : false,
         "mDiyo" : {
             "location" : "TConstruct/development/",
             "regex" : "TConstruct_(?P<mc>.+?)_(?P<dev>.+?).jar"
