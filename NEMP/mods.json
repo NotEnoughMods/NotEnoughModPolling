@@ -217,6 +217,7 @@
     "MCPC-Plus" : {
         "function" : "CheckJenkins",
         "active" : true,
+        "changelog" : false,
         "jenkins" : {
             "url" : "http://ci.md-5.net/job/MCPC-Plus/lastSuccessfulBuild/api/json",
             "regex": "mcpc-plus-(?P<mc>.+?)-(.+?)-(.+?)-(?P<dev>.+?).jar$",

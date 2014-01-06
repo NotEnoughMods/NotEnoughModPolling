@@ -50,9 +50,9 @@ class NotEnoughClasses():
         modList = open("commands/NEMP/mods.json", "r")
         fileInfo = modList.read()
         self.mods = simplejson.loads(fileInfo, strict = False)
-        # for mod in self.mods:
-            # if "change" not in self.mods[mod]:
-               # self.mods[mod]["change"] = "NOT_USED"
+        for mod in self.mods:
+            if "change" not in self.mods[mod]:
+                self.mods[mod]["change"] = "NOT_USED"
     def buildHTML(self):
         headerText = ""
         with open("commands/NEMP/header.txt", "r") as f:
@@ -124,10 +124,10 @@ class NotEnoughClasses():
         filename = jsonres["artifacts"][self.mods[mod]["jenkins"]["item"]]["fileName"]
         match = re.search(self.mods[mod]["jenkins"]["regex"],filename)
         output = match.groupdict()
-        # try:
-            # output["change"] = jsonres["changeSet"]["items"][0]["comment"]
-        # except:
-            # output["change"] = "NOT_USED"
+        try:
+            output["change"] = jsonres["changeSet"]["items"][0]["comment"]
+        except:
+            output["change"] = "NOT_USED"
         return output
     def CheckMCForge2(self,mod):
         result = self.fetch_page(self.mods[mod]["mcforge"]["url"])
@@ -281,8 +281,8 @@ class NotEnoughClasses():
                     status[2] = True
             if "mc" in output:
                 self.mods[mod]["mc"] = output["mc"]
-            # if "change" in output:
-                # self.mods[mod]["change"] = output["change"]
+            if "change" in output and "changelog" not in self.mods[mod]:
+                self.mods[mod]["change"] = output["change"]
             return status
         except:
             print(mod+" failed to be polled...")
@@ -359,16 +359,15 @@ def MicroTimerEvent(self,channels):
                     mod = item[0]
                     flags = item[1]
                     
-                    
                     if NEM.mods[mod]["dev"] != "NOT_USED" and flags[0]:
                         self.writeQueue("Updating DevMod {0}, Flags: {1}".format(mod, flags), "NEMP")
                         self.sendChatMessage(self.send, channel, "!ldev "+version+" "+mod+" "+unicode(NEM.mods[mod]["dev"]))
                     if NEM.mods[mod]["version"]  != "NOT_USED" and flags[1]:
                         self.writeQueue("Updating Mod {0}, Flags: {1}".format(mod, flags), "NEMP")
                         self.sendChatMessage(self.send, channel, "!lmod "+version+" "+mod+" "+unicode(NEM.mods[mod]["version"]))
-                    # if NEM.mods[mod]["change"] != "NOT_USED":
-                        # self.writeQueue("Sending text for Mod {0}".format(mod), "NEMP")
-                        # self.sendChatMessage(self.send, channel, " * "+NEM.mods[mod]["change"].encode("utf-8"))
+                    if NEM.mods[mod]["change"] != "NOT_USED" and "changelog" not in NEM.mods[mod]:
+                        self.writeQueue("Sending text for Mod {0}".format(mod), "NEMP")
+                        self.sendChatMessage(self.send, channel, " * "+NEM.mods[mod]["change"].encode("utf-8"))
                 
 def poll(self, name, params, channel, userdata, rank):
     if len(params) < 3:
@@ -423,7 +422,7 @@ def getversion(self,name,params,channel,userdata,rank):
 def about(self, name, params, channel, userdata, rank):
     self.sendChatMessage(self.send, channel, "Not Enough Mods: Polling for IRC by SinZ, with help from NightKev - v1.3")
     self.sendChatMessage(self.send, channel, "Source code available at: http://github.com/SinZ163/NotEnoughMods")
-    
+
 def nemp_help(self, name, params, channel, userdata, rank):
     if len(params) == 1:
         self.sendChatMessage(self.send, channel, name+ ": Available commands: " + ", ".join(helpDict))
@@ -478,7 +477,7 @@ def nemp_reload(self,name,params,channel,userdata,rank):
     
     self.sendChatMessage(self.send,channel, "Reloaded the NEMP Database")
     
-def test_parser(self,name,params,channel,userdata,rank):
+def test_parser(self,name,params,channel,userdata,rank): 
     if len(params) > 0:
         if params[1] not in NEM.mods:
             self.sendChatMessage(self.send, channel, name+": No polling info for \""+params[1]+"\"")
@@ -492,13 +491,14 @@ def test_parser(self,name,params,channel,userdata,rank):
                 self.sendChatMessage(self.send,channel, "!mod "+params[1]+" "+unicode(result["version"]))
             if "dev" in result:
                 self.sendChatMessage(self.send,channel, "!dev "+params[1]+" "+unicode(result["dev"]))
-            # if "change" in result:
-                # self.sendChatMessage(self.send,channel, " * "+result["change"])
+            if "change" in result:
+                self.sendChatMessage(self.send,channel, " * "+result["change"])
         except Exception as error:
             self.sendChatMessage(self.send, channel, name+": "+str(error))
             traceback.print_exc()
             self.sendChatMessage(self.send,channel, params[1]+" failed to be polled")
-
+            
+#This is a waste of code imo, you can just run normal polling with 10sec delay, and not have it freeze the bot, also doesn't test the polling
 def test_polling(self,name,params,channel,userdata,rank):
     try:
         # PollingThread()
@@ -553,6 +553,19 @@ def nktest(self,name,params,channel,userdata,rank):
 def genHTML(self,name,params,channel,userdata,rank):
     NEM.buildHTML()
 
+def nemp_set(self,name,params,channel,userdata,rank):
+    #params[1] = mod
+    #params[2] = config
+    #params[3] = setting if len(params) == 4, else deeper config
+    #params[4] = setting
+    if len(params) < 4:
+        self.sendChatMessage(self.send, channel, "This is not a toy!")
+        return
+    if len(params) == 4:
+        NEM.mods[params[1]][params[2]] = params[3]
+    else:
+        NEM.mods[params[1]][params[2]][params[3]] = params[4]
+    self.sendChatMessage(self.send, channel, "done.")
 def queue(self,name,params,channel,userdata,rank): #Why is this still here
     if len(params) < 2:
         self.sendChatMessage(self.send, channel, "{} item(s) in the queue.".format(len(NEM.updatequeue)))
@@ -625,6 +638,7 @@ commands = {
     "reload" : nemp_reload,
     "nktest" : nktest,
     "html" : genHTML,
+    "set" : nemp_set,
     #"queue" : queue, # TODO: move this into its own file
     
     # -- ALIASES -- #
