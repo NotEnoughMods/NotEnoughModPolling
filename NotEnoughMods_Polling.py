@@ -18,8 +18,6 @@ class NotEnoughClasses():
     newMods = False
     mods = {}
     
-    updatequeue = []
-    
     def __init__(self):
         self.useragent = urllib2.build_opener()
         self.useragent.addheaders = [
@@ -566,64 +564,6 @@ def nemp_set(self,name,params,channel,userdata,rank):
     else:
         NEM.mods[params[1]][params[2]][params[3]] = params[4]
     self.sendChatMessage(self.send, channel, "done.")
-def queue(self,name,params,channel,userdata,rank): #Why is this still here
-    if len(params) < 2:
-        self.sendChatMessage(self.send, channel, "{} item(s) in the queue.".format(len(NEM.updatequeue)))
-        
-    elif params[1] in ("show","list","display"):
-        i = 0
-        if len(NEM.updatequeue) == 0:
-            self.sendChatMessage(self.send, channel, "There are no items currently in the queue.")
-            return
-        for item in NEM.updatequeue:
-            self.sendChatMessage(self.send, name, "{}: {}".format(i, item))
-            i += 1
-            
-    elif params[1] in ("add","new") and len(params) > 2:
-        NEM.updatequeue.append(" ".join(params[2:]))
-        self.sendChatMessage(self.send, channel, "Success!")
-    
-    elif params[1] in ("del","delete","rem","remove","rm") and len(params) > 2:
-        if rank > 0:
-            if params[2].isdigit():
-                del NEM.updatequeue[int(params[2])]
-                self.sendChatMessage(self.send, channel, "Success!")
-            else:
-                self.sendChatMessage(self.send, channel, "'{}' is not a number.".format(params[2]))
-                
-    elif params[1] in ("execute","update") and len(params) > 2:
-        if params[2].isdigit():
-            index = int(params[2])
-        else:
-            self.sendChatMessage(self.send, channel, "'{}' is not a number.".format(params[2]))
-            return
-        
-        if len(NEM.updatequeue) >= index and rank > 0:
-            self.sendChatMessage(self.send, channel, NEM.updatequeue[index])
-            del NEM.updatequeue[index]
-            self.sendChatMessage(self.send, channel, "Success!")
-            
-    elif params[1] in ("help","?","info"):
-        if len(params) == 2:
-            self.sendChatMessage(self.send, channel, "Possible sub-commands include: show/list/display, add/new, del/delete/rem/remove/rm, execute/update, help/?/info. You can also type '=nemp queue' by itself to get the number of items in the queue.")
-            self.sendChatMessage(self.send, channel, "Type =nemp queue help <sub-command> for more information about that specific sub-command.")
-            
-        else:
-            if params[2] in ("show","list","display"):
-                self.sendChatMessage(self.send, channel, "This will query you with the contents of the queue.")
-                
-            elif params[2] in ("add","new"):
-                self.sendChatMessage(self.send, channel, "This will add a new item to the queue. Usage: '=nemp queue add [modinfo]'")
-            
-            elif params[2] in ("del","delete","rem","remove","rm"):
-                self.sendChatMessage(self.send, channel, "This will remove an item from the queue. Usage: '=nemp queue del [index]'. Requires voiced or higher rank.")
-            
-            elif params[2] in ("execute","update"):
-                self.sendChatMessage(self.send, channel, "This will send the queue item as a message to the channel and then remove it from the queue, it can be used if the queue item is a properly formatted ModBot command. Usage: '=nemp queue update [index]'")
-                self.sendChatMessage(self.send, channel, "Example: If the second queue item is the string '!lmod 1.6.4 RedLogic 58.1.2', then you would type '=nemp queue update 1' (the queue starts at 0) and the bot would output that exact string to the channel.")
-            
-            elif params[2] in ("help","?","info"):
-                self.sendChatMessage(self.send, channel, "Yes, that's the name of the help command, congrats.")
 
 commands = {
     "running" : running,
