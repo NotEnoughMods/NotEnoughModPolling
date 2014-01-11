@@ -236,7 +236,7 @@ class NotEnoughClasses():
         return output
         
     def CheckSpacechase(self,mod):
-        result = self.fetch_page("http://spacechase0.com/wp-content/plugins/mc-mod-manager/nem.php?mc=6")
+        result = self.fetch_page("http://spacechase0.com/wp-content/plugins/mc-mod-manager/nem.php?mc="+self.mods[mod]["mc"][2:])
         for line in result.splitlines():
             info = line.split(',')
             #0 = ID, 1=NEM ID, 2=ModID, 3=Author, 4=Link, 5=Version, 6=Comment
