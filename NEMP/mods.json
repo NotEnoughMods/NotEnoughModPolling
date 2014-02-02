@@ -214,12 +214,12 @@
             "item" : 0
         }
     },
-    "MCPC-Plus" : {
+    "MCPC+" : {
         "function" : "CheckJenkins",
         "active" : true,
         "changelog" : false,
         "jenkins" : {
-            "url" : "http://ci.md-5.net/job/MCPC-Plus/lastSuccessfulBuild/api/json",
+            "url" : "http://ci.md-5.net/job/MCPC-Plus-164/lastSuccessfulBuild/api/json",
             "regex": "mcpc-plus-(?P<mc>.+?)-(.+?)-(.+?)-(?P<dev>.+?).jar$",
             "item": 0
         }
