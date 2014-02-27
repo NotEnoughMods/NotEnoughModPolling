@@ -33,11 +33,17 @@ def execute(self, name, params, channel, userdata, rank, chan):
     if len(params) > 0:
         cmdName = params[0]
         if cmdName in commands:
-            command = commands[params[0]]
-            command(self, name, params, channel, userdata, rank)
+            userRank = self.rankconvert[rank]
+            
+            command, requiredRank = commands[params[0]]
+            print "Needed rank: {0} User rank: {1}".format(requiredRank, userRank)
+            if userRank >= requiredRank:
+                command(self, name, params, channel, userdata, rank)
+            else:
+                self.sendMessage(channel, "You're not authorized to use this command.")
         else:
-            self.sendMessage(channel, "invalid command!")
-            self.sendMessage(channel, "see {0}nemp help for a list of commands".format(self.cmdprefix))
+            self.sendMessage(channel, "Invalid command!")
+            self.sendMessage(channel, "See {0}nemp help for a list of commands".format(self.cmdprefix))
     else:
         self.sendMessage(channel, name+": see \"{0}nemp help\" for a list of commands".format(self.cmdprefix))
 
@@ -180,7 +186,6 @@ def PollingThread(self, pipe):
         for i in xrange(sleepTime//30 + 1):
             #print "Sleeping for 30s, step %s" % i
             if self.signal:
-                print "AAAAnd shutting down"
                 return
             else:
                 time.sleep(30)
@@ -474,34 +479,38 @@ def nemp_set(self,name,params,channel,userdata,rank):
     else:
         self.NEM.mods[params[1]][params[2]][params[3]] = params[4]
     self.sendMessage(channel, "done.")
-    
+
+# In each entry, the second value in the tuple is the
+# rank that is required to be able to use the command.
+VOICED = 1
+OP = 2
 commands = {
-    "running" : running,
-    "poll" : poll,
-    "list" : nemp_list,
-    "about": about,
-    "help" : nemp_help,
-    "setversion" : setversion,
-    "getversion" : getversion,
-    "test" : test_parser,
-    "testpolling" : test_polling,
-    "reload" : nemp_reload,
-    "nktest" : nktest,
-    "html" : genHTML,
-    "set" : nemp_set,
-    "status" : status,
-    "disabledmods" : show_disabledMods,
-    "failedmods" : show_autodeactivatedMods,
+    "running" : (running, VOICED),
+    "poll" : (poll, OP),
+    "list" : (nemp_list, VOICED),
+    "about": (about, VOICED),
+    "help" : (nemp_help, VOICED),
+    "setversion" : (setversion, OP),
+    "getversion" : (getversion, VOICED),
+    "test" : (test_parser, OP),
+    "testpolling" : (test_polling, OP),
+    "reload" : (nemp_reload, OP),
+    "nktest" : (nktest, OP),
+    "html" : (genHTML, OP),
+    "set" : (nemp_set, OP),
+    "status" : (status, VOICED),
+    "disabledmods" : (show_disabledMods, VOICED),
+    "failedmods" : (show_autodeactivatedMods, VOICED),
     #"queue" : queue, # TODO: move this into its own file
     
     # -- ALIASES -- #
-    "setv" : setversion,
-    "getv" : getversion,
-    "polling" : running,
-    "testpoll" : test_polling,
-    "refresh" : nemp_reload,
-    "disabled" : show_disabledMods,
-    "failed" : show_autodeactivatedMods
+    "setv" : (setversion, OP),
+    "getv" : (getversion, VOICED),
+    "polling" : (running, VOICED),
+    "testpoll" : (test_polling, OP),
+    "refresh" : (nemp_reload, OP),
+    "disabled" : (show_disabledMods, VOICED),
+    "failed" : (show_autodeactivatedMods, VOICED)
     
     # -- END ALIASES -- #
 }
