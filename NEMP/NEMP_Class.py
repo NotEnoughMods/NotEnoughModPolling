@@ -265,11 +265,15 @@ class NotEnoughClasses():
                       False, False]
             output = getattr(self, self.mods[mod]["function"])(mod)
             if "dev" in output:
+                # Remove whitespace at the end and start
+                self.mods[mod]["dev"], output["dev"] = self.mods[mod]["dev"].strip(), output["dev"].strip()
                 if self.mods[mod]["dev"] != output["dev"]:
                     self.mods[mod]["dev"] = output["dev"]
                     status[0] = True
                     status[1] = True
             if "version" in output:
+                # Remove whitespace at the end and start
+                self.mods[mod]["version"], output["version"] = self.mods[mod]["version"].strip(), output["version"].strip()
                 if self.mods[mod]["version"] != output["version"]:
                     self.mods[mod]["version"] = output["version"]
                     status[0] = True
@@ -278,8 +282,8 @@ class NotEnoughClasses():
                 self.mods[mod]["mc"] = output["mc"]
             if "change" in output and "changelog" not in self.mods[mod]:
                 self.mods[mod]["change"] = output["change"]
-            return status
+            return status, False # Everything went fine, no exception raised
         except:
             print(mod+" failed to be polled...")
             traceback.print_exc()
-            return [False, False, False]
+            return [False, False, False], True # an exception was raised, so we return a True
