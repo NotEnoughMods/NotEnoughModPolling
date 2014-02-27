@@ -532,8 +532,8 @@
         "category" : "bspkrs",
         "active" : true,
         "html" : {
-            "url" : "http://dl.dropboxusercontent.com/u/20748481/Minecraft/1.6.4/statusEffectHud.version",
-            "regex" : "v(?P<version>.+?)\\((?P<mc>.+?)\\)"
+            "url" : "http://dl.dropboxusercontent.com/u/20748481/Minecraft/1.7.2/statusEffectHud.version",
+            "regex" : "(?P<version>.+?)\\((?P<mc>.+?)\\)"
         }
     },
     "ArmorStatusHUD" : {
@@ -541,8 +541,8 @@
         "category" : "bspkrs",
         "active" : true,
         "html" : {
-            "url" : "http://dl.dropboxusercontent.com/u/20748481/Minecraft/1.6.4/armorStatusHud.version",
-            "regex" : "v(?P<version>.+?)\\((?P<mc>.+?)\\)"
+            "url" : "http://dl.dropboxusercontent.com/u/20748481/Minecraft/1.7.2/armorStatusHud.version",
+            "regex" : "(?P<version>.+?)\\((?P<mc>.+?)\\)"
         }
     },
     "BlockBreaker" : {
@@ -559,8 +559,8 @@
         "category" : "bspkrs",
         "active" : true,
         "html" : {
-            "url" : "http://dl.dropboxusercontent.com/u/20748481/Minecraft/1.6.4/bspkrsCore.version",
-            "regex" : "v(?P<version>.+?)\\((?P<mc>.+?)\\)"
+            "url" : "http://dl.dropboxusercontent.com/u/20748481/Minecraft/1.7.2/bspkrsCore.version",
+            "regex" : "(?P<version>.+?)\\((?P<mc>.+?)\\)"
         }
     },
     "CrystalWing" : {
@@ -568,8 +568,8 @@
         "category" : "bspkrs",
         "active" : true,
         "html" : {
-            "url" : "http://dl.dropboxusercontent.com/u/20748481/Minecraft/1.6.4/crystalWingForge.version",
-            "regex" : "Forge (?P<version>.+?)$"
+            "url" : "http://dl.dropboxusercontent.com/u/20748481/Minecraft/1.7.2/crystalWingForge.version",
+            "regex" : "(?P<version>.+?)$"
         }
     },
     "DirectionHUD" : {
@@ -577,8 +577,8 @@
         "category" : "bspkrs",
         "active" : true,
         "html" : {
-            "url" : "http://dl.dropboxusercontent.com/u/20748481/Minecraft/1.6.4/directionHUD.version",
-            "regex" : "v(?P<version>.+?)\\((?P<mc>.+?)\\)"
+            "url" : "http://dl.dropboxusercontent.com/u/20748481/Minecraft/1.7.2/directionHUD.version",
+            "regex" : "(?P<version>.+?)\\((?P<mc>.+?)\\)"
         }
     },
     "FloatingRuins" : {
@@ -586,8 +586,8 @@
         "category" : "bspkrs",
         "active" : true,
         "html" : {
-            "url" : "http://dl.dropboxusercontent.com/u/20748481/Minecraft/1.6.4/floatingRuinsForge.version",
-            "regex" : "Forge (?P<version>.+?)$"
+            "url" : "http://dl.dropboxusercontent.com/u/20748481/Minecraft/1.7.2/floatingRuinsForge.version",
+            "regex" : "(?P<version>.+?)$"
         }
     },      
     "IngameInfo" : {
@@ -604,8 +604,8 @@
         "category" : "bspkrs",
         "active" : true,
         "html" : {
-            "url" : "http://dl.dropboxusercontent.com/u/20748481/Minecraft/1.6.4/startingInventory.version",
-            "regex" : "ML (?P<version>.+?)$"
+            "url" : "http://dl.dropboxusercontent.com/u/20748481/Minecraft/1.7.2/startingInventoryForge.version",
+            "regex" : "(?P<version>.+?)$"
         }
     },
     "TreeCapitator" : {
@@ -613,8 +613,8 @@
         "category" : "bspkrs",
         "active" : true,
         "html" : {
-            "url" : "http://dl.dropboxusercontent.com/u/20748481/Minecraft/1.6.4/treeCapitatorForge.version",
-            "regex" : "Forge (?P<version>.+?)$"
+            "url" : "http://dl.dropboxusercontent.com/u/20748481/Minecraft/1.7.2/treeCapitatorForge.version",
+            "regex" : "(?P<version>.+?)$"
         }
     },
     "WorldStateCheckpoints" : {
@@ -622,8 +622,8 @@
         "category" : "bspkrs",
         "active" : true,
         "html" : {
-            "url" : "http://dl.dropboxusercontent.com/u/20748481/Minecraft/1.6.4/worldStateCheckpoints.version",
-            "regex" : "ML (?P<version>.+?)$"
+            "url" : "http://dl.dropboxusercontent.com/u/20748481/Minecraft/1.7.2/worldStateCheckpointsForge.version",
+            "regex" : "(?P<version>.+?)$"
         }
     },
     "InGameInfoXML" : {
