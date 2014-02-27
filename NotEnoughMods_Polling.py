@@ -93,7 +93,7 @@ def running(self, name, params, channel, userdata, rank):
                 print "Sigquit to NEMP Thread sent"
                 
                 self.NEM_troubledMods = {}
-                self.NEM_autodeactivatedMods = {}
+                #self.NEM_autodeactivatedMods = {}
                 
             except Exception as error:
                 print str(error)
