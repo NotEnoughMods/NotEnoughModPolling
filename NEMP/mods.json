@@ -674,7 +674,7 @@
         "jenkins" : {
             "url" : "http://ci.matthewprenger.com/job/ServerTools-NIGHTLY/lastSuccessfulBuild/api/json",
             "regex" : "ServerTools-CORE-(?P<mc>.+?)-(?P<dev>.+?).jar",
-            "item" : 0
+            "item" : 1
         }
     }
 }
