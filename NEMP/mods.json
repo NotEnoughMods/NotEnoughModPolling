@@ -663,7 +663,7 @@
         "function" : "CheckJenkins",
         "active" : true,
         "jenkins" : {
-            "url" : "http://ci.algent.fr/job/EnderIO%20MC%201.6.4/lastSuccessfulBuild/api/json",
+            "url" : "http://ci.algent.fr/job/EnderIO%20MC/lastSuccessfulBuild/api/json",
             "regex" : "EnderIO-(?P<mc>.+?)-(?P<dev>.+?).jar",
             "item" : 0
         }
