@@ -402,10 +402,10 @@ def test_parser(self,name,params,channel,userdata,rank):
                     self.sendMessage(channel, "!setlist "+result["mc"])
                 if "version" in result:
                     #self.sendMessage(channel, "!mod "+params[1]+" "+unicode(result["version"]))
-                    self.sendMessage(channel, "!lmod {0} {1} {2}".format(version, mod, unicode(self.NEM.mods[mod]["version"])))
+                    self.sendMessage(channel, "!lmod {0} {1} {2}".format(version, mod, unicode(result["version"])))
                 if "dev" in result:
                     #self.sendMessage(channel, "!dev "+params[1]+" "+unicode(result["dev"]))
-                    self.sendMessage(channel, "!ldev {0} {1} {2}".format(version, mod, unicode(self.NEM.mods[mod]["dev"])))
+                    self.sendMessage(channel, "!ldev {0} {1} {2}".format(version, mod, unicode(result["dev"])))
                 if "change" in result:
                     self.sendMessage(channel, " * "+result["change"])
             except Exception as error:

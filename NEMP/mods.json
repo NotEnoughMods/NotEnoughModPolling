@@ -151,12 +151,11 @@
         }
     },
     "PowerConverters" : {
-        "comment" : "should be called PowerConverters-Samrg472 or PowerConvertersUnofficial, but meh",
         "function" : "CheckJenkins",
         "active" : true,
         "jenkins" : {
-            "url" : "https://samrg474.ci.cloudbees.com/job/PowerConverters/lastSuccessfulBuild/api/json",
-            "regex" : "PowerConverters-(?P<mc>.+?)-(?P<dev>.+?).zip",
+            "url" : "http://jamesmckay.id.au:8080/job/Power%20Converters/lastSuccessfulBuild/api/json",
+            "regex" : "PowerConverters-(?P<mc>.+?)-(?P<dev>.+?).jar",
             "item" : 0
         }
     },
