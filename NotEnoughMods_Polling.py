@@ -395,11 +395,14 @@ def test_parser(self,name,params,channel,userdata,rank):
                 mod = params[1]
                 result = getattr(self.NEM, self.NEM.mods[mod]["function"])(mod)
                 
-                print(result)
+                print("result of parser: {}".format(result))
                 version = self.NEM.mods[params[1]]["mc"]
                 
                 if "mc" in result:
-                    self.sendMessage(channel, "!setlist "+result["mc"])
+                    if version != result["mc"]:
+                        self.sendMessage(channel, "Expected MC version {}, got {}".format(version,result["mc"]))
+                else:
+                    self.sendMessage(channel, "Did not receive MC version from parser.")
                 if "version" in result:
                     #self.sendMessage(channel, "!mod "+params[1]+" "+unicode(result["version"]))
                     self.sendMessage(channel, "!lmod {0} {1} {2}".format(version, mod, unicode(result["version"])))
@@ -408,58 +411,12 @@ def test_parser(self,name,params,channel,userdata,rank):
                     self.sendMessage(channel, "!ldev {0} {1} {2}".format(version, mod, unicode(result["dev"])))
                 if "change" in result:
                     self.sendMessage(channel, " * "+result["change"])
+                
             except Exception as error:
                 self.sendMessage(channel, name+": "+str(error))
                 traceback.print_exc()
                 self.sendMessage(channel, params[1]+" failed to be polled")
             
-#This is a waste of code imo, you can just run normal polling with 10sec delay, and not have it freeze the bot, also doesn't test the polling
-def test_polling(self,name,params,channel,userdata,rank):
-    try:
-        # PollingThread()
-        if self.NEM.newMods:
-            self.NEM.mods = self.NEM.newMods
-            self.NEM.InitiateVersions()
-        else:
-            self.NEM.InitiateVersions()
-        
-        tempList = {}
-        for mod, info in self.NEM.mods.iteritems():
-            if 'name' in info:
-                real_name = info['name']
-            else:
-                real_name = mod
-            if self.NEM.mods[mod]["active"]:
-                result, exceptionRaised = self.NEM.CheckMod(mod)
-                if result[0]:
-                    if self.NEM.mods[mod]["mc"] in tempList:
-                        tempList[self.NEM.mods[mod]["mc"]].append((real_name, result[1:]))
-                    else:
-                        tempVersion = [(real_name, result[1:])]
-                        tempList[self.NEM.mods[mod]["mc"]] = tempVersion
-        # MicroTimerEvent()
-        yes = bool(tempList)
-        if yes:
-            for version in tempList:
-                for item in tempList[version]:
-                    # item[0] = name of mod
-                    # item[1] = flags for dev/release change
-                    # flags[0] = has release version changed?
-                    # flags[1] = has dev version changed?
-                    mod = item[0]
-                    flags = item[1]
-                    
-                    if self.NEM.mods[mod]["dev"] != "NOT_USED" and flags[0]:
-                        self.sendMessage(channel, "!ldev "+version+" "+mod+" "+unicode(self.NEM.mods[mod]["dev"]))
-                    if self.NEM.mods[mod]["version"]  != "NOT_USED" and flags[1]:
-                        self.sendMessage(channel, "!lmod "+version+" "+mod+" "+unicode(self.NEM.mods[mod]["version"]))
-                    # if NEM.mods[mod]["change"] != "NOT_USED":
-                        # self.sendChatMessage(self.send, channel, " * "+NEM.mods[mod]["change"])
-    
-    except:
-        self.sendMessage(channel, "An exception has occurred, check the console for more information.")
-        traceback.print_exc()
-
 def nktest(self,name,params,channel,userdata,rank):
     pass
 
@@ -493,7 +450,6 @@ commands = {
     "setversion" : (setversion, OP),
     "getversion" : (getversion, VOICED),
     "test" : (test_parser, OP),
-    "testpolling" : (test_polling, OP),
     "reload" : (nemp_reload, OP),
     "nktest" : (nktest, OP),
     "html" : (genHTML, OP),
@@ -501,13 +457,11 @@ commands = {
     "status" : (status, VOICED),
     "disabledmods" : (show_disabledMods, VOICED),
     "failedmods" : (show_autodeactivatedMods, VOICED),
-    #"queue" : queue, # TODO: move this into its own file
     
     # -- ALIASES -- #
     "setv" : (setversion, OP),
     "getv" : (getversion, VOICED),
     "polling" : (running, VOICED),
-    "testpoll" : (test_polling, OP),
     "refresh" : (nemp_reload, OP),
     "disabled" : (show_disabledMods, VOICED),
     "failed" : (show_autodeactivatedMods, VOICED)
