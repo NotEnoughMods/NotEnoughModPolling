@@ -120,10 +120,11 @@ def nemp_help(self, name, params, channel, userdata, rank):
 
 def status(self, name, params, channel, userdata, rank):
     if self.events["time"].doesExist("NotEnoughModPolling"):
+        channels = ", ".join(self.events["time"].getChannels("NotEnoughModPolling"))
         self.sendMessage(channel, 
-                         "NEM Polling is currently running in the following channel(s): {0}".format(
-                                                                                                    ", ".join(self.events["time"].getChannels("NotEnoughModPolling"))
-                                                                                                    ) )
+                         "NEM Polling is currently running "
+                         "in the following channel(s): {0}".format(channels)
+                         )
     else:
         self.sendMessage(channel, "NEM Polling is not running.")
 
@@ -136,7 +137,10 @@ def show_disabledMods(self, name, params, channel, userdata, rank):
     if len(disabled) == 0:
         self.sendNotice(name, "No mods are disabled right now.")
     else:
-        self.sendNotice(name, "The following mods are disabled right now: {0}. {1} mod(s) total. ".format(", ".join(disabled), len(disabled)))
+        self.sendNotice(name, 
+                        "The following mods are disabled right now: {0}. "
+                        "{1} mod(s) total. ".format(", ".join(disabled), len(disabled))
+                        )
 
 def show_autodeactivatedMods(self, name, params, channel, userdata, rank):
     disabled = []
