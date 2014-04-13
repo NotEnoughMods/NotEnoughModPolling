@@ -164,7 +164,7 @@
         "active" : true,
         "jenkins" : {
             "url" : "http://ic2api.player.to:8080/job/IC2_experimental/lastSuccessfulBuild/api/json",
-            "regex" : "industrialcraft-2_(?P<version>.+?)-experimental.jar",
+            "regex" : "industrialcraft-2-(?P<version>.+?)-experimental.jar",
             "item" : 2
         }
     },
@@ -588,7 +588,7 @@
             "url" : "http://dl.dropboxusercontent.com/u/20748481/Minecraft/1.7.2/floatingRuinsForge.version",
             "regex" : "(?P<version>.+?)$"
         }
-    },      
+    },
     "IngameInfo" : {
         "function" : "CheckHTML",
         "category" : "bspkrs",
