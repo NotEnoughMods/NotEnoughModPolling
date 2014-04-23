@@ -625,6 +625,11 @@
             "regex" : "(?P<version>.+?)$"
         }
     },
+    "LunatriusCore" : {
+        "function"  : "CheckLunatrius",
+        "category" : "lunatrius",
+        "active" : true
+    },
     "InGameInfoXML" : {
         "function"  : "CheckLunatrius",
         "category" : "lunatrius",
