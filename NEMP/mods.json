@@ -78,8 +78,8 @@
         "active" : true,
         "jenkins" : {
             "url" : "http://jenkins.dev.dryware.org/job/skyboy-MineFactoryReloaded/lastSuccessfulBuild/api/json",
-            "regex": "MineFactoryReloaded-(?P<dev>.+?).jar$",
-            "item": 1
+            "regex" : "MineFactoryReloaded-(?P<dev>.+?).jar$",
+            "item" : 1
         }
     },
     "IndustrialCraft2" : {
@@ -219,8 +219,8 @@
         "changelog" : false,
         "jenkins" : {
             "url" : "http://ci.md-5.net/job/MCPC-Plus-164/lastSuccessfulBuild/api/json",
-            "regex": "mcpc-plus-(?P<mc>.+?)-(.+?)-(.+?)-(?P<dev>.+?).jar$",
-            "item": 0
+            "regex" : "mcpc-plus-(?P<mc>.+?)-(.+?)-(.+?)-(?P<dev>.+?).jar$",
+            "item" : 0
         }
     },
     "Artifice" : {
@@ -229,8 +229,8 @@
         "active" : true,
         "jenkins" : {
             "url" : "http://build.technicpack.net/job/Artifice/lastSuccessfulBuild/api/json",
-            "regex": "Artifice-(?P<dev>.+?).jar$",
-            "item": 0
+            "regex" : "Artifice-(?P<dev>.+?).jar$",
+            "item" : 0
         }
     },
     "LogisticsPipes" : {
@@ -664,8 +664,8 @@
         "active" : true,
         "jenkins" : {
             "url" : "http://themattabase.com:9090/job/Applied%20Thermodynamics/lastSuccessfulBuild/api/json",
-            "regex": "apptherm-(?P<dev>.+?).jar$",
-            "item": 0
+            "regex" : "apptherm-(?P<dev>.+?).jar$",
+            "item" : 0
         }
     },
     "EnderIO" : {
