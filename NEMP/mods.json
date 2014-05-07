@@ -625,6 +625,11 @@
             "regex" : "(?P<version>.+?)$"
         }
     },
+    "DynIMC" : {
+        "function"  : "CheckLunatrius",
+        "category" : "lunatrius",
+        "active" : true
+    },
     "LunatriusCore" : {
         "function"  : "CheckLunatrius",
         "category" : "lunatrius",
