@@ -4,16 +4,17 @@ import re
 import traceback
 import threading
 import time
+import gzip
+
+from StringIO import StringIO
 
 ID = "nem"
 permission = 1
 
-class NotEnoughClasses(): 
+class NotEnoughClasses():
     def getLatestVersion(self):
         try:
-            NEMfeed = self.useragent.open("http://bot.notenoughmods.com/?json", timeout = 10)
-            result = NEMfeed.read()
-            NEMfeed.close() 
+            result = self.fetch_page("http://bot.notenoughmods.com/?json")
             return simplejson.loads(result, strict = False)
         except:
             print("Failed to get NEM versions, falling back to hard-coded")
@@ -22,13 +23,30 @@ class NotEnoughClasses():
             return ["1.4.5","1.4.6-1.4.7","1.5.1","1.5.2","1.6.1","1.6.2", "1.6.4"]
     def __init__(self):
         self.useragent = urllib2.build_opener()
-        self.useragent.addheaders = [('User-agent', 'NotEnoughMods:Tools/1.X (+http://github.com/SinZ163/NotEnoughMods)')]
-        
+        self.useragent.addheaders = [
+            ('User-agent', 'NotEnoughMods:Tools/1.X (+http://github.com/SinZ163/NotEnoughMods)'),
+            ('Accept-encoding', 'gzip')
+        ]
+
         self.versions = self.getLatestVersion()
         self.version = self.versions[len(self.versions)-1]
-        
+
+    def fetch_page(self, url, decompress=True, timeout=10):
+        try:
+            response = self.useragent.open(url, timeout=timeout)
+            if response.info().get('Content-Encoding') == 'gzip' and decompress:
+                buf = StringIO(response.read())
+                f = gzip.GzipFile(fileobj=buf, mode='rb')
+                data = f.read()
+            else:
+                data = response.read()
+            return data
+        except:
+            pass
+            #most likely a timeout
+
 NEM = NotEnoughClasses()
-     
+
 def execute(self, name, params, channel, userdata, rank):
     try:
         command = commands[params[0]]
@@ -41,10 +59,10 @@ def setlist(self, name, params, channel, userdata, rank):
     if len(params) != 2:
         self.sendChatMessage(self.send, channel, name+ ": Insufficent amount of parameters provided.")
         self.sendChatMessage(self.send, channel, name+ ": "+help["setlist"][1])
-    else:        
+    else:
         colourblue = unichr(2)+unichr(3)+"12"
         colour = unichr(3)+unichr(2)
-        
+
         NEM.version = str(params[1])
         self.sendChatMessage(self.send, channel, "switched list to: "+colourblue+params[1]+colour)
 def multilist(self,name,params,channel,userdata,rank):
@@ -56,9 +74,7 @@ def multilist(self,name,params,channel,userdata,rank):
             jsonres = {}
             results = {}
             for version in NEM.versions:
-                NEMfeed = NEM.useragent.open("http://bot.notenoughmods.com/"+urllib2.quote(version)+".json")
-                result = NEMfeed.read()
-                NEMfeed.close()
+                result = NEM.fetch_page("http://bot.notenoughmods.com/"+urllib2.quote(version)+".json")
                 jsonres[version] = simplejson.loads(result, strict = False )
                 i = -1
                 for mod in jsonres[version]:
@@ -106,7 +122,7 @@ def multilist(self,name,params,channel,userdata,rank):
                     print(error)
                     traceback.print_exc()
                     #lol
-                self.sendChatMessage(self.send, channel, bold+colour+blue+line+colour+bold+": "+colour+purple+jsonres[line][results[line]]["name"]+" "+alias+colour+darkgreen+jsonres[line][results[line]]["version"]+dev+" "+comment+colour+orange+jsonres[line][results[line]]["shorturl"]+colour)    
+                self.sendChatMessage(self.send, channel, bold+colour+blue+line+colour+bold+": "+colour+purple+jsonres[line][results[line]]["name"]+" "+alias+colour+darkgreen+jsonres[line][results[line]]["version"]+dev+" "+comment+colour+orange+jsonres[line][results[line]]["shorturl"]+colour)
         except Exception as error:
             self.sendChatMessage(self.send, channel, name+": "+str(error))
             traceback.print_exc()
@@ -120,9 +136,7 @@ def list(self, name, params, channel, userdata, rank):
     else:
         version = NEM.version
     try:
-        NEMfeed = NEM.useragent.open("http://bot.notenoughmods.com/"+urllib2.quote(version)+".json")
-        result = NEMfeed.read()
-        NEMfeed.close()
+        result = NEM.fetch_page("http://bot.notenoughmods.com/"+urllib2.quote(version)+".json")
         jsonres = simplejson.loads(result, strict = False )
         results = []
         i = -1
@@ -170,7 +184,7 @@ def list(self, name, params, channel, userdata, rank):
                 print(error)
                 traceback.print_exc()
                 #lol
-            self.sendChatMessage(self.send, channel, colour+purple+jsonres[line]["name"]+" "+alias+colour+darkgreen+jsonres[line]["version"]+dev+" "+comment+colour+orange+jsonres[line]["shorturl"]+colour)  
+            self.sendChatMessage(self.send, channel, colour+purple+jsonres[line]["name"]+" "+alias+colour+darkgreen+jsonres[line]["version"]+dev+" "+comment+colour+orange+jsonres[line]["shorturl"]+colour)
     except Exception as error:
         self.sendChatMessage(self.send, channel, name+": "+str(error))
         traceback.print_exc()
@@ -180,19 +194,15 @@ def compare(self, name, params, channel, userdata, rank):
             params[1] : {},
             params[2] : {}
         }
-        oldFeed = NEM.useragent.open("http://bot.notenoughmods.com/"+urllib2.quote(params[1])+".json")
-        oldData = oldFeed.read()
-        oldFeed.close()
+        oldData = NEM.fetch_page("http://bot.notenoughmods.com/"+urllib2.quote(params[1])+".json")
         oldJson = simplejson.loads(oldData, strict = False )
-        
+
         for modInfo in oldJson:
             modName = modInfo["name"].lower()
             data[params[1]][modName] = modInfo
-        newFeed = NEM.useragent.open("http://bot.notenoughmods.com/"+urllib2.quote(params[2])+".json")
-        newData = newFeed.read()
-        newFeed.close()
+        newData = NEM.fetch_page("http://bot.notenoughmods.com/"+urllib2.quote(params[2])+".json")
         newJson = simplejson.loads(newData, strict = False )
-        
+
         for modInfo in newJson:
             modName = modInfo["name"].lower()
             data[params[2]][modName] = modInfo
@@ -208,7 +218,7 @@ def compare(self, name, params, channel, userdata, rank):
         traceback.print_exc()
 def about(self, name, params, channel, userdata, rank):
     self.sendChatMessage(self.send, channel, "Not Enough Mods toolkit for IRC by SinZ v3.0")
-    
+
 def help(self, name, params, channel, userdata, rank):
     if len(params) == 1:
         self.sendChatMessage(self.send, channel, name+ ": Available commands: " + ", ".join(help))
