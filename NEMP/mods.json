@@ -626,17 +626,17 @@
         }
     },
     "DynIMC" : {
-        "function"  : "CheckLunatrius",
+        "function" : "CheckLunatrius",
         "category" : "lunatrius",
         "active" : true
     },
     "LunatriusCore" : {
-        "function"  : "CheckLunatrius",
+        "function" : "CheckLunatrius",
         "category" : "lunatrius",
         "active" : true
     },
     "InGameInfoXML" : {
-        "function"  : "CheckLunatrius",
+        "function" : "CheckLunatrius",
         "category" : "lunatrius",
         "active" : true
     },
