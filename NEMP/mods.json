@@ -76,8 +76,8 @@
         "active" : true,
         "jenkins" : {
             "url" : "http://jenkins.mc.dryware.org/job/skyboy-MineFactoryReloaded/lastSuccessfulBuild/api/json",
-            "regex" : "MineFactoryReloaded-(?P<dev>.+?).jar$",
-            "item" : 1
+            "regex" : "MineFactoryReloaded-\\[(?P<mc>.+?)\\](?P<dev>.+?).jar$",
+            "item" : 0
         }
     },
     "IndustrialCraft2" : {
