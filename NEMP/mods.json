@@ -21,14 +21,13 @@
         }
     },
     "ForgeMultipart" : {
-        "function" : "CheckMCForge",
+        "function" : "CheckMCForge2",
         "category" : "forge",
         "active" : true,
         "mcforge" : {
-            "name" : "ForgeMultipart",
-            "dev" : "latest",
-            "rec" : "recommended",
-            "regex" : "ForgeMultipart-universal-(.+?)-(.+?).jar$"
+            "url" : "http://files.minecraftforge.net/maven/codechicken/ForgeMultipart/promotions.json",
+            "promo" : "latest",
+            "promoType" : "dev"
         }
     },
     "CompactSolars" : {
@@ -43,14 +42,13 @@
         }
     },
     "BiomesOPlenty" : {
-        "function" : "CheckMCForge",
+        "function" : "CheckMCForge2",
         "category" : "forge",
         "active" : true,
         "mcforge" : {
-            "name" : "BiomesOPlenty",
-            "dev" : "latest",
-            "rec" : "recommended",
-            "regex" : "BiomesOPlenty-universal-(.+?)-(.+?).jar$"
+            "url" : "http://files.minecraftforge.net/maven/com/github/glitchfiend/biomesoplenty/BiomesOPlenty/promotions.json",
+            "promo" : "latest",
+            "promoType" : "dev"
         }
     },
     "OpenPeripheral" : {
@@ -77,7 +75,7 @@
         "function" : "CheckJenkins",
         "active" : true,
         "jenkins" : {
-            "url" : "http://jenkins.dev.dryware.org/job/skyboy-MineFactoryReloaded/lastSuccessfulBuild/api/json",
+            "url" : "http://jenkins.mc.dryware.org/job/skyboy-MineFactoryReloaded/lastSuccessfulBuild/api/json",
             "regex" : "MineFactoryReloaded-(?P<dev>.+?).jar$",
             "item" : 1
         }
