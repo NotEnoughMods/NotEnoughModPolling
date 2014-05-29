@@ -10,17 +10,17 @@ from StringIO import StringIO
 class NotEnoughClasses():
     nemVersions = []
     nemVersion = ""
-    
+
     newMods = False
     mods = {}
-    
+
     def __init__(self):
         self.useragent = urllib2.build_opener()
         self.useragent.addheaders = [
             ('User-agent', 'NotEnoughMods:Polling/1.X (+http://github.com/SinZ163/NotEnoughMods)'),
             ('Accept-encoding', 'gzip')
         ]
-        
+
         self.buildModDict()
         self.buildHTML()
         self.QueryNEM()
@@ -47,7 +47,7 @@ class NotEnoughClasses():
         for mod in self.mods:
             if "change" not in self.mods[mod]:
                 self.mods[mod]["change"] = "NOT_USED"
-                
+
     def buildHTML(self):
         headerText = ""
         with open("commands/NEMP/header.txt", "r") as f:
@@ -74,7 +74,7 @@ class NotEnoughClasses():
                     pass
                 f.write("        </tr>\r\n")
             f.write(footerText)
-            
+
     def QueryNEM(self):
         try:
             result = self.fetch_page("http://bot.notenoughmods.com/?json")
@@ -84,35 +84,35 @@ class NotEnoughClasses():
             traceb = str(traceback.format_exc())
             print(traceb)
             self.nemVersions = reversed(["1.4.5","1.4.6-1.4.7","1.5.1","1.5.2","1.6.1","1.6.2","1.6.4","1.7.2"])
-            
+
     def InitiateVersions(self):
         templist = self.mods.keys()
         try:
             for version in self.nemVersions:
                 if "-dev" not in version: #is this still needed?
                     rawJson = self.fetch_page("http://bot.notenoughmods.com/"+version+".json")
-                    
+
                     jsonres = simplejson.loads(rawJson, strict = False)
-                    
+
                     for mod in jsonres:
                         if mod["name"] in templist:
                             self.mods[mod["name"]]["mc"] = version
-                            
+
                             if "dev" in mod and mod["dev"]:
                                 self.mods[mod["name"]]["dev"] = str(mod["dev"])         #Inconsistant JSON is bad, and Pyker should feel bad.
                             else:
                                 self.mods[mod["name"]]["dev"] = "NOT_USED"
-                            
+
                             if "version" in mod and mod["version"]:
                                 self.mods[mod["name"]]["version"] = str(mod["version"]) #Inconsistant JSON is bad, and Pyker should feel bad.
                             else:
                                 self.mods[mod["name"]]["version"] = "NOT_USED"
-                            
+
                             templist.remove(mod["name"])
         except:
             pass
             #most likely a timeout
-        
+
     def CheckJenkins(self, mod):
         result = self.fetch_page(self.mods[mod]["jenkins"]["url"])
         jsonres = simplejson.loads(result, strict = False )
@@ -127,7 +127,7 @@ class NotEnoughClasses():
     def CheckMCForge2(self,mod):
         result = self.fetch_page(self.mods[mod]["mcforge"]["url"])
         jsonres = simplejson.loads(result, strict=False)
-        
+
         for promo in jsonres["promos"]:
             if promo == self.mods[mod]["mcforge"]["promo"]:
                 return {
@@ -166,14 +166,14 @@ class NotEnoughClasses():
                 output["mc"] = tmpMC
             output["dev"] = devMatch.group(2)
             return output
-            
+
     def CheckChickenBones(self,mod):
         result = self.fetch_page("http://www.chickenbones.craftsaddle.org/Files/New_Versions/version.php?file="+mod+"&version="+self.mods[mod]["mc"])
         if result.startswith("Ret: "): #Hacky I know, but this is how ChickenBones does it in his mod
             return {
                 "version" : result[5:]
             }
-            
+
     def CheckmDiyo(self,mod):
         result = self.fetch_page("http://tanis.sunstrike.io/"+self.mods[mod]["mDiyo"]["location"])
         lines = result.split()
@@ -184,7 +184,7 @@ class NotEnoughClasses():
         match = re.search(self.mods[mod]["mDiyo"]["regex"],result)
         output = match.groupdict()
         return output
-        
+
     def CheckAE(self,mod):
         result = self.fetch_page("http://ae-mod.info/releases")
         jsonres = simplejson.loads(result, strict = False )
@@ -205,11 +205,11 @@ class NotEnoughClasses():
             "dev" : devVersion,
             "mc" : devMC #TODO: this doesn't seem reliable...
         }
-        
+
     def CheckAE2(self,mod):
         result = self.fetch_page("http://ae2.ae-mod.info/builds/builds.json")
         jsonres = simplejson.loads(result, strict = False )
-        jsonres = sorted(jsonres, key=lambda k: k['Created'])
+        jsonres = sorted(jsonres['Versions'], key=lambda k: k['Created'])
         relVersion = ""
         #relMC = ""
         devVersion = ""
@@ -222,7 +222,7 @@ class NotEnoughClasses():
             "dev" : devVersion,
             "mc" : devMC #TODO: this doesn't seem reliable...
         }
-        
+
     def CheckDropBox(self,mod):
         result = self.fetch_page(self.mods[mod]["html"]["url"])
         match = None
@@ -239,7 +239,7 @@ class NotEnoughClasses():
             return match
         else:
             return {}
-        
+
     def CheckHTML(self,mod):
         result = self.fetch_page(self.mods[mod]["html"]["url"])
         output = {}
@@ -248,7 +248,7 @@ class NotEnoughClasses():
             if match:
                 output = match.groupdict()
         return output
-        
+
     def CheckSpacechase(self,mod):
         result = self.fetch_page("http://spacechase0.com/wp-content/plugins/mc-mod-manager/nem.php?mc="+self.mods[mod]["mc"][2:])
         for line in result.splitlines():
@@ -278,7 +278,7 @@ class NotEnoughClasses():
         try:
             # First False is for if there was an update.
             # Next two Falses are for if there was an dev or version change
-            status = [False, 
+            status = [False,
                       False, False]
             output = getattr(self, self.mods[mod]["function"])(mod)
             if "dev" in output:
