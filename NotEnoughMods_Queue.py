@@ -19,8 +19,8 @@ def execute(self, name, params, channel, userdata, rank):
         self.sendChatMessage(self.send, channel, str(e))
         self.sendChatMessage(self.send, channel, "invalid command!")
         self.sendChatMessage(self.send, channel, "see {}{} help for a list of commands".format(self.cmdprefix,ID))
-        
-        
+
+
 def command_help(self, name, params, channel, userdata, rank):
     actualRank = rankTranslate[rank]
     paramCount = len(params)
@@ -62,12 +62,12 @@ def command_help(self, name, params, channel, userdata, rank):
         commandRanks = [[], [], [], []]
         for command, info in commands.iteritems():
             commandRanks[info["rank"]].append(command)
-        
+
         self.sendNotice(name, "Available commands:")
         for i in range(0,actualRank):
             if len(commandRanks[i]) > 0:
                 self.sendNotice(name, nameTranslate[i]+": "+", ".join(commandRanks[i]))
-            
+
 def command_show(self,name,params,channel,userdata,rank):
     i = 0
     if len(NEM.updatequeue) == 0:
@@ -76,31 +76,31 @@ def command_show(self,name,params,channel,userdata,rank):
     for item in NEM.updatequeue:
         self.sendChatMessage(self.send, name, "{}: {}".format(i, item))
         i += 1
-       
-def command_add(self,name,params,channel,userdata,rank):         
+
+def command_add(self,name,params,channel,userdata,rank):
     NEM.updatequeue.append(" ".join(params[1:]))
     self.sendChatMessage(self.send, channel, "Success!")
-    
-def command_remove(self,name,params,channel,userdata,rank):     
+
+def command_remove(self,name,params,channel,userdata,rank):
     if params[1].isdigit():
         del NEM.updatequeue[int(params[1])]
         self.sendChatMessage(self.send, channel, "Success!")
     else:
         self.sendChatMessage(self.send, channel, "'{}' is not a number.".format(params[1]))
-                
+
 def command_execute(self,name,params,channel,userdata,rank):
     if params[1].isdigit():
         index = int(params[1])
     else:
         self.sendChatMessage(self.send, channel, "'{}' is not a number.".format(params[2]))
         return
-    
+
     if len(NEM.updatequeue) >= index and rank > 0:
         self.sendChatMessage(self.send, channel, NEM.updatequeue[index])
         del NEM.updatequeue[index]
         self.sendChatMessage(self.send, channel, "Success!")
-           
-        
+
+
 rankTranslate = {
     "" : 0,
     "+" : 1,
