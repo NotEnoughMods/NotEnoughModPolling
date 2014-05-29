@@ -206,6 +206,23 @@ class NotEnoughClasses():
             "mc" : devMC #TODO: this doesn't seem reliable...
         }
         
+    def CheckAE2(self,mod):
+        result = self.fetch_page("http://ae2.ae-mod.info/builds/builds.json")
+        jsonres = simplejson.loads(result, strict = False )
+        jsonres = sorted(jsonres, key=lambda k: k['Created'])
+        relVersion = ""
+        #relMC = ""
+        devVersion = ""
+        devMC = ""
+        for version in jsonres:
+            devVersion = version["Version"]
+            devMC = version["VersionMC"]
+        return {
+            "version" : relVersion,
+            "dev" : devVersion,
+            "mc" : devMC #TODO: this doesn't seem reliable...
+        }
+        
     def CheckDropBox(self,mod):
         result = self.fetch_page(self.mods[mod]["html"]["url"])
         match = None

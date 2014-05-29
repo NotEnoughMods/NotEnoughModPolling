@@ -308,8 +308,8 @@
         }
     },
     "AppliedEnergistics" : {
-        "function" : "CheckAE",
-        "active" : false
+        "function" : "CheckAE2",
+        "active" : true
     },
     "CheaperArrows" : {
         "function" : "CheckSpacechase",
