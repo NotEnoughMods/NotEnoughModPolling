@@ -83,7 +83,7 @@ def multilist(self,name,params,channel,userdata,rank):
                         results[version] = i
                         break
                     else:
-                        aliases = mod["aliases"].split(" ")
+                        aliases = mod["aliases"]
                         for alias in aliases:
                             if params[1].lower() == alias.lower():
                                 results[version] = i
@@ -109,8 +109,8 @@ def multilist(self,name,params,channel,userdata,rank):
             self.sendChatMessage(self.send, channel, "Listing "+count+" for \""+params[1]+"\":")
             for line in sorted(results.iterkeys()):
                 alias = colour
-                if jsonres[line][results[line]]["aliases"] != "":
-                    alias = colour+"("+colour+pink+str(re.sub(" ", colour+', '+colour+pink, jsonres[line][results[line]]["aliases"]))+colour+") "
+                if jsonres[line][results[line]]["aliases"]:
+                    alias = colour+"("+colour+pink+(colour+', '+colour+pink).join(jsonres[line][results[line]]["aliases"])+colour+") "
                 comment = colour
                 if jsonres[line][results[line]]["comment"] != "":
                     comment = str(colour+"["+colour+gray+jsonres[line][results[line]]["comment"]+colour+"] ")
@@ -146,7 +146,7 @@ def list(self, name, params, channel, userdata, rank):
                 results.append(i)
                 continue
             else:
-                aliases = mod["aliases"].split(" ")
+                aliases = mod["aliases"]
                 for alias in aliases:
                     if params[1].lower() in alias.lower():
                         results.append(i)
@@ -171,8 +171,8 @@ def list(self, name, params, channel, userdata, rank):
         self.sendChatMessage(self.send, channel, "Listing "+count+" for \""+params[1]+"\" in "+bold+colour+blue+version+colour+bold+":")
         for line in results:
             alias = colour
-            if jsonres[line]["aliases"] != "":
-                alias = colour+"("+colour+pink+str(re.sub(" ", colour+', '+colour+pink, jsonres[line]["aliases"]))+colour+") "
+            if jsonres[line]["aliases"]:
+                alias = colour+"("+colour+pink+(colour+', '+colour+pink).join(jsonres[line]["aliases"])+colour+") "
             comment = colour
             if jsonres[line]["comment"] != "":
                 comment = str(colour+"("+colour+gray+jsonres[line]["comment"]+colour+") ")
