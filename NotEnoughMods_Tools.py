@@ -179,12 +179,12 @@ def list(self, name, params, channel, userdata, rank):
             dev = colour
             try:
                 if jsonres[line]["dev"] != "":
-                    dev = str(colour+" ("+colour+gray+"dev"+colour+": "+colour+red+jsonres[line]["dev"]+colour+")")
+                    dev = str(colour+" ("+colour+gray+"dev"+colour+": "+colour+red+str(jsonres[line]["dev"])+colour+")")
             except Exception as error:
                 print(error)
                 traceback.print_exc()
                 #lol
-            self.sendChatMessage(self.send, channel, colour+purple+jsonres[line]["name"]+" "+alias+colour+darkgreen+jsonres[line]["version"]+dev+" "+comment+colour+orange+jsonres[line]["shorturl"]+colour)
+            self.sendChatMessage(self.send, channel, colour+purple+jsonres[line]["name"]+" "+alias+colour+darkgreen+str(jsonres[line]["version"])+dev+" "+comment+colour+orange+jsonres[line]["shorturl"]+colour)
     except Exception as error:
         self.sendChatMessage(self.send, channel, name+": "+str(error))
         traceback.print_exc()
