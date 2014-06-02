@@ -308,6 +308,10 @@
         }
     },
     "AppliedEnergistics" : {
+        "function" : "CheckAE",
+        "active" : true
+    },
+    "AppliedEnergistics2" : {
         "function" : "CheckAE2",
         "active" : true
     },
