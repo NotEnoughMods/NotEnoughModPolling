@@ -218,7 +218,6 @@ class NotEnoughClasses():
             devVersion = version["Version"]
             devMC = version["VersionMC"]
         return {
-            "version" : relVersion,
             "dev" : devVersion,
             "mc" : devMC #TODO: this doesn't seem reliable...
         }
