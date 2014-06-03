@@ -137,6 +137,9 @@ def list(self, name, params, channel, userdata, rank):
         version = NEM.version
     try:
         result = NEM.fetch_page("http://bot.notenoughmods.com/"+urllib2.quote(version)+".json")
+        if not result:
+            self.sendChatMessage(self.send, channel, name + ": Could not fetch the list. Are you sure it exists?")
+            return
         jsonres = simplejson.loads(result, strict = False )
         results = []
         i = -1
