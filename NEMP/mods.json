@@ -12,7 +12,7 @@
     "IronChests" : {
         "function" : "CheckMCForge",
         "category" : "forge",
-        "active" : true,
+        "active" : false,
         "mcforge" : {
             "name" : "IronChests2",
             "dev" : "latest",
@@ -672,7 +672,7 @@
     },
     "EnderIO" : {
         "function" : "CheckJenkins",
-        "active" : true,
+        "active" : false,
         "jenkins" : {
             "url" : "http://ci.algent.fr/job/EnderIO%20MC/lastSuccessfulBuild/api/json",
             "regex" : "EnderIO-(?P<mc>.+?)-(?P<dev>.+?).jar",
