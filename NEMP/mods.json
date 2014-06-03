@@ -10,14 +10,13 @@
         }
     },
     "IronChests" : {
-        "function" : "CheckMCForge",
+        "function" : "CheckMCForge2",
         "category" : "forge",
-        "active" : false,
+        "active" : true,
         "mcforge" : {
-            "name" : "IronChests2",
-            "dev" : "latest",
-            "rec" : "recommended",
-            "regex" : "ironchest-universal-(.+?)-(.+?).zip$"
+            "url" : "http://files.minecraftforge.net/maven/cpw/mods/ironchest/promotions.json",
+            "promo" : "latest",
+            "promoType" : "dev"
         }
     },
     "ForgeMultipart" : {
