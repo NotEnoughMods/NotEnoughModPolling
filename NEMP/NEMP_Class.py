@@ -122,7 +122,7 @@ class NotEnoughClasses():
         try:
             output["change"] = jsonres["changeSet"]["items"][0]["comment"]
         except:
-            output["change"] = "NOT_USED"
+            pass
         return output
     def CheckMCForge2(self,mod):
         result = self.fetch_page(self.mods[mod]["mcforge"]["url"])
