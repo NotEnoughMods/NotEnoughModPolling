@@ -686,5 +686,14 @@
             "regex" : "ServerTools-CORE-(?P<mc>.+?)-(?P<dev>.+?).jar",
             "item" : 7
         }
+    },
+    "NEIAddons" : {
+        "function" : "CheckJenkins",
+        "active" : true,
+        "jenkins" : {
+            "url" : "http://jenkins.bdew.net/job/neiaddons-1.7.2/lastSuccessfulBuild/api/json",
+            "regex" : "neiaddons-mc172-(?P<dev>.+?).jar",
+            "item" : 0
+        }
     }
 }
