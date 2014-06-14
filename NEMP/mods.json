@@ -678,13 +678,44 @@
             "item" : 2
         }
     },
-    "ServerTools" : {
+	"ServerTools-BACKUP" : {
         "function" : "CheckJenkins",
+        "category" : "ServerTools",
         "active" : true,
         "jenkins" : {
-            "url" : "http://ci.matthewprenger.com/job/ServerTools-NIGHTLY/lastSuccessfulBuild/api/json",
-            "regex" : "ServerTools-CORE-(?P<mc>.+?)-(?P<dev>.+?).jar",
-            "item" : 7
+            "url" : "http://ci.matthewprenger.com/job/ServerTools-BACKUP/lastSuccessfulBuild/api/json",
+            "regex" : "ServerTools-BACKUP-(?P<mc>.+?)-(?P<version>.+?).jar",
+            "item" : 3
+        }
+    },
+    "ServerTools-CORE" : {
+        "function" : "CheckJenkins",
+        "category" : "ServerTools",
+        "active" : true,
+        "jenkins" : {
+            "url" : "http://ci.matthewprenger.com/job/ServerTools-CORE/lastSuccessfulBuild/api/json",
+            "regex" : "ServerTools-CORE-(?P<mc>.+?)-(?P<version>.+?).jar",
+            "item" : 3
+        }
+    },
+	"ServerTools-PERMISSION" : {
+        "function" : "CheckJenkins",
+        "category" : "ServerTools",
+        "active" : true,
+        "jenkins" : {
+            "url" : "http://ci.matthewprenger.com/job/ServerTools-PERMISSION/lastSuccessfulBuild/api/json",
+            "regex" : "ServerTools-PERMISSION-(?P<mc>.+?)-(?P<version>.+?).jar",
+            "item" : 3
+        }
+    },
+	"ServerTools-TELEPORT" : {
+        "function" : "CheckJenkins",
+        "category" : "ServerTools",
+        "active" : true,
+        "jenkins" : {
+            "url" : "http://ci.matthewprenger.com/job/ServerTools-TELEPORT/lastSuccessfulBuild/api/json",
+            "regex" : "ServerTools-TELEPORT-(?P<mc>.+?)-(?P<version>.+?).jar",
+            "item" : 3
         }
     },
     "NEIAddons" : {
