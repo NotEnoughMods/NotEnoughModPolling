@@ -678,7 +678,7 @@
             "item" : 2
         }
     },
-	"ServerTools-BACKUP" : {
+    "ServerTools-BACKUP" : {
         "function" : "CheckJenkins",
         "category" : "ServerTools",
         "active" : true,
@@ -698,7 +698,7 @@
             "item" : 3
         }
     },
-	"ServerTools-PERMISSION" : {
+    "ServerTools-PERMISSION" : {
         "function" : "CheckJenkins",
         "category" : "ServerTools",
         "active" : true,
@@ -708,7 +708,7 @@
             "item" : 3
         }
     },
-	"ServerTools-TELEPORT" : {
+    "ServerTools-TELEPORT" : {
         "function" : "CheckJenkins",
         "category" : "ServerTools",
         "active" : true,
