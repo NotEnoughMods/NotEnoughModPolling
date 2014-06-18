@@ -11,3 +11,6 @@ td,th {
 	padding-left: 10px;
 	padding-right: 10px;
 }
+.disabled {
+    text-decoration:line-through;
+}
