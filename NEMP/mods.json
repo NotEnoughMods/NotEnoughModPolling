@@ -726,5 +726,14 @@
             "regex" : "neiaddons-mc172-(?P<dev>.+?).jar",
             "item" : 0
         }
+    },
+    "ExtraCells" : {
+        "function" : "CheckJenkins",
+        "active" : true,
+        "jenkins" : {
+            "url" : "http://shadowcity.net:8080/job/ExtraCells2/lastSuccessfulBuild/api/json",
+            "regex" : "ExtraCells-(?P<version>.+?).jar",
+            "item" : 0
+        }
     }
 }
