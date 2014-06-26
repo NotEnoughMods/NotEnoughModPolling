@@ -28,8 +28,8 @@
             "promo" : "latest",
             "promoType" : "dev"
         }
-	},
-	"CodeChickenLib" : {
+    },
+    "CodeChickenLib" : {
         "function" : "CheckMCForge2",
         "category" : "forge",
         "active" : true,
