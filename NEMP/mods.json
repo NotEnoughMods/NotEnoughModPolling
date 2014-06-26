@@ -28,6 +28,16 @@
             "promo" : "latest",
             "promoType" : "dev"
         }
+	},
+	"CodeChickenLib" : {
+        "function" : "CheckMCForge2",
+        "category" : "forge",
+        "active" : true,
+        "mcforge" : {
+            "url" : "http://files.minecraftforge.net/maven/codechicken/CodeChickenLib/promotions.json",
+            "promo" : "latest",
+            "promoType" : "dev"
+        }
     },
     "CompactSolars" : {
         "function" : "CheckMCForge",
