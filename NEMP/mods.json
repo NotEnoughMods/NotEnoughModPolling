@@ -40,14 +40,13 @@
         }
     },
     "CompactSolars" : {
-        "function" : "CheckMCForge",
+        "function" : "CheckMCForge2",
         "category" : "forge",
         "active" : true,
         "mcforge" : {
-            "name" : "CompactSolars",
-            "dev" : "latest",
-            "rec" : "recommended",
-            "regex" : "compactsolars-universal-(.+?)-(.+?).zip$"
+            "url" : "http://files.minecraftforge.net/maven/cpw/mods/CompactSolars/promotions.json",
+            "promo" : "latest",
+            "promoType" : "dev"
         }
     },
     "BiomesOPlenty" : {
