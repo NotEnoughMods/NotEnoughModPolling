@@ -211,15 +211,16 @@ class NotEnoughClasses():
         jsonres = simplejson.loads(result, strict = False )
         jsonres = sorted(jsonres['Versions'], key=lambda k: k['Created'])
         relVersion = ""
-        #relMC = ""
-        devVersion = ""
-        devMC = ""
+        relMC = ""
+        #devVersion = ""
+        #devMC = ""
         for version in jsonres:
-            devVersion = version["Version"]
-            devMC = version["VersionMC"]
+            if version["Channel"] == "stable":
+                relVersion = version["Version"]
+                relMC = version["VersionMC"]
         return {
-            "dev" : devVersion,
-            "mc" : devMC #TODO: this doesn't seem reliable...
+            "version": relVersion,
+            "mc" : relMC #TODO: this doesn't seem reliable...
         }
 
     def CheckDropBox(self,mod):
