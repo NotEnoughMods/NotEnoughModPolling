@@ -124,6 +124,7 @@ class NotEnoughClasses():
         except:
             pass
         return output
+
     def CheckMCForge2(self,mod):
         result = self.fetch_page(self.mods[mod]["mcforge"]["url"])
         jsonres = simplejson.loads(result, strict=False)
@@ -266,6 +267,7 @@ class NotEnoughClasses():
                     "version" : info[5]
                 }
         return {}
+
     def CheckLunatrius(self,mod):
         result = self.fetch_page("http://mc.lunatri.us/json?latest&mod="+mod)
         jsonres = simplejson.loads(result, strict = False )
@@ -274,6 +276,7 @@ class NotEnoughClasses():
             "version" : info["version"],
             "mc" : info["mc"]
         }
+
     def CheckBigReactors(self,mod):
         result = self.fetch_page("http://big-reactors.com/version.json")
         info = simplejson.loads(result, strict = False)
@@ -281,6 +284,7 @@ class NotEnoughClasses():
             "version" : info["version"],
             "mc" : info["version-minecraft"]
         }
+
     def CheckMod(self, mod):
         try:
             # First False is for if there was an update.

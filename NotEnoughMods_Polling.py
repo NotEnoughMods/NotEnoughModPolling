@@ -74,7 +74,7 @@ def running(self, name, params, channel, userdata, rank):
             self.sendMessage(channel, "Turning NotEnoughModPolling on.")
             self.NEM.InitiateVersions()
             self.NEM_cycle_count = 0
-            
+
             timerForPolls = 60*5
 
             if len(params) == 3:
@@ -162,24 +162,24 @@ def show_failedcount(self, name, params, channel, userdata, rank):
     else:
         sortedMods = sorted(self.NEM_troubledMods, key = lambda x: self.NEM_troubledMods[x])
         newlist = []
-        
+
         for modName in sortedMods:
             if self.NEM_troubledMods[modName] > 1:
                 newlist.append( (modName+" [{0}x]".format(self.NEM_troubledMods[modName])) )
-                
+
         if len(newlist) == 0:
-            self.sendNotice(name,   
+            self.sendNotice(name,
                             "{0} mod{1} had trouble being polled once. "
                             "If the mod(s) fail polling a second time, "
                             "they will be shown by this command.".format(len(sortedMods))
                             )
             return
-        
-        self.sendNotice(name,   
+
+        self.sendNotice(name,
                         "The following mods have been having trouble being polled at least twice in a row so far: "
                         "{0}. {1} mod(s) total".format(", ".join(newlist), len(newlist))
                         )
-        
+
         if len(sortedMods) - len(newlist) > 0:
             self.sendNotice(name,
                             "{0} mod(s) had trouble being polled only a "
@@ -310,7 +310,6 @@ def NEMP_TimerEvent(self, channels):
         for mod in current_troubled_mods:
             nemp_logger.debug("Mod {0} is working again. Counter reset (Counter was at {1}) ".format(mod, self.NEM_troubledMods[mod]))
             del self.NEM_troubledMods[mod]
-
 
 def poll(self, name, params, channel, userdata, rank):
     if len(params) < 3:

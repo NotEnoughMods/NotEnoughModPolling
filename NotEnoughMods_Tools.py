@@ -21,6 +21,7 @@ class NotEnoughClasses():
             traceb = str(traceback.format_exc())
             print(traceb)
             return ["1.4.5","1.4.6-1.4.7","1.5.1","1.5.2","1.6.1","1.6.2", "1.6.4"]
+
     def __init__(self):
         self.useragent = urllib2.build_opener()
         self.useragent.addheaders = [
@@ -65,6 +66,7 @@ def setlist(self, name, params, channel, userdata, rank):
 
         NEM.version = str(params[1])
         self.sendChatMessage(self.send, channel, "switched list to: "+colourblue+params[1]+colour)
+
 def multilist(self,name,params,channel,userdata,rank):
     if len(params) != 2:
         self.sendChatMessage(self.send, channel, name+ ": Insufficent amount of parameters provided.")
@@ -126,6 +128,7 @@ def multilist(self,name,params,channel,userdata,rank):
         except Exception as error:
             self.sendChatMessage(self.send, channel, name+": "+str(error))
             traceback.print_exc()
+
 def list(self, name, params, channel, userdata, rank):
     if len(params) < 2:
         self.sendChatMessage(self.send, channel, name+ ": Insufficent amount of parameters provided.")
@@ -191,6 +194,7 @@ def list(self, name, params, channel, userdata, rank):
     except Exception as error:
         self.sendChatMessage(self.send, channel, name+": "+str(error))
         traceback.print_exc()
+
 def compare(self, name, params, channel, userdata, rank):
     try:
         data = {
@@ -219,6 +223,7 @@ def compare(self, name, params, channel, userdata, rank):
     except Exception as error:
         self.sendChatMessage(self.send, channel, name+": "+str(error))
         traceback.print_exc()
+
 def about(self, name, params, channel, userdata, rank):
     self.sendChatMessage(self.send, channel, "Not Enough Mods toolkit for IRC by SinZ v3.0")
 
@@ -232,6 +237,7 @@ def help(self, name, params, channel, userdata, rank):
                 self.sendChatMessage(self.send, channel, name+ ": "+line)
         else:
             self.sendChatMessage(self.send, channel, name+ ": Invalid command provided")
+
 commands = {
     "list" : list,
     "multilist": multilist,
@@ -240,6 +246,7 @@ commands = {
     "setlist" : setlist,
     "compare" : compare
 }
+
 help = {
     "list" : ["=nem list <search> <version>", "Searchs the NotEnoughMods database for <search> and returns all results to IRC"],
     "about": ["=nem about", "Shows some info about this plugin."],
