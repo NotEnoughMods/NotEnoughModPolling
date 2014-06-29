@@ -209,19 +209,26 @@ class NotEnoughClasses():
     def CheckAE2(self,mod):
         result = self.fetch_page("http://ae2.ae-mod.info/builds/builds.json")
         jsonres = simplejson.loads(result, strict = False )
-        jsonres = sorted(jsonres['Versions'], key=lambda k: k['Created'])
+        jsonres = sorted(jsonres['Versions'], key=lambda k: k['Created'], reverse=True)
         relVersion = ""
-        relMC = ""
-        #devVersion = ""
-        #devMC = ""
-        for version in jsonres:
-            if version["Channel"] == "stable":
-                relVersion = version["Version"]
-                relMC = version["VersionMC"]
-        return {
-            "version": relVersion,
-            "mc" : relMC #TODO: this doesn't seem reliable...
-        }
+        MCversion = ""
+        devVersion = ""
+        if jsonres[0]["Channel"] == "stable":
+            relVersion = jsonres[0]["Version"]
+            MCversion = jsonres[0]["VersionMC"]
+        else:
+            devVersion = jsonres[0]["Version"]
+            MCversion = jsonres[0]["VersionMC"]
+        if relVersion is not None:
+            return {
+                "version": relVersion,
+                "mc": MCversion
+            }
+        if devVersion is not None:
+            return {
+                "dev": devVersion,
+                "mc": MCversion
+            }
 
     def CheckDropBox(self,mod):
         result = self.fetch_page(self.mods[mod]["html"]["url"])
