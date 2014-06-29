@@ -219,12 +219,12 @@ class NotEnoughClasses():
         else:
             devVersion = jsonres[0]["Version"]
             MCversion = jsonres[0]["VersionMC"]
-        if relVersion is not None:
+        if relVersion:
             return {
                 "version": relVersion,
                 "mc": MCversion
             }
-        if devVersion is not None:
+        if devVersion:
             return {
                 "dev": devVersion,
                 "mc": MCversion
