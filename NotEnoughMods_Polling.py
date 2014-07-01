@@ -208,12 +208,10 @@ def PollingThread(self, pipe):
             if NEM.mods[mod]["active"]:
                 result, exceptionRaised = NEM.CheckMod(mod)
 
-                if result[0]:
-                    if NEM.mods[mod]["mc"] in tempList:
-                        tempList[NEM.mods[mod]["mc"]].append((real_name, result[1:]))
-                    else:
-                        tempVersion = [(real_name, result[1:])]
-                        tempList[NEM.mods[mod]["mc"]] = tempVersion
+                # if there is an update
+                if any(result):
+                    tempList.setdefault(NEM.mods[mod]['mc'], []).append((real_name, result))
+                # if there's no update, we must check if there was an exception
                 elif exceptionRaised:
                     failed.append(real_name)
         pipe.send((tempList, failed))

@@ -287,25 +287,23 @@ class NotEnoughClasses():
 
     def CheckMod(self, mod):
         try:
-            # First False is for if there was an update.
-            # Next two Falses are for if there was an dev or version change
-            status = [False,
-                      False, False]
+            # [dev change, version change]
+            status = [False, False]
             output = getattr(self, self.mods[mod]["function"])(mod)
             if "dev" in output:
                 # Remove whitespace at the end and start
-                self.mods[mod]["dev"], output["dev"] = self.mods[mod]["dev"].strip(), output["dev"].strip()
+                self.mods[mod]["dev"] = self.mods[mod]["dev"].strip()
+                output["dev"] = output["dev"].strip()
                 if self.mods[mod]["dev"] != output["dev"]:
                     self.mods[mod]["dev"] = output["dev"]
                     status[0] = True
-                    status[1] = True
             if "version" in output:
                 # Remove whitespace at the end and start
-                self.mods[mod]["version"], output["version"] = self.mods[mod]["version"].strip(), output["version"].strip()
+                self.mods[mod]["version"] = self.mods[mod]["version"].strip()
+                output["version"] = output["version"].strip()
                 if self.mods[mod]["version"] != output["version"]:
                     self.mods[mod]["version"] = output["version"]
-                    status[0] = True
-                    status[2] = True
+                    status[1] = True
             if "mc" in output:
                 self.mods[mod]["mc"] = output["mc"]
             if "change" in output and "changelog" not in self.mods[mod]:
@@ -314,4 +312,4 @@ class NotEnoughClasses():
         except:
             print(mod+" failed to be polled...")
             traceback.print_exc()
-            return [False, False, False], True # an exception was raised, so we return a True
+            return [False, False], True # an exception was raised, so we return a True
