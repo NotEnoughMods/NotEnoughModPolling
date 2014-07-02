@@ -59,6 +59,17 @@
             "promoType" : "dev"
         }
     },
+    "Cauldron" : {
+        "function" : "CheckMCForge2",
+        "category" : "forge",
+        "active" : true,
+        "changelog" : false,
+        "mcforge" : {
+            "url" : "http://files.minecraftforge.net/maven/net/minecraftforge/cauldron/promotions.json",
+            "promo" : "latest",
+            "promoType" : "dev"
+        }
+    },
     "OpenPeripheral" : {
         "function" : "CheckJenkins",
         "category" : "openmods",
@@ -216,16 +227,6 @@
         "jenkins" : {
             "url" : "http://nallar.me/buildservice/job/Buildcraft/lastSuccessfulBuild/api/json",
             "regex" : "buildcraft-universal-(?P<mc>.+?)-(?P<dev>.+?).jar$",
-            "item" : 0
-        }
-    },
-    "Cauldron" : {
-        "function" : "CheckJenkins",
-        "active" : true,
-        "changelog" : false,
-        "jenkins" : {
-            "url" : "http://ci.md-5.net/job/Cauldron/lastSuccessfulBuild/api/json",
-            "regex" : "cauldron-(?P<mc>.+?)-(.+?)-(.+?)-(?P<dev>.+?).jar$",
             "item" : 0
         }
     },
