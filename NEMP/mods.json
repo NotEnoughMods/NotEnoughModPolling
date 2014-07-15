@@ -656,6 +656,11 @@
         "category" : "lunatrius",
         "active" : true
     },
+    "Profiles" : {
+        "function" : "CheckLunatrius",
+        "category" : "lunatrius",
+        "active" : true
+    },
     "Stackie" : {
         "function" : "CheckLunatrius",
         "category" : "lunatrius",
