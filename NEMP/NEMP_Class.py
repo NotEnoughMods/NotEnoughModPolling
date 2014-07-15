@@ -272,10 +272,13 @@ class NotEnoughClasses():
         result = self.fetch_page("http://mc.lunatri.us/json?latest&mod="+mod)
         jsonres = simplejson.loads(result, strict = False )
         info = jsonres["mods"][mod]["latest"]
-        return {
+        output = {
             "version" : info["version"],
             "mc" : info["mc"]
         }
+        if len(info['changes']) > 0:
+            output["change"] = info['changes'][0]
+        return output
 
     def CheckBigReactors(self,mod):
         result = self.fetch_page("http://big-reactors.com/version.json")
