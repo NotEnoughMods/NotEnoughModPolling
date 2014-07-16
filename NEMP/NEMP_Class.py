@@ -99,12 +99,12 @@ class NotEnoughClasses():
                             self.mods[mod["name"]]["mc"] = version
 
                             if "dev" in mod and mod["dev"]:
-                                self.mods[mod["name"]]["dev"] = str(mod["dev"])         #Inconsistant JSON is bad, and Pyker should feel bad.
+                                self.mods[mod["name"]]["dev"] = str(mod["dev"])
                             else:
                                 self.mods[mod["name"]]["dev"] = "NOT_USED"
 
                             if "version" in mod and mod["version"]:
-                                self.mods[mod["name"]]["version"] = str(mod["version"]) #Inconsistant JSON is bad, and Pyker should feel bad.
+                                self.mods[mod["name"]]["version"] = str(mod["version"])
                             else:
                                 self.mods[mod["name"]]["version"] = "NOT_USED"
 
