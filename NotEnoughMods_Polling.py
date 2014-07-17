@@ -475,30 +475,30 @@ def nemp_set(self,name,params,channel,userdata,rank):
 # In each entry, the second value in the tuple is the
 # rank that is required to be able to use the command.
 VOICED = 1
-OP = 2
+#OP = 2
 commands = {
     "running" : (running, VOICED),
-    "poll" : (poll, OP),
+    "poll" : (poll, VOICED),
     "list" : (nemp_list, VOICED),
     "about": (about, VOICED),
     "help" : (nemp_help, VOICED),
-    "setversion" : (setversion, OP),
+    "setversion" : (setversion, VOICED),
     "getversion" : (getversion, VOICED),
-    "test" : (test_parser, OP),
-    "reload" : (nemp_reload, OP),
-    "nktest" : (nktest, OP),
-    "html" : (genHTML, OP),
-    "set" : (nemp_set, OP),
+    "test" : (test_parser, VOICED),
+    "reload" : (nemp_reload, VOICED),
+    "nktest" : (nktest, VOICED),
+    "html" : (genHTML, VOICED),
+    "set" : (nemp_set, VOICED),
     "status" : (status, VOICED),
     "disabledmods" : (show_disabledMods, VOICED),
     "failedmods" : (show_autodeactivatedMods, VOICED),
     "failcount" : (show_failedcount, VOICED),
 
     # -- ALIASES -- #
-    "setv" : (setversion, OP),
+    "setv" : (setversion, VOICED),
     "getv" : (getversion, VOICED),
     "polling" : (running, VOICED),
-    "refresh" : (nemp_reload, OP),
+    "refresh" : (nemp_reload, VOICED),
     "disabled" : (show_disabledMods, VOICED),
     "failed" : (show_autodeactivatedMods, VOICED)
 
