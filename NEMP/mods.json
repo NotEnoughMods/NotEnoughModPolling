@@ -543,7 +543,7 @@
         "active" : true,
         "html" : {
             "url" : "http://dl.dropboxusercontent.com/u/20748481/Minecraft/1.7.10/statusEffectHud.version",
-            "regex" : "(?P<version>.+?)\\((?P<mc>.+?)\\)"
+            "regex" : "(?P<version>.+?)$"
         }
     },
     "ArmorStatusHUD" : {
@@ -552,7 +552,7 @@
         "active" : true,
         "html" : {
             "url" : "http://dl.dropboxusercontent.com/u/20748481/Minecraft/1.7.10/armorStatusHud.version",
-            "regex" : "(?P<version>.+?)\\((?P<mc>.+?)\\)"
+            "regex" : "(?P<version>.+?)$"
         }
     },
     "BlockBreaker" : {
@@ -588,7 +588,7 @@
         "active" : true,
         "html" : {
             "url" : "http://dl.dropboxusercontent.com/u/20748481/Minecraft/1.7.10/directionHUD.version",
-            "regex" : "(?P<version>.+?)\\((?P<mc>.+?)\\)"
+            "regex" : "(?P<version>.+?)$"
         }
     },
     "FloatingRuins" : {
@@ -623,7 +623,7 @@
         "category" : "bspkrs",
         "active" : true,
         "html" : {
-            "url" : "http://dl.dropboxusercontent.com/u/20748481/Minecraft/1.7.10/treeCapitatorForge.version",
+            "url" : "http://dl.dropboxusercontent.com/u/20748481/Minecraft/1.7.2/treeCapitatorForge.version",
             "regex" : "(?P<version>.+?)$"
         }
     },
@@ -738,7 +738,7 @@
         "active" : true,
         "jenkins" : {
             "url" : "http://jenkins.bdew.net/job/neiaddons-1.7.10/lastSuccessfulBuild/api/json",
-            "regex" : "neiaddons-mc172-(?P<dev>.+?).jar",
+            "regex" : "neiaddons-mc1710-(?P<dev>.+?).jar",
             "item" : 0
         }
     },
