@@ -542,7 +542,7 @@
         "category" : "bspkrs",
         "active" : true,
         "html" : {
-            "url" : "http://dl.dropboxusercontent.com/u/20748481/Minecraft/1.7.2/statusEffectHud.version",
+            "url" : "http://dl.dropboxusercontent.com/u/20748481/Minecraft/1.7.10/statusEffectHud.version",
             "regex" : "(?P<version>.+?)\\((?P<mc>.+?)\\)"
         }
     },
@@ -551,7 +551,7 @@
         "category" : "bspkrs",
         "active" : true,
         "html" : {
-            "url" : "http://dl.dropboxusercontent.com/u/20748481/Minecraft/1.7.2/armorStatusHud.version",
+            "url" : "http://dl.dropboxusercontent.com/u/20748481/Minecraft/1.7.10/armorStatusHud.version",
             "regex" : "(?P<version>.+?)\\((?P<mc>.+?)\\)"
         }
     },
@@ -569,7 +569,7 @@
         "category" : "bspkrs",
         "active" : true,
         "html" : {
-            "url" : "http://dl.dropboxusercontent.com/u/20748481/Minecraft/1.7.2/bspkrsCore.version",
+            "url" : "http://dl.dropboxusercontent.com/u/20748481/Minecraft/1.7.10/bspkrsCore.version",
             "regex" : "(?P<version>.+?)\\((?P<mc>.+?)\\)"
         }
     },
@@ -578,7 +578,7 @@
         "category" : "bspkrs",
         "active" : true,
         "html" : {
-            "url" : "http://dl.dropboxusercontent.com/u/20748481/Minecraft/1.7.2/crystalWingForge.version",
+            "url" : "http://dl.dropboxusercontent.com/u/20748481/Minecraft/1.7.10/crystalWingForge.version",
             "regex" : "(?P<version>.+?)$"
         }
     },
@@ -587,7 +587,7 @@
         "category" : "bspkrs",
         "active" : true,
         "html" : {
-            "url" : "http://dl.dropboxusercontent.com/u/20748481/Minecraft/1.7.2/directionHUD.version",
+            "url" : "http://dl.dropboxusercontent.com/u/20748481/Minecraft/1.7.10/directionHUD.version",
             "regex" : "(?P<version>.+?)\\((?P<mc>.+?)\\)"
         }
     },
@@ -596,7 +596,7 @@
         "category" : "bspkrs",
         "active" : true,
         "html" : {
-            "url" : "http://dl.dropboxusercontent.com/u/20748481/Minecraft/1.7.2/floatingRuinsForge.version",
+            "url" : "http://dl.dropboxusercontent.com/u/20748481/Minecraft/1.7.10/floatingRuinsForge.version",
             "regex" : "(?P<version>.+?)$"
         }
     },
@@ -614,7 +614,7 @@
         "category" : "bspkrs",
         "active" : true,
         "html" : {
-            "url" : "http://dl.dropboxusercontent.com/u/20748481/Minecraft/1.7.2/startingInventoryForge.version",
+            "url" : "http://dl.dropboxusercontent.com/u/20748481/Minecraft/1.7.10/startingInventoryForge.version",
             "regex" : "(?P<version>.+?)$"
         }
     },
@@ -623,7 +623,7 @@
         "category" : "bspkrs",
         "active" : true,
         "html" : {
-            "url" : "http://dl.dropboxusercontent.com/u/20748481/Minecraft/1.7.2/treeCapitatorForge.version",
+            "url" : "http://dl.dropboxusercontent.com/u/20748481/Minecraft/1.7.10/treeCapitatorForge.version",
             "regex" : "(?P<version>.+?)$"
         }
     },
@@ -632,7 +632,7 @@
         "category" : "bspkrs",
         "active" : true,
         "html" : {
-            "url" : "http://dl.dropboxusercontent.com/u/20748481/Minecraft/1.7.2/worldStateCheckpointsForge.version",
+            "url" : "http://dl.dropboxusercontent.com/u/20748481/Minecraft/1.7.10/worldStateCheckpointsForge.version",
             "regex" : "(?P<version>.+?)$"
         }
     },
@@ -737,7 +737,7 @@
         "function" : "CheckJenkins",
         "active" : true,
         "jenkins" : {
-            "url" : "http://jenkins.bdew.net/job/neiaddons-1.7.2/lastSuccessfulBuild/api/json",
+            "url" : "http://jenkins.bdew.net/job/neiaddons-1.7.10/lastSuccessfulBuild/api/json",
             "regex" : "neiaddons-mc172-(?P<dev>.+?).jar",
             "item" : 0
         }
