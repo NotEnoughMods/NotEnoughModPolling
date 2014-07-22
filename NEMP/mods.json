@@ -768,5 +768,14 @@
             "regex" : "Mariculture-(?P<mc>.+?)-(?P<dev>.+?).jar",
             "item" : 3
         }
+    },
+        "Forestry" : {
+        "function" : "CheckJenkins",
+        "active" : true,
+        "jenkins" : {
+            "url" : "http://ic2api.player.to:8080/job/Forestry/lastSuccessfulBuild/api/json",
+            "regex" : "Forestry_(?P<mc>.+?)-(?P<dev>.+?).jar",
+            "item" : 2
+        }
     }
 }
