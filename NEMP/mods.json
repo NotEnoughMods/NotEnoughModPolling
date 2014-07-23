@@ -782,7 +782,7 @@
         "active" : true,
         "jenkins" : {
             "url" : "http://ci.indiewikis.com:8080/job/Project%20Red/Recommended/api/json",
-            "regex" : "ProjectRed-BASE-(?P<mc>.+?)-(?P<version>.+?).jar",
+            "regex" : "ProjectRed-Base-(?P<mc>.+?)-(?P<version>.+?).jar",
             "item" : 0
         }
     }
