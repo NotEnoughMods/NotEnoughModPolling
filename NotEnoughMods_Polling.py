@@ -433,6 +433,10 @@ def test_parser(self,name,params,channel,userdata,rank):
                 print("result of parser: {}".format(result))
                 version = self.NEM.mods[params[1]]["mc"]
 
+                if not result:
+                    self.sendMessage(channel, "Didn't get a reply from the parser. (got " + repr(result) +")")
+                    return
+
                 if "mc" in result:
                     if version != result["mc"]:
                         self.sendMessage(channel, "Expected MC version {}, got {}".format(version,result["mc"]))
