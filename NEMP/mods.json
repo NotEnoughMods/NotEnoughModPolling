@@ -260,12 +260,11 @@
     },
     "Mekanism" : {
         "function" : "CheckJenkins",
-        "category" : "calclavia",
         "active" : true,
         "jenkins" : {
-            "url" : "http://calclavia.com:8080/job/Mekanism/lastSuccessfulBuild/api/json",
-            "regex" : "Mekanism-v(?P<dev>.+?).jar",
-            "item" : 2
+            "url" : "http://ci.indiewikis.com:8080/job/Mekanism/Recommended/api/json",
+            "regex" : "Mekanism-(?P<mc>.+?)-(?P<version>.+?).jar",
+            "item" : 1
         }
     },
     "CodeChickenCore" : {
@@ -776,6 +775,15 @@
             "url" : "http://ic2api.player.to:8080/job/Forestry/lastSuccessfulBuild/api/json",
             "regex" : "forestry_(?P<mc>.+?)-(?P<dev>.+?).jar",
             "item" : 2
+        }
+    },
+    "ProjectRed" : {
+        "function" : "CheckJenkins",
+        "active" : true,
+        "jenkins" : {
+            "url" : "http://ci.indiewikis.com:8080/job/Project%20Red/Recommended/api/json",
+            "regex" : "ProjectRed-BASE-(?P<mc>.+?)-(?P<version>.+?).jar",
+            "item" : 0
         }
     }
 }
