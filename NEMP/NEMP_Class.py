@@ -4,6 +4,7 @@ import re
 import traceback
 import gzip
 
+from distutils.version import LooseVersion
 from StringIO import StringIO
 
 
@@ -169,11 +170,15 @@ class NotEnoughClasses():
             return output
 
     def CheckChickenBones(self,mod):
-        result = self.fetch_page("http://www.chickenbones.craftsaddle.org/Files/New_Versions/version.php?file="+mod+"&version="+self.mods[mod]["mc"])
+        result = self.fetch_page("http://www.chickenbones.net/Files/notification/version.php?version="+self.mods[mod]["mc"]+"&file="+mod)
         if result.startswith("Ret: "): #Hacky I know, but this is how ChickenBones does it in his mod
-            return {
-                "version" : result[5:]
-            }
+            new_version = result[5:]
+            if LooseVersion(new_version) > LooseVersion(self.mods[mod]['version']):
+                return {
+                    "version" : new_version
+                }
+            else:
+                return {}
 
     def CheckmDiyo(self,mod):
         result = self.fetch_page("http://tanis.sunstrike.io/"+self.mods[mod]["mDiyo"]["location"])
