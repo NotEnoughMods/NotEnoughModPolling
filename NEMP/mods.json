@@ -785,5 +785,41 @@
             "regex" : "ProjectRed-Base-(?P<mc>.+?)-(?P<version>.+?).jar",
             "item" : 0
         }
+    },
+    "OpenComputers" : {
+        "function" : "CheckJenkins",
+        "active" : true,
+        "jenkins" : {
+            "url" : "http://ci.cil.li/job/OpenComputers-1.3-MC1.6.4/lastSuccessfulBuild/api/json",
+            "regex" : "OpenComputers-MC(?P<mc>.+?)-(?P<version>.+?)-universal.jar",
+            "item" : 3
+        }
+    },
+    "OpenComputers" : {
+        "function" : "CheckJenkins",
+        "active" : true,
+        "jenkins" : {
+            "url" : "http://ci.cil.li/job/OpenComputers-1.3-MC1.7.10/lastSuccessfulBuild/api/json",
+            "regex" : "OpenComputers-MC(?P<mc>.+?)-(?P<version>.+?)-universal.jar",
+            "item" : 3
+        }
+    },
+    "OpenComputers" : {
+        "function" : "CheckJenkins",
+        "active" : true,
+        "jenkins" : {
+            "url" : "http://ci.cil.li/job/OpenComputers-dev-MC1.6.4/lastSuccessfulBuild/api/json",
+            "regex" : "OpenComputers-MC(?P<mc>.+?)-(?P<dev>.+?)-universal.jar",
+            "item" : 3
+        }
+    },
+    "OpenComputers" : {
+        "function" : "CheckJenkins",
+        "active" : true,
+        "jenkins" : {
+            "url" : "http://ci.cil.li/job/OpenComputers-dev-MC1.7.10/lastSuccessfulBuild/api/json",
+            "regex" : "OpenComputers-MC(?P<mc>.+?)-(?P<dev>.+?)-universal.jar",
+            "item" : 3
+        }
     }
 }
