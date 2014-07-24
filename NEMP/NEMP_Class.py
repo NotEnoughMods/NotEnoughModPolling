@@ -269,7 +269,7 @@ class NotEnoughClasses():
         return {}
 
     def CheckLunatrius(self,mod):
-        result = self.fetch_page("http://mc.lunatri.us/json?latest&mod="+mod)
+        result = self.fetch_page("http://mc.lunatri.us/json?latest&mod="+mod+"&v=2")
         jsonres = simplejson.loads(result, strict = False )
         info = jsonres["mods"][mod]["latest"]
         output = {
