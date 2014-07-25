@@ -92,7 +92,7 @@
     },
     "MineFactoryReloaded" : {
         "function" : "CheckJenkins",
-        "active" : true,
+        "active" : false,
         "jenkins" : {
             "url" : "http://jenkins.mc.dryware.org/job/skyboy-MineFactoryReloaded/lastSuccessfulBuild/api/json",
             "regex" : "MineFactoryReloaded-\\[(?P<mc>.+?)\\](?P<dev>.+?).jar$",
