@@ -1,15 +1,37 @@
 import urllib2
 import simplejson
-import re
 import traceback
-import threading
-import time
 import gzip
+import logging
+import os
 
 from StringIO import StringIO
+from string import ascii_letters, digits
+from time import time
 
 ID = "nem"
 permission = 1
+
+nem_logger = logging.getLogger("NEM_Tools")
+
+## Colour Constants for List and Multilist command
+COLOURPREFIX = unichr(3)
+COLOUREND = COLOURPREFIX
+BOLD = unichr(2)
+
+DARKGREEN = COLOURPREFIX+"03"
+RED = COLOURPREFIX+"05"
+PURPLE = COLOURPREFIX+"06"
+ORANGE = COLOURPREFIX+"07"
+BLUE = COLOURPREFIX+"12"
+PINK = COLOURPREFIX+"13"
+GRAY = COLOURPREFIX+"14"
+LIGHTGRAY = COLOURPREFIX+"15"
+
+ALLOWED_IN_FILENAME = "-_.() %s%s" % (ascii_letters, digits)
+
+            
+## Colour Constants End
 
 class NotEnoughClasses():
     def getLatestVersion(self):
@@ -18,9 +40,11 @@ class NotEnoughClasses():
             return simplejson.loads(result, strict = False)
         except:
             print("Failed to get NEM versions, falling back to hard-coded")
-            traceb = str(traceback.format_exc())
-            print(traceb)
-            return ["1.4.5","1.4.6-1.4.7","1.5.1","1.5.2","1.6.1","1.6.2", "1.6.4"]
+            nem_logger.exception("Failed to get NEM versions, falling back to hard-coded.")
+            #traceb = str(traceback.format_exc())
+            #print(traceb)
+            return ["1.4.5","1.4.6-1.4.7","1.5.1","1.5.2","1.6.1","1.6.2", "1.6.4", 
+                    "1.7.2", "1.7.4", "1.7.5", "1.7.7", "1.7.9", "1.7.10"]
 
     def __init__(self):
         self.useragent = urllib2.build_opener()
@@ -28,12 +52,42 @@ class NotEnoughClasses():
             ('User-agent', 'NotEnoughMods:Tools/1.X (+http://github.com/SinZ163/NotEnoughMods)'),
             ('Accept-encoding', 'gzip')
         ]
+        
+        self.cacheDir = os.path.join("commands", "NEM", "cache")
+        self.cache_FileLastUpdated = {}
+        self.cache_period = 24 * 60 * 60 # once per day
+        
 
         self.versions = self.getLatestVersion()
         self.version = self.versions[len(self.versions)-1]
-
-    def fetch_page(self, url, decompress=True, timeout=10):
+    
+    def normalize_filename(self, name):
+        return ''.join(c for c in name if c in ALLOWED_IN_FILENAME)
+        
+    def fetch_page(self, url, decompress=True, timeout=10, cache = False):
+        
         try:
+            fname = self.normalize_filename(url)
+            filepath = os.path.join(self.cacheDir, fname)
+            
+            if cache == True:
+                if fname in self.cache_FileLastUpdated:
+                    lastUpdated = self.cache_FileLastUpdated[fname]
+                    
+                    if time() - lastUpdated > self.cache_period:
+                        pass
+                    else:
+                        #print "Loading from cache,",filepath
+                        with open(filepath, "r") as f:
+                            return f.read()
+                else:
+                    if os.path.exists(filepath):
+                        #print "Loading from cache,",filepath
+                        self.cache_FileLastUpdated[fname] = time()
+                        
+                        with open(filepath, "r") as f:
+                            return f.read()
+            
             response = self.useragent.open(url, timeout=timeout)
             if response.info().get('Content-Encoding') == 'gzip' and decompress:
                 buf = StringIO(response.read())
@@ -41,8 +95,16 @@ class NotEnoughClasses():
                 data = f.read()
             else:
                 data = response.read()
+            
+            if cache == True:
+                #print "Writing to cache,",filepath
+                with open(filepath, "w") as f:
+                    f.write(data)
+                self.cache_FileLastUpdated[fname] = time()
+            
             return data
         except:
+            traceback.print_exc()
             pass
             #most likely a timeout
 
@@ -53,95 +115,144 @@ def execute(self, name, params, channel, userdata, rank):
         command = commands[params[0]]
         command(self, name, params, channel, userdata, rank)
     except:
-        self.sendChatMessage(self.send, channel, "Invalid sub-command!")
-        self.sendChatMessage(self.send, channel, "See \"=nem help\" for help")
+        self.sendMessage(channel, "Invalid sub-command!")
+        self.sendMessage(channel, "See \"=nem help\" for help")
 
 def setlist(self, name, params, channel, userdata, rank):
     if len(params) != 2:
-        self.sendChatMessage(self.send, channel, name+ ": Insufficent amount of parameters provided.")
-        self.sendChatMessage(self.send, channel, name+ ": "+help["setlist"][1])
+        self.sendMessage(channel, 
+                         "{name}: Insufficient amount of parameters provided.".format(name = name)
+                         )
+        self.sendMessage(channel, 
+                         "{name}: {setlistHelp}".format(name = name,
+                                                        setlistHelp = help["setlist"][0])
+                         )
     else:
-        colourblue = unichr(2)+unichr(3)+"12"
-        colour = unichr(3)+unichr(2)
-
         NEM.version = str(params[1])
-        self.sendChatMessage(self.send, channel, "switched list to: "+colourblue+params[1]+colour)
+        self.sendMessage(channel, 
+                         "switched list to: "
+                         "{bold}{blue}{version}{colourEnd}".format(bold = BOLD,
+                                                                   blue = BLUE,
+                                                                   version = params[1],
+                                                                   colourEnd = COLOUREND)
+                         )
 
 def multilist(self,name,params,channel,userdata,rank):
     if len(params) != 2:
-        self.sendChatMessage(self.send, channel, name+ ": Insufficent amount of parameters provided.")
-        self.sendChatMessage(self.send, channel, name+ ": "+help["multilist"][1])
+        self.sendMessage(channel, 
+                         "{name}: Insufficient amount of parameters provided.".format(name = name))
+        self.sendMessage(channel, 
+                         "{name}: {multilistHelp}".format(name = name,
+                                                          multilistHelp = help["multilist"][0])
+                         )
     else:
         try:
             jsonres = {}
             results = {}
+            
+            modName = params[1]
+            
             for version in NEM.versions:
-                result = NEM.fetch_page("http://bot.notenoughmods.com/"+urllib2.quote(version)+".json")
+                result = NEM.fetch_page("http://bot.notenoughmods.com/"+urllib2.quote(version)+".json", cache = True)
                 jsonres[version] = simplejson.loads(result, strict = False )
-                i = -1
-                for mod in jsonres[version]:
-                    i = i + 1
-                    if str(params[1]).lower() == mod["name"].lower():
+                
+                for i, mod in enumerate(jsonres[version]):
+                    if modName.lower() == mod["name"].lower():
                         results[version] = i
                         break
                     else:
-                        aliases = mod["aliases"]
-                        for alias in aliases:
-                            if params[1].lower() == alias.lower():
-                                results[version] = i
-                                break
-            darkgreen = "03"
-            red = "05"
-            purple = "06"
-            orange = "07"
-            blue = "12"
-            pink = "13"
-            gray = "14"
-            lightgray = "15"
-            bold = unichr(2)
-            colour = unichr(3)
+                        aliases = [mod_alias.lower() for mod_alias in mod["aliases"] ]
+                        if modName.lower() in aliases:
+                            results[version] = i
+            
             count = len(results)
+            
             if count == 0:
-                self.sendChatMessage(self.send, channel, name+ ": mod not present in NEM.")
+                self.sendMessage(channel, name+ ": mod not present in NEM.")
                 return
             elif count == 1:
                 count = str(count)+" MC version"
             else:
                 count = str(count)+" MC versions"
-            self.sendChatMessage(self.send, channel, "Listing "+count+" for \""+params[1]+"\":")
-            for line in sorted(results.iterkeys()):
-                alias = colour
-                if jsonres[line][results[line]]["aliases"]:
-                    alias = colour+"("+colour+pink+(colour+', '+colour+pink).join(jsonres[line][results[line]]["aliases"])+colour+") "
-                comment = colour
-                if jsonres[line][results[line]]["comment"] != "":
-                    comment = str(colour+"["+colour+gray+jsonres[line][results[line]]["comment"]+colour+"] ")
-                dev = colour
+                
+            self.sendMessage(channel, "Listing "+count+" for \""+params[1]+"\":")
+            
+            for version in sorted(results.iterkeys()):
+                alias = ""
+                modData = jsonres[version][results[version]]
+                
+                if modData["aliases"]:
+                    alias_joinText= "{colourEnd}, {colour}".format(colourEnd = COLOUREND,
+                                                               colour = PINK)
+                    alias_text = alias_joinText.join(modData["aliases"])
+                    
+                    alias = "({colour}{text}{colourEnd}) ".format(colourEnd = COLOUREND, 
+                                                                  colour = PINK,
+                                                                  text = alias_text)
+                
+                comment = ""
+                if modData["comment"] != "":
+                    comment = "({colour}{text}{colourEnd}) ".format(colourEnd = COLOUREND, 
+                                                                colour = GRAY,
+                                                                text = modData["comment"])
+                
+                dev = ""
                 try:
-                    if jsonres[line][results[line]]["dev"] != "":
-                        dev = str(colour+" ("+colour+gray+"dev"+colour+": "+colour+red+jsonres[line][results[line]]["dev"]+colour+")")
+                    if modData["dev"] != "":
+                        dev = ("({colour}dev{colourEnd}): "
+                               "{colour2}{version}{colourEnd})".format(colourEnd = COLOUREND, 
+                                                                   colour = GRAY,
+                                                                   colour2 = RED,
+                                                                   version = modData["dev"])
+                                )
+                                
                 except Exception as error:
                     print(error)
                     traceback.print_exc()
-                    #lol
-                self.sendChatMessage(self.send, channel, bold+colour+blue+line+colour+bold+": "+colour+purple+jsonres[line][results[line]]["name"]+" "+alias+colour+darkgreen+jsonres[line][results[line]]["version"]+dev+" "+comment+colour+orange+jsonres[line][results[line]]["shorturl"]+colour)
+                    
+                self.sendMessage(channel, 
+                                 "{bold}{blue}{mcversion}{colourEnd}{bold}: "
+                                 "{purple}{name}{colourEnd} {aliasString}"
+                                 "{darkgreen}{version}{colourEnd} {devString}"
+                                 "{comment}{orange}{shorturl}{colourEnd}".format(name = modData["name"],
+                                                                             aliasString = alias,
+                                                                             devString = dev,
+                                                                             comment = comment,
+                                                                             version = modData["version"],
+                                                                             shorturl = modData["shorturl"],
+                                                                             mcversion = version,
+                                                                             
+                                                                             bold = BOLD,
+                                                                             blue = BLUE,
+                                                                             purple = PURPLE,
+                                                                             darkgreen = DARKGREEN,
+                                                                             orange = ORANGE,
+                                                                             colourEnd = COLOUREND)
+                             )
+                
         except Exception as error:
-            self.sendChatMessage(self.send, channel, name+": "+str(error))
+            self.sendMessage(channel, name+": "+str(error))
             traceback.print_exc()
 
 def list(self, name, params, channel, userdata, rank):
     if len(params) < 2:
-        self.sendChatMessage(self.send, channel, name+ ": Insufficent amount of parameters provided.")
-        self.sendChatMessage(self.send, channel, name+ ": "+help["list"][1])
+        self.sendMessage(channel, 
+                         "{name}: Insufficient amount of parameters provided.".format(name = name))
+        self.sendMessage(channel, 
+                         "{name}: {helpEntry}".format(name = name,
+                                                      helpEntry = help["list"][0])
+                         )
         return
     if len(params) >= 3:
         version = params[2]
     else:
         version = NEM.version
     try:
-        result = NEM.fetch_page("http://bot.notenoughmods.com/"+urllib2.quote(version)+".json")
+        result = NEM.fetch_page("http://bot.notenoughmods.com/"+urllib2.quote(version)+".json", cache = True)
         if not result:
-            self.sendChatMessage(self.send, channel, name + ": Could not fetch the list. Are you sure it exists?")
+            self.sendMessage(channel, 
+                             "{0}: Could not fetch the list. Are you sure it exists?".format(name)
+                             )
             return
         jsonres = simplejson.loads(result, strict = False )
         results = []
@@ -157,86 +268,133 @@ def list(self, name, params, channel, userdata, rank):
                     if params[1].lower() in alias.lower():
                         results.append(i)
                         break
-        darkgreen = "03"
-        red = "05"
-        purple = "06"
-        orange = "7"
-        blue = "12"
-        pink = "13"
-        gray = "14"
-        bold = unichr(2)
-        colour = unichr(3)
+        
         count = len(results)
+        
         if count == 0:
-            self.sendChatMessage(self.send, channel, name+ ": no results found.")
+            self.sendMessage(channel, name+ ": no results found.")
             return
         elif count == 1:
             count = str(count)+" result"
         else:
             count = str(count)+" results"
-        self.sendChatMessage(self.send, channel, "Listing "+count+" for \""+params[1]+"\" in "+bold+colour+blue+version+colour+bold+":")
+            
+        self.sendMessage(channel, 
+                        "Listing {count} for \"{term}\" in "
+                        "{bold}{colour}{version}"
+                        "{colourEnd}{bold}".format(count = count,
+                                                   term = params[1],
+                                                   version = version,
+                                                   bold = BOLD,
+                                                   colourEnd = COLOUREND,
+                                                   colour = BLUE)
+                         )
+        
         for line in results:
-            alias = colour
+            alias = COLOURPREFIX
             if jsonres[line]["aliases"]:
-                alias = colour+"("+colour+pink+(colour+', '+colour+pink).join(jsonres[line]["aliases"])+colour+") "
-            comment = colour
+                alias_joinText= "{colourEnd}, {colour}".format(colourEnd = COLOUREND,
+                                                               colour = PINK)
+                alias_text = alias_joinText.join(jsonres[line]["aliases"])
+                
+                alias = "({colour}{text}{colourEnd}) ".format(colourEnd = COLOUREND, 
+                                                              colour = PINK,
+                                                              text = alias_text)
+            comment = ""
             if jsonres[line]["comment"] != "":
-                comment = str(colour+"("+colour+gray+jsonres[line]["comment"]+colour+") ")
-            dev = colour
+                comment = "({colour}{text}{colourEnd}) ".format(colourEnd = COLOUREND, 
+                                                                colour = GRAY,
+                                                                text = jsonres[line]["comment"])
+            dev = ""
             try:
                 if jsonres[line]["dev"] != "":
-                    dev = str(colour+" ("+colour+gray+"dev"+colour+": "+colour+red+str(jsonres[line]["dev"])+colour+")")
+                    dev = ("({colour}dev{colourEnd}): "
+                           "{colour2}{version}{colourEnd})".format(colourEnd = COLOUREND, 
+                                                                   colour = GRAY,
+                                                                   colour2 = RED,
+                                                                   version = jsonres[line]["dev"])
+                           )
             except Exception as error:
                 print(error)
                 traceback.print_exc()
-                #lol
-            self.sendChatMessage(self.send, channel, colour+purple+jsonres[line]["name"]+" "+alias+colour+darkgreen+str(jsonres[line]["version"])+dev+" "+comment+colour+orange+jsonres[line]["shorturl"]+colour)
+                
+            self.sendMessage(channel, 
+                             "{purple}{name}{colourEnd} {aliasString}"
+                             "{darkgreen}{version}{colourEnd} {devString}"
+                             "{comment}{orange}{shorturl}{colourEnd}".format(name = jsonres[line]["name"],
+                                                                             aliasString = alias,
+                                                                             devString = dev,
+                                                                             comment = comment,
+                                                                             version = jsonres[line]["version"],
+                                                                             shorturl = jsonres[line]["shorturl"],
+                                                                             
+                                                                             purple = PURPLE,
+                                                                             darkgreen = DARKGREEN,
+                                                                             orange = ORANGE,
+                                                                             colourEnd = COLOUREND)
+                             )
     except Exception as error:
-        self.sendChatMessage(self.send, channel, name+": "+str(error))
+        self.sendMessage(channel, "{0}: {1}".format(name, error) )
         traceback.print_exc()
 
 def compare(self, name, params, channel, userdata, rank):
     try:
-        data = {
-            params[1] : {},
-            params[2] : {}
-        }
-        oldData = NEM.fetch_page("http://bot.notenoughmods.com/"+urllib2.quote(params[1])+".json")
+        oldVersion, newVersion = params[1], params[2]
+
+        oldData = NEM.fetch_page("http://bot.notenoughmods.com/"+urllib2.quote(oldVersion)+".json", cache = True)
         oldJson = simplejson.loads(oldData, strict = False )
-
-        for modInfo in oldJson:
-            modName = modInfo["name"].lower()
-            data[params[1]][modName] = modInfo
-        newData = NEM.fetch_page("http://bot.notenoughmods.com/"+urllib2.quote(params[2])+".json")
+        
+        newData = NEM.fetch_page("http://bot.notenoughmods.com/"+urllib2.quote(newVersion)+".json", cache = True)
         newJson = simplejson.loads(newData, strict = False )
-
-        for modInfo in newJson:
-            modName = modInfo["name"].lower()
-            data[params[2]][modName] = modInfo
+        
+        newMods = {modInfo["name"].lower(): True for modInfo in newJson}
+        
         missingMods = []
-        for key in data[params[1]].iterkeys():
-            if key not in data[params[2]]:
-                missingMods.append(data[params[1]][key]["name"])
-        with open("commands/modbot.mca.d3s.co/htdocs/compare/"+params[1]+"..."+params[2]+".json", "w") as f:
+        
+        for modInfo in oldJson:
+            old_modName = modInfo["name"].lower()
+            if old_modName not in newMods:
+                missingMods.append(modInfo["name"])
+                
+        path = "commands/modbot.mca.d3s.co/htdocs/compare/{0}...{1}.json".format(oldVersion, newVersion)
+        with open(path, "w") as f:
             f.write(simplejson.dumps(missingMods, sort_keys=True, indent=4 * ' '))
-        self.sendChatMessage(self.send, channel, str(len(missingMods))+" mods died trying to update to "+params[2])
+        
+        self.sendMessage(channel, 
+                         "{0} mods died trying to update to {1}".format(len(missingMods), newVersion)
+                         )
+        
     except Exception as error:
-        self.sendChatMessage(self.send, channel, name+": "+str(error))
+        self.sendMessage(channel, "{0}: {1}".format(name, error) )
         traceback.print_exc()
 
 def about(self, name, params, channel, userdata, rank):
-    self.sendChatMessage(self.send, channel, "Not Enough Mods toolkit for IRC by SinZ v3.0")
+    self.sendMessage(channel, "Not Enough Mods toolkit for IRC by SinZ & Yoshi2 v4.0")
 
 def help(self, name, params, channel, userdata, rank):
     if len(params) == 1:
-        self.sendChatMessage(self.send, channel, name+ ": Available commands: " + ", ".join(help))
+        self.sendMessage(channel, 
+                         "{0}: Available commands: {1}".format(name, 
+                                                               ", ".join(help))
+                         )
     else:
         command = params[1]
         if command in help:
             for line in help[command]:
-                self.sendChatMessage(self.send, channel, name+ ": "+line)
+                self.sendMessage(channel, name+ ": "+line)
         else:
-            self.sendChatMessage(self.send, channel, name+ ": Invalid command provided")
+            self.sendMessage(channel, name+ ": Invalid command provided")
+
+def force_cacheRedownload(self, name, params, channel, userdata, rank):
+    if self.rankconvert[rank] >= 3:
+        for version in NEM.versions:
+            url = "http://bot.notenoughmods.com/"+urllib2.quote(version)+".json"
+            normalized = NEM.normalize_filename(url)
+            filepath = os.path.join(NEM.cacheDir, normalized)
+            if os.path.exists(filepath):
+                NEM.cache_FileLastUpdated[normalized] = 0
+                
+        self.sendMessage(channel, "Cache Timestamps have been reset. Cache will be redownloaded on the next fetching.")
 
 commands = {
     "list" : list,
@@ -244,13 +402,21 @@ commands = {
     "about": about,
     "help" : help,
     "setlist" : setlist,
-    "compare" : compare
+    "compare" : compare,
+    "forceredownload" : force_cacheRedownload
 }
 
 help = {
-    "list" : ["=nem list <search> <version>", "Searchs the NotEnoughMods database for <search> and returns all results to IRC"],
-    "about": ["=nem about", "Shows some info about this plugin."],
-    "help" : ["=nem help [command]", "Shows this help info about [command] or lists all commands for this plugin."],
-    "setlist" : ["=nem setlist <version>", "Sets the default version to <version> for the other commands."],
-    "multilist" : ["=nem multilist <modName or alias>", "Searchs the NotEnoughMods database for a version per MC version"]
-}
+    "list" : ["=nem list <search> <version>", 
+              "Searches the NotEnoughMods database for <search> and returns all results to IRC."],
+    "about": ["=nem about", 
+              "Shows some info about the NEM plugin."],
+    "help" : ["=nem help [command]", 
+              "Shows the help info about [command] or lists all commands for this plugin."],
+    "setlist" : ["=nem setlist <version>", 
+                 "Sets the default version to be used by other commands to <version>."],
+    "multilist" : ["=nem multilist <modName or alias>", 
+                   "Searches the NotEnoughMods database for modName or alias in all MC versions."],
+    "compare" : ["=nem compare <oldVersion> <newVersion>", 
+                 "Compares the NEMP entries for two different MC versions and says how many mods haven't been updated to the new version."]
+        }
