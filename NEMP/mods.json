@@ -114,20 +114,11 @@
     },
     "MineFactoryReloaded" : {
         "function" : "CheckJenkins",
-        "active" : false,
+        "active" : true,
         "jenkins" : {
             "url" : "http://jenkins.mc.dryware.org/job/skyboy-MineFactoryReloaded/lastSuccessfulBuild/api/json",
             "regex" : "MineFactoryReloaded-\\[(?P<mc>.+?)\\](?P<dev>.+?).jar$",
             "item" : 0
-        }
-    },
-    "IndustrialCraft2" : {
-        "function" : "CheckJenkins",
-        "active" : false,
-        "jenkins" : {
-            "url" : "http://ic2api.player.to:8080/job/IC2_lf/lastSuccessfulBuild/api/json",
-            "regex" : "industrialcraft-2_(?P<dev>.+?)-lf.jar$",
-            "item" : 2
         }
     },
     "ModularPowersuits" : {
