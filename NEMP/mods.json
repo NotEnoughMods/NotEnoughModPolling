@@ -70,14 +70,26 @@
             "promoType" : "dev"
         }
     },
-    "OpenPeripheral" : {
+    "OpenPeripheralCore" : {
+        "comment" : "This isn't a core </3",
+    
         "function" : "CheckJenkins",
         "category" : "openmods",
         "active" : true,
         "jenkins" : {
-            "url" : "http://openmods.info:8080/job/OpenPeripheral/lastSuccessfulBuild/api/json",
-            "regex" : "OpenPeripheral-(?P<dev>.+?)-forge(.+?).jar$",
-            "item" : 0
+            "url" : "http://openmods.info:8080/job/OpenPeripheralCore/lastSuccessfulBuild/api/json",
+            "regex" : "OpenPeripheralCore-(?P<mc>.+?)-(?P<dev>.+?).jar$",
+            "item" : 1
+        }
+    },
+    "OpenPeripheralAddons" : {
+        "function" : "CheckJenkins",
+        "category" : "openmods",
+        "active" : true,
+        "jenkins" : {
+            "url" : "http://openmods.info:8080/job/OpenPeripheralAddons/lastSuccessfulBuild/api/json",
+            "regex" : "OpenPeripheralAddons-(?P<mc>.+?)-(?P<dev>.+?).jar$",
+            "item" : 1
         }
     },
     "OpenBlocks" : {
@@ -85,9 +97,19 @@
         "category" : "openmods",
         "active" : true,
         "jenkins" : {
-            "url" : "http://openmods.info:8080/job/OpenBlocks-Experimental/lastSuccessfulBuild/api/json",
-            "regex" : "OpenBlocks-Experimental-(?P<dev>.+?).jar$",
-            "item" : 0
+            "url" : "http://openmods.info:8080/job/OpenBlocks/lastSuccessfulBuild/api/json",
+            "regex" : "OpenBlocks-(?P<mc>.+?)-(?P<dev>.+?).jar$",
+            "item" : 1
+        }
+    },
+    "OpenModsLib" : {
+        "function" : "CheckJenkins",
+        "category" : "openmods",
+        "active" : true,
+        "jenkins" : {
+            "url" : "http://openmods.info:8080/job/OpenModsLib/lastSuccessfulBuild/api/json",
+            "regex" : "OpenModsLib-(?P<mc>.+?)-(?P<dev>.+?).jar$",
+            "item" : 1
         }
     },
     "MineFactoryReloaded" : {
