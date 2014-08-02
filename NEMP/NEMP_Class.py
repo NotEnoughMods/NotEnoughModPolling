@@ -294,16 +294,11 @@ class NotEnoughClasses():
         }
 
     def CheckCurseForge(self,mod):
-        try:
-            modid = self.mods[mod]["curseforge"]["id"]
-        except:
-            modid = ""
+        modid = self.mods[mod]['curseforge'].get('id')
 
         # Accounts for discrepancies between NEM mod names and the CurseForge link format
-        if self.mods[mod]["curseforge"].has_key("name"):
-            modname = self.mods[mod]["curseforge"]["name"]
-        else:
-            modname = mod.lower()
+        # Uses CurseForge name if there is one specified. Defaults to the mod's name in lowercase.
+        modname = self.mods[mod]['curseforge'].get('name', mod.lower())
 
         # As IDs only work with newer mods we have to support two versions of the URL
         if modid:
@@ -320,16 +315,17 @@ class NotEnoughClasses():
 
         if jsonres["download"]["type"] == "release":
             relVersion = output["version"]
-            MCversion = jsonres["download"]["version"]
         else:
             devVersion = output["version"]
-            MCversion = jsonres["download"]["version"]
+
+        MCversion = jsonres["download"]["version"]
 
         if relVersion:
             return {
                 "version": relVersion,
                 "mc": MCversion
             }
+
         if devVersion:
             return {
                 "dev": devVersion,
