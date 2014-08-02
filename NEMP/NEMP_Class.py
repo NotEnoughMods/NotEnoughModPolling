@@ -293,6 +293,49 @@ class NotEnoughClasses():
             "mc" : info["version-minecraft"]
         }
 
+    def CheckCurseForge(self,mod):
+        try:
+            modid = self.mods[mod]["curseforge"]["id"]
+        except:
+            modid = ""
+
+        # Accounts for discrepancies between NEM mod names and the CurseForge link format
+        if self.mods[mod]["curseforge"].has_key("name"):
+            modname = self.mods[mod]["curseforge"]["name"]
+        else:
+            modname = mod.lower()
+
+        # As IDs only work with newer mods we have to support two versions of the URL
+        if modid:
+            result = self.fetch_page("http://widget.mcf.li/mc-mods/minecraft/"+modid+"-"+modname+".json")
+        else:
+            result = self.fetch_page("http://widget.mcf.li/mc-mods/minecraft/"+modname+".json")
+
+        jsonres = simplejson.loads(result, strict = False )
+        filename = jsonres["download"]["name"]
+        match = re.search(self.mods[mod]["curseforge"]["regex"],filename)
+        output = match.groupdict()
+        relVersion = ""
+        devVersion = ""
+
+        if jsonres["download"]["type"] == "release":
+            relVersion = output["version"]
+            MCversion = jsonres["download"]["version"]
+        else:
+            devVersion = output["version"]
+            MCversion = jsonres["download"]["version"]
+
+        if relVersion:
+            return {
+                "version": relVersion,
+                "mc": MCversion
+            }
+        if devVersion:
+            return {
+                "dev": devVersion,
+                "mc": MCversion
+            }
+
     def CheckMod(self, mod):
         try:
             # [dev change, version change]
