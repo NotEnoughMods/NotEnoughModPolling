@@ -113,12 +113,11 @@
         }
     },
     "MineFactoryReloaded" : {
-        "function" : "CheckJenkins",
-        "active" : false,
-        "jenkins" : {
-            "url" : "http://jenkins.mc.dryware.org/job/skyboy-MineFactoryReloaded/lastSuccessfulBuild/api/json",
-            "regex" : "MineFactoryReloaded-\\[(?P<mc>.+?)\\](?P<dev>.+?).jar$",
-            "item" : 0
+        "function" : "CheckCurseForge",
+        "active" : true,
+        "curseforge" : {
+            "name" : "minefactory-reloaded",
+            "regex" : "MineFactoryReloaded-_.+?_(?P<version>.+?).jar$"
         }
     },
     "IndustrialCraft2" : {
@@ -320,21 +319,21 @@
         "active" : true
     },
     "TinkersConstruct" : {
-        "function" : "CheckmDiyo",
+        "function" : "CheckCurseForge",
         "category" : "mdiyo",
-        "active" : false,
-        "mDiyo" : {
-            "location" : "TConstruct/development/",
-            "regex" : "TConstruct_(?P<mc>.+?)_(?P<dev>.+?).jar"
+        "active" : true,
+        "curseforge" : {
+            "name" : "tinkers-construct",
+            "regex" : "TConstruct_.+?_(?P<version>.+?).jar"
         }
     },
     "Mechworks" : {
-        "function" : "CheckmDiyo",
+        "function" : "CheckCurseForge",
         "category" : "mdiyo",
         "active" : true,
-        "mDiyo" : {
-            "location" : "TMechworks/development/",
-            "regex" : "TMechworks_(?P<mc>.+?)_(?P<dev>.+?).jar"
+        "curseforge" : {
+            "name" : "tinkers-mechworks",
+            "regex" : "TMechworks_.+?_(?P<version>.+?).jar"
         }
     },
     "AppliedEnergistics" : {
@@ -812,7 +811,7 @@
         "function" : "CheckCurseForge",
         "active" : true,
         "curseforge": {
-            "regex" : "_.+?_(?P<version>.+?).jar"
+            "regex" : "CoFHCore-_.+?_(?P<version>.+?).jar"
         }
     },
     "CoFHLib" : {
@@ -820,14 +819,30 @@
         "active" : true,
         "curseforge": {
             "id" : "220333",
-            "regex" : "_.+?_(?P<version>.+?).jar"
+            "regex" : "CoFHLib-_.+?_(?P<version>.+?).jar"
+        }
+    },
+    "ThermalExpansion" : {
+        "function" : "CheckCurseForge",
+        "active" : true,
+        "curseforge": {
+            "regex" : "ThermalExpansion-_.+?_(?P<version>.+?).jar"
+        }
+    },
+    "ThermalFoundation" : {
+        "function" : "CheckCurseForge",
+        "active" : true,
+        "curseforge": {
+            "name" : "thermal-foundation",
+            "id" : "222880",
+            "regex" : "ThermalFoundation-_.+?_(?P<version>.+?).jar"
         }
     },
     "SimplyJetpacks" : {
         "function" : "CheckCurseForge",
         "active" : true,
         "curseforge": {
-            "regex" : "-.+?-(?P<version>.+?).jar",
+            "regex" : "SimplyJetpacks-.+?-(?P<version>.+?).jar",
             "name" : "simply-jetpacks"
         }
     }
