@@ -119,8 +119,7 @@
             "name" : "minefactory-reloaded",
             "regex" : "MineFactoryReloaded-_.+?_(?P<version>.+?).jar$"
         }
-    },
-    "IndustrialCraft2" : {
+	 "IndustrialCraft2" : {
         "function" : "CheckJenkins",
         "active" : false,
         "jenkins" : {
@@ -838,12 +837,120 @@
             "regex" : "ThermalFoundation-_.+?_(?P<version>.+?).jar"
         }
     },
+    "ThermalFoundation" : {
+        "function" : "CheckCurseForge",
+        "active" : true,
+        "curseforge": {
+            "id" : "222880",
+            "name" : "thermal-foundation",
+            "regex" : "_.+?_(?P<version>.+?).jar"
+        }
+    },
+    "ThermalExpansion" : {
+        "function" : "CheckCurseForge",
+        "active" : true,
+        "curseforge": {
+            "name" : "thermalexpansion",
+            "regex" : "_.+?_(?P<version>.+?).jar"
+        }
+    },
+    "MinefactoryReloaded" : {
+        "function" : "CheckCurseForge",
+        "active" : true,
+        "curseforge": {
+            "name" : "minefactory-reloaded",
+            "regex" : "_.+?_(?P<version>.+?).jar"
+        }
+    },
     "SimplyJetpacks" : {
         "function" : "CheckCurseForge",
         "active" : true,
         "curseforge": {
             "regex" : "SimplyJetpacks-.+?-(?P<version>.+?).jar",
             "name" : "simply-jetpacks"
+        }
+    },
+    "Witchery" : {
+        "function" : "CheckCurseForge",
+        "active" : true,
+        "curseforge": {
+            "regex" : "-.+?-(?P<version>.+?).jar"
+        }
+    },
+    "AnotherOneBitestheDust" : {
+        "function" : "CheckCurseForge",
+        "active" : true,
+        "curseforge": {
+            "name" : "another-one-bites-the-dust",
+            "id" : "221863",
+            "regex" : ".+?-(?P<version>.+?).jar"
+        }
+    },
+    "EnchantingPlus" : {
+        "function" : "CheckCurseForge",
+        "active" : false,
+        "curseforge": {
+            "name" : "enchanting-plus",
+            "regex" : "-.+?-(?P<version>.+?).jar"
+        }
+    },
+    "Railcraft" : {
+        "function" : "CheckCurseForge",
+        "active" : true,
+        "curseforge": {
+            "regex" : ".+?-(?P<version>.+?).jar"
+        }
+    },
+    "TinkersConstruct" : {
+        "function" : "CheckCurseForge",
+        "active" : true,
+        "curseforge": {
+            "name" : "tinkers-construct",
+            "regex" : "_.+?_(?P<version>.+?).jar"
+        }
+    },
+    "EnderIO" : {
+        "function" : "CheckCurseForge",
+        "active" : true,
+        "curseforge": {
+            "name" : "ender-io",
+            "regex" : ".+?-(?P<version>.+?).jar"
+        }
+    },
+    "Jabba" : {
+        "function" : "CheckCurseForge",
+        "active" : true,
+        "curseforge": {
+            "regex" : ".+?-(?P<version>.+?)_.+?.jar"
+        }
+    },
+    "Waila" : {
+        "function" : "CheckCurseForge",
+        "active" : true,
+        "curseforge": {
+            "regex" : ".+?-(?P<version>.+?)_.+?.jar"
+        }
+    },
+    "Opis" : {
+        "function" : "CheckCurseForge",
+        "active" : true,
+        "curseforge": {
+            "regex" : ".+?-(?P<version>.+?)_.+?.jar"
+        }
+    },
+    "MobiusCore" : {
+        "function" : "CheckCurseForge",
+        "active" : true,
+        "curseforge": {
+            "regex" : ".+?_(?P<version>.+?)_.+?.jar"
+        }
+    },
+    "ModTweaker" : {
+        "function" : "CheckCurseForge",
+        "active" : true,
+        "curseforge": {
+            "id" : "220954",
+            "regex" : "-.+?-(?P<version>.+?).jar"
         }
     }
 }
