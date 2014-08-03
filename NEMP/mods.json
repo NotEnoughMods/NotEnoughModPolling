@@ -120,6 +120,13 @@
             "regex" : "MineFactoryReloaded-_.+?_(?P<version>.+?).jar$"
         }
     },
+    "NetherOres" : {
+        "function" : "CheckCurseForge",
+        "active" : true,
+        "curseforge" : {
+            "regex" : "-_.+?_(?P<version>.+?).jar"
+        }
+    },
     "IndustrialCraft2" : {
         "function" : "CheckJenkins",
         "active" : false,
@@ -714,52 +721,71 @@
         }
     },
     "ServerTools-BACKUP" : {
-        "function" : "CheckJenkins",
-        "category" : "ServerTools",
+        "function" : "CheckCurseForge",
         "active" : true,
-        "jenkins" : {
-            "url" : "http://ci.matthewprenger.com/job/ServerTools-BACKUP/lastSuccessfulBuild/api/json",
-            "regex" : "ServerTools-BACKUP-(?P<mc>.+?)-(?P<version>.+?).jar",
-            "item" : 3
+        "curseforge": {
+			"name" : "servertools-backup",
+			"id" : "220713",
+            "regex" : "-.+?-(?P<version>.+?).jar"
         }
     },
     "ServerTools-CORE" : {
-        "function" : "CheckJenkins",
-        "category" : "ServerTools",
+        "function" : "CheckCurseForge",
         "active" : true,
-        "jenkins" : {
-            "url" : "http://ci.matthewprenger.com/job/ServerTools-CORE/lastSuccessfulBuild/api/json",
-            "regex" : "ServerTools-CORE-(?P<mc>.+?)-(?P<version>.+?).jar",
-            "item" : 3
+        "curseforge": {
+			"name" : "forgeservertools",
+            "regex" : "-.+?-(?P<version>.+?).jar"
         }
     },
     "ServerTools-PERMISSION" : {
-        "function" : "CheckJenkins",
-        "category" : "ServerTools",
+        "function" : "CheckCurseForge",
         "active" : true,
-        "jenkins" : {
-            "url" : "http://ci.matthewprenger.com/job/ServerTools-PERMISSION/lastSuccessfulBuild/api/json",
-            "regex" : "ServerTools-PERMISSION-(?P<mc>.+?)-(?P<version>.+?).jar",
-            "item" : 3
+        "curseforge": {
+			"name" : "servertools-permission",
+			"id" : "220714",
+            "regex" : "-.+?-(?P<version>.+?).jar"
         }
     },
     "ServerTools-TELEPORT" : {
-        "function" : "CheckJenkins",
-        "category" : "ServerTools",
+        "function" : "CheckCurseForge",
         "active" : true,
-        "jenkins" : {
-            "url" : "http://ci.matthewprenger.com/job/ServerTools-TELEPORT/lastSuccessfulBuild/api/json",
-            "regex" : "ServerTools-TELEPORT-(?P<mc>.+?)-(?P<version>.+?).jar",
-            "item" : 3
+        "curseforge": {
+			"name" : "servertools-teleport",
+			"id" : "220715",
+            "regex" : "-.+?-(?P<version>.+?).jar"
         }
     },
-    "NEIAddons" : {
-        "function" : "CheckJenkins",
+	"NEIAddons" : {
+        "function" : "CheckCurseForge",
         "active" : true,
-        "jenkins" : {
-            "url" : "http://jenkins.bdew.net/job/neiaddons-1.7.10/lastSuccessfulBuild/api/json",
-            "regex" : "neiaddons-mc1710-(?P<dev>.+?).jar",
-            "item" : 0
+        "curseforge": {
+			"name" : "nei-addons",
+            "regex" : "-.+?-(?P<version>.+?).jar"
+        }
+    },
+	"BdLib" : {
+        "function" : "CheckCurseForge",
+        "active" : true,
+        "curseforge": {
+			"name" : "bdlib",
+            "regex" : "-.+?-(?P<version>.+?).jar"
+        }
+    },
+	"Gendustry" : {
+        "function" : "CheckCurseForge",
+        "active" : true,
+        "curseforge": {
+			"name" : "gendustry",
+            "regex" : "-.+?-(?P<version>.+?).jar"
+        }
+    },
+	"PressurePipes" : {
+        "function" : "CheckCurseForge",
+        "active" : true,
+        "curseforge": {
+			"name" : "pressure-pipes",
+			"id" : "221214",
+            "regex" : "-.+?-(?P<version>.+?).jar"
         }
     },
     "ExtraCells" : {
@@ -836,6 +862,14 @@
             "name" : "thermal-foundation",
             "id" : "222880",
             "regex" : "ThermalFoundation-_.+?_(?P<version>.+?).jar"
+        }
+    },
+	"RedstoneArsenal" : {
+        "function" : "CheckCurseForge",
+        "active" : true,
+        "curseforge": {
+			"name" : "redstone-arsenal",
+            "regex" : "_.+?_(?P<version>.+?).jar"
         }
     },
     "SimplyJetpacks" : {
@@ -920,6 +954,69 @@
             "url" : "http://www.wtfcool.com:8080/job/Morpheus/lastSuccessfulBuild/api/json",
             "regex" : "-(?P<mc>.+?)-(?P<version>.+?).jar",
             "item" : 1
+        }
+    },
+	"Zyin'sHUD" : {
+        "function" : "CheckCurseForge",
+        "active" : true,
+        "curseforge": {
+			"name" : "zyins-hud",
+            "regex" : "-.+?-v.(?P<version>.+?).jar"
+        }
+    },
+	"ProgressiveAutomation" : {
+        "function" : "CheckCurseForge",
+        "active" : true,
+        "curseforge": {
+			"name" : "progressive-automation-early-miner",
+			"id" : "220606",
+            "regex" : "-.+?-(?P<version>.+?).jar"
+        }
+    },
+	"SimpleFluidTanks" : {
+        "function" : "CheckCurseForge",
+        "active" : true,
+        "curseforge": {
+            "regex" : "-.+?-(?P<version>.+?).jar"
+        }
+    },
+	"UndergroundBiomesConstructs" : {
+        "function" : "CheckCurseForge",
+        "active" : true,
+        "curseforge": {
+            "regex" : "-.+?-(?P<version>.+?).jar"
+        }
+    },
+	"BuildcraftAdditions" : {
+        "function" : "CheckCurseForge",
+        "active" : true,
+        "curseforge": {
+			"id" : "221014",
+			"name" : "buildcraft-additions",
+            "regex" : "-.+?-(?P<version>.+?).jar"
+        }
+    },
+	"Tubes" : {
+        "function" : "CheckCurseForge",
+        "active" : true,
+        "curseforge": {
+            "regex" : "-.+?-(?P<version>.+?).jar"
+        }
+    },
+	"WarpBook" : {
+        "function" : "CheckCurseForge",
+        "active" : true,
+        "curseforge": {
+			"name" : "warp-book",
+            "regex" : ".+?-(?P<version>.+?).jar"
+        }
+    },
+	"Veinminer" : {
+        "function" : "CheckCurseForge",
+        "active" : true,
+        "curseforge": {
+			"name" : "veinminer",
+            "regex" : ".+?_(?P<version>.+?).jar"
         }
     }
 }
