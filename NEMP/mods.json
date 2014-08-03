@@ -845,5 +845,72 @@
             "regex" : "SimplyJetpacks-.+?-(?P<version>.+?).jar",
             "name" : "simply-jetpacks"
         }
+    },
+    "Witchery" : {
+        "function" : "CheckCurseForge",
+        "active" : true,
+        "curseforge": {
+            "regex" : "-.+?-(?P<version>.+?).jar"
+        }
+    },
+    "AnotherOneBitestheDust" : {
+        "function" : "CheckCurseForge",
+        "active" : true,
+        "curseforge": {
+            "name" : "another-one-bites-the-dust",
+            "id" : "221863",
+            "regex" : ".+?-(?P<version>.+?).jar"
+        }
+    },
+    "EnchantingPlus" : {
+        "function" : "CheckCurseForge",
+        "active" : false,
+        "curseforge": {
+            "name" : "enchanting-plus",
+            "regex" : "-.+?-(?P<version>.+?).jar"
+        }
+    },
+    "Railcraft" : {
+        "function" : "CheckCurseForge",
+        "active" : true,
+        "curseforge": {
+            "regex" : ".+?-(?P<version>.+?).jar"
+        }
+    },
+    "Jabba" : {
+        "function" : "CheckCurseForge",
+        "active" : true,
+        "curseforge": {
+            "regex" : ".+?-(?P<version>.+?)_.+?.jar"
+        }
+    },
+    "Waila" : {
+        "function" : "CheckCurseForge",
+        "active" : true,
+        "curseforge": {
+            "regex" : ".+?-(?P<version>.+?)_.+?.jar"
+        }
+    },
+    "Opis" : {
+        "function" : "CheckCurseForge",
+        "active" : true,
+        "curseforge": {
+            "regex" : ".+?-(?P<version>.+?)_.+?.jar"
+        }
+    },
+    "MobiusCore" : {
+        "function" : "CheckCurseForge",
+        "active" : true,
+        "curseforge": {
+            "regex" : ".+?_(?P<version>.+?)_.+?.jar"
+        }
+    },
+    "ModTweaker" : {
+        "function" : "CheckCurseForge",
+        "active" : true,
+        "curseforge": {
+            "id" : "220954",
+            "regex" : "-.+?-(?P<version>.+?).jar"
+        }
     }
 }
