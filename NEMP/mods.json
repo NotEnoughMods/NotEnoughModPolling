@@ -912,5 +912,14 @@
             "id" : "220954",
             "regex" : "-.+?-(?P<version>.+?).jar"
         }
+    },
+    "Morpheus" : {
+        "function" : "CheckJenkins",
+        "active" : true,
+        "jenkins" : {
+            "url" : "http://www.wtfcool.com:8080/job/Morpheus/lastSuccessfulBuild/api/json",
+            "regex" : "-(?P<mc>.+?)-(?P<version>.+?).jar",
+            "item" : 1
+        }
     }
 }
