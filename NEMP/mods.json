@@ -798,5 +798,28 @@
             "regex" : "ProjectRed-Base-(?P<mc>.+?)-(?P<version>.+?).jar",
             "item" : 0
         }
+    },
+    "CoFHCore" : {
+        "function" : "CheckCurseForge",
+        "active" : true,
+        "curseforge": {
+            "regex" : "_.+?_(?P<version>.+?).jar"
+        }
+    },
+    "CoFHLib" : {
+        "function" : "CheckCurseForge",
+        "active" : true,
+        "curseforge": {
+            "id" : "220333",
+            "regex" : "_.+?_(?P<version>.+?).jar"
+        }
+    },
+    "SimplyJetpacks" : {
+        "function" : "CheckCurseForge",
+        "active" : true,
+        "curseforge": {
+            "regex" : "-.+?-(?P<version>.+?).jar",
+            "name" : "simply-jetpacks"
+        }
     }
 }
