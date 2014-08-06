@@ -921,5 +921,157 @@
             "regex" : "-(?P<mc>.+?)-(?P<version>.+?).jar",
             "item" : 1
         }
+    },
+    "NetherOres" : {
+        "function" : "CheckCurseForge",
+        "active" : true,
+        "curseforge" : {
+            "regex" : "-_.+?_(?P<version>.+?).jar"
+        }
+    },
+    "RedstoneArsenal" : {
+        "function" : "CheckCurseForge",
+        "active" : true,
+        "curseforge": {
+            "name" : "redstone-arsenal",
+            "regex" : "_.+?_(?P<version>.+?).jar"
+        }
+    },
+    "BdLib" : {
+        "function" : "CheckCurseForge",
+        "active" : true,
+        "curseforge": {
+            "name" : "bdlib",
+            "regex" : "-.+?-(?P<version>.+?).jar"
+        }
+    },
+    "Gendustry" : {
+        "function" : "CheckCurseForge",
+        "active" : true,
+        "curseforge": {
+            "name" : "gendustry",
+            "regex" : "-.+?-(?P<version>.+?).jar"
+        }
+    },
+    "PressurePipes" : {
+        "function" : "CheckCurseForge",
+        "active" : true,
+        "curseforge": {
+            "name" : "pressure-pipes",
+            "id" : "221214",
+            "regex" : "-.+?-(?P<version>.+?).jar"
+        }
+    },
+    "Zyin'sHUD" : {
+        "function" : "CheckCurseForge",
+        "active" : true,
+        "curseforge": {
+            "name" : "zyins-hud",
+            "regex" : "-.+?-v.(?P<version>.+?).jar"
+        }
+    },
+    "ProgressiveAutomation" : {
+        "function" : "CheckCurseForge",
+        "active" : true,
+        "curseforge": {
+            "name" : "progressive-automation-early-miner",
+            "id" : "220606",
+            "regex" : "-.+?-(?P<version>.+?).jar"
+        }
+    },
+    "SimpleFluidTanks" : {
+        "function" : "CheckCurseForge",
+        "active" : true,
+        "curseforge": {
+            "regex" : "-.+?-(?P<version>.+?).jar"
+        }
+    },
+    "UndergroundBiomesConstructs" : {
+        "function" : "CheckCurseForge",
+        "active" : true,
+        "curseforge": {
+            "regex" : "-.+?-(?P<version>.+?).jar"
+        }
+    },
+    "BuildcraftAdditions" : {
+        "function" : "CheckCurseForge",
+        "active" : true,
+        "curseforge": {
+            "id" : "221014",
+            "name" : "buildcraft-additions",
+            "regex" : "-.+?-(?P<version>.+?).jar"
+        }
+    },
+    "Tubes" : {
+        "function" : "CheckCurseForge",
+        "active" : true,
+        "curseforge": {
+            "regex" : "-.+?-(?P<version>.+?).jar"
+        }
+    },
+    "WarpBook" : {
+        "function" : "CheckCurseForge",
+        "active" : true,
+        "curseforge": {
+            "name" : "warp-book",
+            "regex" : ".+?-(?P<version>.+?).jar"
+        }
+    },
+    "Veinminer" : {
+        "function" : "CheckCurseForge",
+        "active" : true,
+        "curseforge": {
+            "name" : "veinminer",
+            "regex" : ".+?_(?P<version>.+?).jar"
+        }
+    },
+    "SteelIndustries" : {
+        "function" : "CheckCurseForge",
+        "active" : true,
+        "curseforge": {
+            "id" : "221363",
+			"name" : "steel-industries",
+            "regex" : "-.+?-(?P<version>.+?).jar"
+        }
+    },
+    "Hydraulicraft" : {
+        "function" : "CheckCurseForge",
+        "active" : true,
+        "curseforge": {
+            "id" : "223036",
+            "regex" : "-.+?-(?P<version>.+?).jar"
+        }
+    },
+    "AetherCraft" : {
+        "function" : "CheckCurseForge",
+        "active" : true,
+        "curseforge": {
+            "name" : "aec",
+            "regex" : "-.+?-(?P<version>.+?).jar"
+        }
+    },
+    "Aquaculture" : {
+        "function" : "CheckCurseForge",
+        "active" : true,
+        "curseforge": {
+            "regex" : "-.+?-(?P<version>.+?).jar"
+        }
+    },
+    "ExNihilo" : {
+        "function" : "CheckCurseForge",
+        "active" : true,
+        "curseforge": {
+            "name" : "ex-nihilo",
+            "id" : "221696",
+            "regex" : "-.+?-(?P<version>.+?).jar"
+        }
+    },
+    "ExAliquo" : {
+        "function" : "CheckCurseForge",
+        "active" : true,
+        "curseforge": {
+            "name" : "ex-aliquo",
+            "regex" : ".+?_(?P<version>.+?).zip"
+        }
     }
 }
