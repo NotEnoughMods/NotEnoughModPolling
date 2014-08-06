@@ -1030,7 +1030,7 @@
         "active" : true,
         "curseforge": {
             "id" : "221363",
-			"name" : "steel-industries",
+            "name" : "steel-industries",
             "regex" : "-.+?-(?P<version>.+?).jar"
         }
     },
