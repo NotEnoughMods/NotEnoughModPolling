@@ -201,7 +201,7 @@
         "function" : "CheckJenkins",
         "active" : true,
         "jenkins" : {
-            "url" : "http://ic2api.player.to:8080/job/IC2_experimental/lastSuccessfulBuild/api/json",
+            "url" : "http://jenkins.ic2.player.to/job/IC2_experimental/lastSuccessfulBuild/api/json",
             "regex" : "industrialcraft-2-(?P<version>.+?)-experimental.jar",
             "item" : 2
         }
@@ -234,12 +234,11 @@
         }
     },
     "NEM-VersionChecker" : {
-        "function" : "CheckJenkins",
+        "function" : "CheckHTML",
         "active" : true,
-        "jenkins" : {
-            "url" : "http://ci.thezorro266.com/job/NEM-VersionChecker/lastSuccessfulBuild/api/json",
-            "regex" : "NEM-VersionChecker-MC(?P<mc>.+?)-(?P<version>.+?).jar$",
-            "item" : 0
+        "html" : {
+            "url" : "http://files.pagefortress.com/Mods/",
+            "regex" : "NEM-VersionChecker-(?P<mc>.+?)-(?P<version>.+?).jar"
         }
     },
     "Buildcraft" : {
@@ -793,7 +792,7 @@
         "function" : "CheckJenkins",
         "active" : true,
         "jenkins" : {
-            "url" : "http://ic2api.player.to:8080/job/Forestry/lastSuccessfulBuild/api/json",
+            "url" : "http://jenkins.ic2.player.to/job/Forestry/lastSuccessfulBuild/api/json",
             "regex" : "forestry_(?P<mc>.+?)-(?P<dev>.+?).jar",
             "item" : 2
         }
@@ -1072,6 +1071,50 @@
         "curseforge": {
             "name" : "ex-aliquo",
             "regex" : ".+?_(?P<version>.+?).zip"
+        }
+    },
+    "Pay2Spawn" : {
+        "function" : "CheckJenkins",
+        "active" : true,
+        "jenkins": {
+            "url" : "http://jenkins.dries007.net/job/Pay2Spawn/lastSuccessfulBuild/api/json",
+            "regex" : "Pay2Spawn-(?P<mc>.+?)-(?P<version>.+?).jar",
+            "item" : 2
+        }
+    },
+    "HoloInventory" : {
+        "function" : "CheckJenkins",
+        "active" : true,
+        "jenkins": {
+            "url" : "http://jenkins.dries007.net/job/HoloInventory/lastSuccessfulBuild/api/json",
+            "regex" : "HoloInventory-(?P<mc>.+?)-(?P<version>.+?).jar",
+            "item" : 2
+        }
+    },
+    "PlaceableTools" : {
+        "function" : "CheckJenkins",
+        "active" : true,
+        "jenkins": {
+            "url" : "http://jenkins.dries007.net/job/PlaceableTools/lastSuccessfulBuild/api/json",
+            "regex" : "PlaceableTools-(?P<mc>.+?)-(?P<version>.+?).jar",
+            "item" : 2
+        }
+    },
+    "TorchTools" : {
+        "function" : "CheckJenkins",
+        "active" : true,
+        "jenkins": {
+            "url" : "http://jenkins.dries007.net/job/TorchTools/lastSuccessfulBuild/api/json",
+            "regex" : "TorchTools-(?P<mc>.+?)-(?P<version>.+?).jar",
+            "item" : 2
+        }
+    },
+    "EquivalentExchange3" :{
+        "function" : "CheckHTML",
+        "active" : true,
+        "html": {
+            "url" : "http://ee3.pahimar.com/",
+            "regex" : "/all/latest/EquivalentExchange3-(?P<mc>.+?)-(?P<dev>.+?).jar"
         }
     }
 }
