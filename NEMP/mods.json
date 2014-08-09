@@ -252,11 +252,10 @@
     },
     "Artifice" : {
         "function" : "CheckJenkins",
-        "category" : "technic-ci",
         "active" : true,
         "jenkins" : {
-            "url" : "http://build.technicpack.net/job/Artifice/lastSuccessfulBuild/api/json",
-            "regex" : "Artifice-(?P<dev>.+?).jar$",
+            "url" : "http://76.72.175.100:8080/job/Artifice/lastSuccessfulBuild/api/json",
+            "regex" : "Artifice-(?P<version>.+?).jar$",
             "item" : 0
         }
     },
@@ -1114,7 +1113,136 @@
         "active" : true,
         "html": {
             "url" : "http://ee3.pahimar.com/",
-            "regex" : "/all/latest/EquivalentExchange3-(?P<mc>.+?)-(?P<dev>.+?).jar"
+            "regex" : "/all/latest/EquivalentExchange3-(?P<mc>.+?)-(?P<version>.+?).jar"
+        }
+    },
+    "HardcoreQuestingMode" :{
+        "function" : "CheckCurseForge",
+        "active" : true,
+        "curseforge": {
+            "name" : "hardcore-questing-mode",
+            "regex" : ".+?__(?P<version>.+?)_.jar"
+        }
+    },
+    "Steve'sWorkshop" :{
+        "function" : "CheckCurseForge",
+        "active" : true,
+        "curseforge": {
+            "name" : "steves-workshop",
+            "id" : "223173",
+            "regex" : ".+?-(?P<version>.+?).jar"
+        }
+    },
+    "MineMenu" :{
+        "function" : "CheckCurseForge",
+        "active" : true,
+        "curseforge": {
+            "name" : "minemenu",
+            "id" : "222378",
+            "regex" : "-.+?-(?P<version>.+?)-universal.jar"
+        }
+    },
+    "RemoteIO" :{
+        "function" : "CheckCurseForge",
+        "active" : true,
+        "curseforge": {
+            "name" : "remote-io",
+            "regex" : "-.+?-(?P<version>.+?)-universal.jar"
+        }
+    },
+    "TooMuchTime" :{
+        "function" : "CheckCurseForge",
+        "active" : true,
+        "curseforge": {
+            "id" : "222463",
+            "regex" : "-.+?-(?P<version>.+?)-universal.jar"
+        }
+    },
+    "TooMuchLoot" :{
+        "function" : "CheckCurseForge",
+        "active" : true,
+        "curseforge": {
+            "id" : "220845",
+            "regex" : "-.+?-(?P<version>.+?)-universal.jar"
+        }
+    },
+    "TooMuchRain" :{
+        "function" : "CheckCurseForge",
+        "active" : true,
+        "curseforge": {
+            "id" : "221982",
+            "regex" : "-.+?-(?P<version>.+?)-universal.jar"
+        }
+    },
+    "Ping" :{
+        "function" : "CheckCurseForge",
+        "active" : true,
+        "curseforge": {
+            "id" : "222967",
+            "regex" : "-.+?-(?P<version>.+?)-universal.jar"
+        }
+    },
+    "miscMFRcircuits" :{
+        "function" : "CheckCurseForge",
+        "active" : true,
+        "curseforge": {
+            "id" : "223152",
+            "regex" : "-.+?-(?P<version>.+?).jar"
+        }
+    },
+    "ExtraTiC" :{
+        "function" : "CheckCurseForge",
+        "active" : true,
+        "curseforge": {
+            "regex" : "-.+?-(?P<version>.+?).jar"
+        }
+    },
+    "Metallurgy" :{
+        "function" : "CheckCurseForge",
+        "active" : true,
+        "curseforge": {
+            "regex" : "-.+?-(?P<version>.+?).jar"
+        }
+    },
+    "MetallurgyCore" :{
+        "function" : "CheckCurseForge",
+        "active" : true,
+        "curseforge": {
+            "name" : "metallurgy-core",
+            "regex" : "-.+?-(?P<version>.+?).jar"
+        }
+    },
+    "WeepingAngels" :{
+        "function" : "CheckCurseForge",
+        "active" : true,
+        "curseforge": {
+            "name" : "weeping-angels",
+            "regex" : "-.+-(?P<version>.+?).jar"
+        }
+    },
+    "OwnerEmitter" :{
+        "function" : "CheckCurseForge",
+        "active" : true,
+        "curseforge": {
+            "id" : "222818",
+            "name" : "owner-emitter",
+            "regex" : "-.+-(?P<version>.+?).jar"
+        }
+    },
+    "CGOrigin" :{
+        "function" : "CheckCurseForge",
+        "active" : true,
+        "curseforge": {
+            "name" : "countrygamer_core",
+            "regex" : "-.+?-(?P<version>.+?).jar"
+        }
+    },
+    "Bagginses" :{
+        "function" : "CheckCurseForge",
+        "active" : true,
+        "curseforge": {
+            "id" : "223005",
+            "regex" : ".+?-(?P<version>.+?).jar"
         }
     }
 }
