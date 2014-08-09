@@ -255,7 +255,7 @@
         "active" : true,
         "jenkins" : {
             "url" : "http://76.72.175.100:8080/job/Artifice/lastSuccessfulBuild/api/json",
-            "regex" : "Artifice-(?P<version>.+?).jar$",
+            "regex" : "Artifice-.+?-(?P<version>.+?).jar$",
             "item" : 0
         }
     },
