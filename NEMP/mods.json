@@ -1116,5 +1116,12 @@
             "url" : "http://ee3.pahimar.com/",
             "regex" : "/all/latest/EquivalentExchange3-(?P<mc>.+?)-(?P<dev>.+?).jar"
         }
+    },
+    "IntelligentEnergistics" : {
+        "function" : "CheckCurseForge",
+        "active" : true,
+        "curseforge": {
+            "regex" : "IntelligentEnergistics-(?P<mc>.+?)-(?P<version>.+?)-universal.jar"
+        }
     }
 }
