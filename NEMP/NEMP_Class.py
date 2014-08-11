@@ -293,12 +293,12 @@ class NotEnoughClasses():
             "mc" : info["version-minecraft"]
         }
 
-    def CheckCurseForge(self,mod):
-        modid = self.mods[mod]['curseforge'].get('id')
+    def CheckCurse(self,mod):
+        modid = self.mods[mod]['curse'].get('id')
 
-        # Accounts for discrepancies between NEM mod names and the CurseForge link format
-        # Uses CurseForge name if there is one specified. Defaults to the mod's name in lowercase.
-        modname = self.mods[mod]['curseforge'].get('name', mod.lower())
+        # Accounts for discrepancies between NEM mod names and the Curse link format
+        # Uses Curse name if there is one specified. Defaults to the mod's name in lowercase.
+        modname = self.mods[mod]['curse'].get('name', mod.lower())
 
         # As IDs only work with newer mods we have to support two versions of the URL
         if modid:
@@ -308,7 +308,7 @@ class NotEnoughClasses():
 
         jsonres = simplejson.loads(result, strict = False )
         filename = jsonres["download"]["name"]
-        match = re.search(self.mods[mod]["curseforge"]["regex"],filename)
+        match = re.search(self.mods[mod]["curse"]["regex"],filename)
         output = match.groupdict()
         relVersion = ""
         devVersion = ""

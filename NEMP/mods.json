@@ -113,9 +113,9 @@
         }
     },
     "MineFactoryReloaded" : {
-        "function" : "CheckCurseForge",
+        "function" : "CheckCurse",
         "active" : true,
-        "curseforge" : {
+        "curse" : {
             "name" : "minefactory-reloaded",
             "regex" : "MineFactoryReloaded-_.+?_(?P<version>.+?).jar$"
         }
@@ -317,19 +317,19 @@
         "active" : true
     },
     "TinkersConstruct" : {
-        "function" : "CheckCurseForge",
+        "function" : "CheckCurse",
         "category" : "mdiyo",
         "active" : true,
-        "curseforge" : {
+        "curse" : {
             "name" : "tinkers-construct",
             "regex" : "TConstruct_.+?_(?P<version>.+?).jar"
         }
     },
     "Tinkers'Mechworks" : {
-        "function" : "CheckCurseForge",
+        "function" : "CheckCurse",
         "category" : "mdiyo",
         "active" : true,
-        "curseforge" : {
+        "curse" : {
             "name" : "tinkers-mechworks",
             "regex" : "TMechworks_.+?_(?P<version>.+?).jar"
         }
@@ -806,107 +806,107 @@
         }
     },
     "CoFHCore" : {
-        "function" : "CheckCurseForge",
+        "function" : "CheckCurse",
         "active" : true,
-        "curseforge": {
+        "curse": {
             "regex" : "CoFHCore-_.+?_(?P<version>.+?).jar"
         }
     },
     "CoFHLib" : {
-        "function" : "CheckCurseForge",
+        "function" : "CheckCurse",
         "active" : true,
-        "curseforge": {
+        "curse": {
             "id" : "220333",
             "regex" : "CoFHLib-_.+?_(?P<version>.+?).jar"
         }
     },
     "ThermalExpansion" : {
-        "function" : "CheckCurseForge",
+        "function" : "CheckCurse",
         "active" : true,
-        "curseforge": {
+        "curse": {
             "regex" : "ThermalExpansion-_.+?_(?P<version>.+?).jar"
         }
     },
     "ThermalFoundation" : {
-        "function" : "CheckCurseForge",
+        "function" : "CheckCurse",
         "active" : true,
-        "curseforge": {
+        "curse": {
             "name" : "thermal-foundation",
             "id" : "222880",
             "regex" : "ThermalFoundation-_.+?_(?P<version>.+?).jar"
         }
     },
     "SimplyJetpacks" : {
-        "function" : "CheckCurseForge",
+        "function" : "CheckCurse",
         "active" : true,
-        "curseforge": {
+        "curse": {
             "regex" : "SimplyJetpacks-.+?-(?P<version>.+?).jar",
             "name" : "simply-jetpacks"
         }
     },
     "Witchery" : {
-        "function" : "CheckCurseForge",
+        "function" : "CheckCurse",
         "active" : true,
-        "curseforge": {
+        "curse": {
             "regex" : "-.+?-(?P<version>.+?).jar"
         }
     },
     "AnotherOneBitestheDust" : {
-        "function" : "CheckCurseForge",
+        "function" : "CheckCurse",
         "active" : true,
-        "curseforge": {
+        "curse": {
             "name" : "another-one-bites-the-dust",
             "id" : "221863",
             "regex" : ".+?-(?P<version>.+?).jar"
         }
     },
     "EnchantingPlus" : {
-        "function" : "CheckCurseForge",
+        "function" : "CheckCurse",
         "active" : false,
-        "curseforge": {
+        "curse": {
             "name" : "enchanting-plus",
             "regex" : "-.+?-(?P<version>.+?).jar"
         }
     },
     "Railcraft" : {
-        "function" : "CheckCurseForge",
+        "function" : "CheckCurse",
         "active" : true,
-        "curseforge": {
+        "curse": {
             "regex" : ".+?-(?P<version>.+?).jar"
         }
     },
     "Jabba" : {
-        "function" : "CheckCurseForge",
+        "function" : "CheckCurse",
         "active" : true,
-        "curseforge": {
+        "curse": {
             "regex" : ".+?-(?P<version>.+?)_.+?.jar"
         }
     },
     "Waila" : {
-        "function" : "CheckCurseForge",
+        "function" : "CheckCurse",
         "active" : true,
-        "curseforge": {
+        "curse": {
             "regex" : ".+?-(?P<version>.+?)_.+?.jar"
         }
     },
     "Opis" : {
-        "function" : "CheckCurseForge",
+        "function" : "CheckCurse",
         "active" : true,
-        "curseforge": {
+        "curse": {
             "regex" : ".+?-(?P<version>.+?)_.+?.jar"
         }
     },
     "MobiusCore" : {
-        "function" : "CheckCurseForge",
+        "function" : "CheckCurse",
         "active" : true,
-        "curseforge": {
+        "curse": {
             "regex" : ".+?_(?P<version>.+?)_.+?.jar"
         }
     },
     "ModTweaker" : {
-        "function" : "CheckCurseForge",
+        "function" : "CheckCurse",
         "active" : true,
-        "curseforge": {
+        "curse": {
             "id" : "220954",
             "regex" : "-.+?-(?P<version>.+?).jar"
         }
@@ -921,153 +921,153 @@
         }
     },
     "NetherOres" : {
-        "function" : "CheckCurseForge",
+        "function" : "CheckCurse",
         "active" : true,
-        "curseforge" : {
+        "curse" : {
             "regex" : "-_.+?_(?P<version>.+?).jar"
         }
     },
     "RedstoneArsenal" : {
-        "function" : "CheckCurseForge",
+        "function" : "CheckCurse",
         "active" : true,
-        "curseforge": {
+        "curse": {
             "name" : "redstone-arsenal",
             "regex" : "_.+?_(?P<version>.+?).jar"
         }
     },
     "BdLib" : {
-        "function" : "CheckCurseForge",
+        "function" : "CheckCurse",
         "active" : true,
-        "curseforge": {
+        "curse": {
             "name" : "bdlib",
             "regex" : "-.+?-(?P<version>.+?).jar"
         }
     },
     "Gendustry" : {
-        "function" : "CheckCurseForge",
+        "function" : "CheckCurse",
         "active" : true,
-        "curseforge": {
+        "curse": {
             "name" : "gendustry",
             "regex" : "-.+?-(?P<version>.+?).jar"
         }
     },
     "PressurePipes" : {
-        "function" : "CheckCurseForge",
+        "function" : "CheckCurse",
         "active" : true,
-        "curseforge": {
+        "curse": {
             "name" : "pressure-pipes",
             "id" : "221214",
             "regex" : "-.+?-(?P<version>.+?).jar"
         }
     },
     "Zyin'sHUD" : {
-        "function" : "CheckCurseForge",
+        "function" : "CheckCurse",
         "active" : true,
-        "curseforge": {
+        "curse": {
             "name" : "zyins-hud",
             "regex" : "-.+?-v.(?P<version>.+?).jar"
         }
     },
     "ProgressiveAutomation" : {
-        "function" : "CheckCurseForge",
+        "function" : "CheckCurse",
         "active" : true,
-        "curseforge": {
+        "curse": {
             "name" : "progressive-automation-early-miner",
             "id" : "220606",
             "regex" : "-.+?-(?P<version>.+?).jar"
         }
     },
     "SimpleFluidTanks" : {
-        "function" : "CheckCurseForge",
+        "function" : "CheckCurse",
         "active" : true,
-        "curseforge": {
+        "curse": {
             "regex" : "-.+?-(?P<version>.+?).jar"
         }
     },
     "UndergroundBiomesConstructs" : {
-        "function" : "CheckCurseForge",
+        "function" : "CheckCurse",
         "active" : true,
-        "curseforge": {
+        "curse": {
             "regex" : "-.+?-(?P<version>.+?).jar"
         }
     },
     "BuildcraftAdditions" : {
-        "function" : "CheckCurseForge",
+        "function" : "CheckCurse",
         "active" : true,
-        "curseforge": {
+        "curse": {
             "id" : "221014",
             "name" : "buildcraft-additions",
             "regex" : "-.+?-(?P<version>.+?).jar"
         }
     },
     "Tubes" : {
-        "function" : "CheckCurseForge",
+        "function" : "CheckCurse",
         "active" : true,
-        "curseforge": {
+        "curse": {
             "regex" : "-.+?-(?P<version>.+?).jar"
         }
     },
     "WarpBook" : {
-        "function" : "CheckCurseForge",
+        "function" : "CheckCurse",
         "active" : true,
-        "curseforge": {
+        "curse": {
             "name" : "warp-book",
             "regex" : ".+?-(?P<version>.+?).jar"
         }
     },
     "Veinminer" : {
-        "function" : "CheckCurseForge",
+        "function" : "CheckCurse",
         "active" : true,
-        "curseforge": {
+        "curse": {
             "name" : "veinminer",
             "regex" : ".+?_(?P<version>.+?).jar"
         }
     },
     "SteelIndustries" : {
-        "function" : "CheckCurseForge",
+        "function" : "CheckCurse",
         "active" : true,
-        "curseforge": {
+        "curse": {
             "id" : "221363",
             "name" : "steel-industries",
             "regex" : "-.+?-(?P<version>.+?).jar"
         }
     },
     "Hydraulicraft" : {
-        "function" : "CheckCurseForge",
+        "function" : "CheckCurse",
         "active" : true,
-        "curseforge": {
+        "curse": {
             "id" : "223036",
             "regex" : "-.+?-(?P<version>.+?).jar"
         }
     },
     "AetherCraft" : {
-        "function" : "CheckCurseForge",
+        "function" : "CheckCurse",
         "active" : true,
-        "curseforge": {
+        "curse": {
             "name" : "aec",
             "regex" : "-.+?-(?P<version>.+?).jar"
         }
     },
     "Aquaculture" : {
-        "function" : "CheckCurseForge",
+        "function" : "CheckCurse",
         "active" : true,
-        "curseforge": {
+        "curse": {
             "regex" : "-.+?-(?P<version>.+?).jar"
         }
     },
     "ExNihilo" : {
-        "function" : "CheckCurseForge",
+        "function" : "CheckCurse",
         "active" : true,
-        "curseforge": {
+        "curse": {
             "name" : "ex-nihilo",
             "id" : "221696",
             "regex" : "-.+?-(?P<version>.+?).jar"
         }
     },
     "ExAliquo" : {
-        "function" : "CheckCurseForge",
+        "function" : "CheckCurse",
         "active" : true,
-        "curseforge": {
+        "curse": {
             "name" : "ex-aliquo",
             "regex" : ".+?_(?P<version>.+?).zip"
         }
@@ -1117,130 +1117,130 @@
         }
     },
     "HardcoreQuestingMode" :{
-        "function" : "CheckCurseForge",
+        "function" : "CheckCurse",
         "active" : true,
-        "curseforge": {
+        "curse": {
             "name" : "hardcore-questing-mode",
             "regex" : ".+?__(?P<version>.+?)_.jar"
         }
     },
     "Steve'sWorkshop" :{
-        "function" : "CheckCurseForge",
+        "function" : "CheckCurse",
         "active" : true,
-        "curseforge": {
+        "curse": {
             "name" : "steves-workshop",
             "id" : "223173",
             "regex" : ".+?-(?P<version>.+?).jar"
         }
     },
     "MineMenu" :{
-        "function" : "CheckCurseForge",
+        "function" : "CheckCurse",
         "active" : true,
-        "curseforge": {
+        "curse": {
             "name" : "minemenu",
             "id" : "222378",
             "regex" : "-.+?-(?P<version>.+?)-universal.jar"
         }
     },
     "RemoteIO" :{
-        "function" : "CheckCurseForge",
+        "function" : "CheckCurse",
         "active" : true,
-        "curseforge": {
+        "curse": {
             "name" : "remote-io",
             "regex" : "-.+?-(?P<version>.+?)-universal.jar"
         }
     },
     "TooMuchTime" :{
-        "function" : "CheckCurseForge",
+        "function" : "CheckCurse",
         "active" : true,
-        "curseforge": {
+        "curse": {
             "id" : "222463",
             "regex" : "-.+?-(?P<version>.+?)-universal.jar"
         }
     },
     "TooMuchLoot" :{
-        "function" : "CheckCurseForge",
+        "function" : "CheckCurse",
         "active" : true,
-        "curseforge": {
+        "curse": {
             "id" : "220845",
             "regex" : "-.+?-(?P<version>.+?)-universal.jar"
         }
     },
     "TooMuchRain" :{
-        "function" : "CheckCurseForge",
+        "function" : "CheckCurse",
         "active" : true,
-        "curseforge": {
+        "curse": {
             "id" : "221982",
             "regex" : "-.+?-(?P<version>.+?)-universal.jar"
         }
     },
     "Ping" :{
-        "function" : "CheckCurseForge",
+        "function" : "CheckCurse",
         "active" : true,
-        "curseforge": {
+        "curse": {
             "id" : "222967",
             "regex" : "-.+?-(?P<version>.+?)-universal.jar"
         }
     },
     "miscMFRcircuits" :{
-        "function" : "CheckCurseForge",
+        "function" : "CheckCurse",
         "active" : true,
-        "curseforge": {
+        "curse": {
             "id" : "223152",
             "regex" : "-.+?-(?P<version>.+?).jar"
         }
     },
     "ExtraTiC" :{
-        "function" : "CheckCurseForge",
+        "function" : "CheckCurse",
         "active" : true,
-        "curseforge": {
+        "curse": {
             "regex" : "-.+?-(?P<version>.+?).jar"
         }
     },
     "Metallurgy" :{
-        "function" : "CheckCurseForge",
+        "function" : "CheckCurse",
         "active" : true,
-        "curseforge": {
+        "curse": {
             "regex" : "-.+?-(?P<version>.+?).jar"
         }
     },
     "MetallurgyCore" :{
-        "function" : "CheckCurseForge",
+        "function" : "CheckCurse",
         "active" : true,
-        "curseforge": {
+        "curse": {
             "name" : "metallurgy-core",
             "regex" : "-.+?-(?P<version>.+?).jar"
         }
     },
     "WeepingAngels" :{
-        "function" : "CheckCurseForge",
+        "function" : "CheckCurse",
         "active" : true,
-        "curseforge": {
+        "curse": {
             "name" : "weeping-angels",
             "regex" : "-.+-(?P<version>.+?).jar"
         }
     },
     "OwnerEmitter" :{
-        "function" : "CheckCurseForge",
+        "function" : "CheckCurse",
         "active" : true,
-        "curseforge": {
+        "curse": {
             "id" : "222818",
             "name" : "owner-emitter",
             "regex" : "-.+-(?P<version>.+?).jar"
         }
     },
     "CGOrigin" :{
-        "function" : "CheckCurseForge",
+        "function" : "CheckCurse",
         "active" : true,
-        "curseforge": {
+        "curse": {
             "name" : "countrygamer_core",
             "regex" : "-.+?-(?P<version>.+?).jar"
         }
     },
     "Bagginses" :{
-        "function" : "CheckCurseForge",
+        "function" : "CheckCurse",
         "active" : true,
-        "curseforge": {
+        "curse": {
             "id" : "223005",
             "regex" : ".+?-(?P<version>.+?).jar"
         }
