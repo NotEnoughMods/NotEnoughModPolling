@@ -717,7 +717,7 @@
         "active" : true,
         "curse" : {
             "regex" : "ServerTools-BACKUP-(?P<mc>.+?)-(?P<version>.+?).jar",
-            "id" : "220713"
+            "id" : "220713",
             "name" : "servertools-backup"
         }
     },
@@ -736,7 +736,7 @@
         "active" : true,
         "curse" : {
             "regex" : "ServerTools-PERMISSION-(?P<mc>.+?)-(?P<version>.+?).jar",
-            "id" : "220714"
+            "id" : "220714",
             "name" : "servertools-permission"
         }
     },
@@ -746,7 +746,7 @@
         "active" : true,
         "curse" : {
             "regex" : "ServerTools-TELEPORT-(?P<mc>.+?)-(?P<version>.+?).jar",
-            "id" : "220715"
+            "id" : "220715",
             "name" : "servertools-teleport"
         }
     },
