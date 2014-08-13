@@ -712,43 +712,42 @@
         }
     },
     "ServerTools-BACKUP" : {
-        "function" : "CheckJenkins",
+        "function" : "CheckCurse",
         "category" : "ServerTools",
         "active" : true,
-        "jenkins" : {
-            "url" : "http://ci.matthewprenger.com/job/ServerTools-BACKUP/lastSuccessfulBuild/api/json",
+        "curse" : {
             "regex" : "ServerTools-BACKUP-(?P<mc>.+?)-(?P<version>.+?).jar",
-            "item" : 3
+            "id" : "220713"
+            "name" : "servertools-backup"
         }
     },
     "ServerTools-CORE" : {
-        "function" : "CheckJenkins",
+        "function" : "CheckCurse",
         "category" : "ServerTools",
         "active" : true,
-        "jenkins" : {
-            "url" : "http://ci.matthewprenger.com/job/ServerTools-CORE/lastSuccessfulBuild/api/json",
+        "curse" : {
             "regex" : "ServerTools-CORE-(?P<mc>.+?)-(?P<version>.+?).jar",
-            "item" : 3
+            "name" : "forgeservertools"
         }
     },
     "ServerTools-PERMISSION" : {
-        "function" : "CheckJenkins",
+        "function" : "CheckCurse",
         "category" : "ServerTools",
         "active" : true,
-        "jenkins" : {
-            "url" : "http://ci.matthewprenger.com/job/ServerTools-PERMISSION/lastSuccessfulBuild/api/json",
+        "curse" : {
             "regex" : "ServerTools-PERMISSION-(?P<mc>.+?)-(?P<version>.+?).jar",
-            "item" : 3
+            "id" : "220714"
+            "name" : "servertools-permission"
         }
     },
     "ServerTools-TELEPORT" : {
-        "function" : "CheckJenkins",
+        "function" : "CheckCurse",
         "category" : "ServerTools",
         "active" : true,
-        "jenkins" : {
-            "url" : "http://ci.matthewprenger.com/job/ServerTools-TELEPORT/lastSuccessfulBuild/api/json",
+        "curse" : {
             "regex" : "ServerTools-TELEPORT-(?P<mc>.+?)-(?P<version>.+?).jar",
-            "item" : 3
+            "id" : "220715"
+            "name" : "servertools-teleport"
         }
     },
     "NEIAddons" : {
