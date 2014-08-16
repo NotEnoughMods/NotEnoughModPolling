@@ -1252,5 +1252,85 @@
             "name" : "blue-power",
             "regex" : "-.+?-(?P<version>.+?)-universal.jar"
         }
+    },
+        "DeepCoreMining" : {
+        "function" : "CheckJenkins",
+        "active" : true,
+        "jenkins" : {
+            "url" : "http://jenkins.bdew.net/job/deepcore/lastSuccessfulBuild/api/json",
+            "regex" : "deepcore-mc1710-(?P<dev>.+?).jar",
+            "item" : 0
+        }
+    },
+    "EiraIRC" :{
+        "function" : "CheckCurse",
+        "active" : true,
+        "curse": {
+            "regex" : "-.+?-v(?P<version>.+?).jar"
+        }
+    },
+    "OpenComputers" :{
+        "function" : "CheckCurse",
+        "active" : true,
+        "curse": {
+            "id" : "223008",
+            "regex" : "-.+?-(?P<version>.+?)-universal.jar"
+        }
+    },
+    "SecurityCraft" :{
+        "function" : "CheckCurse",
+        "active" : true,
+        "curse": {
+            "name" : "securitycraft-mod",
+            "regex" : ".+?_v(?P<version>.+?)_.+?.jar"
+        }
+    },
+    "Fabricators" :{
+        "function" : "CheckCurse",
+        "active" : true,
+        "curse": {
+            "regex" : "-.+?-(?P<version>.+?)-universal.jar"
+        }
+    },
+    "IguanasTinkerTweaks" :{
+        "function" : "CheckCurse",
+        "active" : true,
+        "curse": {
+            "id" : "223248",
+            "name" : "iguanas-tinker-tweaks",
+            "regex" : "-.+?-(?P<version>.+?).jar"
+        }
+    },
+    "Gravestone" :{
+        "function" : "CheckCurse",
+        "active" : true,
+        "curse": {
+            "name" : "gravestone_mod",
+            "regex" : ".+?_(?P<version>.+?).jar"
+        }
+    },
+    "Natura" :{
+        "function" : "CheckCurse",
+        "active" : true,
+        "curse": {
+            "regex" : "-.+?-(?P<version>.+?).jar"
+        }
+    },
+    "TiCTooltips" :{
+        "function" : "CheckCurse",
+        "active" : true,
+        "curse": {
+            "name" : "tic-tooltips",
+            "regex" : "-.+?-(?P<version>.+?).jar"
+        }
+    },
+    "TheSpiceofLife" :{
+        "function" : "CheckCurse",
+        "active" : true,
+        "curse": {
+            "id" : "220811",
+            "name" : "the-spice-of-life",
+            "regex" : "-.+?-(?P<version>.+?).jar"
+        }
     }
 }
