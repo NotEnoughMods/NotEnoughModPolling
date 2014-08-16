@@ -1253,7 +1253,7 @@
             "regex" : "-.+?-(?P<version>.+?)-universal.jar"
         }
     },
-        "DeepCoreMining" : {
+    "DeepCoreMining" : {
         "function" : "CheckJenkins",
         "active" : true,
         "jenkins" : {
