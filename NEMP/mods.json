@@ -462,6 +462,16 @@
         "category" : "sc0",
         "active" : true
     },
+    "EnderTech-Drayshak" : {
+        "function" : "CheckCurse",
+        "category" : "drayshak",
+        "active" : true,
+        "curse" : {
+            "regex" : "EnderTech-(?P<mc>.+?)-(?P<version>.+?).jar",
+            "id" : "223428",
+            "name" : "EnderTech"
+        }
+    },
     "BloodMagic" : {
         "function" : "CheckDropBox",
         "active" : true,
