@@ -129,6 +129,15 @@
             "item" : 2
         }
     },
+    "LanteaCraft" : {
+        "function" : "CheckJenkins",
+        "active" : true,
+        "jenkins" : {
+            "url" : "http://lanteacraft.com/jenkins/job/LanteaCraft-Experimental/lastSuccessfulBuild/api/json",
+            "regex" : "LanteaCraft-(?P<mc>.+?)-(?P<dev>.+?).jar$",
+            "item" : 0
+        }
+    },
     "ModularPowersuits" : {
         "function" : "CheckJenkins",
         "category" : "technic-ci",
