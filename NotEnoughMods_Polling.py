@@ -107,7 +107,7 @@ def running(self, name, params, channel, userdata, rank):
 
 def about(self, name, params, channel, userdata, rank):
     self.sendMessage(channel, "Not Enough Mods: Polling for IRC by SinZ, with help from NightKev & Yoshi2 - v1.4")
-    self.sendMessage(channel, "Additional contributions by Pyker, spacechase & helinus")
+    self.sendMessage(channel, "Additional contributions by Pyker, spacechase, helinus & sMi")
     self.sendMessage(channel, "Source code available at: http://github.com/SinZ163/NotEnoughMods")
 
 def nemp_help(self, name, params, channel, userdata, rank):
