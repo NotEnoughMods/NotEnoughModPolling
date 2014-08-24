@@ -9,6 +9,17 @@
             "promoType" : "dev"
         }
     },
+    "MinecraftForge-Release" : {
+        "name" : "MinecraftForge",
+        "function" : "CheckMCForge2",
+        "category" : "forge",
+        "active" : true,
+        "mcforge" : {
+            "url" : "http://files.minecraftforge.net/maven/net/minecraftforge/forge/promotions.json",
+            "promo" : "recommended",
+            "promoType" : "version"
+        }
+    },
     "IronChests" : {
         "function" : "CheckMCForge2",
         "category" : "forge",
@@ -17,6 +28,17 @@
             "url" : "http://files.minecraftforge.net/maven/cpw/mods/ironchest/promotions.json",
             "promo" : "latest",
             "promoType" : "dev"
+        }
+    },
+    "IronChests-Release" : {
+        "name" : "IronChests",
+        "function" : "CheckMCForge2",
+        "category" : "forge",
+        "active" : true,
+        "mcforge" : {
+            "url" : "http://files.minecraftforge.net/maven/cpw/mods/ironchest/promotions.json",
+            "promo" : "recommended",
+            "promoType" : "version"
         }
     },
     "ForgeMultipart" : {
@@ -49,6 +71,17 @@
             "promoType" : "dev"
         }
     },
+    "CompactSolars-Release" : {
+        "name" : "CompactSolars",
+        "function" : "CheckMCForge2",
+        "category" : "forge",
+        "active" : true,
+        "mcforge" : {
+            "url" : "http://files.minecraftforge.net/maven/cpw/mods/CompactSolars/promotions.json",
+            "promo" : "recommended",
+            "promoType" : "version"
+        }
+    },
     "BiomesOPlenty" : {
         "function" : "CheckMCForge2",
         "category" : "forge",
@@ -57,6 +90,17 @@
             "url" : "http://files.minecraftforge.net/maven/com/github/glitchfiend/biomesoplenty/BiomesOPlenty/promotions.json",
             "promo" : "latest",
             "promoType" : "dev"
+        }
+    },
+    "BiomesOPlenty-Release" : {
+        "name" : "BiomesOPlenty",
+        "function" : "CheckMCForge2",
+        "category" : "forge",
+        "active" : true,
+        "mcforge" : {
+            "url" : "http://files.minecraftforge.net/maven/com/github/glitchfiend/biomesoplenty/BiomesOPlenty/promotions.json",
+            "promo" : "recommended",
+            "promoType" : "version"
         }
     },
     "Cauldron" : {
@@ -68,6 +112,18 @@
             "url" : "http://files.minecraftforge.net/maven/net/minecraftforge/cauldron/promotions.json",
             "promo" : "latest",
             "promoType" : "dev"
+        }
+    },
+    "Cauldron-Release" : {
+        "name" : "Cauldron",
+        "function" : "CheckMCForge2",
+        "category" : "forge",
+        "active" : true,
+        "changelog" : false,
+        "mcforge" : {
+            "url" : "http://files.minecraftforge.net/maven/net/minecraftforge/cauldron/promotions.json",
+            "promo" : "recommended",
+            "promoType" : "version"
         }
     },
     "OpenPeripheralCore" : {
