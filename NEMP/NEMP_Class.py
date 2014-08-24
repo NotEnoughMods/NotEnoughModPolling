@@ -110,6 +110,24 @@ class NotEnoughClasses():
                                 self.mods[mod["name"]]["version"] = "NOT_USED"
 
                             templist.remove(mod["name"])
+                    #ok, so it wasn't directly on the list, is it indirectly on the list though.
+                    for lonelyMod in templist:
+                        if "name" in self.mods[lonelyMod]:
+                            #ok, this is a PykerHack mod.
+                            for lonelyTestMod in jsonres:
+                                if self.mods[lonelyMod]["name"] == lonelyTestMod["name"]: #ok, does it exist for this MC version.
+                                    self.mods[lonelyMod]["mc"] = version
+
+                                    if "dev" in mod and mod["dev"]:
+                                        self.mods[lonelyMod]["dev"] = str(mod["dev"])
+                                    else:
+                                        self.mods[lonelyMod]["dev"] = "NOT_USED"
+
+                                    if "version" in mod and mod["version"]:
+                                        self.mods[lonelyMod]["version"] = str(mod["version"])
+                                    else:
+                                        self.mods[lonelyMod]["version"] = "NOT_USED"
+                                    templist.remove(lonelyMod)
         except:
             pass
             #most likely a timeout

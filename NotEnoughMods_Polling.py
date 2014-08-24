@@ -201,19 +201,16 @@ def PollingThread(self, pipe):
         for mod, info in NEM.mods.iteritems():
             if self.signal:
                 return
-            if 'name' in info:
-                real_name = info['name']
-            else:
-                real_name = mod
+                
             if NEM.mods[mod]["active"]:
                 result, exceptionRaised = NEM.CheckMod(mod)
 
                 # if there is an update
                 if any(result):
-                    tempList.setdefault(NEM.mods[mod]['mc'], []).append((real_name, result))
+                    tempList.setdefault(NEM.mods[mod]['mc'], []).append((mod, result))
                 # if there's no update, we must check if there was an exception
                 elif exceptionRaised:
-                    failed.append(real_name)
+                    failed.append(mod)
         pipe.send((tempList, failed))
 
         # A more reasonable way of sleeping to quicken up the
@@ -266,16 +263,21 @@ def NEMP_TimerEvent(self, channels):
                     # flags[1] = has dev version changed?
                     mod = item[0]
                     flags = item[1]
+                    real_name = ""
+                    if 'name' in self.NEM.mods[mod]:
+                        real_name = self.NEM.mods[mod]['name']
+                    else:
+                        real_name = mod
 
                     if self.NEM.mods[mod]["dev"] != "NOT_USED" and flags[0]:
                         nemp_logger.debug("Updating DevMod {0}, Flags: {1}".format(mod, flags))
                         #self.sendMessage(channel, "!ldev "+version+" "+mod+" "+unicode(self.NEM.mods[mod]["dev"]))
-                        self.sendMessage(channel, "!ldev {0} {1} {2}".format(version, mod, unicode(self.NEM.mods[mod]["dev"])))
+                        self.sendMessage(channel, "!ldev {0} {1} {2}".format(version, real_name, unicode(self.NEM.mods[mod]["dev"])))
 
                     if self.NEM.mods[mod]["version"]  != "NOT_USED" and flags[1]:
                         nemp_logger.debug("Updating Mod {0}, Flags: {1}".format(mod, flags))
                         #self.sendMessage(channel, "!lmod "+version+" "+mod+" "+unicode(self.NEM.mods[mod]["version"]))
-                        self.sendMessage(channel, "!lmod {0} {1} {2}".format(version, mod, unicode(self.NEM.mods[mod]["version"])))
+                        self.sendMessage(channel, "!lmod {0} {1} {2}".format(version, real_name, unicode(self.NEM.mods[mod]["version"])))
 
                     if self.NEM.mods[mod]["change"] != "NOT_USED" and "changelog" not in self.NEM.mods[mod]:
                         nemp_logger.debug("Sending text for Mod {0}".format(mod))
