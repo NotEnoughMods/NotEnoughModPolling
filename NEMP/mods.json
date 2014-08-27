@@ -333,15 +333,6 @@
             "item" : 0
         }
     },
-    "ExtraCells" : {
-        "function" : "CheckJenkins",
-        "active" : false,
-        "jenkins" : {
-            "url" : "http://themattabase.com:9090/job/ExtraCells/lastSuccessfulBuild/api/json",
-            "regex" : "ExtraCells-(?P<dev>.+?).jar",
-            "item" : 0
-        }
-    },
     "Mekanism" : {
         "function" : "CheckJenkins",
         "active" : true,
