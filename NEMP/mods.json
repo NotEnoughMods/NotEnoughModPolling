@@ -328,12 +328,22 @@
         "function" : "CheckJenkins",
         "active" : true,
         "jenkins" : {
-            "url" : "http://ci.thezorro266.com/job/LogisticsPipes-Dev/lastSuccessfulBuild/api/json",
-            "regex" : "LogisticsPipes-MC(?P<mc>.+?)-(?P<dev>.+?).jar",
+            "url" : "http://ci.thezorro266.com/job/LogisticsPipes1.7/lastSuccessfulBuild/api/json",
+            "regex" : "logisticspipes-(?P<dev>.+?).jar",
             "item" : 0
         }
     },
     "Mekanism" : {
+        "function" : "CheckJenkins",
+        "active" : true,
+        "jenkins" : {
+            "url" : "http://ci.indiewikis.com:8080/job/Mekanism/lastSuccessfulBuild/api/json",
+            "regex" : "Mekanism-(?P<mc>.+?)-(?P<dev>.+?).jar",
+            "item" : 1
+        }
+    },
+    "Mekanism-Release" : {
+        "name" : "Mekanism",
         "function" : "CheckJenkins",
         "active" : true,
         "jenkins" : {
@@ -626,7 +636,7 @@
         "category" : "bspkrs",
         "active" : true,
         "html" : {
-            "url" : "http://dl.dropboxusercontent.com/u/20748481/Minecraft/1.7.10/statusEffectHud.version",
+            "url" : "http://bspk.rs/Minecraft/1.7.10/statusEffectHUD.version",
             "regex" : "(?P<version>.+?)$"
         }
     },
@@ -635,7 +645,7 @@
         "category" : "bspkrs",
         "active" : true,
         "html" : {
-            "url" : "http://dl.dropboxusercontent.com/u/20748481/Minecraft/1.7.10/armorStatusHud.version",
+            "url" : "http://bspk.rs/Minecraft/1.7.10/armorStatusHUD.version",
             "regex" : "(?P<version>.+?)$"
         }
     },
@@ -644,7 +654,7 @@
         "category" : "bspkrs",
         "active" : true,
         "html" : {
-            "url" : "http://dl.dropboxusercontent.com/u/20748481/Minecraft/1.6.4/blockBreakerForge.version",
+            "url" : "http://bspk.rs/Minecraft/1.6.4/blockBreakerForge.version",
             "regex" : "Forge (?P<version>.+?)$"
         }
     },
@@ -653,8 +663,8 @@
         "category" : "bspkrs",
         "active" : true,
         "html" : {
-            "url" : "http://dl.dropboxusercontent.com/u/20748481/Minecraft/1.7.10/bspkrsCore.version",
-            "regex" : "(?P<version>.+?)\\((?P<mc>.+?)\\)"
+            "url" : "http://bspk.rs/Minecraft/1.7.10/bspkrsCore.version",
+            "regex" : "(?P<version>.+?)$"
         }
     },
     "CrystalWing" : {
@@ -662,7 +672,7 @@
         "category" : "bspkrs",
         "active" : true,
         "html" : {
-            "url" : "http://dl.dropboxusercontent.com/u/20748481/Minecraft/1.7.10/crystalWingForge.version",
+            "url" : "http://bspk.rs/Minecraft/1.7.10/crystalWingForge.version",
             "regex" : "(?P<version>.+?)$"
         }
     },
@@ -671,7 +681,7 @@
         "category" : "bspkrs",
         "active" : true,
         "html" : {
-            "url" : "http://dl.dropboxusercontent.com/u/20748481/Minecraft/1.7.10/directionHUD.version",
+            "url" : "http://bspk.rs/Minecraft/1.7.10/directionHUD.version",
             "regex" : "(?P<version>.+?)$"
         }
     },
@@ -680,7 +690,7 @@
         "category" : "bspkrs",
         "active" : true,
         "html" : {
-            "url" : "http://dl.dropboxusercontent.com/u/20748481/Minecraft/1.7.10/floatingRuinsForge.version",
+            "url" : "http://bspk.rs/Minecraft/1.7.10/floatingRuinsForge.version",
             "regex" : "(?P<version>.+?)$"
         }
     },
@@ -689,7 +699,7 @@
         "category" : "bspkrs",
         "active" : true,
         "html" : {
-            "url" : "http://dl.dropboxusercontent.com/u/20748481/Minecraft/1.6.4/ingameInfo.version",
+            "url" : "http://bspk.rs/Minecraft/1.6.4/ingameInfo.version",
             "regex" : "ML (?P<version>.+?)$"
         }
     },
@@ -698,7 +708,7 @@
         "category" : "bspkrs",
         "active" : true,
         "html" : {
-            "url" : "http://dl.dropboxusercontent.com/u/20748481/Minecraft/1.7.10/startingInventoryForge.version",
+            "url" : "http://bspk.rs/Minecraft/1.7.10/startingInventoryForge.version",
             "regex" : "(?P<version>.+?)$"
         }
     },
@@ -707,7 +717,7 @@
         "category" : "bspkrs",
         "active" : true,
         "html" : {
-            "url" : "http://dl.dropboxusercontent.com/u/20748481/Minecraft/1.7.2/treeCapitatorForge.version",
+            "url" : "http://bspk.rs/Minecraft/1.7.2/treeCapitatorForge.version",
             "regex" : "(?P<version>.+?)$"
         }
     },
@@ -716,7 +726,7 @@
         "category" : "bspkrs",
         "active" : true,
         "html" : {
-            "url" : "http://dl.dropboxusercontent.com/u/20748481/Minecraft/1.7.10/worldStateCheckpointsForge.version",
+            "url" : "http://bspk.rs/Minecraft/1.7.10/worldStateCheckpointsForge.version",
             "regex" : "(?P<version>.+?)$"
         }
     },
@@ -839,8 +849,8 @@
         "active" : true,
         "jenkins" : {
             "url" : "http://ci.tterrag.com/job/Super%20Massive%20Tech/lastSuccessfulBuild/api/json",
-            "regex" : "SuperMassiveTech-MC(?P<mc>.+?)-(?P<dev>.+?).jar",
-            "item" : 0
+            "regex" : "SuperMassiveTech-(?P<mc>.+?)-(?P<dev>.+?).jar",
+            "item" : 3
         }
     },
     "Mariculture" : {
@@ -862,6 +872,16 @@
         }
     },
     "ProjectRed" : {
+        "function" : "CheckJenkins",
+        "active" : true,
+        "jenkins" : {
+            "url" : "http://ci.indiewikis.com:8080/job/Project%20Red/lastSuccessfulBuild/api/json",
+            "regex" : "ProjectRed-Base-(?P<mc>.+?)-(?P<dev>.+?).jar",
+            "item" : 0
+        }
+    },
+    "ProjectRed-Release" : {
+        "name" : "ProjectRed",
         "function" : "CheckJenkins",
         "active" : true,
         "jenkins" : {
@@ -965,7 +985,7 @@
         "function" : "CheckCurse",
         "active" : true,
         "curse": {
-            "regex" : ".+?_(?P<version>.+?)_.+?.jar"
+            "regex" : "MobiusCore-(?P<version>.+?)_.+?jar"
         }
     },
     "ModTweaker" : {
@@ -1423,6 +1443,14 @@
             "url" : "http://files.minecraftforge.net/maven/com/github/abrarsyed/secretroomsmod/promotions.json",
             "promo" : "latest",
             "promoType" : "dev"
+        }
+    },
+    "Botania" : {
+        "function" : "CheckHTML",
+        "active" : true,
+        "html" : {
+            "url" : "https://raw.githubusercontent.com/Vazkii/Botania/master/version/1.7.10.txt",
+            "regex" : "(?P<version>.+?)$"
         }
     }
 }
