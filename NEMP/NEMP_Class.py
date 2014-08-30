@@ -307,8 +307,8 @@ class NotEnoughClasses():
         result = self.fetch_page("http://big-reactors.com/version.json")
         info = simplejson.loads(result, strict = False)
         return {
-            "version" : info["version"],
-            "mc" : info["version-minecraft"]
+            "dev" : info["version"], #apparently this is a dev build, when it totally isn't.
+            "mc" : info["mcVersion"]
         }
 
     def CheckCurse(self,mod):
