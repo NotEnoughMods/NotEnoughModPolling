@@ -330,7 +330,7 @@
         "jenkins" : {
             "url" : "http://ci.thezorro266.com/job/LogisticsPipes1.7/lastSuccessfulBuild/api/json",
             "regex" : "logisticspipes-(?P<dev>.+?).jar",
-            "item" : 0
+            "item" : 2
         }
     },
     "Mekanism" : {
