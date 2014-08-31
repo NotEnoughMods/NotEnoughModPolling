@@ -199,8 +199,8 @@ def multilist(self,name,params,channel,userdata,rank):
                 dev = ""
                 try:
                     if modData["dev"] != "":
-                        dev = ("({colour}dev{colourEnd}): "
-                               "{colour2}{version}{colourEnd})".format(colourEnd = COLOUREND,
+                        dev = ("({colour}dev{colourEnd}: "
+                               "{colour2}{version}{colourEnd}) ".format(colourEnd = COLOUREND,
                                                                    colour = GRAY,
                                                                    colour2 = RED,
                                                                    version = modData["dev"])
