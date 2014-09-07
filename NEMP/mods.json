@@ -1298,7 +1298,7 @@
             "regex" : "-.+?-(?P<version>.+?).jar"
         }
     },
-    "Gravestone" :{
+    "GravestoneMod" :{
         "function" : "CheckCurse",
         "active" : true,
         "curse": {
