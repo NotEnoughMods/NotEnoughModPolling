@@ -201,7 +201,7 @@ def PollingThread(self, pipe):
         for mod, info in NEM.mods.iteritems():
             if self.signal:
                 return
-                
+
             if NEM.mods[mod]["active"]:
                 result, exceptionRaised = NEM.CheckMod(mod)
 
@@ -446,10 +446,10 @@ def test_parser(self,name,params,channel,userdata,rank):
                     self.sendMessage(channel, "Did not receive MC version from parser.")
                 if "version" in result:
                     #self.sendMessage(channel, "!mod "+params[1]+" "+unicode(result["version"]))
-                    self.sendMessage(channel, "!lmod {0} {1} {2}".format(version, mod, unicode(result["version"])))
+                    self.sendMessage(channel, "!lmod {0} {1} {2}".format(result['mc'], mod, unicode(result["version"])))
                 if "dev" in result:
                     #self.sendMessage(channel, "!dev "+params[1]+" "+unicode(result["dev"]))
-                    self.sendMessage(channel, "!ldev {0} {1} {2}".format(version, mod, unicode(result["dev"])))
+                    self.sendMessage(channel, "!ldev {0} {1} {2}".format(result['mc'], mod, unicode(result["dev"])))
                 if "change" in result:
                     self.sendMessage(channel, " * "+result["change"])
 
