@@ -1263,7 +1263,7 @@
         "function" : "CheckCurse",
         "active" : true,
         "curse": {
-            "regex" : "-.+?-v(?P<version>.+?).jar"
+            "regex" : "-mc(?P<mc>.+?)-v(?P<version>.+?).jar"
         }
     },
     "OpenComputers" :{
