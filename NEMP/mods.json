@@ -1363,5 +1363,59 @@
             "url" : "https://raw.githubusercontent.com/Vazkii/Botania/master/version/1.7.10.txt",
             "regex" : "(?P<version>.+?)$"
         }
+    },
+    "AutoCrafter2000" : {
+        "function" : "CheckJenkins",
+        "active" : true,
+        "jenkins": {
+            "url" : "http://jenkins.dries007.net/job/AutoCrafter2000/lastSuccessfulBuild/api/json",
+            "regex" : "AutoCrafter2000-(?P<mc>.+?)-(?P<version>.+?).jar",
+            "item" : 2
+        }
+    },
+    "CrayCrafting" : {
+        "function" : "CheckJenkins",
+        "active" : true,
+        "jenkins": {
+            "url" : "http://jenkins.dries007.net/job/CrayCrafting/lastSuccessfulBuild/api/json",
+            "regex" : "CrayCrafting-(?P<mc>.+?)-(?P<version>.+?).jar",
+            "item" : 2
+        }
+    },
+    "D3Core" : {
+        "function" : "CheckJenkins",
+        "active" : true,
+        "jenkins": {
+            "url" : "http://jenkins.dries007.net/job/D3Core/lastSuccessfulBuild/api/json",
+            "regex" : "D3Core-(?P<mc>.+?)-(?P<version>.+?).jar",
+            "item" : 2
+        }
+    },
+    "GreenThumb" : {
+        "function" : "CheckJenkins",
+        "active" : true,
+        "jenkins": {
+            "url" : "http://jenkins.dries007.net/job/GreenThumb/lastSuccessfulBuild/api/json",
+            "regex" : "GreenThumb-(?P<mc>.+?)-(?P<version>.+?).jar",
+            "item" : 2
+        }
+    },
+    "Let-it-Burn" : {
+        "function" : "CheckJenkins",
+        "active" : true,
+        "jenkins": {
+            "url" : "http://jenkins.dries007.net/job/Let-it-Burn/lastSuccessfulBuild/api/json",
+            "regex" : "LetItBurn-(?P<mc>.+?)-(?P<version>.+?).jar",
+            "item" : 2
+        }
+    },
+    "Lumberjack" : {
+        "function" : "CheckJenkins",
+        "active" : true,
+        "jenkins": {
+            "url" : "http://jenkins.dries007.net/job/Lumberjack/lastSuccessfulBuild/api/json",
+            "regex" : "Lumberjack-(?P<mc>.+?)-(?P<version>.+?).jar",
+            "item" : 2
+        }
     }
 }
