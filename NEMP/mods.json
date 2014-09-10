@@ -1424,7 +1424,7 @@
         "jenkins": {
             "url" : "http://server.techjargaming.com:8080/job/HexWool/lastSuccessfulBuild/api/json",
             "regex" : "HexWool-(?P<mc>.+?)-(?P<version>.+?).jar",
-            "item" : 2
+            "item" : 0
         }
     },
 }
