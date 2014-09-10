@@ -1417,5 +1417,14 @@
             "regex" : "Lumberjack-(?P<mc>.+?)-(?P<version>.+?).jar",
             "item" : 2
         }
+    },
+    "HexWool" : {
+        "function" : "CheckJenkins",
+        "active" : true,
+        "jenkins": {
+            "url" : "http://server.techjargaming.com:8080/job/HexWool/lastSuccessfulBuild/api/json",
+            "regex" : "HexWool-(?P<mc>.+?)-(?P<version>.+?).jar",
+            "item" : 0
+        }
     }
 }
