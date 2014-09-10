@@ -1303,7 +1303,7 @@
         "active" : true,
         "curse": {
             "name" : "gravestone_mod",
-            "regex" : "GraveStone.+?(?P<version>.+?).jar"
+            "regex" : "GraveStone (?P<version>.+?).jar"
         }
     },
     "Natura" :{
