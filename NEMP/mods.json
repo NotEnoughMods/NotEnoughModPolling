@@ -1422,7 +1422,7 @@
         "function" : "CheckJenkins",
         "active" : true,
         "jenkins": {
-            "url" : "http://server.techjargaming.com:8080/job/HexWool//lastSuccessfulBuild/api/json",
+            "url" : "http://server.techjargaming.com:8080/job/HexWool/lastSuccessfulBuild/api/json",
             "regex" : "HexWool-(?P<mc>.+?)-(?P<version>.+?).jar",
             "item" : 2
         }
