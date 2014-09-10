@@ -1256,7 +1256,7 @@
         "curse": {
             "id" : "223099",
             "name" : "blue-power",
-            "regex" : "-.+?-(?P<version>.+?)-universal.jar"
+            "regex" : "-(?P<mc>.+?)-(?P<version>.+?)-universal.jar"
         }
     },
     "EiraIRC" :{
