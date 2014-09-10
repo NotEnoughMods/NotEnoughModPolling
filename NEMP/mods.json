@@ -1133,7 +1133,7 @@
         "function" : "CheckCurse",
         "active" : true,
         "curse": {
-            "name" : "steves-workshop",
+            "name" : "steves-workshop-223173",
             "id" : "223173",
             "regex" : ".+?-(?P<version>.+?).jar"
         }
