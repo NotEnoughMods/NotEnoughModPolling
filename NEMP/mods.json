@@ -293,9 +293,9 @@
         "function" : "CheckJenkins",
         "active" : true,
         "jenkins" : {
-            "url" : "http://2.iongaming.org:8080/job/Galacticraft/lastSuccessfulBuild/api/json",
-            "regex" : "Galacticraft-(?P<mc>.+?)-(?P<dev>.+?).jar$",
-            "item" : 0
+            "url" : "http://ci.micdoodle8.com/job/Galacticraft-1.7/lastSuccessfulBuild/api/json",
+            "regex" : "GalacticraftCore-BETA-.+?-(?P<dev>.+?).jar$",
+            "item" : 1
         }
     },
     "NEM-VersionChecker" : {
@@ -940,7 +940,7 @@
             "regex" : "_.+?_(?P<version>.+?).jar"
         }
     },
-    "BdLib" : {
+    "BDLib" : {
         "function" : "CheckCurse",
         "active" : true,
         "curse": {
@@ -1017,7 +1017,7 @@
         "active" : true,
         "curse": {
             "name" : "warp-book",
-            "regex" : ".+?-(?P<version>.+?).jar"
+            "regex" : "Warp.+?Book.+?(?P<version>.+?)$"
         }
     },
     "Veinminer" : {
@@ -1303,7 +1303,7 @@
         "active" : true,
         "curse": {
             "name" : "gravestone_mod",
-            "regex" : ".+?_(?P<version>.+?).jar"
+            "regex" : "GraveStone.+?(?P<version>.+?).jar"
         }
     },
     "Natura" :{
