@@ -200,8 +200,18 @@
         "active" : false,
         "jenkins" : {
             "url" : "http://build.technicpack.net/job/ModularPowersuits/lastSuccessfulBuild/api/json",
-            "regex" : "ModularPowersuits-(?P<mc>.+?)-(?P<dev>.+?).jar$",
-            "item" : 0
+            "regex" : "ModularPowersuits-(?P<dev>.+?).jar$",
+            "item" : 1
+        }
+    },
+    "Numina" : {
+        "function" : "CheckJenkins",
+        "category" : "technic-ci",
+        "active" : false,
+        "jenkins" : {
+            "url" : "http://build.technicpack.net/job/Numina/lastSuccessfulBuild/api/json",
+            "regex" : "Numina-(?P<dev>.+?).jar$",
+            "item" : 1
         }
     },
     "ModularPowersuits-Addons" : {
@@ -275,8 +285,8 @@
         "function" : "CheckJenkins",
         "active" : true,
         "jenkins" : {
-            "url" : "http://ci.iongaming.org/job/VanityBlocks/lastSuccessfulBuild/api/json",
-            "regex" : "VanityBlocks-(?P<mc>.+?)-(?P<dev>.+?).jar",
+            "url" : "http://2.iongaming.org:8080/job/VanityBlocks/lastSuccessfulBuild/api/json",
+            "regex" : "VanityBlocks-V(?P<mc>.+?)-(?P<dev>.+?).jar",
             "item" : 0
         }
     },
@@ -705,6 +715,15 @@
             "url" : "http://ci.tterrag.com/job/EnderIO-RF/lastSuccessfulBuild/api/json",
             "regex" : "EnderIO-(?P<mc>.+?)-(?P<dev>.+?).jar",
             "item" : 3
+        }
+    },
+    "EnderIO-Release" : {
+        "name" : "EnderIO",
+        "function" : "CheckCurse",
+        "active" : true,
+        "curse" : {
+            "regex" : "EnderIO-(?P<mc>.+?)-(?P<version>.+?).jar",
+            "name" : "ender-io"
         }
     },
     "ServerTools-BACKUP" : {
@@ -1425,6 +1444,14 @@
             "url" : "http://server.techjargaming.com:8080/job/HexWool/lastSuccessfulBuild/api/json",
             "regex" : "HexWool-(?P<mc>.+?)-(?P<version>.+?).jar",
             "item" : 0
+        }
+    },
+    "Luppii'sLadders" :{
+        "function" : "CheckCurse",
+        "active" : true,
+        "curse": {
+            "name" : "luppiis-ladders",
+            "regex" : "Ladders-(?P<version>.+?)-MC(?P<mc>.+?).jar"
         }
     }
 }
