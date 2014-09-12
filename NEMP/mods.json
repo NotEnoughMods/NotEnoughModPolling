@@ -1426,5 +1426,32 @@
             "regex" : "HexWool-(?P<mc>.+?)-(?P<version>.+?).jar",
             "item" : 0
         }
+    },
+    "MadScience" : {
+        "function" : "CheckJenkins",
+        "active" : true,
+        "jenkins": {
+            "url" : "http://madsciencemod.com:8080/job/Mad%20Science/Release%20Version/api/json",
+            "regex" : "MadScience-MC(?P<mc>.+?)-F9.11.1.964_v(?P<version>.+?)-universal.jar",
+            "item" : 2
+        }
+    },
+    "Minechem" : {
+        "function" : "CheckJenkins",
+        "active" : true,
+        "jenkins": {
+            "url" : "http://jenkins.jakimfett.com/build/job/Minechem%201.7/lastSuccessfulBuild/api/json",
+            "regex" : "Minechem-(?P<mc>.+?)-(?P<dev>.+?).jar",
+            "item" : 1
+        }
+    },
+    "AlchemyPlusPlus" : {
+        "function" : "CheckJenkins",
+        "active" : true,
+        "jenkins": {
+            "url" : "http://jenkins.jakimfett.com/build/job/AlchemyPlusPlus%201.7/lastSuccessfulBuild/api/json",
+            "regex" : "AlchemyPlusPlus-(?P<mc>.+?)-(?P<dev>.+?).jar",
+            "item" : 0
+        }
     }
 }
