@@ -271,12 +271,10 @@ def NEMP_TimerEvent(self, channels):
 
                     if self.NEM.mods[mod]["dev"] != "NOT_USED" and flags[0]:
                         nemp_logger.debug("Updating DevMod {0}, Flags: {1}".format(mod, flags))
-                        #self.sendMessage(channel, "!ldev "+version+" "+mod+" "+unicode(self.NEM.mods[mod]["dev"]))
                         self.sendMessage(channel, "!ldev {0} {1} {2}".format(version, real_name, unicode(self.NEM.mods[mod]["dev"])))
 
                     if self.NEM.mods[mod]["version"]  != "NOT_USED" and flags[1]:
                         nemp_logger.debug("Updating Mod {0}, Flags: {1}".format(mod, flags))
-                        #self.sendMessage(channel, "!lmod "+version+" "+mod+" "+unicode(self.NEM.mods[mod]["version"]))
                         self.sendMessage(channel, "!lmod {0} {1} {2}".format(version, real_name, unicode(self.NEM.mods[mod]["version"])))
 
                     if self.NEM.mods[mod]["change"] != "NOT_USED" and "changelog" not in self.NEM.mods[mod]:
@@ -449,10 +447,8 @@ def test_parser(self,name,params,channel,userdata,rank):
                 else:
                     self.sendMessage(channel, "Did not receive MC version from parser.")
                 if "version" in result:
-                    #self.sendMessage(channel, "!mod "+params[1]+" "+unicode(result["version"]))
                     self.sendMessage(channel, "!lmod {0} {1} {2}".format(version, real_name, unicode(result["version"])))
                 if "dev" in result:
-                    #self.sendMessage(channel, "!dev "+params[1]+" "+unicode(result["dev"]))
                     self.sendMessage(channel, "!ldev {0} {1} {2}".format(version, real_name, unicode(result["dev"])))
                 if "change" in result:
                     self.sendMessage(channel, " * "+result["change"])
