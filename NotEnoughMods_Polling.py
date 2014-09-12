@@ -433,7 +433,10 @@ def test_parser(self,name,params,channel,userdata,rank):
                 result = getattr(self.NEM, self.NEM.mods[mod]["function"])(mod)
 
                 print("result of parser: {}".format(result))
-                version = self.NEM.mods[params[1]]["mc"]
+                if 'mc' in result:
+                    version = result['mc']
+                else:
+                    version = self.NEM.mods[params[1]]["mc"]
 
                 if not result:
                     self.sendMessage(channel, "Didn't get a reply from the parser. (got " + repr(result) +")")
@@ -446,10 +449,10 @@ def test_parser(self,name,params,channel,userdata,rank):
                     self.sendMessage(channel, "Did not receive MC version from parser.")
                 if "version" in result:
                     #self.sendMessage(channel, "!mod "+params[1]+" "+unicode(result["version"]))
-                    self.sendMessage(channel, "!lmod {0} {1} {2}".format(result['mc'], mod, unicode(result["version"])))
+                    self.sendMessage(channel, "!lmod {0} {1} {2}".format(version, mod, unicode(result["version"])))
                 if "dev" in result:
                     #self.sendMessage(channel, "!dev "+params[1]+" "+unicode(result["dev"]))
-                    self.sendMessage(channel, "!ldev {0} {1} {2}".format(result['mc'], mod, unicode(result["dev"])))
+                    self.sendMessage(channel, "!ldev {0} {1} {2}".format(version, mod, unicode(result["dev"])))
                 if "change" in result:
                     self.sendMessage(channel, " * "+result["change"])
 
