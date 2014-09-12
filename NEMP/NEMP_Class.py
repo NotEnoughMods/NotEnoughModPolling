@@ -90,44 +90,43 @@ class NotEnoughClasses():
         templist = self.mods.keys()
         try:
             for version in self.nemVersions:
-                if "-dev" not in version: #is this still needed?
-                    rawJson = self.fetch_page("http://bot.notenoughmods.com/"+version+".json")
+                rawJson = self.fetch_page("http://bot.notenoughmods.com/"+version+".json")
 
-                    jsonres = simplejson.loads(rawJson, strict = False)
+                jsonres = simplejson.loads(rawJson, strict = False)
 
-                    for mod in jsonres:
-                        if mod["name"] in templist:
-                            self.mods[mod["name"]]["mc"] = version
+                for mod in jsonres:
+                    if mod["name"] in templist:
+                        self.mods[mod["name"]]["mc"] = version
 
-                            if "dev" in mod and mod["dev"]:
-                                self.mods[mod["name"]]["dev"] = str(mod["dev"])
-                            else:
-                                self.mods[mod["name"]]["dev"] = "NOT_USED"
+                        if "dev" in mod and mod["dev"]:
+                            self.mods[mod["name"]]["dev"] = str(mod["dev"])
+                        else:
+                            self.mods[mod["name"]]["dev"] = "NOT_USED"
 
-                            if "version" in mod and mod["version"]:
-                                self.mods[mod["name"]]["version"] = str(mod["version"])
-                            else:
-                                self.mods[mod["name"]]["version"] = "NOT_USED"
+                        if "version" in mod and mod["version"]:
+                            self.mods[mod["name"]]["version"] = str(mod["version"])
+                        else:
+                            self.mods[mod["name"]]["version"] = "NOT_USED"
 
-                            templist.remove(mod["name"])
-                    #ok, so it wasn't directly on the list, is it indirectly on the list though.
-                    for lonelyMod in templist:
-                        if "name" in self.mods[lonelyMod]:
-                            #ok, this is a PykerHack mod.
-                            for lonelyTestMod in jsonres:
-                                if self.mods[lonelyMod]["name"] == lonelyTestMod["name"]: #ok, does it exist for this MC version.
-                                    self.mods[lonelyMod]["mc"] = version
+                        templist.remove(mod["name"])
+                #ok, so it wasn't directly on the list, is it indirectly on the list though.
+                for lonelyMod in templist:
+                    if "name" in self.mods[lonelyMod]:
+                        #ok, this is a PykerHack mod.
+                        for lonelyTestMod in jsonres:
+                            if self.mods[lonelyMod]["name"] == lonelyTestMod["name"]: #ok, does it exist for this MC version.
+                                self.mods[lonelyMod]["mc"] = version
 
-                                    if "dev" in mod and mod["dev"]:
-                                        self.mods[lonelyMod]["dev"] = str(mod["dev"])
-                                    else:
-                                        self.mods[lonelyMod]["dev"] = "NOT_USED"
+                                if "dev" in mod and mod["dev"]:
+                                    self.mods[lonelyMod]["dev"] = str(mod["dev"])
+                                else:
+                                    self.mods[lonelyMod]["dev"] = "NOT_USED"
 
-                                    if "version" in mod and mod["version"]:
-                                        self.mods[lonelyMod]["version"] = str(mod["version"])
-                                    else:
-                                        self.mods[lonelyMod]["version"] = "NOT_USED"
-                                    templist.remove(lonelyMod)
+                                if "version" in mod and mod["version"]:
+                                    self.mods[lonelyMod]["version"] = str(mod["version"])
+                                else:
+                                    self.mods[lonelyMod]["version"] = "NOT_USED"
+                                templist.remove(lonelyMod)
         except:
             pass
             #most likely a timeout
