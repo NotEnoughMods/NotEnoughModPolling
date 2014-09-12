@@ -5,6 +5,7 @@ import gzip
 import logging
 import os
 
+from collections import OrderedDict
 from StringIO import StringIO
 from string import ascii_letters, digits
 from time import time
@@ -148,7 +149,7 @@ def multilist(self,name,params,channel,userdata,rank):
     else:
         try:
             jsonres = {}
-            results = {}
+            results = OrderedDict()
 
             modName = params[1]
 
