@@ -431,6 +431,7 @@ def test_parser(self,name,params,channel,userdata,rank):
             try:
                 mod = params[1]
                 result = getattr(self.NEM, self.NEM.mods[mod]["function"])(mod)
+                real_name = self.NEM.mods[mod].get('name', mod)
 
                 print("result of parser: {}".format(result))
                 if 'mc' in result:
@@ -449,10 +450,10 @@ def test_parser(self,name,params,channel,userdata,rank):
                     self.sendMessage(channel, "Did not receive MC version from parser.")
                 if "version" in result:
                     #self.sendMessage(channel, "!mod "+params[1]+" "+unicode(result["version"]))
-                    self.sendMessage(channel, "!lmod {0} {1} {2}".format(version, mod, unicode(result["version"])))
+                    self.sendMessage(channel, "!lmod {0} {1} {2}".format(version, real_name, unicode(result["version"])))
                 if "dev" in result:
                     #self.sendMessage(channel, "!dev "+params[1]+" "+unicode(result["dev"]))
-                    self.sendMessage(channel, "!ldev {0} {1} {2}".format(version, mod, unicode(result["dev"])))
+                    self.sendMessage(channel, "!ldev {0} {1} {2}".format(version, real_name, unicode(result["dev"])))
                 if "change" in result:
                     self.sendMessage(channel, " * "+result["change"])
 
