@@ -1479,5 +1479,14 @@
             "regex" : "Ladders-(?P<version>.+?)-MC(?P<mc>.+?).jar"
 
         }
+    },
+    "VersionChecker": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "id": "221140",
+            "name": "version-checker",
+            "regex": "VersionChecker-(?P<version>.+?).jar"
+        }
     }
 }
