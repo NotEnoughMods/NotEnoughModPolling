@@ -117,13 +117,13 @@ class NotEnoughClasses():
                             if self.mods[lonelyMod]["name"] == lonelyTestMod["name"]: #ok, does it exist for this MC version.
                                 self.mods[lonelyMod]["mc"] = version
 
-                                if "dev" in mod and mod["dev"]:
-                                    self.mods[lonelyMod]["dev"] = str(mod["dev"])
+                                if "dev" in lonelyTestMod and lonelyTestMod["dev"]:
+                                    self.mods[lonelyMod]["dev"] = str(lonelyTestMod["dev"])
                                 else:
                                     self.mods[lonelyMod]["dev"] = "NOT_USED"
 
-                                if "version" in mod and mod["version"]:
-                                    self.mods[lonelyMod]["version"] = str(mod["version"])
+                                if "version" in lonelyTestMod and lonelyTestMod["version"]:
+                                    self.mods[lonelyMod]["version"] = str(lonelyTestMod["version"])
                                 else:
                                     self.mods[lonelyMod]["version"] = "NOT_USED"
                                 templist.remove(lonelyMod)
