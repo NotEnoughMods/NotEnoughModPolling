@@ -1496,7 +1496,7 @@
         "curse": {
             "id": "224164",
             "name": "fluxed-trinkets",
-            "regex" : ".+? .+? (?P<version>.+?)$"
+            "regex" : "Fluxed Trinkets \\[(?P<version>.+?)\\]$"
         }
     },
     "PneumaticCraft" : {
