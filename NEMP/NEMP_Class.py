@@ -39,12 +39,12 @@ class NotEnoughClasses():
             return data
         except:
             pass
-            #most likely a timeout
+            # most likely a timeout
 
     def buildModDict(self):
         modList = open("commands/NEMP/mods.json", "r")
         fileInfo = modList.read()
-        self.mods = simplejson.loads(fileInfo, strict = False)
+        self.mods = simplejson.loads(fileInfo, strict=False)
         for mod in self.mods:
             if "change" not in self.mods[mod]:
                 self.mods[mod]["change"] = "NOT_USED"
@@ -58,14 +58,14 @@ class NotEnoughClasses():
             footerText = f.read()
         with open("commands/NEMP/htdocs/index.html", "w") as f:
             f.write(re.sub("~MOD_COUNT~", str(len(self.mods)), headerText))
-            for modName, info in sorted(self.mods.iteritems()): # TODO: make this not terrible
+            for modName, info in sorted(self.mods.iteritems()):  # TODO: make this not terrible
                 if info["active"]:
                     isDisabled = "active"
                 else:
                     isDisabled = "disabled"
                 f.write("""
         <tr class='{}'>
-            <td class='name'>{}</td>""".format(isDisabled,modName))
+            <td class='name'>{}</td>""".format(isDisabled, modName))
                 f.write("""
             <td class='function'>{}</td>
 """.format(info["function"]))
@@ -79,20 +79,20 @@ class NotEnoughClasses():
     def QueryNEM(self):
         try:
             result = self.fetch_page("http://bot.notenoughmods.com/?json")
-            self.nemVersions = reversed(simplejson.loads(result, strict = False))
+            self.nemVersions = reversed(simplejson.loads(result, strict=False))
         except:
             print("Failed to get NEM versions, falling back to hard-coded")
             traceb = str(traceback.format_exc())
             print(traceb)
-            self.nemVersions = reversed(["1.4.5","1.4.6-1.4.7","1.5.1","1.5.2","1.6.1","1.6.2","1.6.4","1.7.2"])
+            self.nemVersions = reversed(["1.4.5", "1.4.6-1.4.7", "1.5.1", "1.5.2", "1.6.1", "1.6.2", "1.6.4", "1.7.2"])
 
     def InitiateVersions(self):
         templist = self.mods.keys()
         try:
             for version in self.nemVersions:
-                rawJson = self.fetch_page("http://bot.notenoughmods.com/"+version+".json")
+                rawJson = self.fetch_page("http://bot.notenoughmods.com/" + version + ".json")
 
-                jsonres = simplejson.loads(rawJson, strict = False)
+                jsonres = simplejson.loads(rawJson, strict=False)
 
                 for mod in jsonres:
                     if mod["name"] in templist:
@@ -109,12 +109,12 @@ class NotEnoughClasses():
                             self.mods[mod["name"]]["version"] = "NOT_USED"
 
                         templist.remove(mod["name"])
-                #ok, so it wasn't directly on the list, is it indirectly on the list though.
+                # ok, so it wasn't directly on the list, is it indirectly on the list though.
                 for lonelyMod in templist:
                     if "name" in self.mods[lonelyMod]:
-                        #ok, this is a PykerHack mod.
+                        # ok, this is a PykerHack mod.
                         for lonelyTestMod in jsonres:
-                            if self.mods[lonelyMod]["name"] == lonelyTestMod["name"]: #ok, does it exist for this MC version.
+                            if self.mods[lonelyMod]["name"] == lonelyTestMod["name"]:  # ok, does it exist for this MC version.
                                 self.mods[lonelyMod]["mc"] = version
 
                                 if "dev" in lonelyTestMod and lonelyTestMod["dev"]:
@@ -129,13 +129,13 @@ class NotEnoughClasses():
                                 templist.remove(lonelyMod)
         except:
             pass
-            #most likely a timeout
+            # most likely a timeout
 
     def CheckJenkins(self, mod):
         result = self.fetch_page(self.mods[mod]["jenkins"]["url"])
-        jsonres = simplejson.loads(result, strict = False )
+        jsonres = simplejson.loads(result, strict=False)
         filename = jsonres["artifacts"][self.mods[mod]["jenkins"]["item"]]["fileName"]
-        match = re.search(self.mods[mod]["jenkins"]["regex"],filename)
+        match = re.search(self.mods[mod]["jenkins"]["regex"], filename)
         output = match.groupdict()
         try:
             output["change"] = jsonres["changeSet"]["items"][0]["comment"]
@@ -143,21 +143,21 @@ class NotEnoughClasses():
             pass
         return output
 
-    def CheckMCForge2(self,mod):
+    def CheckMCForge2(self, mod):
         result = self.fetch_page(self.mods[mod]["mcforge"]["url"])
         jsonres = simplejson.loads(result, strict=False)
 
         for promo in jsonres["promos"]:
             if promo == self.mods[mod]["mcforge"]["promo"]:
                 return {
-                    self.mods[mod]["mcforge"]["promoType"] : jsonres["promos"][promo]["version"],
-                    "mc" : jsonres["promos"][promo]["mcversion"]
+                    self.mods[mod]["mcforge"]["promoType"]: jsonres["promos"][promo]["version"],
+                    "mc": jsonres["promos"][promo]["mcversion"]
                 }
         return {}
 
-    def CheckMCForge(self,mod):
-        result = self.fetch_page("http://files.minecraftforge.net/"+self.mods[mod]["mcforge"]["name"]+"/json")
-        jsonres = simplejson.loads(result, strict = False )
+    def CheckMCForge(self, mod):
+        result = self.fetch_page("http://files.minecraftforge.net/" + self.mods[mod]["mcforge"]["name"] + "/json")
+        jsonres = simplejson.loads(result, strict=False)
         promotionArray = jsonres["promotions"]
         devMatch = ""
         recMatch = ""
@@ -166,12 +166,12 @@ class NotEnoughClasses():
                 for entry in promotion["files"]:
                     if entry["type"] == "universal":
                         info = entry["url"]
-                        devMatch = re.search(self.mods[mod]["mcforge"]["regex"],info)
+                        devMatch = re.search(self.mods[mod]["mcforge"]["regex"], info)
             elif promotion["name"] == self.mods[mod]["mcforge"]["rec"]:
                 for entry in promotion["files"]:
                     if entry["type"] == "universal":
                         info = entry["url"]
-                        recMatch = re.search(self.mods[mod]["mcforge"]["regex"],info)
+                        recMatch = re.search(self.mods[mod]["mcforge"]["regex"], info)
         if devMatch:
             output = {}
             tmpMC = "null"
@@ -186,31 +186,31 @@ class NotEnoughClasses():
             output["dev"] = devMatch.group(2)
             return output
 
-    def CheckChickenBones(self,mod):
-        result = self.fetch_page("http://www.chickenbones.net/Files/notification/version.php?version="+self.mods[mod]["mc"]+"&file="+mod)
-        if result.startswith("Ret: "): #Hacky I know, but this is how ChickenBones does it in his mod
+    def CheckChickenBones(self, mod):
+        result = self.fetch_page("http://www.chickenbones.net/Files/notification/version.php?version=" + self.mods[mod]["mc"] + "&file=" + mod)
+        if result.startswith("Ret: "):  # Hacky I know, but this is how ChickenBones does it in his mod
             new_version = result[5:]
             if LooseVersion(new_version) > LooseVersion(self.mods[mod]['version']):
                 return {
-                    "version" : new_version
+                    "version": new_version
                 }
             else:
                 return {}
 
-    def CheckmDiyo(self,mod):
-        result = self.fetch_page("http://tanis.sunstrike.io/"+self.mods[mod]["mDiyo"]["location"])
+    def CheckmDiyo(self, mod):
+        result = self.fetch_page("http://tanis.sunstrike.io/" + self.mods[mod]["mDiyo"]["location"])
         lines = result.split()
         result = ""
         for line in lines:
             if ".jar" in line.lower():
                 result = line
-        match = re.search(self.mods[mod]["mDiyo"]["regex"],result)
+        match = re.search(self.mods[mod]["mDiyo"]["regex"], result)
         output = match.groupdict()
         return output
 
-    def CheckAE(self,mod):
+    def CheckAE(self, mod):
         result = self.fetch_page("http://ae-mod.info/releases")
-        jsonres = simplejson.loads(result, strict = False )
+        jsonres = simplejson.loads(result, strict=False)
         jsonres = sorted(jsonres, key=lambda k: k['Released'])
         relVersion = ""
         #relMC = ""
@@ -224,14 +224,14 @@ class NotEnoughClasses():
                 devVersion = version["Version"]
                 devMC = version["Minecraft"]
         return {
-            "version" : relVersion,
-            "dev" : devVersion,
-            "mc" : devMC #TODO: this doesn't seem reliable...
+            "version": relVersion,
+            "dev": devVersion,
+            "mc": devMC  # TODO: this doesn't seem reliable...
         }
 
-    def CheckAE2(self,mod):
+    def CheckAE2(self, mod):
         result = self.fetch_page("http://ae2.ae-mod.info/builds/builds.json")
-        jsonres = simplejson.loads(result, strict = False )
+        jsonres = simplejson.loads(result, strict=False)
         jsonres = sorted(jsonres['Versions'], key=lambda k: k['Created'], reverse=True)
         relVersion = ""
         MCversion = ""
@@ -253,7 +253,7 @@ class NotEnoughClasses():
                 "mc": MCversion
             }
 
-    def CheckDropBox(self,mod):
+    def CheckDropBox(self, mod):
         result = self.fetch_page(self.mods[mod]["html"]["url"])
         match = None
         for match in re.finditer(self.mods[mod]["html"]["regex"], result):
@@ -270,7 +270,7 @@ class NotEnoughClasses():
         else:
             return {}
 
-    def CheckHTML(self,mod):
+    def CheckHTML(self, mod):
         result = self.fetch_page(self.mods[mod]["html"]["url"])
         output = {}
         for line in result.splitlines():
@@ -279,38 +279,38 @@ class NotEnoughClasses():
                 output = match.groupdict()
         return output
 
-    def CheckSpacechase(self,mod):
-        result = self.fetch_page("http://spacechase0.com/wp-content/plugins/mc-mod-manager/nem.php?mc="+self.mods[mod]["mc"][2:])
+    def CheckSpacechase(self, mod):
+        result = self.fetch_page("http://spacechase0.com/wp-content/plugins/mc-mod-manager/nem.php?mc=" + self.mods[mod]["mc"][2:])
         for line in result.splitlines():
             info = line.split(',')
-            #0 = ID, 1=NEM ID, 2=ModID, 3=Author, 4=Link, 5=Version, 6=Comment
+            # 0 = ID, 1=NEM ID, 2=ModID, 3=Author, 4=Link, 5=Version, 6=Comment
             if info[1] == mod:
                 return {
-                    "version" : info[5]
+                    "version": info[5]
                 }
         return {}
 
-    def CheckLunatrius(self,mod):
-        result = self.fetch_page("http://mc.lunatri.us/json?latest&mod="+mod+"&v=2")
-        jsonres = simplejson.loads(result, strict = False )
+    def CheckLunatrius(self, mod):
+        result = self.fetch_page("http://mc.lunatri.us/json?latest&mod=" + mod + "&v=2")
+        jsonres = simplejson.loads(result, strict=False)
         info = jsonres["mods"][mod]["latest"]
         output = {
-            "version" : info["version"],
-            "mc" : info["mc"]
+            "version": info["version"],
+            "mc": info["mc"]
         }
         if len(info['changes']) > 0:
             output["change"] = info['changes'][0]
         return output
 
-    def CheckBigReactors(self,mod):
+    def CheckBigReactors(self, mod):
         result = self.fetch_page("http://big-reactors.com/version.json")
-        info = simplejson.loads(result, strict = False)
+        info = simplejson.loads(result, strict=False)
         return {
-            "dev" : info["version"], #apparently this is a dev build, when it totally isn't.
-            "mc" : info["mcVersion"]
+            "dev": info["version"],  # apparently this is a dev build, when it totally isn't.
+            "mc": info["mcVersion"]
         }
 
-    def CheckCurse(self,mod):
+    def CheckCurse(self, mod):
         modid = self.mods[mod]['curse'].get('id')
 
         # Accounts for discrepancies between NEM mod names and the Curse link format
@@ -319,13 +319,13 @@ class NotEnoughClasses():
 
         # As IDs only work with newer mods we have to support two versions of the URL
         if modid:
-            result = self.fetch_page("http://widget.mcf.li/mc-mods/minecraft/"+modid+"-"+modname+".json")
+            result = self.fetch_page("http://widget.mcf.li/mc-mods/minecraft/" + modid + "-" + modname + ".json")
         else:
-            result = self.fetch_page("http://widget.mcf.li/mc-mods/minecraft/"+modname+".json")
+            result = self.fetch_page("http://widget.mcf.li/mc-mods/minecraft/" + modname + ".json")
 
-        jsonres = simplejson.loads(result, strict = False )
+        jsonres = simplejson.loads(result, strict=False)
         filename = jsonres["download"]["name"]
-        match = re.search(self.mods[mod]["curse"]["regex"],filename)
+        match = re.search(self.mods[mod]["curse"]["regex"], filename)
         output = match.groupdict()
         relVersion = ""
         devVersion = ""
@@ -372,8 +372,8 @@ class NotEnoughClasses():
                 self.mods[mod]["mc"] = output["mc"]
             if "change" in output and "changelog" not in self.mods[mod]:
                 self.mods[mod]["change"] = output["change"]
-            return status, False # Everything went fine, no exception raised
+            return status, False  # Everything went fine, no exception raised
         except:
-            print(mod+" failed to be polled...")
+            print(mod + " failed to be polled...")
             traceback.print_exc()
-            return [False, False], True # an exception was raised, so we return a True
+            return [False, False], True  # an exception was raised, so we return a True
