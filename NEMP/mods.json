@@ -1516,5 +1516,12 @@
             "name": "intelligent-energistics",
             "regex": "IntelligentEnergistics-(?P<mc>.+?)-(?P<dev>.+?)-universal.jar"
         }
+    },
+    "IntelligentEnergistics" : {
+        "function" : "CheckCurseForge",
+        "active" : true,
+        "curseforge": {
+            "regex" : "IntelligentEnergistics-(?P<mc>.+?)-(?P<version>.+?)-universal.jar"
+        }
     }
 }
