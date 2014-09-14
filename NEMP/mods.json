@@ -314,13 +314,13 @@
             "regex" : "NEM-VersionChecker-(?P<mc>.+?)-(?P<version>.+?).jar"
         }
     },
-    "Buildcraft" : {
+    "BuildCraft" : {
         "function" : "CheckJenkins",
         "active" : false,
         "jenkins" : {
             "url" : "http://nallar.me/buildservice/job/Buildcraft/lastSuccessfulBuild/api/json",
-            "regex" : "buildcraft-universal-(?P<mc>.+?)-(?P<dev>.+?).jar$",
-            "item" : 0
+            "regex" : "buildcraft-(?P<dev>.+?).jar$",
+            "item" : 4
         }
     },
     "Artifice" : {
@@ -497,7 +497,7 @@
     "DenPipes" : {
         "function" : "CheckDropBox",
         "category" : "den",
-        "active" : true,
+        "active" : false,
         "html" : {
             "url" : "https://www.dropbox.com/sh/qqgsswnyxh2mq9f/KBRRnClA4f/DenPipes",
             "regex" : "DenPipes-(?P<mc>.+?)-(?P<version>.+?).jar"
@@ -506,7 +506,7 @@
     "DenPipesEmerald" : {
         "function" : "CheckDropBox",
         "category" : "den",
-        "active" : true,
+        "active" : false,
         "html" : {
             "url" : "https://www.dropbox.com/sh/qqgsswnyxh2mq9f/B9lEpmV2zD/DenPipes/Addons",
             "regex" : "DenPipes-Emerald-(?P<mc>.+?)-(?P<version>.+?).jar"
@@ -515,7 +515,7 @@
     "GateCopy" : {
         "function" : "CheckDropBox",
         "category" : "den",
-        "active" : true,
+        "active" : false,
         "html" : {
             "url" : "https://www.dropbox.com/sh/qqgsswnyxh2mq9f/PIj33yv4Gd/GateCopy",
             "regex" : "GateCopy-(?P<mc>.+?)-(?P<version>.+?).jar"
@@ -534,7 +534,7 @@
     "INpureTools" : {
         "function" : "CheckDropBox",
         "category" : "den",
-        "active" : true,
+        "active" : false,
         "html" : {
             "url" : "https://www.dropbox.com/sh/qqgsswnyxh2mq9f/3X9h2iJEcc/INpureTools",
             "regex" : "INpureTools-(?P<mc>.+?)-(?P<version>.+?).jar"
@@ -543,7 +543,7 @@
     "INpureTools_CCTurtle" : {
         "function" : "CheckDropBox",
         "category" : "den",
-        "active" : true,
+        "active" : false,
         "html" : {
             "url" : "https://www.dropbox.com/sh/qqgsswnyxh2mq9f/3pg3Hi0xaX/INpureTools/Turtles",
             "regex" : "INpureTools_CCTurtle-(?P<mc>.+?)-(?P<version>.+?).jar"
@@ -552,7 +552,7 @@
     "PluginsForForestry" : {
         "function" : "CheckJenkins",
         "category" : "den",
-        "active" : true,
+        "active" : false,
         "jenkins" : {
             "url" : "http://denoflions.servehttp.com:8080/job/PluginsForForestry/lastSuccessfulBuild/api/json",
             "regex" : "PluginsforForestry-(?P<mc>.+?)-(?P<version>.+?).jar",
@@ -699,7 +699,7 @@
     },
     "AppliedThermodynamics" : {
         "function" : "CheckJenkins",
-        "active" : true,
+        "active" : false,
         "jenkins" : {
             "url" : "http://themattabase.com:9090/job/Applied%20Thermodynamics/lastSuccessfulBuild/api/json",
             "regex" : "apptherm-(?P<dev>.+?).jar$",
@@ -894,7 +894,8 @@
         "function" : "CheckCurse",
         "active" : true,
         "curse": {
-            "regex" : ".+?-(?P<version>.+?).jar"
+            "name" : "railcraft",
+            "regex" : ".+? (?P<version>.+?)$"
         }
     },
     "Jabba" : {
@@ -1150,7 +1151,7 @@
         "function" : "CheckCurse",
         "active" : true,
         "curse": {
-            "name" : "steves-workshop-223173",
+            "name" : "steves-workshop",
             "id" : "223173",
             "regex" : ".+?-(?P<version>.+?).jar"
         }
@@ -1487,6 +1488,24 @@
             "id": "221140",
             "name": "version-checker",
             "regex": "VersionChecker-(?P<version>.+?).jar"
+        }
+    },
+    "FluxedTrinkets": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "id": "224164",
+            "name": "fluxed-trinkets",
+            "regex" : ".+? .+? (?P<version>.+?)$"
+        }
+    },
+    "PneumaticCraft" : {
+        "function" : "CheckJenkins",
+        "active" : true,
+        "jenkins": {
+            "url" : "http://vps.k-4u.nl:8090/job/PneumaticCraft//lastSuccessfulBuild/api/json",
+            "regex" : "PneumaticCraft-(?P<mc>.+?)-(?P<dev>.+?)-universal.jar",
+            "item" : 0
         }
     }
 }
