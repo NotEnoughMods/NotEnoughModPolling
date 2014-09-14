@@ -106,7 +106,7 @@
     "Cauldron" : {
         "function" : "CheckMCForge2",
         "category" : "forge",
-        "active" : true,
+        "active" : false,
         "changelog" : false,
         "mcforge" : {
             "url" : "http://files.minecraftforge.net/maven/net/minecraftforge/cauldron/promotions.json",
@@ -118,7 +118,7 @@
         "name" : "Cauldron",
         "function" : "CheckMCForge2",
         "category" : "forge",
-        "active" : true,
+        "active" : false,
         "changelog" : false,
         "mcforge" : {
             "url" : "http://files.minecraftforge.net/maven/net/minecraftforge/cauldron/promotions.json",
