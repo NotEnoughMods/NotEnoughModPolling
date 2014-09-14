@@ -1507,5 +1507,14 @@
             "regex" : "PneumaticCraft-(?P<mc>.+?)-(?P<dev>.+?)-universal.jar",
             "item" : 0
         }
+    },
+    "IntelligentEnergistics": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "id": "222848",
+            "name": "intelligent-energistics",
+            "regex": "IntelligentEnergistics-(?P<mc>.+?)-(?P<dev>.+?)-universal.jar"
+        }
     }
 }
