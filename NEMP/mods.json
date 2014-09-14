@@ -468,10 +468,10 @@
     },
     "BloodMagic" : {
         "function" : "CheckDropBox",
-        "active" : true,
+        "active" : false,
         "html" : {
-            "url" : "https://www.dropbox.com/sh/hda611lfjpm9fco/dMTKWT48wQ",
-            "regex" : "Blood%20Magic%20v(?P<version>.+?).zip"
+            "url" : "https://www.dropbox.com/sh/0aqvalqobu61t44/AADZq-GuoDeuNzgg6zueVM_Ca",
+            "regex" : "Blood Magic-v(?P<version>.+?)\\(.+?\\)\\.jar"
         }
     },
     "CreeperCollateral" : {
@@ -1506,6 +1506,32 @@
             "url" : "http://vps.k-4u.nl:8090/job/PneumaticCraft//lastSuccessfulBuild/api/json",
             "regex" : "PneumaticCraft-(?P<mc>.+?)-(?P<dev>.+?)-universal.jar",
             "item" : 0
+        }
+    },
+    "CustomNPCs": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "id": "221826",
+            "name": "custom-npcs",
+            "regex": "CustomNPCs_(?P<version>.+?).jar"
+        }
+    },
+    "MinecraftComesAlive": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "name": "mca",
+            "regex": "MCA-(?P<version>.+?)_MC-(?P<mc>.+?).zip"
+        }
+    },
+    "TheMistsofRioV": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "id": "222477",
+            "name": "the-mists-of-riov",
+            "regex": "The_Mists_of_RioV_-_v(?P<version>.+?).jar"
         }
     }
 }
