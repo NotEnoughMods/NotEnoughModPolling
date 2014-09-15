@@ -1551,5 +1551,135 @@
             "name": "dual-hotbar",
             "regex": "dualhotbar-(?P<mc>.+?)-(?P<version>.+?).jar"
         }
+    },
+    "ThaumicWarden": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "name": "thaumic-warden",
+            "regex": "TWarden-(?P<version>.+?).jar"
+        }
+     },
+    "AlchemicalBling": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "id": "221980",
+            "name": "alchemical-bling",
+            "regex": "AlchemicalBling-(?P<version>.+?)-universal.jar"
+        }
+     },
+    "Atum": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "name": "atum",
+            "regex": "Atum-(?P<mc>.+?)-(?P<version>.+?).jar"
+        }
+     },
+    "Automagy": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "id": "222153",
+            "name": "automagy",
+            "regex": "Automagy-(?P<mc>.+?)-(?P<version>.+?).jar"
+        }
+     },
+    "Freedom": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "id": "222395",
+            "name": "freedom",
+            "regex": "freedom(?P<version>.+?).zip"
+        }
+     },
+    "Santa'sToys": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "id": "222682",
+            "name": "santas-toys",
+            "regex": "santastoys(?P<version>.+?).zip"
+        }
+     },
+    "SparklyPants": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "id": "222513",
+            "name": "sparkly-pants",
+            "regex": "sparklypants(?P<version>.+?).zip"
+        }
+     },
+    "Santa'sDecor": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "id": "222394",
+            "name": "santas-decor",
+            "regex": "santasdecor(?P<version>.+?).zip"
+        }
+     },
+    "CraftGuide": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "name": "craftguide",
+            "regex": "CraftGuide-(?P<version>.+?).zip"
+        }
+     },
+    "DarkMenagerie": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "id": "224039",
+            "name": "dark-menagerie",
+            "regex": "dark_menagerie-(?P<mc>.+?)-(?P<version>.+?).jar"
+        }
+     },
+    "DonutCraft": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "id": "223352",
+            "name": "donutcraft",
+            "regex": "DonutCraft-(?P<version>.+?).jar"
+        }
+     },
+    "DraconicEvolution": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "id": "223565",
+            "name": "draconic-evolution",
+            "regex": "Draconic-Evolution-(?P<mc>.+?)-v(?P<version>.+?).jar"
+        }
+     },
+    "ElementalCreepers": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "name": "elemental-creepers",
+            "regex": "Elemental_Creepers-universal_(?P<mc>.+?)-(?P<version>.+?).jar"
+        }
+     },
+    "ElementalMelons": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "id": "222196",
+            "name": "elemental-melons",
+            "regex": "ElementalMelons-(?P<mc>.+?)-(?P<version>.+?).jar"
+        }
+     },
+    "EvilCraft": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "name": "evilcraft",
+            "regex": "EvilCraft-(?P<mc>.+?)-(?P<version>.+?).jar"
+        }
     }
 }
