@@ -1607,7 +1607,7 @@
      },
     "Santa'sToys": {
         "function": "CheckCurse",
-        "active": true,
+        "active": false,
         "curse": {
             "id": "222682",
             "name": "santas-toys",
@@ -1616,7 +1616,7 @@
      },
     "SparklyPants": {
         "function": "CheckCurse",
-        "active": true,
+        "active": false,
         "curse": {
             "id": "222513",
             "name": "sparkly-pants",
@@ -1625,7 +1625,7 @@
      },
     "Santa'sDecor": {
         "function": "CheckCurse",
-        "active": true,
+        "active": false,
         "curse": {
             "id": "222394",
             "name": "santas-decor",
