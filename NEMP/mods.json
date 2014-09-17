@@ -854,7 +854,8 @@
         "function" : "CheckCurse",
         "active" : true,
         "curse": {
-            "regex" : "ThermalExpansion-_.+?_(?P<version>.+?).jar"
+            "regex" : "ThermalExpansion-_.+?_(?P<version>.+?).jar",
+            "name": "thermalexpansion"
         }
     },
     "ThermalFoundation" : {
@@ -1012,7 +1013,8 @@
         "function" : "CheckCurse",
         "active" : true,
         "curse": {
-            "regex" : "-.+?-(?P<version>.+?).jar"
+            "name": "simplefluidtanks",
+            "regex": "simplefluidtanks-(?P<mc>.+?)-(?P<version>.+?).jar"
         }
     },
     "UndergroundBiomesConstructs" : {
