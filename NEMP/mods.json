@@ -195,7 +195,7 @@
     "ModularPowersuits" : {
         "function" : "CheckJenkins",
         "category" : "technic-ci",
-        "active" : false,
+        "active" : true,
         "jenkins" : {
             "url" : "http://build.technicpack.net/job/ModularPowersuits/lastSuccessfulBuild/api/json",
             "regex" : "ModularPowersuits-(?P<dev>.+?).jar$",
@@ -205,7 +205,7 @@
     "Numina" : {
         "function" : "CheckJenkins",
         "category" : "technic-ci",
-        "active" : false,
+        "active" : true,
         "jenkins" : {
             "url" : "http://build.technicpack.net/job/Numina/lastSuccessfulBuild/api/json",
             "regex" : "Numina-(?P<dev>.+?).jar$",
@@ -475,13 +475,21 @@
         }
     },
     "CreeperCollateral" : {
-        "function" : "CheckJenkins",
+        "function" : "CheckCurse",
         "category" : "den",
-        "active" : false,
-        "jenkins" : {
-            "url" : "http://denoflions.servehttp.com:8080/view/All/job/Creeper%20Collateral/lastSuccessfulBuild/api/json",
-            "regex" : "CreeperCollateral-(?P<mc>.+?)-(?P<version>.+?).jar",
-            "item" : 0
+        "active" : true,
+        "curse" : {
+            "regex" : "CreeperCollateral-_(?P<mc>.+?)_(?P<version>.+?).jar",
+            "id" : "223801"
+        }
+    },
+    "INpureCore" : {
+        "function" : "CheckCurse",
+        "category" : "den",
+        "active" : true,
+        "curse" : {
+            "regex" : "INpureCore-_(?P<mc>.+?)_(?P<version>.+?).jar",
+            "id" : "223792"
         }
     },
     "denLib" : {
@@ -1503,7 +1511,7 @@
         "function" : "CheckJenkins",
         "active" : true,
         "jenkins": {
-            "url" : "http://vps.k-4u.nl:8090/job/PneumaticCraft//lastSuccessfulBuild/api/json",
+            "url" : "http://vps.k-4u.nl:8090/job/PneumaticCraft/lastSuccessfulBuild/api/json",
             "regex" : "PneumaticCraft-(?P<mc>.+?)-(?P<dev>.+?)-universal.jar",
             "item" : 0
         }
