@@ -488,7 +488,7 @@
         "category" : "den",
         "active" : true,
         "curse" : {
-            "regex" : "INpureCore-_(?P<mc>.+?)_(?P<version>.+?).jar",
+            "regex" : "INpureCore-\\[(?P<mc>.+?)\\](?P<version>.+?).jar",
             "id" : "223792"
         }
     },
