@@ -782,7 +782,7 @@
     },
     "ExtraCells" : {
         "function" : "CheckJenkins",
-        "active" : true,
+        "active" : false,
         "jenkins" : {
             "url" : "http://shadowcity.net:8080/job/ecrv1/lastSuccessfulBuild/api/json",
             "regex" : "ExtraCells-(?P<version>.+?).jar",
@@ -1655,7 +1655,7 @@
         "curse": {
             "id": "223352",
             "name": "donutcraft",
-            "regex": "DonutCraft-(?P<version>.+?).jar"
+            "regex": "DonutCraft-Release(?P<version>.+?).jar"
         }
      },
     "DraconicEvolution": {
