@@ -782,10 +782,10 @@
     },
     "ExtraCells" : {
         "function" : "CheckJenkins",
-        "active" : false,
+        "active" : true,
         "jenkins" : {
             "url" : "http://shadowcity.net:8080/job/ecrv1/lastSuccessfulBuild/api/json",
-            "regex" : "ExtraCells-(?P<version>.+?).jar",
+            "regex" : "ExtraCells-(?P<mc>.+?)-(?P<version>.+?).jar",
             "item" : 0
         }
     },
@@ -1625,11 +1625,11 @@
      },
     "Santa'sDecor": {
         "function": "CheckCurse",
-        "active": false,
+        "active": true,
         "curse": {
             "id": "222394",
             "name": "santas-decor",
-            "regex": "santasdecor(?P<version>.+?).zip"
+            "regex": "Santa'sDecor-(?P<mc>.+?)-(?P<version>.+?).zip"
         }
      },
     "CraftGuide": {
@@ -1690,6 +1690,49 @@
         "curse": {
             "name": "evilcraft",
             "regex": "EvilCraft-(?P<mc>.+?)-(?P<version>.+?).jar"
+        }
+     },
+    "JourneyMap": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "name": "journeymap",
+            "regex": "JourneyMap(?P<version>.+?)_Unlimited_MC(?P<mc>.+?)-.jar"
+        }
+     },
+    "Thaumcraft": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "id": "223628",
+            "name": "thaumcraft",
+            "regex": "Thaumcraft-(?P<mc>.+?)-(?P<version>.+?).jar"
+        }
+     },
+    "ThaumicTinkerer": {
+        "function": "CheckCurse",
+        "active": false,
+        "curse": {
+            "name": "thaumic-tinkerer",
+            "regex": "ThaumicTinkerer-.+?-(?P<mc>.+?)-(?P<version>.+?).jar"
+        }
+     },
+    "MorePistons-JiraiyahVersion": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "id": "224220",
+            "name": "more-pistons-jiraiyah-version",
+            "regex": "MorePistons-(?P<mc>.+?)-(?P<version>.+?).jar"
+        }
+     },
+    "RoguelikeDungeons": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "id": "221585",
+            "name": "roguelike-dungeons",
+            "regex": "roguelike-(?P<mc>.+?)-(?P<version>.+?).jar"
         }
     }
 }
