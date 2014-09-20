@@ -61,6 +61,15 @@
             "promoType" : "dev"
         }
     },
+    "CompactMachines" : {
+        "function" : "CheckCurse",
+        "active" : true,
+        "curse" : {
+	    "name" : "compact-machines",
+	    "id" : "224218",
+            "regex" : "compactmachines-(?P<mc>.+?)-(?P<version>.+?).jar$"
+        }
+    },
     "CompactSolars" : {
         "function" : "CheckMCForge2",
         "category" : "forge",
