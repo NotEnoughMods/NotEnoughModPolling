@@ -812,8 +812,8 @@
         "active" : true,
         "jenkins" : {
             "url" : "http://ci.tterrag.com/job/Mariculture/lastSuccessfulBuild/api/json",
-            "regex" : "Mariculture-(?P<mc>.+?)-(?P<dev>.+?)-.+?.jar",
-            "item" : 0
+            "regex" : "Mariculture-Base-(?P<mc>.+?)-(?P<dev>.+?).jar",
+            "item" : 1
         }
     },
     "Forestry" : {
