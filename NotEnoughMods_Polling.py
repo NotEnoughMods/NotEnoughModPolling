@@ -4,7 +4,6 @@ import logging
 
 
 from commands.NEMP import NEMP_Class
-from centralizedThreading import FunctionNameAlreadyExists  # @UnresolvedImport (this makes my IDE happy <_<)
 
 ID = "nemp"
 permission = 1
@@ -221,13 +220,6 @@ def PollingThread(self, pipe):
                 return
             else:
                 time.sleep(30)
-
-"""def MainTimerEvent(self,channels):
-    try:
-        self.threading.addThread("NEMP", PollingThread)
-        self.events["time"].addEvent("NEMP_ThreadClock", 10, MicroTimerEvent, channels)
-    except FunctionNameAlreadyExists as e:
-        print(e)"""
 
 def NEMP_TimerEvent(self, channels):
     yes = self.threading.poll("NEMP")
