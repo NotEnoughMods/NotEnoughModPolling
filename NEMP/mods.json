@@ -803,7 +803,7 @@
         "active" : true,
         "jenkins" : {
             "url" : "http://ci.tterrag.com/job/Super%20Massive%20Tech/lastSuccessfulBuild/api/json",
-            "regex" : "SuperMassiveTech-(?P<mc>.+?)-(?P<dev>.+?).jar",
+            "regex" : "SuperMassiveTech-MC(?P<mc>.+?)-(?P<dev>.+?).jar",
             "item" : 3
         }
     },
