@@ -1523,7 +1523,7 @@
         "active" : true,
         "jenkins": {
             "url" : "http://vps.k-4u.nl:8090/job/PneumaticCraft/lastSuccessfulBuild/api/json",
-            "regex" : "PneumaticCraft-(?P<mc>.+?)-(?P<dev>.+?)-universal.jar",
+            "regex" : "PneumaticCraft-(?P<mc>.+?)-(?P<version>.+?)-universal.jar",
             "item" : 0
         }
     },
@@ -1743,5 +1743,14 @@
             "name": "roguelike-dungeons",
             "regex": "roguelike-(?P<mc>.+?)-(?P<version>.+?).jar"
         }
-    }
-}
+    },
+    "NotEnoughKeys" : {
+        "function" : "CheckJenkins",
+        "active" : true,
+        "jenkins": {
+            "url" : "http://shadowcity.net:8080/job/NotEnoughKeys/lastSuccessfulBuild/api/json",
+            "regex" : "NotEnoughKeys-(?P<mc>.+?)-(?P<dev>.+?).jar",
+            "item" : 0
+        }
+     }
+ }
