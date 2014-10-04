@@ -17,8 +17,6 @@ helpDict = {
     "list": ["{0}nemp list", "Lists the mods that NotEnoughModPolling checks"],
     "about": ["{0}nemp about", "Shows some info about this plugin."],
     "help": ["{0}nemp help [command]", "Shows this help info about [command] or lists all commands for this plugin."],
-    "setversion": ["{0}nemp setversion <version>", "Sets the version to <version> for polling to assume."],
-    "getversion": ["{0}nemp getversion", "gets the version for polling to assume."],
     "refresh": ["'{0}nemp refresh' or '{0}nemp reload'", "Reloads the various data stores (mods list, versions list, etc)"],
     "reload": ["'{0}nemp refresh' or '{0}nemp reload'", "Reloads the various data stores (mods list, versions list, etc)"],
     "test": ["{0}nemp test <mod>", "Tests the parser for <mod> and outputs the contents to IRC"],
@@ -347,20 +345,6 @@ def poll(self, name, params, channel, userdata, rank):
 
             self.sendMessage(channel, name + ": All mods are now set to " + str(setting))
 
-def setversion(self, name, params, channel, userdata, rank):
-    if len(params) != 2:
-        self.sendMessage(channel, name + ": Insufficent amount of parameters provided.")
-        self.sendMessage(channel, name + ": " + helpDict["setversion"][1])
-    else:
-        colourblue = unichr(2) + unichr(3) + "12"
-        colour = unichr(3) + unichr(2)
-
-        self.NEM.nemVersion = str(params[1])
-        self.sendMessage(channel, "Default list has been set to: {0}{1}{2}".format(colourblue, params[1], colour))
-
-def getversion(self, name, params, channel, userdata, rank):
-    self.sendMessage(channel, self.NEM.nemVersion)
-
 def nemp_list(self, name, params, channel, userdata, rank):
     dest = None
     if len(params) > 1:
@@ -478,8 +462,6 @@ commands = {
     "list": (nemp_list, VOICED),
     "about": (about, VOICED),
     "help": (nemp_help, VOICED),
-    "setversion": (setversion, VOICED),
-    "getversion": (getversion, VOICED),
     "test": (test_parser, VOICED),
     "reload": (nemp_reload, VOICED),
     "nktest": (nktest, VOICED),
@@ -491,8 +473,6 @@ commands = {
     "failcount": (show_failedcount, VOICED),
 
     # -- ALIASES -- #
-    "setv": (setversion, VOICED),
-    "getv": (getversion, VOICED),
     "polling": (running, VOICED),
     "refresh": (nemp_reload, VOICED),
     "disabled": (show_disabledMods, VOICED),

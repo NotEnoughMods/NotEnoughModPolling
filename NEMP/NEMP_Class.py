@@ -10,7 +10,6 @@ from StringIO import StringIO
 
 class NotEnoughClasses():
     nemVersions = []
-    nemVersion = ""
 
     newMods = False
     mods = {}
