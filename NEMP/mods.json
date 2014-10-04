@@ -135,7 +135,7 @@
             "promoType" : "version"
         }
     },
-            "FML-1.8" : {
+    "FML-1.8" : {
         "name" : "FML",
         "function" : "CheckMCForge2",
         "category" : "forge",
@@ -1764,5 +1764,5 @@
             "regex" : "NotEnoughKeys-(?P<mc>.+?)-(?P<dev>.+?).jar",
             "item" : 0
         }
-     }
- }
+    }
+}
