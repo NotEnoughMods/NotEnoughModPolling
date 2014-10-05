@@ -1489,7 +1489,7 @@
         "function" : "CheckJenkins",
         "active" : true,
         "jenkins": {
-            "url" : "http://jenkins.jakimfett.com/build/job/Minechem%201.7/lastSuccessfulBuild/api/json",
+            "url" : "http://jenkins.jakimfett.com/job/Minechem%201.7/lastSuccessfulBuild/api/json",
             "regex" : "Minechem-(?P<mc>.+?)-(?P<dev>.+?).jar",
             "item" : 1
         }
@@ -1498,7 +1498,7 @@
         "function" : "CheckJenkins",
         "active" : true,
         "jenkins": {
-            "url" : "http://jenkins.jakimfett.com/build/job/AlchemyPlusPlus%201.7/lastSuccessfulBuild/api/json",
+            "url" : "http://jenkins.jakimfett.com/job/AlchemyPlusPlus%201.7/lastSuccessfulBuild/api/json",
             "regex" : "AlchemyPlusPlus-(?P<mc>.+?)-(?P<dev>.+?).jar",
             "item" : 0
         }
