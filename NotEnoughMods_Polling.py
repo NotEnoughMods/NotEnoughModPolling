@@ -166,7 +166,7 @@ def show_failedcount(self, name, params, channel, userdata, rank):
 
         if len(newlist) == 0:
             self.sendNotice(name,
-                            "{0} mod{1} had trouble being polled once. "
+                            "{0} mod(s) had trouble being polled once. "
                             "If the mod(s) fail polling a second time, "
                             "they will be shown by this command.".format(len(sortedMods))
                             )
