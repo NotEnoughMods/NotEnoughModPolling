@@ -389,6 +389,9 @@ def nemp_reload(self, name, params, channel, userdata, rank):
 
         self.sendMessage(channel, "NEMP Polling has been deactivated")
 
+    self.NEM_troubledMods = {}
+    self.NEM_autodeactivatedMods = {}
+
     self.NEM.buildModDict()
     self.NEM.QueryNEM()
     self.NEM.InitiateVersions()
