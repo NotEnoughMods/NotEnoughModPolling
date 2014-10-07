@@ -194,7 +194,7 @@
         "active" : true,
         "curse" : {
             "name" : "minefactory-reloaded",
-            "regex" : "MineFactoryReloaded-_.+?_(?P<version>.+?).jar$"
+            "regex" : "MineFactoryReloaded-\\[(?P<mc>.+?)\\](?P<version>.+?).jar"
         }
     },
     "IndustrialCraft2" : {
@@ -417,7 +417,7 @@
         "active" : true,
         "curse" : {
             "name" : "tinkers-construct",
-            "regex" : "TConstruct_.+?_(?P<version>.+?).jar"
+            "regex" : "TConstruct-(?P<mc>.+?)-(?P<version>.+?).jar"
         }
     },
     "Tinkers'Mechworks" : {
@@ -500,7 +500,7 @@
         "category" : "den",
         "active" : true,
         "curse" : {
-            "regex" : "CreeperCollateral-_(?P<mc>.+?)_(?P<version>.+?).jar",
+            "regex" : "CreeperCollateral-\\[(?P<mc>.+?)\\](?P<version>.+?).jar",
             "id" : "223801"
         }
     },
@@ -739,7 +739,7 @@
         "function" : "CheckJenkins",
         "active" : true,
         "jenkins" : {
-            "url" : "http://ci.tterrag.com/job/EnderIO-RF/lastSuccessfulBuild/api/json",
+            "url" : "http://ci.tterrag.com/job/EnderIO/lastSuccessfulBuild/api/json",
             "regex" : "EnderIO-(?P<mc>.+?)-(?P<dev>.+?).jar",
             "item" : 3
         }
@@ -828,12 +828,22 @@
             "item" : 1
         }
     },
-    "Forestry" : {
+    "Forestry-Release" : {
+        "name" : "Forestry",
         "function" : "CheckJenkins",
         "active" : true,
         "jenkins" : {
             "url" : "http://jenkins.ic2.player.to/job/Forestry/lastSuccessfulBuild/api/json",
-            "regex" : "forestry_(?P<mc>.+?)-(?P<dev>.+?).jar",
+            "regex" : "forestry_(?P<mc>.+?)-(?P<mod>.+?).jar",
+            "item" : 2
+        }
+    },
+        "Forestry" : {
+        "function" : "CheckJenkins",
+        "active" : true,
+        "jenkins" : {
+            "url" : "http://jenkins.ic2.player.to/job/Forestry_Dev/lastSuccessfulBuild/api/json",
+            "regex" : "forestry_(?P<mc>.+?)-(?P<dev>.+?)-.+?jar",
             "item" : 2
         }
     },
@@ -860,7 +870,7 @@
         "function" : "CheckCurse",
         "active" : true,
         "curse": {
-            "regex" : "CoFHCore-_.+?_(?P<version>.+?).jar"
+            "regex" : "CoFHCore-\\[(?P<mc>.+?)\\](?P<version>.+?).jar"
         }
     },
     "CoFHLib" : {
@@ -868,14 +878,14 @@
         "active" : true,
         "curse": {
             "id" : "220333",
-            "regex" : "CoFHLib-_.+?_(?P<version>.+?).jar"
+            "regex" : "CoFHLib-\\[(?P<mc>.+?)\\](?P<version>.+?).jar"
         }
     },
     "ThermalExpansion" : {
         "function" : "CheckCurse",
         "active" : true,
         "curse": {
-            "regex" : "ThermalExpansion-_.+?_(?P<version>.+?).jar",
+            "regex" :  "ThermalExpansion-\\[(?P<mc>.+?)\\](?P<version>.+?).jar",
             "name": "thermalexpansion"
         }
     },
@@ -885,7 +895,7 @@
         "curse": {
             "name" : "thermal-foundation",
             "id" : "222880",
-            "regex" : "ThermalFoundation-_.+?_(?P<version>.+?).jar"
+            "regex" : "ThermalFoundation-\\[(?P<mc>.+?)\\](?P<version>.+?).jar"
         }
     },
     "SimplyJetpacks" : {
@@ -977,7 +987,7 @@
         "function" : "CheckCurse",
         "active" : true,
         "curse" : {
-            "regex" : "-_.+?_(?P<version>.+?).jar"
+            "regex" : "NetherOres-\\[(?P<mc>.+?)\\](?P<version>.+?).jar"
         }
     },
     "RedstoneArsenal" : {
@@ -985,7 +995,7 @@
         "active" : true,
         "curse": {
             "name" : "redstone-arsenal",
-            "regex" : "_.+?_(?P<version>.+?).jar"
+            "regex" : "RedstoneArsenal-\\[(?P<mc>.+?)\\](?P<version>.+?).jar"
         }
     },
     "BDLib" : {
@@ -1175,7 +1185,7 @@
         "active" : true,
         "curse": {
             "name" : "hardcore-questing-mode",
-            "regex" : ".+?__(?P<version>.+?)_.jar"
+            "regex" : "HQM-The Journey (?P<version>.+?).jar"
         }
     },
     "Steve'sWorkshop" :{
@@ -1301,7 +1311,7 @@
     },
     "BluePower" :{
         "function" : "CheckCurse",
-        "active" : true,
+        "active" : false,
         "curse": {
             "id" : "223099",
             "name" : "blue-power",
@@ -1328,7 +1338,7 @@
         "active" : true,
         "curse": {
             "name" : "securitycraft-mod",
-            "regex" : ".+?_v(?P<version>.+?)_.+?.jar"
+            "regex" : "SecurityCraft v(?P<version>.+?) for (?P<mc>.+?).jar"
         }
     },
     "Fabricators" :{
@@ -1541,7 +1551,7 @@
     },
     "IntelligentEnergistics": {
         "function": "CheckCurse",
-        "active": true,
+        "active": false,
         "curse": {
             "id": "222848",
             "name": "intelligent-energistics",
@@ -1562,7 +1572,7 @@
         "active": true,
         "curse": {
             "name": "mca",
-            "regex": "MCA-(?P<version>.+?)_MC-(?P<mc>.+?).zip"
+            "regex": "MCA-(?P<mc>.+?)-(?P<version>.+?)-universal.jar"
         }
     },
     "TheMistsofRioV": {
@@ -1571,7 +1581,7 @@
         "curse": {
             "id": "222477",
             "name": "the-mists-of-riov",
-            "regex": "The_Mists_of_RioV_-_v(?P<version>.+?).jar"
+            "regex": "The Mists of RioV - (?P<version>.+?).jar"
         }
     },
     "DualHotbar": {
@@ -1610,7 +1620,7 @@
      },
     "Automagy": {
         "function": "CheckCurse",
-        "active": true,
+        "active": false,
         "curse": {
             "id": "222153",
             "name": "automagy",
@@ -1663,7 +1673,7 @@
      },
     "DarkMenagerie": {
         "function": "CheckCurse",
-        "active": true,
+        "active": false,
         "curse": {
             "id": "224039",
             "name": "dark-menagerie",
@@ -1717,8 +1727,8 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "name": "journeymap",
-            "regex": "JourneyMap(?P<version>.+?)_Unlimited_MC(?P<mc>.+?)-.jar"
+            "name": "journeymap-32274",
+            "regex": "JourneyMap(?P<version>.+?)_Unlimited_MC(?P<mc>.+?).jar"
         }
      },
     "Thaumcraft": {
