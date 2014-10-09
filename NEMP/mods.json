@@ -1185,7 +1185,7 @@
         "active" : true,
         "curse": {
             "name" : "hardcore-questing-mode",
-            "regex" : "HQM-The Journey (?P<version>.+?).jar"
+            "regex" : "HQM-The Journey \\((?P<version>.+?)\\).jar"
         }
     },
     "Steve'sWorkshop" :{
