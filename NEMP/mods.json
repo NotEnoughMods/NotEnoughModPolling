@@ -1,4 +1,4 @@
-{
+﻿{
     "MinecraftForge" : {
         "function" : "CheckMCForge2",
         "category" : "forge",
@@ -1101,7 +1101,7 @@
         "active" : true,
         "curse": {
             "id" : "223036",
-            "regex" : "-.+?-(?P<version>.+?).jar"
+            "regex" : "-.+?-(?P<version>.+?)-universal.jar"
         }
     },
     "AetherCraft" : {
