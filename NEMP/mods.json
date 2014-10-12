@@ -1061,7 +1061,7 @@
         "curse": {
             "id" : "221014",
             "name" : "buildcraft-additions",
-            "regex" : "-.+?-(?P<version>.+?).jar"
+            "regex" : "Buildcraft Additions (?P<version>.+)"
         }
     },
     "Tubes" : {
@@ -1537,7 +1537,7 @@
         "curse": {
             "id": "224164",
             "name": "fluxed-trinkets",
-            "regex" : "Fluxed Trinkets \\[(?P<version>.+?)\\]$"
+            "regex" : "Fluxed Trinkets \\[(?P<version>.+?)\\]"
         }
     },
     "PneumaticCraft" : {
@@ -1703,7 +1703,7 @@
         "active": true,
         "curse": {
             "name": "elemental-creepers",
-            "regex": "Elemental_Creepers-universal_(?P<mc>.+?)-(?P<version>.+?).jar"
+            "regex": "Elemental Creepers v(?P<version>.+)"
         }
      },
     "ElementalMelons": {
