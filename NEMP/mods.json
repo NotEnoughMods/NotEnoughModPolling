@@ -834,7 +834,7 @@
         "active" : true,
         "jenkins" : {
             "url" : "http://jenkins.ic2.player.to/job/Forestry/lastSuccessfulBuild/api/json",
-            "regex" : "forestry_(?P<mc>.+?)-(?P<mod>.+?).jar",
+            "regex" : "forestry_(?P<mc>.+?)-(?P<version>.+?).jar",
             "item" : 2
         }
     },
