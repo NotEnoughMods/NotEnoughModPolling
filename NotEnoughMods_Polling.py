@@ -131,10 +131,7 @@ def status(self, name, params, channel, userdata, rank):
         self.sendMessage(channel, "NEM Polling is not running.")
 
 def show_disabledMods(self, name, params, channel, userdata, rank):
-    disabled = []
-    for mod in self.NEM.mods:
-        if self.NEM.mods[mod]["active"] == False:
-            disabled.append(mod)
+    disabled = [mod for mod, info in self.NEM.mods.iteritems() if not info['active']]
 
     if len(disabled) == 0:
         self.sendNotice(name, "No mods are disabled right now.")
