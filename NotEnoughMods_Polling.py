@@ -149,6 +149,13 @@ def show_autodeactivatedMods(self, name, params, channel, userdata, rank):
         self.sendNotice(name, "The following mods have been automatically disabled so far: "
                         "{0}. {1} mod(s) total".format(", ".join(disabled), len(disabled)))
 
+def clean_failed_mods(self, name, params, channel, userdata, rank):
+    failed_mods = self.NEM_autodeactivatedMods.keys()
+    for failed_mod in self.NEM_autodeactivatedMods:
+        self.NEM.mods[failed_mod]['active'] = True
+    self.NEM_autodeactivatedMods = {}
+    self.sendMessage(channel, "Re-enabled {0} automatically disabled mods.".format(len(failed_mods)))
+
 def show_failedcount(self, name, params, channel, userdata, rank):
     print self.NEM_troubledMods
     if len(self.NEM_troubledMods) == 0:
@@ -471,12 +478,14 @@ commands = {
     "disabledmods": (show_disabledMods, VOICED),
     "failedmods": (show_autodeactivatedMods, VOICED),
     "failcount": (show_failedcount, VOICED),
+    "resetfailed": (clean_failed_mods, VOICED),
 
     # -- ALIASES -- #
     "polling": (running, VOICED),
     "refresh": (nemp_reload, VOICED),
     "disabled": (show_disabledMods, VOICED),
-    "failed": (show_autodeactivatedMods, VOICED)
+    "failed": (show_autodeactivatedMods, VOICED),
+    "cleanfailed": (clean_failed_mods, VOICED)
 
     # -- END ALIASES -- #
 }
