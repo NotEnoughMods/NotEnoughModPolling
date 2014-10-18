@@ -328,6 +328,20 @@ def poll(self, name, params, channel, userdata, rank):
                     if mod in self.NEM_troubledMods:
                         del self.NEM_troubledMods[mod]
 
+        if params[1].lower().startswith('p:'):
+            parser = params[1][2:].lower()
+            match_mods = {k: v for k, v in self.NEM.mods.iteritems() if v['function'][5:].lower() == parser}
+            for mod, info in match_mods.iteritems():
+                if info['function'][5:].lower() == parser:
+                    info['active'] = setting
+                    #self.sendMessage(channel, name + ": " + mod + "'s poll status is now " + str(setting))
+
+                    if mod in self.NEM_autodeactivatedMods:
+                        del self.NEM_autodeactivatedMods[mod]
+                    if mod in self.NEM_troubledMods:
+                        del self.NEM_troubledMods[mod]
+            self.sendMessage(channel, name + ": " + ', '.join(sorted(match_mods.keys(), key=lambda x: x.lower())) + "'s poll status is now " + str(setting))
+
         elif params[1] in self.NEM.mods:
             mod = params[1]
             self.NEM.mods[mod]["active"] = setting
