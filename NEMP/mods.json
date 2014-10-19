@@ -1076,7 +1076,7 @@
         "active" : true,
         "curse": {
             "name" : "warp-book",
-            "regex" : "Warp.+?Book.+?(?P<version>.+?)$"
+            "regex" : "warpbook-(?P<mc>.+?)-(?P<version>.+?).jar"
         }
     },
     "Veinminer" : {
@@ -1533,7 +1533,7 @@
     },
     "FluxedTrinkets": {
         "function": "CheckCurse",
-        "active": true,
+        "active": false,
         "curse": {
             "id": "224164",
             "name": "fluxed-trinkets",
@@ -1774,5 +1774,14 @@
             "regex" : "NotEnoughKeys-(?P<mc>.+?)-(?P<dev>.+?).jar",
             "item" : 0
         }
+   },     
+    "Mystcraft": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "id": "224599",
+            "name": "mystcraft",
+            "regex": "mystcraft-(?P<mc>.+?)-(?P<version>.+?).jar"
+        }
     }
-}
+ }
