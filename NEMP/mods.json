@@ -1076,7 +1076,7 @@
         "active" : true,
         "curse": {
             "name" : "warp-book",
-            "regex" : "warpbook-(?P<mc>.+?)-(?P<version>.+?).jar"
+            "regex" : "warpbook-(?P<mc>.+?)_(?P<version>.+?).jar"
         }
     },
     "Veinminer" : {
@@ -1774,7 +1774,7 @@
             "regex" : "NotEnoughKeys-(?P<mc>.+?)-(?P<dev>.+?).jar",
             "item" : 0
         }
-   },     
+   },
     "Mystcraft": {
         "function": "CheckCurse",
         "active": true,
@@ -1784,4 +1784,4 @@
             "regex": "mystcraft-(?P<mc>.+?)-(?P<version>.+?).jar"
         }
     }
- }
+}
