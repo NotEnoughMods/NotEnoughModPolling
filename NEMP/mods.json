@@ -311,7 +311,7 @@
     },
     "AdditionalBuildcraftObjects" : {
         "function" : "CheckJenkins",
-        "active" : true,
+        "active" : false,
         "jenkins" : {
             "url" : "https://jenkins.ra-doersch.de/job/AdditionalBuildcraftObjects/lastSuccessfulBuild/api/json",
             "regex" : "buildcraft-Z-additional-buildcraft-objects-(?P<mc>.+?)-.+-(?P<dev>.+?).jar",
