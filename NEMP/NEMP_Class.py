@@ -1,3 +1,4 @@
+import logging
 import re
 import requests
 import simplejson
@@ -6,6 +7,7 @@ import traceback
 from distutils.version import LooseVersion
 from StringIO import StringIO
 
+logging.getLogger('requests').setLevel(logging.WARNING)
 
 class NotEnoughClasses():
     nemVersions = []
