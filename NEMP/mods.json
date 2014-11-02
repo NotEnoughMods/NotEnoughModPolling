@@ -1784,7 +1784,7 @@
             "regex": "mystcraft-(?P<mc>.+?)-(?P<version>.+?).jar"
         }
    },
-    "ProjectE : {
+    "ProjectE" : {
         "function" : "CheckDropBox",
         "active" : true,
         "html" : {
