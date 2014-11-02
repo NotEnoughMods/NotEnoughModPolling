@@ -426,7 +426,7 @@
         "active" : true,
         "curse" : {
             "name" : "tinkers-mechworks",
-            "regex" : "TMechworks_.+?_(?P<version>.+?).jar"
+            "regex" : "TMechworks-(?P<mc>.+?)-(?P<version>.+?).jar"
         }
     },
     "AppliedEnergistics" : {
@@ -1081,7 +1081,7 @@
     },
     "Veinminer" : {
         "function" : "CheckCurse",
-        "active" : true,
+        "active" : false,
         "curse": {
             "name" : "veinminer",
             "regex" : ".+?_(?P<version>.+?).jar"
@@ -1633,7 +1633,7 @@
         "curse": {
             "id": "222395",
             "name": "freedom",
-            "regex": "freedom(?P<version>.+?).zip"
+            "regex": "Freedom-(?P<mc>.+?)-(?P<version>.+?).zip"
         }
      },
     "Santa'sToys": {
@@ -1782,6 +1782,23 @@
             "id": "224599",
             "name": "mystcraft",
             "regex": "mystcraft-(?P<mc>.+?)-(?P<version>.+?).jar"
+        }
+   },
+    "ProjectE : {
+        "function" : "CheckDropBox",
+        "active" : true,
+        "html" : {
+            "url" : "https://www.dropbox.com/sh/0re51mv4tp5l0xx/AAD9pmU4zOSQDSVgjVCtB5IJa",
+            "regex" : "ProectE-Alpha (?P<dev>.+?).jar"
+        }
+   },
+    "Flaxbeard'sSteamPower": {
+        "function": "CheckCurse",
+        "active": false,
+        "curse": {
+            "id": "224867",
+            "name": "flaxbeards-steam-power",
+            "regex": "Flaxbeard'sSteamPower-(?P<mc>.+?)-(?P<version>.+?).jar"
         }
     }
 }
