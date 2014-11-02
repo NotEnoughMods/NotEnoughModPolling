@@ -65,8 +65,8 @@
         "function" : "CheckCurse",
         "active" : true,
         "curse" : {
-	    "name" : "compact-machines",
-	    "id" : "224218",
+            "name" : "compact-machines",
+            "id" : "224218",
             "regex" : "compactmachines-(?P<mc>.+?)-(?P<version>.+?).jar$"
         }
     },
@@ -1774,7 +1774,7 @@
             "regex" : "NotEnoughKeys-(?P<mc>.+?)-(?P<dev>.+?).jar",
             "item" : 0
         }
-   },
+    },
     "Mystcraft": {
         "function": "CheckCurse",
         "active": true,
@@ -1783,7 +1783,7 @@
             "name": "mystcraft",
             "regex": "mystcraft-(?P<mc>.+?)-(?P<version>.+?).jar"
         }
-   },
+    },
     "ProjectE" : {
         "function" : "CheckDropBox",
         "active" : true,
@@ -1791,7 +1791,7 @@
             "url" : "https://www.dropbox.com/sh/0re51mv4tp5l0xx/AAD9pmU4zOSQDSVgjVCtB5IJa",
             "regex" : "ProectE-Alpha (?P<dev>.+?).jar"
         }
-   },
+    },
     "Flaxbeard'sSteamPower": {
         "function": "CheckCurse",
         "active": false,
