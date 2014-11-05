@@ -1000,7 +1000,7 @@
     },
     "BDLib" : {
         "function" : "CheckCurse",
-        "active" : true,
+        "active" : false,
         "curse": {
             "name" : "bdlib",
             "regex" : "-.+?-(?P<version>.+?).jar"
@@ -1541,12 +1541,12 @@
         }
     },
     "PneumaticCraft" : {
-        "function" : "CheckJenkins",
+        "function" : "CheckCurse",
         "active" : true,
-        "jenkins": {
-            "url" : "http://vps.k-4u.nl:8090/job/PneumaticCraft/lastSuccessfulBuild/api/json",
-            "regex" : "PneumaticCraft-(?P<mc>.+?)-(?P<version>.+?)-universal.jar",
-            "item" : 0
+        "curse": {
+            "id": "224125",
+            "name": "pneumaticcraft",
+            "regex" : "PneumaticCraft-(?P<mc>.+?)-(?P<version>.+?)-universal.jar"
         }
     },
     "IntelligentEnergistics": {
