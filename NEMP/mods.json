@@ -1728,7 +1728,7 @@
         "active": true,
         "curse": {
             "name": "journeymap-32274",
-            "regex": "JourneyMap(?P<version>.+?)_Unlimited_MC(?P<mc>.+?).jar"
+            "regex": "JourneyMap(?P<version>.+?)_.+?_MC(?P<mc>.+?).jar"
         }
      },
     "Thaumcraft": {
