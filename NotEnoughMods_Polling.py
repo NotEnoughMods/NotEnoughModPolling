@@ -453,9 +453,6 @@ def test_parser(self, name, params, channel, userdata, rank):
                 traceback.print_exc()
                 self.sendMessage(channel, params[1] + " failed to be polled")
 
-def nktest(self, name, params, channel, userdata, rank):
-    pass
-
 def genHTML(self, name, params, channel, userdata, rank):
     self.NEM.buildHTML()
 
@@ -485,7 +482,6 @@ commands = {
     "help": (nemp_help, VOICED),
     "test": (test_parser, VOICED),
     "reload": (nemp_reload, VOICED),
-    "nktest": (nktest, VOICED),
     "html": (genHTML, VOICED),
     "set": (nemp_set, VOICED),
     "status": (status, VOICED),
