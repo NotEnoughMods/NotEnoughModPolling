@@ -1420,7 +1420,7 @@
         "active" : true,
         "html" : {
             "url" : "https://raw.githubusercontent.com/Vazkii/Botania/master/version/1.7.10.txt",
-            "regex" : "(?P<version>.+?)$"
+            "regex" : "^(?P<version>[rR].+?)$"
         }
     },
     "AutoCrafter2000" : {
