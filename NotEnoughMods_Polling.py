@@ -417,7 +417,7 @@ def nemp_reload(self, name, params, channel, userdata, rank):
     self.NEM.QueryNEM()
     self.NEM.InitiateVersions()
     self.NEM.buildHTML()
-    
+
     self.sendMessage(channel, "Reloaded the NEMP Database")
 
 def test_parser(self, name, params, channel, userdata, rank):
