@@ -23,9 +23,9 @@ class NotEnoughClasses():
         self.requests_session.max_redirects = 5
 
         self.buildModDict()
-        self.buildHTML()
         self.QueryNEM()
         self.InitiateVersions()
+        self.buildHTML()
 
     def fetch_page(self, url, timeout=10, decode_json=False):
         try:
@@ -68,7 +68,8 @@ class NotEnoughClasses():
             <td class='name'>{}</td>""".format(isDisabled, modName))
                 f.write("""
             <td class='function'>{}</td>
-""".format(info["function"]))
+            <td class='mc_version'>{}</td>
+""".format(info["function"], info["mc"]))
                 try:
                     f.write("            <td class='category'>{}</td>\r\n".format(info["category"]))
                 except:

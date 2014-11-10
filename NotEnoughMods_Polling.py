@@ -155,6 +155,7 @@ def clean_failed_mods(self, name, params, channel, userdata, rank):
         self.NEM.mods[failed_mod]['active'] = True
     self.NEM_autodeactivatedMods = {}
     self.sendMessage(channel, "Re-enabled {0} automatically disabled mods.".format(len(failed_mods)))
+    self.NEM.buildHTML()
 
 def show_failedcount(self, name, params, channel, userdata, rank):
     print self.NEM_troubledMods
@@ -297,6 +298,7 @@ def NEMP_TimerEvent(self, channels):
                     del self.NEM_troubledMods[mod]
 
                     nemp_logger.debug("Mod {0} has failed to be polled at least 5 times, it has been disabled.".format(mod))
+                    self.NEM.buildHTML()
 
         # Reset counter for any mod that is still in the list.
         for mod in current_troubled_mods:
@@ -362,6 +364,7 @@ def poll(self, name, params, channel, userdata, rank):
                     del self.NEM_troubledMods[mod]
 
             self.sendMessage(channel, name + ": All mods are now set to " + str(setting))
+        self.NEM.buildHTML()
 
 def nemp_list(self, name, params, channel, userdata, rank):
     dest = None
@@ -413,7 +416,8 @@ def nemp_reload(self, name, params, channel, userdata, rank):
     self.NEM.buildModDict()
     self.NEM.QueryNEM()
     self.NEM.InitiateVersions()
-
+    self.NEM.buildHTML()
+    
     self.sendMessage(channel, "Reloaded the NEMP Database")
 
 def test_parser(self, name, params, channel, userdata, rank):
