@@ -1772,7 +1772,7 @@
         "jenkins": {
             "url" : "http://shadowcity.net:8080/job/NotEnoughKeys/lastSuccessfulBuild/api/json",
             "regex" : "NotEnoughKeys-(?P<mc>.+?)-(?P<dev>.+?).jar",
-            "item" : 0
+            "item" : 1
         }
     },
     "Mystcraft": {
