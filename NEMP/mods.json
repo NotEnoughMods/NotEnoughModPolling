@@ -323,7 +323,7 @@
         "active" : true,
         "jenkins" : {
             "url" : "http://ci.micdoodle8.com/job/Galacticraft-1.7/lastSuccessfulBuild/api/json",
-            "regex" : "GalacticraftCore-BETA-.+?-(?P<dev>.+?).jar$",
+            "regex" : "GalacticraftCore-.+?-(?P<dev>.+?).jar",
             "item" : 1
         }
     },
@@ -1499,7 +1499,7 @@
         "function" : "CheckJenkins",
         "active" : true,
         "jenkins": {
-            "url" : "http://jenkins.jakimfett.com/job/Minechem%201.7/lastSuccessfulBuild/api/json",
+            "url" : "http://jenkins.jakimfett.com/job/Minechem%201.7%20v5/lastSuccessfulBuild/api/json",
             "regex" : "Minechem-(?P<mc>.+?)-(?P<dev>.+?).jar",
             "item" : 1
         }
@@ -1686,7 +1686,7 @@
         "curse": {
             "id": "223352",
             "name": "donutcraft",
-            "regex": "DonutCraft-Release(?P<version>.+?).jar"
+            "regex": "DonutCraft-(?P<version>.+?).jar"
         }
      },
     "DraconicEvolution": {
@@ -1767,12 +1767,12 @@
         }
     },
     "NotEnoughKeys" : {
-        "function" : "CheckJenkins",
-        "active" : true,
-        "jenkins": {
-            "url" : "http://shadowcity.net:8080/job/NotEnoughKeys/lastSuccessfulBuild/api/json",
-            "regex" : "NotEnoughKeys-(?P<mc>.+?)-(?P<dev>.+?).jar",
-            "item" : 1
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "id": "224614",
+            "name": "notenoughkeys",
+            "regex": "NotEnoughKeys-(?P<mc>.+?)-(?P<version>.+?).jar"
         }
     },
     "Mystcraft": {
