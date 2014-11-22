@@ -674,7 +674,7 @@
         "category" : "bspkrs",
         "active" : true,
         "html" : {
-            "url" : "http://bspk.rs/Minecraft/1.7.2/treeCapitatorForge.version",
+            "url" : "http://bspk.rs/Minecraft/1.7.10/treecapitator.version",
             "regex" : "(?P<version>.+?)$"
         }
     },
