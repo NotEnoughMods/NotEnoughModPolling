@@ -674,7 +674,7 @@
         "category" : "bspkrs",
         "active" : true,
         "html" : {
-            "url" : "http://bspk.rs/Minecraft/1.7.2/treeCapitatorForge.version",
+            "url" : "http://bspk.rs/Minecraft/1.7.10/treeCapitatorForge.version",
             "regex" : "(?P<version>.+?)$"
         }
     },
@@ -1789,7 +1789,7 @@
         "active" : true,
         "html" : {
             "url" : "https://www.dropbox.com/sh/0re51mv4tp5l0xx/AAD9pmU4zOSQDSVgjVCtB5IJa",
-            "regex" : "ProectE-Alpha (?P<dev>.+?).jar"
+            "regex" : "ProjectE-Alpha (?P<dev>.+?).jar"
         }
     },
     "Flaxbeard'sSteamPower": {
