@@ -87,43 +87,66 @@ class NotEnoughClasses():
             self.nemVersions = reversed(["1.4.5", "1.4.6-1.4.7", "1.5.1", "1.5.2", "1.6.1", "1.6.2", "1.6.4", "1.7.2"])
 
     def InitiateVersions(self):
+        #Store a list of mods so we dont override our version
         templist = self.mods.keys()
         try:
+            #for MC version in NEM's list
             for version in self.nemVersions:
+                #Get the NEM List for this MC Version
                 jsonres = self.fetch_json("http://bot.notenoughmods.com/" + version + ".json")
-
+                
+                #For each NEM Mod...
                 for mod in jsonres:
+                    #Is it in our list?
                     if mod["name"] in templist:
+                        #Its in our list, lets store this info
                         self.mods[mod["name"]]["mc"] = version
-
+                        
+                        #Does this NEM Mod have a dev version
                         if "dev" in mod and mod["dev"]:
+                            #It does
                             self.mods[mod["name"]]["dev"] = str(mod["dev"])
                         else:
+                            #It doesn't
                             self.mods[mod["name"]]["dev"] = "NOT_USED"
-
+                            
+                        #Does this NEM Mod have a version (not required, but yay redundancy)
                         if "version" in mod and mod["version"]:
+                            #What a suprise, it did...
                             self.mods[mod["name"]]["version"] = str(mod["version"])
                         else:
+                            #What the actual fuck, how did this happen
                             self.mods[mod["name"]]["version"] = "NOT_USED"
-
+                            
+                        #We have had our way with this mod, throw it away
                         templist.remove(mod["name"])
+                        
                 # ok, so it wasn't directly on the list, is it indirectly on the list though.
                 for lonelyMod in templist:
+                    #Is this mod a PykerHack(tm)
                     if "name" in self.mods[lonelyMod]:
-                        # ok, this is a PykerHack mod.
+                        # ok, this is a PykerHack(tm) mod, lets loop through NEM again to find it
                         for lonelyTestMod in jsonres:
-                            if self.mods[lonelyMod]["name"] == lonelyTestMod["name"]:  # ok, does it exist for this MC version.
+                            #Is it here?
+                            if self.mods[lonelyMod]["name"] == lonelyTestMod["name"]:
+                                 # ok, does it exist for this MC version.
                                 self.mods[lonelyMod]["mc"] = version
-
+                                
+                                #Does it have a dev version
                                 if "dev" in lonelyTestMod and lonelyTestMod["dev"]:
+                                    #It did
                                     self.mods[lonelyMod]["dev"] = str(lonelyTestMod["dev"])
                                 else:
+                                    #It didn't
                                     self.mods[lonelyMod]["dev"] = "NOT_USED"
-
+                                # #Redundancy
                                 if "version" in lonelyTestMod and lonelyTestMod["version"]:
+                                    #yay
                                     self.mods[lonelyMod]["version"] = str(lonelyTestMod["version"])
                                 else:
+                                    #wat
                                     self.mods[lonelyMod]["version"] = "NOT_USED"
+                                #gtfo LonelyMod, noone likes you anymore
                                 templist.remove(lonelyMod)
         except:
             pass
