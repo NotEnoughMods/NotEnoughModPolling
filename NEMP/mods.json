@@ -147,6 +147,18 @@
             "promoType" : "dev"
         }
     },
+    "MinecraftForge-1.8" : {
+        "name" : "MinecraftForge",
+        "function" : "CheckMCForge2",
+        "category" : "forge",
+        "active" : true,
+        "changelog" : false,
+        "mcforge" : {
+            "url" : "http://files.minecraftforge.net/maven/net/minecraftforge/forge/promotions.json",
+            "promo" : "latest-1.8",
+            "promoType" : "dev"
+        }
+    },
     "OpenPeripheralCore" : {
         "comment" : "This isn't a core </3",
 
