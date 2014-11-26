@@ -504,7 +504,7 @@
         "active" : true,
         "html" : {
             "url" : "https://www.dropbox.com/sh/0aqvalqobu61t44/AADZq-GuoDeuNzgg6zueVM_Ca",
-            "regex" : "Blood Magic-v(?P<version>.+?)\\(.+?\\)\\.jar"
+            "regex" : "BloodMagic-(?P<mc>.+?)-(?P<version>.+?)-1.jar"
         }
     },
     "CreeperCollateral" : {
