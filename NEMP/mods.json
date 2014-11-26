@@ -861,7 +861,7 @@
     },
     "ProjectRed" : {
         "function" : "CheckJenkins",
-        "active" : true,
+        "active" : false,
         "jenkins" : {
             "url" : "http://ci.indiewikis.com:8080/job/Project%20Red/lastSuccessfulBuild/api/json",
             "regex" : "ProjectRed-Base-(?P<mc>.+?)-(?P<dev>.+?).jar",
@@ -871,7 +871,7 @@
     "ProjectRed-Release" : {
         "name" : "ProjectRed",
         "function" : "CheckJenkins",
-        "active" : true,
+        "active" : false,
         "jenkins" : {
             "url" : "http://ci.indiewikis.com:8080/job/Project%20Red/Recommended/api/json",
             "regex" : "ProjectRed-Base-(?P<mc>.+?)-(?P<version>.+?).jar",
