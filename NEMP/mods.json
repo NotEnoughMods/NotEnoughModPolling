@@ -1812,5 +1812,23 @@
             "name": "flaxbeards-steam-power",
             "regex": "Flaxbeard'sSteamPower-(?P<mc>.+?)-(?P<version>.+?).jar"
         }
+    },
+    "MalisisCore": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "id": "223896",
+            "name": "malisiscore",
+            "regex": "malisiscore-(?P<mc>.+?)-(?P<version>.+).jar"
+        }
+    },
+    "MalisisDoors": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "id": "223891",
+            "name": "malisis-doors",
+            "regex": "malisisdoors-(?P<mc>.+?)-(?P<version>.+).jar"
+        }
     }
 }
