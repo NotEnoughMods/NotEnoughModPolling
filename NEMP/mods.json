@@ -1830,5 +1830,14 @@
             "name": "malisis-doors",
             "regex": "malisisdoors-(?P<mc>.+?)-(?P<version>.+).jar"
         }
+    },
+    "FloodLights": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "id": "224728",
+            "name": "floodlights",
+            "regex": "FloodLights-(?P<mc>.+?)-(?P<version>.+).jar"
+        }
     }
 }
