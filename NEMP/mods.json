@@ -1830,7 +1830,7 @@
             "name": "malisis-doors",
             "regex": "malisisdoors-(?P<mc>.+?)-(?P<version>.+).jar"
         }
-    }
+    },
     "FloodLights": {
         "function": "CheckCurse",
         "active": true,
