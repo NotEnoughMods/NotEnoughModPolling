@@ -1073,7 +1073,7 @@
         "curse": {
             "id" : "221014",
             "name" : "buildcraft-additions",
-            "regex" : "Buildcraft Additions (?P<version>.+)"
+            "regex" : "BuildcraftAdditions(?P<mc>.+?)-(?P<version>.+?).jar"
         }
     },
     "Tubes" : {
@@ -1151,6 +1151,7 @@
     "Pay2Spawn" : {
         "function" : "CheckJenkins",
         "active" : true,
+        "category" : "DDdev",
         "jenkins": {
             "url" : "http://jenkins.dries007.net/job/Pay2Spawn/lastSuccessfulBuild/api/json",
             "regex" : "Pay2Spawn-(?P<mc>.+?)-(?P<version>.+?).jar",
@@ -1160,6 +1161,7 @@
     "HoloInventory" : {
         "function" : "CheckJenkins",
         "active" : true,
+        "category" : "DDdev",
         "jenkins": {
             "url" : "http://jenkins.dries007.net/job/HoloInventory/lastSuccessfulBuild/api/json",
             "regex" : "HoloInventory-(?P<mc>.+?)-(?P<version>.+?).jar",
@@ -1169,6 +1171,7 @@
     "PlaceableTools" : {
         "function" : "CheckJenkins",
         "active" : true,
+        "category" : "DDdev",
         "jenkins": {
             "url" : "http://jenkins.dries007.net/job/PlaceableTools/lastSuccessfulBuild/api/json",
             "regex" : "PlaceableTools-(?P<mc>.+?)-(?P<version>.+?).jar",
@@ -1178,6 +1181,7 @@
     "TorchTools" : {
         "function" : "CheckJenkins",
         "active" : true,
+        "category" : "DDdev",
         "jenkins": {
             "url" : "http://jenkins.dries007.net/job/TorchTools/lastSuccessfulBuild/api/json",
             "regex" : "TorchTools-(?P<mc>.+?)-(?P<version>.+?).jar",
@@ -1239,7 +1243,7 @@
         "active" : true,
         "curse": {
             "id" : "220845",
-            "regex" : "-.+?-(?P<version>.+?)-universal.jar"
+            "regex" : "-.+?-(?P<version>.+?).jar"
         }
     },
     "TooMuchRain" :{
@@ -1438,6 +1442,7 @@
     "AutoCrafter2000" : {
         "function" : "CheckJenkins",
         "active" : true,
+        "category" : "DDdev",
         "jenkins": {
             "url" : "http://jenkins.dries007.net/job/AutoCrafter2000/lastSuccessfulBuild/api/json",
             "regex" : "AutoCrafter2000-(?P<mc>.+?)-(?P<version>.+?).jar",
@@ -1446,6 +1451,7 @@
     },
     "CrayCrafting" : {
         "function" : "CheckJenkins",
+        "category" : "DDdev",
         "active" : true,
         "jenkins": {
             "url" : "http://jenkins.dries007.net/job/CrayCrafting/lastSuccessfulBuild/api/json",
@@ -1456,6 +1462,7 @@
     "D3Core" : {
         "function" : "CheckJenkins",
         "active" : true,
+        "category" : "DDdev",
         "jenkins": {
             "url" : "http://jenkins.dries007.net/job/D3Core/lastSuccessfulBuild/api/json",
             "regex" : "D3Core-(?P<mc>.+?)-(?P<version>.+?).jar",
@@ -1465,6 +1472,7 @@
     "GreenThumb" : {
         "function" : "CheckJenkins",
         "active" : true,
+        "category" : "DDdev",
         "jenkins": {
             "url" : "http://jenkins.dries007.net/job/GreenThumb/lastSuccessfulBuild/api/json",
             "regex" : "GreenThumb-(?P<mc>.+?)-(?P<version>.+?).jar",
@@ -1474,6 +1482,7 @@
     "Let-it-Burn" : {
         "function" : "CheckJenkins",
         "active" : true,
+        "category" : "DDdev",
         "jenkins": {
             "url" : "http://jenkins.dries007.net/job/Let-it-Burn/lastSuccessfulBuild/api/json",
             "regex" : "LetItBurn-(?P<mc>.+?)-(?P<version>.+?).jar",
@@ -1483,6 +1492,7 @@
     "Lumberjack" : {
         "function" : "CheckJenkins",
         "active" : true,
+        "category" : "DDdev",
         "jenkins": {
             "url" : "http://jenkins.dries007.net/job/Lumberjack/lastSuccessfulBuild/api/json",
             "regex" : "Lumberjack-(?P<mc>.+?)-(?P<version>.+?).jar",
@@ -1645,7 +1655,7 @@
         "curse": {
             "id": "222395",
             "name": "freedom",
-            "regex": "Freedom-(?P<mc>.+?)-(?P<version>.+?).zip"
+            "regex": "Freedom-(?P<mc>.+?)-(?P<version>.+?).jar"
         }
      },
     "Santa'sToys": {
@@ -1672,7 +1682,7 @@
         "curse": {
             "id": "222394",
             "name": "santas-decor",
-            "regex": "Santa'sDecor-(?P<mc>.+?)-(?P<version>.+?).zip"
+            "regex": "Santa'sDecor-(?P<mc>.+?)-(?P<version>.+?).jar"
         }
      },
     "CraftGuide": {
@@ -1838,6 +1848,15 @@
             "id": "224728",
             "name": "floodlights",
             "regex": "FloodLights-(?P<mc>.+?)-(?P<version>.+).jar"
+        }
+    },
+    "NearbyMobFinder": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "id": "221985",
+            "name": "nearby-mob-finder",
+            "regex": "Nearby Mob Finder (?P<version>.+)"
         }
     }
 }
