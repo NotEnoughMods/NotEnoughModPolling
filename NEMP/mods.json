@@ -1858,5 +1858,14 @@
             "name": "nearby-mob-finder",
             "regex": "Nearby Mob Finder (?P<version>.+)"
         }
+    },
+    "ExtraUtilities": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "id": "225561",
+            "name": "extra-utilities",
+            "regex": "Extra Utilities (?P<version>.+)"
+        }
     }
 }
