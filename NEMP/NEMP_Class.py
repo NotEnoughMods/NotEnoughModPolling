@@ -5,7 +5,6 @@ import simplejson
 import traceback
 
 from distutils.version import LooseVersion
-from StringIO import StringIO
 
 logging.getLogger('requests').setLevel(logging.WARNING)
 
@@ -94,14 +93,14 @@ class NotEnoughClasses():
             for version in self.nemVersions:
                 #Get the NEM List for this MC Version
                 jsonres = self.fetch_json("http://bot.notenoughmods.com/" + version + ".json")
-                
+
                 #For each NEM Mod...
                 for mod in jsonres:
                     #Is it in our list?
                     if mod["name"] in templist:
                         #Its in our list, lets store this info
                         self.mods[mod["name"]]["mc"] = version
-                        
+
                         #Does this NEM Mod have a dev version
                         if "dev" in mod and mod["dev"]:
                             #It does
@@ -109,7 +108,7 @@ class NotEnoughClasses():
                         else:
                             #It doesn't
                             self.mods[mod["name"]]["dev"] = "NOT_USED"
-                            
+
                         #Does this NEM Mod have a version (not required, but yay redundancy)
                         if "version" in mod and mod["version"]:
                             #What a suprise, it did...
@@ -117,10 +116,10 @@ class NotEnoughClasses():
                         else:
                             #What the actual fuck, how did this happen
                             self.mods[mod["name"]]["version"] = "NOT_USED"
-                            
+
                         #We have had our way with this mod, throw it away
                         templist.remove(mod["name"])
-                        
+
                 # ok, so it wasn't directly on the list, is it indirectly on the list though.
                 for lonelyMod in templist:
                     #Is this mod a PykerHack(tm)
@@ -131,7 +130,7 @@ class NotEnoughClasses():
                             if self.mods[lonelyMod]["name"] == lonelyTestMod["name"]:
                                  # ok, does it exist for this MC version.
                                 self.mods[lonelyMod]["mc"] = version
-                                
+
                                 #Does it have a dev version
                                 if "dev" in lonelyTestMod and lonelyTestMod["dev"]:
                                     #It did
