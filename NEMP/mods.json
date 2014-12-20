@@ -1073,7 +1073,7 @@
         "curse": {
             "id" : "221014",
             "name" : "buildcraft-additions",
-            "regex" : "BuildcraftAdditions(?P<mc>.+?)-(?P<version>.+?).jar"
+            "regex" : "Buildcraft Additions (?P<version>.+)"
         }
     },
     "Tubes" : {
