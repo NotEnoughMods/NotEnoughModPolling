@@ -1,6 +1,7 @@
 import traceback
 import time
 import logging
+import shlex
 
 
 from commands.NEMP import NEMP_Class
@@ -465,13 +466,17 @@ def nemp_set(self, name, params, channel, userdata, rank):
     #params[2] = config
     # params[3] = setting if len(params) == 4, else deeper config
     #params[4] = setting
-    if len(params) < 4:
+
+    # Split the arguments in a shell-like fashion
+    args = shlex.split(' '.join(params[1:]))
+
+    if len(args) < 3:
         self.sendMessage(channel, "This is not a toy!")
         return
-    if len(params) == 4:
-        self.NEM.mods[params[1]][params[2]] = params[3]
+    if len(args) == 3:
+        self.NEM.mods[args[0]][args[1]] = args[2]
     else:
-        self.NEM.mods[params[1]][params[2]][params[3]] = params[4]
+        self.NEM.mods[args[0]][args[1]][args[2]] = args[3]
     self.sendMessage(channel, "done.")
 
 # In each entry, the second value in the tuple is the
