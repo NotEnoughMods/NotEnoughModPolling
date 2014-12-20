@@ -318,10 +318,21 @@ class NotEnoughClasses():
 
     def CheckBigReactors(self, mod):
         info = self.fetch_json("http://big-reactors.com/version.json")
-        return {
-            "dev": info["version"],  # apparently this is a dev build, when it totally isn't.
-            "mc": info["mcVersion"]
+
+        ret = {
+            'mc': info['mcVersion']
         }
+
+        if info['stable']:
+            ret['version'] = info['version']
+        else:
+            ret['dev'] = info['version']
+
+        if info['changelog']:
+            # send only the first line of the changelog
+            ret['change'] = info['changelog'][0]
+
+        return ret
 
     def CheckCurse(self, mod):
         modid = self.mods[mod]['curse'].get('id')
