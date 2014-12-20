@@ -1867,5 +1867,13 @@
             "name": "extra-utilities",
             "regex": "Extra Utilities (?P<version>.+)"
         }
+    },
+    "BetterStorage": {
+        "function": "CheckGitHubRelease",
+        "active": true,
+        "github": {
+            "repo": "copygirl/BetterStorage",
+            "regex": "BetterStorage-(?P<mc>.+?)-(?P<version>.+?)\\.jar"
+        }
     }
 }

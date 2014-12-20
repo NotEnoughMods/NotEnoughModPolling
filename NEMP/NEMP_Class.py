@@ -361,6 +361,21 @@ class NotEnoughClasses():
                 "mc": MCversion
             }
 
+    def CheckGitHubRelease(self, mod):
+        repo = self.mods[mod]['github'].get('repo')
+
+        releases = self.fetch_json('https://api.github.com/repos/' + repo + '/releases')
+
+        regex = re.compile(self.mods[mod]['github']['regex'])
+
+        for release in releases:
+            for asset in release['assets']:
+                match = regex.search(asset['name'])
+                if match:
+                    return match.groupdict()
+
+        return {}
+
     def CheckMod(self, mod):
         try:
             # [dev change, version change]
