@@ -347,30 +347,23 @@ class NotEnoughClasses():
         else:
             jsonres = self.fetch_json("http://widget.mcf.li/mc-mods/minecraft/" + modname + ".json")
 
-        filename = jsonres["download"]["name"]
-        match = re.search(self.mods[mod]["curse"]["regex"], filename)
-        output = match.groupdict()
-        relVersion = ""
-        devVersion = ""
+        regex = re.compile(self.mods[mod]['curse']['regex'])
 
-        if jsonres["download"]["type"] == "release":
-            relVersion = output["version"]
-        else:
-            devVersion = output["version"]
+        for release in sorted(jsonres['files'].values(), key=lambda x: x['id'], reverse=True):
+            match = regex.search(release['name'])
+            if match:
+                output = match.groupdict()
 
-        MCversion = jsonres["download"]["version"]
+                res = {
+                    'mc': release['version']
+                }
 
-        if relVersion:
-            return {
-                "version": relVersion,
-                "mc": MCversion
-            }
+                if jsonres["download"]["type"] == "release":
+                    res['version'] = output['version']
+                else:
+                    res['dev'] = output['version']
 
-        if devVersion:
-            return {
-                "dev": devVersion,
-                "mc": MCversion
-            }
+                return res
 
     def CheckGitHubRelease(self, mod):
         repo = self.mods[mod]['github'].get('repo')
