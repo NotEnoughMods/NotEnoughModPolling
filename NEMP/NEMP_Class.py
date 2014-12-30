@@ -207,7 +207,7 @@ class NotEnoughClasses():
         result = self.fetch_page("http://www.chickenbones.net/Files/notification/version.php?version=" + self.mods[mod]["mc"] + "&file=" + mod)
         if result.startswith("Ret: "):  # Hacky I know, but this is how ChickenBones does it in his mod
             new_version = result[5:]
-            if LooseVersion(new_version) > LooseVersion(self.mods[mod]['version']):
+            if self.mods[mod]['version'] == 'dev-only' or LooseVersion(new_version) > LooseVersion(self.mods[mod]['version']):
                 return {
                     "version": new_version
                 }
