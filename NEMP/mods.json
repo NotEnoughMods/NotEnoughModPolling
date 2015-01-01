@@ -1875,5 +1875,13 @@
             "repo": "copygirl/BetterStorage",
             "regex": "BetterStorage-(?P<mc>.+?)-(?P<version>.+?)\\.jar"
         }
+    },
+    "PoorOres": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "id": "224492",
+            "regex": "PoorOres (?P<version>.+)"
+        }
     }
 }
