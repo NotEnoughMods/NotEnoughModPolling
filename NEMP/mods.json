@@ -1883,5 +1883,14 @@
             "id": "224492",
             "regex": "PoorOres (?P<version>.+)"
         }
+    },
+    "sprinkles_for_vanilla": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "id": "226309",
+            "name": "sprinkles_for_vanilla",
+            "regex": "sprinkles_for_vanilla (?P<version>.+)"
+        }
     }
 }
