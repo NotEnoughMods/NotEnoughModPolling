@@ -500,11 +500,12 @@
         }
     },
     "BloodMagic" : {
-        "function" : "CheckDropBox",
+        "function" : "CheckCurse",
         "active" : true,
-        "html" : {
-            "url" : "https://www.dropbox.com/sh/0aqvalqobu61t44/AADZq-GuoDeuNzgg6zueVM_Ca",
-            "regex" : "BloodMagic-(?P<mc>.+?)-(?P<version>.+?)-1.jar"
+        "curse" : {
+            "regex" : "BloodMagic-(?P<mc>.+?)-(?P<version>.+?)-.+?.jar",
+            "id" : "224791",
+            "name" : "blood-magic"
         }
     },
     "CreeperCollateral" : {
@@ -1891,6 +1892,14 @@
             "id": "226309",
             "name": "sprinkles_for_vanilla",
             "regex": "sprinkles_for_vanilla (?P<version>.+)"
+        }
+    },
+    "Minechem": {
+        "function": "CheckCurse",
+        "active": false,
+        "curse": {
+            "name": "minechem-5",
+            "regex": "Minechem (?P<version>.+)"
         }
     }
 }
