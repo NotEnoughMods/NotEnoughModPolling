@@ -1894,7 +1894,8 @@
             "regex": "sprinkles_for_vanilla (?P<version>.+)"
         }
     },
-    "Minechem": {
+    "Minechem-curse": {
+        "name" : "Minechem",
         "function": "CheckCurse",
         "active": false,
         "curse": {
