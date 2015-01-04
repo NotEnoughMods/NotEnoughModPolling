@@ -750,7 +750,7 @@
     },
     "EnderIO" : {
         "function" : "CheckJenkins",
-        "active" : true,
+        "active" : false,
         "jenkins" : {
             "url" : "http://ci.tterrag.com/job/EnderIO/lastSuccessfulBuild/api/json",
             "regex" : "EnderIO-(?P<mc>.+?)-(?P<dev>.+?).jar",
@@ -825,7 +825,7 @@
     },
     "SuperMassiveTech" : {
         "function" : "CheckJenkins",
-        "active" : true,
+        "active" : false,
         "jenkins" : {
             "url" : "http://ci.tterrag.com/job/Super%20Massive%20Tech/lastSuccessfulBuild/api/json",
             "regex" : "SuperMassiveTech-MC(?P<mc>.+?)-(?P<dev>.+?).jar",
@@ -834,7 +834,7 @@
     },
     "Mariculture" : {
         "function" : "CheckJenkins",
-        "active" : true,
+        "active" : false,
         "jenkins" : {
             "url" : "http://ci.tterrag.com/job/Mariculture/lastSuccessfulBuild/api/json",
             "regex" : "Mariculture-Base-(?P<mc>.+?)-(?P<dev>.+?).jar",
