@@ -246,7 +246,7 @@ class NotEnoughClasses():
         }
 
     def CheckAE2(self, mod):
-        jsonres = self.fetch_json("http://ae2.ae-mod.info/builds/builds.json")
+        jsonres = self.fetch_json("http://feeds.ae-mod.info/builds.json")
         jsonres = sorted(jsonres['Versions'], key=lambda k: k['Created'], reverse=True)
         relVersion = ""
         MCversion = ""
