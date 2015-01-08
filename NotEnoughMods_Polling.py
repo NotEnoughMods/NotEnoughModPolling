@@ -468,11 +468,20 @@ def nemp_set(self, name, params, channel, userdata, rank):
     #params[4] = setting
 
     # Split the arguments in a shell-like fashion
-    args = shlex.split(' '.join(params[1:]))
+    try:
+        args = shlex.split(' '.join(params[1:]))
+    except:
+        self.sendMessage(channel, "That looks like invalid input (are there any unescaped quotes?). Try again.")
+        return
 
     if len(args) < 3:
         self.sendMessage(channel, "This is not a toy!")
         return
+
+    if args[1] == 'active':
+        self.sendMessage(channel, "You want =nemp poll instead.")
+        return
+
     if len(args) == 3:
         self.NEM.mods[args[0]][args[1]] = args[2]
     else:
