@@ -1912,5 +1912,15 @@
             "name": "minechem-5",
             "regex": "Minechem (?P<version>.+)"
         }
+    },
+    "RFTools": {
+        "name" : "RFTools",
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "id": "224641",
+            "name": "rftools",
+            "regex": "rftools-(?P<version>.+).jar"
+        }
     }
 }
