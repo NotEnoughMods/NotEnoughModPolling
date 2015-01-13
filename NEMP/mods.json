@@ -1922,5 +1922,49 @@
             "name": "rftools",
             "regex": "rftools-(?P<version>.+).jar"
         }
+    },
+    "LaunchGui-1.7": {
+        "name": "LaunchGui",
+        "function": "CheckJenkins",
+        "category" : "Tehnut",
+        "active": true,
+        "jenkins": {
+            "url": "http://tehnut.info/jenkins/job/LaunchGUI-1.7.10/lastSuccessfulBuild/api/json",
+            "regex": "LaunchGui-(?P<mc>.+?)-(?P<version>.+?)-client.jar",
+            "item": 0
+        }
+    },
+    "LaunchGui-1.8": {
+        "name": "LaunchGui",
+        "function": "CheckJenkins",
+        "active": true,
+        "category" : "Tehnut",
+        "jenkins": {
+            "url": "http://tehnut.info/jenkins/job/LaunchGUI-1.8/lastSuccessfulBuild/api/json",
+            "regex": "LaunchGui-(?P<mc>.+?)-(?P<version>.+?)-client.jar",
+            "item": 0
+        }
+    },
+    "LoaderList": {
+        "name": "LoaderList",
+        "function": "CheckJenkins",
+        "active": true,
+        "category" : "Tehnut",
+        "jenkins": {
+            "url": "http://tehnut.info/jenkins/job/LoaderList/lastSuccessfulBuild/api/json",
+            "regex": "LoaderList-(?P<mc>.+?)-(?P<version>.+?)-universal.jar",
+            "item": 3
+        }
+    },
+    "SunStroke": {
+        "name": "SunStroke",
+        "function": "CheckJenkins",
+        "active": true,
+        "category" : "Tehnut",
+        "jenkins": {
+            "url": "http://tehnut.info/jenkins/job/SunStroke/lastSuccessfulBuild/api/json",
+            "regex": "SunStroke-(?P<mc>.+?)-(?P<version>.+?).jar",
+            "item": 3
+        }
     }
 }
