@@ -26,7 +26,8 @@ helpDict = {
     "disabledmods": ["{0}nemp disabledmods", "Shows a list of the currently disabled mods."],
     "failedmods": ["{0}nemp failedmods", "Shows a list of mods that have failed to be polled at least 5 times in a row and were disabled automatically."],
     "failcount": ["{0}nemp failcount", "Shows how many times mods have failed to be polled so far. At least two failures in a row required.",
-                  "Mods that have failed being polled 5 times are excluded from this list. Check {0}nemp failedmods for those mods."]
+                  "Mods that have failed being polled 5 times are excluded from this list. Check {0}nemp failedmods for those mods."],
+    "showinfo": ["{0}nemp showinfo <mod> [<path> [...]]", "Shows polling information for the specified mod."]
 }
 
 def execute(self, name, params, channel, userdata, rank, chan):
@@ -542,7 +543,8 @@ commands = {
     "refresh": (nemp_reload, VOICED),
     "disabled": (show_disabledMods, VOICED),
     "failed": (show_autodeactivatedMods, VOICED),
-    "cleanfailed": (clean_failed_mods, VOICED)
+    "cleanfailed": (clean_failed_mods, VOICED),
+    "show": (nemp_showinfo, VOICED)
 
     # -- END ALIASES -- #
 }
