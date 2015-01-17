@@ -298,6 +298,9 @@ def NEMP_TimerEvent(self, channels):
                     self.NEM.mods[mod]["active"] = False
                     del self.NEM_troubledMods[mod]
 
+                    # TODO: Not hardcode the channel
+                    self.sendMessage('#test', 'Mod {0} failed.'.format(mod))
+
                     nemp_logger.debug("Mod {0} has failed to be polled at least 5 times, it has been disabled.".format(mod))
                     self.NEM.buildHTML()
 
