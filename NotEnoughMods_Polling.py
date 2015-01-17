@@ -491,6 +491,31 @@ def nemp_set(self, name, params, channel, userdata, rank):
         self.NEM.mods[args[0]][args[1]][args[2]] = args[3]
     self.sendMessage(channel, "done.")
 
+def nemp_showinfo(self, name, params, channel, userdata, rank):
+    if len(params) < 2:
+        self.sendMessage(channel, name + ": You have to specify at least the mod's name.")
+        return
+
+    mod = params[1]
+
+    if mod not in self.NEM.mods:
+        self.sendMessage(channel, name + ": No such mod in NEMP.")
+        return
+
+    if len(params) > 1:
+        path = params[2:]
+    else:
+        path = []
+
+    try:
+        elem = self.NEM.mods[mod]
+        for path_elem in path:
+            elem = elem.get(path_elem)
+
+        self.sendMessage(channel, name + ": " + repr(elem))
+    except KeyError:
+        self.sendMessage(channel, name + ": Error, no such element.")
+
 # In each entry, the second value in the tuple is the
 # rank that is required to be able to use the command.
 VOICED = 1
@@ -510,6 +535,7 @@ commands = {
     "failedmods": (show_autodeactivatedMods, VOICED),
     "failcount": (show_failedcount, VOICED),
     "resetfailed": (clean_failed_mods, VOICED),
+    "showinfo": (nemp_showinfo, VOICED),
 
     # -- ALIASES -- #
     "polling": (running, VOICED),
