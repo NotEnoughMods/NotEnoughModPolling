@@ -511,11 +511,11 @@ def nemp_showinfo(self, name, params, channel, userdata, rank):
     try:
         elem = self.NEM.mods[mod]
         for path_elem in path:
-            elem = elem.get(path_elem)
+            elem = elem[path_elem]
 
         self.sendMessage(channel, name + ": " + repr(elem))
     except KeyError:
-        self.sendMessage(channel, name + ": Error, no such element.")
+        self.sendMessage(channel, name + ": No such element in that mod's configuration.")
 
 # In each entry, the second value in the tuple is the
 # rank that is required to be able to use the command.
