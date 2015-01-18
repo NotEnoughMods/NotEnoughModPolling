@@ -13,11 +13,13 @@ Author:
 
 Developers:
 - [NightKev][2]
+- [Pyker][3]
+- [dmod][7]
 
 Contributors:
-- [Pyker][3]
 - [Helinus][4]
 - [Spacechase0][5]
+- [And many others](https://github.com/SinZ163/NotEnoughMods/graphs/contributors)
 
 Website CSS by [GenPage][6]
 
@@ -27,3 +29,4 @@ Website CSS by [GenPage][6]
 [4]: https://github.com/helinus
 [5]: https://github.com/spacechase0
 [6]: https://github.com/GenPage
+[7]: https://github.com/dmodoomsirius
