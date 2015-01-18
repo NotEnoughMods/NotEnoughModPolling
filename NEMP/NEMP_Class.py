@@ -389,26 +389,26 @@ class NotEnoughClasses():
     def CheckAtomicStryker(self, mod, document):
         if not document:
             return self.fetch_page("http://atomicstryker.net/updatemanager/modversions.txt")
-        else: #not sure if this is needed, but yolo
-            lines = document.splitlines();
-            mcver = []
-            version = []
-            for line in lines:
-                if "mcversion" in line:
-                    #We have a new MC Version
-                    mcMatch = re.search("mcversion = Minecraft (.+?)$", line)
-                    mcver.append(mcMatch.group(1))
-                elif self.mods[mod]["AtomicStryker"]["name"] in line:
-                    verMatch = re.search(self.mods[mod]["AtomicStryker"]["name"] + " = (.+?)$", line)
-                    version.append(verMatch.group(1))
 
-            if len(mcver) != 0 and len(version) != 0:
-                return {
-                    #-1 is used for the last entry to version, and the corresponding MC version (as all of his mods so far are for all MC versions (except 1.8 somewhat)
-                    "mc" : mcver[-1],
-                    "version" : version[-1]
-                }
-            return {}
+        lines = document.splitlines();
+        mcver = []
+        version = []
+        for line in lines:
+            if "mcversion" in line:
+                #We have a new MC Version
+                mcMatch = re.search("mcversion = Minecraft (.+?)$", line)
+                mcver.append(mcMatch.group(1))
+            elif self.mods[mod]["AtomicStryker"]["name"] in line:
+                verMatch = re.search(self.mods[mod]["AtomicStryker"]["name"] + " = (.+?)$", line)
+                version.append(verMatch.group(1))
+
+        if len(mcver) != 0 and len(version) != 0:
+            return {
+                #-1 is used for the last entry to version, and the corresponding MC version (as all of his mods so far are for all MC versions (except 1.8 somewhat)
+                "mc" : mcver[-1],
+                "version" : version[-1]
+            }
+        return {}
 
     def CheckMod(self, mod, document=None):
         try:
