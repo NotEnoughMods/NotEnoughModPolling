@@ -393,6 +393,7 @@ class NotEnoughClasses():
         lines = document.splitlines();
         mcver = []
         version = []
+
         for line in lines:
             if "mcversion" in line:
                 #We have a new MC Version
@@ -408,16 +409,19 @@ class NotEnoughClasses():
                 "mc" : mcver[-1],
                 "version" : version[-1]
             }
+
         return {}
 
     def CheckMod(self, mod, document=None):
         try:
             # [dev change, version change]
             status = [False, False]
+
             if document:
                 output = getattr(self, self.mods[mod]["function"])(mod, document)
             else:
                 output = getattr(self, self.mods[mod]["function"])(mod)
+
             if "dev" in output:
                 # Remove whitespace at the end and start
                 self.mods[mod]["dev"] = self.mods[mod]["dev"].strip()
@@ -425,6 +429,7 @@ class NotEnoughClasses():
                 if self.mods[mod]["dev"] != output["dev"]:
                     self.mods[mod]["dev"] = output["dev"]
                     status[0] = True
+
             if "version" in output:
                 # Remove whitespace at the end and start
                 self.mods[mod]["version"] = self.mods[mod]["version"].strip()
@@ -432,10 +437,13 @@ class NotEnoughClasses():
                 if self.mods[mod]["version"] != output["version"]:
                     self.mods[mod]["version"] = output["version"]
                     status[1] = True
+
             if "mc" in output:
                 self.mods[mod]["mc"] = output["mc"]
+
             if "change" in output and "changelog" not in self.mods[mod]:
                 self.mods[mod]["change"] = output["change"]
+
             return status, False  # Everything went fine, no exception raised
         except:
             print(mod + " failed to be polled...")
@@ -444,6 +452,7 @@ class NotEnoughClasses():
 
     def CheckMods(self, mod):
         output = {}
+
         try:
             #We need to know what mods this SinZationalHax uses
             mods = self.SinZationalHax[self.mods[mod]["SinZationalHax"]["id"]]
@@ -456,4 +465,5 @@ class NotEnoughClasses():
             print(mod + " failed to be polled (SinZationalHax)")
             traceback.print_exc()
             output[tempMod] = ([False, False], True)
+
         return output
