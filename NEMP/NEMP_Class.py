@@ -13,6 +13,7 @@ class NotEnoughClasses():
 
     newMods = False
     mods = {}
+    SinZationalHax = {}
 
     def __init__(self):
         self.requests_session = requests.Session()
@@ -47,6 +48,11 @@ class NotEnoughClasses():
         for mod in self.mods:
             if "change" not in self.mods[mod]:
                 self.mods[mod]["change"] = "NOT_USED"
+            if "SinZationalHax" in self.mods[mod]:
+                if self.mods[mod]["SinZationalHax"]["id"] in self.SinZationalHax:
+                    self.SinZationalHax[self.mods[mod]["SinZationalHax"]["id"]].append(mod)
+                else:
+                    self.SinZationalHax[self.mods[mod]["SinZationalHax"]["id"]] = [mod]
 
     def buildHTML(self):
         headerText = ""
@@ -379,12 +385,39 @@ class NotEnoughClasses():
                     return match.groupdict()
 
         return {}
-
-    def CheckMod(self, mod):
+        
+    def CheckAtomicStryker(self, mod, input):
+        if input == False:
+            return self.fetch_page("http://atomicstryker.net/updatemanager/modversions.txt")
+        else: #not sure if this is needed, but yolo
+            lines = input.splitlines();
+            mcver = []
+            version = []
+            for line in lines:
+                if "mcversion" in line:
+                    #We have a new MC Version
+                    mcMatch = re.search("mcversion = Minecraft (.+?)$", line)
+                    mcver.append(mcMatch.group(1))
+                elif self.mods[mod]["AtomicStryker"]["name"] in line:
+                    verMatch = re.search(self.mods[mod]["AtomicStryker"]["name"] + " = (.+?)$", line)
+                    version.append(verMatch.group(1))
+ 
+            if len(mcver) != 0 and len(version) != 0:
+                
+                return {
+                    #len(version)-1 is used for the last entry to version, and the corresponding MC version (as all of his mods so far are for all MC versions (except 1.8 somewhat)
+                    "mc" : mcver[len(version)-1],
+                    "version" : version[len(version)-1]
+                }
+            return {}
+    def CheckMod(self, mod, input=False):
         try:
             # [dev change, version change]
             status = [False, False]
-            output = getattr(self, self.mods[mod]["function"])(mod)
+            if input != False:
+                output = getattr(self, self.mods[mod]["function"])(mod, input)
+            else:
+                output = getattr(self, self.mods[mod]["function"])(mod)
             if "dev" in output:
                 # Remove whitespace at the end and start
                 self.mods[mod]["dev"] = self.mods[mod]["dev"].strip()
@@ -408,3 +441,18 @@ class NotEnoughClasses():
             print(mod + " failed to be polled...")
             traceback.print_exc()
             return [False, False], True  # an exception was raised, so we return a True
+    def CheckMods(self, mod):
+        output = {}
+        try:
+            #We need to know what mods this SinZationalHax uses
+            mods = self.SinZationalHax[self.mods[mod]["SinZationalHax"]["id"]]
+            #Lets get the page/json/whatever all the mods want
+            input = getattr(self, self.mods[mod]["function"])(mod, False)
+            #Ok, time to parse it for each mod
+            for tempMod in mods:
+                output[tempMod] = self.CheckMod(tempMod, input)
+        except:
+            print(mod + " failed to be polled (SinZationalHax)")
+            traceback.print_exc() 
+            output[tempMod] = ([False, False], True)
+        return output

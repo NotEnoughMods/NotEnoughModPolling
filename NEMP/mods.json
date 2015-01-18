@@ -1966,5 +1966,159 @@
             "regex": "SunStroke-(?P<mc>.+?)-(?P<version>.+?).jar",
             "item": 3
         }
-    }
+    },
+	"AdvancedMachines": {
+		"function": "CheckAtomicStryker",
+		"active": true,
+		"category" : "AtomicStryker",
+		"SinZationalHax": {
+			"id": "atomicstryker"
+		},
+		"AtomicStryker": {
+			"name" : "AdvancedMachines"
+		}
+	},
+	"BattleTowers": {
+		"function": "CheckAtomicStryker",
+		"active": true,
+		"category" : "AtomicStryker",
+		"SinZationalHax": {
+			"id": "atomicstryker"
+		},
+		"AtomicStryker": {
+			"name" : "BattleTowers"
+		}
+	},
+	"DynamicLights": {
+		"function": "CheckAtomicStryker",
+		"active": true,
+		"category" : "AtomicStryker",
+		"SinZationalHax": {
+			"id": "atomicstryker"
+		},
+		"AtomicStryker": {
+			"name" : "AS_FinderCompass"
+		}
+	},
+	"FinderCompass": {
+		"function": "CheckAtomicStryker",
+		"active": true,
+		"category" : "AtomicStryker",
+		"SinZationalHax": {
+			"id": "atomicstryker"
+		},
+		"AtomicStryker": {
+			"name" : "AS_FinderCompass"
+		}
+	},
+	"InfernalMobs": {
+		"function": "CheckAtomicStryker",
+		"active": true,
+		"category" : "AtomicStryker",
+		"SinZationalHax": {
+			"id": "atomicstryker"
+		},
+		"AtomicStryker": {
+			"name" : "InfernalMobs"
+		}
+	},
+	"Kenshiro": {
+		"function": "CheckAtomicStryker",
+		"active": true,
+		"category" : "AtomicStryker",
+		"SinZationalHax": {
+			"id": "atomicstryker"
+		},
+		"AtomicStryker": {
+			"name" : "AS_Kenshiro"
+		}
+	},
+	"MagicYarn": {
+		"function": "CheckAtomicStryker",
+		"active": true,
+		"category" : "AtomicStryker",
+		"SinZationalHax": {
+			"id": "atomicstryker"
+		},
+		"AtomicStryker": {
+			"name" : "MagicYarn"
+		}
+	},
+	"Minions": {
+		"function": "CheckAtomicStryker",
+		"active": true,
+		"category" : "AtomicStryker",
+		"SinZationalHax": {
+			"id": "atomicstryker"
+		},
+		"AtomicStryker": {
+			"name" : "AS_Minions"
+		}
+	},
+	"MultiMine": {
+		"function": "CheckAtomicStryker",
+		"active": true,
+		"category" : "AtomicStryker",
+		"SinZationalHax": {
+			"id": "atomicstryker"
+		},
+		"AtomicStryker": {
+			"name" : "AS_MultiMine"
+		}
+	},
+	"PetBat": {
+		"function": "CheckAtomicStryker",
+		"active": true,
+		"category" : "AtomicStryker",
+		"SinZationalHax": {
+			"id": "atomicstryker"
+		},
+		"AtomicStryker": {
+			"name" : "PetBat"
+		}
+	},
+	"RopesPlus": {
+			"function": "CheckAtomicStryker",
+		"active": true,
+		"category" : "AtomicStryker",
+		"SinZationalHax": {
+			"id": "atomicstryker"
+		},
+		"AtomicStryker": {
+			"name" : "RopesPlus"
+		}
+	},
+	"Ruins": {
+		"function": "CheckAtomicStryker",
+		"active": true,
+		"category" : "AtomicStryker",
+		"SinZationalHax": {
+			"id": "atomicstryker"
+		},
+		"AtomicStryker": {
+			"name" : "AS_Ruins"
+		}
+	},
+	"SimplyHaxFlying": {
+		"function": "CheckAtomicStryker",
+		"active": true,
+		"category" : "AtomicStryker",
+		"SinZationalHax": {
+			"id": "atomicstryker"
+		},
+		"AtomicStryker": {
+			"name" : "SimplyHaxFlying"
+		}
+	},
+	"Necromancy": {
+		"function": "CheckAtomicStryker",
+		"active": true,
+		"category" : "AtomicStryker",
+		"SinZationalHax": {
+			"id": "atomicstryker"
+		},
+		"AtomicStryker": {
+			"name" : "Necromancy"
+		}
+	}
 }
