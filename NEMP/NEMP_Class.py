@@ -387,7 +387,7 @@ class NotEnoughClasses():
         return {}
 
     def CheckAtomicStryker(self, mod, document):
-        if document == False:
+        if not document:
             return self.fetch_page("http://atomicstryker.net/updatemanager/modversions.txt")
         else: #not sure if this is needed, but yolo
             lines = document.splitlines();
@@ -403,19 +403,18 @@ class NotEnoughClasses():
                     version.append(verMatch.group(1))
 
             if len(mcver) != 0 and len(version) != 0:
-
                 return {
-                    #len(version)-1 is used for the last entry to version, and the corresponding MC version (as all of his mods so far are for all MC versions (except 1.8 somewhat)
-                    "mc" : mcver[len(version)-1],
-                    "version" : version[len(version)-1]
+                    #-1 is used for the last entry to version, and the corresponding MC version (as all of his mods so far are for all MC versions (except 1.8 somewhat)
+                    "mc" : mcver[-1],
+                    "version" : version[-1]
                 }
             return {}
 
-    def CheckMod(self, mod, document=False):
+    def CheckMod(self, mod, document=None):
         try:
             # [dev change, version change]
             status = [False, False]
-            if document != False:
+            if document:
                 output = getattr(self, self.mods[mod]["function"])(mod, document)
             else:
                 output = getattr(self, self.mods[mod]["function"])(mod)
@@ -449,7 +448,7 @@ class NotEnoughClasses():
             #We need to know what mods this SinZationalHax uses
             mods = self.SinZationalHax[self.mods[mod]["SinZationalHax"]["id"]]
             #Lets get the page/json/whatever all the mods want
-            document = getattr(self, self.mods[mod]["function"])(mod, False)
+            document = getattr(self, self.mods[mod]["function"])(mod, None)
             #Ok, time to parse it for each mod
             for tempMod in mods:
                 output[tempMod] = self.CheckMod(tempMod, document)
