@@ -405,9 +405,9 @@ class NotEnoughClasses():
 
         if len(mcver) != 0 and len(version) != 0:
             return {
-                #-1 is used for the last entry to version, and the corresponding MC version (as all of his mods so far are for all MC versions (except 1.8 somewhat)
-                "mc" : mcver[-1],
-                "version" : version[-1]
+                #len(version)-1 is used for the last entry to version, and the corresponding MC version (as all of his mods so far are for all MC versions (except 1.8 somewhat)
+                "mc" : mcver[len(version)-1],
+                "version" : version[len(version)-1]
             }
 
         return {}
