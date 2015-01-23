@@ -1520,7 +1520,7 @@
     },
     "Minechem" : {
         "function" : "CheckJenkins",
-        "active" : true,
+        "active" : false,
         "jenkins": {
             "url" : "http://jenkins.jakimfett.com/job/Minechem%201.7%20v5/lastSuccessfulBuild/api/json",
             "regex" : "Minechem-(?P<mc>.+?)-(?P<dev>.+?).jar",
@@ -1907,7 +1907,7 @@
     "Minechem-curse": {
         "name" : "Minechem",
         "function": "CheckCurse",
-        "active": false,
+        "active": true,
         "curse": {
             "name": "minechem-5",
             "regex": "Minechem (?P<version>.+)"
