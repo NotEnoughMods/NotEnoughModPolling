@@ -353,6 +353,8 @@ class NotEnoughClasses():
         else:
             jsonres = self.fetch_json("http://widget.mcf.li/mc-mods/minecraft/" + modname + ".json")
 
+        release_type = jsonres['release_type'].lower()
+
         regex = re.compile(self.mods[mod]['curse']['regex'])
 
         for release in sorted(jsonres['files'].values(), key=lambda x: x['id'], reverse=True):
@@ -364,7 +366,7 @@ class NotEnoughClasses():
                     'mc': release['version']
                 }
 
-                if jsonres["download"]["type"] == "release":
+                if jsonres["download"]["type"].lower() == release_type:
                     res['version'] = output['version']
                 else:
                     res['dev'] = output['version']
