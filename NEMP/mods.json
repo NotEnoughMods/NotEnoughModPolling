@@ -2115,5 +2115,14 @@
         "AtomicStryker": {
             "name" : "Necromancy"
         }
+    },
+    "DPU": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "id": "225343",
+            "name": "dont-pick-up",
+            "regex": "DPU (?P<version>.+)"
+        }
     }
 }
