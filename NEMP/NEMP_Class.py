@@ -386,6 +386,20 @@ class NotEnoughClasses():
 
         return {}
 
+    def CheckBuildCraft(self, mod):
+        page = self.fetch_page('https://raw.githubusercontent.com/BuildCraft/BuildCraft/master/buildcraft_resources/versions.txt')
+
+        # filter empty lines
+        lines = [line for line in page.splitlines() if line]
+
+        mc, mod_name, version = lines[-1].split(':')
+
+        return {
+            'mc': mc,
+            'version': version
+        }
+
+
     def CheckAtomicStryker(self, mod, document):
         if not document:
             return self.fetch_page("http://atomicstryker.net/updatemanager/modversions.txt")

@@ -348,13 +348,8 @@
         }
     },
     "BuildCraft" : {
-        "function" : "CheckJenkins",
-        "active" : false,
-        "jenkins" : {
-            "url" : "http://nallar.me/buildservice/job/Buildcraft/lastSuccessfulBuild/api/json",
-            "regex" : "buildcraft-(?P<dev>.+?).jar$",
-            "item" : 4
-        }
+        "function" : "CheckBuildCraft",
+        "active" : true
     },
     "Artifice" : {
         "function" : "CheckJenkins",
