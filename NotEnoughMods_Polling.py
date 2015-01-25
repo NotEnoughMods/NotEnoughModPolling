@@ -521,19 +521,22 @@ def nemp_set(self, name, params, channel, userdata, rank):
         self.sendMessage(channel, "You want =nemp poll instead.")
         return
 
-    if len(args) == 3:
-        if cast_to:
-            new_value = cast_to(args[2])
+    try:
+        if len(args) == 3:
+            if cast_to:
+                new_value = cast_to(args[2])
+            else:
+                new_value = args[2]
+            self.NEM.mods[args[0]][args[1]] = new_value
         else:
-            new_value = args[2]
-        self.NEM.mods[args[0]][args[1]] = new_value
-    else:
-        if cast_to:
-            new_value = cast_to(args[3])
-        else:
-            new_value = args[3]
-        self.NEM.mods[args[0]][args[1]][args[2]] = new_value
-    self.sendMessage(channel, "done.")
+            if cast_to:
+                new_value = cast_to(args[3])
+            else:
+                new_value = args[3]
+            self.NEM.mods[args[0]][args[1]][args[2]] = new_value
+        self.sendMessage(channel, "done.")
+    except ValueError as e:
+        self.sendMessage(channel, "Error: " + str(e))
 
 def nemp_showinfo(self, name, params, channel, userdata, rank):
     if len(params) < 2:
