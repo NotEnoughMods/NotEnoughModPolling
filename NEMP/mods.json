@@ -161,14 +161,13 @@
     },
     "OpenPeripheralCore" : {
         "comment" : "This isn't a core </3",
-
         "function" : "CheckJenkins",
         "category" : "openmods",
         "active" : true,
         "jenkins" : {
             "url" : "http://openmods.info:8080/job/OpenPeripheralCore/lastSuccessfulBuild/api/json",
             "regex" : "OpenPeripheralCore-(?P<mc>.+?)-(?P<dev>.+?).jar$",
-            "item" : 1
+            "item" : 4
         }
     },
     "OpenPeripheralAddons" : {
@@ -198,7 +197,7 @@
         "jenkins" : {
             "url" : "http://openmods.info:8080/job/OpenModsLib/lastSuccessfulBuild/api/json",
             "regex" : "OpenModsLib-(?P<mc>.+?)-(?P<dev>.+?).jar$",
-            "item" : 1
+            "item" : 2
         }
     },
     "MineFactoryReloaded" : {
