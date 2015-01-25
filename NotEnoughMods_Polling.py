@@ -498,6 +498,21 @@ def nemp_set(self, name, params, channel, userdata, rank):
         self.sendMessage(channel, "That looks like invalid input (are there any unescaped quotes?). Try again.")
         return
 
+    available_casts = {
+        'int': int
+    }
+
+    cast_to = None
+
+    if args[0] == '--type':
+        if args[1] in available_casts:
+            cast_to = available_casts[args[1]]
+            # Trim out these 2 args so the rest will work just fine
+            args = args[2:]
+        else:
+            self.sendMessage(channel, "Unknown type. Available types are: " + ', '.join(available_casts.iterkeys()))
+            return
+
     if len(args) < 3:
         self.sendMessage(channel, "This is not a toy!")
         return
@@ -507,9 +522,17 @@ def nemp_set(self, name, params, channel, userdata, rank):
         return
 
     if len(args) == 3:
-        self.NEM.mods[args[0]][args[1]] = args[2]
+        if cast_to:
+            new_value = cast_to(args[2])
+        else:
+            new_value = args[2]
+        self.NEM.mods[args[0]][args[1]] = new_value
     else:
-        self.NEM.mods[args[0]][args[1]][args[2]] = args[3]
+        if cast_to:
+            new_value = cast_to(args[3])
+        else:
+            new_value = args[3]
+        self.NEM.mods[args[0]][args[1]][args[2]] = new_value
     self.sendMessage(channel, "done.")
 
 def nemp_showinfo(self, name, params, channel, userdata, rank):
