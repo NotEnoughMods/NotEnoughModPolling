@@ -1304,7 +1304,7 @@
             "regex" : "-.+-(?P<version>.+?).jar"
         }
     },
-    "CGOrigin" :{
+    "Origin" :{
         "function" : "CheckCurse",
         "active" : true,
         "curse": {
