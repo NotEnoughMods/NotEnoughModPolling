@@ -28,15 +28,11 @@ class NotEnoughClasses():
         self.buildHTML()
 
     def fetch_page(self, url, timeout=10, decode_json=False):
-        try:
-            request = self.requests_session.get(url, timeout=timeout)
-            if decode_json:
-                return request.json()
-            else:
-                return request.text
-        except:
-            pass
-            # most likely a timeout
+        request = self.requests_session.get(url, timeout=timeout)
+        if decode_json:
+            return request.json()
+        else:
+            return request.text
 
     def fetch_json(self, *args, **kwargs):
         return self.fetch_page(*args, decode_json=True, **kwargs)
