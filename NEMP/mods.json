@@ -1904,7 +1904,7 @@
         "active": true,
         "curse": {
             "name": "minechem-5",
-            "regex": "Minechem (?P<version>.+)"
+            "regex": "Minechem v(?P<version>.+) for (?P<mc>.+)"
         }
     },
     "RFTools": {
