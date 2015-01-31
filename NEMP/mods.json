@@ -1874,7 +1874,7 @@
     "BetterStorage-dev": {
         "name": "BetterStorage",
         "function": "CheckJenkins",
-        "active": true,
+        "active": false,
         "jenkins": {
             "url": "http://jenkins.rx14.co.uk/job/copygirl/job/BetterStorage/lastSuccessfulBuild/api/json",
             "regex": "^BetterStorage-(?P<mc>.+)-(?P<dev>.+)\\.jar$",
