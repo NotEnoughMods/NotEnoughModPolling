@@ -2132,5 +2132,13 @@
             "name": "chisel-2",
             "regex": "Chisel 2 - (?P<version>.+)"
         }
+    },
+    "ANSSRPG": {
+        "function": "CheckGitHubRelease",
+        "active": true,
+        "github": {
+            "repo": "disconsented/ANSSRPG",
+            "regex": "anssrpg-(?P<version>.+?)\\.jar"
+        }
     }
 }
