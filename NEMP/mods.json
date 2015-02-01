@@ -931,7 +931,7 @@
     },
     "EnchantingPlus" : {
         "function" : "CheckCurse",
-        "active" : false,
+        "active" : true,
         "curse": {
             "name" : "enchanting-plus",
             "regex" : "-.+?-(?P<version>.+?).jar"
@@ -981,11 +981,22 @@
             "regex" : "-.+?-(?P<version>.+?).jar"
         }
     },
-    "Morpheus" : {
+    "Morpheus-1.7" : {
+        "name" : "Morpheus",
         "function" : "CheckJenkins",
         "active" : true,
         "jenkins" : {
-            "url" : "http://www.wtfcool.com:8080/job/Morpheus/lastSuccessfulBuild/api/json",
+            "url" : "http://jenkins.qmunity.co.uk/job/Morpheus%201.7.x/lastSuccessfulBuild/api/json",
+            "regex" : "-(?P<mc>.+?)-(?P<version>.+?).jar",
+            "item" : 1
+        }
+    },
+    "Morpheus-1.8" : {
+        "name" : "Morpheus",
+        "function" : "CheckJenkins",
+        "active" : true,
+        "jenkins" : {
+            "url" : "http://jenkins.qmunity.co.uk/job/Morpheus/lastSuccessfulBuild/api/json",
             "regex" : "-(?P<mc>.+?)-(?P<version>.+?).jar",
             "item" : 1
         }
@@ -1007,7 +1018,7 @@
     },
     "BDLib" : {
         "function" : "CheckCurse",
-        "active" : false,
+        "active" : true,
         "curse": {
             "name" : "bdlib",
             "regex" : "-.+?-(?P<version>.+?).jar"
@@ -1088,7 +1099,7 @@
     },
     "Veinminer" : {
         "function" : "CheckCurse",
-        "active" : false,
+        "active" : true,
         "curse": {
             "name" : "veinminer",
             "regex" : ".+?_(?P<version>.+?).jar"
@@ -1659,7 +1670,7 @@
         "curse": {
             "id": "222682",
             "name": "santas-toys",
-            "regex": "santastoys(?P<version>.+?).zip"
+            "regex": "-.+?-(?P<version>.+?).jar"
         }
      },
     "SparklyPants": {
@@ -1668,7 +1679,7 @@
         "curse": {
             "id": "222513",
             "name": "sparkly-pants",
-            "regex": "sparklypants(?P<version>.+?).zip"
+            "regex": "-.+?-(?P<version>.+?).jar"
         }
      },
     "Santa'sDecor": {
@@ -2139,6 +2150,49 @@
         "github": {
             "repo": "disconsented/ANSSRPG",
             "regex": "anssrpg-(?P<version>.+?)\\.jar"
+        }
+    },
+    "Mine&BladeBattleGear2-Bullseye": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "name": "mb-battlegear-2",
+            "regex": "-.+? - (?P<version>.+)"
+        }
+    },
+    "AnimationAPI": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "name": "animationapi",
+            "regex": ".+? v(?P<version>.+) .+?"
+        }
+    },
+    "WorldEdit": {
+        "function": "CheckCurse",
+        "active": false,
+        "curse": {
+            "id": "225608",
+            "name": "worldedit",
+            "regex": "WorldEdit (?P<version>.+) .+? .+? .+?"
+        }
+    },
+    "Binnie'sMods": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "id": "223525",
+            "name": "binnies-mods",
+            "regex": "-.+?-(?P<version>.+?).jar"
+        }
+    },
+    "WhatAreWeLookingAt": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "id": "224712",
+            "name": "wawla-what-are-we-looking-at",
+            "regex": "-(?P<version>.+?)_.+?.jar"
         }
     }
 }
