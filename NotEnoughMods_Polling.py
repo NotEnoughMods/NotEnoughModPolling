@@ -31,6 +31,7 @@ helpDict = {
     "showinfo": ["{0}nemp showinfo <mod> [<path> [...]]", "Shows polling information for the specified mod."]
 }
 
+
 def execute(self, name, params, channel, userdata, rank, chan):
     if len(params) > 0:
         cmdName = params[0]
@@ -48,6 +49,7 @@ def execute(self, name, params, channel, userdata, rank, chan):
             self.sendMessage(channel, "See {0}nemp help for a list of commands".format(self.cmdprefix))
     else:
         self.sendMessage(channel, name + ": see \"{0}nemp help\" for a list of commands".format(self.cmdprefix))
+
 
 def __initialize__(self, Startup):
     if Startup:
@@ -67,6 +69,7 @@ def __initialize__(self, Startup):
     self.NEM_troubledMods = {}
     self.NEM_autodeactivatedMods = {}
     self.NEM_cycle_count = 0
+
 
 def running(self, name, params, channel, userdata, rank):
     if len(params) >= 2 and (params[1] == "true" or params[1] == "on"):
@@ -105,10 +108,12 @@ def running(self, name, params, channel, userdata, rank):
         else:
             self.sendMessage(channel, "NotEnoughModPolling isn't running!")
 
+
 def about(self, name, params, channel, userdata, rank):
     self.sendMessage(channel, "Not Enough Mods: Polling for IRC by SinZ, with help from NightKev & Yoshi2 - v1.4")
     self.sendMessage(channel, "Additional contributions by Pyker, spacechase, helinus & sMi")
     self.sendMessage(channel, "Source code available at: http://github.com/SinZ163/NotEnoughMods")
+
 
 def nemp_help(self, name, params, channel, userdata, rank):
     if len(params) == 1:
@@ -122,6 +127,7 @@ def nemp_help(self, name, params, channel, userdata, rank):
         else:
             self.sendMessage(channel, name + ": Invalid command provided")
 
+
 def status(self, name, params, channel, userdata, rank):
     if self.events["time"].doesExist("NotEnoughModPolling"):
         channels = ", ".join(self.events["time"].getChannels("NotEnoughModPolling"))
@@ -132,6 +138,7 @@ def status(self, name, params, channel, userdata, rank):
                          )
     else:
         self.sendMessage(channel, "NEM Polling is not running.")
+
 
 def show_disabledMods(self, name, params, channel, userdata, rank):
     disabled = [mod for mod, info in self.NEM.mods.iteritems() if not info['active']]
@@ -144,6 +151,7 @@ def show_disabledMods(self, name, params, channel, userdata, rank):
                         "{1} mod(s) total. ".format(", ".join(disabled), len(disabled))
                         )
 
+
 def show_autodeactivatedMods(self, name, params, channel, userdata, rank):
     if len(self.NEM_autodeactivatedMods) == 0:
         self.sendNotice(name, "No mods have been automatically disabled so far.")
@@ -152,6 +160,7 @@ def show_autodeactivatedMods(self, name, params, channel, userdata, rank):
         self.sendNotice(name, "The following mods have been automatically disabled so far: "
                         "{0}. {1} mod(s) total".format(", ".join(disabled), len(disabled)))
 
+
 def clean_failed_mods(self, name, params, channel, userdata, rank):
     failed_mods = self.NEM_autodeactivatedMods.keys()
     for failed_mod in self.NEM_autodeactivatedMods:
@@ -159,6 +168,7 @@ def clean_failed_mods(self, name, params, channel, userdata, rank):
     self.NEM_autodeactivatedMods = {}
     self.sendMessage(channel, "Re-enabled {0} automatically disabled mods.".format(len(failed_mods)))
     self.NEM.buildHTML()
+
 
 def show_failedcount(self, name, params, channel, userdata, rank):
     print self.NEM_troubledMods
@@ -191,6 +201,7 @@ def show_failedcount(self, name, params, channel, userdata, rank):
                             "single time and thus were not shown.".format(len(sortedMods) - len(newlist))
                             )
 
+
 def PollingThread(self, pipe):
     NEM = self.base["NEM"]
     sleepTime = self.base["PollTime"]
@@ -210,7 +221,7 @@ def PollingThread(self, pipe):
 
             if NEM.mods[mod]["active"]:
                 if "SinZationalHax" in NEM.mods[mod]:
-                    if NEM.mods[mod]["SinZationalHax"]["id"] not in SinZationalHax: #have we polled this set of mods before
+                    if NEM.mods[mod]["SinZationalHax"]["id"] not in SinZationalHax:  # have we polled this set of mods before
                         results = NEM.CheckMods(mod)
                         for outputMod, outputInfo in results.iteritems():
                             result, exceptionRaised = results[outputMod]
@@ -218,7 +229,7 @@ def PollingThread(self, pipe):
                                 tempList.setdefault(NEM.mods[outputMod]['mc'], []).append((outputMod, result))
                             elif exceptionRaised:
                                 failed.append(outputMod)
-                        SinZationalHax.append(NEM.mods[mod]["SinZationalHax"]["id"]) #Remember this poll that we have done this set of mods
+                        SinZationalHax.append(NEM.mods[mod]["SinZationalHax"]["id"])  # Remember this poll that we have done this set of mods
                     else:
                         nemp_logger.debug("Already polled {} before".format(NEM.mods[mod]["SinZationalHax"]["id"]))
                 else:
@@ -243,8 +254,11 @@ def PollingThread(self, pipe):
 
 # Returns the version string with some replacements, like:
 # - whitespace (space/tab/etc) replaced by hyphen
+
+
 def clean_version(version):
     return re.sub(r'\s+', '-', version)
+
 
 def NEMP_TimerEvent(self, channels):
     yes = self.threading.poll("NEMP")
@@ -330,6 +344,7 @@ def NEMP_TimerEvent(self, channels):
             nemp_logger.debug("Mod {0} is working again. Counter reset (Counter was at {1}) ".format(mod, self.NEM_troubledMods[mod]))
             del self.NEM_troubledMods[mod]
 
+
 def poll(self, name, params, channel, userdata, rank):
     if len(params) < 3:
         self.sendMessage(channel, name + ": Insufficient amount of parameters provided. Required: 2")
@@ -391,6 +406,7 @@ def poll(self, name, params, channel, userdata, rank):
             self.sendMessage(channel, name + ": All mods are now set to " + str(setting))
         self.NEM.buildHTML()
 
+
 def nemp_list(self, name, params, channel, userdata, rank):
     dest = None
     if len(params) > 1:
@@ -399,7 +415,7 @@ def nemp_list(self, name, params, channel, userdata, rank):
         elif params[1] == "broadcast":
             dest = channel
 
-    if dest == None:
+    if dest is None:
         self.sendMessage(channel, "http://nemp.mca.d3s.co/")
         return
 
@@ -419,7 +435,7 @@ def nemp_list(self, name, params, channel, userdata, rank):
             if self.NEM.mods[key]["dev"] != "NOT_USED":
                 relType = relType + color + red + "[D]" + color
 
-            if not mcver in tempList:
+            if mcver not in tempList:
                 tempList[mcver] = []
             tempList[mcver].append("{0}{1}".format(real_name, relType))
 
@@ -427,6 +443,7 @@ def nemp_list(self, name, params, channel, userdata, rank):
     for mcver in sorted(tempList.iterkeys()):
         tempList[mcver] = sorted(tempList[mcver], key=lambda s: s.lower())
         self.sendMessage(dest, "Mods checked for {} ({}): {}".format(color + blue + bold + mcver + color + bold, len(tempList[mcver]), ', '.join(tempList[mcver])))
+
 
 def nemp_reload(self, name, params, channel, userdata, rank):
     if self.events["time"].doesExist("NotEnoughModPolling"):
@@ -444,6 +461,7 @@ def nemp_reload(self, name, params, channel, userdata, rank):
     self.NEM.buildHTML()
 
     self.sendMessage(channel, "Reloaded the NEMP Database")
+
 
 def test_parser(self, name, params, channel, userdata, rank):
     if len(params) > 0:
@@ -482,8 +500,10 @@ def test_parser(self, name, params, channel, userdata, rank):
                 traceback.print_exc()
                 self.sendMessage(channel, params[1] + " failed to be polled")
 
+
 def genHTML(self, name, params, channel, userdata, rank):
     self.NEM.buildHTML()
+
 
 def nemp_set(self, name, params, channel, userdata, rank):
     #params[1] = mod
@@ -537,6 +557,7 @@ def nemp_set(self, name, params, channel, userdata, rank):
         self.sendMessage(channel, "done.")
     except ValueError as e:
         self.sendMessage(channel, "Error: " + str(e))
+
 
 def nemp_showinfo(self, name, params, channel, userdata, rank):
     if len(params) < 2:

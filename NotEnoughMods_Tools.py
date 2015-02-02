@@ -71,7 +71,7 @@ class NotEnoughClasses():
             fname = self.normalize_filename(url)
             filepath = os.path.join(self.cacheDir, fname)
 
-            if cache == True:
+            if cache:
                 if fname in self.cache_FileLastUpdated:
                     lastUpdated = self.cache_FileLastUpdated[fname]
 
@@ -97,7 +97,7 @@ class NotEnoughClasses():
             else:
                 data = response.read()
 
-            if cache == True:
+            if cache:
                 # print "Writing to cache,",filepath
                 with open(filepath, "w") as f:
                     f.write(data)
@@ -111,6 +111,7 @@ class NotEnoughClasses():
 
 NEM = NotEnoughClasses()
 
+
 def execute(self, name, params, channel, userdata, rank):
     try:
         command = commands[params[0]]
@@ -118,6 +119,7 @@ def execute(self, name, params, channel, userdata, rank):
     except:
         self.sendMessage(channel, "Invalid sub-command!")
         self.sendMessage(channel, "See \"=nem help\" for help")
+
 
 def setlist(self, name, params, channel, userdata, rank):
     if len(params) != 2:
@@ -137,6 +139,7 @@ def setlist(self, name, params, channel, userdata, rank):
                                                                    version=params[1],
                                                                    colourEnd=COLOUREND)
                          )
+
 
 def multilist(self, name, params, channel, userdata, rank):
     if len(params) != 2:
@@ -234,6 +237,7 @@ def multilist(self, name, params, channel, userdata, rank):
         except Exception as error:
             self.sendMessage(channel, name + ": " + str(error))
             traceback.print_exc()
+
 
 def list(self, name, params, channel, userdata, rank):
     if len(params) < 2:
@@ -338,6 +342,7 @@ def list(self, name, params, channel, userdata, rank):
         self.sendMessage(channel, "{0}: {1}".format(name, error))
         traceback.print_exc()
 
+
 def compare(self, name, params, channel, userdata, rank):
     try:
         oldVersion, newVersion = params[1], params[2]
@@ -369,8 +374,10 @@ def compare(self, name, params, channel, userdata, rank):
         self.sendMessage(channel, "{0}: {1}".format(name, error))
         traceback.print_exc()
 
+
 def about(self, name, params, channel, userdata, rank):
     self.sendMessage(channel, "Not Enough Mods toolkit for IRC by SinZ & Yoshi2 v4.0")
+
 
 def help(self, name, params, channel, userdata, rank):
     if len(params) == 1:
@@ -385,6 +392,7 @@ def help(self, name, params, channel, userdata, rank):
                 self.sendMessage(channel, name + ": " + line)
         else:
             self.sendMessage(channel, name + ": Invalid command provided")
+
 
 def force_cacheRedownload(self, name, params, channel, userdata, rank):
     if self.rankconvert[rank] >= 3:

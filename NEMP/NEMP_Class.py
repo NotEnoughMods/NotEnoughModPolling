@@ -8,6 +8,7 @@ from distutils.version import LooseVersion
 
 logging.getLogger('requests').setLevel(logging.WARNING)
 
+
 class NotEnoughClasses():
     nemVersions = []
 
@@ -88,66 +89,66 @@ class NotEnoughClasses():
             self.nemVersions = reversed(["1.4.5", "1.4.6-1.4.7", "1.5.1", "1.5.2", "1.6.1", "1.6.2", "1.6.4", "1.7.2"])
 
     def InitiateVersions(self):
-        #Store a list of mods so we dont override our version
+        # Store a list of mods so we dont override our version
         templist = self.mods.keys()
         try:
-            #for MC version in NEM's list
+            # for MC version in NEM's list
             for version in self.nemVersions:
-                #Get the NEM List for this MC Version
+                # Get the NEM List for this MC Version
                 jsonres = self.fetch_json("http://bot.notenoughmods.com/" + version + ".json")
 
-                #For each NEM Mod...
+                # For each NEM Mod...
                 for mod in jsonres:
-                    #Is it in our list?
+                    # Is it in our list?
                     if mod["name"] in templist:
-                        #Its in our list, lets store this info
+                        # Its in our list, lets store this info
                         self.mods[mod["name"]]["mc"] = version
 
-                        #Does this NEM Mod have a dev version
+                        # Does this NEM Mod have a dev version
                         if "dev" in mod and mod["dev"]:
-                            #It does
+                            # It does
                             self.mods[mod["name"]]["dev"] = str(mod["dev"])
                         else:
-                            #It doesn't
+                            # It doesn't
                             self.mods[mod["name"]]["dev"] = "NOT_USED"
 
-                        #Does this NEM Mod have a version (not required, but yay redundancy)
+                        # Does this NEM Mod have a version (not required, but yay redundancy)
                         if "version" in mod and mod["version"]:
-                            #What a suprise, it did...
+                            # What a suprise, it did...
                             self.mods[mod["name"]]["version"] = str(mod["version"])
                         else:
-                            #What the actual fuck, how did this happen
+                            # What the actual fuck, how did this happen
                             self.mods[mod["name"]]["version"] = "NOT_USED"
 
-                        #We have had our way with this mod, throw it away
+                        # We have had our way with this mod, throw it away
                         templist.remove(mod["name"])
 
                 # ok, so it wasn't directly on the list, is it indirectly on the list though.
                 for lonelyMod in templist:
-                    #Is this mod a PykerHack(tm)
+                    # Is this mod a PykerHack(tm)
                     if "name" in self.mods[lonelyMod]:
                         # ok, this is a PykerHack(tm) mod, lets loop through NEM again to find it
                         for lonelyTestMod in jsonres:
-                            #Is it here?
+                            # Is it here?
                             if self.mods[lonelyMod]["name"] == lonelyTestMod["name"]:
                                  # ok, does it exist for this MC version.
                                 self.mods[lonelyMod]["mc"] = version
 
-                                #Does it have a dev version
+                                # Does it have a dev version
                                 if "dev" in lonelyTestMod and lonelyTestMod["dev"]:
-                                    #It did
+                                    # It did
                                     self.mods[lonelyMod]["dev"] = str(lonelyTestMod["dev"])
                                 else:
-                                    #It didn't
+                                    # It didn't
                                     self.mods[lonelyMod]["dev"] = "NOT_USED"
                                 # #Redundancy
                                 if "version" in lonelyTestMod and lonelyTestMod["version"]:
-                                    #yay
+                                    # yay
                                     self.mods[lonelyMod]["version"] = str(lonelyTestMod["version"])
                                 else:
-                                    #wat
+                                    # wat
                                     self.mods[lonelyMod]["version"] = "NOT_USED"
-                                #gtfo LonelyMod, noone likes you anymore
+                                # gtfo LonelyMod, noone likes you anymore
                                 templist.remove(lonelyMod)
         except:
             pass
@@ -397,18 +398,17 @@ class NotEnoughClasses():
             'version': version
         }
 
-
     def CheckAtomicStryker(self, mod, document):
         if not document:
             return self.fetch_page("http://atomicstryker.net/updatemanager/modversions.txt")
 
-        lines = document.splitlines();
+        lines = document.splitlines()
         mcver = []
         version = []
 
         for line in lines:
             if "mcversion" in line:
-                #We have a new MC Version
+                # We have a new MC Version
                 mcMatch = re.search("mcversion = Minecraft (.+?)$", line)
                 mcver.append(mcMatch.group(1))
             elif self.mods[mod]["AtomicStryker"]["name"] in line:
@@ -417,9 +417,9 @@ class NotEnoughClasses():
 
         if len(mcver) != 0 and len(version) != 0:
             return {
-                #len(version)-1 is used for the last entry to version, and the corresponding MC version (as all of his mods so far are for all MC versions (except 1.8 somewhat)
-                "mc" : mcver[len(version)-1],
-                "version" : version[len(version)-1]
+                # len(version)-1 is used for the last entry to version, and the corresponding MC version (as all of his mods so far are for all MC versions (except 1.8 somewhat)
+                "mc": mcver[len(version) - 1],
+                "version": version[len(version) - 1]
             }
 
         return {}
@@ -466,11 +466,11 @@ class NotEnoughClasses():
         output = {}
 
         try:
-            #We need to know what mods this SinZationalHax uses
+            # We need to know what mods this SinZationalHax uses
             mods = self.SinZationalHax[self.mods[mod]["SinZationalHax"]["id"]]
-            #Lets get the page/json/whatever all the mods want
+            # Lets get the page/json/whatever all the mods want
             document = getattr(self, self.mods[mod]["function"])(mod, None)
-            #Ok, time to parse it for each mod
+            # Ok, time to parse it for each mod
             for tempMod in mods:
                 output[tempMod] = self.CheckMod(tempMod, document)
         except:
