@@ -709,6 +709,11 @@
         "category" : "lunatrius",
         "active" : true
     },
+    "InGameModConfigs" : {
+        "function" : "CheckLunatrius",
+        "category" : "lunatrius",
+        "active" : true
+    },
     "MonsterSpawnHighlighter" : {
         "function" : "CheckLunatrius",
         "category" : "lunatrius",
