@@ -160,7 +160,7 @@ class NotEnoughClasses():
         match = re.search(self.mods[mod]["jenkins"]["regex"], filename)
         output = match.groupdict()
         try:
-            output["change"] = jsonres["changeSet"]["items"][0]["comment"]
+            output["change"] = jsonres["changeSet"]["items"][0]["msg"]
         except:
             pass
         return output
