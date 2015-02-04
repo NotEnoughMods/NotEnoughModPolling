@@ -2243,7 +2243,7 @@
         "curse": {
             "id": "225608",
             "name": "worldedit",
-            "regex": "WorldEdit (?P<version>.+) .+? .+? .+?"
+            "regex": "WorldEdit (?P<version>.+) \\("
         }
     },
     "Binnie'sMods": {
