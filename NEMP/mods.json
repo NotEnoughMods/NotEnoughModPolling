@@ -1828,11 +1828,12 @@
         }
     },
     "ProjectE" : {
-        "function" : "CheckDropBox",
-        "active" : true,
-        "html" : {
-            "url" : "https://www.dropbox.com/sh/0re51mv4tp5l0xx/AAD9pmU4zOSQDSVgjVCtB5IJa",
-            "regex" : "ProjectE-Alpha (?P<dev>.+?).jar"
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "id": "226410",
+            "name": "projecte",
+            "regex": ".+?-.+?-(?P<version>.+?).jar"
         }
     },
     "Flaxbeard'sSteamPower": {
@@ -1985,6 +1986,59 @@
             "url": "http://tehnut.info/jenkins/job/SunStroke/lastSuccessfulBuild/api/json",
             "regex": "SunStroke-(?P<mc>.+?)-(?P<version>.+?).jar",
             "item": 3
+        }
+    },
+    "CookieCore": {
+        "name": "CookieCore",
+        "function": "CheckJenkins",
+        "active": true,
+        "category" : "Tehnut",
+        "jenkins": {
+            "url": "http://tehnut.info/jenkins/job/CookieCore/lastSuccessfulBuild/api/json",
+            "regex": "CookieCore-(?P<mc>.+?)-(?P<version>.+?).jar",
+            "item": 3
+        }
+    },
+    "ModularArmour": {
+        "name": "ModularArmour",
+        "function": "CheckJenkins",
+        "active": true,
+        "category" : "Tehnut",
+        "jenkins": {
+            "url": "http://tehnut.info/jenkins/job/ModularArmour/lastSuccessfulBuild/api/json",
+            "regex": "ModularArmour-(?P<mc>.+?)-(?P<version>.+?).jar",
+            "item": 3
+        }
+    },
+    "Sanguimancy": {
+        "name": "Sanguimancy",
+        "function": "CheckJenkins",
+        "active": true,
+        "category" : "Tehnut",
+        "jenkins": {
+            "url": "http://tehnut.info/jenkins/job/Sanguimancy/lastSuccessfulBuild/api/json",
+            "regex": "Sanguimancy-(?P<mc>.+?)-(?P<dev>.+?).jar",
+            "item": 3
+        }
+    },
+    "TSteelworks-Ephys-dev": {
+        "name": "TinkersSteelworks-Ephys",
+        "function": "CheckJenkins",
+        "active": true,
+        "category" : "Tehnut",
+        "jenkins": {
+            "url": "http://tehnut.info/jenkins/job/TSteelworks/lastSuccessfulBuild/api/json",
+            "regex": "TSteelworks-(?P<mc>.+?)-(?P<dev>.+?).jar",
+            "item": 3
+        }
+    },
+    "TSteelworks-Ephys": {
+        "name": "TinkersSteelworks-Ephys",
+        "function": "CheckGitHubRelease",
+        "active": true,
+        "github": {
+            "repo": "Ephys/TinkersSteelworks",
+            "regex": "TSteelworks-(?P<mc>.+?)-(?P<dev>.+?).jar"
         }
     },
     "AdvancedMachines": {
@@ -2185,7 +2239,7 @@
     },
     "WorldEdit": {
         "function": "CheckCurse",
-        "active": false,
+        "active": true,
         "curse": {
             "id": "225608",
             "name": "worldedit",
@@ -2208,6 +2262,35 @@
             "id": "224712",
             "name": "wawla-what-are-we-looking-at",
             "regex": "-(?P<version>.+?)_.+?.jar"
+        }
+    },
+    "Dimensional-Pockets": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "id": "226990",
+            "name": "dimensional-pockets",
+            "regex": "Dimensional Pockets (?P<version>.+)"
+        }
+    },
+    "EnderZoo": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "id": "225247",
+            "name": "ender-zoo",
+            "regex": ".+?-(?P<mc>.+?)-(?P<version>.+?).jar"
+        }
+    },
+    "EnderZoo-dev": {
+        "name": "EnderZoo",
+        "function": "CheckJenkins",
+        "active": true,
+        "category" : "Tehnut",
+        "jenkins": {
+            "url": "http://ci.tterrag.com/job/Ender%20Zoo/lastSuccessfulBuild/api/json",
+            "regex": ".+?-(?P<mc>.+?)-(?P<dev>.+?).jar",
+            "item": 3
         }
     }
 }
