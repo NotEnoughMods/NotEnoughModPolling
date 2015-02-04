@@ -822,6 +822,16 @@
             "item" : 0
         }
     },
+    "ExtraCells-dev" : {
+        "name" : "ExtraCells",
+        "function" : "CheckJenkins",
+        "active" : true,
+        "jenkins" : {
+            "url" : "http://shadowcity.net:8080/job/ecrv2/lastSuccessfulBuild/api/json",
+            "regex" : "ExtraCells-(?P<mc>.+?)-(?P<dev>.+?).jar",
+            "item" : 0
+        }
+    },
     "SuperMassiveTech" : {
         "function" : "CheckJenkins",
         "active" : false,
