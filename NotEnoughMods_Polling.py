@@ -29,7 +29,7 @@ helpDict = {
     "failcount": ["{0}nemp failcount", "Shows how many times mods have failed to be polled so far. At least two failures in a row required.",
                   "Mods that have failed being polled 5 times are excluded from this list. Check {0}nemp failedmods for those mods."],
     "showinfo": ["{0}nemp showinfo <mod> [<path> [...]]", "Shows polling information for the specified mod."],
-	"url" : ["{0}nemp url <mod>", "Spits out the URL of the specified mod."]
+    "url" : ["{0}nemp url <mod>", "Spits out the URL of the specified mod."]
 }
 
 
@@ -590,7 +590,7 @@ def nemp_url(self, name, params, channel, userdata, rank):
         self.sendMessage(channel, name + ": You have to specify at least the mod's name.")
         return
     modname = params[1]
-    
+
     if modname not in self.NEM.mods:
         self.sendMessage(channel, name + ": No such mod in NEMP.")
         return
@@ -630,7 +630,7 @@ commands = {
     "failcount": (show_failedcount, VOICED),
     "resetfailed": (clean_failed_mods, VOICED),
     "showinfo": (nemp_showinfo, VOICED),
-	"url" : (nemp_url, VOICED),
+    "url" : (nemp_url, VOICED),
 
     # -- ALIASES -- #
     "polling": (running, VOICED),
