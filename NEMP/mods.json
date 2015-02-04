@@ -2292,5 +2292,13 @@
             "regex": ".+?-(?P<mc>.+?)-(?P<dev>.+?).jar",
             "item": 3
         }
+    },
+    "Flamingo": {
+        "function": "CheckGitHubRelease",
+        "active": true,
+        "github": {
+            "repo": "Vexatos/Flamingo",
+            "regex": "Flamingo-(?P<mc>.+?)-(?P<version>.+).jar"
+        }
     }
 }
