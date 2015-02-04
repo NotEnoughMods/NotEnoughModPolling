@@ -1,14 +1,11 @@
-import urllib2
 import simplejson
 import traceback
-import gzip
 import logging
 import os
+import requests
 
 from collections import OrderedDict
-from StringIO import StringIO
 from string import ascii_letters, digits
-from time import time
 
 ID = "nem"
 permission = 1
@@ -38,8 +35,7 @@ class NotEnoughClasses():
 
     def getLatestVersion(self):
         try:
-            result = self.fetch_page("http://bot.notenoughmods.com/?json")
-            return simplejson.loads(result, strict=False)
+            return self.fetch_json("http://bot.notenoughmods.com/?json")
         except:
             print("Failed to get NEM versions, falling back to hard-coded")
             nem_logger.exception("Failed to get NEM versions, falling back to hard-coded.")
@@ -49,15 +45,15 @@ class NotEnoughClasses():
                     "1.7.2", "1.7.4", "1.7.5", "1.7.7", "1.7.9", "1.7.10"]
 
     def __init__(self):
-        self.useragent = urllib2.build_opener()
-        self.useragent.addheaders = [
-            ('User-agent', 'NotEnoughMods:Tools/1.X (+http://github.com/SinZ163/NotEnoughMods)'),
-            ('Accept-encoding', 'gzip')
-        ]
+        self.requests_session = requests.Session()
+        self.requests_session.headers = {
+            'User-agent': 'NotEnoughMods:Tools/1.X (+http://github.com/SinZ163/NotEnoughMods)'
+        }
+        self.requests_session.max_redirects = 5
 
-        self.cacheDir = os.path.join("commands", "NEM", "cache")
-        self.cache_FileLastUpdated = {}
-        self.cache_period = 24 * 60 * 60  # once per day
+        self.cache_dir = os.path.join("commands", "NEM", "cache")
+        self.cache_last_modified = {}
+        self.cache_etag = {}
 
         self.versions = self.getLatestVersion()
         self.version = self.versions[len(self.versions) - 1]
@@ -65,49 +61,77 @@ class NotEnoughClasses():
     def normalize_filename(self, name):
         return ''.join(c for c in name if c in ALLOWED_IN_FILENAME)
 
-    def fetch_page(self, url, decompress=True, timeout=10, cache=False):
-
+    def fetch_page(self, url, timeout=10, decode_json=False, cache=False):
         try:
-            fname = self.normalize_filename(url)
-            filepath = os.path.join(self.cacheDir, fname)
-
             if cache:
-                if fname in self.cache_FileLastUpdated:
-                    lastUpdated = self.cache_FileLastUpdated[fname]
+                fname = self.normalize_filename(url)
+                filepath = os.path.join(self.cache_dir, fname)
 
-                    if time() - lastUpdated > self.cache_period:
-                        pass
+                if os.path.exists(filepath):
+                    # get it (conditionally) and, if necessary, store the new version
+                    headers = {}
+
+                    # set etag if it exists
+                    etag = self.cache_etag.get(url)
+                    if etag:
+                        headers['If-None-Match'] = etag
+
+                    # set last-modified if it exists
+                    last_modified = self.cache_last_modified.get(url)
+                    if last_modified:
+                        headers['If-Modified-Since'] = '"{}"'.format(last_modified)
+
+                    request = self.requests_session.get(url, timeout=timeout, headers=headers)
+
+                    if request.status_code == 304:
+                        # load from cache
+                        with open(filepath, 'r') as f:
+                            # and return it
+                            if decode_json:
+                                return simplejson.load(f)
+                            else:
+                                return f.read()
                     else:
-                        # print "Loading from cache,",filepath
-                        with open(filepath, "r") as f:
-                            return f.read()
+                        # cache the new version
+                        with open(filepath, 'w') as f:
+                            f.write(request.content)
+
+                        self.cache_etag[url] = request.headers.get('etag')
+                        self.cache_last_modified[url] = request.headers.get('last-modified')
+
+                        # and return it
+                        if decode_json:
+                            return request.json()
+                        else:
+                            return request.content
                 else:
-                    if os.path.exists(filepath):
-                        # print "Loading from cache,",filepath
-                        self.cache_FileLastUpdated[fname] = time()
+                    # get it and cache it
+                    request = self.requests_session.get(url, timeout=timeout)
 
-                        with open(filepath, "r") as f:
-                            return f.read()
+                    with open(filepath, 'w') as f:
+                        f.write(request.content)
 
-            response = self.useragent.open(url, timeout=timeout)
-            if response.info().get('Content-Encoding') == 'gzip' and decompress:
-                buf = StringIO(response.read())
-                f = gzip.GzipFile(fileobj=buf, mode='rb')
-                data = f.read()
+                    self.cache_etag[url] = request.headers.get('etag')
+                    self.cache_last_modified[url] = request.headers.get('last-modified')
+
+                    if decode_json:
+                        return request.json()
+                    else:
+                        return request.content
             else:
-                data = response.read()
-
-            if cache:
-                # print "Writing to cache,",filepath
-                with open(filepath, "w") as f:
-                    f.write(data)
-                self.cache_FileLastUpdated[fname] = time()
-
-            return data
+                # no caching
+                request = self.requests_session.get(url, timeout=timeout)
+                if decode_json:
+                    return request.json()
+                else:
+                    return request.content
         except:
             traceback.print_exc()
             pass
             # most likely a timeout
+
+    def fetch_json(self, *args, **kwargs):
+        return self.fetch_page(*args, decode_json=True, **kwargs)
 
 NEM = NotEnoughClasses()
 
@@ -157,8 +181,7 @@ def multilist(self, name, params, channel, userdata, rank):
             modName = params[1]
 
             for version in NEM.versions:
-                result = NEM.fetch_page("http://bot.notenoughmods.com/" + urllib2.quote(version) + ".json", cache=True)
-                jsonres[version] = simplejson.loads(result, strict=False)
+                jsonres[version] = NEM.fetch_json("http://bot.notenoughmods.com/" + requests.utils.quote(version) + ".json", cache=True)
 
                 for i, mod in enumerate(jsonres[version]):
                     if modName.lower() == mod["name"].lower():
@@ -253,7 +276,7 @@ def list(self, name, params, channel, userdata, rank):
     else:
         version = NEM.version
     try:
-        result = NEM.fetch_page("http://bot.notenoughmods.com/" + urllib2.quote(version) + ".json", cache=True)
+        result = NEM.fetch_page("http://bot.notenoughmods.com/" + requests.utils.quote(version) + ".json", cache=True)
         if not result:
             self.sendMessage(channel,
                              "{0}: Could not fetch the list. Are you sure it exists?".format(name)
@@ -347,11 +370,9 @@ def compare(self, name, params, channel, userdata, rank):
     try:
         oldVersion, newVersion = params[1], params[2]
 
-        oldData = NEM.fetch_page("http://bot.notenoughmods.com/" + urllib2.quote(oldVersion) + ".json", cache=True)
-        oldJson = simplejson.loads(oldData, strict=False)
+        oldJson = NEM.fetch_json("http://bot.notenoughmods.com/" + requests.utils.quote(oldVersion) + ".json", cache=True)
 
-        newData = NEM.fetch_page("http://bot.notenoughmods.com/" + urllib2.quote(newVersion) + ".json", cache=True)
-        newJson = simplejson.loads(newData, strict=False)
+        newJson = NEM.fetch_json("http://bot.notenoughmods.com/" + requests.utils.quote(newVersion) + ".json", cache=True)
 
         newMods = {modInfo["name"].lower(): True for modInfo in newJson}
 
@@ -397,11 +418,11 @@ def help(self, name, params, channel, userdata, rank):
 def force_cacheRedownload(self, name, params, channel, userdata, rank):
     if self.rankconvert[rank] >= 3:
         for version in NEM.versions:
-            url = "http://bot.notenoughmods.com/" + urllib2.quote(version) + ".json"
+            url = "http://bot.notenoughmods.com/" + requests.utils.quote(version) + ".json"
             normalized = NEM.normalize_filename(url)
-            filepath = os.path.join(NEM.cacheDir, normalized)
+            filepath = os.path.join(NEM.cache_dir, normalized)
             if os.path.exists(filepath):
-                NEM.cache_FileLastUpdated[normalized] = 0
+                NEM.cache_last_modified[normalized] = 0
 
         self.sendMessage(channel, "Cache Timestamps have been reset. Cache will be redownloaded on the next fetching.")
 
