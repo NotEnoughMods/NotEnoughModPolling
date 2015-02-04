@@ -333,7 +333,7 @@
         "function" : "CheckJenkins",
         "active" : true,
         "jenkins" : {
-            "url" : "http://ci.micdoodle8.com/job/Galacticraft-1.7/lastSuccessfulBuild/api/json",
+            "url" : "http://ci.micdoodle8.com:8080/job/Galacticraft-1.7/lastSuccessfulBuild/api/json",
             "regex" : "GalacticraftCore-.+?-(?P<dev>.+?).jar",
             "item" : 1
         }
