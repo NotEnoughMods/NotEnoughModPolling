@@ -265,16 +265,17 @@ def NEMP_TimerEvent(self, channels):
     yes = self.threading.poll("NEMP")
 
     if yes:
-        tempList, failedMods = self.threading.recv("NEMP")
+        nemp_data = self.threading.recv("NEMP")
+
         self.NEM_cycle_count += 1
         # self.threading.sigquitThread("NEMP")
         # self.events["time"].removeEvent("NEMP_ThreadClock")
 
-        if isinstance(tempList, dict) and "action" in tempList and tempList["action"] == "exceptionOccured":
-            nemp_logger.error("NEMP Thread {0} encountered an unhandled exception: {1}".format(tempList["functionName"],
-                                                                                               str(tempList["exception"])))
+        if isinstance(nemp_data, dict) and "action" in nemp_data and nemp_data["action"] == "exceptionOccured":
+            nemp_logger.error("NEMP Thread {0} encountered an unhandled exception: {1}".format(nemp_data["functionName"],
+                                                                                               str(nemp_data["exception"])))
             nemp_logger.error("Traceback Start")
-            nemp_logger.error(tempList["traceback"])
+            nemp_logger.error(nemp_data["traceback"])
             nemp_logger.error("Traceback End")
 
             nemp_logger.error("Shutting down NEMP Events and Polling")
@@ -285,6 +286,8 @@ def NEMP_TimerEvent(self, channels):
             self.NEM_autodeactivatedMods = {}
 
             return
+
+        tempList, failedMods = nemp_data
 
         for channel in channels:
             for version in tempList:
