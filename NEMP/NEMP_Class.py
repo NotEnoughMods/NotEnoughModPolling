@@ -476,6 +476,7 @@ class NotEnoughClasses():
         except:
             print(mod + " failed to be polled (SinZationalHax)")
             traceback.print_exc()
-            output[tempMod] = ([False, False], True)
+            if 'tempMod' in locals():
+                output[tempMod] = ([False, False], True)
 
         return output
