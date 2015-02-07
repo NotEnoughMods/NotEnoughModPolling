@@ -1363,11 +1363,24 @@
         }
     },
     "OpenComputers" :{
-        "function" : "CheckCurse",
+        "function" : "CheckJenkins",
         "active" : true,
-        "curse": {
-            "id" : "223008",
-            "regex" : "-.+?-(?P<version>.+?)-universal.jar"
+        "category" : "OC",
+        "jenkins": {
+            "url" : "http://ci.cil.li/job/OpenComputers-1.4-MC1.7.10/lastSuccessfulBuild/api/json",
+            "regex" : ".+?-MC(?P<mc>.+?)-(?P<version>.+?)-.+?.jar",
+            "item" : 4
+        }
+    },
+    "OpenComputers-Dev" :{
+        "name" : "OpenComputers",
+        "function" : "CheckJenkins",
+        "active" : true,
+        "category" : "OC",
+        "jenkins": {
+            "url" : "http://ci.cil.li/job/OpenComputers-dev-MC1.7.10/lastSuccessfulBuild/api/json",
+            "regex" : ".+?-MC(?P<mc>.+?)-(?P<version>.+?)-.+?.jar",
+            "item" : 4
         }
     },
     "SecurityCraft" :{
@@ -2286,7 +2299,7 @@
         "name": "EnderZoo",
         "function": "CheckJenkins",
         "active": true,
-        "category" : "Tehnut",
+        "category" : "tterag",
         "jenkins": {
             "url": "http://ci.tterrag.com/job/Ender%20Zoo/lastSuccessfulBuild/api/json",
             "regex": ".+?-(?P<mc>.+?)-(?P<dev>.+?).jar",
@@ -2299,6 +2312,60 @@
         "github": {
             "repo": "Vexatos/Flamingo",
             "regex": "Flamingo-(?P<mc>.+?)-(?P<version>.+).jar"
+        }
+    },
+    "Talismans2": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "id": "224434",
+            "name": "talismans-2",
+            "regex": ".+?-(?P<mc>.+?)-(?P<version>.+?).jar"
+        }
+    },
+    "BetterBedrockGen": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "id": "223275",
+            "name": "betterbedrockgen",
+            "regex": ".+? (?P<mc>.+?)-(?P<version>.+?).jar"
+        }
+    },
+    "CbmReborn": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "id": "225226",
+            "name": "condensed-block-mod-reborn",
+            "regex": ".+?-(?P<mc>.+?)-(?P<version>.+?).jar"
+        }
+    },
+    "Equivalence": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "id": "226158",
+            "name": "equivalence",
+            "regex": ".+?-(?P<mc>.+?)-(?P<version>.+?).jar"
+        }
+    },
+    "NEIIntegration": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "id": "225251",
+            "name": "nei-integration",
+            "regex": ".+?-MC(?P<mc>.+?)-(?P<version>.+?).jar"
+        }
+    },
+    "GlassShards": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "id": "226834",
+            "name": "glass-shards",
+            "regex": ".+?_mc(?P<mc>.+?)-(?P<version>.+?).jar"
         }
     }
 }
