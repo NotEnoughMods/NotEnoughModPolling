@@ -1379,7 +1379,7 @@
         "category" : "OC",
         "jenkins": {
             "url" : "http://ci.cil.li/job/OpenComputers-dev-MC1.7.10/lastSuccessfulBuild/api/json",
-            "regex" : ".+?-MC(?P<mc>.+?)-(?P<version>.+?)-.+?.jar",
+            "regex" : ".+?-MC(?P<mc>.+?)-(?P<dev>.+?)-.+?.jar",
             "item" : 4
         }
     },
