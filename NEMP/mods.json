@@ -2299,7 +2299,7 @@
         "name": "EnderZoo",
         "function": "CheckJenkins",
         "active": true,
-        "category" : "tterag",
+        "category" : "tterrag",
         "jenkins": {
             "url": "http://ci.tterrag.com/job/Ender%20Zoo/lastSuccessfulBuild/api/json",
             "regex": ".+?-(?P<mc>.+?)-(?P<dev>.+?).jar",
