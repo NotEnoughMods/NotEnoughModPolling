@@ -699,6 +699,11 @@
         "category" : "lunatrius",
         "active" : true
     },
+    "ExtensionFixer" : {
+        "function" : "CheckLunatrius",
+        "category" : "lunatrius",
+        "active" : true
+    },
     "LunatriusCore" : {
         "function" : "CheckLunatrius",
         "category" : "lunatrius",
