@@ -1,22 +1,23 @@
 {
-    "MinecraftForge" : {
-        "function" : "CheckMCForge2",
-        "category" : "forge",
-        "active" : true,
-        "mcforge" : {
-            "url" : "http://files.minecraftforge.net/maven/net/minecraftforge/forge/promotions.json",
-            "promo" : "latest",
-            "promoType" : "dev"
-        }
-    },
-    "MinecraftForge-Release" : {
+    "MinecraftForge-1.7.10" : {
         "name" : "MinecraftForge",
         "function" : "CheckMCForge2",
         "category" : "forge",
         "active" : true,
         "mcforge" : {
             "url" : "http://files.minecraftforge.net/maven/net/minecraftforge/forge/promotions.json",
-            "promo" : "recommended",
+            "promo" : "latest-1.7.10",
+            "promoType" : "dev"
+        }
+    },
+    "MinecraftForge-1.7.10-Release" : {
+        "name" : "MinecraftForge",
+        "function" : "CheckMCForge2",
+        "category" : "forge",
+        "active" : true,
+        "mcforge" : {
+            "url" : "http://files.minecraftforge.net/maven/net/minecraftforge/forge/promotions.json",
+            "promo" : "1.7.10-recommended",
             "promoType" : "version"
         }
     },
@@ -155,8 +156,20 @@
         "changelog" : false,
         "mcforge" : {
             "url" : "http://files.minecraftforge.net/maven/net/minecraftforge/forge/promotions.json",
-            "promo" : "latest-1.8",
+            "promo" : "1.8-latest",
             "promoType" : "dev"
+        }
+    },
+    "MinecraftForge-1.8-Release" : {
+        "name" : "MinecraftForge",
+        "function" : "CheckMCForge2",
+        "category" : "forge",
+        "active" : true,
+        "changelog" : false,
+        "mcforge" : {
+            "url" : "http://files.minecraftforge.net/maven/net/minecraftforge/forge/promotions.json",
+            "promo" : "1.8-recommended",
+            "promoType" : "version"
         }
     },
     "OpenPeripheralCore" : {
