@@ -2385,5 +2385,28 @@
             "name": "glass-shards",
             "regex": ".+?_mc(?P<mc>.+?)-(?P<version>.+?).jar"
         }
+    "KoreSample": {
+        "function": "CheckGitHubRelease",
+        "active": true,
+        "github": {
+            "repo": "MinecraftModArchive/KoreSample",
+            "regex": "KoreSample-(?P<mc>.+?)-(?P<version>.+?).jar"
+        }
+    },
+    "ScottsTweaks": {
+        "function": "CheckGitHubRelease",
+        "active": true,
+        "github": {
+            "repo": "MinecraftModArchive/ScottsTweaks",
+            "regex": "ScottsTweaks-(?P<mc>.+?)-(?P<version>.+?).jar"
+        }
+    },
+    "AncientTrees": {
+        "function": "CheckGitHubRelease",
+        "active": true,
+        "github": {
+            "repo": "MinecraftModArchive/Dendrology",
+            "regex": "AncientTrees-(?P<mc>.+?)-(?P<version>.+?).jar"
+        }
     }
 }
