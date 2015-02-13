@@ -1135,7 +1135,7 @@
         "active" : true,
         "curse": {
             "name" : "veinminer",
-            "regex" : ".+?_(?P<version>.+?).jar"
+            "regex" : "VeinMiner (?P<version>.+) \\("
         }
     },
     "SteelIndustries" : {
@@ -1266,7 +1266,7 @@
         "active" : true,
         "curse": {
             "name" : "remote-io",
-            "regex" : "-.+?-(?P<version>.+?)-universal.jar"
+            "regex" : "RemoteIO-.+?-(?P<version>.+)"
         }
     },
     "TooMuchTime" :{
@@ -2249,7 +2249,7 @@
         "active": true,
         "github": {
             "repo": "disconsented/ANSSRPG",
-            "regex": "anssrpg-(?P<version>.+?)\\.jar"
+            "regex": "ANSSRPG-(?P<mc>.+?)-(?P<dev>.+?)-.+?.jar"
         }
     },
     "Mine&BladeBattleGear2-Bullseye": {
