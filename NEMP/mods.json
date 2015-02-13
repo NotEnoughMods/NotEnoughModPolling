@@ -2385,6 +2385,7 @@
             "name": "glass-shards",
             "regex": ".+?_mc(?P<mc>.+?)-(?P<version>.+?).jar"
         }
+     },
     "KoreSample": {
         "function": "CheckGitHubRelease",
         "active": true,
