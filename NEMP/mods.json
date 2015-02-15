@@ -938,6 +938,15 @@
             "regex" : "ThermalFoundation-\\[(?P<mc>.+?)\\](?P<version>.+?).jar"
         }
     },
+    "SolarFlux" : {
+        "function" : "CheckCurse",
+        "active" : true,
+        "curse": {
+            "name" : "solar-flux",
+            "id" : "223548",
+            "regex" : "SolarFlux-.+?-(?P<version>.+?).jar"
+        }
+    },
     "SimplyJetpacks" : {
         "function" : "CheckCurse",
         "active" : true,
