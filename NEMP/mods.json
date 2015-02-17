@@ -2028,6 +2028,17 @@
             "item": 3
         }
     },
+    "MoreChisels": {
+        "name": "MoreChisels",
+        "function": "CheckJenkins",
+        "active": true,
+        "category" : "Tehnut",
+        "jenkins": {
+            "url": "http://tehnut.info/jenkins/job/MoreChisels/lastSuccessfulBuild/api/json",
+            "regex": "MoreChisels-(?P<mc>.+?)-(?P<version>.+?).jar",
+            "item": 3
+        }
+    },
     "CookieCore": {
         "name": "CookieCore",
         "function": "CheckJenkins",
