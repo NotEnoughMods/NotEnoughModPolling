@@ -468,41 +468,44 @@ def nemp_reload(self, name, params, channel, userdata, rank):
 
 
 def test_parser(self, name, params, channel, userdata, rank):
-    if len(params) > 0:
-        if params[1] not in self.NEM.mods:
-            self.sendMessage(channel, name + ": Mod \"" + params[1] + "\" does not exist in the database.")
-        else:
-            try:
-                mod = params[1]
-                result = getattr(self.NEM, self.NEM.mods[mod]["function"])(mod)
-                real_name = self.NEM.mods[mod].get('name', mod)
+    if len(params) != 2:
+        self.sendMessage(channel, "{name}: Wrong number of parameters. This command accepts 1 parameter: the mod's name".format(name=name))
+        return
 
-                print("result of parser: {}".format(result))
-                if 'mc' in result:
-                    version = result['mc']
-                else:
-                    version = self.NEM.mods[params[1]]["mc"]
+    if params[1] not in self.NEM.mods:
+        self.sendMessage(channel, name + ": Mod \"" + params[1] + "\" does not exist in the database.")
+    else:
+        try:
+            mod = params[1]
+            result = getattr(self.NEM, self.NEM.mods[mod]["function"])(mod)
+            real_name = self.NEM.mods[mod].get('name', mod)
 
-                if not result:
-                    self.sendMessage(channel, "Didn't get a reply from the parser. (got " + repr(result) + ")")
-                    return
+            print("result of parser: {}".format(result))
+            if 'mc' in result:
+                version = result['mc']
+            else:
+                version = self.NEM.mods[params[1]]["mc"]
 
-                if "mc" in result:
-                    if version != result["mc"]:
-                        self.sendMessage(channel, "Expected MC version {}, got {}".format(version, result["mc"]))
-                else:
-                    self.sendMessage(channel, "Did not receive MC version from parser.")
-                if "version" in result:
-                    self.sendMessage(channel, "!lmod {0} {1} {2}".format(version, real_name, unicode(clean_version(result["version"]))))
-                if "dev" in result:
-                    self.sendMessage(channel, "!ldev {0} {1} {2}".format(version, real_name, unicode(clean_version(result["dev"]))))
-                if "change" in result:
-                    self.sendMessage(channel, " * " + result["change"])
+            if not result:
+                self.sendMessage(channel, "Didn't get a reply from the parser. (got " + repr(result) + ")")
+                return
 
-            except Exception as error:
-                self.sendMessage(channel, name + ": " + str(error))
-                traceback.print_exc()
-                self.sendMessage(channel, params[1] + " failed to be polled")
+            if "mc" in result:
+                if version != result["mc"]:
+                    self.sendMessage(channel, "Expected MC version {}, got {}".format(version, result["mc"]))
+            else:
+                self.sendMessage(channel, "Did not receive MC version from parser.")
+            if "version" in result:
+                self.sendMessage(channel, "!lmod {0} {1} {2}".format(version, real_name, unicode(clean_version(result["version"]))))
+            if "dev" in result:
+                self.sendMessage(channel, "!ldev {0} {1} {2}".format(version, real_name, unicode(clean_version(result["dev"]))))
+            if "change" in result:
+                self.sendMessage(channel, " * " + result["change"])
+
+        except Exception as error:
+            self.sendMessage(channel, name + ": " + str(error))
+            traceback.print_exc()
+            self.sendMessage(channel, params[1] + " failed to be polled")
 
 
 def genHTML(self, name, params, channel, userdata, rank):
