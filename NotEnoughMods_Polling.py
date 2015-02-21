@@ -29,7 +29,7 @@ helpDict = {
     "failcount": ["{0}nemp failcount", "Shows how many times mods have failed to be polled so far. At least two failures in a row required.",
                   "Mods that have failed being polled 5 times are excluded from this list. Check {0}nemp failedmods for those mods."],
     "showinfo": ["{0}nemp showinfo <mod> [<path> [...]]", "Shows polling information for the specified mod."],
-    "url" : ["{0}nemp url <mod>", "Spits out the URL of the specified mod."]
+    "url": ["{0}nemp url <mod>", "Spits out the URL of the specified mod."]
 }
 
 
@@ -591,6 +591,7 @@ def nemp_showinfo(self, name, params, channel, userdata, rank):
     except KeyError:
         self.sendMessage(channel, name + ": No such element in that mod's configuration.")
 
+
 def nemp_url(self, name, params, channel, userdata, rank):
     if len(params) < 2:
         self.sendMessage(channel, name + ": You have to specify at least the mod's name.")
@@ -603,7 +604,7 @@ def nemp_url(self, name, params, channel, userdata, rank):
     mod = self.NEM.mods[modname]
     func = mod["function"]
     if func == "CheckGitHubRelease":
-        self.sendMessage(channel, name + ": https://github.com/"+mod["github"]["repo"])
+        self.sendMessage(channel, name + ": https://github.com/" + mod["github"]["repo"])
     elif func == "CheckCurse":
         prefix = ""
         _name = modname.lower()
@@ -611,9 +612,9 @@ def nemp_url(self, name, params, channel, userdata, rank):
             prefix = mod["curse"]["id"] + "-"
         if "name" in mod["curse"]:
             _name = mod["curse"]["name"]
-        self.sendMessage(channel, name + ": http://curse.com/mc-mods/minecraft/"+prefix+_name)
+        self.sendMessage(channel, name + ": http://curse.com/mc-mods/minecraft/" + prefix + _name)
     elif func == "CheckJenkins":
-        self.sendMessage(channel, name + ": "+mod["jenkins"]["url"][:-28])
+        self.sendMessage(channel, name + ": " + mod["jenkins"]["url"][:-28])
     else:
         self.sendMessage(channel, name + ": This mod doesn't have a well-defined URL")
 # In each entry, the second value in the tuple is the
@@ -636,7 +637,7 @@ commands = {
     "failcount": (show_failedcount, VOICED),
     "resetfailed": (clean_failed_mods, VOICED),
     "showinfo": (nemp_showinfo, VOICED),
-    "url" : (nemp_url, VOICED),
+    "url": (nemp_url, VOICED),
 
     # -- ALIASES -- #
     "polling": (running, VOICED),
