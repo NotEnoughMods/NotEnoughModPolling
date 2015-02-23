@@ -1394,7 +1394,7 @@
         "active" : true,
         "category" : "OC",
         "jenkins": {
-            "url" : "http://ci.cil.li/job/OpenComputers-1.4-MC1.7.10/lastSuccessfulBuild/api/json",
+            "url" : "http://ci.cil.li/job/OpenComputers-1.5-MC1.7.10/lastSuccessfulBuild/api/json",
             "regex" : ".+?-MC(?P<mc>.+?)-(?P<version>.+?)-.+?.jar",
             "item" : 4
         }
