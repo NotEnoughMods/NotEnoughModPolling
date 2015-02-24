@@ -180,7 +180,7 @@
         "jenkins" : {
             "url" : "http://openmods.info:8080/job/OpenPeripheralCore/lastSuccessfulBuild/api/json",
             "regex" : "OpenPeripheralCore-(?P<mc>.+?)-(?P<dev>.+?).jar$",
-            "item" : 4
+            "item" : 5
         }
     },
     "OpenPeripheralAddons" : {
