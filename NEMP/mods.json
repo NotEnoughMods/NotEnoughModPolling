@@ -938,6 +938,15 @@
             "regex" : "ThermalFoundation-\\[(?P<mc>.+?)\\](?P<version>.+?).jar"
         }
     },
+    "ThermalDynamics" : {
+        "function" : "CheckCurse",
+        "active" : true,
+        "curse": {
+            "name" : "thermal-dynamics",
+            "id" : "227443",
+            "regex" : "ThermalDynamics-\\[(?P<mc>.+?)\\](?P<version>.+?).jar"
+        }
+    },
     "SolarFlux" : {
         "function" : "CheckCurse",
         "active" : true,
