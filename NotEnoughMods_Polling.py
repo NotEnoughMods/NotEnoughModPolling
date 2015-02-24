@@ -531,7 +531,7 @@ def nemp_set(self, name, params, channel, userdata, rank):
 
     cast_to = None
 
-    if args[0] == '--type':
+    if args and args[0] == '--type':
         if args[1] in available_casts:
             cast_to = available_casts[args[1]]
             # Trim out these 2 args so the rest will work just fine
