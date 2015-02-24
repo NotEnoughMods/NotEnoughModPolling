@@ -1867,6 +1867,15 @@
             "regex": "NotEnoughKeys-(?P<mc>.+?)-(?P<version>.+?).jar"
         }
     },
+    "Steve'sAddons" : {
+        "function" : "CheckCurse",
+        "active" : true,
+        "curse" : {
+            "name" : "steves-addons",
+            "id" : "226067",
+            "regex" : "StevesAddons-(?P<mc>.+?)-(?P<version>.+?).jar"
+        }
+    },   
     "Mystcraft": {
         "function": "CheckCurse",
         "active": true,
