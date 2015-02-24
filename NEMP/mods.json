@@ -1808,11 +1808,11 @@
         }
      },
     "EvilCraft": {
-        "function": "CheckCurse",
+        "function": "CheckGitHubRelease",
         "active": true,
-        "curse": {
-            "name": "evilcraft",
-            "regex": "EvilCraft-(?P<mc>.+?)-(?P<version>.+?).jar"
+        "github": {
+            "repo": "rubensworks/EvilCraft",
+            "regex": "EvilCraft-(?P<mc>.+?)-(?P<version>.+?)\\.jar"
         }
      },
     "JourneyMap": {
