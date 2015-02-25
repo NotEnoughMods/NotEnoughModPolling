@@ -2462,7 +2462,7 @@
         "curse" : {
             "id" : "227778",
             "name" : "forge-teamspeak-3-integration",
-            "regex" : "ForgeTSIntegration-(?P<version>.+?).jar"
+            "regex" : "ForgeTSIntegration-(?P<version>.+)$"
         }
     },
     "AncientTrees": {
