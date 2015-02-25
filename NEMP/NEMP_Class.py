@@ -9,12 +9,29 @@ from distutils.version import LooseVersion
 logging.getLogger('requests').setLevel(logging.WARNING)
 
 
+class InvalidVersion(Exception):
+
+    def __init__(self, version):
+        self.version = version
+
+    def __str__(self):
+        return 'Invalid version: {!r}'.format(self.version)
+
+
 class NotEnoughClasses():
     nemVersions = []
 
     newMods = False
     mods = {}
     SinZationalHax = {}
+
+    invalid_versions = [
+        r'\.jar',
+        r'-src',
+        r'-javadoc',
+        r'-api',
+        r'-deobf'
+    ]
 
     def __init__(self):
         self.requests_session = requests.Session()
@@ -27,6 +44,10 @@ class NotEnoughClasses():
         self.QueryNEM()
         self.InitiateVersions()
         self.buildHTML()
+
+        # compile invalid versions regexes
+        for i, regex in enumerate(self.invalid_versions[:]):
+            self.invalid_versions[i] = re.compile(regex, re.I)
 
     def fetch_page(self, url, timeout=10, decode_json=False):
         request = self.requests_session.get(url, timeout=timeout)
@@ -424,6 +445,12 @@ class NotEnoughClasses():
 
         return {}
 
+    def is_version_valid(self, version):
+        for regex in self.invalid_versions:
+            if regex.search(version):
+                return False
+        return True
+
     def CheckMod(self, mod, document=None):
         try:
             # [dev change, version change]
@@ -438,6 +465,11 @@ class NotEnoughClasses():
                 # Remove whitespace at the end and start
                 self.mods[mod]["dev"] = self.mods[mod]["dev"].strip()
                 output["dev"] = output["dev"].strip()
+
+                # validate version
+                if not self.is_version_valid(output['dev']):
+                    raise InvalidVersion(output['dev'])
+
                 if self.mods[mod]["dev"] != output["dev"]:
                     self.mods[mod]["dev"] = output["dev"]
                     status[0] = True
@@ -446,6 +478,11 @@ class NotEnoughClasses():
                 # Remove whitespace at the end and start
                 self.mods[mod]["version"] = self.mods[mod]["version"].strip()
                 output["version"] = output["version"].strip()
+
+                # validate version
+                if not self.is_version_valid(output['version']):
+                    raise InvalidVersion(output['version'])
+
                 if self.mods[mod]["version"] != output["version"]:
                     self.mods[mod]["version"] = output["version"]
                     status[1] = True

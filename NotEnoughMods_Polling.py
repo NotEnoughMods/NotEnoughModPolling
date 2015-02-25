@@ -304,17 +304,21 @@ def NEMP_TimerEvent(self, channels):
                     else:
                         real_name = mod
 
-                    if self.NEM.mods[mod]["dev"] != "NOT_USED" and flags[0]:
+                    dev_version = self.NEM.mods[mod]["dev"]
+                    release_version = self.NEM.mods[mod]["version"]
+                    changes = self.NEM.mods[mod]["change"]
+
+                    if flags[0] and dev_version != "NOT_USED":
                         nemp_logger.debug("Updating DevMod {0}, Flags: {1}".format(mod, flags))
-                        self.sendMessage(channel, "!ldev {0} {1} {2}".format(version, real_name, unicode(clean_version(self.NEM.mods[mod]["dev"]))))
+                        self.sendMessage(channel, "!ldev {0} {1} {2}".format(version, real_name, unicode(clean_version(dev_version))))
 
-                    if self.NEM.mods[mod]["version"] != "NOT_USED" and flags[1]:
+                    if flags[1] and release_version != "NOT_USED":
                         nemp_logger.debug("Updating Mod {0}, Flags: {1}".format(mod, flags))
-                        self.sendMessage(channel, "!lmod {0} {1} {2}".format(version, real_name, unicode(clean_version(self.NEM.mods[mod]["version"]))))
+                        self.sendMessage(channel, "!lmod {0} {1} {2}".format(version, real_name, unicode(clean_version(release_version))))
 
-                    if self.NEM.mods[mod]["change"] != "NOT_USED" and "changelog" not in self.NEM.mods[mod]:
+                    if changes != "NOT_USED" and "changelog" not in self.NEM.mods[mod]:
                         nemp_logger.debug("Sending text for Mod {0}".format(mod))
-                        self.sendMessage(channel, " * " + self.NEM.mods[mod]["change"])
+                        self.sendMessage(channel, " * " + changes)
 
         # A temporary list containing the mods that have failed to be polled so far.
         # We use it to check if the same mods had trouble in the newest polling attempt.
@@ -496,8 +500,12 @@ def test_parser(self, name, params, channel, userdata, rank):
             else:
                 self.sendMessage(channel, "Did not receive MC version from parser.")
             if "version" in result:
+                if not self.NEM.is_version_valid(result['version']):
+                    raise NEMP_Class.InvalidVersion(result['version'])
                 self.sendMessage(channel, "!lmod {0} {1} {2}".format(version, real_name, unicode(clean_version(result["version"]))))
             if "dev" in result:
+                if not self.NEM.is_version_valid(result['dev']):
+                    raise NEMP_Class.InvalidVersion(result['dev'])
                 self.sendMessage(channel, "!ldev {0} {1} {2}".format(version, real_name, unicode(clean_version(result["dev"]))))
             if "change" in result:
                 self.sendMessage(channel, " * " + result["change"])
