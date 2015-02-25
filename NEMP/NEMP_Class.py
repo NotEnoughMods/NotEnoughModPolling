@@ -3,6 +3,7 @@ import re
 import requests
 import simplejson
 import traceback
+import yaml
 
 from distutils.version import LooseVersion
 
@@ -48,6 +49,13 @@ class NotEnoughClasses():
         # compile invalid versions regexes
         for i, regex in enumerate(self.invalid_versions[:]):
             self.invalid_versions[i] = re.compile(regex, re.I)
+
+        # load settings
+        with open('commands/NEMP/config.yml', 'r') as f:
+            self.config = yaml.load(f)
+        except:
+            print('You need to setup the NEMP/config.yml file')
+            raise
 
     def fetch_page(self, url, timeout=10, decode_json=False):
         request = self.requests_session.get(url, timeout=timeout)
@@ -394,7 +402,15 @@ class NotEnoughClasses():
     def CheckGitHubRelease(self, mod):
         repo = self.mods[mod]['github'].get('repo')
 
-        releases = self.fetch_json('https://api.github.com/repos/' + repo + '/releases')
+        client_id = self.config.get('github', {}).get('client_id')
+        client_secret = self.config.get('github', {}).get('client_secret')
+
+        url = 'https://api.github.com/repos/' + repo + '/releases'
+
+        if client_id and client_secret:
+            url += '?client_id={}&client_secret={}'.format(client_id, client_secret)
+
+        releases = self.fetch_json(url)
 
         regex = re.compile(self.mods[mod]['github']['regex'])
 
