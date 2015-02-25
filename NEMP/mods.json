@@ -2470,7 +2470,7 @@
         "active": true,
         "github": {
             "repo": "MinecraftModArchive/Dendrology",
-            "regex": "AncientTrees-(?P<mc>.+?)-(?P<version>.+)$"
+            "regex": "AncientTrees-(?P<mc>.+?)-(?P<version>.+?).jar"
         }
     }
 }
