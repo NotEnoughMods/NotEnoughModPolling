@@ -51,8 +51,9 @@ class NotEnoughClasses():
             self.invalid_versions[i] = re.compile(regex, re.I)
 
         # load settings
-        with open('commands/NEMP/config.yml', 'r') as f:
-            self.config = yaml.load(f)
+        try:
+            with open('commands/NEMP/config.yml', 'r') as f:
+                self.config = yaml.load(f)
         except:
             print('You need to setup the NEMP/config.yml file')
             raise
