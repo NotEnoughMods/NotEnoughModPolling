@@ -732,6 +732,11 @@
         "category" : "lunatrius",
         "active" : true
     },
+    "LaserLevel" : {
+        "function" : "CheckLunatrius",
+        "category" : "lunatrius",
+        "active" : true
+    },
     "MonsterSpawnHighlighter" : {
         "function" : "CheckLunatrius",
         "category" : "lunatrius",
