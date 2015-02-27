@@ -865,12 +865,11 @@
         }
     },
     "Mariculture" : {
-        "function" : "CheckJenkins",
-        "active" : false,
-        "jenkins" : {
-            "url" : "http://ci.tterrag.com/job/Mariculture/lastSuccessfulBuild/api/json",
-            "regex" : "Mariculture-Base-(?P<mc>.+?)-(?P<dev>.+?).jar",
-            "item" : 1
+        "function" : "CheckCurse",
+        "active" : true,
+        "curse" : {
+            "name": "mariculture",
+            "regex" : "Mariculture (?P<mc>.+?) - (?P<version>.+)"
         }
     },
     "Forestry-Release" : {
