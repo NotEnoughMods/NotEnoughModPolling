@@ -319,6 +319,8 @@ def NEMP_TimerEvent(self, channels):
                     if changes != "NOT_USED" and "changelog" not in self.NEM.mods[mod]:
                         nemp_logger.debug("Sending text for Mod {0}".format(mod))
                         self.sendMessage(channel, " * " + changes)
+                        # clean up changelog in case the next poll doesn't have one
+                        self.NEM.mods[mod]['change'] = 'NOT_USED'
 
         # A temporary list containing the mods that have failed to be polled so far.
         # We use it to check if the same mods had trouble in the newest polling attempt.
