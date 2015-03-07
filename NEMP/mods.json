@@ -2541,5 +2541,14 @@
             "name": "bibliocraft-bibliowoods-highlands-edition",
             "regex": "BiblioWoods Highlands edition v(?P<version>.+?) .+"
         }
+    },
+    "Femtocraft": {
+        "function": "CheckJenkins",
+        "active": true,
+        "jenkins": {
+            "url": "http://ci.otegamers.com/job/Femtocraft-1.7.10-Dev/lastSuccessfulBuild/api/json",
+            "regex": "femtocraft-(?P<mc>.+?)-(?P<dev>.+)-dev\\.jar$",
+            "item": 0
+        }
     }
 }
