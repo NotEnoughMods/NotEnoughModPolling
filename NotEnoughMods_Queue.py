@@ -87,24 +87,38 @@ def command_add(self, name, params, channel, userdata, rank):
 
 
 def command_remove(self, name, params, channel, userdata, rank):
+    if len(params) < 2:
+        self.sendChatMessage(self.send, channel, "You must specify an index to execute.")
+        return
+
     if params[1].isdigit():
-        del NEM.updatequeue[int(params[1])]
-        self.sendChatMessage(self.send, channel, "Success!")
+        try:
+            NEM.updatequeue.pop(int(params[1]))
+            self.sendChatMessage(self.send, channel, "Success!")
+        except IndexError:
+            self.sendChatMessage(self.send, channel, "Failed: No such index.")
     else:
         self.sendChatMessage(self.send, channel, "'{}' is not a number.".format(params[1]))
 
 
 def command_execute(self, name, params, channel, userdata, rank):
+    if len(params) < 2:
+        self.sendChatMessage(self.send, channel, "You must specify an index to execute.")
+        return
+
     if params[1].isdigit():
         index = int(params[1])
     else:
-        self.sendChatMessage(self.send, channel, "'{}' is not a number.".format(params[2]))
+        self.sendChatMessage(self.send, channel, "'{}' is not a number.".format(params[1]))
         return
 
-    if len(NEM.updatequeue) >= index and rank > 0:
-        self.sendChatMessage(self.send, channel, NEM.updatequeue[index])
-        del NEM.updatequeue[index]
-        self.sendChatMessage(self.send, channel, "Success!")
+    if rank > 0:
+        try:
+            msg = NEM.updatequeue.pop(index)
+            self.sendChatMessage(self.send, channel, msg)
+            self.sendChatMessage(self.send, channel, "Success!")
+        except IndexError:
+            self.sendChatMessage(self.send, channel, "Failed: No such index.")
 
 
 rankTranslate = {
