@@ -232,7 +232,8 @@ def PollingThread(self, pipe):
                                 failed.append(outputMod)
                         SinZationalHax.append(NEM.mods[mod]["SinZationalHax"]["id"])  # Remember this poll that we have done this set of mods
                     else:
-                        nemp_logger.debug("Already polled {} before".format(NEM.mods[mod]["SinZationalHax"]["id"]))
+                        # nemp_logger.debug("Already polled {} before".format(NEM.mods[mod]["SinZationalHax"]["id"]))
+                        pass
                 else:
                     result, exceptionRaised = NEM.CheckMod(mod)
 
