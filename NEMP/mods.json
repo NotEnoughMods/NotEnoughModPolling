@@ -2487,5 +2487,59 @@
             "repo": "MinecraftModArchive/Dendrology",
             "regex": "AncientTrees-(?P<mc>.+?)-(?P<version>.+?).jar"
         }
+    },
+    "BiblioCraft": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "id": "228027",
+            "name": "bibliocraft",
+            "regex": "BiblioCraft v(?P<version>.+)"
+        }
+    },
+    "BiblioWoodsForestry": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "id": "228363",
+            "name": "bibliocraft-bibliowoods-forestry-edition",
+            "regex": "BiblioWoods Forestry edition v(?P<version>.+?) .+"
+        }
+    },
+    "BiblioWoodsBiomesO'Plenty": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "id": "228362",
+            "name": "bibliocraft-bibliowoods-biomes-oplenty-edition",
+            "regex": "BiblioWoods Biomes O' Plenty edition v(?P<version>.+?) .+"
+        }
+    },
+    "BiblioWoodsExtraBiomesXL": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "id": "228365",
+            "name": "bibliocraft-bibliowoods-extrabiomesxl-edition",
+            "regex": "BiblioWoods ExtraBiomesXL edition v(?P<version>.+?) .+"
+        }
+    },
+    "BiblioWoodsNatura": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "id": "228364",
+            "name": "bibliocraft-bibliowoods-natura-edition",
+            "regex": "BiblioWoods Natura edition v(?P<version>.+?) .+"
+        }
+    },
+    "BiblioWoodsHighlands": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "id": "228361",
+            "name": "bibliocraft-bibliowoods-highlands-edition",
+            "regex": "BiblioWoods Highlands edition v(?P<version>.+?) .+"
+        }
     }
 }
