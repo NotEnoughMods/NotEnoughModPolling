@@ -461,7 +461,7 @@
         "category" : "sc0",
         "active" : true,
         "spacechase" : {
-			"slug" : "text-formatting"
+            "slug" : "text-formatting"
         }
     },
     "SurvivalWings" : {
@@ -469,7 +469,7 @@
         "category" : "sc0",
         "active" : true,
         "spacechase" : {
-			"slug" : "survival-wings"
+            "slug" : "survival-wings"
         }
     },
     "BiomeWand" : {
@@ -477,7 +477,7 @@
         "category" : "sc0",
         "active" : true,
         "spacechase" : {
-			"slug" : "biome-wand"
+            "slug" : "biome-wand"
         }
     },
     "UsefulPets" : {
@@ -485,7 +485,7 @@
         "category" : "sc0",
         "active" : true,
         "spacechase" : {
-			"slug" : "useful-pets"
+            "slug" : "useful-pets"
         }
     },
     "SpaceCore" : {
@@ -493,7 +493,7 @@
         "category" : "sc0",
         "active" : true,
         "spacechase" : {
-			"slug" : "spacecore"
+            "slug" : "spacecore"
         }
     },
     "ComponentEquipment" : {
@@ -501,7 +501,7 @@
         "category" : "sc0",
         "active" : true,
         "spacechase" : {
-			"slug" : "component-equipment"
+            "slug" : "component-equipment"
         }
     },
     "UsefulPetsAddon_PainterlyTextures" : {
@@ -509,7 +509,7 @@
         "category" : "sc0",
         "active" : true,
         "spacechase" : {
-			"slug" : "useful-pets-painterly"
+            "slug" : "useful-pets-painterly"
         }
     },
     "EnderTech-Drayshak" : {

@@ -328,10 +328,10 @@ class NotEnoughClasses():
         return output
 
     def CheckSpacechase(self, mod):
-        jsonres = self.fetch_json( "http://spacechase0.com/core/latest.php?obj=mods/minecraft/" + self.mods[ mod ][ "spacechase" ][ "slug" ] + "&platform=" + self.mods[ mod ][ "mc" ])
+        jsonres = self.fetch_json("http://spacechase0.com/core/latest.php?obj=mods/minecraft/" + self.mods[mod]["spacechase"]["slug"] + "&platform=" + self.mods[mod]["mc"])
         output = {
-            "version": jsonres[ "version" ],
-            "change": jsonres[ "summary" ]
+            "version": jsonres["version"],
+            "change": jsonres["summary"]
         }
         return output
 
