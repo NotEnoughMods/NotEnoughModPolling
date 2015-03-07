@@ -459,42 +459,58 @@
     "TextFormatting" : {
         "function" : "CheckSpacechase",
         "category" : "sc0",
-        "active" : true
+        "active" : true,
+        "spacechase" : {
+			"slug" : "text-formatting"
+        }
     },
     "SurvivalWings" : {
         "function" : "CheckSpacechase",
         "category" : "sc0",
-        "active" : true
+        "active" : true,
+        "spacechase" : {
+			"slug" : "survival-wings"
+        }
     },
     "BiomeWand" : {
         "function" : "CheckSpacechase",
         "category" : "sc0",
-        "active" : true
-    },
-    "ToggleSpawners" : {
-        "function" : "CheckSpacechase",
-        "category" : "sc0",
-        "active" : true
+        "active" : true,
+        "spacechase" : {
+			"slug" : "biome-wand"
+        }
     },
     "UsefulPets" : {
         "function" : "CheckSpacechase",
         "category" : "sc0",
-        "active" : true
+        "active" : true,
+        "spacechase" : {
+			"slug" : "useful-pets"
+        }
     },
     "SpaceCore" : {
         "function" : "CheckSpacechase",
         "category" : "sc0",
-        "active" : true
+        "active" : true,
+        "spacechase" : {
+			"slug" : "spacecore"
+        }
     },
     "ComponentEquipment" : {
         "function" : "CheckSpacechase",
         "category" : "sc0",
-        "active" : true
+        "active" : true,
+        "spacechase" : {
+			"slug" : "component-equipment"
+        }
     },
     "UsefulPetsAddon_PainterlyTextures" : {
         "function" : "CheckSpacechase",
         "category" : "sc0",
-        "active" : true
+        "active" : true,
+        "spacechase" : {
+			"slug" : "useful-pets-painterly"
+        }
     },
     "EnderTech-Drayshak" : {
         "function" : "CheckCurse",
