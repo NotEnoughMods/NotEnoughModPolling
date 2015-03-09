@@ -2550,5 +2550,14 @@
             "regex": "femtocraft-(?P<mc>.+?)-(?P<dev>.+)-dev\\.jar$",
             "item": 0
         }
+    },
+    "JSONAbles": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "id": "228458",
+            "name": "jsonables",
+            "regex": "{ JSONAbles } \\[(?P<version>.+?)\\]"
+        }
     }
 }
