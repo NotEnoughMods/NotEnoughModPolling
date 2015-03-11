@@ -31,7 +31,8 @@ class NotEnoughClasses():
         r'-src',
         r'-javadoc',
         r'-api',
-        r'-deobf'
+        r'-deobf',
+        r'[<>]',
     ]
 
     def __init__(self):
