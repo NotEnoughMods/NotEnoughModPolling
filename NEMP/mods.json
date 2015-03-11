@@ -1173,7 +1173,7 @@
         "active" : true,
         "curse": {
             "name" : "veinminer",
-            "regex" : "VeinMiner (?P<version>.+) \\("
+            "regex" : "VeinMiner (?P<version>\\S+)"
         }
     },
     "SteelIndustries" : {
