@@ -2559,5 +2559,13 @@
             "name": "jsonables",
             "regex": "{ JSONAbles } \\[(?P<version>.+?)\\]"
         }
+    },
+    "DimensionalDoors-CanVox": {
+        "function": "CheckGitHubRelease",
+        "active": true,
+        "github": {
+            "repo": "CannibalVox/DimDoors",
+            "regex": "^DimensionalDoors-(?P<version>.+)\\.jar$"
+        }
     }
 }
