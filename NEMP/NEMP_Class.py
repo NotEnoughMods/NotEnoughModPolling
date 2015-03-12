@@ -417,7 +417,11 @@ class NotEnoughClasses():
             for asset in release['assets']:
                 match = regex.search(asset['name'])
                 if match:
-                    return match.groupdict()
+                    result = match.groupdict()
+                    if release['prerelease']:
+                        result['dev'] = result['version']
+                        del result['version']
+                    return result
 
         return {}
 

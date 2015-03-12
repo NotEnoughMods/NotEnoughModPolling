@@ -2138,7 +2138,7 @@
         "active": true,
         "github": {
             "repo": "Ephys/TinkersSteelworks",
-            "regex": "TSteelworks-(?P<mc>.+?)-(?P<dev>.+?).jar"
+            "regex": "TSteelworks-(?P<mc>.+?)-(?P<version>.+?).jar"
         }
     },
     "AdvancedMachines": {
@@ -2318,7 +2318,7 @@
         "active": true,
         "github": {
             "repo": "disconsented/ANSSRPG",
-            "regex": "ANSSRPG-(?P<mc>.+?)-(?P<dev>.+?)-.+?.jar"
+            "regex": "ANSSRPG-(?P<mc>.+?)-(?P<version>.+?)-.+?.jar"
         }
     },
     "Mine&BladeBattleGear2-Bullseye": {
