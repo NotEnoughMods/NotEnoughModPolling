@@ -788,7 +788,7 @@
     },
     "EnderIO" : {
         "function" : "CheckJenkins",
-        "active" : false,
+        "active" : true,
         "jenkins" : {
             "url" : "http://ci.tterrag.com/job/EnderIO/lastSuccessfulBuild/api/json",
             "regex" : "EnderIO-(?P<mc>.+?)-(?P<dev>.+?).jar",
