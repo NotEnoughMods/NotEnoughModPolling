@@ -33,6 +33,8 @@ class NotEnoughClasses():
         r'-api',
         r'-deobf',
         r'[<>]',
+        r'^\[',
+        r'\]$',
     ]
 
     def __init__(self):
