@@ -2560,4 +2560,13 @@
             "regex": "{ JSONAbles } \\[(?P<version>.+?)\\]"
         }
     }
+	    "Baubles": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "id": "227083",
+            "name": "baubles",
+            "regex": "Baubles-(?P<mc>.+?)-(?P<version>.+?).jar"
+        }
+    }
 }
