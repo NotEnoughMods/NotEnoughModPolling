@@ -1611,7 +1611,7 @@
         "function" : "CheckJenkins",
         "active" : false,
         "jenkins": {
-            "url" : "http://jenkins.jakimfett.com/job/Minechem%201.7%20v5/lastSuccessfulBuild/api/json",
+            "url" : "http://jenkins.jakimfett.com/view/ForgeModding/job/Minechem%20v5%20for%201.7.10/lastSuccessfulBuild/api/json",
             "regex" : "Minechem-(?P<mc>.+?)-(?P<dev>.+?).jar",
             "item" : 1
         }
