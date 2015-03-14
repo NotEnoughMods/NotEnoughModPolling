@@ -2568,4 +2568,13 @@
             "regex": "^DimensionalDoors-(?P<version>.+)\\.jar$"
         }
     }
+	    "Baubles": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "id": "227083",
+            "name": "baubles",
+            "regex": "Baubles-(?P<mc>.+?)-(?P<version>.+?).jar"
+        }
+    }
 }
