@@ -328,7 +328,7 @@
         "function" : "CheckJenkins",
         "active" : true,
         "jenkins" : {
-            "url" : "http://2.iongaming.org:8080/job/VanityBlocks/lastStableBuild/api/json",
+            "url" : "http://iongaming.org:8080/job/VanityBlocks/lastStableBuild/api/json",
             "regex" : "VanityBlocks-V(?P<mc>.+?)-(?P<dev>.+?).jar",
             "item" : 0
         }
