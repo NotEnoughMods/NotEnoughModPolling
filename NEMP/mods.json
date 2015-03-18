@@ -1304,7 +1304,7 @@
         "active" : true,
         "curse": {
             "name" : "remote-io",
-            "regex" : "RemoteIO-.+?-(?P<version>.+)"
+            "regex" : "RemoteIO-.+?-(?P<version>.+?)(?:-universal\\.jar)?$"
         }
     },
     "TooMuchTime" :{
