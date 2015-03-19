@@ -453,15 +453,8 @@
         "active" : false
     },
     "AppliedEnergistics2" : {
-        "function": "CheckGitHubRelease",
-        "active": true,
-        "github": {
-            "repo": "AppliedEnergistics/Applied-Energistics-2",
-            "type": "tag"
-        },
-        "_replace": {
-            ".": "-"
-        }
+        "function": "CheckAE2",
+        "active": true
     },
     "TextFormatting" : {
         "function" : "CheckSpacechase",
