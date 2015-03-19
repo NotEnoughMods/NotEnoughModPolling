@@ -413,19 +413,28 @@ class NotEnoughClasses():
 
         releases = self.fetch_json(url)
 
-        regex = re.compile(self.mods[mod]['github']['regex'])
+        type_ = self.mods[mod]['github'].get('type', 'asset')
 
-        for release in releases:
-            for asset in release['assets']:
-                match = regex.search(asset['name'])
-                if match:
-                    result = match.groupdict()
-                    if release['prerelease']:
-                        result['dev'] = result['version']
-                        del result['version']
-                    return result
+        if type_ == 'asset':
+            regex = re.compile(self.mods[mod]['github']['regex'])
 
-        return {}
+            for release in releases:
+                for asset in release['assets']:
+                    match = regex.search(asset['name'])
+                    if match:
+                        result = match.groupdict()
+                        if release['prerelease']:
+                            result['dev'] = result['version']
+                            del result['version']
+                        return result
+        elif type_ == 'tag':
+            release = releases[0]
+            if release['prerelease']:
+                return {'dev': release['tag_name']}
+            else:
+                return {'version': release['tag_name']}
+        else:
+            raise ValueError('Invalid type {!r} for CheckGitHubRelease parser'.format(type_))
 
     def CheckBuildCraft(self, mod):
         page = self.fetch_page('https://raw.githubusercontent.com/BuildCraft/BuildCraft/master/buildcraft_resources/versions.txt')
