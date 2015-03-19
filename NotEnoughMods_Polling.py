@@ -507,7 +507,7 @@ def test_parser(self, name, params, channel, userdata, rank):
                     raise NEMP_Class.InvalidVersion(result['version'])
                 if '_replace' in self.NEM.mods[mod]:
                     for k, v in self.NEM.mods[mod]['_replace'].iteritems():
-                        result['dev'] = result['dev'].replace(k, v)
+                        result['version'] = result['version'].replace(k, v)
                 self.sendMessage(channel, "!lmod {0} {1} {2}".format(version, real_name, unicode(clean_version(result["version"]))))
             if "dev" in result:
                 if not self.NEM.is_version_valid(result['dev']):
