@@ -458,6 +458,9 @@
         "github": {
             "repo": "AppliedEnergistics/Applied-Energistics-2",
             "type": "tag"
+        },
+        "_replace": {
+            ".": "-"
         }
     },
     "TextFormatting" : {

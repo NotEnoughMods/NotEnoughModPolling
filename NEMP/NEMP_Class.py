@@ -500,6 +500,10 @@ class NotEnoughClasses():
                 if not self.is_version_valid(output['dev']):
                     raise InvalidVersion(output['dev'])
 
+                if '_replace' in self.mods[mod]:
+                    for k, v in self.mods[mod]['_replace'].iteritems():
+                        output['dev'] = output['dev'].replace(k, v)
+
                 if self.mods[mod]["dev"] != output["dev"]:
                     self.mods[mod]["dev"] = output["dev"]
                     status[0] = True
@@ -512,6 +516,10 @@ class NotEnoughClasses():
                 # validate version
                 if not self.is_version_valid(output['version']):
                     raise InvalidVersion(output['version'])
+
+                if '_replace' in self.mods[mod]:
+                    for k, v in self.mods[mod]['_replace'].iteritems():
+                        output['version'] = output['version'].replace(k, v)
 
                 if self.mods[mod]["version"] != output["version"]:
                     self.mods[mod]["version"] = output["version"]
