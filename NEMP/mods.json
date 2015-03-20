@@ -2574,7 +2574,7 @@
         "active": true,
         "category" : "tterrag",
         "jenkins": {
-            "url": "http://ci.tterrag.com/job/ttCore/api/json",
+            "url": "http://ci.tterrag.com/job/ttCore/lastSuccessfulBuild/api/json",
             "regex": ".+?-MC(?P<mc>.+?)-(?P<dev>.+?).jar",
             "item": 3
         }
@@ -2585,11 +2585,11 @@
         "active": true,
         "category" : "tterrag",
         "jenkins": {
-            "url": "http://ci.tterrag.com/job/WAILAPlugins/api/json",
+            "url": "http://ci.tterrag.com/job/WAILAPlugins/lastSuccessfulBuild/api/json",
             "regex": ".+?-MC(?P<mc>.+?)-(?P<dev>.+?).jar",
             "item": 2
         }
-    },    
+    },
     "Baubles": {
         "function": "CheckCurse",
         "active": true,
