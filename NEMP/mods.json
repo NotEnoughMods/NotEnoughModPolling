@@ -2575,7 +2575,7 @@
         "category" : "tterrag",
         "jenkins": {
             "url": "http://ci.tterrag.com/job/ttCore/api/json",
-            "regex": ".+?-(?P<mc>.+?)-(?P<dev>.+?).jar",
+            "regex": ".+?-MC(?P<mc>.+?)-(?P<dev>.+?).jar",
             "item": 3
         }
     },
@@ -2586,7 +2586,7 @@
         "category" : "tterrag",
         "jenkins": {
             "url": "http://ci.tterrag.com/job/WAILAPlugins/api/json",
-            "regex": ".+?-(?P<mc>.+?)-(?P<dev>.+?).jar",
+            "regex": ".+?-MC(?P<mc>.+?)-(?P<dev>.+?).jar",
             "item": 2
         }
     },    
