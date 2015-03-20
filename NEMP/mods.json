@@ -2568,6 +2568,28 @@
             "regex": "^DimensionalDoors-(?P<version>.+)\\.jar$"
         }
     },
+    "ttCore": {
+        "name": "ttCore",
+        "function": "CheckJenkins",
+        "active": true,
+        "category" : "tterrag",
+        "jenkins": {
+            "url": "http://ci.tterrag.com/job/ttCore/api/json",
+            "regex": ".+?-(?P<mc>.+?)-(?P<dev>.+?).jar",
+            "item": 3
+        }
+    },
+    "WAILAPlugins": {
+        "name": "WAILAPlugins",
+        "function": "CheckJenkins",
+        "active": true,
+        "category" : "tterrag",
+        "jenkins": {
+            "url": "http://ci.tterrag.com/job/WAILAPlugins/api/json",
+            "regex": ".+?-(?P<mc>.+?)-(?P<dev>.+?).jar",
+            "item": 2
+        }
+    },    
     "Baubles": {
         "function": "CheckCurse",
         "active": true,
