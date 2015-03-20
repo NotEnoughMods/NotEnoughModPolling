@@ -453,8 +453,13 @@
         "active" : false
     },
     "AppliedEnergistics2" : {
-        "function": "CheckAE2",
-        "active": true
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "id": "223794",
+            "name": "applied-energistics-2",
+            "regex": "appliedenergistics2-(?P<version>.+)\\.jar"
+        }
     },
     "TextFormatting" : {
         "function" : "CheckSpacechase",
