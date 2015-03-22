@@ -1444,6 +1444,17 @@
             "item" : 4
         }
     },
+    "OpenComputers-1.8" :{
+        "name" : "OpenComputers",
+        "function" : "CheckJenkins",
+        "active" : true,
+        "category" : "OC",
+        "jenkins": {
+            "url" : "http://ci.cil.li/job/OpenComputers-dev-MC1.8/lastSuccessfulBuild/api/json",
+            "regex" : ".+?-MC(?P<mc>.+?)-(?P<dev>.+?)-.+?.jar",
+            "item" : 4
+        }
+    },
     "SecurityCraft" :{
         "function" : "CheckCurse",
         "active" : true,
