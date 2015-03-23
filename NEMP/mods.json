@@ -42,6 +42,17 @@
             "promoType" : "version"
         }
     },
+    "IronChests-1.7.10" : {
+        "name" : "IronChests",
+        "function" : "CheckMCForge2",
+        "category" : "forge",
+        "active" : true,
+        "mcforge" : {
+            "url" : "http://files.minecraftforge.net/maven/cpw/mods/ironchest/promotions.json",
+            "promo" : "1.7.10-latest",
+            "promoType" : "version"
+        }
+    },
     "ForgeMultipart" : {
         "function" : "CheckMCForge2",
         "category" : "forge",
