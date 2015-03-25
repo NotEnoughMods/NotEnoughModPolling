@@ -2170,6 +2170,16 @@
             "item": 3
         }
     },
+    "Guide-API": {
+        "function": "CheckJenkins",
+        "active": true,
+        "category" : "Tehnut",
+        "jenkins": {
+            "url": "http://tehnut.info/jenkins/job/Guide-API/lastSuccessfulBuild/api/json",
+            "regex": "Guide-API-(?P<mc>.+?)-(?P<version>.+?).jar",
+             "item": 3
+        }
+    },
     "TSteelworks-Ephys": {
         "name": "TinkersSteelworks-Ephys",
         "function": "CheckGitHubRelease",
