@@ -2655,5 +2655,14 @@
             "name": "witching-gadgets",
             "regex": "Witching Gadgets v(?P<version>.+)"
         }
+    },
+    "Fluxed-Crystals": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "id": "226074",
+            "name": "fluxed-crystals",
+            "regex": "Fluxed-Crystals (?P<version>.+)"
+        }
     }
 }
