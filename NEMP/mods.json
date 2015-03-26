@@ -2646,5 +2646,14 @@
             "name": "baubles",
             "regex": "Baubles-(?P<mc>.+?)-(?P<version>.+?).jar"
         }
+    },
+    "WitchingGadgets": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "id": "228268",
+            "name": "witching-gadgets",
+            "regex": "Witching Gadgets v(?P<version>.+)"
+        }
     }
 }
