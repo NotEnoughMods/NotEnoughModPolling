@@ -924,12 +924,12 @@
         }
     },
     "ProjectRed" : {
-        "function" : "CheckJenkins",
-        "active" : false,
-        "jenkins" : {
-            "url" : "http://ci.indiewikis.com:8080/job/Project%20Red/lastSuccessfulBuild/api/json",
-            "regex" : "ProjectRed-Base-(?P<mc>.+?)-(?P<dev>.+?).jar",
-            "item" : 0
+        "function" : "CheckCurse",
+        "active" : true,
+        "curse": {
+            "name" : "project-red-base",
+            "id" : "228702",
+            "regex" : "ProjectRed-(?P<mc>.+?)-(?P<version>.+?)-.+?.jar"
         }
     },
     "ProjectRed-Release" : {
