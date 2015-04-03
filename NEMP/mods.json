@@ -2003,7 +2003,7 @@
         "curse": {
             "id": "225561",
             "name": "extra-utilities",
-            "regex": "Extra Utilities (?P<version>.+)"
+            "regex": "extrautilities-(?P<version>.+).jar"
         }
     },
     "BetterStorage": {
