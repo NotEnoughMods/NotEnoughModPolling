@@ -26,18 +26,7 @@ class NotEnoughClasses():
     mods = {}
     SinZationalHax = {}
 
-    invalid_versions = [
-        r'\.jar',
-        r'-src',
-        r'-javadoc',
-        r'-api',
-        r'-deobf',
-        r'[<>]',
-        r'^\[',
-        r'\]$',
-        r'\{',
-        r'\}',
-    ]
+    invalid_versions = []
 
     def __init__(self):
         self.requests_session = requests.Session()
@@ -46,22 +35,12 @@ class NotEnoughClasses():
         }
         self.requests_session.max_redirects = 5
 
+        self.load_config()
+        self.load_version_bans()
         self.buildModDict()
         self.QueryNEM()
         self.InitiateVersions()
         self.buildHTML()
-
-        # compile invalid versions regexes
-        for i, regex in enumerate(self.invalid_versions[:]):
-            self.invalid_versions[i] = re.compile(regex, re.I)
-
-        # load settings
-        try:
-            with open('commands/NEMP/config.yml', 'r') as f:
-                self.config = yaml.load(f)
-        except:
-            print('You need to setup the NEMP/config.yml file')
-            raise
 
     def fetch_page(self, url, timeout=10, decode_json=False):
         request = self.requests_session.get(url, timeout=timeout)
@@ -72,6 +51,26 @@ class NotEnoughClasses():
 
     def fetch_json(self, *args, **kwargs):
         return self.fetch_page(*args, decode_json=True, **kwargs)
+
+    def load_config(self):
+        try:
+            with open('commands/NEMP/config.yml', 'r') as f:
+                self.config = yaml.load(f)
+        except:
+            print('You need to setup the NEMP/config.yml file')
+            raise
+
+    def load_version_bans(self):
+        try:
+            with open('commands/NEMP/bans.yml', 'r') as f:
+                self.invalid_versions = yaml.load(f)
+        except:
+            print('You need to setup the NEMP/bans.yml file')
+            raise
+
+        # compile regexes for performance
+        for i, regex in enumerate(self.invalid_versions[:]):
+            self.invalid_versions[i] = re.compile(regex, re.I)
 
     def buildModDict(self):
         modList = open("commands/NEMP/mods.json", "r")

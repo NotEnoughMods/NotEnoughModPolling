@@ -29,7 +29,8 @@ helpDict = {
     "failcount": ["{0}nemp failcount", "Shows how many times mods have failed to be polled so far. At least two failures in a row required.",
                   "Mods that have failed being polled 5 times are excluded from this list. Check {0}nemp failedmods for those mods."],
     "showinfo": ["{0}nemp showinfo <mod> [<path> [...]]", "Shows polling information for the specified mod."],
-    "url": ["{0}nemp url <mod>", "Spits out the URL of the specified mod."]
+    "url": ["{0}nemp url <mod>", "Spits out the URL of the specified mod."],
+    'reloadbans': ['{0}nemp reloadbans', 'Reloads the banned versions configuration file (bans.yml).'],
 }
 
 
@@ -634,6 +635,13 @@ def nemp_url(self, name, params, channel, userdata, rank):
         self.sendMessage(channel, name + ": " + mod["jenkins"]["url"][:-28])
     else:
         self.sendMessage(channel, name + ": This mod doesn't have a well-defined URL")
+
+
+def nemp_reloadbans(self, name, params, channel, userdata, rank):
+    self.NEM.load_version_bans()
+    self.sendMessage(channel, 'Done, {} bans loaded.'.format(len(self.NEM.invalid_versions)))
+
+
 # In each entry, the second value in the tuple is the
 # rank that is required to be able to use the command.
 VOICED = 1
@@ -655,6 +663,7 @@ commands = {
     "resetfailed": (clean_failed_mods, VOICED),
     "showinfo": (nemp_showinfo, VOICED),
     "url": (nemp_url, VOICED),
+    'reloadbans': (nemp_reloadbans, VOICED),
 
     # -- ALIASES -- #
     "polling": (running, VOICED),
