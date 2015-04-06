@@ -35,8 +35,8 @@ class NotEnoughClasses():
         r'[<>]',
         r'^\[',
         r'\]$',
-        r'^\{',
-        r'\}$',
+        r'\{',
+        r'\}',
     ]
 
     def __init__(self):
