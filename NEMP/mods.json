@@ -2671,7 +2671,7 @@
         "curse": {
             "id": "228653",
             "name": "werkbench",
-            "regex": "Werkbench v(?P<version>.+?) .+"
+            "regex": "Werkbench v(?P<version>\\S+)"
         }
     }
 }
