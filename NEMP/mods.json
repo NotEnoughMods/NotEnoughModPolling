@@ -322,7 +322,7 @@
         "active" : true,
         "jenkins" : {
             "url" : "http://jamesmckay.id.au:8080/job/Power%20Converters/lastSuccessfulBuild/api/json",
-            "regex" : "PowerConverters-(?P<mc>.+?)-(?P<dev>.+?).jar",
+            "regex" : "PowerConverters-(?P<mc>.+?)_(?P<dev>.+?).jar",
             "item" : 1
         }
     },
