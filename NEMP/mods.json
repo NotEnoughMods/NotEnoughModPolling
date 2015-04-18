@@ -1949,7 +1949,7 @@
         "curse": {
             "id": "226410",
             "name": "projecte",
-            "regex": ".+?-.+?-(?P<version>.+?).jar"
+            "regex": "ProjectE-(?P<version>.+?).jar"
         }
     },
     "Flaxbeard'sSteamPower": {
