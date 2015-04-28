@@ -6,7 +6,7 @@
         "active" : true,
         "mcforge" : {
             "url" : "http://files.minecraftforge.net/maven/net/minecraftforge/forge/promotions.json",
-            "promo" : "latest-1.7.10",
+            "promo" : "1.7.10-latest",
             "promoType" : "dev"
         }
     },
