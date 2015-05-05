@@ -412,40 +412,24 @@
         }
     },
     "CodeChickenCore" : {
-        "function" : "CheckCurse",
-        "active" : true,
-        "curse": {
-            "id": "222213",
-            "name": "codechickencore",
-            "regex": "CodeChickenCore-(?P<mc>.+)-(?P<version>.+)-universal\\.jar"
-        }
+        "function" : "CheckChickenBones",
+        "category" : "cb",
+        "active" : true
     },
     "ChickenChunks" : {
-        "function" : "CheckCurse",
-        "active" : true,
-        "curse": {
-            "id": "229316",
-            "name": "chickenchunks",
-            "regex": "ChickenChunks-(?P<mc>.+)-(?P<version>.+)-universal\\.jar"
-        }
+        "function" : "CheckChickenBones",
+        "category" : "cb",
+        "active" : true
     },
     "NotEnoughItems" : {
-        "function" : "CheckCurse",
-        "active" : true,
-        "curse": {
-            "id": "222211",
-            "name": "notenoughitems",
-            "regex": "NotEnoughItems-(?P<mc>.+)-(?P<version>.+)-universal\\.jar"
-        }
+        "function" : "CheckChickenBones",
+        "category" : "cb",
+        "active" : true
     },
     "EnderStorage" : {
-        "function" : "CheckCurse",
-        "active" : true,
-        "curse": {
-            "id": "229306",
-            "name": "ender-storage",
-            "regex": "EnderStorage-(?P<mc>.+)-(?P<version>.+)-universal\\.jar"
-        }
+        "function" : "CheckChickenBones",
+        "category" : "cb",
+        "active" : true
     },
     "Translocator" : {
         "function" : "CheckChickenBones",
