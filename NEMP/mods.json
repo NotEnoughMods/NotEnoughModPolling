@@ -542,7 +542,7 @@
         "function" : "CheckCurse",
         "active" : true,
         "curse" : {
-            "regex" : "BloodMagic-(?P<mc>.+?)-(?P<version>.+?)-.+?.jar",
+            "regex" : "BloodMagic-(?P<mc>.+?)-(?P<version>.+?).jar",
             "id" : "224791",
             "name" : "blood-magic"
         }
