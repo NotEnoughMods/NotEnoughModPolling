@@ -385,21 +385,24 @@ class NotEnoughClasses():
 
         regex = re.compile(self.mods[mod]['curse']['regex'])
 
-        for release in sorted(jsonres['files'].values(), key=lambda x: x['id'], reverse=True):
-            match = regex.search(release['name'])
-            if match:
-                output = match.groupdict()
+        releases = sorted(jsonres['files'].values(), key=lambda x: x['id'], reverse=True)
 
-                res = {
-                    'mc': release['version']
-                }
+        release = releases[0]
 
-                if jsonres["download"]["type"].lower() == release_type:
-                    res['version'] = output['version']
-                else:
-                    res['dev'] = output['version']
+        match = regex.search(release['name'])
 
-                return res
+        output = match.groupdict()
+
+        res = {
+            'mc': release['version']
+        }
+
+        if jsonres["download"]["type"].lower() == release_type:
+            res['version'] = output['version']
+        else:
+            res['dev'] = output['version']
+
+        return res
 
     def CheckGitHubRelease(self, mod):
         repo = self.mods[mod]['github'].get('repo')
