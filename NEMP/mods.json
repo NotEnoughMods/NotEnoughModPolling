@@ -211,7 +211,7 @@
         "jenkins" : {
             "url" : "http://openmods.info:8080/job/OpenBlocks/lastSuccessfulBuild/api/json",
             "regex" : "OpenBlocks-(?P<mc>.+?)-(?P<dev>.+?).jar$",
-            "item" : 1
+            "item" : 4
         }
     },
     "OpenModsLib" : {
@@ -1065,7 +1065,7 @@
         "active" : true,
         "curse": {
             "id" : "220954",
-            "regex" : "ModTweaker2 \\[(?P<version>.+)\\]"
+            "regex" : "ModTweaker (?P<version>.+)"
         }
     },
     "Morpheus-1.7" : {
@@ -1198,7 +1198,7 @@
         "curse": {
             "id" : "221363",
             "name" : "steel-industries",
-            "regex" : "-.+?-(?P<version>.+?).jar"
+            "regex" : "Steel Industries V (?P<version>.+)"
         }
     },
     "Hydraulicraft" : {
@@ -1415,7 +1415,7 @@
         "active" : true,
         "curse": {
             "id" : "223005",
-            "regex" : ".+?-(?P<version>.+?).jar"
+            "regex" : "Bagginses (?P<version>.+)"
         }
     },
     "BluePower" :{
@@ -1506,7 +1506,7 @@
         "active" : true,
         "curse": {
             "name" : "gravestone_mod",
-            "regex" : "GraveStone (?P<version>.+?).jar"
+            "regex" : "GraveStone-(?P<version>.+?).jar"
         }
     },
     "Natura" :{
