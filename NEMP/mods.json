@@ -211,7 +211,7 @@
         "jenkins" : {
             "url" : "http://openmods.info:8080/job/OpenBlocks/lastSuccessfulBuild/api/json",
             "regex" : "OpenBlocks-(?P<mc>.+?)-(?P<dev>.+?).jar$",
-            "item" : 4
+            "item" : 3
         }
     },
     "OpenModsLib" : {
