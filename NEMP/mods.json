@@ -1198,7 +1198,7 @@
         "curse": {
             "id" : "221363",
             "name" : "steel-industries",
-            "regex" : "Steel Industries V (?P<version>.+)"
+            "regex" : "Version (?P<version>\\S+)"
         }
     },
     "Hydraulicraft" : {
