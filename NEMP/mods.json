@@ -2698,7 +2698,7 @@
             "regex" : "-.+?-(?P<version>.+?)-universal.jar"
         }
     },
-    "Doublejump" : {
+    "DoubleJump" : {
         "function" : "CheckCurse",
         "active" : true,
         "curse": {
