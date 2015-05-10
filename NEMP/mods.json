@@ -2605,7 +2605,7 @@
         "curse": {
             "id": "228458",
             "name": "jsonables",
-            "regex": "^(?:\\{ )?JSONAbles(?: \\})? [\\[\\{]?(?P<version>.+?)[\\]\\}]?$"
+            "regex": "^(?:\\{ )?JSONAbles(?: \\})?[ \\-][\\[\\{]?(?P<version>.+?)[\\]\\}]?$"
         }
     },
     "DimensionalDoors-CanVox": {
