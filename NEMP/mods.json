@@ -864,7 +864,7 @@
         "active" : true,
         "jenkins" : {
             "url" : "http://jenkins.bdew.net/job/neiaddons-1.7.10/lastSuccessfulBuild/api/json",
-            "regex" : "neiaddons-mc1710-(?P<dev>.+?).jar",
+            "regex" : "neiaddons-(?P<dev>.+?)-mc(?P<mc>.+?)\\.jar",
             "item" : 0
         }
     },
