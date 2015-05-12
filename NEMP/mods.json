@@ -1845,7 +1845,7 @@
         "curse": {
             "id": "223565",
             "name": "draconic-evolution",
-            "regex": "Draconic-Evolution-(?P<mc>.+?)-v(?P<version>.+?).jar"
+            "regex": "Draconic-Evolution-(?P<mc>.+?)-(?P<version>.+?).jar"
         }
      },
     "ElementalCreepers": {
