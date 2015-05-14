@@ -2662,7 +2662,7 @@
         "curse": {
             "id": "226074",
             "name": "fluxed-crystals",
-            "regex": "fluxedCrystals-(?P<version>.+?)(?:\\.jar)?$"
+            "regex": "Fluxed-Crystals-(?P<version>.+?)(?:\\.jar)?$"
         }
     },
     "Werkbench": {
