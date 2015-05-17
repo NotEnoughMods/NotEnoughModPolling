@@ -1818,7 +1818,7 @@
         "active": true,
         "curse": {
             "name": "craftguide",
-            "regex": "CraftGuide-(?P<version>.+?).zip"
+            "regex": "CraftGuide-(?P<version>.+?)-forge.jar"
         }
      },
     "DarkMenagerie": {
