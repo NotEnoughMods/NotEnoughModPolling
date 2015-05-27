@@ -2713,5 +2713,13 @@
             "id" : "230541",
             "regex" : "-.+?-(?P<version>.+?).jar"
         }
+    },
+    "copycore": {
+        "function": "CheckGitHubRelease",
+        "active": true,
+        "github": {
+            "repo": "copygirl/copycore",
+            "regex": "copycore-(?P<mc>.+?)-(?P<version>.+?)\\.jar"
+        }
     }
 }
