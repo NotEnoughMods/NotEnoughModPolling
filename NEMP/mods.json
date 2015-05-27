@@ -2721,5 +2721,9 @@
             "repo": "copygirl/copycore",
             "regex": "copycore-(?P<mc>.+?)-(?P<version>.+?)\\.jar"
         }
+    },
+    "4Space": {
+        "function": "Check4Space",
+        "active": true
     }
 }

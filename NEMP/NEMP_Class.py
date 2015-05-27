@@ -453,6 +453,23 @@ class NotEnoughClasses():
             'version': version
         }
 
+    def Check4Space(self, mod):
+        page = self.fetch_page('http://4space.mods.center/version.html')
+
+        parts = page.strip().replace('Version=', '').split('#')
+
+        if len(parts) != 3:
+            raise RuntimeError('Invalid amount of version parts')
+
+        new_version = '.'.join(parts)
+
+        if self.mods[mod]['version'] == 'dev-only' or LooseVersion(new_version) > LooseVersion(self.mods[mod]['version']):
+            return {
+                "version": new_version
+            }
+        else:
+            return {}
+
     def CheckAtomicStryker(self, mod, document):
         if not document:
             return self.fetch_page("http://atomicstryker.net/updatemanager/modversions.txt")
