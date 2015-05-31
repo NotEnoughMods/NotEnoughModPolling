@@ -2601,7 +2601,7 @@
     },
     "JSONAbles": {
         "function": "CheckCurse",
-        "active": true,
+        "active": false,
         "curse": {
             "id": "228458",
             "name": "jsonables",
