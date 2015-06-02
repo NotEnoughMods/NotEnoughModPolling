@@ -2176,7 +2176,7 @@
         "category" : "Tehnut",
         "jenkins": {
             "url": "http://tehnut.info/jenkins/job/Guide-API/lastSuccessfulBuild/api/json",
-            "regex": "Guide-API-(?P<mc>.+?)-(?P<version>.+?).jar",
+            "regex": "Guide-API-(?P<mc>.+?)-(?P<version>.+)-.+?",
              "item": 3
         }
     },
