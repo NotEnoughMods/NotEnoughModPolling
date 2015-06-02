@@ -73,9 +73,9 @@ class NotEnoughClasses():
             self.invalid_versions[i] = re.compile(regex, re.I)
 
     def buildModDict(self):
-        modList = open("commands/NEMP/mods.json", "r")
-        fileInfo = modList.read()
-        self.mods = simplejson.loads(fileInfo, strict=False)
+        with open("commands/NEMP/mods.json", "rb") as modList:
+            self.mods = simplejson.load(modList)
+
         for mod in self.mods:
             if "change" not in self.mods[mod]:
                 self.mods[mod]["change"] = "NOT_USED"
