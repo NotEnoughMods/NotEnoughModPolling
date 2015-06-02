@@ -158,7 +158,7 @@ class NotEnoughClasses():
                         templist.remove(mod["name"])
 
                 # ok, so it wasn't directly on the list, is it indirectly on the list though.
-                for lonelyMod in templist:
+                for lonelyMod in templist[:]:
                     # Is this mod a PykerHack(tm)
                     if "name" in self.mods[lonelyMod]:
                         # ok, this is a PykerHack(tm) mod, lets loop through NEM again to find it
