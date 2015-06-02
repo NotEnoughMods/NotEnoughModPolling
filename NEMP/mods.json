@@ -2725,5 +2725,32 @@
     "4Space": {
         "function": "Check4Space",
         "active": true
+    },
+    "HelpFixer": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "id": "223797",
+            "name": "helpfixer",
+            "regex": "HelpFixer ?- ?(?P<version>.+?)(?:\\.jar)?$"
+        }
+    },
+    "IceShards": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "id": "229598",
+            "name": "ice-shards",
+            "regex": "ice_shards_mc.+?-(?P<version>.+?)\\.jar"
+        }
+    },
+    "Roadblocks": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "id": "227278",
+            "name": "roadblocks",
+            "regex": "Roadblocks-.+?-(?P<version>.+?)\\.jar"
+        }
     }
 }
