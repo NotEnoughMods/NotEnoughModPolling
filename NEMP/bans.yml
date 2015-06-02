@@ -3,6 +3,7 @@
 - '-javadoc'
 - '-api'
 - '-deobf'
+- 'sources'
 - '[<>]'
 - '^\['
 - '\]$'
