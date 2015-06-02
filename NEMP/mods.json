@@ -2505,7 +2505,7 @@
      },
     "KoreSample": {
         "function": "CheckGitHubRelease",
-        "active": true,
+        "active": false,
         "github": {
             "repo": "MinecraftModArchive/KoreSample",
             "regex": "KoreSample-(?P<mc>.+?)-(?P<version>.+?).jar"
@@ -2530,7 +2530,7 @@
     },
     "AncientTrees": {
         "function": "CheckGitHubRelease",
-        "active": true,
+        "active": false,
         "github": {
             "repo": "MinecraftModArchive/Dendrology",
             "regex": "AncientTrees-(?P<mc>.+?)-(?P<version>[0-9]+(?:\\.[0-9]+)*).jar"
