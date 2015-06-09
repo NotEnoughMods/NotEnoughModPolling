@@ -1830,15 +1830,6 @@
             "regex": "dark_menagerie-(?P<mc>.+?)-(?P<version>.+?).jar"
         }
      },
-    "DonutCraft": {
-        "function": "CheckCurse",
-        "active": true,
-        "curse": {
-            "id": "223352",
-            "name": "donutcraft",
-            "regex": "DonutCraft-(?P<version>.+?).jar"
-        }
-     },
     "DraconicEvolution": {
         "function": "CheckCurse",
         "active": true,
