@@ -2743,5 +2743,13 @@
             "name": "roadblocks",
             "regex": "Roadblocks-.+?-(?P<version>.+?)\\.jar"
         }
+    },
+    "RemainInMotion": {
+        "function": "CheckGitHubRelease",
+        "active": true,
+        "github": {
+            "repo": "planetguy32/RemainInMotion",
+            "regex": "RemainInMotion-(?P<version>.+)\\.jar"
+        }
     }
 }
