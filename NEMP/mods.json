@@ -1722,7 +1722,7 @@
         "active": true,
         "curse": {
             "name": "mca",
-            "regex": "MCA-(?P<mc>.+?)-(?P<version>.+?)-universal.jar"
+            "regex": "MCA-(?P<version>.+?)-(?P<mc>1\\..+?)-universal.jar"
         }
     },
     "TheMistsofRioV": {
