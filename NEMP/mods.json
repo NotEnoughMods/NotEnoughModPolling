@@ -1108,7 +1108,7 @@
         "active" : true,
         "curse": {
             "name" : "bdlib",
-            "regex" : "-.+?-(?P<version>.+?).jar"
+            "regex" : "bdlib-(?P<version>.+?)-mc.+.jar"
         }
     },
     "Gendustry" : {
@@ -1116,7 +1116,7 @@
         "active" : true,
         "curse": {
             "name" : "gendustry",
-            "regex" : "-.+?-(?P<version>.+?).jar"
+            "regex" : "gendustry-(?P<version>.+?)-mc.+.jar"
         }
     },
     "PressurePipes" : {
@@ -1125,7 +1125,7 @@
         "curse": {
             "name" : "pressure-pipes",
             "id" : "221214",
-            "regex" : "-.+?-(?P<version>.+?).jar"
+            "regex" : "pressure-(?P<version>.+?)-mc.+.jar"
         }
     },
     "Zyin'sHUD" : {
