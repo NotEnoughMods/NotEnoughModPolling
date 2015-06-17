@@ -2751,5 +2751,14 @@
             "repo": "planetguy32/RemainInMotion",
             "regex": "RemainInMotion-(?P<version>.+)\\.jar"
         }
+    },
+    "SolarExpansion": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "id": "223583",
+            "name": "solar-expansion",
+            "regex": "Solar Expansion (?:BASIC|EDITABLE) (?P<version>\\S+)"
+        }
     }
 }
