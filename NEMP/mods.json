@@ -1128,6 +1128,36 @@
             "regex" : "pressure-(?P<version>.+?)-mc.+.jar"
         }
     },
+    "BDLib-dev": {
+        "name": "BDLib",
+        "function": "CheckJenkins",
+        "active": true,
+        "jenkins": {
+            "url": "http://jenkins.bdew.net/job/bdlib-1.7.10/lastSuccessfulBuild/api/json",
+            "regex": "bdlib-(?P<dev>.+?)-mc(?P<mc>1\\..+).jar",
+            "item": 0
+        }
+    },
+    "Gendustry-dev": {
+        "name": "Gendustry",
+        "function": "CheckJenkins",
+        "active": true,
+        "jenkins": {
+            "url": "http://jenkins.bdew.net/job/gendustry-1.7.10/lastSuccessfulBuild/api/json",
+            "regex": "gendustry-(?P<dev>.+?)-mc(?P<mc>1\\..+).jar",
+            "item": 1
+        }
+    },
+    "PressurePipes-dev": {
+        "name": "PressurePipes",
+        "function": "CheckJenkins",
+        "active": true,
+        "jenkins": {
+            "url": "http://jenkins.bdew.net/job/pressure-1.7.10/lastSuccessfulBuild/api/json",
+            "regex": "pressure-(?P<dev>.+?)-mc(?P<mc>1\\..+).jar",
+            "item": 1
+        }
+    },
     "Zyin'sHUD" : {
         "function" : "CheckCurse",
         "active" : true,
