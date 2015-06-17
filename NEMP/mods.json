@@ -404,7 +404,7 @@
     "Mekanism-Release" : {
         "name" : "Mekanism",
         "function" : "CheckJenkins",
-        "active" : true,
+        "active" : false,
         "jenkins" : {
             "url" : "http://ci.indiewikis.com:8080/job/Mekanism/Recommended/api/json",
             "regex" : "Mekanism-(?P<mc>.+?)-(?P<version>.+?).jar",
