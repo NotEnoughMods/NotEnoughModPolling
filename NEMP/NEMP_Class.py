@@ -487,6 +487,23 @@ class NotEnoughClasses():
         else:
             return {}
 
+    def CheckMekanism(self, mod):
+        # mostly a straight port from http://git.io/vL8tB
+
+        result = self.fetch_page('https://dl.dropbox.com/u/90411166/Mod%20Versions/Mekanism.txt').split(':')
+
+        if len(result) > 1 and 'UTF-8' not in result and 'HTML' not in result and 'http' not in result:
+            remote_version = result[0]
+            local_version = self.mods[mod]['version']
+
+            if local_version == 'dev-only' or LooseVersion(remote_version) > LooseVersion(local_version):
+                return {
+                    'version': result[0],
+                    'change': result[1]
+                }
+            else:
+                return {}
+
     def CheckAtomicStryker(self, mod, document):
         if not document:
             return self.fetch_page("http://atomicstryker.net/updatemanager/modversions.txt")

@@ -403,13 +403,8 @@
     },
     "Mekanism-Release" : {
         "name" : "Mekanism",
-        "function" : "CheckJenkins",
-        "active" : false,
-        "jenkins" : {
-            "url" : "http://ci.indiewikis.com:8080/job/Mekanism/Recommended/api/json",
-            "regex" : "Mekanism-(?P<mc>.+?)-(?P<version>.+?).jar",
-            "item" : 1
-        }
+        "function" : "CheckMekanism",
+        "active" : true
     },
     "CodeChickenCore" : {
         "function" : "CheckChickenBones",
