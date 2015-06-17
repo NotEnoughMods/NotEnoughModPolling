@@ -60,7 +60,7 @@
         "mcforge" : {
             "url" : "http://files.minecraftforge.net/maven/codechicken/ForgeMultipart/promotions.json",
             "promo" : "latest",
-            "promoType" : "dev"
+            "promoType" : "version"
         }
     },
     "CodeChickenLib" : {
