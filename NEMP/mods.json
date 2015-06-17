@@ -1561,7 +1561,7 @@
     },
     "Botania" : {
         "function" : "CheckHTML",
-        "active" : true,
+        "active" : false,
         "html" : {
             "url" : "https://raw.githubusercontent.com/Vazkii/Botania/master/version/1.7.10.txt",
             "regex" : "^(?P<version>[rR].+?)$"
