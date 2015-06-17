@@ -1590,12 +1590,8 @@
         }
     },
     "Botania" : {
-        "function" : "CheckHTML",
-        "active" : false,
-        "html" : {
-            "url" : "https://raw.githubusercontent.com/Vazkii/Botania/master/version/1.7.10.txt",
-            "regex" : "^(?P<version>[rR].+?)$"
-        }
+        "function" : "CheckBotania",
+        "active" : true
     },
     "AutoCrafter2000" : {
         "function" : "CheckJenkins",

@@ -470,6 +470,23 @@ class NotEnoughClasses():
         else:
             return {}
 
+    def CheckBotania(self, mod):
+        mc = self.mods[mod]['mc']
+
+        online_version = self.fetch_page("https://raw.githubusercontent.com/Vazkii/Botania/master/version/" + mc + ".txt")
+
+        online_build = int(online_version.split('-')[1])
+
+        local_build = int(self.mods[mod]['version'].split('-')[1])
+
+        if online_build > local_build:
+            return {
+                'version': online_version,
+                'mc': mc
+            }
+        else:
+            return {}
+
     def CheckAtomicStryker(self, mod, document):
         if not document:
             return self.fetch_page("http://atomicstryker.net/updatemanager/modversions.txt")
