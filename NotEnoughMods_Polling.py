@@ -217,33 +217,37 @@ def PollingThread(self, pipe):
         tempList = {}
         SinZationalHax = []
         failed = []
+
         for mod, info in NEM.mods.iteritems():
             if self.signal:
                 return
 
-            if NEM.mods[mod]["active"]:
-                if "SinZationalHax" in NEM.mods[mod]:
-                    if NEM.mods[mod]["SinZationalHax"]["id"] not in SinZationalHax:  # have we polled this set of mods before
-                        results = NEM.CheckMods(mod)
-                        for outputMod, outputInfo in results.iteritems():
-                            result, exceptionRaised = results[outputMod]
-                            if any(result):
-                                tempList.setdefault(NEM.mods[outputMod]['mc'], []).append((outputMod, result))
-                            elif exceptionRaised:
-                                failed.append(outputMod)
-                        SinZationalHax.append(NEM.mods[mod]["SinZationalHax"]["id"])  # Remember this poll that we have done this set of mods
-                    else:
-                        # nemp_logger.debug("Already polled {} before".format(NEM.mods[mod]["SinZationalHax"]["id"]))
-                        pass
-                else:
-                    result, exceptionRaised = NEM.CheckMod(mod)
+            if not NEM.mods[mod]["active"]:
+                return
 
-                    # if there is an update
-                    if any(result):
-                        tempList.setdefault(NEM.mods[mod]['mc'], []).append((mod, result))
-                    # if there's no update, we must check if there was an exception
-                    elif exceptionRaised:
-                        failed.append(mod)
+            if "SinZationalHax" in NEM.mods[mod]:
+                if NEM.mods[mod]["SinZationalHax"]["id"] not in SinZationalHax:  # have we polled this set of mods before
+                    results = NEM.CheckMods(mod)
+                    for outputMod, outputInfo in results.iteritems():
+                        result, exceptionRaised = results[outputMod]
+                        if any(result):
+                            tempList.setdefault(NEM.mods[outputMod]['mc'], []).append((outputMod, result))
+                        elif exceptionRaised:
+                            failed.append(outputMod)
+                    SinZationalHax.append(NEM.mods[mod]["SinZationalHax"]["id"])  # Remember this poll that we have done this set of mods
+                else:
+                    # nemp_logger.debug("Already polled {} before".format(NEM.mods[mod]["SinZationalHax"]["id"]))
+                    pass
+            else:
+                result, exceptionRaised = NEM.CheckMod(mod)
+
+                # if there is an update
+                if any(result):
+                    tempList.setdefault(NEM.mods[mod]['mc'], []).append((mod, result))
+                # if there's no update, we must check if there was an exception
+                elif exceptionRaised:
+                    failed.append(mod)
+
         pipe.send((tempList, failed))
 
         # A more reasonable way of sleeping to quicken up the
