@@ -114,13 +114,7 @@ class NotEnoughClasses():
             f.write(footerText)
 
     def QueryNEM(self):
-        try:
-            self.nemVersions = reversed(self.fetch_json("http://bot.notenoughmods.com/?json"))
-        except:
-            print("Failed to get NEM versions, falling back to hard-coded")
-            traceb = str(traceback.format_exc())
-            print(traceb)
-            self.nemVersions = reversed(["1.4.5", "1.4.6-1.4.7", "1.5.1", "1.5.2", "1.6.1", "1.6.2", "1.6.4", "1.7.2"])
+        self.nemVersions = reversed(self.fetch_json("http://bot.notenoughmods.com/?json"))
 
     def InitiateVersions(self):
         # Store a list of mods so we dont override our version
