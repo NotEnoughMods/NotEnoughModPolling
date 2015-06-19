@@ -252,13 +252,17 @@
         "function" : "CheckCurse",
         "active" : true,
         "curse" : {
-            "regex" : "OpenPrinter-(?P<mc>.+?)-(.+?)-(?P<version>.+?).jar$"
+            "id": "225127",
+            "name": "openprinter",
+            "regex" : "OpenPrinter-(?P<mc>.+?)-.+?-(?P<version>.+?).jar$"
         }
     },
     "OpenSecurity" : {
         "function" : "CheckCurse",
         "active" : true,
         "curse" : {
+            "id": "231687",
+            "name": "opensecurity",
             "regex" : "OpenSecurity-(?P<version>.+?).jar$"
         }
     },
