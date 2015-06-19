@@ -248,6 +248,20 @@
             "regex" : "LanteaCraft-(?P<mc>.+?)-(?P<version>.+?).jar$"
         }
     },
+    "OpenPrinter" : {
+        "function" : "CheckCurse",
+        "active" : true,
+        "curse" : {
+            "regex" : "OpenPrinter-(?P<mc>.+?)-(.+?)-(?P<version>.+?).jar$"
+        }
+    },
+    "OpenSecurity" : {
+        "function" : "CheckCurse",
+        "active" : true,
+        "curse" : {
+            "regex" : "OpenSecurity-(?P<version>.+?).jar$"
+        }
+    },
     "ModularPowersuits" : {
         "function" : "CheckJenkins",
         "category" : "technic-ci",
