@@ -2439,7 +2439,7 @@
         "curse": {
             "id": "224712",
             "name": "wawla-what-are-we-looking-at",
-            "regex": "-(?P<version>.+?)_.+?.jar"
+            "regex": "Wawla-(?P<version>.+?)-.+.jar"
         }
     },
     "Dimensional-Pockets": {
