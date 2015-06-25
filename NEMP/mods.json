@@ -1078,7 +1078,7 @@
         "active" : true,
         "curse": {
             "id" : "220954",
-            "regex" : "ModTweaker (?P<version>.+)"
+            "regex" : "ModTweaker2 - (?P<version>.+)"
         }
     },
     "Morpheus-1.7" : {
