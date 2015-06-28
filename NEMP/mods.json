@@ -821,7 +821,7 @@
         "jenkins" : {
             "url" : "http://ci.tterrag.com/job/EnderIO/lastSuccessfulBuild/api/json",
             "regex" : "EnderIO-(?P<mc>.+?)-(?P<dev>.+?).jar",
-            "item" : 4
+            "item" : 3
         }
     },
     "EnderIO-Release" : {
