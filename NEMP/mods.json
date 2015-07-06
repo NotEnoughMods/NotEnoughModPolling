@@ -2476,7 +2476,7 @@
         "active": true,
         "github": {
             "repo": "Vexatos/Flamingo",
-            "regex": "Flamingo-(?P<mc>.+?)-(?P<version>.+).jar"
+            "regex": "Flamingo-(?P<mc>.+?)-(?P<version>[0-9.]+).jar"
         }
     },
     "Talismans2": {
