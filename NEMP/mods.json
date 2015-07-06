@@ -254,7 +254,7 @@
         "curse" : {
             "id": "225127",
             "name": "openprinter",
-            "regex" : "OpenPrinter-(?P<mc>.+?)-.+?-(?P<version>.+?).jar$"
+            "regex" : "OpenPrinter-(?P<mc>.+?)-(?P<version>.+?).jar$"
         }
     },
     "OpenSecurity" : {
@@ -2448,7 +2448,7 @@
         "curse": {
             "id": "226990",
             "name": "dimensional-pockets",
-            "regex": "Dimensional Pockets (?P<version>.+)"
+            "regex": "DimensionalPockets (?P<version>.+)"
         }
     },
     "EnderZoo": {
