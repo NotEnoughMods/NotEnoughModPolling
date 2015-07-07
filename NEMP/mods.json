@@ -2664,7 +2664,7 @@
         "category" : "tterrag",
         "jenkins": {
             "url": "http://ci.tterrag.com/job/WAILAPlugins/lastSuccessfulBuild/api/json",
-            "regex": ".+?-MC(?P<mc>.+?)-(?P<version>.+?).jar",
+            "regex": ".+?-MC(?P<mc>.+?)-(?P<dev>.+?).jar",
             "item": 2
         }
     },
