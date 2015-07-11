@@ -223,7 +223,7 @@ def PollingThread(self, pipe):
                 return
 
             if not NEM.mods[mod]["active"]:
-                return
+                continue
 
             if "SinZationalHax" in NEM.mods[mod]:
                 if NEM.mods[mod]["SinZationalHax"]["id"] not in SinZationalHax:  # have we polled this set of mods before
