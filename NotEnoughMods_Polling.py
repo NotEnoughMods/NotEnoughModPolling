@@ -542,7 +542,8 @@ def nemp_set(self, name, params, channel, userdata, rank):
         return
 
     available_casts = {
-        'int': int
+        'int': int,
+        'float': float
     }
 
     cast_to = None
@@ -560,25 +561,35 @@ def nemp_set(self, name, params, channel, userdata, rank):
         self.sendMessage(channel, "This is not a toy!")
         return
 
+    mod = args[0]
+
+    if mod not in self.NEM.mods:
+        self.sendMessage(channel, name + ': No such mod in NEMP.')
+        return
+
     if args[1] == 'active':
         self.sendMessage(channel, "You want =nemp poll instead.")
         return
 
     try:
-        if len(args) == 3:
-            if cast_to:
-                new_value = cast_to(args[2])
-            else:
-                new_value = args[2]
-            self.NEM.mods[args[0]][args[1]] = new_value
+        if cast_to:
+            new_value = cast_to(args[-1])
         else:
-            if cast_to:
-                new_value = cast_to(args[3])
-            else:
-                new_value = args[3]
-            self.NEM.mods[args[0]][args[1]][args[2]] = new_value
+            new_value = args[-1]
+
+        elem = self.NEM.mods[mod]
+
+        path = args[1:-2]
+
+        for path_elem in path:
+            elem = elem[path_elem]
+
+        elem[args[-2]] = new_value
+
         self.sendMessage(channel, "done.")
-    except ValueError as e:
+    except KeyError:
+        self.sendMessage(channel, name + ": No such element in that mod's configuration.")
+    except Exception as e:
         self.sendMessage(channel, "Error: " + str(e))
 
 
