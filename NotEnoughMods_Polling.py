@@ -535,11 +535,6 @@ def genHTML(self, name, params, channel, userdata, rank):
 
 
 def nemp_set(self, name, params, channel, userdata, rank):
-    #params[1] = mod
-    #params[2] = config
-    # params[3] = setting if len(params) == 4, else deeper config
-    #params[4] = setting
-
     # Split the arguments in a shell-like fashion
     try:
         args = shlex.split(' '.join(params[1:]))
