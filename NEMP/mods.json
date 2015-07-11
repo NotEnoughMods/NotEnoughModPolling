@@ -2213,7 +2213,7 @@
     "TSteelworks-Ephys": {
         "name": "TinkersSteelworks-Ephys",
         "function": "CheckGitHubRelease",
-        "active": true,
+        "active": false,
         "github": {
             "repo": "Ephys/TinkersSteelworks",
             "regex": "TSteelworks-(?P<mc>.+?)-(?P<version>.+?).jar"
