@@ -2806,7 +2806,7 @@
         "curse": {
             "id": "227328",
             "name": "thaumcraft-node-tracker",
-            "regex": "tcnodetracker-1.7.10-(?P<version>.+?).jar"
+            "regex": "tcnodetracker-(?P<mc>[^-]+)-(?P<version>.+?).jar"
         }
     },
     "Bookshelf": {
@@ -2815,7 +2815,7 @@
         "curse": {
             "id": "232784",
             "name": "bookshelf-api-library",
-            "regex": "Bookshelf-1.7.10-(?P<version>.+?).jar"
+            "regex": "Bookshelf-(?P<mc>[^-]+)-(?P<version>.+?).jar"
         }
     },
     "ModularSystems": {
@@ -2824,7 +2824,7 @@
         "curse": {
             "id": "68528",
             "name": "modular-systems",
-            "regex": "ModularSystems-1.7.10-(?P<version>.+?).jar"
+            "regex": "ModularSystems-(?P<mc>[^-]+)-(?P<version>.+?).jar"
         }
     }
 }
