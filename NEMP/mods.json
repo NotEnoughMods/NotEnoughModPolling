@@ -2799,5 +2799,32 @@
             "name": "solar-expansion",
             "regex": "Solar Expansion (?:BASIC|EDITABLE) (?P<version>\\S+)"
         }
+    },
+    "ThaumcraftNodeTracker": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "id": "227328",
+            "name": "thaumcraft-node-tracker",
+            "regex": "tcnodetracker-1.7.10-(?P<version>.+?).jar"
+        }
+    },
+    "Bookshelf": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "id": "232784",
+            "name": "bookshelf-api-library",
+            "regex": "Bookshelf-1.7.10-(?P<version>.+?).jar"
+        }
+    },
+    "ModularSystems": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "id": "68528",
+            "name": "modular-systems",
+            "regex": "ModularSystems-1.7.10-(?P<version>.+?).jar"
+        }
     }
 }
