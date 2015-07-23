@@ -2448,7 +2448,7 @@
         "curse": {
             "id": "226990",
             "name": "dimensional-pockets",
-            "regex": "DimensionalPockets (?P<version>.+)"
+            "regex": "DimensionalPockets (?P<version>\\S+)"
         }
     },
     "EnderZoo": {
