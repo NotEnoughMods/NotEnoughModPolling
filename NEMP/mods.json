@@ -2834,5 +2834,13 @@
             "name": "openmodularturrets",
             "regex": "OpenModularTurrets-(?P<mc>.+?)-(?P<version>.+).jar"
         }
+    },
+    "PlaceableItems": {
+        "function": "CheckHTML",
+        "active": true,
+        "html": {
+            "url": "https://raw.githubusercontent.com/Ferdzz/PlaceableItems/master/version.txt",
+            "regex": "(?P<version>.+)"
+        }
     }
 }
