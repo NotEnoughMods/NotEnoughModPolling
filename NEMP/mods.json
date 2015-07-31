@@ -936,6 +936,15 @@
             "item" : 2
         }
     },
+    "MrTJPCore" : {
+        "function" : "CheckCurse",
+        "active" : true,
+        "curse": {
+            "name" : "mrtjpcore",
+            "id" : "229002",
+            "regex" : "MrTJPCore-(?P<version>.+?)-universal.jar"
+        }
+    },
     "ProjectRed" : {
         "function" : "CheckCurse",
         "active" : true,
@@ -945,14 +954,13 @@
             "regex" : "ProjectRed-(?P<mc>.+?)-(?P<version>.+?)-.+?.jar"
         }
     },
-    "ProjectRed-Release" : {
-        "name" : "ProjectRed",
-        "function" : "CheckJenkins",
-        "active" : false,
-        "jenkins" : {
-            "url" : "http://ci.indiewikis.com:8080/job/Project%20Red/Recommended/api/json",
-            "regex" : "ProjectRed-Base-(?P<mc>.+?)-(?P<version>.+?).jar",
-            "item" : 0
+    "ForgeRelocation" : {
+        "function" : "CheckCurse",
+        "active" : true,
+        "curse": {
+            "name" : "forge-relocation",
+            "id" : "232075",
+            "regex" : "ForgeRelocation-(?P<version>.+?)-universal.jar"
         }
     },
     "CoFHCore" : {
