@@ -2851,5 +2851,14 @@
             "url": "https://raw.githubusercontent.com/Ferdzz/PlaceableItems/master/version.txt",
             "regex": "(?P<version>.+)"
         }
+    },
+    "FancyFluidStorage": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "id": "232683",
+            "name": "ffs-fancy-fluid-storage",
+            "regex": "Fancy Fluid Storage-(?P<mc>[^-]+)-(?P<version>.+?).jar"
+        }
     }
 }
