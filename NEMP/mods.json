@@ -2550,11 +2550,12 @@
         }
     },
     "ScottsTweaks": {
-        "function": "CheckGitHubRelease",
+        "function": "CheckCurse",
         "active": true,
-        "github": {
-            "repo": "MinecraftModArchive/ScottsTweaks",
-            "regex": "ScottsTweaks-(?P<mc>.+?)-(?P<version>.+?).jar"
+        "curse": {
+            "id": "229627",
+            "name": "scotts-tweaks",
+            "regex": "Scott's Tweaks v(?P<version>\\S+)"
         }
     },
     "ForgeTeamspeak3Integration" : {
