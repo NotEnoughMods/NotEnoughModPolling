@@ -2858,7 +2858,7 @@
         "curse": {
             "id": "232683",
             "name": "ffs-fancy-fluid-storage",
-            "regex": "Fancy Fluid Storage-(?P<mc>[^-]+)-(?P<version>.+?).jar"
+            "regex": "FFS v(?P<version>\\S+)"
         }
     }
 }
