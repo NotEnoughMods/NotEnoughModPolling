@@ -2213,7 +2213,7 @@
         "active": true,
         "category" : "Tehnut",
         "jenkins": {
-            "url": "http://tehnut.info/jenkins/job/Guide-API/lastSuccessfulBuild/api/json",
+            "url": "http://tehnut.info/jenkins/job/Guide-API-1.7.10/lastSuccessfulBuild/api/json",
             "regex": "Guide-API-(?P<mc>.+?)-(?P<version>.+)-.+?",
              "item": 3
         }
