@@ -2869,7 +2869,7 @@
         "jenkins": {
             "url": "http://tehnut.info/jenkins/view/HxCMods/job/HxCCore-1.7.10/lastSuccessfulBuild/api/json",
             "regex": "HxCCore-(?P<mc>.+?)-(?P<version>.+?)-universal.jar",
-            "item": 0
+            "item": 1
         }
     },
     "HxCCore-1.8": {
@@ -2880,7 +2880,7 @@
         "jenkins": {
             "url": "http://tehnut.info/jenkins/view/HxCMods/job/HxCCore-1.8/lastSuccessfulBuild/api/json",
             "regex": "HxCCore-(?P<mc>.+?)-(?P<version>.+?)-universal.jar",
-            "item": 0
+            "item": 1
         }
     },
 	"HxCBlocks-1.7": {
@@ -2890,7 +2890,7 @@
         "active": true,
         "jenkins": {
             "url": "http://tehnut.info/jenkins/view/HxCMods/job/HxCBlocks-1.7.10/lastSuccessfulBuild/api/json",
-            "regex": "HxCCore-(?P<mc>.+?)-(?P<version>.+?).jar",
+            "regex": "HxC-Blocks-(?P<mc>.+?)-(?P<version>.+?).jar",
             "item": 0
         }
     },
