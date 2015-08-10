@@ -2860,5 +2860,82 @@
             "name": "ffs-fancy-fluid-storage",
             "regex": "FFS v(?P<version>\\S+)"
         }
+    },
+    "HxCCore-1.7": {
+        "name": "HxC-Core",
+        "function": "CheckJenkins",
+        "category" : "HxCMods",
+        "active": true,
+        "jenkins": {
+            "url": "http://tehnut.info/jenkins/view/HxCMods/job/HxCCore-1.7.10/lastSuccessfulBuild/api/json",
+            "regex": "HxCCore-(?P<mc>.+?)-(?P<version>.+?)-universal.jar",
+            "item": 0
+        }
+    },
+    "HxCCore-1.8": {
+        "name": "HxC-Core",
+        "function": "CheckJenkins",
+        "active": true,
+        "category" : "HxCMods",
+        "jenkins": {
+            "url": "http://tehnut.info/jenkins/view/HxCMods/job/HxCCore-1.8/lastSuccessfulBuild/api/json",
+            "regex": "HxCCore-(?P<mc>.+?)-(?P<version>.+?)-universal.jar",
+            "item": 0
+        }
+    },
+	"HxCBlocks-1.7": {
+        "name": "HxC-Blocks",
+        "function": "CheckJenkins",
+        "category" : "HxCMods",
+        "active": true,
+        "jenkins": {
+            "url": "http://tehnut.info/jenkins/view/HxCMods/job/HxCBlocks-1.7.10/lastSuccessfulBuild/api/json",
+            "regex": "HxCCore-(?P<mc>.+?)-(?P<version>.+?).jar",
+            "item": 0
+        }
+    },
+    "HxCEnchants-1.7": {
+        "name": "HxC-Enchants",
+        "function": "CheckJenkins",
+        "active": true,
+        "category" : "HxCMods",
+        "jenkins": {
+            "url": "http://tehnut.info/jenkins/view/HxCMods/job/HxCEnchants2-1.7.10/lastSuccessfulBuild/api/json",
+            "regex": "HxCEnchants-(?P<mc>.+?)-(?P<version>.+?)-dev.jar",
+            "item": 0
+        }
+    },
+    "HxCEnchants-1.8": {
+        "name": "HxC-Enchants",
+        "function": "CheckJenkins",
+        "active": true,
+        "category" : "HxCMods",
+        "jenkins": {
+            "url": "http://tehnut.info/jenkins/view/HxCMods/job/HxCEnchants2-1.8/lastSuccessfulBuild/api/json",
+            "regex": "HxCEnchants-(?P<mc>.+?)-(?P<version>.+?)-dev.jar",
+            "item": 0
+        }
+    },
+    "HxCLinkPads-1.7": {
+        "name": "HxC-Link-Pads",
+        "function": "CheckJenkins",
+        "active": true,
+        "category" : "HxCMods",
+        "jenkins": {
+            "url": "http://tehnut.info/jenkins/view/HxCMods/job/HxCLinkPads-1.7.10/lastSuccessfulBuild/api/json",
+            "regex": "HxCLinkPads-(?P<mc>.+?)-(?P<version>.+?).jar",
+            "item": 0
+        }
+    },
+    "HxCWorldGen-1.7": {
+        "name": "HxC-WorldGen",
+        "function": "CheckJenkins",
+        "active": true,
+        "category" : "HxCMods",
+        "jenkins": {
+            "url": "http://tehnut.info/jenkins/view/HxCMods/job/HxCWorldGen-1.7.10/lastSuccessfulBuild/api/json",
+            "regex": "HxCWorldGen-(?P<mc>.+?)-(?P<version>.+?).jar",
+            "item": 0
+        }
     }
 }
