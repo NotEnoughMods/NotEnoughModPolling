@@ -936,6 +936,15 @@
             "item" : 2
         }
     },
+    "MrTJPCore" : {
+        "function" : "CheckCurse",
+        "active" : true,
+        "curse": {
+            "name" : "mrtjpcore",
+            "id" : "229002",
+            "regex" : "MrTJPCore-(?P<version>.+?)-universal.jar"
+        }
+    },
     "ProjectRed" : {
         "function" : "CheckCurse",
         "active" : true,
@@ -945,14 +954,13 @@
             "regex" : "ProjectRed-(?P<mc>.+?)-(?P<version>.+?)-.+?.jar"
         }
     },
-    "ProjectRed-Release" : {
-        "name" : "ProjectRed",
-        "function" : "CheckJenkins",
-        "active" : false,
-        "jenkins" : {
-            "url" : "http://ci.indiewikis.com:8080/job/Project%20Red/Recommended/api/json",
-            "regex" : "ProjectRed-Base-(?P<mc>.+?)-(?P<version>.+?).jar",
-            "item" : 0
+    "ForgeRelocation" : {
+        "function" : "CheckCurse",
+        "active" : true,
+        "curse": {
+            "name" : "forge-relocation",
+            "id" : "232075",
+            "regex" : "ForgeRelocation-(?P<version>.+?)-universal.jar"
         }
     },
     "CoFHCore" : {
@@ -1761,7 +1769,7 @@
         "active": true,
         "curse": {
             "name": "mca",
-            "regex": "MCA-(?P<version>.+?-1\\..+?)-universal.jar"
+            "regex": "MCA-(?P<version>1\\..+?-.+?)-universal.jar"
         }
     },
     "TheMistsofRioV": {
@@ -2205,7 +2213,7 @@
         "active": true,
         "category" : "Tehnut",
         "jenkins": {
-            "url": "http://tehnut.info/jenkins/job/Guide-API/lastSuccessfulBuild/api/json",
+            "url": "http://tehnut.info/jenkins/job/Guide-API-1.7.10/lastSuccessfulBuild/api/json",
             "regex": "Guide-API-(?P<mc>.+?)-(?P<version>.+)-.+?",
              "item": 3
         }
@@ -2448,7 +2456,7 @@
         "curse": {
             "id": "226990",
             "name": "dimensional-pockets",
-            "regex": "DimensionalPockets (?P<version>.+)"
+            "regex": "DimensionalPockets (?P<version>\\S+)"
         }
     },
     "EnderZoo": {
@@ -2542,11 +2550,12 @@
         }
     },
     "ScottsTweaks": {
-        "function": "CheckGitHubRelease",
+        "function": "CheckCurse",
         "active": true,
-        "github": {
-            "repo": "MinecraftModArchive/ScottsTweaks",
-            "regex": "ScottsTweaks-(?P<mc>.+?)-(?P<version>.+?).jar"
+        "curse": {
+            "id": "229627",
+            "name": "scotts-tweaks",
+            "regex": "Scott's Tweaks v(?P<version>\\S+)"
         }
     },
     "ForgeTeamspeak3Integration" : {
@@ -2806,7 +2815,7 @@
         "curse": {
             "id": "227328",
             "name": "thaumcraft-node-tracker",
-            "regex": "tcnodetracker-1.7.10-(?P<version>.+?).jar"
+            "regex": "tcnodetracker-(?P<mc>[^-]+)-(?P<version>.+?).jar"
         }
     },
     "Bookshelf": {
@@ -2815,16 +2824,118 @@
         "curse": {
             "id": "232784",
             "name": "bookshelf-api-library",
-            "regex": "Bookshelf-1.7.10-(?P<version>.+?).jar"
+            "regex": "Bookshelf-(?P<mc>[^-]+)-(?P<version>.+?).jar"
         }
     },
     "ModularSystems": {
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "id": "68528",
             "name": "modular-systems",
-            "regex": "ModularSystems-1.7.10-(?P<version>.+?).jar"
+            "regex": "ModularSystems-(?P<mc>[^-]+)-(?P<version>.+?).jar"
+        }
+    },
+    "OpenModularTurrets": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "id": "224663",
+            "name": "openmodularturrets",
+            "regex": "OpenModularTurrets-(?P<mc>.+?)-(?P<version>.+).jar"
+        }
+    },
+    "PlaceableItems": {
+        "function": "CheckHTML",
+        "active": true,
+        "html": {
+            "url": "https://raw.githubusercontent.com/Ferdzz/PlaceableItems/master/version.txt",
+            "regex": "(?P<version>.+)"
+        }
+    },
+    "FancyFluidStorage": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "id": "232683",
+            "name": "ffs-fancy-fluid-storage",
+            "regex": "FFS v(?P<version>\\S+)"
+        }
+    },
+    "HxCCore-1.7": {
+        "name": "HxC-Core",
+        "function": "CheckJenkins",
+        "category" : "HxCMods",
+        "active": true,
+        "jenkins": {
+            "url": "http://tehnut.info/jenkins/view/HxCMods/job/HxCCore-1.7.10/lastSuccessfulBuild/api/json",
+            "regex": "HxCCore-(?P<mc>.+?)-(?P<version>.+?)-universal.jar",
+            "item": 1
+        }
+    },
+    "HxCCore-1.8": {
+        "name": "HxC-Core",
+        "function": "CheckJenkins",
+        "active": true,
+        "category" : "HxCMods",
+        "jenkins": {
+            "url": "http://tehnut.info/jenkins/view/HxCMods/job/HxCCore-1.8/lastSuccessfulBuild/api/json",
+            "regex": "HxCCore-(?P<mc>.+?)-(?P<version>.+?)-universal.jar",
+            "item": 1
+        }
+    },
+	"HxCBlocks-1.7": {
+        "name": "HxC-Blocks",
+        "function": "CheckJenkins",
+        "category" : "HxCMods",
+        "active": true,
+        "jenkins": {
+            "url": "http://tehnut.info/jenkins/view/HxCMods/job/HxCBlocks-1.7.10/lastSuccessfulBuild/api/json",
+            "regex": "HxC-Blocks-(?P<mc>.+?)-(?P<version>.+?).jar",
+            "item": 0
+        }
+    },
+    "HxCEnchants-1.7": {
+        "name": "HxC-Enchants",
+        "function": "CheckJenkins",
+        "active": true,
+        "category" : "HxCMods",
+        "jenkins": {
+            "url": "http://tehnut.info/jenkins/view/HxCMods/job/HxCEnchants2-1.7.10/lastSuccessfulBuild/api/json",
+            "regex": "HxCEnchants-(?P<mc>.+?)-(?P<version>.+?)-dev.jar",
+            "item": 0
+        }
+    },
+    "HxCEnchants-1.8": {
+        "name": "HxC-Enchants",
+        "function": "CheckJenkins",
+        "active": true,
+        "category" : "HxCMods",
+        "jenkins": {
+            "url": "http://tehnut.info/jenkins/view/HxCMods/job/HxCEnchants2-1.8/lastSuccessfulBuild/api/json",
+            "regex": "HxCEnchants-(?P<mc>.+?)-(?P<version>.+?)-dev.jar",
+            "item": 0
+        }
+    },
+    "HxCLinkPads-1.7": {
+        "name": "HxC-Link-Pads",
+        "function": "CheckJenkins",
+        "active": true,
+        "category" : "HxCMods",
+        "jenkins": {
+            "url": "http://tehnut.info/jenkins/view/HxCMods/job/HxCLinkPads-1.7.10/lastSuccessfulBuild/api/json",
+            "regex": "HxCLinkPads-(?P<mc>.+?)-(?P<version>.+?).jar",
+            "item": 0
+        }
+    },
+    "HxCWorldGen-1.7": {
+        "name": "HxC-WorldGen",
+        "function": "CheckJenkins",
+        "active": true,
+        "category" : "HxCMods",
+        "jenkins": {
+            "url": "http://tehnut.info/jenkins/view/HxCMods/job/HxCWorldGen-1.7.10/lastSuccessfulBuild/api/json",
+            "regex": "HxCWorldGen-(?P<mc>.+?)-(?P<version>.+?).jar",
+            "item": 0
         }
     }
 }
