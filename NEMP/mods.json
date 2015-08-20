@@ -1684,12 +1684,11 @@
         }
     },
     "MadScience" : {
-        "function" : "CheckJenkins",
+        "function" : "CheckCurse",
         "active" : true,
-        "jenkins": {
-            "url" : "http://madsciencemod.com:8080/job/Mad%20Science/Release%20Version/api/json",
-            "regex" : "MadScience-MC(?P<mc>.+?)-F9.11.1.964_v(?P<version>.+?)-universal.jar",
-            "item" : 2
+        "curse": {
+            "name": "mad-science",
+            "regex" : "MadScience-MC(?P<mc>.+?)-F.+?_v(?P<version>.+?)-universal.jar"
         }
     },
     "Minechem" : {
