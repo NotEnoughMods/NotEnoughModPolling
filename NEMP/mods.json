@@ -2945,5 +2945,131 @@
             "regex": "HxCWorldGen-(?P<mc>.+?)-(?P<version>.+?).jar",
             "item": 0
         }
+    },
+    "DragonAPI": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "id": "235591",
+            "name": "dragonapi",
+            "regex": "(?P<version>[Vv][0-9]+[a-zA-Z]+)\\.jar"
+        }
+    },
+    "ChromatiCraft": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "id": "235590",
+            "name": "chromaticraft",
+            "regex": "(?P<version>[Vv][0-9]+[a-zA-Z]+)\\.jar"
+        }
+    },
+    "RotaryCraft": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "id": "235596",
+            "name": "rotarycraft",
+            "regex": "(?P<version>[Vv][0-9]+[a-zA-Z]+)\\.jar"
+        }
+    },
+    "ReactorCraft": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "id": "235593",
+            "name": "reactorcraft",
+            "regex": "(?P<version>[Vv][0-9]+[a-zA-Z]+)\\.jar"
+        }
+    },
+    "ElectriCraft": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "id": "235594",
+            "name": "electricraft",
+            "regex": "(?P<version>[Vv][0-9]+[a-zA-Z]+)\\.jar"
+        }
+    },
+    "ExpandedRedstone": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "id": "235602",
+            "name": "expandedredstone",
+            "regex": "(?P<version>[Vv][0-9]+[a-zA-Z]+)\\.jar"
+        }
+    },
+    "GeoStrata": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "id": "235601",
+            "name": "geostrata",
+            "regex": "(?P<version>[Vv][0-9]+[a-zA-Z]+)\\.jar"
+        }
+    },
+    "TerritoryZone": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "id": "235610",
+            "name": "territoryzone",
+            "regex": "(?P<version>[Vv][0-9]+[a-zA-Z]+)\\.jar"
+        }
+    },
+    "MeteorCraft": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "id": "235604",
+            "name": "meteorcraft",
+            "regex": "(?P<version>[Vv][0-9]+[a-zA-Z]+)\\.jar"
+        }
+    },
+    "CaveControl": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "id": "235605",
+            "name": "cavecontrol",
+            "regex": "(?P<version>[Vv][0-9]+[a-zA-Z]+)\\.jar"
+        }
+    },
+    "CritterPet": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "id": "235608",
+            "name": "critterpet",
+            "regex": "(?P<version>[Vv][0-9]+[a-zA-Z]+)\\.jar"
+        }
+    },
+    "UsefulTNT": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "id": "235612",
+            "name": "usefultnt",
+            "regex": "(?P<version>[Vv][0-9]+[a-zA-Z]+)\\.jar"
+        }
+    },
+    "LegacyCraft": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "id": "235611",
+            "name": "legacycraft",
+            "regex": "(?P<version>[Vv][0-9]+[a-zA-Z]+)\\.jar"
+        }
+    },
+    "VoidMonster": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "id": "235609",
+            "name": "void-monster",
+            "regex": "(?P<version>[Vv][0-9]+[a-zA-Z]+)\\.jar"
+        }
     }
 }
