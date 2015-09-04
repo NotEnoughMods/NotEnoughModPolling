@@ -354,6 +354,9 @@ class NotEnoughClasses():
         else:
             jsonres = self.fetch_json("http://widget.mcf.li/mc-mods/minecraft/" + modname + ".json")
 
+        if jsonres.get('code') == '200' and jsonres.get('error') == 'No Files Found':
+            return {}
+
         release_type = jsonres['release_type'].lower()
 
         regex = re.compile(self.mods[mod]['curse']['regex'])
