@@ -1959,7 +1959,7 @@
         "curse": {
             "id": "224614",
             "name": "notenoughkeys",
-            "regex": "NotEnoughKeys-(?P<mc>.+?)-(?P<version>.+?).jar"
+            "regex": "NEK version: (?P<mc>.+?)-(?P<version>.+)"
         }
     },
     "Steve'sAddons" : {
