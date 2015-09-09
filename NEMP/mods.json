@@ -2952,7 +2952,7 @@
         "curse": {
             "id": "235591",
             "name": "dragonapi",
-            "regex": "(?P<version>[Vv][0-9]+[a-zA-Z]+)\\.jar"
+            "regex": "[Vv](?P<version>[0-9]+[a-zA-Z]+)\\.jar"
         }
     },
     "ChromatiCraft": {
@@ -2961,7 +2961,7 @@
         "curse": {
             "id": "235590",
             "name": "chromaticraft",
-            "regex": "(?P<version>[Vv][0-9]+[a-zA-Z]+)\\.jar"
+            "regex": "[Vv](?P<version>[0-9]+[a-zA-Z]+)\\.jar"
         }
     },
     "RotaryCraft": {
@@ -2970,7 +2970,7 @@
         "curse": {
             "id": "235596",
             "name": "rotarycraft",
-            "regex": "(?P<version>[Vv][0-9]+[a-zA-Z]+)\\.jar"
+            "regex": "[Vv](?P<version>[0-9]+[a-zA-Z]+)\\.jar"
         }
     },
     "ReactorCraft": {
@@ -2979,7 +2979,7 @@
         "curse": {
             "id": "235593",
             "name": "reactorcraft",
-            "regex": "(?P<version>[Vv][0-9]+[a-zA-Z]+)\\.jar"
+            "regex": "[Vv](?P<version>[0-9]+[a-zA-Z]+)\\.jar"
         }
     },
     "ElectriCraft": {
@@ -2988,7 +2988,7 @@
         "curse": {
             "id": "235594",
             "name": "electricraft",
-            "regex": "(?P<version>[Vv][0-9]+[a-zA-Z]+)\\.jar"
+            "regex": "[Vv](?P<version>[0-9]+[a-zA-Z]+)\\.jar"
         }
     },
     "ExpandedRedstone": {
@@ -2997,7 +2997,7 @@
         "curse": {
             "id": "235602",
             "name": "expandedredstone",
-            "regex": "(?P<version>[Vv][0-9]+[a-zA-Z]+)\\.jar"
+            "regex": "[Vv](?P<version>[0-9]+[a-zA-Z]+)\\.jar"
         }
     },
     "GeoStrata": {
@@ -3006,7 +3006,7 @@
         "curse": {
             "id": "235601",
             "name": "geostrata",
-            "regex": "(?P<version>[Vv][0-9]+[a-zA-Z]+)\\.jar"
+            "regex": "[Vv](?P<version>[0-9]+[a-zA-Z]+)\\.jar"
         }
     },
     "TerritoryZone": {
@@ -3015,7 +3015,7 @@
         "curse": {
             "id": "235610",
             "name": "territoryzone",
-            "regex": "(?P<version>[Vv][0-9]+[a-zA-Z]+)\\.jar"
+            "regex": "[Vv](?P<version>[0-9]+[a-zA-Z]+)\\.jar"
         }
     },
     "MeteorCraft": {
@@ -3024,7 +3024,7 @@
         "curse": {
             "id": "235604",
             "name": "meteorcraft",
-            "regex": "(?P<version>[Vv][0-9]+[a-zA-Z]+)\\.jar"
+            "regex": "[Vv](?P<version>[0-9]+[a-zA-Z]+)\\.jar"
         }
     },
     "CaveControl": {
@@ -3033,7 +3033,7 @@
         "curse": {
             "id": "235605",
             "name": "cavecontrol",
-            "regex": "(?P<version>[Vv][0-9]+[a-zA-Z]+)\\.jar"
+            "regex": "[Vv](?P<version>[0-9]+[a-zA-Z]+)\\.jar"
         }
     },
     "CritterPet": {
@@ -3042,7 +3042,7 @@
         "curse": {
             "id": "235608",
             "name": "critterpet",
-            "regex": "(?P<version>[Vv][0-9]+[a-zA-Z]+)\\.jar"
+            "regex": "[Vv](?P<version>[0-9]+[a-zA-Z]+)\\.jar"
         }
     },
     "UsefulTNT": {
@@ -3051,7 +3051,7 @@
         "curse": {
             "id": "235612",
             "name": "usefultnt",
-            "regex": "(?P<version>[Vv][0-9]+[a-zA-Z]+)\\.jar"
+            "regex": "[Vv](?P<version>[0-9]+[a-zA-Z]+)\\.jar"
         }
     },
     "LegacyCraft": {
@@ -3060,7 +3060,7 @@
         "curse": {
             "id": "235611",
             "name": "legacycraft",
-            "regex": "(?P<version>[Vv][0-9]+[a-zA-Z]+)\\.jar"
+            "regex": "[Vv](?P<version>[0-9]+[a-zA-Z]+)\\.jar"
         }
     },
     "VoidMonster": {
@@ -3069,7 +3069,7 @@
         "curse": {
             "id": "235609",
             "name": "void-monster",
-            "regex": "(?P<version>[Vv][0-9]+[a-zA-Z]+)\\.jar"
+            "regex": "[Vv](?P<version>[0-9]+[a-zA-Z]+)\\.jar"
         }
     }
 }
