@@ -3071,5 +3071,74 @@
             "name": "void-monster",
             "regex": "[Vv](?P<version>[0-9]+[a-zA-Z]+)\\.jar"
         }
+    },
+    "EnderCore": {
+        "function": "CheckJenkins",
+        "active": true,
+        "jenkins": {
+            "url": "http://ci.tterrag.com/job/EnderCore/lastSuccessfulBuild/api/json",
+            "regex": "EnderCore-(?P<mc>.+?)-(?P<version>.+?)\\.jar",
+            "item": 3
+        }
+    },
+    "McJtyLib": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "id": "233105",
+            "name": "mcjtylib",
+            "regex": "mcjtylib-(?P<version>.+)\\.jar"
+        }
+    },
+    "RFTools": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "id": "224641",
+            "name": "rftools",
+            "regex": "rftools-(?P<version>.+)\\.jar"
+        }
+    },
+    "DeepResonance": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "id": "233398",
+            "name": "deep-resonance",
+            "regex": "deepresonance-(?P<version>.+)\\.jar"
+        }
+    },
+    "ElecCore": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "id": "227391",
+            "name": "eleccore-dimensionapi",
+            "regex": "ElecCore-(?P<mc>.+?)-(?P<version>.+)\\.jar"
+        }
+    },
+    "MagicBees": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "name": "magic-bees",
+            "regex": "magicbees-(?P<mc>.+?)-(?P<version>.+)\\.jar"
+        }
+    },
+    "Mantle": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "name": "mantle",
+            "regex": "Mantle-(?P<mc>.+?)-(?P<version>.+)\\.jar"
+        }
+    },
+    "TinkersConstruct": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "name": "tinkers-construct",
+            "regex": "TConstruct-(?P<mc>.+?)-(?P<version>.+)\\.jar"
+        }
     }
 }
