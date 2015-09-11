@@ -3147,5 +3147,102 @@
             "regex": "compacter-(?P<version>.+?)-mc(?P<mc>1\\..+).jar",
             "item": 0
         }
+    },
+    "AnotherOneBitestheDust:BerryBushes": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "id": "230292",
+            "name": "another-one-bites-the-dust-berry-bushes",
+            "regex": "AOBDBB-(?P<version>.+)\\.jar"
+        }
+    },
+    "ArmourersWorkshop": {
+        "function": "CheckJenkins",
+        "active": true,
+        "jenkins": {
+            "url": "http://jenkins.rx14.co.uk/job/RiskyKen/job/Armourers-Workshop/lastSuccessfulBuild/api/json",
+            "regex": "Armourers-Workshop-(?P<version>(?P<mc>1\\..+)-.+)\\.jar",
+            "item": 3
+        }
+    },
+    "ChiselFacades": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "id": "222784",
+            "name": "chisel-facades",
+            "regex": "ChiselFacades-(?P<version>.+)\\.jar"
+        }
+    },
+    "ComputerCraft": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "name": "computercraft",
+            "regex": "ComputerCraft (?P<version>.+)"
+        }
+    },
+    "Decocraft": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "name": "decocraft2",
+            "regex": "Decocraft-(?P<version>.+?)_"
+        }
+    },
+    "GanysEnd": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "id": "222084",
+            "name": "ganys-end",
+            "regex": "Ganys End-(?P<version>.+?)\\.jar"
+        }
+    },
+    "GanysNether": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "id": "222302",
+            "name": "ganys-nether",
+            "regex": "Ganys Nether-(?P<version>.+?)\\.jar"
+        }
+    },
+    "GanysSurface": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "id": "222303",
+            "name": "ganys-surface",
+            "regex": "Ganys Surface-(?P<version>.+?)\\.jar"
+        }
+    },
+    "In-GameWikiMod": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "id": "223815",
+            "name": "in-game-wiki-mod",
+            "regex": "IGW-Mod-.+?-(?P<version>.+)-universal\\.jar"
+        }
+    },
+    "ImmersiveEngineering": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "id": "231951",
+            "name": "immersive-engineering",
+            "regex": "Immersive Engineering v(?P<version>.+)"
+        }
+    },
+    "ImmersiveIntegration": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "id": "232159",
+            "name": "immersive-integration",
+            "regex": "Immersive Integration v(?P<version>.+)"
+        }
     }
 }
