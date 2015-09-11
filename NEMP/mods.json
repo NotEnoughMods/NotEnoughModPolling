@@ -877,7 +877,7 @@
         "active" : true,
         "jenkins" : {
             "url" : "http://jenkins.bdew.net/job/neiaddons-1.7.10/lastSuccessfulBuild/api/json",
-            "regex" : "neiaddons-(?P<dev>.+?)-mc(?P<mc>.+?)\\.jar",
+            "regex" : "neiaddons-(?P<version>.+?)-mc(?P<mc>1\\..+?)\\.jar",
             "item" : 0
         }
     },
@@ -1149,33 +1149,30 @@
             "regex" : "pressure-(?P<version>.+?)-mc.+.jar"
         }
     },
-    "BDLib-dev": {
-        "name": "BDLib",
+    "BDLib": {
         "function": "CheckJenkins",
         "active": true,
         "jenkins": {
             "url": "http://jenkins.bdew.net/job/bdlib-1.7.10/lastSuccessfulBuild/api/json",
-            "regex": "bdlib-(?P<dev>.+?)-mc(?P<mc>1\\..+).jar",
+            "regex": "bdlib-(?P<version>.+?)-mc(?P<mc>1\\..+).jar",
             "item": 0
         }
     },
-    "Gendustry-dev": {
-        "name": "Gendustry",
+    "Gendustry": {
         "function": "CheckJenkins",
         "active": true,
         "jenkins": {
             "url": "http://jenkins.bdew.net/job/gendustry-1.7.10/lastSuccessfulBuild/api/json",
-            "regex": "gendustry-(?P<dev>.+?)-mc(?P<mc>1\\..+).jar",
+            "regex": "gendustry-(?P<version>.+?)-mc(?P<mc>1\\..+).jar",
             "item": 1
         }
     },
-    "PressurePipes-dev": {
-        "name": "PressurePipes",
+    "PressurePipes": {
         "function": "CheckJenkins",
         "active": true,
         "jenkins": {
             "url": "http://jenkins.bdew.net/job/pressure-1.7.10/lastSuccessfulBuild/api/json",
-            "regex": "pressure-(?P<dev>.+?)-mc(?P<mc>1\\..+).jar",
+            "regex": "pressure-(?P<version>.+?)-mc(?P<mc>1\\..+).jar",
             "item": 1
         }
     },
@@ -3122,6 +3119,33 @@
         "curse": {
             "name": "mantle",
             "regex": "Mantle-(?P<mc>.+?)-(?P<version>.+)\\.jar"
+        }
+    },
+    "AdvancedGenerators": {
+        "function": "CheckJenkins",
+        "active": true,
+        "jenkins": {
+            "url": "http://jenkins.bdew.net/job/generators-1.7.10/lastSuccessfulBuild/api/json",
+            "regex": "generators-(?P<version>.+?)-mc(?P<mc>1\\..+).jar",
+            "item": 0
+        }
+    },
+    "AE2Stuff": {
+        "function": "CheckJenkins",
+        "active": true,
+        "jenkins": {
+            "url": "http://jenkins.bdew.net/job/ae2stuff-1.7.10/lastSuccessfulBuild/api/json",
+            "regex": "ae2stuff-(?P<version>.+?)-mc(?P<mc>1\\..+).jar",
+            "item": 0
+        }
+    },
+    "Compacter": {
+        "function": "CheckJenkins",
+        "active": true,
+        "jenkins": {
+            "url": "http://jenkins.bdew.net/job/compacter-1.7.10/lastSuccessfulBuild/api/json",
+            "regex": "compacter-(?P<version>.+?)-mc(?P<mc>1\\..+).jar",
+            "item": 0
         }
     }
 }
