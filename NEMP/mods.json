@@ -882,12 +882,12 @@
         }
     },
     "ExtraCells" : {
-        "function" : "CheckJenkins",
+        "function" : "CheckCurse",
         "active" : true,
-        "jenkins" : {
-            "url" : "http://shadowcity.net:8080/job/ecrv1/lastSuccessfulBuild/api/json",
-            "regex" : "ExtraCells-(?P<mc>.+?)-(?P<version>.+?).jar",
-            "item" : 0
+        "curse" : {
+            "id": "229218",
+            "name": "extracells2",
+            "regex" : "ExtraCells-(?P<mc>.+?)-(?P<version>.+?).jar"
         }
     },
     "ExtraCells-dev" : {
