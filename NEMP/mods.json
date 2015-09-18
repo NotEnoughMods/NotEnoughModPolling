@@ -3162,7 +3162,7 @@
         "active": true,
         "jenkins": {
             "url": "http://jenkins.rx14.co.uk/job/RiskyKen/job/Armourers-Workshop/lastSuccessfulBuild/api/json",
-            "regex": "Armourers-Workshop-(?P<version>(?P<mc>1\\..+)-.+)\\.jar",
+            "regex": "Armourers-Workshop-(?P<mc>1\\..+)-(?P<version>.+)\\.jar",
             "item": 3
         }
     },
