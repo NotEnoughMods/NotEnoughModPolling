@@ -922,7 +922,7 @@
         "jenkins" : {
             "url" : "http://jenkins.ic2.player.to/job/Forestry/lastSuccessfulBuild/api/json",
             "regex" : "forestry_(?P<mc>.+?)-(?P<version>.+?).jar",
-            "item" : 3
+            "item" : 2
         }
     },
     "Forestry" : {
