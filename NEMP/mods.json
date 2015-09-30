@@ -3242,5 +3242,14 @@
             "name": "immersive-integration",
             "regex": "Immersive Integration v(?P<version>.+)"
         }
+    },
+    "StacksOnStacks": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "id": "235753",
+            "name": "stacksonstacks",
+            "regex": "StacksOnStacks-(?P<mc>.+?)-(?P<version>.+)\\.jar"
+        }
     }
 }
