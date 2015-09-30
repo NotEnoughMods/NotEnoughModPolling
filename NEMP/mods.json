@@ -3251,5 +3251,77 @@
             "name": "stacksonstacks",
             "regex": "StacksOnStacks-(?P<mc>.+?)-(?P<version>.+)\\.jar"
         }
+    },
+    "ICBM": {
+        "function": "CheckCurse",
+        "active": false,
+        "curse": {
+            "id": "225502",
+            "name": "icbm",
+            "regex": "ICBM-(?P<mc>.+?)-(?P<version>.+)-.+"
+        }
+    },
+    "VoltzEngine": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "id": "227048",
+            "name": "voltz-engine",
+            "regex": "VoltzEngine (?P<mc>.+?)-(?P<version>.+)"
+        }
+    },
+    "AI-Improvements": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "id": "233019",
+            "name": "ai-improvements",
+            "regex": "AI Improvements (?P<version>.+)"
+        }
+    },
+    "AddictedToRed": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "id": "236575",
+            "name": "addicted-to-red",
+            "regex": "AddictedToRed-(?P<mc>.+?)-(?P<version>.+)-.+"
+        }
+    },
+    "SBM-WoodenBuckets": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "id": "233189",
+            "name": "sbm-wooden-buckets",
+            "regex": ".+?-(?P<mc>.+?)-(?P<version>.+).jar"
+        }
+    },
+    "SBM-WoodenRails": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "id": "233655",
+            "name": "sbm-wooden-rails",
+            "regex": ".+?-(?P<mc>.+?)-(?P<version>.+).jar"
+        }
+    },
+    "SBM-RedCow": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "id": "233525",
+            "name": "sbm-red-cow",
+            "regex": ".+?-(?P<mc>.+?)-(?P<version>.+).jar"
+        }
+    },
+    "SBM-ColoredChests": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "id": "233511",
+            "name": "sbm-colored-chests",
+            "regex": ".+?-(?P<mc>.+?)-(?P<version>.+).jar"
+        }
     }
 }
