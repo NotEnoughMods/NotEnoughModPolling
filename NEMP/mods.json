@@ -3328,7 +3328,7 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "id": 235201,
+            "id": "235201",
             "name": "seedcopy",
             "regex": ".+?-(?P<mc>.+?)-(?P<version>.+).jar"
         }
