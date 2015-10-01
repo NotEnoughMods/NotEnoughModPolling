@@ -3323,5 +3323,14 @@
             "name": "sbm-colored-chests",
             "regex": ".+?-(?P<mc>.+?)-(?P<version>.+).jar"
         }
+    },
+    "SeedCopy": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "id": 235201,
+            "name": "seedcopy",
+            "regex": ".+?-(?P<mc>.+?)-(?P<version>.+).jar"
+        }
     }
 }
