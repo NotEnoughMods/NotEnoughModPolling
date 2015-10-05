@@ -3249,7 +3249,7 @@
         "curse": {
             "id": "235753",
             "name": "stacksonstacks",
-            "regex": "StacksOnStacks-(?P<mc>.+?)-(?P<version>.+)\\.jar"
+            "regex": "StacksOnStacks-(?P<mc>.+?)-(?P<version>.+)"
         }
     },
     "ICBM": {
