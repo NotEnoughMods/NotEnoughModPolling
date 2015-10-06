@@ -1699,7 +1699,7 @@
         "function" : "CheckJenkins",
         "active" : true,
         "jenkins": {
-            "url" : "http://jenkins.jakimfett.com/job/AlchemyPlusPlus%20v1.3%20for%201.7.10/lastSuccessfulBuild/api/json",
+            "url" : "https://jenkins.jakimfett.com/job/AlchemyPlusPlus_1.7.10/lastSuccessfulBuild/api/json",
             "regex" : "AlchemyPlusPlus-(?P<mc>.+?)-(?P<dev>.+?).jar",
             "item" : 0
         }
