@@ -73,10 +73,11 @@ class NotEnoughClasses():
             self.invalid_versions[i] = re.compile(regex, re.I)
 
     def buildModDict(self):
-        modList = open("commands/NEMP/mods.json", "r")
-        fileInfo = modList.read()
-        self.mods = simplejson.loads(fileInfo, strict=False)
+        with open("commands/NEMP/mods.json", "rb") as modList:
+            self.mods = simplejson.load(modList)
+
         for mod in self.mods:
+            self.mods[mod]['nem_versions'] = {}
             if "change" not in self.mods[mod]:
                 self.mods[mod]["change"] = "NOT_USED"
             if "SinZationalHax" in self.mods[mod]:
@@ -114,79 +115,48 @@ class NotEnoughClasses():
             f.write(footerText)
 
     def QueryNEM(self):
-        try:
-            self.nemVersions = reversed(self.fetch_json("http://bot.notenoughmods.com/?json"))
-        except:
-            print("Failed to get NEM versions, falling back to hard-coded")
-            traceb = str(traceback.format_exc())
-            print(traceb)
-            self.nemVersions = reversed(["1.4.5", "1.4.6-1.4.7", "1.5.1", "1.5.2", "1.6.1", "1.6.2", "1.6.4", "1.7.2"])
+        self.nemVersions = self.fetch_json("http://bot.notenoughmods.com/?json")
 
     def InitiateVersions(self):
         # Store a list of mods so we dont override our version
         templist = self.mods.keys()
-        try:
-            # for MC version in NEM's list
-            for version in self.nemVersions:
-                # Get the NEM List for this MC Version
-                jsonres = self.fetch_json("http://bot.notenoughmods.com/" + version + ".json")
 
-                # For each NEM Mod...
-                for mod in jsonres:
-                    # Is it in our list?
-                    if mod["name"] in templist:
-                        # Its in our list, lets store this info
-                        self.mods[mod["name"]]["mc"] = version
+        # for MC version in NEM's list
+        for nem_list_name in self.nemVersions:
+            # Get the NEM List for this MC Version
+            nem_list = self.fetch_json("http://bot.notenoughmods.com/" + nem_list_name + ".json")
 
-                        # Does this NEM Mod have a dev version
-                        if "dev" in mod and mod["dev"]:
-                            # It does
-                            self.mods[mod["name"]]["dev"] = str(mod["dev"])
-                        else:
-                            # It doesn't
-                            self.mods[mod["name"]]["dev"] = "NOT_USED"
+            # For each NEM Mod...
+            for nem_mod in nem_list:
+                nem_mod_name = nem_mod['name']
 
-                        # Does this NEM Mod have a version (not required, but yay redundancy)
-                        if "version" in mod and mod["version"]:
-                            # What a suprise, it did...
-                            self.mods[mod["name"]]["version"] = str(mod["version"])
-                        else:
-                            # What the actual fuck, how did this happen
-                            self.mods[mod["name"]]["version"] = "NOT_USED"
+                # Is it in our list?
+                if nem_mod_name in templist:
+                    # Store latest MC version (since the NEM lists are sorted from oldest to newest)
+                    self.mods[nem_mod_name]["mc"] = nem_list_name
 
-                        # We have had our way with this mod, throw it away
-                        templist.remove(mod["name"])
+                    # Grab the dev and release version
+                    self.mods[nem_mod_name]['nem_versions'][nem_list_name] = {
+                        'dev': nem_mod.get('dev', 'NOT_USED'),
+                        'version': nem_mod.get('version', 'NOT_USED')
+                    }
 
-                # ok, so it wasn't directly on the list, is it indirectly on the list though.
-                for lonelyMod in templist:
-                    # Is this mod a PykerHack(tm)
-                    if "name" in self.mods[lonelyMod]:
-                        # ok, this is a PykerHack(tm) mod, lets loop through NEM again to find it
-                        for lonelyTestMod in jsonres:
-                            # Is it here?
-                            if self.mods[lonelyMod]["name"] == lonelyTestMod["name"]:
-                                 # ok, does it exist for this MC version.
-                                self.mods[lonelyMod]["mc"] = version
+            # ok, so it wasn't directly on the list, is it indirectly on the list though.
+            for lonelyMod in templist[:]:
+                # Is this mod a PykerHack(tm)
+                if "name" in self.mods[lonelyMod]:
+                    # ok, this is a PykerHack(tm) mod, lets loop through NEM again to find it
+                    for nem_mod in nem_list:
+                        # Is it here?
+                        if self.mods[lonelyMod]["name"] == nem_mod["name"]:
+                            # Store latest MC version (since the NEM lists are sorted from oldest to newest)
+                            self.mods[lonelyMod]["mc"] = nem_list_name
 
-                                # Does it have a dev version
-                                if "dev" in lonelyTestMod and lonelyTestMod["dev"]:
-                                    # It did
-                                    self.mods[lonelyMod]["dev"] = str(lonelyTestMod["dev"])
-                                else:
-                                    # It didn't
-                                    self.mods[lonelyMod]["dev"] = "NOT_USED"
-                                # #Redundancy
-                                if "version" in lonelyTestMod and lonelyTestMod["version"]:
-                                    # yay
-                                    self.mods[lonelyMod]["version"] = str(lonelyTestMod["version"])
-                                else:
-                                    # wat
-                                    self.mods[lonelyMod]["version"] = "NOT_USED"
-                                # gtfo LonelyMod, noone likes you anymore
-                                templist.remove(lonelyMod)
-        except:
-            pass
-            # most likely a timeout
+                            # Grab the dev and release version
+                            self.mods[lonelyMod]['nem_versions'][nem_list_name] = {
+                                'dev': nem_mod.get('dev', 'NOT_USED'),
+                                'version': nem_mod.get('version', 'NOT_USED')
+                            }
 
     def CheckJenkins(self, mod):
         jsonres = self.fetch_json(self.mods[mod]["jenkins"]["url"])
@@ -241,10 +211,13 @@ class NotEnoughClasses():
             return output
 
     def CheckChickenBones(self, mod):
-        result = self.fetch_page("http://www.chickenbones.net/Files/notification/version.php?version=" + self.mods[mod]["mc"] + "&file=" + mod)
+        mc_version = self.mods[mod]['mc']
+        local_version = self.get_nem_version(mod, mc_version)
+
+        result = self.fetch_page("http://www.chickenbones.net/Files/notification/version.php?version=" + mc_version + "&file=" + mod)
         if result.startswith("Ret: "):  # Hacky I know, but this is how ChickenBones does it in his mod
-            new_version = result[5:]
-            if self.mods[mod]['version'] == 'dev-only' or LooseVersion(new_version) > LooseVersion(self.mods[mod]['version']):
+            new_version = result[5:].strip()
+            if local_version == 'dev-only' or LooseVersion(new_version) > LooseVersion(local_version):
                 return {
                     "version": new_version
                 }
@@ -381,6 +354,9 @@ class NotEnoughClasses():
         else:
             jsonres = self.fetch_json("http://widget.mcf.li/mc-mods/minecraft/" + modname + ".json")
 
+        if jsonres.get('code') == '200' and jsonres.get('error') == 'No Files Found':
+            return {}
+
         release_type = jsonres['release_type'].lower()
 
         regex = re.compile(self.mods[mod]['curse']['regex'])
@@ -453,6 +429,59 @@ class NotEnoughClasses():
             'version': version
         }
 
+    def Check4Space(self, mod):
+        page = self.fetch_page('http://4space.mods.center/version.html')
+
+        parts = page.strip().replace('Version=', '').split('#')
+
+        if len(parts) != 3:
+            raise RuntimeError('Invalid amount of version parts')
+
+        new_version = '.'.join(parts)
+
+        local_version = self.get_nem_version(mod)
+
+        if local_version == 'dev-only' or LooseVersion(new_version) > LooseVersion(local_version):
+            return {
+                "version": new_version
+            }
+        else:
+            return {}
+
+    def CheckBotania(self, mod):
+        mc = self.mods[mod]['mc']
+
+        online_version = self.fetch_page("https://raw.githubusercontent.com/Vazkii/Botania/master/version/" + mc + ".txt")
+
+        online_build = int(online_version.split('-')[1])
+
+        local_build = int(self.get_nem_version(mod, mc).split('-')[1])
+
+        if online_build > local_build:
+            return {
+                'version': online_version,
+                'mc': mc
+            }
+        else:
+            return {}
+
+    def CheckMekanism(self, mod):
+        # mostly a straight port from http://git.io/vL8tB
+
+        result = self.fetch_page('https://dl.dropbox.com/u/90411166/Mod%20Versions/Mekanism.txt').split(':')
+
+        if len(result) > 1 and 'UTF-8' not in result and 'HTML' not in result and 'http' not in result:
+            remote_version = result[0]
+            local_version = self.get_nem_version(mod)
+
+            if local_version == 'dev-only' or LooseVersion(remote_version) > LooseVersion(local_version):
+                return {
+                    'version': result[0],
+                    'change': result[1]
+                }
+            else:
+                return {}
+
     def CheckAtomicStryker(self, mod, document):
         if not document:
             return self.fetch_page("http://atomicstryker.net/updatemanager/modversions.txt")
@@ -479,58 +508,95 @@ class NotEnoughClasses():
 
         return {}
 
+    def CheckModsIO(self, mod):
+        mod_id = str(self.mods[mod]['modsio']['id'])
+
+        response = self.fetch_json('https://mods.io/mods/' + mod_id + '.json')
+
+        current_version = response['current_version']
+
+        ret = {
+            'mc': current_version['minecraft'],
+            'version': current_version['name']
+        }
+
+        if current_version.get('changelog'):
+            ret['change'] = current_version['changelog']
+
+        return ret
+
     def is_version_valid(self, version):
         for regex in self.invalid_versions:
             if regex.search(version):
                 return False
         return True
 
+    def get_nem_version(self, mod, nem_list=None):
+        if nem_list is None:
+            nem_list = self.mods[mod]['mc']
+        return self.mods[mod]['nem_versions'].get(nem_list, {}).get('version', '')
+
+    def get_nem_dev_version(self, mod, nem_list=None):
+        if nem_list is None:
+            nem_list = self.mods[mod]['mc']
+        return self.mods[mod]['nem_versions'].get(nem_list, {}).get('dev', '')
+
+    def set_nem_version(self, mod, version, nem_list=None):
+        if nem_list is None:
+            nem_list = self.mods[mod]['mc']
+        self.mods[mod]['nem_versions'].setdefault(nem_list, {})['version'] = version
+
+    def set_nem_dev_version(self, mod, version, nem_list=None):
+        if nem_list is None:
+            nem_list = self.mods[mod]['mc']
+        self.mods[mod]['nem_versions'].setdefault(nem_list, {})['dev'] = version
+
     def CheckMod(self, mod, document=None):
         try:
-            # [dev change, version change]
-            status = [False, False]
+            # [mc version, dev change, version change]
+            status = [None, False, False]
 
             if document:
                 output = getattr(self, self.mods[mod]["function"])(mod, document)
             else:
                 output = getattr(self, self.mods[mod]["function"])(mod)
 
+            if "mc" in output:
+                # Update latest NEM list for this mod
+                self.mods[mod]["mc"] = output["mc"]
+                mc_version = output['mc']
+            else:
+                # If no MC version has been specified, use the latest one we
+                # have for this mod
+                mc_version = None
+
+            status[0] = mc_version
+
             if "dev" in output:
                 # Remove whitespace at the end and start
-                self.mods[mod]["dev"] = self.mods[mod]["dev"].strip()
-                output["dev"] = output["dev"].strip()
+                local_dev = self.get_nem_dev_version(mod, mc_version)
+                remote_dev = output['dev'].strip()
 
                 # validate version
-                if not self.is_version_valid(output['dev']):
-                    raise InvalidVersion(output['dev'])
+                if not self.is_version_valid(remote_dev):
+                    raise InvalidVersion(remote_dev)
 
-                if '_replace' in self.mods[mod]:
-                    for k, v in self.mods[mod]['_replace'].iteritems():
-                        output['dev'] = output['dev'].replace(k, v)
-
-                if self.mods[mod]["dev"] != output["dev"]:
-                    self.mods[mod]["dev"] = output["dev"]
-                    status[0] = True
+                if local_dev != remote_dev:
+                    self.set_nem_dev_version(mod, remote_dev, mc_version)
+                    status[1] = True
 
             if "version" in output:
                 # Remove whitespace at the end and start
-                self.mods[mod]["version"] = self.mods[mod]["version"].strip()
-                output["version"] = output["version"].strip()
+                local_release = self.get_nem_version(mod, mc_version)
+                remote_release = output['version'].strip()
 
                 # validate version
-                if not self.is_version_valid(output['version']):
-                    raise InvalidVersion(output['version'])
+                if not self.is_version_valid(remote_release):
+                    raise InvalidVersion(remote_release)
 
-                if '_replace' in self.mods[mod]:
-                    for k, v in self.mods[mod]['_replace'].iteritems():
-                        output['version'] = output['version'].replace(k, v)
-
-                if self.mods[mod]["version"] != output["version"]:
-                    self.mods[mod]["version"] = output["version"]
-                    status[1] = True
-
-            if "mc" in output:
-                self.mods[mod]["mc"] = output["mc"]
+                if local_release != remote_release:
+                    self.set_nem_version(mod, remote_release, mc_version)
+                    status[2] = True
 
             if "change" in output and "changelog" not in self.mods[mod]:
                 self.mods[mod]["change"] = output["change"]
@@ -539,7 +605,7 @@ class NotEnoughClasses():
         except:
             print(mod + " failed to be polled...")
             traceback.print_exc()
-            return [False, False], True  # an exception was raised, so we return a True
+            return [None, False, False], True  # an exception was raised, so we return a True
 
     def CheckMods(self, mod):
         output = {}
@@ -555,7 +621,8 @@ class NotEnoughClasses():
         except:
             print(mod + " failed to be polled (SinZationalHax)")
             traceback.print_exc()
+            # TODO: Fix this ugly hack
             if 'tempMod' in locals():
-                output[tempMod] = ([False, False], True)
+                output[tempMod] = ([None, False, False], True)
 
         return output

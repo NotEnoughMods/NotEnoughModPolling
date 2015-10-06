@@ -2,6 +2,13 @@ NotEnoughMods Polling Plugin
 =============
 A plugin for Renol to utilize and assist the NotEnoughMods project by automatically updating the list via polling various Jenkins/etc servers for mod updates.
 
+Requirements
+------------
+
+`pip install -r requirements.txt`
+
+Python < 2.7.9 also requires these packages to support SNI: `pyOpenSSL ndg-httpsclient pyasn1`
+
 Contact
 ------------
 You can contact SinZ or NightKev in #test at irc.esper.net

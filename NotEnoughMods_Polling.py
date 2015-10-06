@@ -217,33 +217,37 @@ def PollingThread(self, pipe):
         tempList = {}
         SinZationalHax = []
         failed = []
+
         for mod, info in NEM.mods.iteritems():
             if self.signal:
                 return
 
-            if NEM.mods[mod]["active"]:
-                if "SinZationalHax" in NEM.mods[mod]:
-                    if NEM.mods[mod]["SinZationalHax"]["id"] not in SinZationalHax:  # have we polled this set of mods before
-                        results = NEM.CheckMods(mod)
-                        for outputMod, outputInfo in results.iteritems():
-                            result, exceptionRaised = results[outputMod]
-                            if any(result):
-                                tempList.setdefault(NEM.mods[outputMod]['mc'], []).append((outputMod, result))
-                            elif exceptionRaised:
-                                failed.append(outputMod)
-                        SinZationalHax.append(NEM.mods[mod]["SinZationalHax"]["id"])  # Remember this poll that we have done this set of mods
-                    else:
-                        # nemp_logger.debug("Already polled {} before".format(NEM.mods[mod]["SinZationalHax"]["id"]))
-                        pass
-                else:
-                    result, exceptionRaised = NEM.CheckMod(mod)
+            if not NEM.mods[mod]["active"]:
+                continue
 
-                    # if there is an update
-                    if any(result):
-                        tempList.setdefault(NEM.mods[mod]['mc'], []).append((mod, result))
-                    # if there's no update, we must check if there was an exception
-                    elif exceptionRaised:
-                        failed.append(mod)
+            if "SinZationalHax" in NEM.mods[mod]:
+                if NEM.mods[mod]["SinZationalHax"]["id"] not in SinZationalHax:  # have we polled this set of mods before
+                    results = NEM.CheckMods(mod)
+                    for outputMod, outputInfo in results.iteritems():
+                        result, exceptionRaised = results[outputMod]
+                        if any(result):
+                            tempList.setdefault(NEM.mods[outputMod]['mc'], []).append((outputMod, result))
+                        elif exceptionRaised:
+                            failed.append(outputMod)
+                    SinZationalHax.append(NEM.mods[mod]["SinZationalHax"]["id"])  # Remember this poll that we have done this set of mods
+                else:
+                    # nemp_logger.debug("Already polled {} before".format(NEM.mods[mod]["SinZationalHax"]["id"]))
+                    pass
+            else:
+                result, exceptionRaised = NEM.CheckMod(mod)
+
+                # if there is an update
+                if any(result[1:]):
+                    tempList.setdefault(NEM.mods[mod]['mc'], []).append((mod, result))
+                # if there's no update, we must check if there was an exception
+                elif exceptionRaised:
+                    failed.append(mod)
+
         pipe.send((tempList, failed))
 
         # A more reasonable way of sleeping to quicken up the
@@ -295,28 +299,34 @@ def NEMP_TimerEvent(self, channels):
             for version in tempList:
                 for item in tempList[version]:
                     # item[0] = name of mod
-                    # item[1] = flags for dev/release change
-                    # flags[0] = has release version changed?
+                    # item[1] = mc version, flags for dev/release change
+                    # flags[0] = mc version (can be None)
                     # flags[1] = has dev version changed?
+                    # flags[2] = has release version changed?
                     mod = item[0]
                     flags = item[1]
-                    real_name = ""
+
+                    mc_version, dev_flag, release_flag = flags
+
+                    if mc_version is None:
+                        mc_version = self.NEM.mods[mod]['mc']
+
                     if 'name' in self.NEM.mods[mod]:
                         real_name = self.NEM.mods[mod]['name']
                     else:
                         real_name = mod
 
-                    dev_version = self.NEM.mods[mod]["dev"]
-                    release_version = self.NEM.mods[mod]["version"]
+                    dev_version = self.NEM.get_nem_dev_version(mod, mc_version)
+                    release_version = self.NEM.get_nem_version(mod, mc_version)
                     changes = self.NEM.mods[mod]["change"]
 
-                    if flags[0] and dev_version != "NOT_USED":
+                    if dev_flag and dev_version != "NOT_USED":
                         nemp_logger.debug("Updating DevMod {0}, Flags: {1}".format(mod, flags))
-                        self.sendMessage(channel, "!ldev {0} {1} {2}".format(version, real_name, unicode(clean_version(dev_version))))
+                        self.sendMessage(channel, "!ldev {0} {1} {2}".format(mc_version, real_name, unicode(clean_version(dev_version))))
 
-                    if flags[1] and release_version != "NOT_USED":
+                    if release_flag and release_version != "NOT_USED":
                         nemp_logger.debug("Updating Mod {0}, Flags: {1}".format(mod, flags))
-                        self.sendMessage(channel, "!lmod {0} {1} {2}".format(version, real_name, unicode(clean_version(release_version))))
+                        self.sendMessage(channel, "!lmod {0} {1} {2}".format(mc_version, real_name, unicode(clean_version(release_version))))
 
                     if changes != "NOT_USED" and "changelog" not in self.NEM.mods[mod]:
                         nemp_logger.debug("Sending text for Mod {0}".format(mod))
@@ -346,7 +356,7 @@ def NEMP_TimerEvent(self, channels):
                     del self.NEM_troubledMods[mod]
 
                     # TODO: Not hardcode the channel
-                    self.sendMessage('#test', 'Mod {0} failed.'.format(mod))
+                    self.sendMessage('#Renol', 'Mod {0} failed.'.format(mod))
 
                     nemp_logger.debug("Mod {0} has failed to be polled at least 5 times, it has been disabled.".format(mod))
                     self.NEM.buildHTML()
@@ -506,16 +516,10 @@ def test_parser(self, name, params, channel, userdata, rank):
             if "version" in result:
                 if not self.NEM.is_version_valid(result['version']):
                     raise NEMP_Class.InvalidVersion(result['version'])
-                if '_replace' in self.NEM.mods[mod]:
-                    for k, v in self.NEM.mods[mod]['_replace'].iteritems():
-                        result['version'] = result['version'].replace(k, v)
                 self.sendMessage(channel, "!lmod {0} {1} {2}".format(version, real_name, unicode(clean_version(result["version"]))))
             if "dev" in result:
                 if not self.NEM.is_version_valid(result['dev']):
                     raise NEMP_Class.InvalidVersion(result['dev'])
-                if '_replace' in self.NEM.mods[mod]:
-                    for k, v in self.NEM.mods[mod]['_replace'].iteritems():
-                        result['dev'] = result['dev'].replace(k, v)
                 self.sendMessage(channel, "!ldev {0} {1} {2}".format(version, real_name, unicode(clean_version(result["dev"]))))
             if "change" in result:
                 self.sendMessage(channel, " * " + result["change"])
@@ -531,11 +535,6 @@ def genHTML(self, name, params, channel, userdata, rank):
 
 
 def nemp_set(self, name, params, channel, userdata, rank):
-    #params[1] = mod
-    #params[2] = config
-    # params[3] = setting if len(params) == 4, else deeper config
-    #params[4] = setting
-
     # Split the arguments in a shell-like fashion
     try:
         args = shlex.split(' '.join(params[1:]))
@@ -544,7 +543,8 @@ def nemp_set(self, name, params, channel, userdata, rank):
         return
 
     available_casts = {
-        'int': int
+        'int': int,
+        'float': float
     }
 
     cast_to = None
@@ -562,25 +562,35 @@ def nemp_set(self, name, params, channel, userdata, rank):
         self.sendMessage(channel, "This is not a toy!")
         return
 
+    mod = args[0]
+
+    if mod not in self.NEM.mods:
+        self.sendMessage(channel, name + ': No such mod in NEMP.')
+        return
+
     if args[1] == 'active':
         self.sendMessage(channel, "You want =nemp poll instead.")
         return
 
     try:
-        if len(args) == 3:
-            if cast_to:
-                new_value = cast_to(args[2])
-            else:
-                new_value = args[2]
-            self.NEM.mods[args[0]][args[1]] = new_value
+        if cast_to:
+            new_value = cast_to(args[-1])
         else:
-            if cast_to:
-                new_value = cast_to(args[3])
-            else:
-                new_value = args[3]
-            self.NEM.mods[args[0]][args[1]][args[2]] = new_value
+            new_value = args[-1]
+
+        elem = self.NEM.mods[mod]
+
+        path = args[1:-2]
+
+        for path_elem in path:
+            elem = elem[path_elem]
+
+        elem[args[-2]] = new_value
+
         self.sendMessage(channel, "done.")
-    except ValueError as e:
+    except KeyError:
+        self.sendMessage(channel, name + ": No such element in that mod's configuration.")
+    except Exception as e:
         self.sendMessage(channel, "Error: " + str(e))
 
 
