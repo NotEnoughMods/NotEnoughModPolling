@@ -3332,5 +3332,21 @@
             "name": "seedcopy",
             "regex": ".+?-(?P<mc>.+?)-(?P<version>.+).jar"
         }
+    },
+    "ServerQueryExtender" : {
+        "function" : "CheckCurse",
+        "active" : true,
+        "curse": {
+            "id" : "236296",
+            "regex" : "-.+?-(?P<version>.+?)-universal.jar"
+        }
+    },
+    "ServerInfoViewer" : {
+        "function" : "CheckCurse",
+        "active" : true,
+        "curse": {
+            "id" : "236767",
+            "regex" : "-.+?-(?P<version>.+?)-universal.jar"
+        }
     }
 }
