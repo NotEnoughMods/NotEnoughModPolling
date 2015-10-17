@@ -531,6 +531,11 @@ class NotEnoughClasses():
                 return False
         return True
 
+    # Returns the version string with some replacements, like:
+    # - whitespace (space/tab/etc) replaced by hyphen
+    def clean_version(self, version):
+        return re.sub(r'\s+', '-', version)
+
     def get_nem_version(self, mod, nem_list=None):
         if nem_list is None:
             nem_list = self.mods[mod]['mc']
@@ -575,7 +580,7 @@ class NotEnoughClasses():
             if "dev" in output:
                 # Remove whitespace at the end and start
                 local_dev = self.get_nem_dev_version(mod, mc_version)
-                remote_dev = output['dev'].strip()
+                remote_dev = self.clean_version(output['dev'].strip())
 
                 # validate version
                 if not self.is_version_valid(remote_dev):
@@ -588,7 +593,7 @@ class NotEnoughClasses():
             if "version" in output:
                 # Remove whitespace at the end and start
                 local_release = self.get_nem_version(mod, mc_version)
-                remote_release = output['version'].strip()
+                remote_release = self.clean_version(output['version'].strip())
 
                 # validate version
                 if not self.is_version_valid(remote_release):

@@ -89,11 +89,11 @@ def running(self, name, params, channel, userdata, rank):
 
             self.events["time"].addEvent("NotEnoughModPolling", 60, NEMP_TimerEvent, [channel])
         else:
-            self.sendMessage(channel, "NotEnoughMods-Polling is already running.")
+            self.sendMessage(channel, "NotEnoughModPolling is already running.")
 
     if len(params) == 2 and (params[1] == "false" or params[1] == "off"):
         if self.events["time"].doesExist("NotEnoughModPolling"):
-            self.sendMessage(channel, "Turning NotEnoughPolling off.")
+            self.sendMessage(channel, "Turning NotEnoughModPolling off.")
 
             try:
                 self.events["time"].removeEvent("NotEnoughModPolling")
@@ -106,7 +106,7 @@ def running(self, name, params, channel, userdata, rank):
 
             except Exception as error:
                 print str(error)
-                self.sendMessage(channel, "Exception appeared while trying to turn NotEnoughPolling off.")
+                self.sendMessage(channel, "Exception appeared while trying to turn NotEnoughModPolling off.")
         else:
             self.sendMessage(channel, "NotEnoughModPolling isn't running!")
 
@@ -259,13 +259,6 @@ def PollingThread(self, pipe):
             else:
                 time.sleep(30)
 
-# Returns the version string with some replacements, like:
-# - whitespace (space/tab/etc) replaced by hyphen
-
-
-def clean_version(version):
-    return re.sub(r'\s+', '-', version)
-
 
 def NEMP_TimerEvent(self, channels):
     yes = self.threading.poll("NEMP")
@@ -322,11 +315,11 @@ def NEMP_TimerEvent(self, channels):
 
                     if dev_flag and dev_version != "NOT_USED":
                         nemp_logger.debug("Updating DevMod {0}, Flags: {1}".format(mod, flags))
-                        self.sendMessage(channel, "!ldev {0} {1} {2}".format(mc_version, real_name, unicode(clean_version(dev_version))))
+                        self.sendMessage(channel, "!ldev {0} {1} {2}".format(mc_version, real_name, unicode(dev_version)))
 
                     if release_flag and release_version != "NOT_USED":
                         nemp_logger.debug("Updating Mod {0}, Flags: {1}".format(mod, flags))
-                        self.sendMessage(channel, "!lmod {0} {1} {2}".format(mc_version, real_name, unicode(clean_version(release_version))))
+                        self.sendMessage(channel, "!lmod {0} {1} {2}".format(mc_version, real_name, unicode(release_version)))
 
                     if changes != "NOT_USED" and "changelog" not in self.NEM.mods[mod]:
                         nemp_logger.debug("Sending text for Mod {0}".format(mod))
@@ -516,11 +509,11 @@ def test_parser(self, name, params, channel, userdata, rank):
             if "version" in result:
                 if not self.NEM.is_version_valid(result['version']):
                     raise NEMP_Class.InvalidVersion(result['version'])
-                self.sendMessage(channel, "!lmod {0} {1} {2}".format(version, real_name, unicode(clean_version(result["version"]))))
+                self.sendMessage(channel, "!lmod {0} {1} {2}".format(version, real_name, unicode(self.NEM.clean_version(result["version"]))))
             if "dev" in result:
                 if not self.NEM.is_version_valid(result['dev']):
                     raise NEMP_Class.InvalidVersion(result['dev'])
-                self.sendMessage(channel, "!ldev {0} {1} {2}".format(version, real_name, unicode(clean_version(result["dev"]))))
+                self.sendMessage(channel, "!ldev {0} {1} {2}".format(version, real_name, unicode(self.NEM.clean_version(result["dev"]))))
             if "change" in result:
                 self.sendMessage(channel, " * " + result["change"])
 
