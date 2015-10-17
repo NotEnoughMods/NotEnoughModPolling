@@ -509,11 +509,11 @@ def test_parser(self, name, params, channel, userdata, rank):
             if "version" in result:
                 if not self.NEM.is_version_valid(result['version']):
                     raise NEMP_Class.InvalidVersion(result['version'])
-                self.sendMessage(channel, "!lmod {0} {1} {2}".format(version, real_name, unicode(self.NEM.clean_version(result["version"]))))
+                self.sendMessage(channel, "lmod {0} {1} {2}".format(version, real_name, unicode(self.NEM.clean_version(result["version"]))))
             if "dev" in result:
                 if not self.NEM.is_version_valid(result['dev']):
                     raise NEMP_Class.InvalidVersion(result['dev'])
-                self.sendMessage(channel, "!ldev {0} {1} {2}".format(version, real_name, unicode(self.NEM.clean_version(result["dev"]))))
+                self.sendMessage(channel, "ldev {0} {1} {2}".format(version, real_name, unicode(self.NEM.clean_version(result["dev"]))))
             if "change" in result:
                 self.sendMessage(channel, " * " + result["change"])
 
