@@ -468,7 +468,7 @@ class NotEnoughClasses():
     def CheckMekanism(self, mod):
         # mostly a straight port from http://git.io/vL8tB
 
-        result = self.fetch_page('https://dl.dropbox.com/u/90411166/Mod%20Versions/Mekanism.txt').split(':')
+        result = self.fetch_page('https://dl.dropboxusercontent.com/u/90411166/Mod%20Versions/Mekanism.txt').split(':')
 
         if len(result) > 1 and 'UTF-8' not in result and 'HTML' not in result and 'http' not in result:
             remote_version = result[0]
