@@ -288,49 +288,53 @@ def NEMP_TimerEvent(self, channels):
 
         tempList, failedMods = nemp_data
 
-        for channel in channels:
-            for version in tempList:
-                for item in tempList[version]:
-                    # item[0] = name of mod
-                    # item[1] = mc version, flags for dev/release change
-                    # flags[0] = mc version (can be None)
-                    # flags[1] = has dev version changed?
-                    # flags[2] = has release version changed?
-                    mod = item[0]
-                    flags = item[1]
+        for version in tempList:
+            for item in tempList[version]:
+                # item[0] = name of mod
+                # item[1] = mc version, flags for dev/release change
+                # flags[0] = mc version (can be None)
+                # flags[1] = has dev version changed?
+                # flags[2] = has release version changed?
+                mod = item[0]
+                flags = item[1]
 
-                    mc_version, dev_flag, release_flag = flags
+                mc_version, dev_flag, release_flag = flags
 
-                    if mc_version is None:
-                        mc_version = self.NEM.mods[mod]['mc']
+                if mc_version is None:
+                    mc_version = self.NEM.mods[mod]['mc']
 
-                    if 'name' in self.NEM.mods[mod]:
-                        real_name = self.NEM.mods[mod]['name']
-                    else:
-                        real_name = mod
+                if 'name' in self.NEM.mods[mod]:
+                    real_name = self.NEM.mods[mod]['name']
+                else:
+                    real_name = mod
 
-                    dev_version = self.NEM.get_nem_dev_version(mod, mc_version)
-                    release_version = self.NEM.get_nem_version(mod, mc_version)
-                    changes = self.NEM.mods[mod]["change"]
+                dev_version = self.NEM.get_nem_dev_version(mod, mc_version)
+                release_version = self.NEM.get_nem_version(mod, mc_version)
+                changes = self.NEM.mods[mod]["change"]
 
-                    if dev_flag and dev_version != "NOT_USED":
-                        nemp_logger.debug("Updating DevMod {0}, Flags: {1}".format(mod, flags))
+                if dev_flag and dev_version != "NOT_USED":
+                    nemp_logger.debug("Updating DevMod {0}, Flags: {1}".format(mod, flags))
+                    for channel in channels:
                         self.sendMessage(channel, "!ldev {0} {1} {2}".format(mc_version, real_name, unicode(dev_version)))
 
-                    if release_flag and release_version != "NOT_USED":
-                        nemp_logger.debug("Updating Mod {0}, Flags: {1}".format(mod, flags))
+                if release_flag and release_version != "NOT_USED":
+                    nemp_logger.debug("Updating Mod {0}, Flags: {1}".format(mod, flags))
+                    for channel in channels:
                         self.sendMessage(channel, "!lmod {0} {1} {2}".format(mc_version, real_name, unicode(release_version)))
 
-                    if changes != "NOT_USED" and "changelog" not in self.NEM.mods[mod]:
-                        nemp_logger.debug("Sending text for Mod {0}".format(mod))
+                if changes != "NOT_USED" and "changelog" not in self.NEM.mods[mod]:
+                    nemp_logger.debug("Sending text for Mod {0}".format(mod))
+                    for channel in channels:
                         self.sendMessage(channel, " * " + changes)
-                        # clean up changelog in case the next poll doesn't have one
-                        self.NEM.mods[mod]['change'] = 'NOT_USED'
+                    # clean up changelog in case the next poll doesn't have one
+                    self.NEM.mods[mod]['change'] = 'NOT_USED'
 
         # A temporary list containing the mods that have failed to be polled so far.
         # We use it to check if the same mods had trouble in the newest polling attempt.
         # If not, the counter for each mod that succeeded to be polled will be reset.
         current_troubled_mods = self.NEM_troubledMods.keys()
+
+        completely_failed_mods = []
 
         for mod in failedMods:
             if mod not in self.NEM_troubledMods:
@@ -348,11 +352,14 @@ def NEMP_TimerEvent(self, channels):
                     self.NEM.mods[mod]["active"] = False
                     del self.NEM_troubledMods[mod]
 
-                    # TODO: Not hardcode the channel
-                    self.sendMessage('#Renol', 'Mod {0} failed.'.format(mod))
+                    completely_failed_mods.append(mod)
 
                     nemp_logger.debug("Mod {0} has failed to be polled at least 5 times, it has been disabled.".format(mod))
                     self.NEM.buildHTML()
+
+        if completely_failed_mods:
+            # TODO: Not hardcode the channel
+            self.sendMessage('#Renol', 'The following mod(s) failed: {0}.'.format(', '.join(sorted(completely_failed_mods))))
 
         # Reset counter for any mod that is still in the list.
         for mod in current_troubled_mods:
