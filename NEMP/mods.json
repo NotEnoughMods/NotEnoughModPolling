@@ -2043,7 +2043,7 @@
         "active": true,
         "github": {
             "repo": "copygirl/BetterStorage",
-            "regex": "BetterStorage-(?P<mc>.+?)-(?P<version>.+?)\\.jar"
+            "regex": "BetterStorage-(?P<mc>.+?)-(?P<version>[0-9]+(?:\\.[0-9]+)+)\\.jar"
         }
     },
     "BetterStorage-dev": {
