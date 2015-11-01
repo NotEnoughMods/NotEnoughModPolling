@@ -3258,7 +3258,7 @@
         "curse": {
             "id": "225502",
             "name": "icbm",
-            "regex": "ICBM-(?P<mc>.+?)-(?P<version>.+)-.+"
+            "regex": "ICBM (?P<mc>.+?)-(?P<version>.+)"
         }
     },
     "VoltzEngine": {
