@@ -3270,7 +3270,7 @@
         "curse": {
             "id": "227048",
             "name": "voltz-engine",
-            "regex": "VoltzEngine (?P<mc>.+?)-(?P<version>.+)"
+            "regex": "VoltzEngine (?P<version>.+) build .+? for (?P<mc>.+)"
         }
     },
     "AI-Improvements": {
