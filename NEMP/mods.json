@@ -346,6 +346,7 @@
     },
     "IndustrialCraft2-EXP" : {
         "function" : "CheckJenkins",
+        "category" : "Player",
         "active" : true,
         "jenkins" : {
             "url" : "http://jenkins.ic2.player.to/job/IC2_experimental/lastSuccessfulBuild/api/json",
@@ -917,6 +918,7 @@
     },
     "Forestry-Release" : {
         "name" : "Forestry",
+        "category" : "Player",
         "function" : "CheckJenkins",
         "active" : true,
         "jenkins" : {
@@ -927,6 +929,7 @@
     },
     "Forestry" : {
         "function" : "CheckJenkins",
+        "category" : "Player",
         "active" : true,
         "jenkins" : {
             "url" : "http://jenkins.ic2.player.to/job/Forestry_Dev/lastSuccessfulBuild/api/json",
