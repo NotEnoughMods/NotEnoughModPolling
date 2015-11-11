@@ -406,16 +406,6 @@ def poll(self, name, params, channel, userdata, rank):
                         del self.NEM_troubledMods[mod]
             self.sendMessage(channel, name + ": " + ', '.join(sorted(match_mods.keys(), key=lambda x: x.lower())) + "'s poll status is now " + str(setting))
 
-        elif params[1] in self.NEM.mods:
-            mod = params[1]
-            self.NEM.mods[mod]["active"] = setting
-            self.sendMessage(channel, name + ": " + mod + "'s poll status is now " + str(setting))
-
-            if mod in self.NEM_autodeactivatedMods:
-                del self.NEM_autodeactivatedMods[mod]
-            if mod in self.NEM_troubledMods:
-                del self.NEM_troubledMods[mod]
-
         elif params[1].lower() == "all":
             for mod in self.NEM.mods:
                 self.NEM.mods[mod]["active"] = setting
@@ -426,6 +416,21 @@ def poll(self, name, params, channel, userdata, rank):
                     del self.NEM_troubledMods[mod]
 
             self.sendMessage(channel, name + ": All mods are now set to " + str(setting))
+
+        else:
+            mod = self.NEM.get_proper_name(params[1])
+
+            if not mod:
+                self.sendMessage(channel, name + ': No such mod in NEMP.')
+                return
+
+            self.NEM.mods[mod]["active"] = setting
+            self.sendMessage(channel, name + ": " + mod + "'s poll status is now " + str(setting))
+
+            if mod in self.NEM_autodeactivatedMods:
+                del self.NEM_autodeactivatedMods[mod]
+            if mod in self.NEM_troubledMods:
+                del self.NEM_troubledMods[mod]
         self.NEM.buildHTML()
 
 
@@ -490,11 +495,12 @@ def test_parser(self, name, params, channel, userdata, rank):
         self.sendMessage(channel, "{name}: Wrong number of parameters. This command accepts 1 parameter: the mod's name".format(name=name))
         return
 
-    if params[1] not in self.NEM.mods:
+    mod = self.NEM.get_proper_name(params[1])
+
+    if not mod:
         self.sendMessage(channel, name + ": Mod \"" + params[1] + "\" does not exist in the database.")
     else:
         try:
-            mod = params[1]
             result = getattr(self.NEM, self.NEM.mods[mod]["function"])(mod)
             real_name = self.NEM.mods[mod].get('name', mod)
 
@@ -502,7 +508,7 @@ def test_parser(self, name, params, channel, userdata, rank):
             if 'mc' in result:
                 version = result['mc']
             else:
-                version = self.NEM.mods[params[1]]["mc"]
+                version = self.NEM.mods[mod]["mc"]
 
             if not result:
                 self.sendMessage(channel, "Didn't get a reply from the parser. (got " + repr(result) + ")")
@@ -527,7 +533,7 @@ def test_parser(self, name, params, channel, userdata, rank):
         except Exception as error:
             self.sendMessage(channel, name + ": " + str(error))
             traceback.print_exc()
-            self.sendMessage(channel, params[1] + " failed to be polled")
+            self.sendMessage(channel, mod + " failed to be polled")
 
 
 def genHTML(self, name, params, channel, userdata, rank):
@@ -562,9 +568,9 @@ def nemp_set(self, name, params, channel, userdata, rank):
         self.sendMessage(channel, "This is not a toy!")
         return
 
-    mod = args[0]
+    mod = self.NEM.get_proper_name(args[0])
 
-    if mod not in self.NEM.mods:
+    if not mod:
         self.sendMessage(channel, name + ': No such mod in NEMP.')
         return
 
@@ -599,9 +605,9 @@ def nemp_showinfo(self, name, params, channel, userdata, rank):
         self.sendMessage(channel, name + ": You have to specify at least the mod's name.")
         return
 
-    mod = params[1]
+    mod = self.NEM.get_proper_name(params[1])
 
-    if mod not in self.NEM.mods:
+    if not mod:
         self.sendMessage(channel, name + ": No such mod in NEMP.")
         return
 
@@ -624,9 +630,9 @@ def nemp_url(self, name, params, channel, userdata, rank):
     if len(params) < 2:
         self.sendMessage(channel, name + ": You have to specify at least the mod's name.")
         return
-    modname = params[1]
+    modname = self.NEM.get_proper_name(params[1])
 
-    if modname not in self.NEM.mods:
+    if not modname:
         self.sendMessage(channel, name + ": No such mod in NEMP.")
         return
     mod = self.NEM.mods[modname]

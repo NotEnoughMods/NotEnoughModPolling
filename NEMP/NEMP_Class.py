@@ -556,6 +556,15 @@ class NotEnoughClasses():
             nem_list = self.mods[mod]['mc']
         self.mods[mod]['nem_versions'].setdefault(nem_list, {})['dev'] = version
 
+    def get_proper_name(self, mod):
+        lower_mod = mod.lower()
+
+        for mod_name in self.mods.iterkeys():
+            if lower_mod == mod_name.lower():
+                return mod_name
+
+        return None
+
     def CheckMod(self, mod, document=None):
         try:
             # [mc version, dev change, version change]
