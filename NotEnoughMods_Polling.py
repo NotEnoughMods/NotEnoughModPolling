@@ -36,11 +36,11 @@ helpDict = {
 
 def execute(self, name, params, channel, userdata, rank, chan):
     if len(params) > 0:
-        cmdName = params[0]
+        cmdName = params[0].lower()
         if cmdName in commands:
             userRank = self.rankconvert[rank]
 
-            command, requiredRank = commands[params[0]]
+            command, requiredRank = commands[cmdName]
             print "Needed rank: {0} User rank: {1}".format(requiredRank, userRank)
             if userRank >= requiredRank:
                 command(self, name, params, channel, userdata, rank)
