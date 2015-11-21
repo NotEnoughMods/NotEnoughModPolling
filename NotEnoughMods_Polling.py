@@ -392,7 +392,7 @@ def poll(self, name, params, channel, userdata, rank):
                     if mod in self.NEM_troubledMods:
                         del self.NEM_troubledMods[mod]
 
-        if params[1].lower().startswith('p:'):
+        elif params[1].lower().startswith('p:'):
             parser = params[1][2:].lower()
             match_mods = {k: v for k, v in self.NEM.mods.iteritems() if v['function'][5:].lower() == parser}
             for mod, info in match_mods.iteritems():
