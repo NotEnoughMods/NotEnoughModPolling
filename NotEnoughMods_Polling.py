@@ -468,9 +468,9 @@ def nemp_list(self, name, params, channel, userdata, rank):
         if self.NEM.mods[key]["active"]:
             relType = ""
             mcver = self.NEM.mods[key]["mc"]
-            if self.NEM.get_nem_version(key, mcver) != "NOT_USED":
+            if self.NEM.get_nem_version(key, mcver):
                 relType = relType + color + darkgreen + "[R]" + color
-            if self.NEM.get_nem_dev_version(key, mcver) != "NOT_USED":
+            if self.NEM.get_nem_dev_version(key, mcver):
                 relType = relType + color + red + "[D]" + color
 
             if mcver not in tempList:
