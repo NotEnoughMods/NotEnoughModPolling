@@ -444,6 +444,10 @@ def poll(self, name, params, channel, userdata, rank):
 def nemp_list(self, name, params, channel, userdata, rank):
     dest = None
     if len(params) > 1:
+        if rank != '@@':
+            self.sendMessage(channel, '{}: Access denied.'.format(name))
+            return
+
         if params[1] == "pm":
             dest = name
         elif params[1] == "broadcast":
