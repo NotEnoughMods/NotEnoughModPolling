@@ -167,7 +167,7 @@
         "changelog" : false,
         "mcforge" : {
             "url" : "http://files.minecraftforge.net/maven/net/minecraftforge/forge/promotions.json",
-            "promo" : "1.8-latest",
+            "promo" : "1.8.8-latest",
             "promoType" : "dev"
         }
     },
