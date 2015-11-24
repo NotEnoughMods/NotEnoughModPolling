@@ -1107,7 +1107,7 @@
         "jenkins" : {
             "url" : "http://jenkins.qmunity.co.uk/job/Morpheus/lastSuccessfulBuild/api/json",
             "regex" : "-(?P<mc>.+?)-(?P<version>.+?).jar",
-            "item" : 1
+            "item" : 2
         }
     },
     "NetherOres" : {
