@@ -2233,7 +2233,7 @@
         "active": true,
         "category": "Tehnut",
         "jenkins": {
-            "url": "http://tehnut.info/jenkins/job/Guide-API/jobs/1.7.10/lastSuccessfulBuild/api/json",
+            "url": "http://tehnut.info/jenkins/job/Guide-API/job/1.7.10/lastSuccessfulBuild/api/json",
             "regex": "Guide-API-(?P<mc>.+?)-(?P<version>.+)-.+?",
             "item": 3
         }
@@ -2244,7 +2244,7 @@
         "active": true,
         "category": "Tehnut",
         "jenkins": {
-            "url": "http://tehnut.info/jenkins/job/Guide-API/jobs/1.8/lastSuccessfulBuild/api/json",
+            "url": "http://tehnut.info/jenkins/job/Guide-API/job/1.8/lastSuccessfulBuild/api/json",
             "regex": "Guide-API-(?P<mc>.+?)-(?P<version>.+)-.+?",
             "item": 3
         }
@@ -2255,7 +2255,7 @@
         "active": true,
         "category": "Tehnut",
         "jenkins": {
-            "url": "http://tehnut.info/jenkins/job/GoodyBags/jobs/1.7.10/lastSuccessfulBuild/api/json",
+            "url": "http://tehnut.info/jenkins/job/GoodyBags/job/1.7.10/lastSuccessfulBuild/api/json",
             "regex": "GoodyBags-(?P<mc>.+?)-(?P<version>.+)-.+?",
             "item": 3
         }
@@ -2266,7 +2266,7 @@
         "active": true,
         "category": "Tehnut",
         "jenkins": {
-            "url": "http://tehnut.info/jenkins/job/GoodyBags/jobs/1.8/lastSuccessfulBuild/api/json",
+            "url": "http://tehnut.info/jenkins/job/GoodyBags/job/1.8/lastSuccessfulBuild/api/json",
             "regex": "GoodyBags-(?P<mc>.+?)-(?P<version>.+)-.+?",
             "item": 3
         }
@@ -2277,7 +2277,7 @@
         "active": true,
         "category": "Tehnut",
         "jenkins": {
-            "url": "http://tehnut.info/jenkins/job/ResourcefulCrops/jobs/1.7.10/lastSuccessfulBuild/api/json",
+            "url": "http://tehnut.info/jenkins/job/ResourcefulCrops/job/1.7.10/lastSuccessfulBuild/api/json",
             "regex": "ResourcefulCrops-(?P<mc>.+?)-(?P<version>.+)-.+?",
             "item": 4
         }
