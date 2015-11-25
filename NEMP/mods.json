@@ -2095,13 +2095,13 @@
             "regex": "rftools-(?P<version>.+).jar"
         }
     },
-    "LaunchGui-1.7": {
+    "LaunchGui-1.7.10": {
         "name": "LaunchGui",
         "function": "CheckJenkins",
-        "category" : "Tehnut",
+        "category": "Tehnut",
         "active": true,
         "jenkins": {
-            "url": "http://tehnut.info/jenkins/job/LaunchGUI-1.7.10/lastSuccessfulBuild/api/json",
+            "url": "http://tehnut.info/jenkins/job/LaunchGUI/job/1.7.10/lastSuccessfulBuild/api/json",
             "regex": "LaunchGui-(?P<mc>.+?)-(?P<version>.+?)-client.jar",
             "item": 0
         }
@@ -2110,31 +2110,53 @@
         "name": "LaunchGui",
         "function": "CheckJenkins",
         "active": true,
-        "category" : "Tehnut",
+        "category": "Tehnut",
         "jenkins": {
-            "url": "http://tehnut.info/jenkins/job/LaunchGUI-1.8/lastSuccessfulBuild/api/json",
+            "url": "http://tehnut.info/jenkins/job/LaunchGUI/job/1.8/lastSuccessfulBuild/api/json",
             "regex": "LaunchGui-(?P<mc>.+?)-(?P<version>.+?)-client.jar",
             "item": 0
         }
     },
-    "LoaderList": {
+    "LoaderList-1.7.10": {
         "name": "LoaderList",
         "function": "CheckJenkins",
         "active": true,
-        "category" : "Tehnut",
+        "category": "Tehnut",
         "jenkins": {
-            "url": "http://tehnut.info/jenkins/job/LoaderList/lastSuccessfulBuild/api/json",
+            "url": "http://tehnut.info/jenkins/job/LoaderList/job/1.7.10/lastSuccessfulBuild/api/json",
             "regex": "LoaderList-(?P<mc>.+?)-(?P<version>.+?)-universal.jar",
             "item": 3
         }
     },
-    "SunStroke": {
+    "LoaderList-1.8": {
+        "name": "LoaderList",
+        "function": "CheckJenkins",
+        "active": true,
+        "category": "Tehnut",
+        "jenkins": {
+            "url": "http://tehnut.info/jenkins/job/LoaderList/job/1.8/lastSuccessfulBuild/api/json",
+            "regex": "LoaderList-(?P<mc>.+?)-(?P<version>.+?)-universal.jar",
+            "item": 3
+        }
+    },
+    "SunStroke-1.7.10": {
         "name": "SunStroke",
         "function": "CheckJenkins",
         "active": true,
-        "category" : "Tehnut",
+        "category": "Tehnut",
         "jenkins": {
-            "url": "http://tehnut.info/jenkins/job/SunStroke/lastSuccessfulBuild/api/json",
+            "url": "http://tehnut.info/jenkins/job/SunStroke/job/1.7.10/lastSuccessfulBuild/api/json",
+            "regex": "SunStroke-(?P<mc>.+?)-(?P<version>.+?).jar",
+            "item": 3
+        }
+    },
+    "SunStroke-1.8": {
+        "name": "SunStroke",
+        "function": "CheckJenkins",
+        "active": true,
+        "category": "Tehnut",
+        "jenkins": {
+            "url": "http://tehnut.info/jenkins/job/SunStroke/job/1.8/lastSuccessfulBuild/api/json",
             "regex": "SunStroke-(?P<mc>.+?)-(?P<version>.+?).jar",
             "item": 3
         }
@@ -2143,7 +2165,7 @@
         "name": "MoreChisels",
         "function": "CheckJenkins",
         "active": true,
-        "category" : "Tehnut",
+        "category": "Tehnut",
         "jenkins": {
             "url": "http://tehnut.info/jenkins/job/MoreChisels/lastSuccessfulBuild/api/json",
             "regex": "MoreChisels-(?P<mc>.+?)-(?P<version>.+?).jar",
@@ -2154,7 +2176,7 @@
         "name": "ChiselTones",
         "function": "CheckJenkins",
         "active": true,
-        "category" : "Tehnut",
+        "category": "Tehnut",
         "jenkins": {
             "url": "http://tehnut.info/jenkins/job/ChiselTones/lastSuccessfulBuild/api/json",
             "regex": "ChiselTones-(?P<mc>.+?)-(?P<version>.+?).jar",
@@ -2165,7 +2187,7 @@
         "name": "CookieCore",
         "function": "CheckJenkins",
         "active": true,
-        "category" : "Tehnut",
+        "category": "Tehnut",
         "jenkins": {
             "url": "http://tehnut.info/jenkins/job/CookieCore/lastSuccessfulBuild/api/json",
             "regex": "CookieCore-(?P<mc>.+?)-(?P<version>.+?).jar",
@@ -2176,7 +2198,7 @@
         "name": "ModularArmour",
         "function": "CheckJenkins",
         "active": true,
-        "category" : "Tehnut",
+        "category": "Tehnut",
         "jenkins": {
             "url": "http://tehnut.info/jenkins/job/ModularArmour/lastSuccessfulBuild/api/json",
             "regex": "ModularArmour-(?P<mc>.+?)-(?P<version>.+?).jar",
@@ -2187,7 +2209,7 @@
         "name": "Sanguimancy",
         "function": "CheckJenkins",
         "active": true,
-        "category" : "Tehnut",
+        "category": "Tehnut",
         "jenkins": {
             "url": "http://tehnut.info/jenkins/job/Sanguimancy/lastSuccessfulBuild/api/json",
             "regex": "Sanguimancy-(?P<mc>.+?)-(?P<dev>.+?).jar",
@@ -2198,21 +2220,66 @@
         "name": "TinkersSteelworks-Ephys",
         "function": "CheckJenkins",
         "active": true,
-        "category" : "Tehnut",
+        "category": "Tehnut",
         "jenkins": {
             "url": "http://tehnut.info/jenkins/job/TSteelworks/lastSuccessfulBuild/api/json",
             "regex": "TSteelworks-(?P<mc>.+?)-(?P<dev>.+?).jar",
             "item": 3
         }
     },
-    "Guide-API": {
+    "Guide-API-1.7.10": {
+        "name": "Guide-API",
         "function": "CheckJenkins",
         "active": true,
-        "category" : "Tehnut",
+        "category": "Tehnut",
         "jenkins": {
-            "url": "http://tehnut.info/jenkins/job/Guide-API-1.7.10/lastSuccessfulBuild/api/json",
+            "url": "http://tehnut.info/jenkins/job/Guide-API/jobs/1.7.10/lastSuccessfulBuild/api/json",
             "regex": "Guide-API-(?P<mc>.+?)-(?P<version>.+)-.+?",
-             "item": 3
+            "item": 3
+        }
+    },
+    "Guide-API-1.8": {
+        "name": "Guide-API",
+        "function": "CheckJenkins",
+        "active": true,
+        "category": "Tehnut",
+        "jenkins": {
+            "url": "http://tehnut.info/jenkins/job/Guide-API/jobs/1.8/lastSuccessfulBuild/api/json",
+            "regex": "Guide-API-(?P<mc>.+?)-(?P<version>.+)-.+?",
+            "item": 3
+        }
+    },
+    "GoodyBags-1.7.10": {
+        "name": "GoodyBags",
+        "function": "CheckJenkins",
+        "active": true,
+        "category": "Tehnut",
+        "jenkins": {
+            "url": "http://tehnut.info/jenkins/job/GoodyBags/jobs/1.7.10/lastSuccessfulBuild/api/json",
+            "regex": "GoodyBags-(?P<mc>.+?)-(?P<version>.+)-.+?",
+            "item": 3
+        }
+    },
+    "GoodyBags-1.8": {
+        "name": "GoodyBags",
+        "function": "CheckJenkins",
+        "active": true,
+        "category": "Tehnut",
+        "jenkins": {
+            "url": "http://tehnut.info/jenkins/job/GoodyBags/jobs/1.8/lastSuccessfulBuild/api/json",
+            "regex": "GoodyBags-(?P<mc>.+?)-(?P<version>.+)-.+?",
+            "item": 3
+        }
+    },
+    "ResourcefulCrops-1.7.10": {
+        "name": "ResourcefulCrops",
+        "function": "CheckJenkins",
+        "active": true,
+        "category": "Tehnut",
+        "jenkins": {
+            "url": "http://tehnut.info/jenkins/job/ResourcefulCrops/jobs/1.7.10/lastSuccessfulBuild/api/json",
+            "regex": "ResourcefulCrops-(?P<mc>.+?)-(?P<version>.+)-.+?",
+            "item": 4
         }
     },
     "TSteelworks-Ephys": {
