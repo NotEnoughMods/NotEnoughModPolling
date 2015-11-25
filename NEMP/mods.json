@@ -2234,8 +2234,8 @@
         "category": "Tehnut",
         "jenkins": {
             "url": "http://tehnut.info/jenkins/job/Guide-API/job/1.7.10/lastSuccessfulBuild/api/json",
-            "regex": "Guide-API-(?P<mc>.+?)-(?P<version>.+)-.+?",
-            "item": 3
+            "regex": "Guide-API-(?P<mc>.+?)-(?P<version>.+)\\.jar",
+            "item": 4
         }
     },
     "Guide-API-1.8": {
@@ -2245,7 +2245,7 @@
         "category": "Tehnut",
         "jenkins": {
             "url": "http://tehnut.info/jenkins/job/Guide-API/job/1.8/lastSuccessfulBuild/api/json",
-            "regex": "Guide-API-(?P<mc>.+?)-(?P<version>.+)-.+?",
+            "regex": "Guide-API-(?P<mc>.+?)-(?P<version>.+)\\.jar",
             "item": 3
         }
     },
@@ -2256,7 +2256,7 @@
         "category": "Tehnut",
         "jenkins": {
             "url": "http://tehnut.info/jenkins/job/GoodyBags/job/1.7.10/lastSuccessfulBuild/api/json",
-            "regex": "GoodyBags-(?P<mc>.+?)-(?P<version>.+)-.+?",
+            "regex": "GoodyBags-(?P<mc>.+?)-(?P<version>.+)\\.jar",
             "item": 3
         }
     },
@@ -2267,7 +2267,7 @@
         "category": "Tehnut",
         "jenkins": {
             "url": "http://tehnut.info/jenkins/job/GoodyBags/job/1.8/lastSuccessfulBuild/api/json",
-            "regex": "GoodyBags-(?P<mc>.+?)-(?P<version>.+)-.+?",
+            "regex": "GoodyBags-(?P<mc>.+?)-(?P<version>.+)\\.jar",
             "item": 3
         }
     },
@@ -2278,7 +2278,7 @@
         "category": "Tehnut",
         "jenkins": {
             "url": "http://tehnut.info/jenkins/job/ResourcefulCrops/job/1.7.10/lastSuccessfulBuild/api/json",
-            "regex": "ResourcefulCrops-(?P<mc>.+?)-(?P<version>.+)-.+?",
+            "regex": "ResourcefulCrops-(?P<mc>.+?)-(?P<version>.+)\\.jar",
             "item": 4
         }
     },
