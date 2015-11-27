@@ -3436,5 +3436,14 @@
             "name": "just-enough-items-jei",
             "regex": "JEI (?P<version>[0-9]+(?:\\.[0-9]+)+)"
         }
+    },
+    "NotEnoughIDs": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "id": "235107",
+            "name": "notenoughids",
+            "regex": "NotEnoughIDs-(?P<version>.+)"
+        }
     }
 }
