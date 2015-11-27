@@ -107,9 +107,9 @@
         "function" : "CheckCurse",
         "active" : true,
         "curse" : {
-            "name" : "crisscross",
             "id" : "236973",
-            "regex" : "CrissCross-(?P<mc>.+?)-(?P<version>.+?).jar$"
+            "name" : "crisscross",
+            "regex" : "CrissCross (?P<version>\\S+) for MC"
         }
     },
     "BiomesOPlenty" : {
