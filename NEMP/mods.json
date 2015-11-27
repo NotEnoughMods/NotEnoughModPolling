@@ -103,6 +103,15 @@
             "promoType" : "version"
         }
     },
+    "CrissCross" : {
+        "function" : "CheckCurse",
+        "active" : true,
+        "curse" : {
+            "name" : "crisscross",
+            "id" : "236973",
+            "regex" : "CrissCross-(?P<mc>.+?)-(?P<version>.+?).jar$"
+        }
+    },
     "BiomesOPlenty" : {
         "function" : "CheckMCForge2",
         "category" : "forge",
