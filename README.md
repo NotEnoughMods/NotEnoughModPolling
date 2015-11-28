@@ -1,5 +1,7 @@
-NotEnoughMods Polling Plugin
+NotEnoughMods Polling Plugin 
 =============
+[![Build Status](https://travis-ci.org/NotEnoughMods/NotEnoughModPolling.svg?branch=master)](https://travis-ci.org/NotEnoughMods/NotEnoughModPolling)
+
 A plugin for Renol to utilize and assist the NotEnoughMods project by automatically updating the list via polling various Jenkins/etc servers for mod updates.
 
 Requirements
