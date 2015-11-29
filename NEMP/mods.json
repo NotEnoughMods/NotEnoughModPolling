@@ -3445,5 +3445,482 @@
             "name": "notenoughids",
             "regex": "NotEnoughIDs-(?P<version>.+)"
         }
+    },
+    "InGameAccountSwitcher": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "regex": "In-Game Account Switcher (?P<version>.+?)\\.jar",
+            "id": "232676",
+            "name": "in-game-account-switcher"
+        }
+    },
+    "EnderCompass": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "regex": ".+?-(?P<mc>.+?)-(?P<version>.+?).jar",
+            "id": "223106",
+            "name": "ender-compass"
+        }
+    },
+    "SteamCraft2": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "regex": ".+?-(?P<mc>.+?)-(?P<version>.+?).jar",
+            "id": "224017",
+            "name": "steamcraft-2-beta-2-fluxian-storm"
+        }
+    },
+    "YetAnotherBackupMod": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "regex": ".+?-(?P<mc>.+?)-(?P<version>.+?).jar",
+            "id": "223260",
+            "name": "yetanotherbackupmod"
+        }
+    },
+    "BoilerPlate": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "regex": ".+?-(?P<mc>.+?)-(?P<version>.+?).jar",
+            "id": "224018",
+            "name": "boilerplate-lib"
+        }
+    },
+    "AMTGenerators": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "regex": ".+?-(?P<mc>.+?)-(?P<version>.+?).jar",
+            "id": "229724",
+            "name": "amtgenerators"
+        }
+    },
+    "HeartsBar": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "regex": ".+?-(?P<mc>.+?)-(?P<version>.+?).jar",
+            "id": "227863",
+            "name": "hearts-bar"
+        }
+    },
+    "Peripherals++": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "regex": "Peripherals\\+\\+-(?P<version>.+?).jar",
+            "id": "226687",
+            "name": "peripherals"
+        }
+    },
+    "ThermalSmeltery": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "regex": ".+?-(?P<mc>.+?)-(?P<version>.+?).jar",
+            "id": "227661",
+            "name": "thermal-smeltery"
+        }
+    },
+    "SoulShardsTheOldWays": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "regex": "SoulShards-TOW - (?P<version>.+)",
+            "id": "226958",
+            "name": "soul-shards-the-old-ways"
+        }
+    },
+    "Squidless": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "regex": ".+?-(?P<mc>.+?)-(?P<version>.+?).jar",
+            "id": "226115",
+            "name": "squidless"
+        }
+    },
+    "TheCorruptedSector": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "regex": ".+?-(?P<mc>.+?)-(?P<version>.+?).jar",
+            "id": "229328",
+            "name": "the-corrupted-sector"
+        }
+    },
+    "AlternateScoring": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "regex": "scoring-(?P<version>.+)\\.jar",
+            "id": "227851",
+            "name": "alternate-scoring"
+        }
+    },
+    "Cannibalism": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "regex": "Cannibalism-(?P<version>.+?)-.+\\.jar",
+            "id": "224588",
+            "name": "cannibalism"
+        }
+    },
+    "CookingForBlockheads": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "regex": ".+?-(?P<mc>.+?)-(?P<version>.+?).jar",
+            "id": "231484",
+            "name": "cooking-for-blockheads"
+        }
+    },
+    "MobRebirth": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "regex": "Mob Rebirth (?P<version>.+?)\\.jar",
+            "id": "226212",
+            "name": "mob-rebirth"
+        }
+    },
+    "iBench": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "regex": ".+?-(?P<mc>.+?)-(?P<version>.+?).jar",
+            "id": "226218",
+            "name": "ibench"
+        }
+    },
+    "MineTweakerRecipeMaker": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "regex": ".+?-(?P<mc>.+?)-(?P<version>.+?).jar",
+            "id": "226294",
+            "name": "minetweaker-recipemaker"
+        }
+    },
+    "CobbleHaters": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "regex": "cobblehaters-(?P<version>.+?).jar",
+            "id": "227473",
+            "name": "cobblehaters"
+        }
+    },
+    "RockDigger": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "regex": "RockDigger (?P<version>\\S+)",
+            "id": "221245",
+            "name": "rock-digger"
+        }
+    },
+    "Omnis-Core": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "regex": ".+?-(?P<mc>.+?)-(?P<version>.+?).jar",
+            "id": "225813",
+            "name": "omnis-core"
+        }
+    },
+    "Whitelister": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "regex": ".+?-(?P<mc>.+?)-(?P<version>.+?).jar",
+            "id": "224493",
+            "name": "whitelister"
+        }
+    },
+    "CompressedCobblestone": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "regex": ".+?-(?P<mc>.+?)-(?P<version>.+?).jar",
+            "id": "228113",
+            "name": "compressed-cobblestone"
+        }
+    },
+    "LootBags": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "regex": ".+?-(?P<mc>.+?)-(?P<version>.+?).jar",
+            "id": "225946",
+            "name": "lootbags"
+        }
+    },
+    "E-Mobile": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "regex": "E-Mobile-MC(?P<mc>.+?)-(?P<version>.+?).jar",
+            "id": "229324",
+            "name": "e-mobile"
+        }
+    },
+    "RFDrills": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "regex": "Version (?P<version>\\S+)",
+            "id": "229846",
+            "name": "rfdrills"
+        }
+    },
+    "CuteMobModels": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "regex": "yarrcutemobmodels-(?P<version>.+?)-.+\\.jar",
+            "id": "222028",
+            "name": "cute-mob-models"
+        }
+    },
+    "IvToolkit": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "regex": "IvToolkit-(?P<version>.+?).jar",
+            "id": "224535",
+            "name": "ivtoolkit"
+        }
+    },
+    "YeGamolChattels": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "regex": "-(?P<version>.+?).jar",
+            "id": "224600",
+            "name": "ye-gamol-chattels"
+        }
+    },
+    "Tinkers'Defense": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "regex": "(?P<version>\\S+)$",
+            "id": "226910",
+            "name": "tinkers-defense"
+        }
+    },
+    "UltraCompressionMod": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "regex": "-(?P<version>.+?).jar",
+            "id": "222400",
+            "name": "ultra-compression-mod"
+        }
+    },
+    "WhatsThisPack": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "regex": "WTP-(?P<mc>.+?)-(?P<version>.+)",
+            "id": "221658",
+            "name": "wtp-whats-this-pack"
+        }
+    },
+    "OreRegen": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "regex": "OreRegen-(?P<version>.+?).jar",
+            "id": "228516",
+            "name": "oreregen"
+        }
+    },
+    "Psychedelicraft": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "regex": "-(?P<version>.+?).jar",
+            "id": "224601",
+            "name": "psychedelicraft"
+        }
+    },
+    "Eureka": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "regex": "Eureka (?P<version>.+)",
+            "id": "222995",
+            "name": "eureka"
+        }
+    },
+    "MmmMmmMmmMmm": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "regex": ".+?-(?P<version>.+?).jar",
+            "id": "225738",
+            "name": "mmmmmmmmmmmm"
+        }
+    },
+    "AchieveSON": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "regex": "AchieveSON v(?P<version>.+)",
+            "id": "227850",
+            "name": "achieveson"
+        }
+    },
+    "Pandora'sBox": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "regex": "-(?P<version>.+?).jar",
+            "id": "222896",
+            "name": "pandoras-box"
+        }
+    },
+    "ThaumicInfusion": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "regex": "-(?P<version>.+?).jar",
+            "id": "220308",
+            "name": "thaumic-infusion"
+        }
+    },
+    "EasyCrafting": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "regex": ".+?-(?P<mc>.+?)-(?P<version>.+?).jar",
+            "id": "224295",
+            "name": "easycrafting"
+        }
+    },
+    "SimpleEnderThings": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "regex": ".+?-(?P<mc>.+?)-(?P<version>.+?).jar",
+            "id": "222624",
+            "name": "simple-ender-things"
+        }
+    },
+    "FiresClaySpawn": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "regex": "Fire's Clay Spawn (?P<version>.+?).jar",
+            "id": "225539",
+            "name": "fires-clay-spawn"
+        }
+    },
+    "ThermalCasting": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "regex": "-(?P<version>.+?).jar",
+            "id": "228537",
+            "name": "thermal-casting"
+        }
+    },
+    "ThermalRecycling": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "regex": ".+?-(?P<mc>.+?)-(?P<version>.+?).jar",
+            "id": "229666",
+            "name": "thermal-recycling"
+        }
+    },
+    "ThaumicHorizons": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "regex": ".+?-(?P<mc>.+?)-(?P<version>.+?).jar",
+            "id": "227914",
+            "name": "thaumic-horizons"
+        }
+    },
+    "SanguineUtilities": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "regex": "Sanguine Utilities-(?P<version>.+?).jar",
+            "id": "225413",
+            "name": "sanguine-utilities"
+        }
+    },
+    "TheCalculatorMod": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "regex": "(?P<version>\\S+)$",
+            "id": "225104",
+            "name": "the-calculator-mod"
+        }
+    },
+    "Archmagus": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "regex": ".+?-(?P<mc>.+?)-(?P<version>.+?).jar",
+            "id": "223126",
+            "name": "archmagus"
+        }
+    },
+    "FullChests": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "regex": ".+?-(?P<mc>.+?)-(?P<version>.+?).jar",
+            "id": "229162",
+            "name": "full-chests"
+        }
+    },
+    "RecurrentComplex": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "regex": "-(?P<version>.+?).jar",
+            "id": "223150",
+            "name": "recurrent-complex"
+        }
+    },
+    "DimensionGuard": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "regex": ".+?-(?P<mc>.+?)-(?P<version>.+?).jar",
+            "id": "226264",
+            "name": "dimensionguard"
+        }
+    },
+    "Shinsei": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "regex": "Shinsei (?P<mc>.+?)-(?P<version>.+)",
+            "id": "225003",
+            "name": "shinsei"
+        }
+    },
+    "Extra-Carts": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "regex": ".+?-(?P<mc>.+?)-(?P<version>.+?).jar",
+            "id": "222379",
+            "name": "extra-carts"
+        }
     }
 }
