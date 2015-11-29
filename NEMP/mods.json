@@ -3922,5 +3922,32 @@
             "id": "222379",
             "name": "extra-carts"
         }
+    },
+    "AnimalBikes": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "id": "222718",
+            "name": "animal-bikes",
+            "regex": "AnimalBikes_(?P<version>.+)\\.jar"
+        }
+    },
+    "Mo'Creatures": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "id": "229260",
+            "name": "mo-creatures",
+            "regex": "DrZhark's Mo'Creatures Mod-(?P<version>.+)"
+        }
+    },
+    "CustomMobSpawner": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "id": "229261",
+            "name": "custom-mob-spawner",
+            "regex": "CustomMobSpawner (?P<version>.+)"
+        }
     }
 }
