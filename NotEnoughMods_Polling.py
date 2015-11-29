@@ -385,8 +385,8 @@ def poll(self, name, params, channel, userdata, rank):
             if not match_mods:
                 self.sendMessage(channel, '{}: Could not find any matches.'.format(name))
             else:
-                for mod in self.NEM.mods:
-                    self.NEM.mods[mod]["active"] = setting
+                for mod, info in match_mods.iteritems():
+                    info["active"] = setting
 
                     # The mod has been manually activated or deactivated, so we remove it from the
                     # autodeactivatedMods dictionary.
