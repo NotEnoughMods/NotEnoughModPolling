@@ -3954,8 +3954,9 @@
         "function" : "CheckCurse",
         "active" : true,
         "curse" : {
+            "id": "228895",
             "name" : "biometweaker",
-            "regex" : "BiomeTweaker-(?P<mc>.+?) (?P<version>.+?)"
+            "regex" : "BiomeTweaker-(?P<mc>.+?) (?P<version>.+)"
         }
     }
 }
