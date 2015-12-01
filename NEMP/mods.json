@@ -3958,5 +3958,41 @@
             "name" : "biometweaker",
             "regex" : "BiomeTweaker-(?P<mc>.+?) (?P<version>.+)"
         }
+    },
+    "Caterpillar": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "regex": "^(?P<version>[0-9]+(?:\\.[0-9]+)+)$",
+            "id": "237628",
+            "name": "caterpillar"
+        }
+    },
+    "UnLogicII": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "regex": "UnLogic II (?P<version>.+?)\\.jar",
+            "id": "231078",
+            "name": "unlogic-ii"
+        }
+    },
+    "ChunkLoaderZ": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "regex": "ChunkLoaderZ (?P<version>.+)",
+            "id": "238153",
+            "name": "chunkloaderz"
+        }
+    },
+    "NetherEssence": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "regex": "Nether Essence (?P<version>.+?)\\.jar",
+            "id": "238223",
+            "name": "nether-essence"
+        }
     }
 }
