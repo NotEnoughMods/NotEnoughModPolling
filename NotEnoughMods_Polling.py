@@ -47,8 +47,7 @@ def execute(self, name, params, channel, userdata, rank, chan):
             else:
                 self.sendMessage(channel, "You're not authorized to use this command.")
         else:
-            self.sendMessage(channel, "Invalid command!")
-            self.sendMessage(channel, "See {0}nemp help for a list of commands".format(self.cmdprefix))
+            self.sendMessage(channel, name + ": Invalid command! See {0}nemp help for a list of commands".format(self.cmdprefix))
     else:
         self.sendMessage(channel, name + ": see \"{0}nemp help\" for a list of commands".format(self.cmdprefix))
 
