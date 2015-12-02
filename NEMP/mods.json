@@ -1767,7 +1767,7 @@
         "curse": {
             "id": "221826",
             "name": "custom-npcs",
-            "regex": "CustomNPCs_(?P<version>.+?).jar"
+            "regex": "CustomN(?:PC|pc)s_(?P<version>.+?).jar"
         }
     },
     "MinecraftComesAlive": {
