@@ -31,7 +31,7 @@ class NotEnoughClasses():
     def __init__(self):
         self.requests_session = requests.Session()
         self.requests_session.headers = {
-            'User-agent': 'NotEnoughMods:Polling/1.X (+http://github.com/SinZ163/NotEnoughMods)'
+            'User-agent': 'NotEnoughMods:Polling/1.X (+https://github.com/NotEnoughMods/NotEnoughModPolling)'
         }
         self.requests_session.max_redirects = 5
 
