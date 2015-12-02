@@ -4003,5 +4003,14 @@
             "id": "236104",
             "name": "adobe-blocks-2"
         }
+    },
+    "AgriCraft": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "regex": "AgriCraft-.+?-(?P<version>.+)\\.jar",
+            "id": "225635",
+            "name": "agricraft"
+        }
     }
 }
