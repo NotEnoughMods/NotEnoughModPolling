@@ -4012,5 +4012,23 @@
             "id": "225635",
             "name": "agricraft"
         }
+    },
+    "StorageDrawers": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "regex": "-.+?-(?P<version>.+)\\.jar",
+            "id": "223852",
+            "name": "storage-drawers"
+        }
+    },
+    "Traveller'sGear": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "regex": "Traveller's Gear v(?P<version>.+)",
+            "id": "224440",
+            "name": "travellers-gear"
+        }
     }
 }
