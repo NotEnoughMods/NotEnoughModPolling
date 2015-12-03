@@ -268,6 +268,7 @@ def NEMP_TimerEvent(self, channels):
         self.NEM_cycle_count += 1
 
         if self.NEM_cycle_count % 50 == 0:
+            # TODO: Not hardcode the channel
             self.sendMessage('#Renol', 'Full cycles completed: {}'.format(self.NEM_cycle_count))
 
         # self.threading.sigquitThread("NEMP")
