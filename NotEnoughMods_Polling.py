@@ -266,6 +266,10 @@ def NEMP_TimerEvent(self, channels):
         nemp_data = self.threading.recv("NEMP")
 
         self.NEM_cycle_count += 1
+
+        if self.NEM_cycle_count % 50 == 0:
+            self.sendMessage('#Renol', 'Full cycles completed: {}'.format(self.NEM_cycle_count))
+
         # self.threading.sigquitThread("NEMP")
         # self.events["time"].removeEvent("NEMP_ThreadClock")
 
