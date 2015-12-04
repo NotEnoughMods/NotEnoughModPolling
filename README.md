@@ -1,11 +1,12 @@
-NotEnoughMods Polling Plugin 
+Not Enough Mods Polling Plugin 
 =============
 [![Build Status](https://travis-ci.org/NotEnoughMods/NotEnoughModPolling.svg?branch=master)](https://travis-ci.org/NotEnoughMods/NotEnoughModPolling)
 
-A plugin for Renol to utilize and assist the NotEnoughMods project by automatically updating the list via polling various Jenkins/etc servers for mod updates.
+A plugin for the [Renol IRC bot][renol] that automatically keeps some mods in [Not Enough Mods][nem] up-to-date by polling information from several sources.
 
 Requirements
 ------------
+- Python 2.7
 
 `pip install -r requirements.txt`
 
@@ -13,29 +14,32 @@ Python < 2.7.9 also requires these packages to support SNI: `pyOpenSSL ndg-https
 
 Contact
 ------------
-You can contact SinZ or NightKev in #test at irc.esper.net
+You can contact SinZ or NightKev in #test at EsperNet.
 
 Credits
 ------------
 Author:
-- [SinZ][1]
+- [SinZ][sinz]
 
 Developers:
-- [NightKev][2]
-- [Pyker][3]
-- [dmod][7]
+- [NightKev][nightkev]
+- [Pyker][pyker]
+- [dmod][dmod]
 
 Contributors:
-- [Helinus][4]
-- [Spacechase0][5]
-- [And many others](https://github.com/SinZ163/NotEnoughMods/graphs/contributors)
+- [helinus][helinus]
+- [spacechase0][spacechase0]
+- [And many others][contributors]
 
-Website CSS by [GenPage][6]
+Website CSS by [GenPage][genpage]
 
-[1]: https://github.com/SinZ163
-[2]: https://github.com/NightKev
-[3]: https://github.com/Pyker
-[4]: https://github.com/helinus
-[5]: https://github.com/spacechase0
-[6]: https://github.com/GenPage
-[7]: https://github.com/dmodoomsirius
+[sinz]: https://github.com/SinZ163
+[nightkev]: https://github.com/NightKev
+[pyker]: https://github.com/Pyker
+[helinus]: https://github.com/helinus
+[spacechase0]: https://github.com/spacechase0
+[genpage]: https://github.com/GenPage
+[dmod]: https://github.com/dmodoomsirius
+[renol]: https://github.com/RenolY2/Renol-IRC
+[nem]: https://bot.notenoughmods.com/
+[contributors]: https://github.com/NotEnoughMods/NotEnoughModPolling/graphs/contributors
