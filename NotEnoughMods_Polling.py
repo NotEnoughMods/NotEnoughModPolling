@@ -267,9 +267,10 @@ def NEMP_TimerEvent(self, channels):
 
         self.NEM_cycle_count += 1
 
-        if self.NEM_cycle_count % 50 == 0:
-            # TODO: Not hardcode the channel
-            self.sendMessage('#Renol', 'Full cycles completed: {}'.format(self.NEM_cycle_count))
+        staff_channel = self.NEM.config.get('irc', {}).get('staff_channel')
+
+        if staff_channel and self.NEM_cycle_count % 50 == 0:
+            self.sendMessage(staff_channel, 'Full cycles completed: {}'.format(self.NEM_cycle_count))
 
         # self.threading.sigquitThread("NEMP")
         # self.events["time"].removeEvent("NEMP_ThreadClock")
@@ -361,9 +362,8 @@ def NEMP_TimerEvent(self, channels):
                     nemp_logger.debug("Mod {0} has failed to be polled at least 5 times, it has been disabled.".format(mod))
                     self.NEM.buildHTML()
 
-        if completely_failed_mods:
-            # TODO: Not hardcode the channel
-            self.sendMessage('#Renol', 'The following mod(s) failed: {0}.'.format(', '.join(sorted(completely_failed_mods))))
+        if staff_channel and completely_failed_mods:
+            self.sendMessage(staff_channel, 'The following mod(s) failed: {0}.'.format(', '.join(sorted(completely_failed_mods))))
 
         # Reset counter for any mod that is still in the list.
         for mod in current_troubled_mods:
