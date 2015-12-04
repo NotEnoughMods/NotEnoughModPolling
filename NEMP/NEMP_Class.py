@@ -373,7 +373,7 @@ class NotEnoughClasses():
             'mc': release['version']
         }
 
-        if jsonres["download"]["type"].lower() == release_type:
+        if release['type'].lower() == release_type:
             res['version'] = output['version']
         else:
             res['dev'] = output['version']
