@@ -3934,7 +3934,7 @@
     },
     "Mo'Creatures": {
         "function": "CheckCurse",
-        "active": true,
+        "active": false,
         "curse": {
             "id": "229260",
             "name": "mo-creatures",
