@@ -2255,7 +2255,7 @@
         "jenkins": {
             "url": "http://tehnut.info/jenkins/job/Guide-API/job/1.8/lastSuccessfulBuild/api/json",
             "regex": "Guide-API-(?P<mc>.+?)-(?P<version>.+)\\.jar",
-            "item": 3
+            "item": 4
         }
     },
     "GoodyBags-1.7.10": {
