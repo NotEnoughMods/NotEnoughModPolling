@@ -78,8 +78,7 @@ class NotEnoughClasses():
 
         for mod in self.mods:
             self.mods[mod]['nem_versions'] = {}
-            if "change" not in self.mods[mod]:
-                self.mods[mod]["change"] = "NOT_USED"
+
             if "SinZationalHax" in self.mods[mod]:
                 if self.mods[mod]["SinZationalHax"]["id"] in self.SinZationalHax:
                     self.SinZationalHax[self.mods[mod]["SinZationalHax"]["id"]].append(mod)
@@ -137,8 +136,8 @@ class NotEnoughClasses():
 
                     # Grab the dev and release version
                     self.mods[nem_mod_name]['nem_versions'][nem_list_name] = {
-                        'dev': nem_mod.get('dev', 'NOT_USED'),
-                        'version': nem_mod.get('version', 'NOT_USED')
+                        'dev': nem_mod.get('dev', ''),
+                        'version': nem_mod.get('version', '')
                     }
 
             # ok, so it wasn't directly on the list, is it indirectly on the list though.
@@ -154,8 +153,8 @@ class NotEnoughClasses():
 
                             # Grab the dev and release version
                             self.mods[lonelyMod]['nem_versions'][nem_list_name] = {
-                                'dev': nem_mod.get('dev', 'NOT_USED'),
-                                'version': nem_mod.get('version', 'NOT_USED')
+                                'dev': nem_mod.get('dev', ''),
+                                'version': nem_mod.get('version', '')
                             }
 
     def CheckJenkins(self, mod):
@@ -203,7 +202,6 @@ class NotEnoughClasses():
                 output["version"] = recMatch.group(2)
                 tmpMC = recMatch.group(1)
             if devMatch.group(1) != tmpMC:
-                output["version"] = "NOT_USED"
                 output["mc"] = devMatch.group(1)
             else:
                 output["mc"] = tmpMC

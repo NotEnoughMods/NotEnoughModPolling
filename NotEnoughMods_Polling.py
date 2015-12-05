@@ -315,24 +315,24 @@ def NEMP_TimerEvent(self, channels):
 
                 dev_version = self.NEM.get_nem_dev_version(mod, mc_version)
                 release_version = self.NEM.get_nem_version(mod, mc_version)
-                changes = self.NEM.mods[mod]["change"]
+                changes = self.NEM.mods[mod].get('change')
 
-                if dev_flag and dev_version != "NOT_USED":
+                if dev_flag and dev_version:
                     nemp_logger.debug("Updating DevMod {0}, Flags: {1}".format(mod, flags))
                     for channel in channels:
                         self.sendMessage(channel, "!ldev {0} {1} {2}".format(mc_version, real_name, unicode(dev_version)))
 
-                if release_flag and release_version != "NOT_USED":
+                if release_flag and release_version:
                     nemp_logger.debug("Updating Mod {0}, Flags: {1}".format(mod, flags))
                     for channel in channels:
                         self.sendMessage(channel, "!lmod {0} {1} {2}".format(mc_version, real_name, unicode(release_version)))
 
-                if changes != "NOT_USED" and "changelog" not in self.NEM.mods[mod]:
+                if changes and "changelog" not in self.NEM.mods[mod]:
                     nemp_logger.debug("Sending text for Mod {0}".format(mod))
                     for channel in channels:
                         self.sendMessage(channel, " * " + changes)
                     # clean up changelog in case the next poll doesn't have one
-                    self.NEM.mods[mod]['change'] = 'NOT_USED'
+                    del self.NEM.mods[mod]['change']
 
         # A temporary list containing the mods that have failed to be polled so far.
         # We use it to check if the same mods had trouble in the newest polling attempt.
