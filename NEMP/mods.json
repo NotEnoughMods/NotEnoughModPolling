@@ -198,7 +198,7 @@
         "category" : "openmods",
         "active" : true,
         "jenkins" : {
-            "url" : "http://openmods.info:8080/job/OpenPeripheralCore/lastSuccessfulBuild/api/json",
+            "url" : "https://openmods.info:8080/job/OpenPeripheralCore/lastSuccessfulBuild/api/json",
             "regex" : "OpenPeripheralCore-(?P<mc>.+?)-(?P<dev>[0-9]+(?:\\.[0-9]+)*-snapshot-[0-9]+).jar$",
             "item" : 5
         }
@@ -208,7 +208,7 @@
         "category" : "openmods",
         "active" : true,
         "jenkins" : {
-            "url" : "http://openmods.info:8080/job/OpenPeripheralAddons/lastSuccessfulBuild/api/json",
+            "url" : "https://openmods.info:8080/job/OpenPeripheralAddons/lastSuccessfulBuild/api/json",
             "regex" : "OpenPeripheralAddons-(?P<mc>.+?)-(?P<dev>.+?).jar$",
             "item" : 1
         }
@@ -218,7 +218,7 @@
         "category" : "openmods",
         "active" : true,
         "jenkins" : {
-            "url" : "http://openmods.info:8080/job/OpenBlocks/lastSuccessfulBuild/api/json",
+            "url" : "https://openmods.info:8080/job/OpenBlocks/lastSuccessfulBuild/api/json",
             "regex" : "OpenBlocks-(?P<mc>.+?)-(?P<dev>.+?).jar$",
             "item" : 3
         }
@@ -228,7 +228,7 @@
         "category" : "openmods",
         "active" : true,
         "jenkins" : {
-            "url" : "http://openmods.info:8080/job/OpenModsLib/lastSuccessfulBuild/api/json",
+            "url" : "https://openmods.info:8080/job/OpenModsLib/lastSuccessfulBuild/api/json",
             "regex" : "OpenModsLib-(?P<mc>.+?)-(?P<dev>.+?).jar$",
             "item" : 2
         }
