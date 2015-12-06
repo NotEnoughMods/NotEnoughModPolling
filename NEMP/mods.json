@@ -1922,7 +1922,7 @@
         "active": true,
         "curse": {
             "name": "journeymap-32274",
-            "regex": "journeymap-(?P<mc>.+?)-(?P<version>.+?)-.+"
+            "regex": "journeymap-(?P<mc>.+?)-(?P<version>.+)"
         }
      },
     "Thaumcraft": {
