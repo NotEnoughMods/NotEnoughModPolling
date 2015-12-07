@@ -373,12 +373,11 @@
         }
     },
     "AdditionalBuildcraftObjects" : {
-        "function" : "CheckJenkins",
-        "active" : false,
-        "jenkins" : {
-            "url" : "https://jenkins.ra-doersch.de/job/AdditionalBuildcraftObjects/lastSuccessfulBuild/api/json",
-            "regex" : "buildcraft-Z-additional-buildcraft-objects-(?P<mc>.+?)-.+-(?P<dev>.+?).jar",
-            "item" : 0
+        "function" : "CheckGitHubRelease",
+        "active" : true,
+        "github" : {
+            "repo" : "da3dsoul/Additional-Buildcraft-Objects",
+            "regex" : "ABO-MC(?P<mc>.+?)-BC[0-9.]+release(?P<version>.+?)\\.jar"
         }
     },
     "Galacticraft" : {
