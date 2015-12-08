@@ -4029,5 +4029,14 @@
             "id": "224440",
             "name": "travellers-gear"
         }
+    },
+    "JEIAddons": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "id": "238660",
+            "name": "jeiaddons",
+            "regex": "JEIAddons (?P<version>.+)"
+        }
     }
 }
