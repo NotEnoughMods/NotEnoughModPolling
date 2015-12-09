@@ -2,4 +2,5 @@ language: python
 sudo: false
 python:
   - "2.7"
-script: python -m json.tool ./NEMP/mods.json 1>/dev/null
+script:
+  - python -m unittest discover
