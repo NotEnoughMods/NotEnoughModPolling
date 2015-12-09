@@ -4038,5 +4038,14 @@
             "name": "jeiaddons",
             "regex": "JEIAddons (?P<version>.+)"
         }
+    },
+    "RealisticTorches": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "id": "235729",
+            "name": "realistic-torches",
+            "regex": "RealisticTorches-.+?-(?P<version>.+)\\.jar"
+        }
     }
 }
