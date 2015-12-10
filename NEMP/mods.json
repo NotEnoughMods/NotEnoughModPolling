@@ -3962,7 +3962,7 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "regex": "^(?P<version>[0-9]+(?:\\.[0-9]+)+)$",
+            "regex": "Caterpillar-(?P<version>.+)\\.jar",
             "id": "237628",
             "name": "caterpillar"
         }
