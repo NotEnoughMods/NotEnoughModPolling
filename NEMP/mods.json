@@ -3971,7 +3971,7 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "regex": "UnLogic II (?P<version>.+?)\\.jar",
+            "regex": "UnLogic[ ]?II[ \\-](?P<version>.+?)\\.jar",
             "id": "231078",
             "name": "unlogic-ii"
         }
