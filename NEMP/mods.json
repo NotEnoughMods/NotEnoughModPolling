@@ -109,7 +109,7 @@
         "curse" : {
             "id" : "236973",
             "name" : "crisscross",
-            "regex" : "CrissCross (?P<version>\\S+) for MC"
+            "regex" : "CrissCross (?P<version>[0-9]\\S+)"
         }
     },
     "BiomesOPlenty" : {
