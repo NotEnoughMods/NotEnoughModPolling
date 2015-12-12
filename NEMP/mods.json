@@ -3332,11 +3332,11 @@
     },
     "ICBM": {
         "function": "CheckCurse",
-        "active": false,
+        "active": true,
         "curse": {
             "id": "225502",
             "name": "icbm",
-            "regex": "ICBM (?P<mc>.+?)-(?P<version>.+)"
+            "regex": "ICBM (?P<version>.+) build .+? for (?P<mc>.+)"
         }
     },
     "VoltzEngine": {
