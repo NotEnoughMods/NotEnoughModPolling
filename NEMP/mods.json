@@ -2843,7 +2843,7 @@
         "curse": {
             "id": "223797",
             "name": "helpfixer",
-            "regex": "HelpFixer ?- ?(?P<version>.+?)(?:\\.jar)?$"
+            "regex": "HelpFixer-.+-(?P<version>.+)\\.jar"
         }
     },
     "IceShards": {
