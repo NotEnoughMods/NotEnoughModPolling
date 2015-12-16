@@ -1118,6 +1118,14 @@
             "item" : 2
         }
     },
+    "Morpheus" : {
+        "function" : "CheckCurse",
+        "active" : true,
+        "curse": {
+            "id" : "69118",
+            "regex" : "-(?P<mc>.+?)-(?P<version>.+?).jar"
+        }
+    },
     "NetherOres" : {
         "function" : "CheckCurse",
         "active" : true,
