@@ -3307,7 +3307,7 @@
         "curse": {
             "id": "223815",
             "name": "in-game-wiki-mod",
-            "regex": "IGW-Mod-.+?-(?P<version>.+)-universal\\.jar"
+            "regex": "IGW-Mod-.+?-(?P<version>.+)\\.jar"
         }
     },
     "ImmersiveEngineering": {
