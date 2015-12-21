@@ -210,7 +210,7 @@
         "jenkins" : {
             "url" : "https://builds.openmods.info/job/OpenPeripheralAddons/lastSuccessfulBuild/api/json",
             "regex" : "OpenPeripheralAddons-(?P<mc>.+?)-(?P<dev>.+?).jar$",
-            "item" : 1
+            "item" : 3
         }
     },
     "OpenBlocks" : {
