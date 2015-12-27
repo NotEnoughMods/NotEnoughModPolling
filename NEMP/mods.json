@@ -200,7 +200,7 @@
         "jenkins" : {
             "url" : "https://builds.openmods.info/job/OpenPeripheralCore/lastSuccessfulBuild/api/json",
             "regex" : "OpenPeripheralCore-(?P<mc>.+?)-(?P<dev>[0-9]+(?:\\.[0-9]+)*-snapshot-[0-9]+).jar$",
-            "item" : 5
+            "item" : 2
         }
     },
     "OpenPeripheralAddons" : {
