@@ -2824,6 +2824,22 @@
             "regex" : "-.+?-(?P<version>.+?)-universal.jar"
         }
     },
+    "FastTravel" : {
+        "function" : "CheckCurse",
+        "active" : true,
+        "curse": {
+            "id" : "239106",
+            "regex" : "-.+?-(?P<version>.+?)-universal.jar"
+        }
+    },
+    "LiveNotifier" : {
+        "function" : "CheckCurse",
+        "active" : true,
+        "curse": {
+            "id" : "239242",
+            "regex" : "-.+?-(?P<version>.+?)-universal.jar"
+        }
+    },
     "LookingGlass" : {
         "function" : "CheckCurse",
         "active" : true,
