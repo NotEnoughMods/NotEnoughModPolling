@@ -3440,7 +3440,7 @@
         "curse": {
             "id": "238222",
             "name": "just-enough-items-jei",
-            "regex": "jei_(?P<mc>.+)-(?P<version>.+).jar"
+            "regex": "jei_(?P<mc>.+)-(?P<version>.+)\\.jar"
         }
     },
     "NotEnoughIDs": {
