@@ -2829,6 +2829,7 @@
         "active" : true,
         "curse": {
             "id" : "239106",
+            "name": "fast-travel",
             "regex" : "-.+?-(?P<version>.+?)-universal.jar"
         }
     },
