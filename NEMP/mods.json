@@ -4060,7 +4060,7 @@
         "curse": {
             "id": "238660",
             "name": "jeiaddons",
-            "regex": "JEIAddons (?P<version>.+)"
+            "regex": "JEIAddons_(?P<mc>.+)-(?P<version>.+)\\.jar"
         }
     },
     "RealisticTorches": {
