@@ -851,12 +851,24 @@
         }
     },
     "ServerTools-CORE" : {
-        "function" : "CheckCurse",
+        "function" : "CheckMCForge2",
         "category" : "ServerTools",
         "active" : true,
-        "curse" : {
-            "regex" : "ServerTools-CORE-(?P<mc>.+?)-(?P<version>.+?).jar",
-            "name" : "forgeservertools"
+        "mcforge" : {
+            "url" : "http://files.minecraftforge.net/maven/info/servertools/core/ServerTools-CORE/promotions.json",
+            "promo" : "latest",
+            "promoType" : "dev"
+        }
+    },
+    "ServerTools-CORE-Release" : {
+        "name" : "ServerTools-CORE",
+        "function" : "CheckMCForge2",
+        "category" : "ServerTools",
+        "active" : true,
+        "mcforge" : {
+            "url" : "http://files.minecraftforge.net/maven/info/servertools/core/ServerTools-CORE/promotions.json",
+            "promo" : "recommended",
+            "promoType" : "version"
         }
     },
     "ServerTools-PERMISSION" : {
