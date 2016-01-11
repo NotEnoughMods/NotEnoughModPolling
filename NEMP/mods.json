@@ -1491,7 +1491,7 @@
         "active" : true,
         "curse": {
             "id" : "223005",
-            "regex" : "Bagginses (?P<version>.+)"
+            "regex" : "Bagginses (?P<version>.+?) - (?P<mc>.+?)$"
         }
     },
     "BluePower" :{
