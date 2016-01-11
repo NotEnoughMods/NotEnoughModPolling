@@ -1975,7 +1975,7 @@
         "curse": {
             "id": "221585",
             "name": "roguelike-dungeons",
-            "regex": "roguelike-(?P<mc>.+?)-(?P<version>.+?).jar"
+            "regex": ".+-(?P<mc>.+)-(?P<version>.+).jar"
         }
     },
     "NotEnoughKeys" : {
