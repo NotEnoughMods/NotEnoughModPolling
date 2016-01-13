@@ -3620,7 +3620,7 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "regex": "Mob Rebirth (?P<version>.+?)\\.jar",
+            "regex": "MobRebirth-(?P<version>.+).jar",
             "id": "226212",
             "name": "mob-rebirth"
         }
