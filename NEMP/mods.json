@@ -4083,5 +4083,23 @@
             "name": "realistic-torches",
             "regex": "RealisticTorches-.+?-(?P<version>.+)\\.jar"
         }
+    },
+    "PortableCrafting": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "regex": ".+?-(?P<mc>.+?)-(?P<version>.+?).jar",
+            "id": "240655",
+            "name": "portable-crafting"
+        }
+    },
+    "IronBackpacks": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "regex": ".+?-(?P<mc>.+?)-(?P<version>.+?).jar",
+            "id": "227049",
+            "name": "iron-backpacks"
+        }
     }
 }
