@@ -4106,7 +4106,7 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "regex": ".+?-(?P<version>.+?).jar",
+            "regex": "fluxedsolars-(?P<version>.+?)-",
             "id": "240599",
             "name": "fluxed-solars"
         }
