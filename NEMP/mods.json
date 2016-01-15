@@ -317,7 +317,7 @@
     "InventoryTweaks" : {
         "function" : "CheckJenkins",
         "category" : "technic-ci",
-        "active" : true,
+        "active" : false,
         "jenkins" : {
             "url" : "http://build.technicpack.net/job/Inventory-Tweaks/lastSuccessfulBuild/api/json",
             "regex" : "InventoryTweaks-(?P<dev>.+?).jar",
