@@ -3557,7 +3557,7 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "regex": ".+?-(?P<mc>.+?)-(?P<version>.+?).jar",
+            "regex": ".+? - (?P<version>.+)",
             "id": "227661",
             "name": "thermal-smeltery"
         }
