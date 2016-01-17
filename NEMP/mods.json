@@ -272,7 +272,7 @@
         "curse" : {
             "id": "231687",
             "name": "opensecurity",
-            "regex" : "OpenSecurity-(?P<version>.+?).jar$"
+            "regex" : "OpenSecurity-(?P<mc>.+?)-(?P<version>.+?).jar$"
         }
     },
     "ModularPowersuits" : {
