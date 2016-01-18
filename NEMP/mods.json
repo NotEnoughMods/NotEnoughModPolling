@@ -4025,7 +4025,7 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "regex": "Nether Essence (?P<version>.+?)\\.jar",
+            "regex": "NetherEssence-(?P<version>.+?)\\.jar",
             "id": "238223",
             "name": "nether-essence"
         }
