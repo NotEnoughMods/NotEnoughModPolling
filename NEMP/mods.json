@@ -1881,7 +1881,7 @@
         "curse": {
             "id": "222394",
             "name": "santas-decor",
-            "regex": "Santa'sDecor-(?P<mc>.+?)-(?P<version>.+?).jar"
+            "regex": "Santa'?sDecor-(?P<mc>.+?)-(?P<version>.+?).jar"
         }
      },
     "CraftGuide": {
