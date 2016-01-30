@@ -558,10 +558,13 @@ def genHTML(self, name, params, channel, userdata, rank):
 def nemp_set(self, name, params, channel, userdata, rank):
     # Split the arguments in a shell-like fashion
     try:
-        args = shlex.split(' '.join(params[1:]))
+        args = shlex.split(' '.join(params[2:]))
     except:
         self.sendMessage(channel, "That looks like invalid input (are there any unescaped quotes?). Try again.")
         return
+
+    # insert the mod's name into the arguments
+    args.insert(0, params[1])
 
     available_casts = {
         'int': int,
