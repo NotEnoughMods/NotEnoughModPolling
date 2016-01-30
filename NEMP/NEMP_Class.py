@@ -158,7 +158,7 @@ class NotEnoughClasses():
                             }
 
     def CheckJenkins(self, mod):
-        jsonres = self.fetch_json(self.mods[mod]["jenkins"]["url"] + '?tree=changeSet[items[msg]],artifacts[*]')
+        jsonres = self.fetch_json(self.mods[mod]["jenkins"]["url"] + '?tree=changeSet[items[msg]],artifacts[fileName]')
         filename = jsonres["artifacts"][self.mods[mod]["jenkins"]["item"]]["fileName"]
         match = re.search(self.mods[mod]["jenkins"]["regex"], filename)
         output = match.groupdict()
