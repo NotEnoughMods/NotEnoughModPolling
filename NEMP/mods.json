@@ -1517,7 +1517,7 @@
         "jenkins": {
             "url" : "http://ci.cil.li/job/OpenComputers-1.5-MC1.7.10/lastSuccessfulBuild/api/json",
             "regex" : ".+?-MC(?P<mc>.+?)-(?P<version>.+?)-.+?.jar",
-            "item" : 4
+            "item" : 0
         }
     },
     "OpenComputers-Dev" :{
@@ -1528,7 +1528,7 @@
         "jenkins": {
             "url" : "http://ci.cil.li/job/OpenComputers-dev-MC1.7.10/lastSuccessfulBuild/api/json",
             "regex" : ".+?-MC(?P<mc>.+?)-(?P<dev>.+?)-.+?.jar",
-            "item" : 4
+            "item" : 0
         }
     },
     "OpenComputers-1.8" :{
@@ -1539,7 +1539,7 @@
         "jenkins": {
             "url" : "http://ci.cil.li/job/OpenComputers-1.5-MC1.8/lastSuccessfulBuild/api/json",
             "regex" : ".+?-MC(?P<mc>.+?)-(?P<version>.+?)-.+?.jar",
-            "item" : 4
+            "item" : 0
         }
     },
     "OpenComputers-1.8-dev" :{
@@ -1550,7 +1550,7 @@
         "jenkins": {
             "url" : "http://ci.cil.li/job/OpenComputers-dev-MC1.8/lastSuccessfulBuild/api/json",
             "regex" : ".+?-MC(?P<mc>.+?)-(?P<dev>.+?)-.+?.jar",
-            "item" : 3
+            "item" : 0
         }
     },
     "SecurityCraft" :{
