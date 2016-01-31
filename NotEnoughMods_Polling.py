@@ -556,6 +556,10 @@ def genHTML(self, name, params, channel, userdata, rank):
 
 
 def nemp_set(self, name, params, channel, userdata, rank):
+    if len(params) < 4:
+        self.sendMessage(channel, "This is not a toy!")
+        return
+
     # Split the arguments in a shell-like fashion
     try:
         args = shlex.split(' '.join(params[2:]))
@@ -581,10 +585,6 @@ def nemp_set(self, name, params, channel, userdata, rank):
         else:
             self.sendMessage(channel, "Unknown type. Available types are: " + ', '.join(available_casts.iterkeys()))
             return
-
-    if len(args) < 3:
-        self.sendMessage(channel, "This is not a toy!")
-        return
 
     mod = self.NEM.get_proper_name(args[0])
 
