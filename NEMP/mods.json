@@ -389,14 +389,6 @@
             "item" : 1
         }
     },
-    "NEM-VersionChecker" : {
-        "function" : "CheckHTML",
-        "active" : true,
-        "html" : {
-            "url" : "http://files.pagefortress.com/Mods/",
-            "regex" : "NEM-VersionChecker-(?P<mc>.+?)-(?P<version>.+?).jar"
-        }
-    },
     "BuildCraft" : {
         "function" : "CheckBuildCraft",
         "active" : true
