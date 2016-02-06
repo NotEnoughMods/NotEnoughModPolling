@@ -3711,7 +3711,7 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "regex": "yarrcutemobmodels-(?P<version>.+?)-.+\\.jar",
+            "regex": "YarrCuteMobModelsRemake-(?P<version>.+?)-.+\\.jar",
             "id": "222028",
             "name": "cute-mob-models"
         }
