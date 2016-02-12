@@ -884,6 +884,7 @@
         }
     },
     "NEIAddons" : {
+    	"category": "bdew",
         "function" : "CheckJenkins",
         "active" : true,
         "jenkins" : {
@@ -1170,6 +1171,7 @@
         }
     },
     "BDLib": {
+    	"category": "bdew",
         "function": "CheckJenkins",
         "active": true,
         "jenkins": {
@@ -1179,6 +1181,7 @@
         }
     },
     "Gendustry": {
+    	"category": "bdew",
         "function": "CheckJenkins",
         "active": true,
         "jenkins": {
@@ -1188,6 +1191,7 @@
         }
     },
     "PressurePipes": {
+    	"category": "bdew",
         "function": "CheckJenkins",
         "active": true,
         "jenkins": {
@@ -3226,6 +3230,7 @@
         }
     },
     "AdvancedGenerators": {
+    	"category": "bdew",
         "function": "CheckJenkins",
         "active": true,
         "jenkins": {
@@ -3235,6 +3240,7 @@
         }
     },
     "AE2Stuff": {
+    	"category": "bdew",
         "function": "CheckJenkins",
         "active": true,
         "jenkins": {
@@ -3244,6 +3250,7 @@
         }
     },
     "Compacter": {
+    	"category": "bdew",
         "function": "CheckJenkins",
         "active": true,
         "jenkins": {
