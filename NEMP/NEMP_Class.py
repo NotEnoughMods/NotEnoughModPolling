@@ -44,6 +44,9 @@ class NotEnoughClasses():
 
     def fetch_page(self, url, timeout=10, decode_json=False):
         request = self.requests_session.get(url, timeout=timeout)
+
+        request.raise_for_status()
+
         if decode_json:
             return request.json()
         else:
