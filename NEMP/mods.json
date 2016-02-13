@@ -4109,5 +4109,14 @@
             "id": "240599",
             "name": "fluxed-solars"
         }
-    }
+    },
+    "ExtraPlanets": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "regex": "ExtraPlanets-(?P<version>.+?)\\.jar",
+            "id": "241291",
+            "name": "extraplanets"
+        }
+    },
 }
