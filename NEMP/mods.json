@@ -1777,7 +1777,7 @@
     },
     "CustomNPCs": {
         "function": "CheckCurse",
-        "active": true,
+        "active": false,
         "curse": {
             "id": "221826",
             "name": "custom-npcs",
@@ -3959,7 +3959,7 @@
     },
     "AnimalBikes": {
         "function": "CheckCurse",
-        "active": true,
+        "active": false,
         "curse": {
             "id": "222718",
             "name": "animal-bikes",
