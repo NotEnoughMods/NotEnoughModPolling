@@ -3853,7 +3853,7 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "regex": "Fire's Clay Spawn (?P<version>.+?).jar",
+            "regex": "Fire'?s ?Clay ?Spawn[ \\-](?P<version>.+?).jar",
             "id": "225539",
             "name": "fires-clay-spawn"
         }
