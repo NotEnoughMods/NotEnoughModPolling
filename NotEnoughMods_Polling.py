@@ -14,23 +14,23 @@ privmsgEnabled = True
 nemp_logger = logging.getLogger("NEMPolling")
 
 helpDict = {
-    "running": ["{0}nemp running <true/false>", "Enables or Disables the polling of latest builds."],
-    "poll": ["{0}nemp poll <mod> <true/false>", "Enables or Disables the polling of <mod>."],
-    "list": ["{0}nemp list", "Lists the mods that NotEnoughModPolling checks"],
-    "about": ["{0}nemp about", "Shows some info about this plugin."],
-    "help": ["{0}nemp help [command]", "Shows this help info about [command] or lists all commands for this plugin."],
-    "refresh": ["'{0}nemp refresh' or '{0}nemp reload'", "Reloads the various data stores (mods list, versions list, etc)"],
-    "reload": ["'{0}nemp refresh' or '{0}nemp reload'", "Reloads the various data stores (mods list, versions list, etc)"],
-    "test": ["{0}nemp test <mod>", "Tests the parser for <mod> and outputs the contents to IRC"],
-    "queue": ["{0}nemp queue [sub-command]", "Shows or modifies the update queue; its main use is for non-voiced users in #NotEnoughMods to more easily help update the list. Type '{0}nemp queue help' for detailed information about this command"],
-    "status": ["{0}nemp status", "Shows whether or not NEMPolling is running and in which channel it is running."],
-    "disabledmods": ["{0}nemp disabledmods", "Shows a list of the currently disabled mods."],
-    "failedmods": ["{0}nemp failedmods", "Shows a list of mods that have failed to be polled at least 5 times in a row and were disabled automatically."],
-    "failcount": ["{0}nemp failcount", "Shows how many times mods have failed to be polled so far. At least two failures in a row required.",
-                  "Mods that have failed being polled 5 times are excluded from this list. Check {0}nemp failedmods for those mods."],
-    "showinfo": ["{0}nemp showinfo <mod> [<path> [...]]", "Shows polling information for the specified mod."],
-    "url": ["{0}nemp url <mod>", "Spits out the URL of the specified mod."],
-    'reloadbans': ['{0}nemp reloadbans', 'Reloads the banned versions configuration file (bans.yml).'],
+    "running": ["{0} running <true/false>", "Enables or Disables the polling of latest builds."],
+    "poll": ["{0} poll <mod> <true/false>", "Enables or Disables the polling of <mod>."],
+    "list": ["{0} list", "Lists the mods that NotEnoughModPolling checks"],
+    "about": ["{0} about", "Shows some info about this plugin."],
+    "help": ["{0} help [command]", "Shows this help info about [command] or lists all commands for this plugin."],
+    "refresh": ["'{0} refresh' or '{0} reload'", "Reloads the various data stores (mods list, versions list, etc)"],
+    "reload": ["'{0} refresh' or '{0} reload'", "Reloads the various data stores (mods list, versions list, etc)"],
+    "test": ["{0} test <mod>", "Tests the parser for <mod> and outputs the contents to IRC"],
+    "queue": ["{0} queue [sub-command]", "Shows or modifies the update queue; its main use is for non-voiced users in #NotEnoughMods to more easily help update the list. Type '{0} queue help' for detailed information about this command"],
+    "status": ["{0} status", "Shows whether or not NEMPolling is running and in which channel it is running."],
+    "disabledmods": ["{0} disabledmods", "Shows a list of the currently disabled mods."],
+    "failedmods": ["{0} failedmods", "Shows a list of mods that have failed to be polled at least 5 times in a row and were disabled automatically."],
+    "failcount": ["{0} failcount", "Shows how many times mods have failed to be polled so far. At least two failures in a row required.",
+                  "Mods that have failed being polled 5 times are excluded from this list. Check {0} failedmods for those mods."],
+    "showinfo": ["{0} showinfo <mod> [<path> [...]]", "Shows polling information for the specified mod."],
+    "url": ["{0} url <mod>", "Spits out the URL of the specified mod."],
+    'reloadbans': ['{0} reloadbans', 'Reloads the banned versions configuration file (bans.yml).'],
 }
 
 
@@ -47,9 +47,9 @@ def execute(self, name, params, channel, userdata, rank, chan):
             else:
                 self.sendMessage(channel, "You're not authorized to use this command.")
         else:
-            self.sendMessage(channel, name + ": Invalid command! See {0}nemp help for a list of commands".format(self.cmdprefix))
+            self.sendMessage(channel, name + ": Invalid command! See {0} help for a list of commands".format(self.cmdprefix + ID))
     else:
-        self.sendMessage(channel, name + ": see \"{0}nemp help\" for a list of commands".format(self.cmdprefix))
+        self.sendMessage(channel, name + ": see \"{0} help\" for a list of commands".format(self.cmdprefix + ID))
 
 
 def __initialize__(self, Startup):
@@ -119,12 +119,12 @@ def about(self, name, params, channel, userdata, rank):
 def nemp_help(self, name, params, channel, userdata, rank):
     if len(params) == 1:
         self.sendMessage(channel, name + ": Available commands: " + ", ".join(helpDict))
-        self.sendMessage(channel, name + ": For command usage, use \"{0}nemp help <command>\".".format(self.cmdprefix))
+        self.sendMessage(channel, name + ": For command usage, use \"{0} help <command>\".".format(self.cmdprefix + ID))
     else:
         command = params[1]
         if command in helpDict:
             for line in helpDict[command]:
-                self.sendMessage(channel, name + ": " + line.format(self.cmdprefix))
+                self.sendMessage(channel, name + ": " + line.format(self.cmdprefix + ID))
         else:
             self.sendMessage(channel, name + ": Invalid command provided")
 
