@@ -211,6 +211,35 @@ class NotEnoughClasses():
             output["dev"] = devMatch.group(2)
             return output
 
+    def CheckForgeJson(self, mod):
+        jsonres = self.fetch_json(self.mods[mod]["forgejson"]["url"])
+
+        mc_version = self.mods[mod]["forgejson"]["mcversion"]
+        promo = mc_version + "-recommended"
+        dev_promo = mc_version + "-latest"
+
+        if promo not in jsonres["promos"] and dev_promo not in jsonres["promos"]:
+            return {}
+
+        output = {"mc": mc_version}
+        if promo in jsonres["promos"]:
+            if dev_promo in jsonres["promos"] and jsonres["promos"][promo] != jsonres["promos"][dev_promo]:
+                output["dev"] = jsonres["promos"][dev_promo]
+            else:
+                output["version"] = jsonres["promos"][promo]
+        else:
+            output["dev"] = jsonres["promos"][dev_promo]
+
+        try:
+            if "version" in output:
+                version = output["version"]
+            else:
+                version = output["dev"]
+            output["change"] = jsonres[mc_version][version]
+        except:
+            pass
+        return output
+
     def CheckChickenBones(self, mod):
         mc_version = self.mods[mod]['mc']
         local_version = self.get_nem_version(mod, mc_version)

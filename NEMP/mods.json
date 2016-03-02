@@ -4118,5 +4118,13 @@
             "id": "241291",
             "name": "extraplanets"
         }
+    },
+    "BuildingBricks": {
+        "function": "CheckForgeJson",
+        "active": true,
+        "forgejson": {
+            "url": "https://raw.githubusercontent.com/hea3ven/BuildingBricks/master/media/update.json",
+            "mcversion": "1.8.9"
+        }
     }
 }
