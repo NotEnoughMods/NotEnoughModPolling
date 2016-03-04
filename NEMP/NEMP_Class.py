@@ -214,6 +214,9 @@ class NotEnoughClasses():
     def CheckForgeJson(self, mod):
         jsonres = self.fetch_json(self.mods[mod]["forgejson"]["url"])
 
+        if "promos" not in jsonres:
+            return {}
+
         mc_version = self.mods[mod]["forgejson"]["mcversion"]
         promo = mc_version + "-recommended"
         dev_promo = mc_version + "-latest"
