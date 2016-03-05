@@ -3565,7 +3565,7 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "regex": "SoulShards-TOW - (?P<version>.+)",
+            "regex": "SoulShards-TOW-.+?-(?P<version>.+)\\.jar",
             "id": "226958",
             "name": "soul-shards-the-old-ways"
         }
