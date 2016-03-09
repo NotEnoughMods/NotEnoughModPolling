@@ -4125,7 +4125,7 @@
         "active": true,
         "curse": {
             "id": "238253",
-            "name": "pokecube",
+            "name": "pokecube-core",
             "regex": "Pokecube Core-(?P<version>.+).jar"
         }
     }
