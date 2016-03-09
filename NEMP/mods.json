@@ -4118,5 +4118,15 @@
             "id": "241291",
             "name": "extraplanets"
         }
+    },
+    "Pokecube": {
+        "name" : "Pokecube",
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "id": "238253",
+            "name": "pokecube",
+            "regex": "Pokecube Core-(?P<version>.+).jar"
+        }
     }
 }
