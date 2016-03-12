@@ -2115,7 +2115,7 @@
         "curse": {
             "id": "224641",
             "name": "rftools",
-            "regex": "rftools-(?P<version>.+).jar"
+            "regex": "rftools-(.+?)?-(?P<version>.+).jar"
         }
     },
     "LaunchGui-1.7.10": {
