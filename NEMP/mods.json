@@ -4128,5 +4128,35 @@
             "name": "pokecube-core",
             "regex": "Pokecube Core-(?P<version>.+).jar"
         }
+    },
+    "Graves": {
+        "name" : "Graves",
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "id": "240877",
+            "name": "graves",
+            "regex": "graves-(?P<mc>.+?)-(?P<version>.+?)-universal.jar"
+        }
+    },
+    "ChiselsnBits": {
+        "name" : "Chisels&Bits",
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "id": "231095",
+            "name": "chisels-bits",
+            "regex": "chiselsandbits-(?P<version>.+?).jar"
+        }
+    },
+    "DeepResonance": {
+        "name" : "DeepResonance",
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "id": "233398",
+            "name": "deep-resonance",
+            "regex": "deepresonance-(?P<mc>.+?)-(?P<version>.+?).jar"
+        }
     }
 }
