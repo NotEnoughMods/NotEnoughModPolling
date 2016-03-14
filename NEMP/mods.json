@@ -3201,7 +3201,7 @@
         "curse": {
             "id": "233398",
             "name": "deep-resonance",
-            "regex": "deepresonance-(?P<version>.+)\\.jar"
+            "regex": "deepresonance-(?P<mc>.+?)-(?P<version>.+?)\\.jar"
         }
     },
     "ElecCore": {
@@ -4139,24 +4139,13 @@
             "regex": "graves-(?P<mc>.+?)-(?P<version>.+?)-universal.jar"
         }
     },
-    "ChiselsnBits": {
-        "name" : "Chisels&Bits",
+    "Chisels&Bits": {
         "function": "CheckCurse",
         "active": true,
         "curse": {
             "id": "231095",
             "name": "chisels-bits",
             "regex": "chiselsandbits-(?P<version>.+?).jar"
-        }
-    },
-    "DeepResonance": {
-        "name" : "DeepResonance",
-        "function": "CheckCurse",
-        "active": true,
-        "curse": {
-            "id": "233398",
-            "name": "deep-resonance",
-            "regex": "deepresonance-(?P<mc>.+?)-(?P<version>.+?).jar"
         }
     },
     "BuildingBricks": {
