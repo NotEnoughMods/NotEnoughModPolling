@@ -27,3 +27,16 @@ class TestModsJson(unittest.TestCase):
 
             self.assertIn('curse', mod_info, msg=msg)
             self.assertIn('regex', mod_info['curse'], msg=msg)
+
+    def test_forgejson_parser(self):
+        for mod, mod_info in self.mods.iteritems():
+            parser = mod_info['function']
+
+            if parser != 'CheckForgeJson':
+                continue
+
+            msg = 'Mod {!r} has missing ForgeJson parser information'.format(mod)
+
+            self.assertIn('forgejson', mod_info, msg=msg)
+            self.assertIn('url', mod_info['forgejson'], msg=msg)
+            self.assertIn('mcversion', mod_info['forgejson'], msg=msg)

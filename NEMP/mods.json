@@ -4158,5 +4158,13 @@
             "name": "deep-resonance",
             "regex": "deepresonance-(?P<mc>.+?)-(?P<version>.+?).jar"
         }
+    },
+    "BuildingBricks": {
+        "function": "CheckForgeJson",
+        "active": true,
+        "forgejson": {
+            "url": "https://raw.githubusercontent.com/hea3ven/BuildingBricks/master/media/update.json",
+            "mcversion": "1.8.9"
+        }
     }
 }
