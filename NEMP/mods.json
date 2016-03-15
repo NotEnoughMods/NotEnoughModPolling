@@ -4155,5 +4155,14 @@
             "url": "https://raw.githubusercontent.com/hea3ven/BuildingBricks/master/media/update.json",
             "mcversion": "1.8.9"
         }
+    },
+    "Intangible": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "id": "241350",
+            "name": "intangible",
+            "regex": "intangible-.+?-(?P<version>.+?)\\.jar"
+        }
     }
 }
