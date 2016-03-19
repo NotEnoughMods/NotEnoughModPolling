@@ -1261,7 +1261,7 @@
         "active" : true,
         "curse": {
             "name" : "veinminer",
-            "regex" : "VeinMiner-[0-9]+(?:\\.[0-9]+)+_(?P<version>[0-9]+(\\.[0-9]+)+)"
+            "regex" : "VeinMiner(?:-.+?_| )(?P<version>[0-9.]+[0-9])"
         }
     },
     "SteelIndustries" : {
@@ -2589,7 +2589,7 @@
         "curse": {
             "id": "223275",
             "name": "betterbedrockgen",
-            "regex": ".+? (?P<mc>.+?)-(?P<version>.+?).jar"
+            "regex": "BetterBedrockGenerator-(?P<mc>.+?)-(?P<version>.+?).jar"
         }
     },
     "CbmReborn": {
@@ -2875,7 +2875,7 @@
         "curse": {
             "id": "223797",
             "name": "helpfixer",
-            "regex": "HelpFixer-.+-(?P<version>.+)\\.jar"
+            "regex": "HelpFixer - (?P<version>.+)"
         }
     },
     "IceShards": {
@@ -3210,7 +3210,7 @@
         "curse": {
             "id": "227391",
             "name": "eleccore-dimensionapi",
-            "regex": "ElecCore-(?P<mc>.+?)-(?P<version>.+)\\.jar"
+            "regex": "ElecCore-.+?-(?P<version>[0-9.]+)(?:-sources)?\\.jar"
         }
     },
     "MagicBees": {
