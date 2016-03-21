@@ -2928,7 +2928,7 @@
         "curse": {
             "id": "232784",
             "name": "bookshelf-api-library",
-            "regex": "Bookshelf-(?P<mc>[^-]+)-(?P<version>.+?).jar"
+            "regex": "Bookshelf-API-(?P<mc>[^-]+)-(?P<version>.+?).jar"
         }
     },
     "ModularSystems": {
