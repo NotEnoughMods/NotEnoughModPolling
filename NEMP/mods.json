@@ -2922,7 +2922,7 @@
             "regex": "tcnodetracker-(?P<mc>[^-]+)-(?P<version>.+?).jar"
         }
     },
-    "Bookshelf": {
+    "BookshelfAPI": {
         "function": "CheckCurse",
         "active": true,
         "curse": {
