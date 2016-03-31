@@ -3898,7 +3898,7 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "regex": "(?P<version>\\S+)$",
+            "regex": ".+?-(?P<mc>.+?)-(?P<version>.+)",
             "id": "225104",
             "name": "the-calculator-mod"
         }
