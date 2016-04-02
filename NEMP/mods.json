@@ -4164,5 +4164,32 @@
             "name": "intangible",
             "regex": "intangible-.+?-(?P<version>.+?)\\.jar"
         }
+    },
+    "RebornCore": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "id": "237903",
+            "name": "reborncore",
+            "regex": "RebornCore-(?P<mc>.+)-(?P<version>.+?)-universal.jar"
+        }
+    },
+    "TechReborn": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "id": "233564",
+            "name": "techreborn",
+            "regex": "TechReborn-(?P<mc>.+)-(?P<version>.+?)-universal.jar"
+        }
+    },
+    "MoarCarts": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "id": "238471",
+            "name": "moarcarts",
+            "regex": "moarcarts-(?P<mc>.+?)-(?P<version>.+?).jar"
+        }
     }
 }
