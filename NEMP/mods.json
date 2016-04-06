@@ -1078,7 +1078,7 @@
         "function" : "CheckCurse",
         "active" : true,
         "curse": {
-            "regex" : ".+?-(?P<version>.+?)_.+?.jar"
+            "regex" : ".+?-(?P<version>.+?)_.+?"
         }
     },
     "Opis" : {
