@@ -3425,7 +3425,7 @@
         "curse": {
             "id": "233525",
             "name": "sbm-red-cow",
-            "regex": ".+?-(?P<mc>.+?)-(?P<version>.+).jar"
+            "regex": ".+?-(?P<mc>.+?)-(?P<version>.+)-universal.jar"
         }
     },
     "SBM-ColoredChests": {
