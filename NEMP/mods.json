@@ -404,7 +404,7 @@
         "function" : "CheckJenkins",
         "active" : true,
         "jenkins" : {
-            "url" : "http://ci.thezorro266.com/view/Logistics%20Pipes/job/LogisticsPipes-0.9-mc17-bc7/lastSuccessfulBuild/api/json",
+            "url" : "http://ci.rs485.network/view/Logistics%20Pipes/job/LogisticsPipes-0.9-mc17-bc7/lastSuccessfulBuild/api/json",
             "regex" : "logisticspipes-(?P<dev>.+?).jar",
             "item" : 2
         }
