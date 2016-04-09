@@ -3299,7 +3299,7 @@
         "active": true,
         "curse": {
             "name": "decocraft2",
-            "regex": "Decocraft-(?P<version>.+?)_"
+            "regex": "Decocraft (?P<version>.+)"
         }
     },
     "GanysEnd": {
