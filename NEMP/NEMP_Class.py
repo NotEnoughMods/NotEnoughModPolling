@@ -567,7 +567,10 @@ class NotEnoughClasses():
     # Returns the version string with some replacements, like:
     # - whitespace (space/tab/etc) replaced by hyphen
     def clean_version(self, version):
-        return re.sub(r'\s+', '-', version)
+        version = re.sub(r'\s+', '-', version)
+        # remove any extra hyphens
+        version = re.sub(r'-+', '-', version)
+        return version
 
     def get_nem_version(self, mod, nem_list=None):
         if nem_list is None:
