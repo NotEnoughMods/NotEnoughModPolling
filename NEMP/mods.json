@@ -1924,11 +1924,57 @@
         }
      },
     "EvilCraft": {
-        "function": "CheckGitHubRelease",
+        "function": "CheckCurse",
         "active": true,
-        "github": {
-            "repo": "rubensworks/EvilCraft",
+        "curse": {
+            "id": "",
+            "name": "evilcraft",
             "regex": "EvilCraft-(?P<mc>.+?)-(?P<version>.+?)\\.jar"
+        }
+     },
+     "CyclopsCore": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "id": "232758",
+            "name": "cyclops-core",
+            "regex": "CyclopsCore-(?P<mc>.+?)-(?P<version>.+?)\\.jar"
+        }
+     },
+     "FluidConverters": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "id": "223737",
+            "name": "fluidconverters",
+            "regex": "FluidConverters-(?P<mc>.+?)-(?P<version>.+?)\\.jar"
+        }
+     },
+     "StructuredCrafting": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "id": "233151",
+            "name": "structured-crafting",
+            "regex": "StructuredCrafting-(?P<mc>.+?)-(?P<version>.+?)\\.jar"
+        }
+     },
+     "ColossalChests": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "id": "237857",
+            "name": "colossal-chests",
+            "regex": "ColossalChests-(?P<mc>.+?)-(?P<version>.+?)\\.jar"
+        }
+     },
+     "IntegratedDynamics": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "id": "236307",
+            "name": "integrated-dynamics",
+            "regex": "IntegratedDynamics-(?P<mc>.+?)-(?P<version>.+?)\\.jar"
         }
      },
     "JourneyMap": {
