@@ -3344,7 +3344,7 @@
         "curse": {
             "id": "231951",
             "name": "immersive-engineering",
-            "regex": "Immersive Engineering v(?P<version>.+)"
+            "regex": "Immersive Engineering (?P<version>.+)"
         }
     },
     "ImmersiveIntegration": {
@@ -4300,4 +4300,4 @@
             "regex": "ArmorPlus (?P<version>.+)"
         }
     }
-}    
+}
