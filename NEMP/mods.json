@@ -4218,5 +4218,14 @@
             "name": "everything-blocks",
             "regex": "EverythingBlocks (?P<version>\\S+)"
         }
+},
+    "ArmorPlus": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "id": "237366",
+            "name": "armorplus",
+            "regex": "ArmorPlus (?P<version>.+)"
+        }
     }
-}
+}    
