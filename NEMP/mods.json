@@ -4290,7 +4290,7 @@
             "name": "everything-blocks",
             "regex": "EverythingBlocks (?P<version>\\S+)"
         }
-},
+    },
     "ArmorPlus": {
         "function": "CheckCurse",
         "active": true,
