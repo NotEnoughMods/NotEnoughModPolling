@@ -1963,7 +1963,7 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "id": "237857",
+            "id": "237875",
             "name": "colossal-chests",
             "regex": "ColossalChests-(?P<mc>.+?)-(?P<version>.+?)\\.jar"
         }
