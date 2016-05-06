@@ -3345,7 +3345,7 @@
         "active": true,
         "curse": {
             "name": "decocraft2",
-            "regex": "Decocraft (?P<version>.+)"
+            "regex": "Decocraft-(?P<version>.+)_(?P<mc>.+?).jar"
         }
     },
     "GanysEnd": {
