@@ -2062,7 +2062,7 @@
         "curse": {
             "id": "224867",
             "name": "flaxbeards-steam-power",
-            "regex": "Flaxbeard'sSteamPower-(?P<mc>.+?)-(?P<version>.+?).jar"
+            "regex": "FSP-(?P<mc>.+?)-(?P<version>.+?).jar"
         }
     },
     "MalisisCore": {
