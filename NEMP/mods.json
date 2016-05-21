@@ -4338,12 +4338,10 @@
         }
     },
     "ArmorPlus": {
-        "function": "CheckCurse",
+        "function": "CheckForgeJson",
         "active": true,
-        "curse": {
-            "id": "237366",
-            "name": "armorplus",
-            "regex": "ArmorPlus (?P<version>.+)"
-        }
+        "forgejson": {
+            "url": "https://raw.githubusercontent.com/sokratis12GR/VersionUpdate/gh-pages/ArmorPlus.json",
+            "mcversion": "1.9"
     }
 }
