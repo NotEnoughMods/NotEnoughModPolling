@@ -4338,19 +4338,21 @@
         }
     },
     "ArmorPlus": {
-        "function": "CheckForgeJson",
-        "active": true,
-        "forgejson": {
-            "url": "https://raw.githubusercontent.com/sokratis12GR/VersionUpdate/gh-pages/ArmorPlus.json",
-            "mcversion": "1.9"
-        }    	
+	"function": "CheckCurse",
+	"active": true,
+	"curse": {
+	    "id": "237366",
+	    "name": "armorplus",
+	    "regex": "ArmorPlus (?P.+)"
+	}
     },
     "WeaponsPlus": {
-        "function": "CheckForgeJson",
-        "active": true,
-        "forgejson": {
-            "url": "https://raw.githubusercontent.com/sokratis12GR/VersionUpdate/gh-pages/WeaponsPlus.json",
-            "mcversion": "1.9.4"
-        }    	
+	"function": "CheckCurse",
+	"active": true,
+	"curse": {
+	    "id": "245299",
+	    "name": "weaponsplus",
+	    "regex": "WeaponsPlus (?P.+)"
+	}
     }
 }
