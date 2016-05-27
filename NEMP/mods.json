@@ -4360,5 +4360,14 @@
             "url": "https://sokratis12gr.github.io/VersionUpdate/WeaponsPlus.json",
             "mcversion": "1.9.4"
         }
+    },
+    "MCMultiPart": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "regex": "MCMultiPart (?P<version>.+)",
+            "id": "239431",
+            "name": "mcmultipart"
+        }
     }
 }
