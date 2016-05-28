@@ -4261,7 +4261,7 @@
         "curse": {
             "id": "242657",
             "name": "advanced-swords",
-            "regex": "advancedswords-(?P<version>.+?)\\.jar"
+            "regex": "advancedswords-(?P<version>.+?)-"
         }
     },
     "EnderUtilities": {
