@@ -4369,5 +4369,14 @@
             "id": "239431",
             "name": "mcmultipart"
         }
+    },
+    "ThutCore": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "id": "224428",
+            "name": "thutcore",
+            "regex": "thutcore-.+?-(?P<version>.+).jar"
+        }
     }
 }
