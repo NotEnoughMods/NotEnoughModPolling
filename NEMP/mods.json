@@ -907,7 +907,7 @@
         "function" : "CheckJenkins",
         "active" : true,
         "jenkins" : {
-            "url" : "http://shadowcity.net:8080/job/ecrv2/lastSuccessfulBuild/api/json",
+            "url" : "http://shadows.dmodoomsirius.me:8080/job/ecrv2/lastSuccessfulBuild/api/json",
             "regex" : "ExtraCells-(?P<mc>.+?)-(?P<dev>.+?).jar",
             "item" : 0
         }
