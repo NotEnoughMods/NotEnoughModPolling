@@ -3538,7 +3538,7 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "regex": "In-Game Account Switcher (?P<version>.+?)\\.jar",
+            "regex": "InGameAccountSwitcher-(?P<version>.+?)\\.jar",
             "id": "232676",
             "name": "in-game-account-switcher"
         }
