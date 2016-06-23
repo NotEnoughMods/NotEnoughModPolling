@@ -4284,7 +4284,7 @@
         }
     },
     "BuildingBricks-1.9": {
-		"name"; "BuildingBricks"
+		"name": "BuildingBricks",
         "function": "CheckForgeJson",
         "active": true,
         "forgejson": {
