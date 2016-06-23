@@ -4346,11 +4346,21 @@
         }
     },
     "ArmorPlus": {
+    	"name": "ArmorPlus",
         "function": "CheckForgeJson",
         "active": true,
         "forgejson": {
             "url": "https://sokratis12gr.github.io/VersionUpdate/ArmorPlus.json",
             "mcversion": "1.9.4"
+        }
+    },
+    "ArmorPlus": {
+    	"name": "ArmorPlus",
+        "function": "CheckForgeJson",
+        "active": true,
+        "forgejson": {
+            "url": "https://sokratis12gr.github.io/VersionUpdate/ArmorPlus.json",
+            "mcversion": "1.10"
         }
     },
     "WeaponsPlus": {
