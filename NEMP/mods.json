@@ -192,6 +192,78 @@
             "promoType" : "version"
         }
     },
+	"MinecraftForge-1.8.8" : {
+        "name" : "MinecraftForge",
+        "function" : "CheckMCForge2",
+        "category" : "forge",
+        "active" : true,
+        "changelog" : false,
+        "mcforge" : {
+            "url" : "http://files.minecraftforge.net/maven/net/minecraftforge/forge/promotions.json",
+            "promo" : "1.8.8-latest",
+            "promoType" : "dev"
+        }
+    },
+    "MinecraftForge-1.8.9-Release" : {
+        "name" : "MinecraftForge",
+        "function" : "CheckMCForge2",
+        "category" : "forge",
+        "active" : true,
+        "changelog" : false,
+        "mcforge" : {
+            "url" : "http://files.minecraftforge.net/maven/net/minecraftforge/forge/promotions.json",
+            "promo" : "1.8.9-recommended",
+            "promoType" : "version"
+        }
+    },
+	"MinecraftForge-1.8.9" : {
+        "name" : "MinecraftForge",
+        "function" : "CheckMCForge2",
+        "category" : "forge",
+        "active" : true,
+        "changelog" : false,
+        "mcforge" : {
+            "url" : "http://files.minecraftforge.net/maven/net/minecraftforge/forge/promotions.json",
+            "promo" : "1.8.9-latest",
+            "promoType" : "dev"
+        }
+    },
+	"MinecraftForge-1.9.4" : {
+        "name" : "MinecraftForge",
+        "function" : "CheckMCForge2",
+        "category" : "forge",
+        "active" : true,
+        "changelog" : false,
+        "mcforge" : {
+            "url" : "http://files.minecraftforge.net/maven/net/minecraftforge/forge/promotions.json",
+            "promo" : "1.9.4-latest",
+            "promoType" : "dev"
+        }
+    },
+	"MinecraftForge-1.9-Release" : {
+        "name" : "MinecraftForge",
+        "function" : "CheckMCForge2",
+        "category" : "forge",
+        "active" : true,
+        "changelog" : false,
+        "mcforge" : {
+            "url" : "http://files.minecraftforge.net/maven/net/minecraftforge/forge/promotions.json",
+            "promo" : "1.9-recommended",
+            "promoType" : "version"
+	   }
+    },
+	"MinecraftForge-1.10" : {
+        "name" : "MinecraftForge",
+        "function" : "CheckMCForge2",
+        "category" : "forge",
+        "active" : true,
+        "changelog" : false,
+        "mcforge" : {
+            "url" : "http://files.minecraftforge.net/maven/net/minecraftforge/forge/promotions.json",
+            "promo" : "1.10-latest",
+            "promoType" : "dev"
+        }
+    },
     "OpenPeripheralCore" : {
         "comment" : "This isn't a core </3",
         "function" : "CheckJenkins",
@@ -387,6 +459,15 @@
             "url" : "http://ci.micdoodle8.com:8080/job/Galacticraft-1.7/lastSuccessfulBuild/api/json",
             "regex" : "GalacticraftCore-.+?-(?P<dev>.+?).jar",
             "item" : 1
+        }
+    },
+	"MicdoodleCore" : {
+        "function" : "CheckJenkins",
+        "active" : true,
+        "jenkins" : {
+            "url" : "http://ci.micdoodle8.com:8080/job/Galacticraft-1.7/lastSuccessfulBuild/api/json",
+            "regex" : "MicdoodleCore-.+?-(?P<dev>.+?).jar",
+            "item" : 2
         }
     },
     "BuildCraft" : {
@@ -4202,14 +4283,96 @@
             "regex": "chiselsandbits-(?P<version>.+?).jar"
         }
     },
-    "BuildingBricks": {
+    "BuildingBricks-1.9": {
+		"name"; "BuildingBricks"
         "function": "CheckForgeJson",
         "active": true,
         "forgejson": {
             "url": "https://raw.githubusercontent.com/hea3ven/BuildingBricks/master/media/update.json",
-            "mcversion": "1.8.9"
+            "mcversion": "1.9"
         }
     },
+	"BuildingBricks-1.9.4": {
+        "name": "BuildingBricks",
+        "function": "CheckForgeJson",
+        "active": true,
+        "forgejson": {
+            "url": "https://raw.githubusercontent.com/hea3ven/BuildingBricks/version/media/update.json",
+            "mcversion": "1.9.4"
+       }
+    },
+    "HardModeTweaks-1.9": {
+        "name": "HardModeTweaks",
+        "function": "CheckForgeJson",
+        "active": true,
+        "forgejson": {
+            "url": "https://raw.githubusercontent.com/hea3ven/HardModeTweaks/version/media/update.json",
+            "mcversion": "1.9"
+        }
+    },
+    "HardModeTweaks-1.9.4": {
+        "name": "HardModeTweaks",
+        "function": "CheckForgeJson",
+        "active": true,
+        "forgejson": {
+            "url": "https://raw.githubusercontent.com/hea3ven/HardModeTweaks/version/media/update.json",
+            "mcversion": "1.9.4"
+        }
+    },
+    "TwinTails-1.9": {
+        "name": "TwinTails",
+        "function": "CheckForgeJson",
+        "active": true,
+        "forgejson": {
+            "url": "https://raw.githubusercontent.com/hea3ven/TwinTails/version/media/update.json",
+            "mcversion": "1.9"
+        }
+    },
+    "TwinTails-1.9.4": {
+        "name": "TwinTails",
+        "function": "CheckForgeJson",
+        "active": true,
+        "forgejson": {
+            "url": "https://raw.githubusercontent.com/hea3ven/TwinTails/version/media/update.json",
+            "mcversion": "1.9.4"
+        }
+    },
+    "DulceDeLeche-1.9": {
+        "name": "DulceDeLeche",
+        "function": "CheckForgeJson",
+        "active": true,
+        "forgejson": {
+            "url": "https://raw.githubusercontent.com/hea3ven/DulceDeLeche/version/media/update.json",
+            "mcversion": "1.9"
+        }
+    },
+    "DulceDeLeche-1.9.4": {
+        "name": "DulceDeLeche",
+        "function": "CheckForgeJson",
+        "active": true,
+        "forgejson": {
+            "url": "https://raw.githubusercontent.com/hea3ven/DulceDeLeche/version/media/update.json",
+            "mcversion": "1.9.4"
+        }
+    },
+    "Malleable-1.9": {
+        "name": "Malleable",
+        "function": "CheckForgeJson",
+        "active": true,
+        "forgejson": {
+            "url": "https://raw.githubusercontent.com/hea3ven/Malleable/version/media/update.json",
+            "mcversion": "1.9"
+        }
+    },
+    "Malleable-1.9.4": {
+        "name": "Malleable",
+        "function": "CheckForgeJson",
+        "active": true,
+        "forgejson": {
+            "url": "https://raw.githubusercontent.com/hea3ven/Malleable/version/media/update.json",
+            "mcversion": "1.9.4"
+			}
+	},
     "Intangible": {
         "function": "CheckCurse",
         "active": true,
@@ -4377,6 +4540,15 @@
             "id": "224428",
             "name": "thutcore",
             "regex": "thutcore-.+?-(?P<version>.+).jar"
+        }
+    },
+    "Chisel": {
+        "function": "CheckCurse",
+        "active": false,
+        "curse": {
+            "id": "235279",
+            "name": "chisel",
+            "regex": "Chisel - MC(?P<mc>.+?)-(?P<version>.+)"
         }
     }
 }
