@@ -4292,7 +4292,7 @@
             "mcversion": "1.9"
         }
     },
-	"BuildingBricks-1.9.4": {
+	"BuildingBricks-1.10": {
         "name": "BuildingBricks",
         "function": "CheckForgeJson",
         "active": true,
@@ -4371,6 +4371,240 @@
         "forgejson": {
             "url": "https://raw.githubusercontent.com/hea3ven/Malleable/version/media/update.json",
             "mcversion": "1.9.4"
+			}
+	},
+		"BuildingBricks-1.9.4": {
+        "name": "BuildingBricks",
+        "function": "CheckForgeJson",
+        "active": true,
+        "forgejson": {
+            "url": "https://raw.githubusercontent.com/hea3ven/BuildingBricks/version/media/update.json",
+            "mcversion": "1.9.4"
+       }
+    },
+    "HardModeTweaks-1.9": {
+        "name": "HardModeTweaks",
+        "function": "CheckForgeJson",
+        "active": true,
+        "forgejson": {
+            "url": "https://raw.githubusercontent.com/hea3ven/HardModeTweaks/version/media/update.json",
+            "mcversion": "1.9"
+        }
+    },
+    "HardModeTweaks-1.9.4": {
+        "name": "HardModeTweaks",
+        "function": "CheckForgeJson",
+        "active": true,
+        "forgejson": {
+            "url": "https://raw.githubusercontent.com/hea3ven/HardModeTweaks/version/media/update.json",
+            "mcversion": "1.9.4"
+        }
+    },
+    "TwinTails-1.9": {
+        "name": "TwinTails",
+        "function": "CheckForgeJson",
+        "active": true,
+        "forgejson": {
+            "url": "https://raw.githubusercontent.com/hea3ven/TwinTails/version/media/update.json",
+            "mcversion": "1.9"
+        }
+    },
+    "TwinTails-1.9.4": {
+        "name": "TwinTails",
+        "function": "CheckForgeJson",
+        "active": true,
+        "forgejson": {
+            "url": "https://raw.githubusercontent.com/hea3ven/TwinTails/version/media/update.json",
+            "mcversion": "1.9.4"
+        }
+    },
+    "DulceDeLeche-1.9": {
+        "name": "DulceDeLeche",
+        "function": "CheckForgeJson",
+        "active": true,
+        "forgejson": {
+            "url": "https://raw.githubusercontent.com/hea3ven/DulceDeLeche/version/media/update.json",
+            "mcversion": "1.9"
+        }
+    },
+    "DulceDeLeche-1.9.4": {
+        "name": "DulceDeLeche",
+        "function": "CheckForgeJson",
+        "active": true,
+        "forgejson": {
+            "url": "https://raw.githubusercontent.com/hea3ven/DulceDeLeche/version/media/update.json",
+            "mcversion": "1.9.4"
+        }
+    },
+    "Malleable-1.10": {
+        "name": "Malleable",
+        "function": "CheckForgeJson",
+        "active": true,
+        "forgejson": {
+            "url": "https://raw.githubusercontent.com/hea3ven/Malleable/version/media/update.json",
+            "mcversion": "1.9"
+        }
+    },
+    "Malleable-1.9.4": {
+        "name": "Malleable",
+        "function": "CheckForgeJson",
+        "active": true,
+        "forgejson": {
+            "url": "https://raw.githubusercontent.com/hea3ven/Malleable/version/media/update.json",
+            "mcversion": "1.9.4"
+			}
+	},
+		"BuildingBricks-1.10": {
+        "name": "BuildingBricks",
+        "function": "CheckForgeJson",
+        "active": true,
+        "forgejson": {
+            "url": "https://raw.githubusercontent.com/hea3ven/BuildingBricks/version/media/update.json",
+            "mcversion": "1.10"
+       }
+    },
+    "HardModeTweaks-1.10": {
+        "name": "HardModeTweaks",
+        "function": "CheckForgeJson",
+        "active": true,
+        "forgejson": {
+            "url": "https://raw.githubusercontent.com/hea3ven/HardModeTweaks/version/media/update.json",
+            "mcversion": "1.10"
+        }
+    },
+    "HardModeTweaks-1.10": {
+        "name": "HardModeTweaks",
+        "function": "CheckForgeJson",
+        "active": true,
+        "forgejson": {
+            "url": "https://raw.githubusercontent.com/hea3ven/HardModeTweaks/version/media/update.json",
+            "mcversion": "1.10"
+        }
+    },
+    "TwinTails-1.10": {
+        "name": "TwinTails",
+        "function": "CheckForgeJson",
+        "active": true,
+        "forgejson": {
+            "url": "https://raw.githubusercontent.com/hea3ven/TwinTails/version/media/update.json",
+            "mcversion": "1.10"
+        }
+    },
+    "TwinTails-1.10": {
+        "name": "TwinTails",
+        "function": "CheckForgeJson",
+        "active": true,
+        "forgejson": {
+            "url": "https://raw.githubusercontent.com/hea3ven/TwinTails/version/media/update.json",
+            "mcversion": "1.10"
+        }
+    },
+    "DulceDeLeche-1.10": {
+        "name": "DulceDeLeche",
+        "function": "CheckForgeJson",
+        "active": true,
+        "forgejson": {
+            "url": "https://raw.githubusercontent.com/hea3ven/DulceDeLeche/version/media/update.json",
+            "mcversion": "1.10"
+        }
+    },
+    "DulceDeLeche-1.10": {
+        "name": "DulceDeLeche",
+        "function": "CheckForgeJson",
+        "active": true,
+        "forgejson": {
+            "url": "https://raw.githubusercontent.com/hea3ven/DulceDeLeche/version/media/update.json",
+            "mcversion": "1.10"
+        }
+    },
+    "Malleable-1.10": {
+        "name": "Malleable",
+        "function": "CheckForgeJson",
+        "active": true,
+        "forgejson": {
+            "url": "https://raw.githubusercontent.com/hea3ven/Malleable/version/media/update.json",
+            "mcversion": "1.10"
+        }
+    },
+    "Malleable-1.10": {
+        "name": "Malleable",
+        "function": "CheckForgeJson",
+        "active": true,
+        "forgejson": {
+            "url": "https://raw.githubusercontent.com/hea3ven/Malleable/version/media/update.json",
+            "mcversion": "1.10"
+			}
+	},
+		"BuildingBricks-1.10": {
+        "name": "BuildingBricks",
+        "function": "CheckForgeJson",
+        "active": true,
+        "forgejson": {
+            "url": "https://raw.githubusercontent.com/hea3ven/BuildingBricks/version/media/update.json",
+            "mcversion": "1.10"
+       }
+    },
+    "HardModeTweaks-1.10": {
+        "name": "HardModeTweaks",
+        "function": "CheckForgeJson",
+        "active": true,
+        "forgejson": {
+            "url": "https://raw.githubusercontent.com/hea3ven/HardModeTweaks/version/media/update.json",
+            "mcversion": "1.10"
+        }
+    },
+    "HardModeTweaks-1.10": {
+        "name": "HardModeTweaks",
+        "function": "CheckForgeJson",
+        "active": true,
+        "forgejson": {
+            "url": "https://raw.githubusercontent.com/hea3ven/HardModeTweaks/version/media/update.json",
+            "mcversion": "1.10"
+        }
+    },
+    "TwinTails-1.10": {
+        "name": "TwinTails",
+        "function": "CheckForgeJson",
+        "active": true,
+        "forgejson": {
+            "url": "https://raw.githubusercontent.com/hea3ven/TwinTails/version/media/update.json",
+            "mcversion": "1.10"
+        }
+    },
+    "TwinTails-1.10": {
+        "name": "TwinTails",
+        "function": "CheckForgeJson",
+        "active": true,
+        "forgejson": {
+            "url": "https://raw.githubusercontent.com/hea3ven/TwinTails/version/media/update.json",
+            "mcversion": "1.10"
+        }
+    },
+    "DulceDeLeche-1.10": {
+        "name": "DulceDeLeche",
+        "function": "CheckForgeJson",
+        "active": true,
+        "forgejson": {
+            "url": "https://raw.githubusercontent.com/hea3ven/DulceDeLeche/version/media/update.json",
+            "mcversion": "1.10"
+        }
+    },
+    "DulceDeLeche-1.10": {
+        "name": "DulceDeLeche",
+        "function": "CheckForgeJson",
+        "active": true,
+        "forgejson": {
+            "url": "https://raw.githubusercontent.com/hea3ven/DulceDeLeche/version/media/update.json",
+            "mcversion": "1.10"
+        }
+    },
+    "Malleable-1.10": {
+        "name": "Malleable",
+        "function": "CheckForgeJson",
+        "active": true,
+        "forgejson": {
+            "url": "https://raw.githubusercontent.com/hea3ven/Malleable/version/media/update.json",
+            "mcversion": "1.10"
 			}
 	},
     "Intangible": {
@@ -4508,12 +4742,21 @@
             "regex": "EverythingBlocks (?P<version>\\S+)"
         }
     },
-    "ArmorPlus": {
+    "ArmorPlus-1.9.4": {
         "function": "CheckForgeJson",
         "active": true,
         "forgejson": {
             "url": "https://sokratis12gr.github.io/VersionUpdate/ArmorPlus.json",
             "mcversion": "1.9.4"
+        }
+    },
+	"ArmorPlus-1.10": {
+    	"name": "ArmorPlus",
+        "function": "CheckForgeJson",
+        "active": true,
+        "forgejson": {
+            "url": "https://sokratis12gr.github.io/VersionUpdate/ArmorPlus.json",
+            "mcversion": "1.10"
         }
     },
     "WeaponsPlus": {
