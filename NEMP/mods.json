@@ -4671,7 +4671,7 @@
         }
     },
     "ArmorPlus-1.9.4": {
-	    "name": "ArmorPlus",
+    	"name": "ArmorPlus",
         "function": "CheckForgeJson",
         "active": true,
         "forgejson": {
@@ -4679,7 +4679,7 @@
             "mcversion": "1.9.4"
         }
     },
-	"ArmorPlus-1.10": {
+    "ArmorPlus-1.10": {
     	"name": "ArmorPlus",
         "function": "CheckForgeJson",
         "active": true,
@@ -4688,12 +4688,20 @@
             "mcversion": "1.10"
         }
     },
-    "WeaponsPlus": {
+    "WeaponsPlus-1.9.4": {
         "function": "CheckForgeJson",
         "active": true,
         "forgejson": {
             "url": "https://sokratis12gr.github.io/VersionUpdate/WeaponsPlus.json",
             "mcversion": "1.9.4"
+        }
+    },  
+    "WeaponsPlus-1.10": {
+        "function": "CheckForgeJson",
+        "active": true,
+        "forgejson": {
+            "url": "https://sokratis12gr.github.io/VersionUpdate/WeaponsPlus.json",
+            "mcversion": "1.10"
         }
     },
     "MCMultiPart": {
