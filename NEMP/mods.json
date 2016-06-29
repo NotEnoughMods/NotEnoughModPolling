@@ -4589,6 +4589,15 @@
             "regex": "advancedswords-(?P<version>.+?)-"
         }
     },
+    "Autoverse": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "id": "245194",
+            "name": "autoverse",
+            "regex": "autoverse-(?P<mc>[0-9\\.]+)-(?P<version>.+?)\\.jar"
+        }
+    },
     "EnderUtilities": {
         "function": "CheckCurse",
         "active": true,
@@ -4596,6 +4605,15 @@
             "id": "224320",
             "name": "ender-utilities",
             "regex": "enderutilities-(?P<mc>[0-9\\.]+)-(?P<version>.+?)\\.jar"
+        }
+    },
+    "EnvironmentalCreepers": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "id": "246320",
+            "name": "environmental-creepers",
+            "regex": "environmentalcreepers-(?P<mc>[0-9\\.]+)-(?P<version>.+?)\\.jar"
         }
     },
     "ItemScroller": {
