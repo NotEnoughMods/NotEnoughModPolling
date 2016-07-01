@@ -3619,7 +3619,7 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "regex": "InGameAccountSwitcher-(?P<version>.+?)\\.jar",
+            "regex": "InGameAccountSwitcher-(?:Forge-)?(?P<version>.+?)\\.jar",
             "id": "232676",
             "name": "in-game-account-switcher"
         }
@@ -3754,7 +3754,7 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "regex": "MobRebirth-(?P<version>.+).jar",
+            "regex": "MobRebirth-(?:Forge-)?(?P<version>.+).jar",
             "id": "226212",
             "name": "mob-rebirth"
         }
@@ -3988,7 +3988,7 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "regex": "Fire'?s ?Clay ?Spawn[ \\-](?P<version>.+?).jar",
+            "regex": "Fire'?s ?Clay ?Spawn[ \\-](?:Forge-)?(?P<version>.+?).jar",
             "id": "225539",
             "name": "fires-clay-spawn"
         }
@@ -4705,7 +4705,7 @@
             "url": "https://sokratis12gr.github.io/VersionUpdate/ArmorPlus.json",
             "mcversion": "1.10"
         }
-    },   
+    },
     "ArmorPlus-1.10.2": {
     	"name": "ArmorPlus",
         "function": "CheckForgeJson",
@@ -4722,7 +4722,7 @@
             "url": "https://sokratis12gr.github.io/VersionUpdate/WeaponsPlus.json",
             "mcversion": "1.9.4"
         }
-    },  
+    },
     "WeaponsPlus-1.10": {
         "function": "CheckForgeJson",
         "active": true,
@@ -4730,7 +4730,7 @@
             "url": "https://sokratis12gr.github.io/VersionUpdate/WeaponsPlus.json",
             "mcversion": "1.10"
         }
-    },   
+    },
     "WeaponsPlus-1.10.2": {
         "function": "CheckForgeJson",
         "active": true,
