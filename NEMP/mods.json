@@ -4626,5 +4626,14 @@
             "name": "chisel",
             "regex": "Chisel - MC(?P<mc>.+?)-(?P<version>.+)"
         }
+    },
+    "CraftTweaker": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "id": "239197",
+            "name": "crafttweaker",
+            "regex": "CraftTweaker-(?P<mc>.+?)-(?P<version>.+)"
+        }
     }
 }
