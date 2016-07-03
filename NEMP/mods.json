@@ -192,7 +192,7 @@
             "promoType" : "version"
         }
     },
-	"MinecraftForge-1.8.8" : {
+    "MinecraftForge-1.8.8" : {
         "name" : "MinecraftForge",
         "function" : "CheckMCForge2",
         "category" : "forge",
@@ -216,7 +216,7 @@
             "promoType" : "version"
         }
     },
-	"MinecraftForge-1.8.9" : {
+    "MinecraftForge-1.8.9" : {
         "name" : "MinecraftForge",
         "function" : "CheckMCForge2",
         "category" : "forge",
@@ -228,7 +228,7 @@
             "promoType" : "dev"
         }
     },
-	"MinecraftForge-1.9.4" : {
+    "MinecraftForge-1.9.4" : {
         "name" : "MinecraftForge",
         "function" : "CheckMCForge2",
         "category" : "forge",
@@ -240,7 +240,7 @@
             "promoType" : "dev"
         }
     },
-	"MinecraftForge-1.9-Release" : {
+    "MinecraftForge-1.9-Release" : {
         "name" : "MinecraftForge",
         "function" : "CheckMCForge2",
         "category" : "forge",
@@ -250,9 +250,9 @@
             "url" : "http://files.minecraftforge.net/maven/net/minecraftforge/forge/promotions.json",
             "promo" : "1.9-recommended",
             "promoType" : "version"
-	   }
+        }
     },
-	"MinecraftForge-1.10" : {
+    "MinecraftForge-1.10" : {
         "name" : "MinecraftForge",
         "function" : "CheckMCForge2",
         "category" : "forge",
@@ -461,7 +461,7 @@
             "item" : 1
         }
     },
-	"MicdoodleCore" : {
+    "MicdoodleCore" : {
         "function" : "CheckJenkins",
         "active" : true,
         "jenkins" : {
@@ -965,7 +965,7 @@
         }
     },
     "NEIAddons" : {
-    	"category": "bdew",
+        "category": "bdew",
         "function" : "CheckJenkins",
         "active" : true,
         "jenkins" : {
@@ -1252,7 +1252,7 @@
         }
     },
     "BDLib": {
-    	"category": "bdew",
+        "category": "bdew",
         "function": "CheckJenkins",
         "active": true,
         "jenkins": {
@@ -1262,7 +1262,7 @@
         }
     },
     "Gendustry": {
-    	"category": "bdew",
+        "category": "bdew",
         "function": "CheckJenkins",
         "active": true,
         "jenkins": {
@@ -1272,7 +1272,7 @@
         }
     },
     "PressurePipes": {
-    	"category": "bdew",
+        "category": "bdew",
         "function": "CheckJenkins",
         "active": true,
         "jenkins": {
@@ -3131,7 +3131,7 @@
             "item": 1
         }
     },
-	"HxCBlocks-1.7": {
+    "HxCBlocks-1.7": {
         "name": "HxC-Blocks",
         "function": "CheckJenkins",
         "category" : "HxCMods",
@@ -3365,7 +3365,7 @@
         }
     },
     "AdvancedGenerators": {
-    	"category": "bdew",
+        "category": "bdew",
         "function": "CheckJenkins",
         "active": true,
         "jenkins": {
@@ -3375,7 +3375,7 @@
         }
     },
     "AE2Stuff": {
-    	"category": "bdew",
+        "category": "bdew",
         "function": "CheckJenkins",
         "active": true,
         "jenkins": {
@@ -3385,7 +3385,7 @@
         }
     },
     "Compacter": {
-    	"category": "bdew",
+        "category": "bdew",
         "function": "CheckJenkins",
         "active": true,
         "jenkins": {
@@ -4284,7 +4284,7 @@
         }
     },
     "BuildingBricks-1.9": {
-		"name": "BuildingBricks",
+        "name": "BuildingBricks",
         "function": "CheckForgeJson",
         "active": true,
         "forgejson": {
@@ -4292,7 +4292,7 @@
             "mcversion": "1.9"
         }
     },
-	"BuildingBricks-1.10": {
+    "BuildingBricks-1.10": {
         "name": "BuildingBricks",
         "function": "CheckForgeJson",
         "active": true,
@@ -4371,16 +4371,16 @@
         "forgejson": {
             "url": "https://raw.githubusercontent.com/hea3ven/Malleable/version/media/update.json",
             "mcversion": "1.9.4"
-			}
-	},
-		"BuildingBricks-1.9.4": {
+        }
+    },
+    "BuildingBricks-1.9.4": {
         "name": "BuildingBricks",
         "function": "CheckForgeJson",
         "active": true,
         "forgejson": {
             "url": "https://raw.githubusercontent.com/hea3ven/BuildingBricks/version/media/update.json",
             "mcversion": "1.9.4"
-       }
+        }
     },
     "HardModeTweaks-1.9": {
         "name": "HardModeTweaks",
@@ -4452,16 +4452,16 @@
         "forgejson": {
             "url": "https://raw.githubusercontent.com/hea3ven/Malleable/version/media/update.json",
             "mcversion": "1.9.4"
-			}
-	},
-	"BuildingBricks-1.10": {
+            }
+    },
+    "BuildingBricks-1.10": {
         "name": "BuildingBricks",
         "function": "CheckForgeJson",
         "active": true,
         "forgejson": {
             "url": "https://raw.githubusercontent.com/hea3ven/BuildingBricks/version/media/update.json",
             "mcversion": "1.10"
-       }
+        }
     },
     "HardModeTweaks-1.10": {
         "name": "HardModeTweaks",
@@ -4490,14 +4490,14 @@
             "mcversion": "1.10"
         }
     },
-	"BuildingBricks-1.10": {
+    "BuildingBricks-1.10": {
         "name": "BuildingBricks",
         "function": "CheckForgeJson",
         "active": true,
         "forgejson": {
             "url": "https://raw.githubusercontent.com/hea3ven/BuildingBricks/version/media/update.json",
             "mcversion": "1.10"
-       }
+        }
     },
     "HardModeTweaks-1.10": {
         "name": "HardModeTweaks",
@@ -4533,8 +4533,8 @@
         "forgejson": {
             "url": "https://raw.githubusercontent.com/hea3ven/Malleable/version/media/update.json",
             "mcversion": "1.10"
-		}
-	},
+        }
+    },
     "Intangible": {
         "function": "CheckCurse",
         "active": true,
@@ -4689,7 +4689,7 @@
         }
     },
     "ArmorPlus-1.9.4": {
-    	"name": "ArmorPlus",
+        "name": "ArmorPlus",
         "function": "CheckForgeJson",
         "active": true,
         "forgejson": {
@@ -4698,7 +4698,7 @@
         }
     },
     "ArmorPlus-1.10": {
-    	"name": "ArmorPlus",
+        "name": "ArmorPlus",
         "function": "CheckForgeJson",
         "active": true,
         "forgejson": {
@@ -4707,7 +4707,7 @@
         }
     },
     "ArmorPlus-1.10.2": {
-    	"name": "ArmorPlus",
+        "name": "ArmorPlus",
         "function": "CheckForgeJson",
         "active": true,
         "forgejson": {
@@ -4716,7 +4716,7 @@
         }
     },
     "WeaponsPlus-1.9.4": {
-    	"name": "WeaponsPlus",
+        "name": "WeaponsPlus",
         "function": "CheckForgeJson",
         "active": true,
         "forgejson": {
@@ -4725,7 +4725,7 @@
         }
     },
     "WeaponsPlus-1.10": {
-    	"name": "WeaponsPlus",
+        "name": "WeaponsPlus",
         "function": "CheckForgeJson",
         "active": true,
         "forgejson": {
@@ -4734,7 +4734,7 @@
         }
     },
     "WeaponsPlus-1.10.2": {
-    	"name": "WeaponsPlus",
+        "name": "WeaponsPlus",
         "function": "CheckForgeJson",
         "active": true,
         "forgejson": {
