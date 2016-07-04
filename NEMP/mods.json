@@ -2665,7 +2665,7 @@
         "jenkins": {
             "url": "http://ci.tterrag.com/job/Ender%20Zoo/lastSuccessfulBuild/api/json",
             "regex": ".+?-(?P<mc>.+?)-(?P<dev>.+?).jar",
-            "item": 3
+            "item": 1
         }
     },
     "Flamingo": {
