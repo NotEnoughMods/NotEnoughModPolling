@@ -2033,6 +2033,24 @@
             "regex": "IntegratedDynamics-(?P<mc>.+?)-(?P<version>.+?)\\.jar"
         }
      },
+     "CommonCapabilities": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "id": "247007",
+            "name": "common-capabilities",
+            "regex": "CommonCapabilities-(?P<mc>.+?)-(?P<version>.+?)\\.jar"
+        }
+     },
+     "EnergySynergy": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "id": "247043",
+            "name": "energysynergy",
+            "regex": "EnergySynergy-(?P<mc>.+?)-(?P<version>.+?)\\.jar"
+        }
+     },
     "JourneyMap": {
         "function": "CheckCurse",
         "active": true,
