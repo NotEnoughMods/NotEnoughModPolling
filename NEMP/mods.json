@@ -909,7 +909,7 @@
         "function" : "CheckCurse",
         "active" : true,
         "curse" : {
-            "regex" : "EnderIO-(?P<mc>.+?)-(?P<version>.+?).jar",
+            "regex" : "EnderIO - (?P<mc>.+?)-(?P<version>.+)",
             "name" : "ender-io"
         }
     },
