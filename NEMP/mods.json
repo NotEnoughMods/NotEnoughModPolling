@@ -3612,7 +3612,7 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "regex": "InGameAccountSwitcher-(?:Forge-)?(?P<version>.+?)\\.jar",
+            "regex": "InGameAccountSwitcher-.+?-(?P<version>.+?).litemod",
             "id": "232676",
             "name": "in-game-account-switcher"
         }
