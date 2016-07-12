@@ -1873,7 +1873,7 @@
             "name": "thaumic-warden",
             "regex": "TWarden-(?P<version>.+?).jar"
         }
-     },
+    },
     "AlchemicalBling": {
         "function": "CheckCurse",
         "active": true,
@@ -1882,7 +1882,7 @@
             "name": "alchemical-bling",
             "regex": "AlchemicalBling-(?P<version>.+?)-universal.jar"
         }
-     },
+    },
     "Atum": {
         "function": "CheckCurse",
         "active": true,
@@ -1890,7 +1890,7 @@
             "name": "atum",
             "regex": "Atum-(?P<mc>.+?)-(?P<version>.+?).jar"
         }
-     },
+    },
     "Automagy": {
         "function": "CheckCurse",
         "active": true,
@@ -1899,7 +1899,7 @@
             "name": "automagy",
             "regex": "^v(?P<version>[0-9]+(\\.[0-9]+)*)$"
         }
-     },
+    },
     "Freedom": {
         "function": "CheckCurse",
         "active": true,
@@ -1908,7 +1908,7 @@
             "name": "freedom",
             "regex": "Freedom-(?P<mc>.+?)-(?P<version>.+?).jar"
         }
-     },
+    },
     "Santa'sToys": {
         "function": "CheckCurse",
         "active": false,
@@ -1917,7 +1917,7 @@
             "name": "santas-toys",
             "regex": "-.+?-(?P<version>.+?).jar"
         }
-     },
+    },
     "SparklyPants": {
         "function": "CheckCurse",
         "active": false,
@@ -1926,7 +1926,7 @@
             "name": "sparkly-pants",
             "regex": "-.+?-(?P<version>.+?).jar"
         }
-     },
+    },
     "Santa'sDecor": {
         "function": "CheckCurse",
         "active": true,
@@ -1935,7 +1935,7 @@
             "name": "santas-decor",
             "regex": "Santa'?sDecor-(?P<mc>.+?)-(?P<version>.+?).jar"
         }
-     },
+    },
     "CraftGuide": {
         "function": "CheckCurse",
         "active": true,
@@ -1943,7 +1943,7 @@
             "name": "craftguide",
             "regex": "CraftGuide-(?P<version>.+?)-forge.jar"
         }
-     },
+    },
     "DarkMenagerie": {
         "function": "CheckCurse",
         "active": false,
@@ -1952,7 +1952,7 @@
             "name": "dark-menagerie",
             "regex": "dark_menagerie-(?P<mc>.+?)-(?P<version>.+?).jar"
         }
-     },
+    },
     "DraconicEvolution": {
         "function": "CheckCurse",
         "active": true,
@@ -1961,7 +1961,7 @@
             "name": "draconic-evolution",
             "regex": "Draconic-Evolution-(?P<mc>.+?)-(?P<version>.+?).jar"
         }
-     },
+    },
     "ElementalCreepers": {
         "function": "CheckCurse",
         "active": true,
@@ -1969,7 +1969,7 @@
             "name": "elemental-creepers",
             "regex": "Elemental Creepers v(?P<version>.+)"
         }
-     },
+    },
     "ElementalMelons": {
         "function": "CheckCurse",
         "active": true,
@@ -1978,7 +1978,7 @@
             "name": "elemental-melons",
             "regex": "ElementalMelons-(?P<mc>.+?)-(?P<version>.+?).jar"
         }
-     },
+    },
     "EvilCraft": {
         "function": "CheckCurse",
         "active": true,
@@ -1987,8 +1987,8 @@
             "name": "evilcraft",
             "regex": "EvilCraft-(?P<mc>.+?)-(?P<version>.+?)\\.jar"
         }
-     },
-     "CyclopsCore": {
+    },
+    "CyclopsCore": {
         "function": "CheckCurse",
         "active": true,
         "curse": {
@@ -1996,8 +1996,8 @@
             "name": "cyclops-core",
             "regex": "CyclopsCore-(?P<mc>.+?)-(?P<version>.+?)\\.jar"
         }
-     },
-     "FluidConverters": {
+    },
+    "FluidConverters": {
         "function": "CheckCurse",
         "active": true,
         "curse": {
@@ -2005,8 +2005,8 @@
             "name": "fluidconverters",
             "regex": "FluidConverters-(?P<mc>.+?)-(?P<version>.+?)\\.jar"
         }
-     },
-     "StructuredCrafting": {
+    },
+    "StructuredCrafting": {
         "function": "CheckCurse",
         "active": true,
         "curse": {
@@ -2014,8 +2014,8 @@
             "name": "structured-crafting",
             "regex": "StructuredCrafting-(?P<mc>.+?)-(?P<version>.+?)\\.jar"
         }
-     },
-     "ColossalChests": {
+    },
+    "ColossalChests": {
         "function": "CheckCurse",
         "active": true,
         "curse": {
@@ -2023,8 +2023,8 @@
             "name": "colossal-chests",
             "regex": "ColossalChests-(?P<mc>.+?)-(?P<version>.+?)\\.jar"
         }
-     },
-     "IntegratedDynamics": {
+    },
+    "IntegratedDynamics": {
         "function": "CheckCurse",
         "active": true,
         "curse": {
@@ -2032,8 +2032,8 @@
             "name": "integrated-dynamics",
             "regex": "IntegratedDynamics-(?P<mc>.+?)-(?P<version>.+?)\\.jar"
         }
-     },
-     "CommonCapabilities": {
+    },
+    "CommonCapabilities": {
         "function": "CheckCurse",
         "active": true,
         "curse": {
@@ -2041,8 +2041,8 @@
             "name": "common-capabilities",
             "regex": "CommonCapabilities-(?P<mc>.+?)-(?P<version>.+?)\\.jar"
         }
-     },
-     "EnergySynergy": {
+    },
+    "EnergySynergy": {
         "function": "CheckCurse",
         "active": true,
         "curse": {
@@ -2050,7 +2050,7 @@
             "name": "energysynergy",
             "regex": "EnergySynergy-(?P<mc>.+?)-(?P<version>.+?)\\.jar"
         }
-     },
+    },
     "JourneyMap": {
         "function": "CheckCurse",
         "active": true,
@@ -2058,7 +2058,7 @@
             "name": "journeymap-32274",
             "regex": "journeymap-(?P<mc>.+?)-(?P<version>.+)"
         }
-     },
+    },
     "Thaumcraft": {
         "function": "CheckCurse",
         "active": true,
@@ -2067,7 +2067,7 @@
             "name": "thaumcraft",
             "regex": "Thaumcraft-(?P<mc>.+?)-(?P<version>.+?).jar"
         }
-     },
+    },
     "ThaumicTinkerer": {
         "function": "CheckCurse",
         "active": false,
@@ -2075,7 +2075,7 @@
             "name": "thaumic-tinkerer",
             "regex": "ThaumicTinkerer-.+?-(?P<mc>.+?)-(?P<version>.+?).jar"
         }
-     },
+    },
     "MorePistons-JiraiyahVersion": {
         "function": "CheckCurse",
         "active": true,
@@ -2084,7 +2084,7 @@
             "name": "more-pistons-jiraiyah-version",
             "regex": "MorePistons-(?P<mc>.+?)-(?P<version>.+?).jar"
         }
-     },
+    },
     "RoguelikeDungeons": {
         "function": "CheckCurse",
         "active": true,
@@ -2747,7 +2747,7 @@
             "name": "glass-shards",
             "regex": ".+?_mc(?P<mc>.+?)-(?P<version>.+?).jar"
         }
-     },
+    },
     "KoreSample": {
         "function": "CheckGitHubRelease",
         "active": false,
