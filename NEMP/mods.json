@@ -4653,5 +4653,26 @@
             "name": "crafttweaker",
             "regex": "CraftTweaker-(?P<mc>.+?)-(?P<version>.+)"
         }
+    },
+    "SpongeForge": {
+        "function": "CheckMCForge2",
+        "category": "forge",
+        "active": true,
+        "mcforge": {
+            "url": "http://files.minecraftforge.net/maven/org/spongepowered/spongeforge/promotions.json",
+            "promo": "latest",
+            "promoType": "dev"
+        }
+    },
+    "SpongeForge-Release": {
+        "name": "SpongeForge",
+        "function": "CheckMCForge2",
+        "category": "forge",
+        "active": true,
+        "mcforge": {
+            "url": "http://files.minecraftforge.net/maven/org/spongepowered/spongeforge/promotions.json",
+            "promo": "recommended",
+            "promoType": "version"
+        }
     }
 }
