@@ -347,72 +347,12 @@
             "regex" : "OpenSecurity-(?P<mc>.+?)-(?P<version>.+?).jar$"
         }
     },
-    "ModularPowersuits" : {
-        "function" : "CheckJenkins",
-        "category" : "technic-ci",
-        "active" : true,
-        "jenkins" : {
-            "url" : "http://build.technicpack.net/job/ModularPowersuits/lastSuccessfulBuild/api/json",
-            "regex" : "ModularPowersuits-(?P<dev>.+?).jar$",
-            "item" : 1
-        }
-    },
-    "Numina" : {
-        "function" : "CheckJenkins",
-        "category" : "technic-ci",
-        "active" : true,
-        "jenkins" : {
-            "url" : "http://build.technicpack.net/job/Numina/lastSuccessfulBuild/api/json",
-            "regex" : "Numina-(?P<dev>.+?).jar$",
-            "item" : 1
-        }
-    },
-    "ModularPowersuits-Addons" : {
-        "function" : "CheckJenkins",
-        "category" : "technic-ci",
-        "active" : false,
-        "jenkins" : {
-            "url" : "http://build.technicpack.net/job/ModularPowersuitsAddons/lastSuccessfulBuild/api/json",
-            "regex" : "MPSA-(?P<dev>.+?)_(.+?).jar$",
-            "item" : 0
-        }
-    },
     "MFFSv2Classic" : {
         "function" : "CheckJenkins",
         "active" : false,
         "jenkins" : {
             "url" : "http://minalien.com:8080/job/Modular%20Forcefield%20System/lastSuccessfulBuild/api/json",
             "regex" : "ModularForcefieldSystem-(?P<dev>.+?).jar$",
-            "item" : 0
-        }
-    },
-    "InventoryTweaks" : {
-        "function" : "CheckJenkins",
-        "category" : "technic-ci",
-        "active" : false,
-        "jenkins" : {
-            "url" : "http://build.technicpack.net/job/Inventory-Tweaks/lastSuccessfulBuild/api/json",
-            "regex" : "InventoryTweaks-(?P<dev>.+?).jar",
-            "item" : 0
-        }
-    },
-    "DimensionalDoors" : {
-        "function" : "CheckJenkins",
-        "category" : "technic-ci",
-        "active" : false,
-        "jenkins" : {
-            "url" : "http://build.technicpack.net/job/DimDoors/lastSuccessfulBuild/api/json",
-            "regex" : "DimensionalDoors-(?P<mc>.+?)R(?P<dev>.+?).zip$",
-            "item" : 0
-        }
-    },
-    "PowerCrystalsCore" : {
-        "function" : "CheckJenkins",
-        "category" : "technic-ci",
-        "active" : true,
-        "jenkins" : {
-            "url" : "http://build.technicpack.net/job/PowerCrystalsCore/lastSuccessfulBuild/api/json",
-            "regex" : "PowerCrystalsCore-(?P<dev>.+?).jar$",
             "item" : 0
         }
     },
