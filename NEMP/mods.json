@@ -3152,6 +3152,16 @@
             "regex": "HxCWorldGen v(?P<version>.+)"
         }
     },
+    "HxCShards": {
+        "function": "CheckCurse",
+        "active": true,
+        "category": "HxCMods",
+        "curse": {
+            "id": "247328",
+            "name": "hxcshards",
+            "regex": "HxCShards v(?P<version>.+)"
+        }
+    },
     "DragonAPI": {
         "function": "CheckCurse",
         "active": true,
