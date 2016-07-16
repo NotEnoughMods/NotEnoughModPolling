@@ -3230,7 +3230,7 @@
     },
     "EnderCore": {
         "function": "CheckJenkins",
-        "active": true,
+        "active": false,
         "jenkins": {
             "url": "http://ci.tterrag.com/job/EnderCore/lastSuccessfulBuild/api/json",
             "regex": "EnderCore-(?P<mc>.+?)-(?P<version>.+?)\\.jar",
