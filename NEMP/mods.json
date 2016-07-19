@@ -380,7 +380,7 @@
         "active" : true,
         "jenkins" : {
             "url" : "ci.theender.net/job/VanityBlocks/lastSuccessfulBuild/api/json",
-            "regex" : "VanityBlocks-V(?P<mc>.+?)-(?P<dev>.+?).jar",
+            "regex" : "VanityBlocks-V(?P<mc>.+?)--(?P<dev>.+?).jar",
             "item" : 0
         }
     },
