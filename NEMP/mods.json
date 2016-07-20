@@ -326,7 +326,7 @@
         "function" : "CheckCurse",
         "active" : true,
         "curse" : {
-            "regex" : "LanteaCraft-(?P<mc>.+?)-(?P<version>.+?).jar$"
+            "regex" : "LanteaCraft2-(?P<mc>.+?)-(?P<version>.+?).jar$"
         }
     },
     "OpenPrinter" : {
