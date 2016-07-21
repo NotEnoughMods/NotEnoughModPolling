@@ -4187,7 +4187,7 @@
         "curse": {
             "id": "240877",
             "name": "graves",
-            "regex": "graves-(?P<mc>.+?)-(?P<version>.+?)-universal.jar"
+            "regex": "Graves-(?P<mc>.+?)-(?P<version>.+?)-universal.jar"
         }
     },
     "Chisels&Bits": {
