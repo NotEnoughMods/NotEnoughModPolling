@@ -337,6 +337,15 @@
             "name": "openprinter",
             "regex" : "OpenPrinter-(?P<mc>.+?)-(?P<version>.+?).jar$"
         }
+    },   
+    "OpenFM" : {
+        "function" : "CheckCurse",
+        "active" : true,
+        "curse" : {
+            "id": "236839",
+            "name": "openfm",
+            "regex" : "OpenFM-(?P<mc>.+?)-(?P<version>.+?).jar$"
+        }
     },
     "OpenSecurity" : {
         "function" : "CheckCurse",
