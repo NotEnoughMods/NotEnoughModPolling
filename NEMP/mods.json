@@ -388,7 +388,7 @@
         "function" : "CheckJenkins",
         "active" : true,
         "jenkins" : {
-            "url" : "ci.theender.net/job/VanityBlocks/lastSuccessfulBuild/api/json",
+            "url" : "http://ci.theender.net/job/VanityBlocks/lastSuccessfulBuild/api/json",
             "regex" : "VanityBlocks-V(?P<mc>.+?)--(?P<dev>.+?).jar",
             "item" : 0
         }
