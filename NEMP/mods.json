@@ -4550,6 +4550,15 @@
             "mcversion": "1.10.2"
         }
     },
+    "SokratisCore": {
+        "name": "SokratisCore",
+        "function": "CheckForgeJson",
+        "active": true,
+        "forgejson": {
+            "url": "https://raw.githubusercontent.com/sokratis12GR/VersionUpdate/gh-pages/SokratisCore.json",
+            "mcversion": "1.10.2"
+        }
+    },
     "MCMultiPart": {
         "function": "CheckCurse",
         "active": true,
