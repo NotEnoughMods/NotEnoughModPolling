@@ -337,7 +337,7 @@
             "name": "openprinter",
             "regex" : "OpenPrinter-(?P<mc>.+?)-(?P<version>.+?).jar$"
         }
-    },   
+    },
     "OpenFM" : {
         "function" : "CheckCurse",
         "active" : true,
