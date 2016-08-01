@@ -4501,7 +4501,7 @@
         "function": "CheckForgeJson",
         "active": true,
         "forgejson": {
-            "url": "https://raw.githubusercontent.com/sokratis12GR/VersionUpdate/gh-pages/ArmorPlus.json",
+            "url": "https://dev.sokratis12gr.tk/update/json/armorplus.json",
             "mcversion": "1.9.4"
         }
     },
@@ -4510,7 +4510,7 @@
         "function": "CheckForgeJson",
         "active": true,
         "forgejson": {
-            "url": "https://raw.githubusercontent.com/sokratis12GR/VersionUpdate/gh-pages/ArmorPlus.json",
+            "url": "https://dev.sokratis12gr.tk/update/json/armorplus.json",
             "mcversion": "1.10"
         }
     },
@@ -4519,7 +4519,7 @@
         "function": "CheckForgeJson",
         "active": true,
         "forgejson": {
-            "url": "https://raw.githubusercontent.com/sokratis12GR/VersionUpdate/gh-pages/ArmorPlus.json",
+            "url": "https://dev.sokratis12gr.tk/update/json/armorplus.json",
             "mcversion": "1.10.2"
         }
     },
@@ -4528,7 +4528,7 @@
         "function": "CheckForgeJson",
         "active": true,
         "forgejson": {
-            "url": "https://raw.githubusercontent.com/sokratis12GR/VersionUpdate/gh-pages/WeaponsPlus.json",
+            "url": "https://dev.sokratis12gr.tk/update/json/weaponsplus.json",
             "mcversion": "1.9.4"
         }
     },
@@ -4537,7 +4537,7 @@
         "function": "CheckForgeJson",
         "active": true,
         "forgejson": {
-            "url": "https://raw.githubusercontent.com/sokratis12GR/VersionUpdate/gh-pages/WeaponsPlus.json",
+            "url": "https://dev.sokratis12gr.tk/update/json/weaponsplus.json",
             "mcversion": "1.10"
         }
     },
@@ -4546,7 +4546,7 @@
         "function": "CheckForgeJson",
         "active": true,
         "forgejson": {
-            "url": "https://raw.githubusercontent.com/sokratis12GR/VersionUpdate/gh-pages/WeaponsPlus.json",
+            "url": "https://dev.sokratis12gr.tk/update/json/weaponsplus.json",
             "mcversion": "1.10.2"
         }
     },
@@ -4555,7 +4555,7 @@
         "function": "CheckForgeJson",
         "active": true,
         "forgejson": {
-            "url": "https://raw.githubusercontent.com/sokratis12GR/VersionUpdate/gh-pages/SokratisCore.json",
+            "url": "https://dev.sokratis12gr.tk/update/json/sokratiscore.json",
             "mcversion": "1.10.2"
         }
     },
