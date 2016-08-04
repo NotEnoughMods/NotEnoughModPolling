@@ -2952,7 +2952,7 @@
         "curse": {
             "id": "223797",
             "name": "helpfixer",
-            "regex": "HelpFixer - (?P<version>.+)"
+            "regex": "Helpfixer - (?P<version>.+)"
         }
     },
     "IceShards": {
