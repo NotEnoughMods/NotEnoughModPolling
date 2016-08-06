@@ -4501,7 +4501,7 @@
         "function": "CheckForgeJson",
         "active": true,
         "forgejson": {
-            "url": "https://dev.sokratis12gr.tk/update/json/armorplus.json",
+            "url": "https://sokratis12gr.tk/armorplus/armorplus.json",
             "mcversion": "1.9.4"
         }
     },
@@ -4510,7 +4510,7 @@
         "function": "CheckForgeJson",
         "active": true,
         "forgejson": {
-            "url": "https://dev.sokratis12gr.tk/update/json/armorplus.json",
+            "url": "https://sokratis12gr.tk/armorplus/armorplus.json",
             "mcversion": "1.10"
         }
     },
@@ -4519,34 +4519,7 @@
         "function": "CheckForgeJson",
         "active": true,
         "forgejson": {
-            "url": "https://dev.sokratis12gr.tk/update/json/armorplus.json",
-            "mcversion": "1.10.2"
-        }
-    },
-    "WeaponsPlus-1.9.4": {
-        "name": "WeaponsPlus",
-        "function": "CheckForgeJson",
-        "active": true,
-        "forgejson": {
-            "url": "https://dev.sokratis12gr.tk/update/json/weaponsplus.json",
-            "mcversion": "1.9.4"
-        }
-    },
-    "WeaponsPlus-1.10": {
-        "name": "WeaponsPlus",
-        "function": "CheckForgeJson",
-        "active": true,
-        "forgejson": {
-            "url": "https://dev.sokratis12gr.tk/update/json/weaponsplus.json",
-            "mcversion": "1.10"
-        }
-    },
-    "WeaponsPlus-1.10.2": {
-        "name": "WeaponsPlus",
-        "function": "CheckForgeJson",
-        "active": true,
-        "forgejson": {
-            "url": "https://dev.sokratis12gr.tk/update/json/weaponsplus.json",
+            "url": "https://sokratis12gr.tk/armorplus/armorplus.json",
             "mcversion": "1.10.2"
         }
     },
@@ -4555,7 +4528,7 @@
         "function": "CheckForgeJson",
         "active": true,
         "forgejson": {
-            "url": "https://dev.sokratis12gr.tk/update/json/sokratiscore.json",
+            "url": "https://sokratis12gr.tk/sokratiscore/sokratiscore.json",
             "mcversion": "1.10.2"
         }
     },
