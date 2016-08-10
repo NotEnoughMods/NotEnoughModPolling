@@ -3805,7 +3805,7 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "regex": "(?P<version>\\S+)$",
+            "regex": ".+?-(?P<version>.+?).jar",
             "id": "226910",
             "name": "tinkers-defense"
         }
