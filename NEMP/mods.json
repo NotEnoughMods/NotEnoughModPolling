@@ -3670,7 +3670,7 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "regex": ".+? v(?P<version>.+)",
+            "regex": ".+?_(?P<mc>.+?)-(?P<version>.+).jar",
             "id": "231484",
             "name": "cooking-for-blockheads"
         }
