@@ -4496,39 +4496,12 @@
             "regex": "EverythingBlocks (?P<version>\\S+)"
         }
     },
-    "ArmorPlus-1.9.4": {
-        "name": "ArmorPlus",
-        "function": "CheckForgeJson",
-        "active": true,
-        "forgejson": {
-            "url": "https://sokratis12gr.tk/armorplus/armorplus.json",
-            "mcversion": "1.9.4"
-        }
-    },
-    "ArmorPlus-1.10": {
-        "name": "ArmorPlus",
-        "function": "CheckForgeJson",
-        "active": true,
-        "forgejson": {
-            "url": "https://sokratis12gr.tk/armorplus/armorplus.json",
-            "mcversion": "1.10"
-        }
-    },
     "ArmorPlus-1.10.2": {
         "name": "ArmorPlus",
         "function": "CheckForgeJson",
         "active": true,
         "forgejson": {
-            "url": "https://sokratis12gr.tk/armorplus/armorplus.json",
-            "mcversion": "1.10.2"
-        }
-    },
-    "SokratisCore": {
-        "name": "SokratisCore",
-        "function": "CheckForgeJson",
-        "active": true,
-        "forgejson": {
-            "url": "https://sokratis12gr.tk/sokratiscore/sokratiscore.json",
+            "url": "http://fdn.redstone.tech/TheDragonTeam/armorplus/update.json",
             "mcversion": "1.10.2"
         }
     },
