@@ -4505,6 +4505,15 @@
             "mcversion": "1.10.2"
         }
     },
+    "TheDragonLib-1.10.2": {
+        "name": "TheDragonLib",
+        "function": "CheckForgeJson",
+        "active": true,
+        "forgejson": {
+            "url": "http://fdn.redstone.tech/TheDragonTeam/thedragonlib/update.json",
+            "mcversion": "1.10.2"
+        }
+    },
     "MCMultiPart": {
         "function": "CheckCurse",
         "active": true,
