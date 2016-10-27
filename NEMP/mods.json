@@ -4161,15 +4161,6 @@
             "name": "iron-backpacks"
         }
     },
-    "FluxedSolars": {
-        "function": "CheckCurse",
-        "active": true,
-        "curse": {
-            "regex": "fluxedsolars-(?P<version>.+?)\\.jar",
-            "id": "240599",
-            "name": "fluxed-solars"
-        }
-    },
     "ExtraPlanets": {
         "function": "CheckCurse",
         "active": true,
