@@ -4562,12 +4562,12 @@
             "promoType": "version"
         }
     },
-    "Brain Stone Mod": {
+    "BrainStoneMod": {
         "function" : "CheckCurse",
         "active" : true,
         "curse" : {
             "id": "250836",
-            "name": "brainstonemod",
+            "name": "brain-stone-mod",
             "regex" : "v(?P<version>\\d+\\.\\d+\\.\\d+)"
         }
     }
