@@ -4561,5 +4561,14 @@
             "promo": "recommended",
             "promoType": "version"
         }
+    },
+    "BrainStoneMod": {
+        "function" : "CheckCurse",
+        "active" : true,
+        "curse" : {
+            "id": "250836",
+            "name": "brain-stone-mod",
+            "regex" : "v(?P<version>\\d+\\.\\d+\\.\\d+)"
+        }
     }
 }
