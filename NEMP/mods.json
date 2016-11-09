@@ -4571,13 +4571,40 @@
             "regex" : "v(?P<version>\\d+\\.\\d+\\.\\d+)"
         }
     },
-	"SuperCircuitMaker": {
+    "SuperCircuitMaker": {
         "function" : "CheckCurse",
         "active" : true,
         "curse" : {
             "id": "248619",
             "name": "super-circuit-maker",
             "regex" : "Super Circuit Maker (?P<version>.+)"
+        }
+    },
+    "AkashicTome": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "id": "250577",
+            "name": "akashic-tome",
+            "regex": "AkashicTome-(?P<version>.+).jar"
+        }
+    },
+    "Morph-o-Tool": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "id": "245287",
+            "name": "morph-o-tool",
+            "regex": "Morph-o-Tool-(?P<version>.+).jar"
+        }
+    },
+    "AutoRegLib": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "id": "250363",
+            "name": "autoreglib",
+            "regex": "AutoRegLib-(?P<version>.+).jar"
         }
     }
 }
