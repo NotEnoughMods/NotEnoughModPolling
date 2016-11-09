@@ -956,7 +956,7 @@
         "active" : true,
         "curse" : {
             "name": "mariculture",
-            "regex" : "Mariculture (?P<mc>.+?) - (?P<version>.+)"
+            "regex" : "Mariculture-Deluxe-(?P<mc>.+?)-(?P<version>.+).jar"
         }
     },
     "Forestry-Release" : {
@@ -1421,7 +1421,7 @@
         "active" : true,
         "curse": {
             "id" : "221982",
-            "regex" : "-.+?-(?P<version>.+?)-universal.jar"
+            "regex" : "-(?P<version>.+?)-universal.jar"
         }
     },
     "Ping" :{
@@ -1728,7 +1728,7 @@
     },
     "AlchemyPlusPlus" : {
         "function" : "CheckJenkins",
-        "active" : true,
+        "active" : false,
         "jenkins": {
             "url" : "https://jenkins.jakimfett.com/job/AlchemyPlusPlus_1.7.10/lastSuccessfulBuild/api/json",
             "regex" : "AlchemyPlusPlus-(?P<mc>.+?)-(?P<dev>.+?).jar",
@@ -4569,6 +4569,15 @@
             "id": "250836",
             "name": "brain-stone-mod",
             "regex" : "v(?P<version>\\d+\\.\\d+\\.\\d+)"
+        }
+    },
+	"SuperCircuitMaker": {
+        "function" : "CheckCurse",
+        "active" : true,
+        "curse" : {
+            "id": "248619",
+            "name": "super-circuit-maker",
+            "regex" : "Super Circuit Maker (?P<version>.+)"
         }
     }
 }
