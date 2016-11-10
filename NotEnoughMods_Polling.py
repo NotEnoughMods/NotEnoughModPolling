@@ -667,6 +667,8 @@ def nemp_url(self, name, params, channel, userdata, rank):
         self.sendMessage(channel, name + ": http://curse.com/mc-mods/minecraft/" + prefix + _name)
     elif func == "CheckJenkins":
         self.sendMessage(channel, name + ": " + mod["jenkins"]["url"][:-28])
+    elif func == "CheckChickenBones":
+        self.sendMessage(channel, name + ": http://www.chickenbones.net/Files/notification/version.php?version=" + mod['mc'] + "&file=" + modname)
     else:
         self.sendMessage(channel, name + ": This mod doesn't have a well-defined URL")
 
