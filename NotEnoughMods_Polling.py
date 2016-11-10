@@ -118,7 +118,7 @@ def about(self, name, params, channel, userdata, rank):
 
 def nemp_help(self, name, params, channel, userdata, rank):
     if len(params) == 1:
-        self.sendMessage(channel, name + ": Available commands: " + ", ".join(helpDict))
+        self.sendMessage(channel, name + ": Available commands: " + ", ".join(sorted(helpDict.keys())))
         self.sendMessage(channel, name + ": For command usage, use \"{0} help <command>\".".format(self.cmdprefix + ID))
     else:
         command = params[1]
