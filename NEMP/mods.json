@@ -4606,5 +4606,14 @@
             "name": "autoreglib",
             "regex": "AutoRegLib-(?P<version>.+).jar"
         }
+    },
+	"HWYLA": {
+        "function" : "CheckCurse",
+        "active" : true,
+        "curse" : {
+            "id": "253449",
+            "name": "hwyla",
+            "regex" : "Waila-(?P<version>.+)_(?P<mc>.+?).jar"
+        }
     }
 }
