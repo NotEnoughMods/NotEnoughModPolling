@@ -4607,7 +4607,7 @@
             "regex": "AutoRegLib-(?P<version>.+).jar"
         }
     },
-	"HWYLA": {
+    "HWYLA": {
         "function" : "CheckCurse",
         "active" : true,
         "curse" : {
