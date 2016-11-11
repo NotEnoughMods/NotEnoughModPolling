@@ -3544,7 +3544,7 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "regex": "InGameAccountSwitcher-.+?-(?P<version>.+?).litemod",
+            "regex": "InGameAccountSwitcher-(?:(?:Forge|LiteLoader)[- ])?(?P<version>.+?)\\.(?:jar|litemod)",
             "id": "232676",
             "name": "in-game-account-switcher"
         }
