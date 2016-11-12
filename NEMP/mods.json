@@ -3,7 +3,7 @@
         "name" : "MinecraftForge",
         "function" : "CheckMCForge2",
         "category" : "forge",
-        "active" : true,
+        "active" : trueB
         "mcforge" : {
             "url" : "http://files.minecraftforge.net/maven/net/minecraftforge/forge/promotions.json",
             "promo" : "1.7.10-latest",
@@ -4568,7 +4568,7 @@
         "curse" : {
             "id": "250836",
             "name": "brain-stone-mod",
-            "regex" : "(?P<mc>.+?)-(?P<version>.+)"
+            "regex" : "BrainStoneMod-(?P<mc>.+?)-(?P<version>.+)"
         }
     },
     "SuperCircuitMaker": {
