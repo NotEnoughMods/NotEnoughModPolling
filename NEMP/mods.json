@@ -4568,7 +4568,7 @@
         "curse" : {
             "id": "250836",
             "name": "brain-stone-mod",
-            "regex" : "v(?P<version>\\d+\\.\\d+\\.\\d+)"
+            "regex" : "(?P<mc>.+?)-(?P<version>.+)"
         }
     },
     "SuperCircuitMaker": {
