@@ -3,7 +3,7 @@
         "name" : "MinecraftForge",
         "function" : "CheckMCForge2",
         "category" : "forge",
-        "active" : trueB
+        "active" : true,
         "mcforge" : {
             "url" : "http://files.minecraftforge.net/maven/net/minecraftforge/forge/promotions.json",
             "promo" : "1.7.10-latest",
