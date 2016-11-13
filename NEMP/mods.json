@@ -4613,7 +4613,7 @@
         "curse" : {
             "id": "253449",
             "name": "hwyla",
-            "regex" : "Waila-(?P<version>.+)_(?P<mc>.+?).jar"
+            "regex" : "Hwyla-(?P<version>.+)_(?P<mc>.+?).jar"
         }
     }
 }
