@@ -326,7 +326,7 @@ def NEMP_TimerEvent(self, channels):
                     else:
                         clone_version = 'dev-only'
 
-                    nemp_logger.debug('Cloning mod {} to {}'.format(mod, mc_version))
+                    nemp_logger.debug('Cloning mod {} to {}, flags: {}'.format(mod, mc_version, flags))
                     for channel in channels:
                         self.sendMessage(channel, '!clone {} {} {}'.format(real_name, mc_version, clone_version))
                 elif release_flag and release_version:
