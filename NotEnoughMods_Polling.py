@@ -229,7 +229,7 @@ def PollingThread(self, pipe):
                     results = NEM.CheckMods(mod)
                     for outputMod, outputInfo in results.iteritems():
                         result, exceptionRaised = results[outputMod]
-                        if any(result):
+                        if result[1] or result[2]:
                             tempList.setdefault(NEM.mods[outputMod]['mc'], []).append((outputMod, result))
                         elif exceptionRaised:
                             failed.append(outputMod)
@@ -241,7 +241,7 @@ def PollingThread(self, pipe):
                 result, exceptionRaised = NEM.CheckMod(mod)
 
                 # if there is an update
-                if any(result[1:]):
+                if result[1] or result[2]:
                     tempList.setdefault(NEM.mods[mod]['mc'], []).append((mod, result))
                 # if there's no update, we must check if there was an exception
                 elif exceptionRaised:
@@ -300,10 +300,12 @@ def NEMP_TimerEvent(self, channels):
                 # flags[0] = mc version (can be None)
                 # flags[1] = has dev version changed?
                 # flags[2] = has release version changed?
+                # flags[3] = previous dev version
+                # flags[4] = previous release version
                 mod = item[0]
                 flags = item[1]
 
-                mc_version, dev_flag, release_flag = flags
+                mc_version, dev_flag, release_flag, last_dev, last_release = flags
 
                 if mc_version is None:
                     mc_version = self.NEM.mods[mod]['mc']
@@ -317,15 +319,25 @@ def NEMP_TimerEvent(self, channels):
                 release_version = self.NEM.get_nem_version(mod, mc_version)
                 changes = self.NEM.mods[mod].get('change')
 
+                if not last_dev and not last_release:
+                    # No previous information info, so it's new to this NEM list/MC version
+                    if release_version:
+                        clone_version = release_version
+                    else:
+                        clone_version = 'dev-only'
+
+                    nemp_logger.debug('Cloning mod {} to {}'.format(mod, mc_version))
+                    for channel in channels:
+                        self.sendMessage(channel, '!clone {} {} {}'.format(real_name, mc_version, clone_version))
+                elif release_flag and release_version:
+                    nemp_logger.debug("Updating Mod {0}, Flags: {1}".format(mod, flags))
+                    for channel in channels:
+                        self.sendMessage(channel, "!lmod {0} {1} {2}".format(mc_version, real_name, unicode(release_version)))
+
                 if dev_flag and dev_version:
                     nemp_logger.debug("Updating DevMod {0}, Flags: {1}".format(mod, flags))
                     for channel in channels:
                         self.sendMessage(channel, "!ldev {0} {1} {2}".format(mc_version, real_name, unicode(dev_version)))
-
-                if release_flag and release_version:
-                    nemp_logger.debug("Updating Mod {0}, Flags: {1}".format(mod, flags))
-                    for channel in channels:
-                        self.sendMessage(channel, "!lmod {0} {1} {2}".format(mc_version, real_name, unicode(release_version)))
 
                 if changes and "changelog" not in self.NEM.mods[mod]:
                     nemp_logger.debug("Sending text for Mod {0}".format(mod))

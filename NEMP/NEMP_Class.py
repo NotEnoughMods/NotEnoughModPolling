@@ -603,8 +603,8 @@ class NotEnoughClasses():
 
     def CheckMod(self, mod, document=None):
         try:
-            # [mc version, dev change, version change]
-            status = [None, False, False]
+            # [mc version, dev change, version change, previous dev, previous release]
+            status = [None, False, False, '', '']
 
             if document:
                 output = getattr(self, self.mods[mod]["function"])(mod, document)
@@ -622,26 +622,28 @@ class NotEnoughClasses():
 
             status[0] = mc_version
 
+            local_dev = self.get_nem_dev_version(mod, mc_version)
+
             if "dev" in output:
                 # Remove whitespace at the end and start
-                local_dev = self.get_nem_dev_version(mod, mc_version)
                 remote_dev = self.clean_version(output['dev'].strip())
 
                 # validate version
-                if not self.is_version_valid(remote_dev):
+                if not remote_dev or not self.is_version_valid(remote_dev):
                     raise InvalidVersion(remote_dev)
 
                 if local_dev != remote_dev:
                     self.set_nem_dev_version(mod, remote_dev, mc_version)
                     status[1] = True
 
+            local_release = self.get_nem_version(mod, mc_version)
+
             if "version" in output:
                 # Remove whitespace at the end and start
-                local_release = self.get_nem_version(mod, mc_version)
                 remote_release = self.clean_version(output['version'].strip())
 
                 # validate version
-                if not self.is_version_valid(remote_release):
+                if not remote_release or not self.is_version_valid(remote_release):
                     raise InvalidVersion(remote_release)
 
                 if local_release != remote_release:
@@ -651,11 +653,14 @@ class NotEnoughClasses():
             if "change" in output and "changelog" not in self.mods[mod]:
                 self.mods[mod]["change"] = output["change"]
 
+            status[3] = local_dev
+            status[4] = local_release
+
             return status, False  # Everything went fine, no exception raised
         except:
             print(mod + " failed to be polled...")
             traceback.print_exc()
-            return [None, False, False], True  # an exception was raised, so we return a True
+            return [None, False, False, '', ''], True  # an exception was raised, so we return a True
 
     def CheckMods(self, mod):
         output = {}
@@ -673,6 +678,6 @@ class NotEnoughClasses():
             traceback.print_exc()
             # TODO: Fix this ugly hack
             if 'tempMod' in locals():
-                output[tempMod] = ([None, False, False], True)
+                output[tempMod] = ([None, False, False, '', ''], True)
 
         return output
