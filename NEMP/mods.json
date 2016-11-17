@@ -1429,7 +1429,7 @@
         "active" : true,
         "curse": {
             "id" : "222967",
-            "regex" : "-.+?-(?P<version>.+?)-universal.jar"
+            "regex" : "Ping-.+?-(?P<version>.+)\\.jar"
         }
     },
     "miscMFRcircuits" :{
@@ -4084,7 +4084,7 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "regex": "NetherEssence-(?P<version>.+?)\\.jar",
+            "regex": "NetherEssence-Forge-(?P<version>.+)",
             "id": "238223",
             "name": "nether-essence"
         }
@@ -4520,7 +4520,7 @@
         "curse": {
             "id": "224428",
             "name": "thutcore",
-            "regex": "thutcore-(?P<version>[0-9\\.]+)\\.jar"
+            "regex": "thutcore-(?P<version>[0-9a-z\\.]+)\\.jar"
         }
     },
     "Chisel": {
