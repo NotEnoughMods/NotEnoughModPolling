@@ -2178,7 +2178,7 @@
         "curse": {
             "id": "225561",
             "name": "extra-utilities",
-            "regex": "Extra Utilities (?P<version>.+)"
+            "regex": "Extra Utilities 2 - .+ - (?P<version>[0-9\\.]+)"
         }
     },
     "BetterStorage": {
