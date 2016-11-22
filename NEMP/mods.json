@@ -3000,7 +3000,7 @@
         "curse": {
             "id": "223797",
             "name": "helpfixer",
-            "regex": "Helpfixer - (?P<version>.+)"
+            "regex": "HelpFixer - (?P<version>.+)"
         }
     },
     "IceShards": {
