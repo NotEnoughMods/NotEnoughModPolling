@@ -4141,7 +4141,7 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "regex": "AdobeBlocks-(?:Forge-)?(?P<version>.+?)\\.jar",
+            "regex": "AdobeBlocks-(?:Forge-)?(?P<version>.+?)(?:-patched)?(?:.jar)?$",
             "id": "236104",
             "name": "adobe-blocks-2"
         }
