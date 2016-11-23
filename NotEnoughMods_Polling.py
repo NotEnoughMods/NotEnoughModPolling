@@ -649,6 +649,8 @@ def nemp_showinfo(self, name, params, channel, userdata, rank):
     try:
         elem = self.NEM.mods[mod]
         for path_elem in path:
+            if not isinstance(elem, dict):
+                raise KeyError()
             elem = elem[path_elem]
 
         self.sendMessage(channel, name + ": " + repr(elem))
