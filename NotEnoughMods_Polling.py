@@ -89,8 +89,7 @@ def running(self, name, params, channel, userdata, rank):
             self.events["time"].addEvent("NotEnoughModPolling", 60, NEMP_TimerEvent, [channel])
         else:
             self.sendMessage(channel, "NotEnoughModPolling is already running.")
-
-    if len(params) == 2 and (params[1] == "false" or params[1] == "off"):
+    elif len(params) == 2 and (params[1] == "false" or params[1] == "off"):
         if self.events["time"].doesExist("NotEnoughModPolling"):
             self.sendMessage(channel, "Turning NotEnoughModPolling off.")
 
@@ -108,6 +107,13 @@ def running(self, name, params, channel, userdata, rank):
                 self.sendMessage(channel, "Exception appeared while trying to turn NotEnoughModPolling off.")
         else:
             self.sendMessage(channel, "NotEnoughModPolling isn't running!")
+    elif len(params) == 1:
+        if self.events['time'].doesExist('NotEnoughModPolling'):
+            self.sendMessage(channel, 'NEMP is running')
+        else:
+            self.sendMessage(channel, "NEMP isn't running")
+    else:
+        self.sendMessage(channel, name + ": Wrong number of arguments")
 
 
 def about(self, name, params, channel, userdata, rank):
