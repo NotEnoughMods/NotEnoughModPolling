@@ -1196,7 +1196,7 @@
         "function" : "CheckJenkins",
         "active" : false,
         "jenkins" : {
-            "url" : "http://jenkins.qmunity.co.uk/job/Morpheus/lastSuccessfulBuild/api/json",
+            "url" : "http://jenkins.qmunity.co.uk/job/Morpheus%201.8.x/lastSuccessfulBuild/api/json",
             "regex" : "-(?P<mc>.+?)-(?P<version>.+?).jar",
             "item" : 2
         }
@@ -1830,11 +1830,11 @@
     },
     "CustomNPCs": {
         "function": "CheckCurse",
-        "active": false,
+        "active": true,
         "curse": {
             "id": "221826",
             "name": "custom-npcs",
-            "regex": "CustomN(?:PC|pc)s_(?P<version>.+?).jar"
+            "regex": "CustomN(?:PC|pc)s_(?P<version>.+?)\\("
         }
     },
     "MinecraftComesAlive": {
@@ -2844,7 +2844,7 @@
     },
     "JSONAbles": {
         "function": "CheckCurse",
-        "active": false,
+        "active": true,
         "curse": {
             "id": "228458",
             "name": "jsonables",
@@ -3286,12 +3286,12 @@
         }
     },
     "EnderCore": {
-        "function": "CheckJenkins",
-        "active": false,
-        "jenkins": {
-            "url": "http://ci.tterrag.com/job/EnderCore/lastSuccessfulBuild/api/json",
-            "regex": "EnderCore-(?P<mc>.+?)-(?P<version>.+?)\\.jar",
-            "item": 3
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "id": "231868",
+            "name": "endercore",
+            "regex": "EnderCore ?- ?(?P<version>.+?)(?:\\.jar)?$"
         }
     },
     "McJtyLib": {
@@ -4067,20 +4067,20 @@
     },
     "AnimalBikes": {
         "function": "CheckCurse",
-        "active": false,
+        "active": true,
         "curse": {
             "id": "222718",
             "name": "animal-bikes",
-            "regex": "AnimalBikes_(?P<version>.+)\\.jar"
+            "regex": "AnimalBikes_(?P<version>.+)\\("
         }
     },
     "Mo'Creatures": {
         "function": "CheckCurse",
-        "active": false,
+        "active": true,
         "curse": {
             "id": "229260",
             "name": "mo-creatures",
-            "regex": "DrZhark's Mo'Creatures Mod-(?P<version>.+)"
+            "regex": "DrZhark's Mo'Creatures Mod-(?P<version>[0-9.]+)"
         }
     },
     "CustomMobSpawner": {
