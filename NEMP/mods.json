@@ -4663,5 +4663,14 @@
             "name": "hwyla",
             "regex" : "Hwyla-(?P<version>.+)_(?P<mc>.+?).jar"
         }
+    },
+    "ActuallyAdditions": {
+        "function" : "CheckCurse",
+        "active" : true,
+        "curse" : {
+            "id": "228404",
+            "name": "actually-additions",
+            "regex" : "ActuallyAdditions-(?P<version>.+)"
+        }
     }
 }
