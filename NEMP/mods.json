@@ -2359,7 +2359,7 @@
     "TSteelworks-Ephys-dev": {
         "name": "TinkersSteelworks-Ephys",
         "function": "CheckJenkins",
-        "active": true,
+        "active": false,
         "category": "Tehnut",
         "jenkins": {
             "url": "http://tehnut.info/jenkins/job/TSteelworks/lastSuccessfulBuild/api/json",
