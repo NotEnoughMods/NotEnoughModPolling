@@ -442,10 +442,24 @@ class NotEnoughClasses():
                         return result
         elif type_ == 'tag':
             release = releases[0]
-            if release['prerelease']:
-                return {'dev': release['tag_name']}
+
+            tag_name = release['tag_name']
+
+            if 'regex' in self.mods[mod]['github']:
+                regex = self.mods[mod]['github']['regex']
+
+                result = re.search(regex, tag_name).groupdict()
+
+                if release['prerelease']:
+                    result['dev'] = result['version']
+                    del result['version']
+
+                return result
             else:
-                return {'version': release['tag_name']}
+                if release['prerelease']:
+                    return {'dev': tag_name}
+                else:
+                    return {'version': tag_name}
         else:
             raise ValueError('Invalid type {!r} for CheckGitHubRelease parser'.format(type_))
 
