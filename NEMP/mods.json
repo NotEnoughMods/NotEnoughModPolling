@@ -4672,5 +4672,14 @@
             "name": "actually-additions",
             "regex" : "ActuallyAdditions-(?P<version>.+)"
         }
+    },
+    "Cristallum": {
+        "function": "CheckGitHubRelease",
+        "active": true,
+        "github": {
+            "repo": "disconsented/Cristallum",
+            "type": "asset",
+            "regex": "Cristallum-(?P<mc>[0-9.]+)-v(?P<version>[0-9.]+)\\.jar"
+        }
     }
 }
