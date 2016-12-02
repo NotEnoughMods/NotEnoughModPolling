@@ -3588,15 +3588,6 @@
             "regex": "NotEnoughIDs-(?P<version>.+)"
         }
     },
-    "InGameAccountSwitcher": {
-        "function": "CheckCurse",
-        "active": true,
-        "curse": {
-            "regex": "InGameAccountSwitcher-(?:(?:Forge|LiteLoader)[- ])?(?P<version>.+?)\\.(?:jar|litemod)",
-            "id": "232676",
-            "name": "in-game-account-switcher"
-        }
-    },
     "EnderCompass": {
         "function": "CheckCurse",
         "active": true,
@@ -3723,13 +3714,156 @@
             "name": "cooking-for-blockheads"
         }
     },
+    "AdobeBlocks": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "regex": "AdobeBlocks(?:-Forge)?(?:-(?P<mc>.+?))?-(?P<version>[0-9]+(?:\\.[0-9]+)+)",
+            "id": "236104",
+            "name": "adobe-blocks-2"
+        }
+    },
+    "BedrockReplacer": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "regex": "BedrockReplacer(?:-Forge)?(?:-(?P<mc>.+?))?-(?P<version>[0-9]+(?:\\.[0-9]+)+)",
+            "id": "237108",
+            "name": "bedrock-replacer"
+        }
+    },
+    "Caterpillar": {
+        "function": "CheckCurse",
+        "active": false,
+        "curse": {
+            "regex": "Caterpillar-(?P<version>.+)\\.jar",
+            "id": "237628",
+            "name": "caterpillar"
+        }
+    },
+    "CommandKeybindings": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "regex": "CommandKeybindings(?:-(Forge|LiteLoader))?(?:-(?P<mc>.+?))?-(?P<version>[0-9]+(?:\\.[0-9]+)+)",
+            "id": "242907",
+            "name": "command-keybindings"
+        }
+    },
+    "FiresClaySpawn": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "regex": "Fire'?s ?Clay ?Spawn(?:-Forge)?(?:-(?P<mc>.+?))?-(?P<version>[0-9]+(?:\\.[0-9]+)+)",
+            "id": "225539",
+            "name": "fires-clay-spawn"
+        }
+    },
+    "FiresRandomThings": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "regex": "FiresRandomThings(?:-Forge)?(?:-(?P<mc>.+?))?-(?P<version>[0-9]+(?:\\.[0-9]+)+)",
+            "id": "244507",
+            "name": "fires-random-things"
+        }
+    },
+    "Fluidity": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "regex": "Fluidity(?:-Forge)?(?:-(?P<mc>.+?))?-(?P<version>[0-9]+(?:\\.[0-9]+)+)",
+            "id": "241409",
+            "name": "fluidity"
+        }
+    },
+    "InGameAccountSwitcher": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "regex": "InGameAccountSwitcher(?:-(Forge|LiteLoader))?(?:-(?P<mc>.+?))?-(?P<version>[0-9]+(?:\\.[0-9]+)+)",
+            "id": "232676",
+            "name": "in-game-account-switcher"
+        }
+    },
     "MobRebirth": {
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "regex": "MobRebirth(?:-Forge)?-(?P<version>[0-9]+(?:\\.[0-9]+)+)",
+            "regex": "MobRebirth(?:-Forge)?(?:-(?P<mc>.+?))?-(?P<version>[0-9]+(?:\\.[0-9]+)+)",
             "id": "226212",
             "name": "mob-rebirth"
+        }
+    },
+    "MoreAnvils": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "regex": "MoreAnvils(?:-Forge)?(?:-(?P<mc>.+?))?-(?P<version>[0-9]+(?:\\.[0-9]+)+)",
+            "id": "243578",
+            "name": "more-anvils"
+        }
+    },
+    "NetherEssence": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "regex": "NetherEssence(?:-Forge)?(?:-(?P<mc>.+?))?-(?P<version>[0-9]+(?:\\.[0-9]+)+)",
+            "id": "238223",
+            "name": "nether-essence"
+        }
+    },
+    "Overlord": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "regex": "Overlord(?:-Forge)?(?:-(?P<mc>.+?))?-(?P<version>[0-9]+(?:\\.[0-9]+)+)",
+            "id": "251732",
+            "name": "overlord"
+        }
+    },
+    "RabbitsBreedLikeRabbits": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "regex": "RabbitsBreedLikeRabbits(?:-Forge)?(?:-(?P<mc>.+?))?-(?P<version>[0-9]+(?:\\.[0-9]+)+)",
+            "id": "240916",
+            "name": "rabbits-breed-like-rabbits"
+        }
+    },
+    "RealStoneTools": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "regex": "RealStoneTools(?:-Forge)?(?:-(?P<mc>.+?))?-(?P<version>[0-9]+(?:\\.[0-9]+)+)",
+            "id": "232464",
+            "name": "real-stone-tools"
+        }
+    },
+    "SimplyCaterpillar": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "regex": "SimplyCaterpillar(?:-Forge)?(?:-(?P<mc>.+?))?-(?P<version>[0-9]+(?:\\.[0-9]+)+)",
+            "id": "245437",
+            "name": "simply-caterpillar"
+        }
+    },
+    "TimeHUD": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "regex": "TimeHUD(?:-(Forge|LiteLoader))?(?:-(?P<mc>.+?))?-(?P<version>[0-9]+(?:\\.[0-9]+)+)",
+            "id": "239110",
+            "name": "time-hud"
+        }
+    },
+    "WarsMod": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "regex": "WarsMod(?:-Forge)?(?:-(?P<mc>.+?))?-(?P<version>[0-9]+(?:\\.[0-9]+)+)",
+            "name": "warsmod"
         }
     },
     "iBench": {
@@ -3957,15 +4091,6 @@
             "name": "simple-ender-things"
         }
     },
-    "FiresClaySpawn": {
-        "function": "CheckCurse",
-        "active": true,
-        "curse": {
-            "regex": "Fire'?s ?Clay ?Spawn[ \\-](?:Forge-)?(?P<version>.+)",
-            "id": "225539",
-            "name": "fires-clay-spawn"
-        }
-    },
     "ThermalCasting": {
         "function": "CheckCurse",
         "active": true,
@@ -4101,24 +4226,6 @@
             "regex" : "BiomeTweaker-(?P<mc>.+?) (?P<version>.+)"
         }
     },
-    "Caterpillar": {
-        "function": "CheckCurse",
-        "active": true,
-        "curse": {
-            "regex": "Caterpillar-(?P<version>.+)\\.jar",
-            "id": "237628",
-            "name": "caterpillar"
-        }
-    },
-    "UnLogicII": {
-        "function": "CheckCurse",
-        "active": true,
-        "curse": {
-            "regex": "UnLogic[ ]?II[ \\-](?P<version>.+?)\\.jar",
-            "id": "231078",
-            "name": "unlogic-ii"
-        }
-    },
     "ChunkLoaderZ": {
         "function": "CheckCurse",
         "active": true,
@@ -4126,24 +4233,6 @@
             "regex": "ChunkLoaderZ (?P<version>.+)",
             "id": "238153",
             "name": "chunkloaderz"
-        }
-    },
-    "NetherEssence": {
-        "function": "CheckCurse",
-        "active": true,
-        "curse": {
-            "regex": "NetherEssence-Forge-(?P<version>.+)",
-            "id": "238223",
-            "name": "nether-essence"
-        }
-    },
-    "AdobeBlocks": {
-        "function": "CheckCurse",
-        "active": true,
-        "curse": {
-            "regex": "AdobeBlocks(?:-Forge)?-(?P<version>[0-9]+(?:\\.[0-9]+)+)",
-            "id": "236104",
-            "name": "adobe-blocks-2"
         }
     },
     "AgriCraft": {
