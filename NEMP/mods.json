@@ -3718,7 +3718,7 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "regex": "AdobeBlocks(?:-Forge)?(?:-(?P<mc>.+?))?-(?P<version>[0-9]+(?:\.[0-9]+)+)",
+            "regex": "AdobeBlocks(?:-Forge)?(?:-(?P<mc>.+?))?-(?P<version>[0-9]+(?:\\.[0-9]+)+)",
             "id": "236104",
             "name": "adobe-blocks-2"
         }
@@ -3727,7 +3727,7 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "regex": "BedrockReplacer(?:-Forge)?(?:-(?P<mc>.+?))?-(?P<version>[0-9]+(?:\.[0-9]+)+)",
+            "regex": "BedrockReplacer(?:-Forge)?(?:-(?P<mc>.+?))?-(?P<version>[0-9]+(?:\\.[0-9]+)+)",
             "id": "237108",
             "name": "beedrock-replacer"
         }
@@ -3745,7 +3745,7 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "regex": "CommandKeybindings(?:-(Forge|LiteLoader))?(?:-(?P<mc>.+?))?-(?P<version>[0-9]+(?:\.[0-9]+)+)",
+            "regex": "CommandKeybindings(?:-(Forge|LiteLoader))?(?:-(?P<mc>.+?))?-(?P<version>[0-9]+(?:\\.[0-9]+)+)",
             "id": "242907",
             "name": "command-keybindings"
         }
@@ -3754,7 +3754,7 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "regex": "Fire'?s ?Clay ?Spawn(?:-Forge)?(?:-(?P<mc>.+?))?-(?P<version>[0-9]+(?:\.[0-9]+)+)",
+            "regex": "Fire'?s ?Clay ?Spawn(?:-Forge)?(?:-(?P<mc>.+?))?-(?P<version>[0-9]+(?:\\.[0-9]+)+)",
             "id": "225539",
             "name": "fires-clay-spawn"
         }
@@ -3763,7 +3763,7 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "regex": "FiresRandomThings(?:-Forge)?(?:-(?P<mc>.+?))?-(?P<version>[0-9]+(?:\.[0-9]+)+)",
+            "regex": "FiresRandomThings(?:-Forge)?(?:-(?P<mc>.+?))?-(?P<version>[0-9]+(?:\\.[0-9]+)+)",
             "id": "244507",
             "name": "fires-random-things"
         }
@@ -3772,7 +3772,7 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "regex": "Fluidity(?:-Forge)?(?:-(?P<mc>.+?))?-(?P<version>[0-9]+(?:\.[0-9]+)+)",
+            "regex": "Fluidity(?:-Forge)?(?:-(?P<mc>.+?))?-(?P<version>[0-9]+(?:\\.[0-9]+)+)",
             "id": "241409",
             "name": "fluidity"
         }
@@ -3781,7 +3781,7 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "regex": "InGameAccountSwitcher(?:-(Forge|LiteLoader))?(?:-(?P<mc>.+?))?-(?P<version>[0-9]+(?:\.[0-9]+)+)",
+            "regex": "InGameAccountSwitcher(?:-(Forge|LiteLoader))?(?:-(?P<mc>.+?))?-(?P<version>[0-9]+(?:\\.[0-9]+)+)",
             "id": "232676",
             "name": "in-game-account-switcher"
         }
@@ -3790,7 +3790,7 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "regex": "MobRebirth(?:-Forge)?(?:-(?P<mc>.+?))?-(?P<version>[0-9]+(?:\.[0-9]+)+)",
+            "regex": "MobRebirth(?:-Forge)?(?:-(?P<mc>.+?))?-(?P<version>[0-9]+(?:\\.[0-9]+)+)",
             "id": "226212",
             "name": "mob-rebirth"
         }
@@ -3799,7 +3799,7 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "regex": "MoreAnvils(?:-Forge)?(?:-(?P<mc>.+?))?-(?P<version>[0-9]+(?:\.[0-9]+)+)",
+            "regex": "MoreAnvils(?:-Forge)?(?:-(?P<mc>.+?))?-(?P<version>[0-9]+(?:\\.[0-9]+)+)",
             "id": "243578",
             "name": "more-anvils"
         }
@@ -3808,7 +3808,7 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "regex": "NetherEssence(?:-Forge)?(?:-(?P<mc>.+?))?-(?P<version>[0-9]+(?:\.[0-9]+)+)",
+            "regex": "NetherEssence(?:-Forge)?(?:-(?P<mc>.+?))?-(?P<version>[0-9]+(?:\\.[0-9]+)+)",
             "id": "238223",
             "name": "nether-essence"
         }
@@ -3817,7 +3817,7 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "regex": "Overlord(?:-Forge)?(?:-(?P<mc>.+?))?-(?P<version>[0-9]+(?:\.[0-9]+)+)",
+            "regex": "Overlord(?:-Forge)?(?:-(?P<mc>.+?))?-(?P<version>[0-9]+(?:\\.[0-9]+)+)",
             "id": "251732",
             "name": "overlord"
         }
@@ -3826,7 +3826,7 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "regex": "RabbitsBreedLikeRabbits(?:-Forge)?(?:-(?P<mc>.+?))?-(?P<version>[0-9]+(?:\.[0-9]+)+)",
+            "regex": "RabbitsBreedLikeRabbits(?:-Forge)?(?:-(?P<mc>.+?))?-(?P<version>[0-9]+(?:\\.[0-9]+)+)",
             "id": "240916",
             "name": "rabbits-breed-like-rabbits"
         }
@@ -3835,7 +3835,7 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "regex": "RealStoneTools(?:-Forge)?(?:-(?P<mc>.+?))?-(?P<version>[0-9]+(?:\.[0-9]+)+)",
+            "regex": "RealStoneTools(?:-Forge)?(?:-(?P<mc>.+?))?-(?P<version>[0-9]+(?:\\.[0-9]+)+)",
             "id": "232464",
             "name": "real-stone-tools"
         }
@@ -3844,7 +3844,7 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "regex": "SimplyCaterpillar(?:-Forge)?(?:-(?P<mc>.+?))?-(?P<version>[0-9]+(?:\.[0-9]+)+)",
+            "regex": "SimplyCaterpillar(?:-Forge)?(?:-(?P<mc>.+?))?-(?P<version>[0-9]+(?:\\.[0-9]+)+)",
             "id": "245437",
             "name": "simply-caterpillar"
         }
@@ -3853,7 +3853,7 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "regex": "TimeHUD(?:-(Forge|LiteLoader))?(?:-(?P<mc>.+?))?-(?P<version>[0-9]+(?:\.[0-9]+)+)",
+            "regex": "TimeHUD(?:-(Forge|LiteLoader))?(?:-(?P<mc>.+?))?-(?P<version>[0-9]+(?:\\.[0-9]+)+)",
             "id": "239110",
             "name": "time-hud"
         }
@@ -3862,7 +3862,7 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "regex": "WarsMod(?:-Forge)?(?:-(?P<mc>.+?))?-(?P<version>[0-9]+(?:\.[0-9]+)+)",
+            "regex": "WarsMod(?:-Forge)?(?:-(?P<mc>.+?))?-(?P<version>[0-9]+(?:\\.[0-9]+)+)",
             "id": "59679",
             "name": "warsmod"
         }
