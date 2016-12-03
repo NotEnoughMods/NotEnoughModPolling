@@ -879,6 +879,11 @@
         "category" : "lunatrius",
         "active" : true
     },
+    "Tracer" : {
+        "function" : "CheckLunatrius",
+        "category" : "lunatrius",
+        "active" : true
+    },
     "BigReactors" : {
         "function" : "CheckBigReactors",
         "active" : true
