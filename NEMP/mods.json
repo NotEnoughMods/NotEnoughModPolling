@@ -4798,7 +4798,7 @@
         "function" : "CheckCurse",
         "active" : true,
         "curse" : {
-            "id": "246404"
+            "id": "246404",
             "name": "superminer-unified",
             "regex": "SuperMiner-\\[(?P<mc>.+?)\\]-(?P<version>.+?).jar"
         }
