@@ -1961,7 +1961,7 @@
         "curse": {
             "id": "223565",
             "name": "draconic-evolution",
-            "regex": "Draconic-Evolution-(?P<mc>.+?)-(?P<version>.+?).jar"
+            "regex": "Draconic Evolution (?P<mc>.+?)-(?P<version>[0-9]+(\\.[0-9]+)+)"
         }
     },
     "ElementalCreepers": {
