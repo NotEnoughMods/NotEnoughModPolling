@@ -585,7 +585,7 @@ def nemp_set(self, name, params, channel, userdata, rank):
         self.sendMessage(channel, "That looks like invalid input (are there any unescaped quotes?). Try again.")
         return
 
-    # insert the mod's name into the arguments
+    # insert the mod's name as the first argument
     args.insert(0, params[1])
 
     available_casts = {
