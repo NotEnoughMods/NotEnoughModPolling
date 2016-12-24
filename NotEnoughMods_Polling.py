@@ -476,7 +476,7 @@ def nemp_list(self, name, params, channel, userdata, rank):
             dest = channel
 
     if dest is None:
-        self.sendMessage(channel, "http://nemp.mca.d3s.co/")
+        self.sendMessage(channel, "http://polling.notenoughmods.com/")
         return
 
     darkgreen = "03"
