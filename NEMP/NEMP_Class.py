@@ -75,11 +75,44 @@ class NotEnoughClasses():
         for i, regex in enumerate(self.invalid_versions[:]):
             self.invalid_versions[i] = re.compile(regex, re.I)
 
+    def _find_regex(self, data):
+        """
+        Internal-use recursive function to find the regex for a mod's polling
+        information data dict.
+        The mod's data is passed as an argument so it can be re-used for other
+        things which rely on a unique 'regex' key.
+        """
+        if isinstance(data, dict):
+            if 'regex' in data:
+                return data['regex']
+            else:
+                for k, v in data.iteritems():
+                    ret = self._find_regex(v)
+                    if ret:
+                        return ret
+        else:
+            # ignore other types
+            return
+
+    def compile_regex(self, mod):
+        regex = self._find_regex(self.mods[mod])
+
+        if regex:
+            self.mods[mod]['_regex'] = re.compile(regex, re.I)
+
+    def get_mod_regex(self, mod):
+        return self.mods[mod].get('_regex')
+
+    def match_mod_regex(self, mod, data):
+        return self.mods[mod]['_regex'].search(data)
+
     def buildModDict(self):
         with open("commands/NEMP/mods.json", "rb") as modList:
             self.mods = simplejson.load(modList)
 
         for mod in self.mods:
+            self.compile_regex(mod)
+
             self.mods[mod]['nem_versions'] = {}
 
             if "SinZationalHax" in self.mods[mod]:
@@ -163,7 +196,7 @@ class NotEnoughClasses():
     def CheckJenkins(self, mod):
         jsonres = self.fetch_json(self.mods[mod]["jenkins"]["url"] + '?tree=changeSet[items[msg]],artifacts[fileName]')
         filename = jsonres["artifacts"][self.mods[mod]["jenkins"]["item"]]["fileName"]
-        match = re.search(self.mods[mod]["jenkins"]["regex"], filename)
+        match = self.match_mod_regex(mod, filename)
         output = match.groupdict()
         try:
             output["change"] = jsonres["changeSet"]["items"][0]["msg"]
@@ -192,12 +225,12 @@ class NotEnoughClasses():
                 for entry in promotion["files"]:
                     if entry["type"] == "universal":
                         info = entry["url"]
-                        devMatch = re.search(self.mods[mod]["mcforge"]["regex"], info)
+                        devMatch = self.match_mod_regex(mod, info)
             elif promotion["name"] == self.mods[mod]["mcforge"]["rec"]:
                 for entry in promotion["files"]:
                     if entry["type"] == "universal":
                         info = entry["url"]
-                        recMatch = re.search(self.mods[mod]["mcforge"]["regex"], info)
+                        recMatch = self.match_mod_regex(mod, info)
         if devMatch:
             output = {}
             tmpMC = "null"
@@ -264,7 +297,7 @@ class NotEnoughClasses():
         for line in lines:
             if ".jar" in line.lower():
                 result = line
-        match = re.search(self.mods[mod]["mDiyo"]["regex"], result)
+        match = self.match_mod_regex(mod, result)
         output = match.groupdict()
         return output
 
@@ -314,7 +347,8 @@ class NotEnoughClasses():
     def CheckDropBox(self, mod):
         result = self.fetch_page(self.mods[mod]["html"]["url"])
         match = None
-        for match in re.finditer(self.mods[mod]["html"]["regex"], result):
+
+        for match in self.mods[mod]['_regex'].finditer(result):
             pass
         # "match" is still in this scope
         if match:
@@ -332,7 +366,8 @@ class NotEnoughClasses():
         result = self.fetch_page(self.mods[mod]["html"]["url"])
         output = {}
         for line in result.splitlines():
-            match = re.search(self.mods[mod]["html"]["regex"], line)
+            match = self.match_mod_regex(mod, line)
+
             if match:
                 output = match.groupdict()
         return output
@@ -392,13 +427,11 @@ class NotEnoughClasses():
 
         release_type = jsonres['release_type'].lower()
 
-        regex = re.compile(self.mods[mod]['curse']['regex'])
-
         releases = sorted(jsonres['files'].values(), key=lambda x: x['id'], reverse=True)
 
         release = releases[0]
 
-        match = regex.search(release['name'])
+        match = self.match_mod_regex(mod, release['name'])
 
         output = match.groupdict()
 
@@ -429,7 +462,7 @@ class NotEnoughClasses():
         type_ = self.mods[mod]['github'].get('type', 'asset')
 
         if type_ == 'asset':
-            regex = re.compile(self.mods[mod]['github']['regex'])
+            regex = self.get_mod_regex(mod)
 
             for release in releases:
                 for asset in release['assets']:
@@ -446,9 +479,7 @@ class NotEnoughClasses():
             tag_name = release['tag_name']
 
             if 'regex' in self.mods[mod]['github']:
-                regex = self.mods[mod]['github']['regex']
-
-                result = re.search(regex, tag_name).groupdict()
+                result = self.match_mod_regex(mod, tag_name).groupdict()
 
                 if release['prerelease']:
                     result['dev'] = result['version']

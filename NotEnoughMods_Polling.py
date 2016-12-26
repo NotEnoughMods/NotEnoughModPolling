@@ -629,6 +629,9 @@ def nemp_set(self, name, params, channel, userdata, rank):
 
         elem[args[-2]] = new_value
 
+        # recompile the regex just in case it was changed manually
+        self.NEM.compile_regex(mod)
+
         self.sendMessage(channel, "done.")
     except KeyError:
         self.sendMessage(channel, name + ": No such element in that mod's configuration.")
