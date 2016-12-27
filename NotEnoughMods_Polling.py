@@ -571,6 +571,7 @@ def test_parser(self, name, params, channel, userdata, rank):
 
 def genHTML(self, name, params, channel, userdata, rank):
     self.NEM.buildHTML()
+    self.sendMessage(channel, name + ': Done.')
 
 
 def nemp_set(self, name, params, channel, userdata, rank):
