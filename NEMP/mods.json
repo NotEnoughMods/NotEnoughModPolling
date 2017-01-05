@@ -4800,7 +4800,7 @@
         "curse" : {
             "id": "246404",
             "name": "superminer-unified",
-            "regex": "SuperMiner-\\[(?P<mc>.+?)\\]-(?P<version>.+?).jar"
+            "regex": "SuperMiner-\\[(?P<mc>.+?)\\]-(?P<version>.+?)\\.jar"
         }
     }
 }
