@@ -4010,7 +4010,7 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "regex": "WTP-(?P<mc>.+?)-(?P<version>.+)",
+            "regex": "WTP-(?P<mc>.+?)-(?P<version>.+)\\.jar",
             "id": "221658",
             "name": "wtp-whats-this-pack"
         }
