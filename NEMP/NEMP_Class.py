@@ -348,9 +348,11 @@ class NotEnoughClasses():
         result = self.fetch_page(self.mods[mod]["html"]["url"])
         match = None
 
+        # TODO: Why do we use an iter? Do we need that? Make it better.
         for match in self.mods[mod]['_regex'].finditer(result):
             pass
         # "match" is still in this scope
+        # TODO: This seems extremely unpythonic
         if match:
             match = match.groupdict()
 
@@ -365,6 +367,7 @@ class NotEnoughClasses():
     def CheckHTML(self, mod):
         result = self.fetch_page(self.mods[mod]["html"]["url"])
         output = {}
+        # TODO: Maybe change this to work like the Dropbox one
         for line in result.splitlines():
             match = self.match_mod_regex(mod, line)
 
@@ -574,6 +577,7 @@ class NotEnoughClasses():
                 mcMatch = re.search("mcversion = Minecraft (.+?)$", line)
                 mcver.append(mcMatch.group(1))
             elif self.mods[mod]["AtomicStryker"]["name"] in line:
+                # TODO: Fix this mess
                 verMatch = re.search(self.mods[mod]["AtomicStryker"]["name"] + " = (.+?)$", line)
                 version.append(verMatch.group(1))
 

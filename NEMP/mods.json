@@ -4521,13 +4521,13 @@
             "regex": "LightningCraft (?P<version>\\S+)"
         }
     },
-    "AdvancedSwords": {
+    "AdvancedCombat": {
         "function": "CheckCurse",
         "active": true,
         "curse": {
             "id": "242657",
-            "name": "advanced-swords",
-            "regex": "advancedswords-(?P<version>.+?)-"
+            "name": "advanced-combat",
+            "regex": "advancedcombat-(?P<version>.+?)-"
         }
     },
     "Autoverse": {
