@@ -1612,7 +1612,7 @@
         "active" : true,
         "curse": {
             "name" : "securitycraft-mod",
-            "regex" : ".+? SecurityCraft v(?P<version>.+?).jar"
+            "regex" : ".+? SecurityCraft v(?P<version>.+?)(?:\\.jar|$)"
         }
     },
     "Fabricators" :{
