@@ -271,7 +271,9 @@ class NotEnoughClasses():
                 version = output["version"]
             else:
                 version = output["dev"]
-            output["change"] = jsonres[mc_version][version]
+
+            if jsonres[mc_version][version]:
+                output["change"] = jsonres[mc_version][version]
         except:
             pass
         return output
