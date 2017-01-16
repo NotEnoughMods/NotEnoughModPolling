@@ -4794,13 +4794,28 @@
             "regex": "^(?P<mc>[0-9.]+)-v(?P<version>[0-9.]+)$"
         }
     },
-    "SuperMiner" : {
-        "function" : "CheckCurse",
-        "active" : true,
-        "curse" : {
-            "id": "246404",
-            "name": "superminer-unified",
-            "regex": "SuperMiner-\\[(?P<mc>.+?)\\]-(?P<version>.+?)\\.jar"
+    "SuperMiner-1.10.2" : {
+        "function": "CheckForgeJson",
+        "active": true,
+        "forgejson": {
+            "url": "http://www.duelmonster.talktalk.net/Minecraft/SuperMiner/forge_update.json",
+            "mcversion": "1.10.2"
+        }
+    },
+    "SuperMiner-1.11" : {
+        "function": "CheckForgeJson",
+        "active": true,
+        "forgejson": {
+            "url": "http://www.duelmonster.talktalk.net/Minecraft/SuperMiner/forge_update.json",
+            "mcversion": "1.11"
+        }
+    },
+    "SuperMiner-1.11.2" : {
+        "function": "CheckForgeJson",
+        "active": true,
+        "forgejson": {
+            "url": "http://www.duelmonster.talktalk.net/Minecraft/SuperMiner/forge_update.json",
+            "mcversion": "1.11.2"
         }
     }
 }
