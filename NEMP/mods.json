@@ -3065,6 +3065,7 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
+            "id": "68528",
             "name": "modular-systems",
             "regex": "ModularSystems-(?P<mc>[^-]+)-(?P<version>.+?).jar"
         }
