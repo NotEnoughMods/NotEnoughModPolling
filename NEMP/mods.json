@@ -4795,6 +4795,7 @@
         }
     },
     "SuperMiner-1.10.2" : {
+        "name": "SuperMiner",
         "function": "CheckForgeJson",
         "active": true,
         "forgejson": {
@@ -4803,6 +4804,7 @@
         }
     },
     "SuperMiner-1.11" : {
+        "name": "SuperMiner",
         "function": "CheckForgeJson",
         "active": true,
         "forgejson": {
@@ -4811,6 +4813,7 @@
         }
     },
     "SuperMiner-1.11.2" : {
+        "name": "SuperMiner",
         "function": "CheckForgeJson",
         "active": true,
         "forgejson": {
