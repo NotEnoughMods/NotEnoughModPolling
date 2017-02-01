@@ -117,9 +117,9 @@ def running(self, name, params, channel, userdata, rank):
 
 
 def about(self, name, params, channel, userdata, rank):
-    self.sendMessage(channel, "Not Enough Mods: Polling for IRC by SinZ, with help from NightKev & Yoshi2 - v1.4")
-    self.sendMessage(channel, "Additional contributions by Pyker, spacechase, helinus, sMi & dmod")
-    self.sendMessage(channel, "Source code available at: https://github.com/NotEnoughMods/NotEnoughModPolling")
+    self.sendMessage(channel, "Not Enough Mods: Polling - Helps keep NEM updated!")
+    self.sendMessage(channel, "Source code available at https://github.com/NotEnoughMods/NotEnoughModPolling")
+    self.sendMessage(channel, "A list of contributors is available at https://git.io/nemp-contribs")
 
 
 def nemp_help(self, name, params, channel, userdata, rank):
