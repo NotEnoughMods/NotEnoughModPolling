@@ -4649,6 +4649,15 @@
             "mcversion": "1.11"
         }
     },
+    "ArmorPlus-1.11.2": {
+        "name": "ArmorPlus",
+        "function": "CheckForgeJson",
+        "active": true,
+        "forgejson": {
+            "url": "http://fdn.redstone.tech/TheDragonTeam/armorplus/update.json",
+            "mcversion": "1.11.2"
+        }
+    },
     "TheDragonLib-1.10.2": {
         "name": "TheDragonLib",
         "function": "CheckForgeJson",
@@ -4665,6 +4674,15 @@
         "forgejson": {
             "url": "http://fdn.redstone.tech/TheDragonTeam/thedragonlib/update.json",
             "mcversion": "1.11"
+        }
+    },
+    "TheDragonLib-1.11.2": {
+        "name": "TheDragonLib",
+        "function": "CheckForgeJson",
+        "active": true,
+        "forgejson": {
+            "url": "http://fdn.redstone.tech/TheDragonTeam/thedragonlib/update.json",
+            "mcversion": "1.11.2"
         }
     },
     "MCMultiPart": {
