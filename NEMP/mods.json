@@ -4840,5 +4840,14 @@
             "url": "http://www.duelmonster.talktalk.net/Minecraft/SuperMiner/forge_update.json",
             "mcversion": "1.11.2"
         }
+    },
+    "AstralSorcery": {
+        "function" : "CheckCurse",
+        "active" : true,
+        "curse" : {
+            "id": "241721",
+            "name": "astral-sorcery",
+            "regex" : "AstralSorcery-(?P<mc>.+?)-(?P<version>.+).jar"
+        }
     }
 }
