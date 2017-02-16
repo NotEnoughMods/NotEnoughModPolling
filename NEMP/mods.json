@@ -377,31 +377,87 @@
             "regex" : "LanteaCraft-(?P<mc>.+?)-(?P<version>.+?).jar$"
         }
     },
-    "OpenPrinter" : {
-        "function" : "CheckCurse",
-        "active" : true,
-        "curse" : {
-            "id": "225127",
-            "name": "openprinter",
-            "regex" : "OpenPrinter-(?P<mc>.+?)-(?P<version>.+?).jar$"
+    "OpenPrinter-1.7.10" : {
+        "function" : "CheckJenkins",
+        "active" : false,
+        "jenkins": {
+            "url": "http://ci.pc-logix.com/job/OpenPrinter1.7/lastSuccessfulBuild/api/json",
+            "regex": "OpenPrinter-(?P<mc>.+?)-(?P<version>.+?).jar$",
+            "item": 0
         }
     },
-    "OpenFM" : {
-        "function" : "CheckCurse",
+    "OpenPrinter-1.8.9" : {
+        "function" : "CheckJenkins",
         "active" : true,
-        "curse" : {
-            "id": "236839",
-            "name": "openfm",
-            "regex" : "OpenFM-(?P<mc>.+?)-(?P<version>.+?).jar$"
+        "jenkins": {
+            "url": "http://ci.pc-logix.com/job/OpenPrinter-1.8.9/lastSuccessfulBuild/api/json",
+            "regex": "OpenPrinter-(?P<mc>.+?)-(?P<version>.+?).jar$",
+            "item": 1
         }
     },
-    "OpenSecurity" : {
-        "function" : "CheckCurse",
+    "OpenPrinter-1.9.4" : {
+        "function" : "CheckJenkins",
         "active" : true,
-        "curse" : {
-            "id": "231687",
-            "name": "opensecurity",
-            "regex" : "OpenSecurity-(?P<mc>.+?)-(?P<version>.+?).jar$"
+        "jenkins": {
+            "url": "http://ci.pc-logix.com/job/OpenPrinter-1.9.4/lastSuccessfulBuild/api/json",
+            "regex": "OpenPrinter-(?P<mc>.+?)-(?P<version>.+?).jar$",
+            "item": 1
+        }
+    },
+	"OpenPrinter-1.10.2" : {
+        "function" : "CheckJenkins",
+        "active" : true,
+		"mc": "1.10.2",
+        "jenkins": {
+            "url": "http://ci.pc-logix.com/job/OpenPrinter-1.9.4/lastSuccessfulBuild/api/json",
+            "regex": "OpenPrinter-.+?-(?P<version>.+?).jar$",
+            "item": 1
+        }
+    },
+    "OpenFM-1.7.10" : {
+        "function" : "CheckJenkins",
+        "active" : true,
+        "jenkins": {
+            "url": "http://ci.pc-logix.com/job/OpenFM/lastSuccessfulBuild/api/json",
+            "regex" : "OpenFM-(?P<mc>.+?)-(?P<version>.+?).jar$",
+            "item": 0
+        }
+    },
+	"OpenFM-1.8.9" : {
+        "function" : "CheckJenkins",
+        "active" : true,
+        "jenkins": {
+            "url": "http://ci.pc-logix.com/job/OpenFM-1.8/lastSuccessfulBuild/api/json",
+            "regex" : "OpenFM-(?P<mc>.+?)-(?P<version>.+?).jar$",
+            "item": 0
+        }
+    },
+	"OpenFM-1.9.4" : {
+        "function" : "CheckJenkins",
+        "active" : true,
+        "jenkins": {
+            "url": "http://ci.pc-logix.com/job/OpenFM-1.9.4/lastSuccessfulBuild/api/json",
+            "regex" : "OpenFM-(?P<mc>.+?)-(?P<version>.+?).jar$",
+            "item": 0
+        }
+    },
+	"OpenFM-1.10.2" : {
+        "function" : "CheckJenkins",
+        "active" : true,
+		"mc": "1.10.2",
+        "jenkins": {
+            "url": "http://ci.pc-logix.com/job/OpenFM-1.9.4/lastSuccessfulBuild/api/json",
+            "regex" : "OpenFM-.+?-(?P<version>.+?).jar$",
+            "item": 0
+        }
+    },
+	"OpenSecurity-1.7.10" : {
+        "function" : "CheckJenkins",
+        "active" : true,
+        "jenkins": {
+            "url": "http://ci.pc-logix.com/job/OpenSecurity/lastSuccessfulBuild/api/json",
+            "regex" : "OpenSecurity-(?P<mc>.+?)-(?P<version>.+?).jar$",
+            "item": 0
         }
     },
     "MFFSv2Classic" : {
