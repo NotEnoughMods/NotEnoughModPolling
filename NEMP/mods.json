@@ -380,7 +380,7 @@
     "OpenPrinter-1.7.10" : {
         "name": "OpenPrinter",
         "function" : "CheckJenkins",
-        "active" : false,
+        "active" : true,
         "jenkins": {
             "url": "http://ci.pc-logix.com/job/OpenPrinter1.7/lastSuccessfulBuild/api/json",
             "regex": "OpenPrinter-(?P<mc>.+?)-(?P<version>.+?).jar$",
@@ -4913,6 +4913,39 @@
             "id": "241721",
             "name": "astral-sorcery",
             "regex" : "AstralSorcery-(?P<mc>.+?)-(?P<version>.+).jar"
+        }
+    },
+    "TickProfiler-1.7.10" : {
+        "name": "TickProfiler",
+        "category": "nallar",
+        "function" : "CheckJenkins",
+        "active" : true,
+        "jenkins": {
+            "url": "https://jenkins.nallar.me/job/TickProfiler/branch/1.7.10/lastSuccessfulBuild/api/json",
+            "regex": "TickProfiler-(?P<mc>.+?).jenkins.(?P<version>[0-9]+).jar$",
+            "item": 0
+        }
+    },
+    "TickProfiler-1.8.9" : {
+        "name": "TickProfiler",
+        "category": "nallar",
+        "function" : "CheckJenkins",
+        "active" : true,
+        "jenkins": {
+            "url": "https://jenkins.nallar.me/job/TickProfiler/branch/1.8.9/lastSuccessfulBuild/api/json",
+            "regex": "TickProfiler-(?P<mc>.+?).jenkins.(?P<version>[0-9]+).jar$",
+            "item": 1
+        }
+    },
+    "TickProfiler-1.10.2" : {
+        "name": "TickProfiler",
+        "category": "nallar",
+        "function" : "CheckJenkins",
+        "active" : true,
+        "jenkins": {
+            "url": "https://jenkins.nallar.me/job/TickProfiler/branch/1.10.2/lastSuccessfulBuild/api/json",
+            "regex": "TickProfiler-(?P<mc>.+?).jenkins.(?P<version>[0-9]+).jar$",
+            "item": 1
         }
     }
 }
