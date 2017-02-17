@@ -378,6 +378,7 @@
         }
     },
     "OpenPrinter-1.7.10" : {
+        "name": "OpenPrinter",
         "function" : "CheckJenkins",
         "active" : false,
         "jenkins": {
@@ -387,6 +388,7 @@
         }
     },
     "OpenPrinter-1.8.9" : {
+        "name": "OpenPrinter",
         "function" : "CheckJenkins",
         "active" : true,
         "jenkins": {
@@ -396,6 +398,7 @@
         }
     },
     "OpenPrinter-1.9.4" : {
+        "name": "OpenPrinter",
         "function" : "CheckJenkins",
         "active" : true,
         "jenkins": {
@@ -405,6 +408,7 @@
         }
     },
 	"OpenPrinter-1.10.2" : {
+        "name": "OpenPrinter",
         "function" : "CheckJenkins",
         "active" : true,
 		"mc": "1.10.2",
@@ -415,6 +419,7 @@
         }
     },
     "OpenFM-1.7.10" : {
+        "name": "OpenFM",
         "function" : "CheckJenkins",
         "active" : true,
         "jenkins": {
@@ -424,6 +429,7 @@
         }
     },
 	"OpenFM-1.8.9" : {
+        "name": "OpenFM",
         "function" : "CheckJenkins",
         "active" : true,
         "jenkins": {
@@ -433,6 +439,7 @@
         }
     },
 	"OpenFM-1.9.4" : {
+        "name": "OpenFM",
         "function" : "CheckJenkins",
         "active" : true,
         "jenkins": {
@@ -442,6 +449,7 @@
         }
     },
 	"OpenFM-1.10.2" : {
+        "name": "OpenFM",
         "function" : "CheckJenkins",
         "active" : true,
 		"mc": "1.10.2",
@@ -452,6 +460,7 @@
         }
     },
 	"OpenSecurity-1.7.10" : {
+        "name": "OpenSecurity",
         "function" : "CheckJenkins",
         "active" : true,
         "jenkins": {
