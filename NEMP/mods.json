@@ -380,7 +380,7 @@
     "OpenPrinter-1.7.10" : {
         "name": "OpenPrinter",
         "function" : "CheckJenkins",
-        "active" : true,
+        "active" : false,
         "jenkins": {
             "url": "http://ci.pc-logix.com/job/OpenPrinter1.7/lastSuccessfulBuild/api/json",
             "regex": "OpenPrinter-(?P<mc>.+?)-(?P<version>.+?).jar$",
