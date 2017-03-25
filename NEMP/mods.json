@@ -3578,7 +3578,7 @@
         "curse": {
             "id": "236575",
             "name": "addicted-to-red",
-            "regex": "AddictedToRed-(?P<mc>.+?)-(?P<version>.+)-.+"
+            "regex": "AddictedToRed .+?-(?P<version>[0-9]+(?:\\.[0-9]+)+b[0-9]+)"
         }
     },
     "SBM-WoodenBuckets": {
