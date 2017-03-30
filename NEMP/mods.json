@@ -1,624 +1,624 @@
 {
-    "MinecraftForge-1.7.10" : {
-        "name" : "MinecraftForge",
-        "function" : "CheckMCForge2",
-        "category" : "forge",
-        "active" : true,
-        "mcforge" : {
-            "url" : "http://files.minecraftforge.net/maven/net/minecraftforge/forge/promotions.json",
-            "promo" : "1.7.10-latest",
-            "promoType" : "dev"
+    "MinecraftForge-1.7.10": {
+        "name": "MinecraftForge",
+        "function": "CheckMCForge2",
+        "category": "forge",
+        "active": true,
+        "mcforge": {
+            "url": "http://files.minecraftforge.net/maven/net/minecraftforge/forge/promotions.json",
+            "promo": "1.7.10-latest",
+            "promoType": "dev"
         }
     },
-    "MinecraftForge-1.7.10-Release" : {
-        "name" : "MinecraftForge",
-        "function" : "CheckMCForge2",
-        "category" : "forge",
-        "active" : true,
-        "mcforge" : {
-            "url" : "http://files.minecraftforge.net/maven/net/minecraftforge/forge/promotions.json",
-            "promo" : "1.7.10-recommended",
-            "promoType" : "version"
+    "MinecraftForge-1.7.10-Release": {
+        "name": "MinecraftForge",
+        "function": "CheckMCForge2",
+        "category": "forge",
+        "active": true,
+        "mcforge": {
+            "url": "http://files.minecraftforge.net/maven/net/minecraftforge/forge/promotions.json",
+            "promo": "1.7.10-recommended",
+            "promoType": "version"
         }
     },
-    "IronChests" : {
-        "function" : "CheckMCForge2",
-        "category" : "forge",
-        "active" : true,
-        "mcforge" : {
-            "url" : "http://files.minecraftforge.net/maven/cpw/mods/ironchest/promotions.json",
-            "promo" : "latest",
-            "promoType" : "dev"
+    "IronChests": {
+        "function": "CheckMCForge2",
+        "category": "forge",
+        "active": true,
+        "mcforge": {
+            "url": "http://files.minecraftforge.net/maven/cpw/mods/ironchest/promotions.json",
+            "promo": "latest",
+            "promoType": "dev"
         }
     },
-    "IronChests-Release" : {
-        "name" : "IronChests",
-        "function" : "CheckMCForge2",
-        "category" : "forge",
-        "active" : true,
-        "mcforge" : {
-            "url" : "http://files.minecraftforge.net/maven/cpw/mods/ironchest/promotions.json",
-            "promo" : "recommended",
-            "promoType" : "version"
+    "IronChests-Release": {
+        "name": "IronChests",
+        "function": "CheckMCForge2",
+        "category": "forge",
+        "active": true,
+        "mcforge": {
+            "url": "http://files.minecraftforge.net/maven/cpw/mods/ironchest/promotions.json",
+            "promo": "recommended",
+            "promoType": "version"
         }
     },
-    "IronChests-1.7.10" : {
-        "name" : "IronChests",
-        "function" : "CheckMCForge2",
-        "category" : "forge",
-        "active" : true,
-        "mcforge" : {
-            "url" : "http://files.minecraftforge.net/maven/cpw/mods/ironchest/promotions.json",
-            "promo" : "1.7.10-latest",
-            "promoType" : "version"
+    "IronChests-1.7.10": {
+        "name": "IronChests",
+        "function": "CheckMCForge2",
+        "category": "forge",
+        "active": true,
+        "mcforge": {
+            "url": "http://files.minecraftforge.net/maven/cpw/mods/ironchest/promotions.json",
+            "promo": "1.7.10-latest",
+            "promoType": "version"
         }
     },
-    "ForgeMultipart" : {
-        "function" : "CheckMCForge2",
-        "category" : "forge",
-        "active" : true,
-        "mcforge" : {
-            "url" : "http://files.minecraftforge.net/maven/codechicken/ForgeMultipart/promotions.json",
-            "promo" : "latest",
-            "promoType" : "version"
+    "ForgeMultipart": {
+        "function": "CheckMCForge2",
+        "category": "forge",
+        "active": true,
+        "mcforge": {
+            "url": "http://files.minecraftforge.net/maven/codechicken/ForgeMultipart/promotions.json",
+            "promo": "latest",
+            "promoType": "version"
         }
     },
-    "CodeChickenLib" : {
-        "function" : "CheckMCForge2",
-        "category" : "forge",
-        "active" : true,
-        "mcforge" : {
-            "url" : "http://files.minecraftforge.net/maven/codechicken/CodeChickenLib/promotions.json",
-            "promo" : "latest",
-            "promoType" : "dev"
+    "CodeChickenLib": {
+        "function": "CheckMCForge2",
+        "category": "forge",
+        "active": true,
+        "mcforge": {
+            "url": "http://files.minecraftforge.net/maven/codechicken/CodeChickenLib/promotions.json",
+            "promo": "latest",
+            "promoType": "dev"
         }
     },
-    "CompactMachines" : {
-        "function" : "CheckCurse",
-        "active" : true,
-        "curse" : {
-            "name" : "compact-machines",
-            "id" : "224218",
-            "regex" : "compactmachines-(?P<mc>.+?)-(?P<version>.+?).jar$"
+    "CompactMachines": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "name": "compact-machines",
+            "id": "224218",
+            "regex": "compactmachines-(?P<mc>.+?)-(?P<version>.+?).jar$"
         }
     },
-    "CompactSolars" : {
-        "function" : "CheckMCForge2",
-        "category" : "forge",
-        "active" : true,
-        "mcforge" : {
-            "url" : "http://files.minecraftforge.net/maven/cpw/mods/CompactSolars/promotions.json",
-            "promo" : "latest",
-            "promoType" : "dev"
+    "CompactSolars": {
+        "function": "CheckMCForge2",
+        "category": "forge",
+        "active": true,
+        "mcforge": {
+            "url": "http://files.minecraftforge.net/maven/cpw/mods/CompactSolars/promotions.json",
+            "promo": "latest",
+            "promoType": "dev"
         }
     },
-    "CompactSolars-Release" : {
-        "name" : "CompactSolars",
-        "function" : "CheckMCForge2",
-        "category" : "forge",
-        "active" : true,
-        "mcforge" : {
-            "url" : "http://files.minecraftforge.net/maven/cpw/mods/CompactSolars/promotions.json",
-            "promo" : "recommended",
-            "promoType" : "version"
+    "CompactSolars-Release": {
+        "name": "CompactSolars",
+        "function": "CheckMCForge2",
+        "category": "forge",
+        "active": true,
+        "mcforge": {
+            "url": "http://files.minecraftforge.net/maven/cpw/mods/CompactSolars/promotions.json",
+            "promo": "recommended",
+            "promoType": "version"
         }
     },
-    "CrissCross" : {
-        "function" : "CheckCurse",
-        "active" : true,
-        "curse" : {
-            "id" : "236973",
-            "name" : "crisscross",
-            "regex" : "CrissCross (?P<version>[0-9]\\S+)"
+    "CrissCross": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "id": "236973",
+            "name": "crisscross",
+            "regex": "CrissCross (?P<version>[0-9]\\S+)"
         }
     },
-    "BiomesOPlenty" : {
-        "function" : "CheckMCForge2",
-        "category" : "forge",
-        "active" : true,
-        "mcforge" : {
-            "url" : "http://files.minecraftforge.net/maven/com/github/glitchfiend/biomesoplenty/BiomesOPlenty/promotions.json",
-            "promo" : "latest",
-            "promoType" : "dev"
+    "BiomesOPlenty": {
+        "function": "CheckMCForge2",
+        "category": "forge",
+        "active": true,
+        "mcforge": {
+            "url": "http://files.minecraftforge.net/maven/com/github/glitchfiend/biomesoplenty/BiomesOPlenty/promotions.json",
+            "promo": "latest",
+            "promoType": "dev"
         }
     },
-    "BiomesOPlenty-Release" : {
-        "name" : "BiomesOPlenty",
-        "function" : "CheckMCForge2",
-        "category" : "forge",
-        "active" : true,
-        "mcforge" : {
-            "url" : "http://files.minecraftforge.net/maven/com/github/glitchfiend/biomesoplenty/BiomesOPlenty/promotions.json",
-            "promo" : "recommended",
-            "promoType" : "version"
+    "BiomesOPlenty-Release": {
+        "name": "BiomesOPlenty",
+        "function": "CheckMCForge2",
+        "category": "forge",
+        "active": true,
+        "mcforge": {
+            "url": "http://files.minecraftforge.net/maven/com/github/glitchfiend/biomesoplenty/BiomesOPlenty/promotions.json",
+            "promo": "recommended",
+            "promoType": "version"
         }
     },
-    "Cauldron" : {
-        "function" : "CheckMCForge2",
-        "category" : "forge",
-        "active" : false,
-        "changelog" : false,
-        "mcforge" : {
-            "url" : "http://files.minecraftforge.net/maven/net/minecraftforge/cauldron/promotions.json",
-            "promo" : "latest",
-            "promoType" : "dev"
+    "Cauldron": {
+        "function": "CheckMCForge2",
+        "category": "forge",
+        "active": false,
+        "changelog": false,
+        "mcforge": {
+            "url": "http://files.minecraftforge.net/maven/net/minecraftforge/cauldron/promotions.json",
+            "promo": "latest",
+            "promoType": "dev"
         }
     },
-    "Cauldron-Release" : {
-        "name" : "Cauldron",
-        "function" : "CheckMCForge2",
-        "category" : "forge",
-        "active" : false,
-        "changelog" : false,
-        "mcforge" : {
-            "url" : "http://files.minecraftforge.net/maven/net/minecraftforge/cauldron/promotions.json",
-            "promo" : "recommended",
-            "promoType" : "version"
+    "Cauldron-Release": {
+        "name": "Cauldron",
+        "function": "CheckMCForge2",
+        "category": "forge",
+        "active": false,
+        "changelog": false,
+        "mcforge": {
+            "url": "http://files.minecraftforge.net/maven/net/minecraftforge/cauldron/promotions.json",
+            "promo": "recommended",
+            "promoType": "version"
         }
     },
-    "FML-1.8" : {
-        "name" : "FML",
-        "function" : "CheckMCForge2",
-        "category" : "forge",
-        "active" : true,
-        "changelog" : false,
-        "mcforge" : {
-            "url" : "http://files.minecraftforge.net/maven/net/minecraftforge/fml/promotions.json",
-            "promo" : "latest-1.8",
-            "promoType" : "dev"
+    "FML-1.8": {
+        "name": "FML",
+        "function": "CheckMCForge2",
+        "category": "forge",
+        "active": true,
+        "changelog": false,
+        "mcforge": {
+            "url": "http://files.minecraftforge.net/maven/net/minecraftforge/fml/promotions.json",
+            "promo": "latest-1.8",
+            "promoType": "dev"
         }
     },
-    "MinecraftForge-1.8" : {
-        "name" : "MinecraftForge",
-        "function" : "CheckMCForge2",
-        "category" : "forge",
-        "active" : true,
-        "changelog" : false,
-        "mcforge" : {
-            "url" : "http://files.minecraftforge.net/maven/net/minecraftforge/forge/promotions.json",
-            "promo" : "1.8.8-latest",
-            "promoType" : "dev"
+    "MinecraftForge-1.8": {
+        "name": "MinecraftForge",
+        "function": "CheckMCForge2",
+        "category": "forge",
+        "active": true,
+        "changelog": false,
+        "mcforge": {
+            "url": "http://files.minecraftforge.net/maven/net/minecraftforge/forge/promotions.json",
+            "promo": "1.8.8-latest",
+            "promoType": "dev"
         }
     },
-    "MinecraftForge-1.8-Release" : {
-        "name" : "MinecraftForge",
-        "function" : "CheckMCForge2",
-        "category" : "forge",
-        "active" : true,
-        "changelog" : false,
-        "mcforge" : {
-            "url" : "http://files.minecraftforge.net/maven/net/minecraftforge/forge/promotions.json",
-            "promo" : "1.8-recommended",
-            "promoType" : "version"
+    "MinecraftForge-1.8-Release": {
+        "name": "MinecraftForge",
+        "function": "CheckMCForge2",
+        "category": "forge",
+        "active": true,
+        "changelog": false,
+        "mcforge": {
+            "url": "http://files.minecraftforge.net/maven/net/minecraftforge/forge/promotions.json",
+            "promo": "1.8-recommended",
+            "promoType": "version"
         }
     },
-    "MinecraftForge-1.8.8" : {
-        "name" : "MinecraftForge",
-        "function" : "CheckMCForge2",
-        "category" : "forge",
-        "active" : true,
-        "changelog" : false,
-        "mcforge" : {
-            "url" : "http://files.minecraftforge.net/maven/net/minecraftforge/forge/promotions.json",
-            "promo" : "1.8.8-latest",
-            "promoType" : "dev"
+    "MinecraftForge-1.8.8": {
+        "name": "MinecraftForge",
+        "function": "CheckMCForge2",
+        "category": "forge",
+        "active": true,
+        "changelog": false,
+        "mcforge": {
+            "url": "http://files.minecraftforge.net/maven/net/minecraftforge/forge/promotions.json",
+            "promo": "1.8.8-latest",
+            "promoType": "dev"
         }
     },
-    "MinecraftForge-1.8.9-Release" : {
-        "name" : "MinecraftForge",
-        "function" : "CheckMCForge2",
-        "category" : "forge",
-        "active" : true,
-        "changelog" : false,
-        "mcforge" : {
-            "url" : "http://files.minecraftforge.net/maven/net/minecraftforge/forge/promotions.json",
-            "promo" : "1.8.9-recommended",
-            "promoType" : "version"
+    "MinecraftForge-1.8.9-Release": {
+        "name": "MinecraftForge",
+        "function": "CheckMCForge2",
+        "category": "forge",
+        "active": true,
+        "changelog": false,
+        "mcforge": {
+            "url": "http://files.minecraftforge.net/maven/net/minecraftforge/forge/promotions.json",
+            "promo": "1.8.9-recommended",
+            "promoType": "version"
         }
     },
-    "MinecraftForge-1.8.9" : {
-        "name" : "MinecraftForge",
-        "function" : "CheckMCForge2",
-        "category" : "forge",
-        "active" : true,
-        "changelog" : false,
-        "mcforge" : {
-            "url" : "http://files.minecraftforge.net/maven/net/minecraftforge/forge/promotions.json",
-            "promo" : "1.8.9-latest",
-            "promoType" : "dev"
+    "MinecraftForge-1.8.9": {
+        "name": "MinecraftForge",
+        "function": "CheckMCForge2",
+        "category": "forge",
+        "active": true,
+        "changelog": false,
+        "mcforge": {
+            "url": "http://files.minecraftforge.net/maven/net/minecraftforge/forge/promotions.json",
+            "promo": "1.8.9-latest",
+            "promoType": "dev"
         }
     },
-    "MinecraftForge-1.9.4" : {
-        "name" : "MinecraftForge",
-        "function" : "CheckMCForge2",
-        "category" : "forge",
-        "active" : true,
-        "changelog" : false,
-        "mcforge" : {
-            "url" : "http://files.minecraftforge.net/maven/net/minecraftforge/forge/promotions.json",
-            "promo" : "1.9.4-latest",
-            "promoType" : "dev"
+    "MinecraftForge-1.9.4": {
+        "name": "MinecraftForge",
+        "function": "CheckMCForge2",
+        "category": "forge",
+        "active": true,
+        "changelog": false,
+        "mcforge": {
+            "url": "http://files.minecraftforge.net/maven/net/minecraftforge/forge/promotions.json",
+            "promo": "1.9.4-latest",
+            "promoType": "dev"
         }
     },
-    "MinecraftForge-1.9-Release" : {
-        "name" : "MinecraftForge",
-        "function" : "CheckMCForge2",
-        "category" : "forge",
-        "active" : true,
-        "changelog" : false,
-        "mcforge" : {
-            "url" : "http://files.minecraftforge.net/maven/net/minecraftforge/forge/promotions.json",
-            "promo" : "1.9-recommended",
-            "promoType" : "version"
+    "MinecraftForge-1.9-Release": {
+        "name": "MinecraftForge",
+        "function": "CheckMCForge2",
+        "category": "forge",
+        "active": true,
+        "changelog": false,
+        "mcforge": {
+            "url": "http://files.minecraftforge.net/maven/net/minecraftforge/forge/promotions.json",
+            "promo": "1.9-recommended",
+            "promoType": "version"
         }
     },
-    "MinecraftForge-1.10" : {
-        "name" : "MinecraftForge",
-        "function" : "CheckMCForge2",
-        "category" : "forge",
-        "active" : true,
-        "changelog" : false,
-        "mcforge" : {
-            "url" : "http://files.minecraftforge.net/maven/net/minecraftforge/forge/promotions.json",
-            "promo" : "1.10-latest",
-            "promoType" : "dev"
+    "MinecraftForge-1.10": {
+        "name": "MinecraftForge",
+        "function": "CheckMCForge2",
+        "category": "forge",
+        "active": true,
+        "changelog": false,
+        "mcforge": {
+            "url": "http://files.minecraftforge.net/maven/net/minecraftforge/forge/promotions.json",
+            "promo": "1.10-latest",
+            "promoType": "dev"
         }
     },
-    "MinecraftForge-1.10.2-Dev" : {
-        "name" : "MinecraftForge",
-        "function" : "CheckMCForge2",
-        "category" : "forge",
-        "active" : true,
-        "changelog" : false,
-        "mcforge" : {
-            "url" : "http://files.minecraftforge.net/maven/net/minecraftforge/forge/promotions.json",
-            "promo" : "1.10.2-latest",
-            "promoType" : "dev"
+    "MinecraftForge-1.10.2-Dev": {
+        "name": "MinecraftForge",
+        "function": "CheckMCForge2",
+        "category": "forge",
+        "active": true,
+        "changelog": false,
+        "mcforge": {
+            "url": "http://files.minecraftforge.net/maven/net/minecraftforge/forge/promotions.json",
+            "promo": "1.10.2-latest",
+            "promoType": "dev"
         }
     },
-    "MinecraftForge-1.10.2-Release" : {
-        "name" : "MinecraftForge",
-        "function" : "CheckMCForge2",
-        "category" : "forge",
-        "active" : true,
-        "changelog" : false,
-        "mcforge" : {
-            "url" : "http://files.minecraftforge.net/maven/net/minecraftforge/forge/promotions.json",
-            "promo" : "1.10.2-recommended",
-            "promoType" : "version"
+    "MinecraftForge-1.10.2-Release": {
+        "name": "MinecraftForge",
+        "function": "CheckMCForge2",
+        "category": "forge",
+        "active": true,
+        "changelog": false,
+        "mcforge": {
+            "url": "http://files.minecraftforge.net/maven/net/minecraftforge/forge/promotions.json",
+            "promo": "1.10.2-recommended",
+            "promoType": "version"
         }
     },
-    "MinecraftForge-1.11-Dev" : {
-        "name" : "MinecraftForge",
-        "function" : "CheckMCForge2",
-        "category" : "forge",
-        "active" : true,
-        "changelog" : false,
-        "mcforge" : {
-            "url" : "http://files.minecraftforge.net/maven/net/minecraftforge/forge/promotions.json",
-            "promo" : "1.11-latest",
-            "promoType" : "dev"
+    "MinecraftForge-1.11-Dev": {
+        "name": "MinecraftForge",
+        "function": "CheckMCForge2",
+        "category": "forge",
+        "active": true,
+        "changelog": false,
+        "mcforge": {
+            "url": "http://files.minecraftforge.net/maven/net/minecraftforge/forge/promotions.json",
+            "promo": "1.11-latest",
+            "promoType": "dev"
         }
     },
-    "MinecraftForge-1.11-Release" : {
-        "name" : "MinecraftForge",
-        "function" : "CheckMCForge2",
-        "category" : "forge",
-        "active" : true,
-        "changelog" : false,
-        "mcforge" : {
-            "url" : "http://files.minecraftforge.net/maven/net/minecraftforge/forge/promotions.json",
-            "promo" : "1.11-recommended",
-            "promoType" : "version"
+    "MinecraftForge-1.11-Release": {
+        "name": "MinecraftForge",
+        "function": "CheckMCForge2",
+        "category": "forge",
+        "active": true,
+        "changelog": false,
+        "mcforge": {
+            "url": "http://files.minecraftforge.net/maven/net/minecraftforge/forge/promotions.json",
+            "promo": "1.11-recommended",
+            "promoType": "version"
         }
     },
-    "OpenPeripheralCore" : {
-        "comment" : "This isn't a core </3",
-        "function" : "CheckJenkins",
-        "category" : "openmods",
-        "active" : true,
-        "jenkins" : {
-            "url" : "https://builds.openmods.info/job/OpenPeripheralCore/lastSuccessfulBuild/api/json",
-            "regex" : "OpenPeripheralCore-(?P<mc>.+?)-(?P<dev>[0-9]+(?:\\.[0-9]+)*-snapshot-[0-9]+).jar$",
-            "item" : 2
+    "OpenPeripheralCore": {
+        "comment": "This isn't a core </3",
+        "function": "CheckJenkins",
+        "category": "openmods",
+        "active": true,
+        "jenkins": {
+            "url": "https://builds.openmods.info/job/OpenPeripheralCore/lastSuccessfulBuild/api/json",
+            "regex": "OpenPeripheralCore-(?P<mc>.+?)-(?P<dev>[0-9]+(?:\\.[0-9]+)*-snapshot-[0-9]+).jar$",
+            "item": 2
         }
     },
-    "OpenPeripheralAddons" : {
-        "function" : "CheckJenkins",
-        "category" : "openmods",
-        "active" : true,
-        "jenkins" : {
-            "url" : "https://builds.openmods.info/job/OpenPeripheralAddons/lastSuccessfulBuild/api/json",
-            "regex" : "OpenPeripheralAddons-(?P<mc>.+?)-(?P<dev>.+?).jar$",
-            "item" : 1
+    "OpenPeripheralAddons": {
+        "function": "CheckJenkins",
+        "category": "openmods",
+        "active": true,
+        "jenkins": {
+            "url": "https://builds.openmods.info/job/OpenPeripheralAddons/lastSuccessfulBuild/api/json",
+            "regex": "OpenPeripheralAddons-(?P<mc>.+?)-(?P<dev>.+?).jar$",
+            "item": 1
         }
     },
-    "OpenBlocks" : {
-        "function" : "CheckJenkins",
-        "category" : "openmods",
-        "active" : true,
-        "jenkins" : {
-            "url" : "https://builds.openmods.info/job/OpenBlocks/lastSuccessfulBuild/api/json",
-            "regex" : "OpenBlocks-(?P<mc>.+?)-(?P<dev>.+?).jar$",
-            "item" : 1
+    "OpenBlocks": {
+        "function": "CheckJenkins",
+        "category": "openmods",
+        "active": true,
+        "jenkins": {
+            "url": "https://builds.openmods.info/job/OpenBlocks/lastSuccessfulBuild/api/json",
+            "regex": "OpenBlocks-(?P<mc>.+?)-(?P<dev>.+?).jar$",
+            "item": 1
         }
     },
-    "OpenModsLib" : {
-        "function" : "CheckJenkins",
-        "category" : "openmods",
-        "active" : true,
-        "jenkins" : {
-            "url" : "https://builds.openmods.info/job/OpenModsLib/lastSuccessfulBuild/api/json",
-            "regex" : "OpenModsLib-(?P<mc>.+?)-(?P<dev>.+?).jar$",
-            "item" : 2
+    "OpenModsLib": {
+        "function": "CheckJenkins",
+        "category": "openmods",
+        "active": true,
+        "jenkins": {
+            "url": "https://builds.openmods.info/job/OpenModsLib/lastSuccessfulBuild/api/json",
+            "regex": "OpenModsLib-(?P<mc>.+?)-(?P<dev>.+?).jar$",
+            "item": 2
         }
     },
-    "MineFactoryReloaded" : {
-        "function" : "CheckCurse",
-        "active" : true,
-        "curse" : {
-            "name" : "minefactory-reloaded",
-            "regex" : "MineFactoryReloaded-\\[(?P<mc>.+?)\\](?P<version>.+?).jar"
+    "MineFactoryReloaded": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "name": "minefactory-reloaded",
+            "regex": "MineFactoryReloaded-\\[(?P<mc>.+?)\\](?P<version>.+?).jar"
         }
     },
-    "IndustrialCraft2" : {
-        "function" : "CheckJenkins",
-        "active" : false,
-        "jenkins" : {
-            "url" : "http://ic2api.player.to:8080/job/IC2_lf/lastSuccessfulBuild/api/json",
-            "regex" : "industrialcraft-2_(?P<dev>.+?)-lf.jar$",
-            "item" : 2
+    "IndustrialCraft2": {
+        "function": "CheckJenkins",
+        "active": false,
+        "jenkins": {
+            "url": "http://ic2api.player.to:8080/job/IC2_lf/lastSuccessfulBuild/api/json",
+            "regex": "industrialcraft-2_(?P<dev>.+?)-lf.jar$",
+            "item": 2
         }
     },
-    "LanteaCraft" : {
-        "function" : "CheckCurse",
-        "active" : true,
-        "curse" : {
-            "regex" : "LanteaCraft-(?P<mc>.+?)-(?P<version>.+?).jar$"
+    "LanteaCraft": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "regex": "LanteaCraft-(?P<mc>.+?)-(?P<version>.+?).jar$"
         }
     },
-    "OpenPrinter-1.7.10" : {
+    "OpenPrinter-1.7.10": {
         "name": "OpenPrinter",
-        "function" : "CheckJenkins",
-        "active" : false,
+        "function": "CheckJenkins",
+        "active": false,
         "jenkins": {
             "url": "http://ci.pc-logix.com/job/OpenPrinter1.7/lastSuccessfulBuild/api/json",
             "regex": "OpenPrinter-(?P<mc>.+?)-(?P<version>.+?).jar$",
             "item": 0
         }
     },
-    "OpenPrinter-1.8.9" : {
+    "OpenPrinter-1.8.9": {
         "name": "OpenPrinter",
-        "function" : "CheckJenkins",
-        "active" : true,
+        "function": "CheckJenkins",
+        "active": true,
         "jenkins": {
             "url": "http://ci.pc-logix.com/job/OpenPrinter-1.8.9/lastSuccessfulBuild/api/json",
             "regex": "OpenPrinter-(?P<mc>.+?)-(?P<version>.+?).jar$",
             "item": 1
         }
     },
-    "OpenPrinter-1.9.4" : {
+    "OpenPrinter-1.9.4": {
         "name": "OpenPrinter",
-        "function" : "CheckJenkins",
-        "active" : true,
+        "function": "CheckJenkins",
+        "active": true,
         "jenkins": {
             "url": "http://ci.pc-logix.com/job/OpenPrinter-1.9.4/lastSuccessfulBuild/api/json",
             "regex": "OpenPrinter-(?P<mc>.+?)-(?P<version>.+?).jar$",
             "item": 1
         }
     },
-	"OpenPrinter-1.10.2" : {
+    "OpenPrinter-1.10.2": {
         "name": "OpenPrinter",
-        "function" : "CheckJenkins",
-        "active" : true,
-		"mc": "1.10.2",
+        "function": "CheckJenkins",
+        "active": true,
+        "mc": "1.10.2",
         "jenkins": {
             "url": "http://ci.pc-logix.com/job/OpenPrinter-1.9.4/lastSuccessfulBuild/api/json",
             "regex": "OpenPrinter-.+?-(?P<version>.+?).jar$",
             "item": 1
         }
     },
-    "OpenFM-1.7.10" : {
+    "OpenFM-1.7.10": {
         "name": "OpenFM",
-        "function" : "CheckJenkins",
-        "active" : true,
+        "function": "CheckJenkins",
+        "active": true,
         "jenkins": {
             "url": "http://ci.pc-logix.com/job/OpenFM/lastSuccessfulBuild/api/json",
-            "regex" : "OpenFM-(?P<mc>.+?)-(?P<version>.+?).jar$",
+            "regex": "OpenFM-(?P<mc>.+?)-(?P<version>.+?).jar$",
             "item": 0
         }
     },
-	"OpenFM-1.8.9" : {
+    "OpenFM-1.8.9": {
         "name": "OpenFM",
-        "function" : "CheckJenkins",
-        "active" : true,
+        "function": "CheckJenkins",
+        "active": true,
         "jenkins": {
             "url": "http://ci.pc-logix.com/job/OpenFM-1.8/lastSuccessfulBuild/api/json",
-            "regex" : "OpenFM-(?P<mc>.+?)-(?P<version>.+?).jar$",
+            "regex": "OpenFM-(?P<mc>.+?)-(?P<version>.+?).jar$",
             "item": 0
         }
     },
-	"OpenFM-1.9.4" : {
+    "OpenFM-1.9.4": {
         "name": "OpenFM",
-        "function" : "CheckJenkins",
-        "active" : true,
+        "function": "CheckJenkins",
+        "active": true,
         "jenkins": {
             "url": "http://ci.pc-logix.com/job/OpenFM-1.9.4/lastSuccessfulBuild/api/json",
-            "regex" : "OpenFM-(?P<mc>.+?)-(?P<version>.+?).jar$",
+            "regex": "OpenFM-(?P<mc>.+?)-(?P<version>.+?).jar$",
             "item": 0
         }
     },
-	"OpenFM-1.10.2" : {
+    "OpenFM-1.10.2": {
         "name": "OpenFM",
-        "function" : "CheckJenkins",
-        "active" : true,
-		"mc": "1.10.2",
+        "function": "CheckJenkins",
+        "active": true,
+        "mc": "1.10.2",
         "jenkins": {
             "url": "http://ci.pc-logix.com/job/OpenFM-1.9.4/lastSuccessfulBuild/api/json",
-            "regex" : "OpenFM-.+?-(?P<version>.+?).jar$",
+            "regex": "OpenFM-.+?-(?P<version>.+?).jar$",
             "item": 0
         }
     },
-	"OpenSecurity-1.7.10" : {
+    "OpenSecurity-1.7.10": {
         "name": "OpenSecurity",
-        "function" : "CheckJenkins",
-        "active" : true,
+        "function": "CheckJenkins",
+        "active": true,
         "jenkins": {
             "url": "http://ci.pc-logix.com/job/OpenSecurity/lastSuccessfulBuild/api/json",
-            "regex" : "OpenSecurity-(?P<mc>.+?)-(?P<version>.+?).jar$",
+            "regex": "OpenSecurity-(?P<mc>.+?)-(?P<version>.+?).jar$",
             "item": 0
         }
     },
-    "MFFSv2Classic" : {
-        "function" : "CheckJenkins",
-        "active" : false,
-        "jenkins" : {
-            "url" : "http://minalien.com:8080/job/Modular%20Forcefield%20System/lastSuccessfulBuild/api/json",
-            "regex" : "ModularForcefieldSystem-(?P<dev>.+?).jar$",
-            "item" : 0
+    "MFFSv2Classic": {
+        "function": "CheckJenkins",
+        "active": false,
+        "jenkins": {
+            "url": "http://minalien.com:8080/job/Modular%20Forcefield%20System/lastSuccessfulBuild/api/json",
+            "regex": "ModularForcefieldSystem-(?P<dev>.+?).jar$",
+            "item": 0
         }
     },
-    "PowerConverters" : {
-        "function" : "CheckJenkins",
-        "active" : false,
-        "jenkins" : {
-            "url" : "http://jamesmckay.id.au:8080/job/Power%20Converters/lastSuccessfulBuild/api/json",
-            "regex" : "PowerConverters-(?P<mc>.+?)_(?P<dev>.+?).jar",
-            "item" : 1
+    "PowerConverters": {
+        "function": "CheckJenkins",
+        "active": false,
+        "jenkins": {
+            "url": "http://jamesmckay.id.au:8080/job/Power%20Converters/lastSuccessfulBuild/api/json",
+            "regex": "PowerConverters-(?P<mc>.+?)_(?P<dev>.+?).jar",
+            "item": 1
         }
     },
-    "IndustrialCraft2-EXP" : {
-        "function" : "CheckJenkins",
-        "category" : "Player",
-        "active" : true,
-        "jenkins" : {
-            "url" : "http://jenkins.ic2.player.to/job/IC2_experimental/lastSuccessfulBuild/api/json",
-            "regex" : "industrialcraft-2-(?P<version>.+?)-experimental.jar",
-            "item" : 2
+    "IndustrialCraft2-EXP": {
+        "function": "CheckJenkins",
+        "category": "Player",
+        "active": true,
+        "jenkins": {
+            "url": "http://jenkins.ic2.player.to/job/IC2_experimental/lastSuccessfulBuild/api/json",
+            "regex": "industrialcraft-2-(?P<version>.+?)-experimental.jar",
+            "item": 2
         }
     },
-    "VanityBlocks" : {
-        "function" : "CheckJenkins",
-        "active" : false,
-        "jenkins" : {
-            "url" : "https://ci.theender.net/job/VanityBlocks/lastSuccessfulBuild/api/json",
-            "regex" : "VanityBlocks-V(?P<mc>.+?)--(?P<dev>.+?).jar",
-            "item" : 0
+    "VanityBlocks": {
+        "function": "CheckJenkins",
+        "active": false,
+        "jenkins": {
+            "url": "https://ci.theender.net/job/VanityBlocks/lastSuccessfulBuild/api/json",
+            "regex": "VanityBlocks-V(?P<mc>.+?)--(?P<dev>.+?).jar",
+            "item": 0
         }
     },
-    "AdditionalBuildcraftObjects" : {
-        "function" : "CheckGitHubRelease",
-        "active" : true,
-        "github" : {
-            "repo" : "da3dsoul/Additional-Buildcraft-Objects",
-            "regex" : "ABO-MC(?P<mc>.+?)-BC[0-9.]+release(?P<version>.+?)\\.jar"
+    "AdditionalBuildcraftObjects": {
+        "function": "CheckGitHubRelease",
+        "active": true,
+        "github": {
+            "repo": "da3dsoul/Additional-Buildcraft-Objects",
+            "regex": "ABO-MC(?P<mc>.+?)-BC[0-9.]+release(?P<version>.+?)\\.jar"
         }
     },
-    "Galacticraft" : {
-        "function" : "CheckJenkins",
-        "active" : true,
-        "jenkins" : {
-            "url" : "http://ci.micdoodle8.com:8080/job/Galacticraft-1.7/lastSuccessfulBuild/api/json",
-            "regex" : "GalacticraftCore-.+?-(?P<dev>.+?).jar",
-            "item" : 1
+    "Galacticraft": {
+        "function": "CheckJenkins",
+        "active": true,
+        "jenkins": {
+            "url": "http://ci.micdoodle8.com:8080/job/Galacticraft-1.7/lastSuccessfulBuild/api/json",
+            "regex": "GalacticraftCore-.+?-(?P<dev>.+?).jar",
+            "item": 1
         }
     },
-    "MicdoodleCore" : {
-        "function" : "CheckJenkins",
-        "active" : true,
-        "jenkins" : {
-            "url" : "http://ci.micdoodle8.com:8080/job/Galacticraft-1.7/lastSuccessfulBuild/api/json",
-            "regex" : "MicdoodleCore-.+?-(?P<dev>.+?).jar",
-            "item" : 2
+    "MicdoodleCore": {
+        "function": "CheckJenkins",
+        "active": true,
+        "jenkins": {
+            "url": "http://ci.micdoodle8.com:8080/job/Galacticraft-1.7/lastSuccessfulBuild/api/json",
+            "regex": "MicdoodleCore-.+?-(?P<dev>.+?).jar",
+            "item": 2
         }
     },
-    "BuildCraft" : {
-        "function" : "CheckBuildCraft",
-        "active" : true
+    "BuildCraft": {
+        "function": "CheckBuildCraft",
+        "active": true
     },
-    "Artifice" : {
-        "function" : "CheckModsIO",
-        "active" : true,
-        "modsio" : {
+    "Artifice": {
+        "function": "CheckModsIO",
+        "active": true,
+        "modsio": {
             "id": 1139
         }
     },
-    "LogisticsPipes" : {
-        "function" : "CheckJenkins",
-        "active" : true,
-        "jenkins" : {
-            "url" : "http://ci.rs485.network/view/Logistics%20Pipes/job/LogisticsPipes-0.9-mc17-bc7/lastSuccessfulBuild/api/json",
-            "regex" : "logisticspipes-(?P<dev>.+?).jar",
-            "item" : 2
+    "LogisticsPipes": {
+        "function": "CheckJenkins",
+        "active": true,
+        "jenkins": {
+            "url": "http://ci.rs485.network/view/Logistics%20Pipes/job/LogisticsPipes-0.9-mc17-bc7/lastSuccessfulBuild/api/json",
+            "regex": "logisticspipes-(?P<dev>.+?).jar",
+            "item": 2
         }
     },
-    "Mekanism" : {
-        "function" : "CheckJenkins",
-        "active" : true,
-        "jenkins" : {
-            "url" : "http://ci.indiewikis.com:8080/job/Mekanism/lastSuccessfulBuild/api/json",
-            "regex" : "Mekanism-(?P<mc>.+?)-(?P<dev>.+?).jar",
-            "item" : 1
+    "Mekanism": {
+        "function": "CheckJenkins",
+        "active": true,
+        "jenkins": {
+            "url": "http://ci.indiewikis.com:8080/job/Mekanism/lastSuccessfulBuild/api/json",
+            "regex": "Mekanism-(?P<mc>.+?)-(?P<dev>.+?).jar",
+            "item": 1
         }
     },
-    "Mekanism-Release" : {
-        "name" : "Mekanism",
-        "function" : "CheckMekanism",
-        "active" : true
+    "Mekanism-Release": {
+        "name": "Mekanism",
+        "function": "CheckMekanism",
+        "active": true
     },
-    "CodeChickenCore" : {
-        "function" : "CheckChickenBones",
-        "category" : "cb",
-        "active" : true
+    "CodeChickenCore": {
+        "function": "CheckChickenBones",
+        "category": "cb",
+        "active": true
     },
-    "ChickenChunks" : {
-        "function" : "CheckChickenBones",
-        "category" : "cb",
-        "active" : true
+    "ChickenChunks": {
+        "function": "CheckChickenBones",
+        "category": "cb",
+        "active": true
     },
-    "NotEnoughItems" : {
-        "function" : "CheckChickenBones",
-        "category" : "cb",
-        "active" : true
+    "NotEnoughItems": {
+        "function": "CheckChickenBones",
+        "category": "cb",
+        "active": true
     },
-    "EnderStorage" : {
-        "function" : "CheckChickenBones",
-        "category" : "cb",
-        "active" : true
+    "EnderStorage": {
+        "function": "CheckChickenBones",
+        "category": "cb",
+        "active": true
     },
-    "Translocator" : {
-        "function" : "CheckChickenBones",
-        "category" : "cb",
-        "active" : true
+    "Translocator": {
+        "function": "CheckChickenBones",
+        "category": "cb",
+        "active": true
     },
-    "WR-CBE" : {
-        "function" : "CheckChickenBones",
-        "category" : "cb",
-        "active" : true
+    "WR-CBE": {
+        "function": "CheckChickenBones",
+        "category": "cb",
+        "active": true
     },
-    "TinkersConstruct" : {
-        "function" : "CheckCurse",
-        "category" : "mdiyo",
-        "active" : true,
-        "curse" : {
-            "name" : "tinkers-construct",
-            "regex" : "TConstruct-(?P<mc>.+?)-(?P<version>.+?).jar"
+    "TinkersConstruct": {
+        "function": "CheckCurse",
+        "category": "mdiyo",
+        "active": true,
+        "curse": {
+            "name": "tinkers-construct",
+            "regex": "TConstruct-(?P<mc>.+?)-(?P<version>.+?).jar"
         }
     },
-    "Tinkers'Mechworks" : {
-        "function" : "CheckCurse",
-        "category" : "mdiyo",
-        "active" : true,
-        "curse" : {
-            "name" : "tinkers-mechworks",
-            "regex" : "TMechworks-(?P<mc>.+?)-(?P<version>.+?).jar"
+    "Tinkers'Mechworks": {
+        "function": "CheckCurse",
+        "category": "mdiyo",
+        "active": true,
+        "curse": {
+            "name": "tinkers-mechworks",
+            "regex": "TMechworks-(?P<mc>.+?)-(?P<version>.+?).jar"
         }
     },
-    "AppliedEnergistics" : {
-        "function" : "CheckAE",
-        "active" : false
+    "AppliedEnergistics": {
+        "function": "CheckAE",
+        "active": false
     },
-    "AppliedEnergistics2" : {
+    "AppliedEnergistics2": {
         "function": "CheckCurse",
         "active": true,
         "curse": {
@@ -627,672 +627,672 @@
             "regex": "appliedenergistics2-(?P<version>.+)\\.jar"
         }
     },
-    "TextFormatting" : {
-        "function" : "CheckSpacechase",
-        "category" : "sc0",
-        "active" : true,
-        "spacechase" : {
-            "slug" : "text-formatting"
+    "TextFormatting": {
+        "function": "CheckSpacechase",
+        "category": "sc0",
+        "active": true,
+        "spacechase": {
+            "slug": "text-formatting"
         }
     },
-    "SurvivalWings" : {
-        "function" : "CheckSpacechase",
-        "category" : "sc0",
-        "active" : true,
-        "spacechase" : {
-            "slug" : "survival-wings"
+    "SurvivalWings": {
+        "function": "CheckSpacechase",
+        "category": "sc0",
+        "active": true,
+        "spacechase": {
+            "slug": "survival-wings"
         }
     },
-    "BiomeWand" : {
-        "function" : "CheckSpacechase",
-        "category" : "sc0",
-        "active" : true,
-        "spacechase" : {
-            "slug" : "biome-wand"
+    "BiomeWand": {
+        "function": "CheckSpacechase",
+        "category": "sc0",
+        "active": true,
+        "spacechase": {
+            "slug": "biome-wand"
         }
     },
-    "UsefulPets" : {
-        "function" : "CheckSpacechase",
-        "category" : "sc0",
-        "active" : true,
-        "spacechase" : {
-            "slug" : "useful-pets"
+    "UsefulPets": {
+        "function": "CheckSpacechase",
+        "category": "sc0",
+        "active": true,
+        "spacechase": {
+            "slug": "useful-pets"
         }
     },
-    "SpaceCore" : {
-        "function" : "CheckSpacechase",
-        "category" : "sc0",
-        "active" : true,
-        "spacechase" : {
-            "slug" : "spacecore"
+    "SpaceCore": {
+        "function": "CheckSpacechase",
+        "category": "sc0",
+        "active": true,
+        "spacechase": {
+            "slug": "spacecore"
         }
     },
-    "ComponentEquipment" : {
-        "function" : "CheckSpacechase",
-        "category" : "sc0",
-        "active" : true,
-        "spacechase" : {
-            "slug" : "component-equipment"
+    "ComponentEquipment": {
+        "function": "CheckSpacechase",
+        "category": "sc0",
+        "active": true,
+        "spacechase": {
+            "slug": "component-equipment"
         }
     },
-    "UsefulPetsAddon_PainterlyTextures" : {
-        "function" : "CheckSpacechase",
-        "category" : "sc0",
-        "active" : true,
-        "spacechase" : {
-            "slug" : "useful-pets-painterly"
+    "UsefulPetsAddon_PainterlyTextures": {
+        "function": "CheckSpacechase",
+        "category": "sc0",
+        "active": true,
+        "spacechase": {
+            "slug": "useful-pets-painterly"
         }
     },
-    "EnderTech-Drayshak" : {
-        "function" : "CheckCurse",
-        "category" : "drayshak",
-        "active" : true,
-        "curse" : {
-            "regex" : "EnderTech-(?P<mc>.+?)-(?P<version>.+?).jar",
-            "id" : "223428",
-            "name" : "EnderTech"
+    "EnderTech-Drayshak": {
+        "function": "CheckCurse",
+        "category": "drayshak",
+        "active": true,
+        "curse": {
+            "regex": "EnderTech-(?P<mc>.+?)-(?P<version>.+?).jar",
+            "id": "223428",
+            "name": "EnderTech"
         }
     },
-    "BloodMagic" : {
-        "function" : "CheckCurse",
-        "active" : true,
-        "curse" : {
-            "regex" : "BloodMagic-(?P<mc>.+?)-(?P<version>.+?).jar",
-            "id" : "224791",
-            "name" : "blood-magic"
+    "BloodMagic": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "regex": "BloodMagic-(?P<mc>.+?)-(?P<version>.+?).jar",
+            "id": "224791",
+            "name": "blood-magic"
         }
     },
-    "CreeperCollateral" : {
-        "function" : "CheckCurse",
-        "category" : "den",
-        "active" : true,
-        "curse" : {
-            "regex" : "CreeperCollateral-\\[(?P<mc>.+?)\\](?P<version>.+?).jar",
-            "id" : "223801"
+    "CreeperCollateral": {
+        "function": "CheckCurse",
+        "category": "den",
+        "active": true,
+        "curse": {
+            "regex": "CreeperCollateral-\\[(?P<mc>.+?)\\](?P<version>.+?).jar",
+            "id": "223801"
         }
     },
-    "INpureCore" : {
-        "function" : "CheckCurse",
-        "category" : "den",
-        "active" : true,
-        "curse" : {
-            "regex" : "INpureCore-\\[(?P<mc>.+?)\\](?P<version>.+?).jar",
-            "id" : "223792"
+    "INpureCore": {
+        "function": "CheckCurse",
+        "category": "den",
+        "active": true,
+        "curse": {
+            "regex": "INpureCore-\\[(?P<mc>.+?)\\](?P<version>.+?).jar",
+            "id": "223792"
         }
     },
-    "denLib" : {
-        "function" : "CheckJenkins",
-        "category" : "den",
-        "active" : false,
-        "jenkins" : {
-            "url" : "http://denoflions.servehttp.com:8080/view/All/job/denLib%203.X/lastSuccessfulBuild/api/json",
-            "regex" : "denLib-(?P<mc>.+?)-(?P<version>.+?).jar",
-            "item" : 0
+    "denLib": {
+        "function": "CheckJenkins",
+        "category": "den",
+        "active": false,
+        "jenkins": {
+            "url": "http://denoflions.servehttp.com:8080/view/All/job/denLib%203.X/lastSuccessfulBuild/api/json",
+            "regex": "denLib-(?P<mc>.+?)-(?P<version>.+?).jar",
+            "item": 0
         }
     },
-    "DenPipes" : {
-        "function" : "CheckDropBox",
-        "category" : "den",
-        "active" : false,
-        "html" : {
-            "url" : "https://www.dropbox.com/sh/qqgsswnyxh2mq9f/KBRRnClA4f/DenPipes",
-            "regex" : "DenPipes-(?P<mc>.+?)-(?P<version>.+?).jar"
+    "DenPipes": {
+        "function": "CheckDropBox",
+        "category": "den",
+        "active": false,
+        "html": {
+            "url": "https://www.dropbox.com/sh/qqgsswnyxh2mq9f/KBRRnClA4f/DenPipes",
+            "regex": "DenPipes-(?P<mc>.+?)-(?P<version>.+?).jar"
         }
     },
-    "DenPipesEmerald" : {
-        "function" : "CheckDropBox",
-        "category" : "den",
-        "active" : false,
-        "html" : {
-            "url" : "https://www.dropbox.com/sh/qqgsswnyxh2mq9f/B9lEpmV2zD/DenPipes/Addons",
-            "regex" : "DenPipes-Emerald-(?P<mc>.+?)-(?P<version>.+?).jar"
+    "DenPipesEmerald": {
+        "function": "CheckDropBox",
+        "category": "den",
+        "active": false,
+        "html": {
+            "url": "https://www.dropbox.com/sh/qqgsswnyxh2mq9f/B9lEpmV2zD/DenPipes/Addons",
+            "regex": "DenPipes-Emerald-(?P<mc>.+?)-(?P<version>.+?).jar"
         }
     },
-    "GateCopy" : {
-        "function" : "CheckDropBox",
-        "category" : "den",
-        "active" : false,
-        "html" : {
-            "url" : "https://www.dropbox.com/sh/qqgsswnyxh2mq9f/PIj33yv4Gd/GateCopy",
-            "regex" : "GateCopy-(?P<mc>.+?)-(?P<version>.+?).jar"
+    "GateCopy": {
+        "function": "CheckDropBox",
+        "category": "den",
+        "active": false,
+        "html": {
+            "url": "https://www.dropbox.com/sh/qqgsswnyxh2mq9f/PIj33yv4Gd/GateCopy",
+            "regex": "GateCopy-(?P<mc>.+?)-(?P<version>.+?).jar"
         }
     },
-    "HDSkinsandCloaks" : {
-        "function" : "CheckJenkins",
-        "category" : "den",
-        "active" : false,
-        "jenkins" : {
-            "url" : "http://denoflions.servehttp.com:8080/view/All/job/HDSAC%201.6.2/lastSuccessfulBuild/api/json",
-            "regex" : "HDSAC-(?P<mc>.+?)-(?P<version>.+?).jar",
-            "item" : 0
+    "HDSkinsandCloaks": {
+        "function": "CheckJenkins",
+        "category": "den",
+        "active": false,
+        "jenkins": {
+            "url": "http://denoflions.servehttp.com:8080/view/All/job/HDSAC%201.6.2/lastSuccessfulBuild/api/json",
+            "regex": "HDSAC-(?P<mc>.+?)-(?P<version>.+?).jar",
+            "item": 0
         }
     },
-    "INpureTools" : {
-        "function" : "CheckDropBox",
-        "category" : "den",
-        "active" : false,
-        "html" : {
-            "url" : "https://www.dropbox.com/sh/qqgsswnyxh2mq9f/3X9h2iJEcc/INpureTools",
-            "regex" : "INpureTools-(?P<mc>.+?)-(?P<version>.+?).jar"
+    "INpureTools": {
+        "function": "CheckDropBox",
+        "category": "den",
+        "active": false,
+        "html": {
+            "url": "https://www.dropbox.com/sh/qqgsswnyxh2mq9f/3X9h2iJEcc/INpureTools",
+            "regex": "INpureTools-(?P<mc>.+?)-(?P<version>.+?).jar"
         }
     },
-    "INpureTools_CCTurtle" : {
-        "function" : "CheckDropBox",
-        "category" : "den",
-        "active" : false,
-        "html" : {
-            "url" : "https://www.dropbox.com/sh/qqgsswnyxh2mq9f/3pg3Hi0xaX/INpureTools/Turtles",
-            "regex" : "INpureTools_CCTurtle-(?P<mc>.+?)-(?P<version>.+?).jar"
+    "INpureTools_CCTurtle": {
+        "function": "CheckDropBox",
+        "category": "den",
+        "active": false,
+        "html": {
+            "url": "https://www.dropbox.com/sh/qqgsswnyxh2mq9f/3pg3Hi0xaX/INpureTools/Turtles",
+            "regex": "INpureTools_CCTurtle-(?P<mc>.+?)-(?P<version>.+?).jar"
         }
     },
-    "PluginsForForestry" : {
-        "function" : "CheckJenkins",
-        "category" : "den",
-        "active" : false,
-        "jenkins" : {
-            "url" : "http://denoflions.servehttp.com:8080/job/PluginsForForestry/lastSuccessfulBuild/api/json",
-            "regex" : "PluginsforForestry-(?P<mc>.+?)-(?P<version>.+?).jar",
-            "item" : 0
+    "PluginsForForestry": {
+        "function": "CheckJenkins",
+        "category": "den",
+        "active": false,
+        "jenkins": {
+            "url": "http://denoflions.servehttp.com:8080/job/PluginsForForestry/lastSuccessfulBuild/api/json",
+            "regex": "PluginsforForestry-(?P<mc>.+?)-(?P<version>.+?).jar",
+            "item": 0
         }
     },
-    "StatusEffectHUD" : {
-        "function" : "CheckHTML",
-        "category" : "bspkrs",
-        "active" : true,
-        "html" : {
-            "url" : "http://bspk.rs/Minecraft/1.7.10/statusEffectHUD.version",
-            "regex" : "(?P<version>.+?)$"
+    "StatusEffectHUD": {
+        "function": "CheckHTML",
+        "category": "bspkrs",
+        "active": true,
+        "html": {
+            "url": "http://bspk.rs/Minecraft/1.7.10/statusEffectHUD.version",
+            "regex": "(?P<version>.+?)$"
         }
     },
-    "ArmorStatusHUD" : {
-        "function" : "CheckHTML",
-        "category" : "bspkrs",
-        "active" : true,
-        "html" : {
-            "url" : "http://bspk.rs/Minecraft/1.7.10/armorStatusHUD.version",
-            "regex" : "(?P<version>.+?)$"
+    "ArmorStatusHUD": {
+        "function": "CheckHTML",
+        "category": "bspkrs",
+        "active": true,
+        "html": {
+            "url": "http://bspk.rs/Minecraft/1.7.10/armorStatusHUD.version",
+            "regex": "(?P<version>.+?)$"
         }
     },
-    "BlockBreaker" : {
-        "function" : "CheckHTML",
-        "category" : "bspkrs",
-        "active" : true,
-        "html" : {
-            "url" : "http://bspk.rs/Minecraft/1.6.4/blockBreakerForge.version",
-            "regex" : "Forge (?P<version>.+?)$"
+    "BlockBreaker": {
+        "function": "CheckHTML",
+        "category": "bspkrs",
+        "active": true,
+        "html": {
+            "url": "http://bspk.rs/Minecraft/1.6.4/blockBreakerForge.version",
+            "regex": "Forge (?P<version>.+?)$"
         }
     },
-    "bspkrsCore" : {
-        "function" : "CheckHTML",
-        "category" : "bspkrs",
-        "active" : true,
-        "html" : {
-            "url" : "http://bspk.rs/Minecraft/1.7.10/bspkrsCore.version",
-            "regex" : "(?P<version>.+?)$"
+    "bspkrsCore": {
+        "function": "CheckHTML",
+        "category": "bspkrs",
+        "active": true,
+        "html": {
+            "url": "http://bspk.rs/Minecraft/1.7.10/bspkrsCore.version",
+            "regex": "(?P<version>.+?)$"
         }
     },
-    "CrystalWing" : {
-        "function" : "CheckHTML",
-        "category" : "bspkrs",
-        "active" : true,
-        "html" : {
-            "url" : "http://bspk.rs/Minecraft/1.7.10/crystalWingForge.version",
-            "regex" : "(?P<version>.+?)$"
+    "CrystalWing": {
+        "function": "CheckHTML",
+        "category": "bspkrs",
+        "active": true,
+        "html": {
+            "url": "http://bspk.rs/Minecraft/1.7.10/crystalWingForge.version",
+            "regex": "(?P<version>.+?)$"
         }
     },
-    "DirectionHUD" : {
-        "function" : "CheckHTML",
-        "category" : "bspkrs",
-        "active" : true,
-        "html" : {
-            "url" : "http://bspk.rs/Minecraft/1.7.10/directionHUD.version",
-            "regex" : "(?P<version>.+?)$"
+    "DirectionHUD": {
+        "function": "CheckHTML",
+        "category": "bspkrs",
+        "active": true,
+        "html": {
+            "url": "http://bspk.rs/Minecraft/1.7.10/directionHUD.version",
+            "regex": "(?P<version>.+?)$"
         }
     },
-    "FloatingRuins" : {
-        "function" : "CheckHTML",
-        "category" : "bspkrs",
-        "active" : true,
-        "html" : {
-            "url" : "http://bspk.rs/Minecraft/1.7.10/floatingRuinsForge.version",
-            "regex" : "(?P<version>.+?)$"
+    "FloatingRuins": {
+        "function": "CheckHTML",
+        "category": "bspkrs",
+        "active": true,
+        "html": {
+            "url": "http://bspk.rs/Minecraft/1.7.10/floatingRuinsForge.version",
+            "regex": "(?P<version>.+?)$"
         }
     },
-    "IngameInfo" : {
-        "function" : "CheckHTML",
-        "category" : "bspkrs",
-        "active" : true,
-        "html" : {
-            "url" : "http://bspk.rs/Minecraft/1.6.4/ingameInfo.version",
-            "regex" : "ML (?P<version>.+?)$"
+    "IngameInfo": {
+        "function": "CheckHTML",
+        "category": "bspkrs",
+        "active": true,
+        "html": {
+            "url": "http://bspk.rs/Minecraft/1.6.4/ingameInfo.version",
+            "regex": "ML (?P<version>.+?)$"
         }
     },
-    "StartingInventory" : {
-        "function" : "CheckHTML",
-        "category" : "bspkrs",
-        "active" : true,
-        "html" : {
-            "url" : "http://bspk.rs/Minecraft/1.7.10/startingInventoryForge.version",
-            "regex" : "(?P<version>.+?)$"
+    "StartingInventory": {
+        "function": "CheckHTML",
+        "category": "bspkrs",
+        "active": true,
+        "html": {
+            "url": "http://bspk.rs/Minecraft/1.7.10/startingInventoryForge.version",
+            "regex": "(?P<version>.+?)$"
         }
     },
-    "TreeCapitator" : {
-        "function" : "CheckHTML",
-        "category" : "bspkrs",
-        "active" : true,
-        "html" : {
-            "url" : "http://bspk.rs/Minecraft/1.7.10/treecapitator.version",
-            "regex" : "(?P<version>.+?)$"
+    "TreeCapitator": {
+        "function": "CheckHTML",
+        "category": "bspkrs",
+        "active": true,
+        "html": {
+            "url": "http://bspk.rs/Minecraft/1.7.10/treecapitator.version",
+            "regex": "(?P<version>.+?)$"
         }
     },
-    "WorldStateCheckpoints" : {
-        "function" : "CheckHTML",
-        "category" : "bspkrs",
-        "active" : true,
-        "html" : {
-            "url" : "http://bspk.rs/Minecraft/1.7.10/worldStateCheckpointsForge.version",
-            "regex" : "(?P<version>.+?)$"
+    "WorldStateCheckpoints": {
+        "function": "CheckHTML",
+        "category": "bspkrs",
+        "active": true,
+        "html": {
+            "url": "http://bspk.rs/Minecraft/1.7.10/worldStateCheckpointsForge.version",
+            "regex": "(?P<version>.+?)$"
         }
     },
-    "DynIMC" : {
-        "function" : "CheckLunatrius",
-        "category" : "lunatrius",
-        "active" : true
+    "DynIMC": {
+        "function": "CheckLunatrius",
+        "category": "lunatrius",
+        "active": true
     },
-    "ExtensionFixer" : {
-        "function" : "CheckLunatrius",
-        "category" : "lunatrius",
-        "active" : true
+    "ExtensionFixer": {
+        "function": "CheckLunatrius",
+        "category": "lunatrius",
+        "active": true
     },
-    "LunatriusCore" : {
-        "function" : "CheckLunatrius",
-        "category" : "lunatrius",
-        "active" : true
+    "LunatriusCore": {
+        "function": "CheckLunatrius",
+        "category": "lunatrius",
+        "active": true
     },
-    "InGameInfoXML" : {
-        "function" : "CheckLunatrius",
-        "category" : "lunatrius",
-        "active" : true
+    "InGameInfoXML": {
+        "function": "CheckLunatrius",
+        "category": "lunatrius",
+        "active": true
     },
-    "InGameModConfigs" : {
-        "function" : "CheckLunatrius",
-        "category" : "lunatrius",
-        "active" : true
+    "InGameModConfigs": {
+        "function": "CheckLunatrius",
+        "category": "lunatrius",
+        "active": true
     },
-    "LaserLevel" : {
-        "function" : "CheckLunatrius",
-        "category" : "lunatrius",
-        "active" : true
+    "LaserLevel": {
+        "function": "CheckLunatrius",
+        "category": "lunatrius",
+        "active": true
     },
-    "MonsterSpawnHighlighter" : {
-        "function" : "CheckLunatrius",
-        "category" : "lunatrius",
-        "active" : true
+    "MonsterSpawnHighlighter": {
+        "function": "CheckLunatrius",
+        "category": "lunatrius",
+        "active": true
     },
-    "Profiles" : {
-        "function" : "CheckLunatrius",
-        "category" : "lunatrius",
-        "active" : true
+    "Profiles": {
+        "function": "CheckLunatrius",
+        "category": "lunatrius",
+        "active": true
     },
-    "Stackie" : {
-        "function" : "CheckLunatrius",
-        "category" : "lunatrius",
-        "active" : true
+    "Stackie": {
+        "function": "CheckLunatrius",
+        "category": "lunatrius",
+        "active": true
     },
-    "Schematica" : {
-        "function" : "CheckLunatrius",
-        "category" : "lunatrius",
-        "active" : true
+    "Schematica": {
+        "function": "CheckLunatrius",
+        "category": "lunatrius",
+        "active": true
     },
-    "Tracer" : {
-        "function" : "CheckLunatrius",
-        "category" : "lunatrius",
-        "active" : true
+    "Tracer": {
+        "function": "CheckLunatrius",
+        "category": "lunatrius",
+        "active": true
     },
-    "BigReactors" : {
-        "function" : "CheckBigReactors",
-        "active" : true
+    "BigReactors": {
+        "function": "CheckBigReactors",
+        "active": true
     },
-    "AppliedThermodynamics" : {
-        "function" : "CheckJenkins",
-        "active" : false,
-        "jenkins" : {
-            "url" : "http://themattabase.com:9090/job/Applied%20Thermodynamics/lastSuccessfulBuild/api/json",
-            "regex" : "apptherm-(?P<dev>.+?).jar$",
-            "item" : 0
+    "AppliedThermodynamics": {
+        "function": "CheckJenkins",
+        "active": false,
+        "jenkins": {
+            "url": "http://themattabase.com:9090/job/Applied%20Thermodynamics/lastSuccessfulBuild/api/json",
+            "regex": "apptherm-(?P<dev>.+?).jar$",
+            "item": 0
         }
     },
-    "EnderIO" : {
-        "function" : "CheckJenkins",
-        "category" : "tterrag",
-        "active" : true,
-        "jenkins" : {
-            "url" : "http://ci.tterrag.com/job/EnderIO/lastSuccessfulBuild/api/json",
-            "regex" : "EnderIO-(?P<mc>.+?)-(?P<dev>.+?).jar",
-            "item" : 3
+    "EnderIO": {
+        "function": "CheckJenkins",
+        "category": "tterrag",
+        "active": true,
+        "jenkins": {
+            "url": "http://ci.tterrag.com/job/EnderIO/lastSuccessfulBuild/api/json",
+            "regex": "EnderIO-(?P<mc>.+?)-(?P<dev>.+?).jar",
+            "item": 3
         }
     },
-    "EnderIO-Release" : {
-        "name" : "EnderIO",
-        "function" : "CheckCurse",
-        "active" : true,
-        "curse" : {
-            "regex" : "EnderIO ?- ?(?P<mc>.+?)-(?P<version>.+?)(?:.jar|$)",
-            "name" : "ender-io"
+    "EnderIO-Release": {
+        "name": "EnderIO",
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "regex": "EnderIO ?- ?(?P<mc>.+?)-(?P<version>.+?)(?:.jar|$)",
+            "name": "ender-io"
         }
     },
-    "ServerTools-BACKUP" : {
-        "function" : "CheckCurse",
-        "category" : "ServerTools",
-        "active" : true,
-        "curse" : {
-            "regex" : "ServerTools-BACKUP-(?P<mc>.+?)-(?P<version>.+?).jar",
-            "id" : "220713",
-            "name" : "servertools-backup"
+    "ServerTools-BACKUP": {
+        "function": "CheckCurse",
+        "category": "ServerTools",
+        "active": true,
+        "curse": {
+            "regex": "ServerTools-BACKUP-(?P<mc>.+?)-(?P<version>.+?).jar",
+            "id": "220713",
+            "name": "servertools-backup"
         }
     },
-    "ServerTools-CORE" : {
-        "function" : "CheckMCForge2",
-        "category" : "ServerTools",
-        "active" : true,
-        "mcforge" : {
-            "url" : "http://files.minecraftforge.net/maven/info/servertools/core/ServerTools-CORE/promotions.json",
-            "promo" : "latest",
-            "promoType" : "dev"
+    "ServerTools-CORE": {
+        "function": "CheckMCForge2",
+        "category": "ServerTools",
+        "active": true,
+        "mcforge": {
+            "url": "http://files.minecraftforge.net/maven/info/servertools/core/ServerTools-CORE/promotions.json",
+            "promo": "latest",
+            "promoType": "dev"
         }
     },
-    "ServerTools-CORE-Release" : {
-        "name" : "ServerTools-CORE",
-        "function" : "CheckMCForge2",
-        "category" : "ServerTools",
-        "active" : true,
-        "mcforge" : {
-            "url" : "http://files.minecraftforge.net/maven/info/servertools/core/ServerTools-CORE/promotions.json",
-            "promo" : "recommended",
-            "promoType" : "version"
+    "ServerTools-CORE-Release": {
+        "name": "ServerTools-CORE",
+        "function": "CheckMCForge2",
+        "category": "ServerTools",
+        "active": true,
+        "mcforge": {
+            "url": "http://files.minecraftforge.net/maven/info/servertools/core/ServerTools-CORE/promotions.json",
+            "promo": "recommended",
+            "promoType": "version"
         }
     },
-    "ServerTools-PERMISSION" : {
-        "function" : "CheckCurse",
-        "category" : "ServerTools",
-        "active" : true,
-        "curse" : {
-            "regex" : "ServerTools-PERMISSION-(?P<mc>.+?)-(?P<version>.+?).jar",
-            "id" : "220714",
-            "name" : "servertools-permission"
+    "ServerTools-PERMISSION": {
+        "function": "CheckCurse",
+        "category": "ServerTools",
+        "active": true,
+        "curse": {
+            "regex": "ServerTools-PERMISSION-(?P<mc>.+?)-(?P<version>.+?).jar",
+            "id": "220714",
+            "name": "servertools-permission"
         }
     },
-    "ServerTools-TELEPORT" : {
-        "function" : "CheckCurse",
-        "category" : "ServerTools",
-        "active" : true,
-        "curse" : {
-            "regex" : "ServerTools-TELEPORT-(?P<mc>.+?)-(?P<version>.+?).jar",
-            "id" : "220715",
-            "name" : "servertools-teleport"
+    "ServerTools-TELEPORT": {
+        "function": "CheckCurse",
+        "category": "ServerTools",
+        "active": true,
+        "curse": {
+            "regex": "ServerTools-TELEPORT-(?P<mc>.+?)-(?P<version>.+?).jar",
+            "id": "220715",
+            "name": "servertools-teleport"
         }
     },
-    "NEIAddons" : {
+    "NEIAddons": {
         "category": "bdew",
-        "function" : "CheckJenkins",
-        "active" : true,
-        "jenkins" : {
-            "url" : "http://jenkins.bdew.net/job/neiaddons-1.7.10/lastSuccessfulBuild/api/json",
-            "regex" : "neiaddons-(?P<version>.+?)-mc(?P<mc>1\\..+?)\\.jar",
-            "item" : 0
+        "function": "CheckJenkins",
+        "active": true,
+        "jenkins": {
+            "url": "http://jenkins.bdew.net/job/neiaddons-1.7.10/lastSuccessfulBuild/api/json",
+            "regex": "neiaddons-(?P<version>.+?)-mc(?P<mc>1\\..+?)\\.jar",
+            "item": 0
         }
     },
-    "ExtraCells" : {
-        "function" : "CheckCurse",
-        "active" : true,
-        "curse" : {
+    "ExtraCells": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
             "id": "229218",
             "name": "extracells2",
-            "regex" : "ExtraCells-(?P<mc>.+?)-(?P<version>.+?)(?:\\.jar|$)"
+            "regex": "ExtraCells-(?P<mc>.+?)-(?P<version>.+?)(?:\\.jar|$)"
         }
     },
-    "ExtraCells-dev" : {
-        "name" : "ExtraCells",
-        "function" : "CheckJenkins",
-        "active" : true,
-        "jenkins" : {
-            "url" : "http://shadows.dmodoomsirius.me:8080/job/ecrv2/lastSuccessfulBuild/api/json",
-            "regex" : "ExtraCells-(?P<mc>.+?)-(?P<dev>.+?).jar",
-            "item" : 0
+    "ExtraCells-dev": {
+        "name": "ExtraCells",
+        "function": "CheckJenkins",
+        "active": true,
+        "jenkins": {
+            "url": "http://shadows.dmodoomsirius.me:8080/job/ecrv2/lastSuccessfulBuild/api/json",
+            "regex": "ExtraCells-(?P<mc>.+?)-(?P<dev>.+?).jar",
+            "item": 0
         }
     },
-    "SuperMassiveTech" : {
-        "function" : "CheckJenkins",
-        "category" : "tterrag",
-        "active" : true,
-        "jenkins" : {
-            "url" : "http://ci.tterrag.com/job/Super%20Massive%20Tech/lastSuccessfulBuild/api/json",
-            "regex" : "SuperMassiveTech-MC(?P<mc>.+?)-(?P<dev>.+?).jar",
-            "item" : 3
+    "SuperMassiveTech": {
+        "function": "CheckJenkins",
+        "category": "tterrag",
+        "active": true,
+        "jenkins": {
+            "url": "http://ci.tterrag.com/job/Super%20Massive%20Tech/lastSuccessfulBuild/api/json",
+            "regex": "SuperMassiveTech-MC(?P<mc>.+?)-(?P<dev>.+?).jar",
+            "item": 3
         }
     },
-    "Mariculture" : {
-        "function" : "CheckCurse",
-        "active" : true,
-        "curse" : {
+    "Mariculture": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
             "name": "mariculture",
-            "regex" : "Mariculture-Deluxe-(?P<mc>.+?)-(?P<version>.+).jar"
+            "regex": "Mariculture-Deluxe-(?P<mc>.+?)-(?P<version>.+).jar"
         }
     },
-    "Forestry-Release" : {
-        "name" : "Forestry",
-        "category" : "Player",
-        "function" : "CheckJenkins",
-        "active" : true,
-        "jenkins" : {
-            "url" : "http://jenkins.ic2.player.to/job/Forestry/lastSuccessfulBuild/api/json",
-            "regex" : "forestry_(?P<mc>.+?)-(?P<version>.+?).jar",
-            "item" : 3
+    "Forestry-Release": {
+        "name": "Forestry",
+        "category": "Player",
+        "function": "CheckJenkins",
+        "active": true,
+        "jenkins": {
+            "url": "http://jenkins.ic2.player.to/job/Forestry/lastSuccessfulBuild/api/json",
+            "regex": "forestry_(?P<mc>.+?)-(?P<version>.+?).jar",
+            "item": 3
         }
     },
-    "Forestry" : {
-        "function" : "CheckJenkins",
-        "category" : "Player",
-        "active" : true,
-        "jenkins" : {
-            "url" : "http://jenkins.ic2.player.to/job/Forestry_Dev/lastSuccessfulBuild/api/json",
-            "regex" : "forestry_(?P<mc>.+?)-(?P<dev>.+?)-.+?jar",
-            "item" : 2
+    "Forestry": {
+        "function": "CheckJenkins",
+        "category": "Player",
+        "active": true,
+        "jenkins": {
+            "url": "http://jenkins.ic2.player.to/job/Forestry_Dev/lastSuccessfulBuild/api/json",
+            "regex": "forestry_(?P<mc>.+?)-(?P<dev>.+?)-.+?jar",
+            "item": 2
         }
     },
-    "MrTJPCore" : {
-        "function" : "CheckCurse",
-        "active" : true,
+    "MrTJPCore": {
+        "function": "CheckCurse",
+        "active": true,
         "curse": {
-            "name" : "mrtjpcore",
-            "id" : "229002",
-            "regex" : "MrTJPCore-(?P<version>.+?)-universal.jar"
+            "name": "mrtjpcore",
+            "id": "229002",
+            "regex": "MrTJPCore-(?P<version>.+?)-universal.jar"
         }
     },
-    "ProjectRed" : {
-        "function" : "CheckCurse",
-        "active" : true,
+    "ProjectRed": {
+        "function": "CheckCurse",
+        "active": true,
         "curse": {
-            "name" : "project-red-base",
-            "id" : "228702",
-            "regex" : "ProjectRed-(?P<mc>.+?)-(?P<version>.+?)-.+?.jar"
+            "name": "project-red-base",
+            "id": "228702",
+            "regex": "ProjectRed-(?P<mc>.+?)-(?P<version>.+?)-.+?.jar"
         }
     },
-    "ForgeRelocation" : {
-        "function" : "CheckCurse",
-        "active" : true,
+    "ForgeRelocation": {
+        "function": "CheckCurse",
+        "active": true,
         "curse": {
-            "name" : "forge-relocation",
-            "id" : "232075",
-            "regex" : "ForgeRelocation-(?P<version>.+?)-universal.jar"
+            "name": "forge-relocation",
+            "id": "232075",
+            "regex": "ForgeRelocation-(?P<version>.+?)-universal.jar"
         }
     },
-    "CoFHCore" : {
-        "function" : "CheckCurse",
-        "active" : true,
+    "CoFHCore": {
+        "function": "CheckCurse",
+        "active": true,
         "curse": {
-            "regex" : "CoFHCore-.+?-(?P<version>[0-9]+(?:\\.[0-9]+)+)-universal.jar"
+            "regex": "CoFHCore-.+?-(?P<version>[0-9]+(?:\\.[0-9]+)+)-universal.jar"
         }
     },
-    "CoFHLib" : {
-        "function" : "CheckCurse",
-        "active" : true,
+    "CoFHLib": {
+        "function": "CheckCurse",
+        "active": true,
         "curse": {
-            "id" : "220333",
-            "regex" : "CoFHLib-\\[(?P<mc>.+?)\\](?P<version>.+?).jar"
+            "id": "220333",
+            "regex": "CoFHLib-\\[(?P<mc>.+?)\\](?P<version>.+?).jar"
         }
     },
-    "ThermalExpansion" : {
-        "function" : "CheckCurse",
-        "active" : true,
+    "ThermalExpansion": {
+        "function": "CheckCurse",
+        "active": true,
         "curse": {
-            "regex" :  "ThermalExpansion-.+?-(?P<version>[0-9]+(?:\\.[0-9]+)+)-universal.jar",
+            "regex": "ThermalExpansion-.+?-(?P<version>[0-9]+(?:\\.[0-9]+)+)-universal.jar",
             "name": "thermalexpansion"
         }
     },
-    "ThermalFoundation" : {
-        "function" : "CheckCurse",
-        "active" : true,
+    "ThermalFoundation": {
+        "function": "CheckCurse",
+        "active": true,
         "curse": {
-            "name" : "thermal-foundation",
-            "id" : "222880",
-            "regex" : "ThermalFoundation-.+?-(?P<version>[0-9]+(?:\\.[0-9]+)+)-universal.jar"
+            "name": "thermal-foundation",
+            "id": "222880",
+            "regex": "ThermalFoundation-.+?-(?P<version>[0-9]+(?:\\.[0-9]+)+)-universal.jar"
         }
     },
-    "ThermalDynamics" : {
-        "function" : "CheckCurse",
-        "active" : true,
+    "ThermalDynamics": {
+        "function": "CheckCurse",
+        "active": true,
         "curse": {
-            "name" : "thermal-dynamics",
-            "id" : "227443",
-            "regex" : "ThermalDynamics-\\[(?P<mc>.+?)\\](?P<version>.+?).jar"
+            "name": "thermal-dynamics",
+            "id": "227443",
+            "regex": "ThermalDynamics-\\[(?P<mc>.+?)\\](?P<version>.+?).jar"
         }
     },
-    "SolarFlux" : {
-        "function" : "CheckCurse",
-        "active" : true,
+    "SolarFlux": {
+        "function": "CheckCurse",
+        "active": true,
         "curse": {
-            "name" : "solar-flux",
-            "id" : "223548",
-            "regex" : "SolarFlux-.+?-(?P<version>.+?).jar"
+            "name": "solar-flux",
+            "id": "223548",
+            "regex": "SolarFlux-.+?-(?P<version>.+?).jar"
         }
     },
-    "SimplyJetpacks" : {
-        "function" : "CheckCurse",
-        "active" : true,
+    "SimplyJetpacks": {
+        "function": "CheckCurse",
+        "active": true,
         "curse": {
-            "regex" : "SimplyJetpacks-.+?-(?P<version>.+?).jar",
-            "name" : "simply-jetpacks"
+            "regex": "SimplyJetpacks-.+?-(?P<version>.+?).jar",
+            "name": "simply-jetpacks"
         }
     },
-    "Witchery" : {
-        "function" : "CheckCurse",
-        "active" : true,
+    "Witchery": {
+        "function": "CheckCurse",
+        "active": true,
         "curse": {
-            "regex" : "-.+?-(?P<version>.+?).jar"
+            "regex": "-.+?-(?P<version>.+?).jar"
         }
     },
-    "AnotherOneBitestheDust" : {
-        "function" : "CheckCurse",
-        "active" : true,
+    "AnotherOneBitestheDust": {
+        "function": "CheckCurse",
+        "active": true,
         "curse": {
-            "name" : "another-one-bites-the-dust",
-            "id" : "221863",
-            "regex" : ".+?-(?P<version>.+?).jar"
+            "name": "another-one-bites-the-dust",
+            "id": "221863",
+            "regex": ".+?-(?P<version>.+?).jar"
         }
     },
-    "EnchantingPlus" : {
-        "function" : "CheckCurse",
-        "active" : true,
+    "EnchantingPlus": {
+        "function": "CheckCurse",
+        "active": true,
         "curse": {
-            "name" : "enchanting-plus",
-            "regex" : "-.+?-(?P<version>.+?).jar"
+            "name": "enchanting-plus",
+            "regex": "-.+?-(?P<version>.+?).jar"
         }
     },
-    "Railcraft" : {
-        "function" : "CheckCurse",
-        "active" : true,
+    "Railcraft": {
+        "function": "CheckCurse",
+        "active": true,
         "curse": {
-            "name" : "railcraft",
-            "regex" : ".+? (?P<version>.+?)$"
+            "name": "railcraft",
+            "regex": ".+? (?P<version>.+?)$"
         }
     },
-    "JABBA" : {
-        "function" : "CheckCurse",
-        "active" : true,
+    "JABBA": {
+        "function": "CheckCurse",
+        "active": true,
         "curse": {
-            "regex" : ".+?-(?P<version>.+?)_.+?.jar"
+            "regex": ".+?-(?P<version>.+?)_.+?.jar"
         }
     },
-    "Waila" : {
-        "function" : "CheckCurse",
-        "active" : true,
+    "Waila": {
+        "function": "CheckCurse",
+        "active": true,
         "curse": {
-            "regex" : ".+?-(?P<version>.+?)_.+?"
+            "regex": ".+?-(?P<version>.+?)_.+?"
         }
     },
-    "Opis" : {
-        "function" : "CheckCurse",
-        "active" : true,
+    "Opis": {
+        "function": "CheckCurse",
+        "active": true,
         "curse": {
-            "regex" : ".+?-(?P<version>.+?)_.+?.jar"
+            "regex": ".+?-(?P<version>.+?)_.+?.jar"
         }
     },
-    "MobiusCore" : {
-        "function" : "CheckCurse",
-        "active" : true,
+    "MobiusCore": {
+        "function": "CheckCurse",
+        "active": true,
         "curse": {
-            "regex" : "MobiusCore-(?P<version>.+?)_.+?jar"
+            "regex": "MobiusCore-(?P<version>.+?)_.+?jar"
         }
     },
-    "ModTweaker" : {
-        "function" : "CheckCurse",
-        "active" : true,
+    "ModTweaker": {
+        "function": "CheckCurse",
+        "active": true,
         "curse": {
-            "id" : "220954",
-            "regex" : "ModTweaker2 ?- ?(?P<version>.+)"
+            "id": "220954",
+            "regex": "ModTweaker2 ?- ?(?P<version>.+)"
         }
     },
-    "Morpheus-1.7" : {
-        "name" : "Morpheus",
-        "function" : "CheckJenkins",
-        "active" : false,
-        "jenkins" : {
-            "url" : "http://jenkins.qmunity.co.uk/job/Morpheus%201.7.x/lastSuccessfulBuild/api/json",
-            "regex" : "-(?P<mc>.+?)-(?P<version>.+?).jar",
-            "item" : 1
+    "Morpheus-1.7": {
+        "name": "Morpheus",
+        "function": "CheckJenkins",
+        "active": false,
+        "jenkins": {
+            "url": "http://jenkins.qmunity.co.uk/job/Morpheus%201.7.x/lastSuccessfulBuild/api/json",
+            "regex": "-(?P<mc>.+?)-(?P<version>.+?).jar",
+            "item": 1
         }
     },
-    "Morpheus-1.8" : {
-        "name" : "Morpheus",
-        "function" : "CheckJenkins",
-        "active" : false,
-        "jenkins" : {
-            "url" : "http://jenkins.qmunity.co.uk/job/Morpheus%201.8.x/lastSuccessfulBuild/api/json",
-            "regex" : "-(?P<mc>.+?)-(?P<version>.+?).jar",
-            "item" : 2
+    "Morpheus-1.8": {
+        "name": "Morpheus",
+        "function": "CheckJenkins",
+        "active": false,
+        "jenkins": {
+            "url": "http://jenkins.qmunity.co.uk/job/Morpheus%201.8.x/lastSuccessfulBuild/api/json",
+            "regex": "-(?P<mc>.+?)-(?P<version>.+?).jar",
+            "item": 2
         }
     },
-    "Morpheus" : {
-        "function" : "CheckCurse",
-        "active" : true,
+    "Morpheus": {
+        "function": "CheckCurse",
+        "active": true,
         "curse": {
-            "regex" : "-(?P<mc>.+?)-(?P<version>.+?).jar"
+            "regex": "-(?P<mc>.+?)-(?P<version>.+?).jar"
         }
     },
-    "NetherOres" : {
-        "function" : "CheckCurse",
-        "active" : true,
-        "curse" : {
-            "regex" : "NetherOres-\\[(?P<mc>.+?)\\](?P<version>.+?).jar"
-        }
-    },
-    "RedstoneArsenal" : {
-        "function" : "CheckCurse",
-        "active" : true,
+    "NetherOres": {
+        "function": "CheckCurse",
+        "active": true,
         "curse": {
-            "name" : "redstone-arsenal",
-            "regex" : "RedstoneArsenal-.+?-(?P<version>[0-9]+(?:\\.[0-9]+)+)-universal.jar"
+            "regex": "NetherOres-\\[(?P<mc>.+?)\\](?P<version>.+?).jar"
+        }
+    },
+    "RedstoneArsenal": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "name": "redstone-arsenal",
+            "regex": "RedstoneArsenal-.+?-(?P<version>[0-9]+(?:\\.[0-9]+)+)-universal.jar"
         }
     },
     "BDLib": {
@@ -1325,542 +1325,542 @@
             "item": 1
         }
     },
-    "Zyin'sHUD" : {
-        "function" : "CheckCurse",
-        "active" : true,
+    "Zyin'sHUD": {
+        "function": "CheckCurse",
+        "active": true,
         "curse": {
-            "name" : "zyins-hud",
-            "regex" : "-.+?-v.(?P<version>.+?).jar"
+            "name": "zyins-hud",
+            "regex": "-.+?-v.(?P<version>.+?).jar"
         }
     },
-    "ProgressiveAutomation" : {
-        "function" : "CheckCurse",
-        "active" : true,
+    "ProgressiveAutomation": {
+        "function": "CheckCurse",
+        "active": true,
         "curse": {
-            "name" : "progressive-automation-early-miner",
-            "id" : "220606",
-            "regex" : "-.+?-(?P<version>.+?).jar"
+            "name": "progressive-automation-early-miner",
+            "id": "220606",
+            "regex": "-.+?-(?P<version>.+?).jar"
         }
     },
-    "SimpleFluidTanks" : {
-        "function" : "CheckCurse",
-        "active" : true,
+    "SimpleFluidTanks": {
+        "function": "CheckCurse",
+        "active": true,
         "curse": {
             "name": "simplefluidtanks",
             "regex": "simplefluidtanks-(?P<mc>.+?)-(?P<version>.+?).jar"
         }
     },
-    "UndergroundBiomesConstructs" : {
-        "function" : "CheckCurse",
-        "active" : true,
+    "UndergroundBiomesConstructs": {
+        "function": "CheckCurse",
+        "active": true,
         "curse": {
-            "regex" : "-.+?-(?P<version>.+?).jar"
+            "regex": "-.+?-(?P<version>.+?).jar"
         }
     },
-    "BuildcraftAdditions" : {
-        "function" : "CheckCurse",
-        "active" : true,
+    "BuildcraftAdditions": {
+        "function": "CheckCurse",
+        "active": true,
         "curse": {
-            "id" : "221014",
-            "name" : "buildcraft-additions",
-            "regex" : "Buildcraft Additions (?P<version>.+)"
+            "id": "221014",
+            "name": "buildcraft-additions",
+            "regex": "Buildcraft Additions (?P<version>.+)"
         }
     },
-    "Tubes" : {
-        "function" : "CheckCurse",
-        "active" : true,
+    "Tubes": {
+        "function": "CheckCurse",
+        "active": true,
         "curse": {
-            "regex" : "-.+?-(?P<version>.+?).jar"
+            "regex": "-.+?-(?P<version>.+?).jar"
         }
     },
-    "WarpBook" : {
-        "function" : "CheckCurse",
-        "active" : true,
+    "WarpBook": {
+        "function": "CheckCurse",
+        "active": true,
         "curse": {
-            "name" : "warp-book",
-            "regex" : "warpbook-(?P<mc>.+?)_(?P<version>.+?).jar"
+            "name": "warp-book",
+            "regex": "warpbook-(?P<mc>.+?)_(?P<version>.+?).jar"
         }
     },
-    "Veinminer" : {
-        "function" : "CheckCurse",
-        "active" : true,
+    "Veinminer": {
+        "function": "CheckCurse",
+        "active": true,
         "curse": {
-            "name" : "veinminer",
-            "regex" : "VeinMiner(?:-.+?_| )(?P<version>[0-9.]+[0-9])"
+            "name": "veinminer",
+            "regex": "VeinMiner(?:-.+?_| )(?P<version>[0-9.]+[0-9])"
         }
     },
-    "SteelIndustries" : {
-        "function" : "CheckCurse",
-        "active" : true,
+    "SteelIndustries": {
+        "function": "CheckCurse",
+        "active": true,
         "curse": {
-            "id" : "221363",
-            "name" : "steel-industries",
-            "regex" : "Version (?P<version>\\S+)"
+            "id": "221363",
+            "name": "steel-industries",
+            "regex": "Version (?P<version>\\S+)"
         }
     },
-    "Hydraulicraft" : {
-        "function" : "CheckCurse",
-        "active" : true,
+    "Hydraulicraft": {
+        "function": "CheckCurse",
+        "active": true,
         "curse": {
-            "id" : "223036",
-            "regex" : "-.+?-(?P<version>.+?)-universal.jar"
+            "id": "223036",
+            "regex": "-.+?-(?P<version>.+?)-universal.jar"
         }
     },
-    "AetherCraft" : {
-        "function" : "CheckCurse",
-        "active" : true,
+    "AetherCraft": {
+        "function": "CheckCurse",
+        "active": true,
         "curse": {
-            "name" : "aec",
-            "regex" : "-.+?-(?P<version>.+?).jar"
+            "name": "aec",
+            "regex": "-.+?-(?P<version>.+?).jar"
         }
     },
-    "Aquaculture" : {
-        "function" : "CheckCurse",
-        "active" : true,
+    "Aquaculture": {
+        "function": "CheckCurse",
+        "active": true,
         "curse": {
-            "regex" : "-.+?-(?P<version>.+?).jar"
+            "regex": "-.+?-(?P<version>.+?).jar"
         }
     },
-    "ExNihilo" : {
-        "function" : "CheckCurse",
-        "active" : true,
+    "ExNihilo": {
+        "function": "CheckCurse",
+        "active": true,
         "curse": {
-            "name" : "ex-nihilo",
-            "id" : "221696",
-            "regex" : "-.+?-(?P<version>.+?).jar"
+            "name": "ex-nihilo",
+            "id": "221696",
+            "regex": "-.+?-(?P<version>.+?).jar"
         }
     },
-    "ExAliquo" : {
-        "function" : "CheckCurse",
-        "active" : true,
+    "ExAliquo": {
+        "function": "CheckCurse",
+        "active": true,
         "curse": {
-            "name" : "ex-aliquo",
-            "regex" : ".+?_(?P<version>.+?).zip"
+            "name": "ex-aliquo",
+            "regex": ".+?_(?P<version>.+?).zip"
         }
     },
-    "Pay2Spawn" : {
-        "function" : "CheckJenkins",
-        "active" : true,
-        "category" : "DDdev",
+    "Pay2Spawn": {
+        "function": "CheckJenkins",
+        "active": true,
+        "category": "DDdev",
         "jenkins": {
-            "url" : "http://jenkins.dries007.net/job/Pay2Spawn/lastSuccessfulBuild/api/json",
-            "regex" : "Pay2Spawn-(?P<mc>.+?)-(?P<version>.+?).jar",
-            "item" : 2
+            "url": "http://jenkins.dries007.net/job/Pay2Spawn/lastSuccessfulBuild/api/json",
+            "regex": "Pay2Spawn-(?P<mc>.+?)-(?P<version>.+?).jar",
+            "item": 2
         }
     },
-    "HoloInventory" : {
-        "function" : "CheckJenkins",
-        "active" : true,
-        "category" : "DDdev",
+    "HoloInventory": {
+        "function": "CheckJenkins",
+        "active": true,
+        "category": "DDdev",
         "jenkins": {
-            "url" : "http://jenkins.dries007.net/job/HoloInventory/lastSuccessfulBuild/api/json",
-            "regex" : "HoloInventory-(?P<mc>.+?)-(?P<version>.+?).jar",
-            "item" : 2
+            "url": "http://jenkins.dries007.net/job/HoloInventory/lastSuccessfulBuild/api/json",
+            "regex": "HoloInventory-(?P<mc>.+?)-(?P<version>.+?).jar",
+            "item": 2
         }
     },
-    "PlaceableTools" : {
-        "function" : "CheckJenkins",
-        "active" : true,
-        "category" : "DDdev",
+    "PlaceableTools": {
+        "function": "CheckJenkins",
+        "active": true,
+        "category": "DDdev",
         "jenkins": {
-            "url" : "http://jenkins.dries007.net/job/PlaceableTools/lastSuccessfulBuild/api/json",
-            "regex" : "PlaceableTools-(?P<mc>.+?)-(?P<version>.+?).jar",
-            "item" : 2
+            "url": "http://jenkins.dries007.net/job/PlaceableTools/lastSuccessfulBuild/api/json",
+            "regex": "PlaceableTools-(?P<mc>.+?)-(?P<version>.+?).jar",
+            "item": 2
         }
     },
-    "TorchTools" : {
-        "function" : "CheckJenkins",
-        "active" : true,
-        "category" : "DDdev",
+    "TorchTools": {
+        "function": "CheckJenkins",
+        "active": true,
+        "category": "DDdev",
         "jenkins": {
-            "url" : "http://jenkins.dries007.net/job/TorchTools/lastSuccessfulBuild/api/json",
-            "regex" : "TorchTools-(?P<mc>.+?)-(?P<version>.+?).jar",
-            "item" : 2
+            "url": "http://jenkins.dries007.net/job/TorchTools/lastSuccessfulBuild/api/json",
+            "regex": "TorchTools-(?P<mc>.+?)-(?P<version>.+?).jar",
+            "item": 2
         }
     },
     "EquivalentExchange3" :{
-        "function" : "CheckHTML",
-        "active" : true,
+        "function": "CheckHTML",
+        "active": true,
         "html": {
-            "url" : "http://ee3.pahimar.com/",
-            "regex" : "/all/latest/EquivalentExchange3-(?P<mc>.+?)-(?P<version>.+?).jar"
+            "url": "http://ee3.pahimar.com/",
+            "regex": "/all/latest/EquivalentExchange3-(?P<mc>.+?)-(?P<version>.+?).jar"
         }
     },
     "HardcoreQuestingMode" :{
-        "function" : "CheckCurse",
-        "active" : true,
+        "function": "CheckCurse",
+        "active": true,
         "curse": {
-            "name" : "hardcore-questing-mode",
-            "regex" : ".+-(?P<mc>.+?)-(?P<version>.+?).jar"
+            "name": "hardcore-questing-mode",
+            "regex": ".+-(?P<mc>.+?)-(?P<version>.+?).jar"
         }
     },
     "Steve'sWorkshop" :{
-        "function" : "CheckCurse",
-        "active" : true,
+        "function": "CheckCurse",
+        "active": true,
         "curse": {
-            "name" : "steves-workshop",
-            "id" : "223173",
-            "regex" : ".+?-(?P<version>.+?).jar"
+            "name": "steves-workshop",
+            "id": "223173",
+            "regex": ".+?-(?P<version>.+?).jar"
         }
     },
     "MineMenu" :{
-        "function" : "CheckCurse",
-        "active" : true,
+        "function": "CheckCurse",
+        "active": true,
         "curse": {
-            "name" : "minemenu",
-            "id" : "222378",
-            "regex" : "-.+?-(?P<version>.+?)-universal.jar"
+            "name": "minemenu",
+            "id": "222378",
+            "regex": "-.+?-(?P<version>.+?)-universal.jar"
         }
     },
     "RemoteIO" :{
-        "function" : "CheckCurse",
-        "active" : true,
+        "function": "CheckCurse",
+        "active": true,
         "curse": {
-            "name" : "remote-io",
-            "regex" : "RemoteIO-.+?-(?P<version>.+?)(?:-universal\\.jar)?$"
+            "name": "remote-io",
+            "regex": "RemoteIO-.+?-(?P<version>.+?)(?:-universal\\.jar)?$"
         }
     },
     "TooMuchTime" :{
-        "function" : "CheckCurse",
-        "active" : true,
+        "function": "CheckCurse",
+        "active": true,
         "curse": {
-            "id" : "222463",
-            "regex" : "-.+?-(?P<version>.+?)-universal.jar"
+            "id": "222463",
+            "regex": "-.+?-(?P<version>.+?)-universal.jar"
         }
     },
     "TooMuchLoot" :{
-        "function" : "CheckCurse",
-        "active" : true,
+        "function": "CheckCurse",
+        "active": true,
         "curse": {
-            "id" : "220845",
-            "regex" : "-.+?-(?P<version>.+?).jar"
+            "id": "220845",
+            "regex": "-.+?-(?P<version>.+?).jar"
         }
     },
     "TooMuchRain" :{
-        "function" : "CheckCurse",
-        "active" : true,
+        "function": "CheckCurse",
+        "active": true,
         "curse": {
-            "id" : "221982",
-            "regex" : "-(?P<version>.+?)-universal.jar"
+            "id": "221982",
+            "regex": "-(?P<version>.+?)-universal.jar"
         }
     },
     "Ping" :{
-        "function" : "CheckCurse",
-        "active" : true,
+        "function": "CheckCurse",
+        "active": true,
         "curse": {
-            "id" : "222967",
-            "regex" : "Ping-.+?-(?P<version>.+)\\.jar"
+            "id": "222967",
+            "regex": "Ping-.+?-(?P<version>.+)\\.jar"
         }
     },
     "miscMFRcircuits" :{
-        "function" : "CheckCurse",
-        "active" : true,
+        "function": "CheckCurse",
+        "active": true,
         "curse": {
-            "id" : "223152",
-            "regex" : "-.+?-(?P<version>.+?).jar"
+            "id": "223152",
+            "regex": "-.+?-(?P<version>.+?).jar"
         }
     },
     "ExtraTiC" :{
-        "function" : "CheckCurse",
-        "active" : true,
+        "function": "CheckCurse",
+        "active": true,
         "curse": {
-            "regex" : "-.+?-(?P<version>.+?).jar"
+            "regex": "-.+?-(?P<version>.+?).jar"
         }
     },
     "Metallurgy" :{
-        "function" : "CheckCurse",
-        "active" : true,
+        "function": "CheckCurse",
+        "active": true,
         "curse": {
-            "regex" : "-.+?-(?P<version>.+?).jar"
+            "regex": "-.+?-(?P<version>.+?).jar"
         }
     },
     "MetallurgyCore" :{
-        "function" : "CheckCurse",
-        "active" : true,
+        "function": "CheckCurse",
+        "active": true,
         "curse": {
-            "name" : "metallurgy-core",
-            "regex" : "-.+?-(?P<version>.+?).jar"
+            "name": "metallurgy-core",
+            "regex": "-.+?-(?P<version>.+?).jar"
         }
     },
     "WeepingAngels" :{
-        "function" : "CheckCurse",
-        "active" : true,
+        "function": "CheckCurse",
+        "active": true,
         "curse": {
-            "name" : "weeping-angels",
-            "regex" : "-.+-(?P<version>.+?).jar"
+            "name": "weeping-angels",
+            "regex": "-.+-(?P<version>.+?).jar"
         }
     },
     "OwnerEmitter" :{
-        "function" : "CheckCurse",
-        "active" : true,
+        "function": "CheckCurse",
+        "active": true,
         "curse": {
-            "id" : "222818",
-            "name" : "owner-emitter",
-            "regex" : "-.+-(?P<version>.+?).jar"
+            "id": "222818",
+            "name": "owner-emitter",
+            "regex": "-.+-(?P<version>.+?).jar"
         }
     },
     "Origin" :{
-        "function" : "CheckCurse",
-        "active" : true,
+        "function": "CheckCurse",
+        "active": true,
         "curse": {
-            "name" : "countrygamer_core",
-            "regex" : "-.+?-(?P<version>.+?).jar"
+            "name": "countrygamer_core",
+            "regex": "-.+?-(?P<version>.+?).jar"
         }
     },
     "Bagginses" :{
-        "function" : "CheckCurse",
-        "active" : true,
+        "function": "CheckCurse",
+        "active": true,
         "curse": {
-            "id" : "223005",
-            "regex" : "Bagginses (?P<version>.+?) - (?P<mc>.+?)$"
+            "id": "223005",
+            "regex": "Bagginses (?P<version>.+?) - (?P<mc>.+?)$"
         }
     },
     "BluePower" :{
-        "function" : "CheckCurse",
-        "active" : true,
+        "function": "CheckCurse",
+        "active": true,
         "curse": {
-            "id" : "223099",
-            "name" : "blue-power",
-            "regex" : "-(?P<mc>.+?)-(?P<version>.+?)-universal.jar"
+            "id": "223099",
+            "name": "blue-power",
+            "regex": "-(?P<mc>.+?)-(?P<version>.+?)-universal.jar"
         }
     },
     "EiraIRC" :{
-        "function" : "CheckCurse",
-        "active" : true,
+        "function": "CheckCurse",
+        "active": true,
         "curse": {
-            "regex" : "-mc(?P<mc>.+?)-(?P<version>.+?).jar"
+            "regex": "-mc(?P<mc>.+?)-(?P<version>.+?).jar"
         }
     },
     "OpenComputers" :{
-        "function" : "CheckJenkins",
-        "active" : true,
-        "category" : "OC",
+        "function": "CheckJenkins",
+        "active": true,
+        "category": "OC",
         "jenkins": {
-            "url" : "http://ci.cil.li/job/OpenComputers-1.5-MC1.7.10/lastSuccessfulBuild/api/json",
-            "regex" : ".+?-MC(?P<mc>.+?)-(?P<version>.+?)-.+?.jar",
-            "item" : 0
+            "url": "http://ci.cil.li/job/OpenComputers-1.5-MC1.7.10/lastSuccessfulBuild/api/json",
+            "regex": ".+?-MC(?P<mc>.+?)-(?P<version>.+?)-.+?.jar",
+            "item": 0
         }
     },
     "OpenComputers-Dev" :{
-        "name" : "OpenComputers",
-        "function" : "CheckJenkins",
-        "active" : true,
-        "category" : "OC",
+        "name": "OpenComputers",
+        "function": "CheckJenkins",
+        "active": true,
+        "category": "OC",
         "jenkins": {
-            "url" : "http://ci.cil.li/job/OpenComputers-dev-MC1.7.10/lastSuccessfulBuild/api/json",
-            "regex" : ".+?-MC(?P<mc>.+?)-(?P<dev>.+?)-.+?.jar",
-            "item" : 0
+            "url": "http://ci.cil.li/job/OpenComputers-dev-MC1.7.10/lastSuccessfulBuild/api/json",
+            "regex": ".+?-MC(?P<mc>.+?)-(?P<dev>.+?)-.+?.jar",
+            "item": 0
         }
     },
     "OpenComputers-1.8" :{
-        "name" : "OpenComputers",
-        "function" : "CheckJenkins",
-        "active" : true,
-        "category" : "OC",
+        "name": "OpenComputers",
+        "function": "CheckJenkins",
+        "active": true,
+        "category": "OC",
         "jenkins": {
-            "url" : "http://ci.cil.li/job/OpenComputers-1.5-MC1.8/lastSuccessfulBuild/api/json",
-            "regex" : ".+?-MC(?P<mc>.+?)-(?P<version>.+?)-.+?.jar",
-            "item" : 0
+            "url": "http://ci.cil.li/job/OpenComputers-1.5-MC1.8/lastSuccessfulBuild/api/json",
+            "regex": ".+?-MC(?P<mc>.+?)-(?P<version>.+?)-.+?.jar",
+            "item": 0
         }
     },
     "OpenComputers-1.8-dev" :{
-        "name" : "OpenComputers",
-        "function" : "CheckJenkins",
-        "active" : true,
-        "category" : "OC",
+        "name": "OpenComputers",
+        "function": "CheckJenkins",
+        "active": true,
+        "category": "OC",
         "jenkins": {
-            "url" : "http://ci.cil.li/job/OpenComputers-dev-MC1.8/lastSuccessfulBuild/api/json",
-            "regex" : ".+?-MC(?P<mc>.+?)-(?P<dev>.+?)-.+?.jar",
-            "item" : 0
+            "url": "http://ci.cil.li/job/OpenComputers-dev-MC1.8/lastSuccessfulBuild/api/json",
+            "regex": ".+?-MC(?P<mc>.+?)-(?P<dev>.+?)-.+?.jar",
+            "item": 0
         }
     },
     "SecurityCraft" :{
-        "function" : "CheckCurse",
-        "active" : true,
+        "function": "CheckCurse",
+        "active": true,
         "curse": {
-            "name" : "securitycraft-mod",
-            "regex" : ".+? SecurityCraft v(?P<version>.+?)(?:\\.jar|$)"
+            "name": "securitycraft-mod",
+            "regex": ".+? SecurityCraft v(?P<version>.+?)(?:\\.jar|$)"
         }
     },
     "Fabricators" :{
-        "function" : "CheckCurse",
-        "active" : true,
+        "function": "CheckCurse",
+        "active": true,
         "curse": {
-            "regex" : "-.+?-(?P<version>.+?)-universal.jar"
+            "regex": "-.+?-(?P<version>.+?)-universal.jar"
         }
     },
     "IguanasTinkerTweaks" :{
-        "function" : "CheckCurse",
-        "active" : true,
+        "function": "CheckCurse",
+        "active": true,
         "curse": {
-            "id" : "223248",
-            "name" : "iguanas-tinker-tweaks",
-            "regex" : "-.+?-(?P<version>.+?).jar"
+            "id": "223248",
+            "name": "iguanas-tinker-tweaks",
+            "regex": "-.+?-(?P<version>.+?).jar"
         }
     },
     "GravestoneMod" :{
-        "function" : "CheckCurse",
-        "active" : true,
+        "function": "CheckCurse",
+        "active": true,
         "curse": {
-            "name" : "gravestone_mod",
-            "regex" : "GraveStone-(?P<version>.+?).jar"
+            "name": "gravestone_mod",
+            "regex": "GraveStone-(?P<version>.+?).jar"
         }
     },
     "Natura" :{
-        "function" : "CheckCurse",
-        "active" : true,
+        "function": "CheckCurse",
+        "active": true,
         "curse": {
-            "regex" : "-.+?-(?P<version>.+?).jar"
+            "regex": "-.+?-(?P<version>.+?).jar"
         }
     },
     "TiCTooltips" :{
-        "function" : "CheckCurse",
-        "active" : true,
+        "function": "CheckCurse",
+        "active": true,
         "curse": {
-            "name" : "tic-tooltips",
-            "regex" : "-.+?-(?P<version>.+?).jar"
+            "name": "tic-tooltips",
+            "regex": "-.+?-(?P<version>.+?).jar"
         }
     },
     "TheSpiceofLife" :{
-        "function" : "CheckCurse",
-        "active" : true,
+        "function": "CheckCurse",
+        "active": true,
         "curse": {
-            "id" : "220811",
-            "name" : "the-spice-of-life",
-            "regex" : "-.+?-(?P<version>.+?).jar"
+            "id": "220811",
+            "name": "the-spice-of-life",
+            "regex": "-.+?-(?P<version>.+?).jar"
         }
     },
     "RotatableBlocks" :{
-        "function" : "CheckCurse",
-        "active" : true,
+        "function": "CheckCurse",
+        "active": true,
         "curse": {
-            "name" : "rotatable-blocks",
-            "regex" : "-.+?-(?P<version>.+?).jar"
+            "name": "rotatable-blocks",
+            "regex": "-.+?-(?P<version>.+?).jar"
         }
     },
     "RefinedRelocation" :{
-        "function" : "CheckCurse",
-        "active" : true,
+        "function": "CheckCurse",
+        "active": true,
         "curse": {
-            "name" : "refined-relocation",
-            "regex" : "-.+?-(?P<version>.+?).jar"
+            "name": "refined-relocation",
+            "regex": "-.+?-(?P<version>.+?).jar"
         }
     },
-    "SecretRoomsMod" : {
-        "function" : "CheckMCForge2",
-        "category" : "forge",
-        "active" : true,
-        "mcforge" : {
-            "url" : "http://files.minecraftforge.net/maven/com/github/abrarsyed/secretroomsmod/promotions.json",
-            "promo" : "latest",
-            "promoType" : "dev"
+    "SecretRoomsMod": {
+        "function": "CheckMCForge2",
+        "category": "forge",
+        "active": true,
+        "mcforge": {
+            "url": "http://files.minecraftforge.net/maven/com/github/abrarsyed/secretroomsmod/promotions.json",
+            "promo": "latest",
+            "promoType": "dev"
         }
     },
-    "Botania" : {
-        "function" : "CheckBotania",
-        "active" : true
+    "Botania": {
+        "function": "CheckBotania",
+        "active": true
     },
-    "AutoCrafter2000" : {
-        "function" : "CheckJenkins",
-        "active" : true,
-        "category" : "DDdev",
+    "AutoCrafter2000": {
+        "function": "CheckJenkins",
+        "active": true,
+        "category": "DDdev",
         "jenkins": {
-            "url" : "http://jenkins.dries007.net/job/AutoCrafter2000/lastSuccessfulBuild/api/json",
-            "regex" : "AutoCrafter2000-(?P<mc>.+?)-(?P<version>.+?).jar",
-            "item" : 2
+            "url": "http://jenkins.dries007.net/job/AutoCrafter2000/lastSuccessfulBuild/api/json",
+            "regex": "AutoCrafter2000-(?P<mc>.+?)-(?P<version>.+?).jar",
+            "item": 2
         }
     },
-    "CrayCrafting" : {
-        "function" : "CheckJenkins",
-        "category" : "DDdev",
-        "active" : true,
+    "CrayCrafting": {
+        "function": "CheckJenkins",
+        "category": "DDdev",
+        "active": true,
         "jenkins": {
-            "url" : "http://jenkins.dries007.net/job/CrayCrafting/lastSuccessfulBuild/api/json",
-            "regex" : "CrayCrafting-(?P<mc>.+?)-(?P<version>.+?).jar",
-            "item" : 2
+            "url": "http://jenkins.dries007.net/job/CrayCrafting/lastSuccessfulBuild/api/json",
+            "regex": "CrayCrafting-(?P<mc>.+?)-(?P<version>.+?).jar",
+            "item": 2
         }
     },
-    "D3Core" : {
-        "function" : "CheckJenkins",
-        "active" : true,
-        "category" : "DDdev",
+    "D3Core": {
+        "function": "CheckJenkins",
+        "active": true,
+        "category": "DDdev",
         "jenkins": {
-            "url" : "http://jenkins.dries007.net/job/D3Core/lastSuccessfulBuild/api/json",
-            "regex" : "D3Core-(?P<mc>.+?)-(?P<version>.+?).jar",
-            "item" : 2
+            "url": "http://jenkins.dries007.net/job/D3Core/lastSuccessfulBuild/api/json",
+            "regex": "D3Core-(?P<mc>.+?)-(?P<version>.+?).jar",
+            "item": 2
         }
     },
-    "GreenThumb" : {
-        "function" : "CheckJenkins",
-        "active" : true,
-        "category" : "DDdev",
+    "GreenThumb": {
+        "function": "CheckJenkins",
+        "active": true,
+        "category": "DDdev",
         "jenkins": {
-            "url" : "http://jenkins.dries007.net/job/GreenThumb/lastSuccessfulBuild/api/json",
-            "regex" : "GreenThumb-(?P<mc>.+?)-(?P<version>.+?).jar",
-            "item" : 2
+            "url": "http://jenkins.dries007.net/job/GreenThumb/lastSuccessfulBuild/api/json",
+            "regex": "GreenThumb-(?P<mc>.+?)-(?P<version>.+?).jar",
+            "item": 2
         }
     },
-    "Let-it-Burn" : {
-        "function" : "CheckJenkins",
-        "active" : true,
-        "category" : "DDdev",
+    "Let-it-Burn": {
+        "function": "CheckJenkins",
+        "active": true,
+        "category": "DDdev",
         "jenkins": {
-            "url" : "http://jenkins.dries007.net/job/Let-it-Burn/lastSuccessfulBuild/api/json",
-            "regex" : "LetItBurn-(?P<mc>.+?)-(?P<version>.+?).jar",
-            "item" : 2
+            "url": "http://jenkins.dries007.net/job/Let-it-Burn/lastSuccessfulBuild/api/json",
+            "regex": "LetItBurn-(?P<mc>.+?)-(?P<version>.+?).jar",
+            "item": 2
         }
     },
-    "Lumberjack" : {
-        "function" : "CheckJenkins",
-        "active" : true,
-        "category" : "DDdev",
+    "Lumberjack": {
+        "function": "CheckJenkins",
+        "active": true,
+        "category": "DDdev",
         "jenkins": {
-            "url" : "http://jenkins.dries007.net/job/Lumberjack/lastSuccessfulBuild/api/json",
-            "regex" : "Lumberjack-(?P<mc>.+?)-(?P<version>.+?).jar",
-            "item" : 2
+            "url": "http://jenkins.dries007.net/job/Lumberjack/lastSuccessfulBuild/api/json",
+            "regex": "Lumberjack-(?P<mc>.+?)-(?P<version>.+?).jar",
+            "item": 2
         }
     },
-    "HexWool" : {
-        "function" : "CheckJenkins",
-        "active" : true,
+    "HexWool": {
+        "function": "CheckJenkins",
+        "active": true,
         "jenkins": {
-            "url" : "http://ci.techjargaming.com/job/HexWool/lastSuccessfulBuild/api/json",
-            "regex" : "HexWool-(?P<mc>.+?)-(?P<version>.+?).jar",
-            "item" : 0
+            "url": "http://ci.techjargaming.com/job/HexWool/lastSuccessfulBuild/api/json",
+            "regex": "HexWool-(?P<mc>.+?)-(?P<version>.+?).jar",
+            "item": 0
         }
     },
-    "MadScience" : {
-        "function" : "CheckCurse",
-        "active" : true,
+    "MadScience": {
+        "function": "CheckCurse",
+        "active": true,
         "curse": {
             "name": "mad-science",
-            "regex" : "MadScience-MC(?P<mc>.+?)-F.+?_v(?P<version>.+?)-universal.jar"
+            "regex": "MadScience-MC(?P<mc>.+?)-F.+?_v(?P<version>.+?)-universal.jar"
         }
     },
-    "Minechem" : {
-        "function" : "CheckJenkins",
-        "active" : false,
+    "Minechem": {
+        "function": "CheckJenkins",
+        "active": false,
         "jenkins": {
-            "url" : "http://jenkins.jakimfett.com/view/ForgeModding/job/Minechem%20v5%20for%201.7.10/lastSuccessfulBuild/api/json",
-            "regex" : "Minechem-(?P<mc>.+?)-(?P<dev>.+?).jar",
-            "item" : 1
+            "url": "http://jenkins.jakimfett.com/view/ForgeModding/job/Minechem%20v5%20for%201.7.10/lastSuccessfulBuild/api/json",
+            "regex": "Minechem-(?P<mc>.+?)-(?P<dev>.+?).jar",
+            "item": 1
         }
     },
-    "AlchemyPlusPlus" : {
-        "function" : "CheckJenkins",
-        "active" : false,
+    "AlchemyPlusPlus": {
+        "function": "CheckJenkins",
+        "active": false,
         "jenkins": {
-            "url" : "https://jenkins.jakimfett.com/job/AlchemyPlusPlus_1.7.10/lastSuccessfulBuild/api/json",
-            "regex" : "AlchemyPlusPlus-(?P<mc>.+?)-(?P<dev>.+?).jar",
-            "item" : 0
+            "url": "https://jenkins.jakimfett.com/job/AlchemyPlusPlus_1.7.10/lastSuccessfulBuild/api/json",
+            "regex": "AlchemyPlusPlus-(?P<mc>.+?)-(?P<dev>.+?).jar",
+            "item": 0
         }
     },
     "Luppii'sLadders" :{
-        "function" : "CheckCurse",
-        "active" : true,
+        "function": "CheckCurse",
+        "active": true,
         "curse": {
-            "name" : "luppiis-ladders",
-            "regex" : "Ladders-(?P<version>.+?)-MC(?P<mc>.+?).jar"
+            "name": "luppiis-ladders",
+            "regex": "Ladders-(?P<version>.+?)-MC(?P<mc>.+?).jar"
 
         }
     },
@@ -1879,16 +1879,16 @@
         "curse": {
             "id": "224164",
             "name": "fluxed-trinkets",
-            "regex" : "Fluxed Trinkets \\[(?P<version>.+?)\\]"
+            "regex": "Fluxed Trinkets \\[(?P<version>.+?)\\]"
         }
     },
-    "PneumaticCraft" : {
-        "function" : "CheckCurse",
-        "active" : true,
+    "PneumaticCraft": {
+        "function": "CheckCurse",
+        "active": true,
         "curse": {
             "id": "224125",
             "name": "pneumaticcraft",
-            "regex" : "PneumaticCraft-(?P<mc>.+?)-(?P<version>.+?)-universal.jar"
+            "regex": "PneumaticCraft-(?P<mc>.+?)-(?P<version>.+?)-universal.jar"
         }
     },
     "IntelligentEnergistics": {
@@ -2163,7 +2163,7 @@
             "regex": ".+-(?P<mc>.+)-(?P<version>.+).jar"
         }
     },
-    "NotEnoughKeys" : {
+    "NotEnoughKeys": {
         "function": "CheckCurse",
         "active": true,
         "curse": {
@@ -2172,13 +2172,13 @@
             "regex": "NEK version: (?P<mc>.+?)-(?P<version>.+)"
         }
     },
-    "Steve'sAddons" : {
-        "function" : "CheckCurse",
-        "active" : true,
-        "curse" : {
-            "name" : "steves-addons",
-            "id" : "226067",
-            "regex" : "StevesAddons-(?P<mc>.+?)-(?P<version>.+?).jar"
+    "Steve'sAddons": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "name": "steves-addons",
+            "id": "226067",
+            "regex": "StevesAddons-(?P<mc>.+?)-(?P<version>.+?).jar"
         }
     },
     "Mystcraft": {
@@ -2190,7 +2190,7 @@
             "regex": "mystcraft-(?P<mc>.+?)-(?P<version>.+?).jar"
         }
     },
-    "ProjectE" : {
+    "ProjectE": {
         "function": "CheckCurse",
         "active": true,
         "curse": {
@@ -2289,7 +2289,7 @@
         }
     },
     "Minechem-curse": {
-        "name" : "Minechem",
+        "name": "Minechem",
         "function": "CheckCurse",
         "active": true,
         "curse": {
@@ -2298,7 +2298,7 @@
         }
     },
     "RFTools": {
-        "name" : "RFTools",
+        "name": "RFTools",
         "function": "CheckCurse",
         "active": true,
         "curse": {
@@ -2506,155 +2506,155 @@
     "AdvancedMachines": {
         "function": "CheckAtomicStryker",
         "active": true,
-        "category" : "AtomicStryker",
+        "category": "AtomicStryker",
         "SinZationalHax": {
             "id": "atomicstryker"
         },
         "AtomicStryker": {
-            "name" : "AdvancedMachines"
+            "name": "AdvancedMachines"
         }
     },
     "BattleTowers": {
         "function": "CheckAtomicStryker",
         "active": true,
-        "category" : "AtomicStryker",
+        "category": "AtomicStryker",
         "SinZationalHax": {
             "id": "atomicstryker"
         },
         "AtomicStryker": {
-            "name" : "BattleTowers"
+            "name": "BattleTowers"
         }
     },
     "DynamicLights": {
         "function": "CheckAtomicStryker",
         "active": true,
-        "category" : "AtomicStryker",
+        "category": "AtomicStryker",
         "SinZationalHax": {
             "id": "atomicstryker"
         },
         "AtomicStryker": {
-            "name" : "DynamicLights"
+            "name": "DynamicLights"
         }
     },
     "FinderCompass": {
         "function": "CheckAtomicStryker",
         "active": true,
-        "category" : "AtomicStryker",
+        "category": "AtomicStryker",
         "SinZationalHax": {
             "id": "atomicstryker"
         },
         "AtomicStryker": {
-            "name" : "AS_FinderCompass"
+            "name": "AS_FinderCompass"
         }
     },
     "InfernalMobs": {
         "function": "CheckAtomicStryker",
         "active": true,
-        "category" : "AtomicStryker",
+        "category": "AtomicStryker",
         "SinZationalHax": {
             "id": "atomicstryker"
         },
         "AtomicStryker": {
-            "name" : "InfernalMobs"
+            "name": "InfernalMobs"
         }
     },
     "Kenshiro": {
         "function": "CheckAtomicStryker",
         "active": true,
-        "category" : "AtomicStryker",
+        "category": "AtomicStryker",
         "SinZationalHax": {
             "id": "atomicstryker"
         },
         "AtomicStryker": {
-            "name" : "AS_Kenshiro"
+            "name": "AS_Kenshiro"
         }
     },
     "MagicYarn": {
         "function": "CheckAtomicStryker",
         "active": true,
-        "category" : "AtomicStryker",
+        "category": "AtomicStryker",
         "SinZationalHax": {
             "id": "atomicstryker"
         },
         "AtomicStryker": {
-            "name" : "MagicYarn"
+            "name": "MagicYarn"
         }
     },
     "Minions": {
         "function": "CheckAtomicStryker",
         "active": true,
-        "category" : "AtomicStryker",
+        "category": "AtomicStryker",
         "SinZationalHax": {
             "id": "atomicstryker"
         },
         "AtomicStryker": {
-            "name" : "AS_Minions"
+            "name": "AS_Minions"
         }
     },
     "MultiMine": {
         "function": "CheckAtomicStryker",
         "active": true,
-        "category" : "AtomicStryker",
+        "category": "AtomicStryker",
         "SinZationalHax": {
             "id": "atomicstryker"
         },
         "AtomicStryker": {
-            "name" : "AS_MultiMine"
+            "name": "AS_MultiMine"
         }
     },
     "PetBat": {
         "function": "CheckAtomicStryker",
         "active": true,
-        "category" : "AtomicStryker",
+        "category": "AtomicStryker",
         "SinZationalHax": {
             "id": "atomicstryker"
         },
         "AtomicStryker": {
-            "name" : "PetBat"
+            "name": "PetBat"
         }
     },
     "RopesPlus": {
             "function": "CheckAtomicStryker",
         "active": true,
-        "category" : "AtomicStryker",
+        "category": "AtomicStryker",
         "SinZationalHax": {
             "id": "atomicstryker"
         },
         "AtomicStryker": {
-            "name" : "RopesPlus"
+            "name": "RopesPlus"
         }
     },
     "Ruins": {
         "function": "CheckAtomicStryker",
         "active": true,
-        "category" : "AtomicStryker",
+        "category": "AtomicStryker",
         "SinZationalHax": {
             "id": "atomicstryker"
         },
         "AtomicStryker": {
-            "name" : "AS_Ruins"
+            "name": "AS_Ruins"
         }
     },
     "SimplyHaxFlying": {
         "function": "CheckAtomicStryker",
         "active": true,
-        "category" : "AtomicStryker",
+        "category": "AtomicStryker",
         "SinZationalHax": {
             "id": "atomicstryker"
         },
         "AtomicStryker": {
-            "name" : "SimplyHaxFlying"
+            "name": "SimplyHaxFlying"
         }
     },
     "Necromancy": {
         "function": "CheckAtomicStryker",
         "active": true,
-        "category" : "AtomicStryker",
+        "category": "AtomicStryker",
         "SinZationalHax": {
             "id": "atomicstryker"
         },
         "AtomicStryker": {
-            "name" : "Necromancy"
+            "name": "Necromancy"
         }
     },
     "DPU": {
@@ -2748,7 +2748,7 @@
         "name": "EnderZoo",
         "function": "CheckJenkins",
         "active": true,
-        "category" : "tterrag",
+        "category": "tterrag",
         "jenkins": {
             "url": "http://ci.tterrag.com/job/Ender%20Zoo/lastSuccessfulBuild/api/json",
             "regex": ".+?-(?P<mc>.+?)-(?P<dev>.+?).jar",
@@ -2834,13 +2834,13 @@
             "regex": "Scott's Tweaks v(?P<version>\\S+)"
         }
     },
-    "ForgeTeamspeak3Integration" : {
-        "function" : "CheckCurse",
-        "active" : true,
-        "curse" : {
-            "id" : "227778",
-            "name" : "forge-teamspeak-3-integration",
-            "regex" : "ForgeTSIntegration-(?P<version>.+)$"
+    "ForgeTeamspeak3Integration": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "id": "227778",
+            "name": "forge-teamspeak-3-integration",
+            "regex": "ForgeTSIntegration-(?P<version>.+)$"
         }
     },
     "AncientTrees": {
@@ -2935,7 +2935,7 @@
         "name": "ttCore",
         "function": "CheckJenkins",
         "active": true,
-        "category" : "tterrag",
+        "category": "tterrag",
         "jenkins": {
             "url": "http://ci.tterrag.com/job/ttCore/lastSuccessfulBuild/api/json",
             "regex": ".+?-MC(?P<mc>.+?)-(?P<dev>.+?).jar",
@@ -2946,7 +2946,7 @@
         "name": "WAILAPlugins",
         "function": "CheckJenkins",
         "active": true,
-        "category" : "tterrag",
+        "category": "tterrag",
         "jenkins": {
             "url": "http://ci.tterrag.com/job/WAILAPlugins/lastSuccessfulBuild/api/json",
             "regex": ".+?-MC(?P<mc>.+?)-(?P<dev>.+?).jar",
@@ -2989,69 +2989,69 @@
             "regex": "Werkbench v(?P<version>\\S+)"
         }
     },
-    "K4Lib" : {
-        "function" : "CheckCurse",
-        "active" : true,
+    "K4Lib": {
+        "function": "CheckCurse",
+        "active": true,
         "curse": {
-            "id" : "224740",
-            "regex" : "-.+?-(?P<version>.+?)-universal.jar"
+            "id": "224740",
+            "regex": "-.+?-(?P<version>.+?)-universal.jar"
         }
     },
-    "PvPToggle" : {
-        "function" : "CheckCurse",
-        "active" : true,
+    "PvPToggle": {
+        "function": "CheckCurse",
+        "active": true,
         "curse": {
-            "id" : "223394",
-            "regex" : "-.+?-(?P<version>.+?)-universal.jar"
+            "id": "223394",
+            "regex": "-.+?-(?P<version>.+?)-universal.jar"
         }
     },
-    "ColorChat" : {
-        "function" : "CheckCurse",
-        "active" : true,
+    "ColorChat": {
+        "function": "CheckCurse",
+        "active": true,
         "curse": {
-            "id" : "221276",
-            "regex" : "-.+?-(?P<version>.+?)-universal.jar"
+            "id": "221276",
+            "regex": "-.+?-(?P<version>.+?)-universal.jar"
         }
     },
-    "DoubleJump" : {
-        "function" : "CheckCurse",
-        "active" : true,
+    "DoubleJump": {
+        "function": "CheckCurse",
+        "active": true,
         "curse": {
-            "id" : "224789",
-            "regex" : "-.+?-(?P<version>.+?)-universal.jar"
+            "id": "224789",
+            "regex": "-.+?-(?P<version>.+?)-universal.jar"
         }
     },
-    "FastTravel" : {
-        "function" : "CheckCurse",
-        "active" : true,
+    "FastTravel": {
+        "function": "CheckCurse",
+        "active": true,
         "curse": {
-            "id" : "239106",
+            "id": "239106",
             "name": "fast-travel",
-            "regex" : "-.+?-(?P<version>.+?)-universal.jar"
+            "regex": "-.+?-(?P<version>.+?)-universal.jar"
         }
     },
-    "LiveNotifier" : {
-        "function" : "CheckCurse",
-        "active" : true,
+    "LiveNotifier": {
+        "function": "CheckCurse",
+        "active": true,
         "curse": {
-            "id" : "239242",
-            "regex" : "-.+?-(?P<version>.+?)-universal.jar"
+            "id": "239242",
+            "regex": "-.+?-(?P<version>.+?)-universal.jar"
         }
     },
-    "RainSjaman" : {
-        "function" : "CheckCurse",
-        "active" : true,
+    "RainSjaman": {
+        "function": "CheckCurse",
+        "active": true,
         "curse": {
-            "id" : "241423",
-            "regex" : "-.+?-(?P<version>.+?)-universal.jar"
+            "id": "241423",
+            "regex": "-.+?-(?P<version>.+?)-universal.jar"
         }
     },
-    "LookingGlass" : {
-        "function" : "CheckCurse",
-        "active" : true,
+    "LookingGlass": {
+        "function": "CheckCurse",
+        "active": true,
         "curse": {
-            "id" : "230541",
-            "regex" : "-.+?-(?P<version>.+?).jar"
+            "id": "230541",
+            "regex": "-.+?-(?P<version>.+?).jar"
         }
     },
     "copycore": {
@@ -3173,7 +3173,7 @@
     },
     "HxC-Core": {
         "function": "CheckCurse",
-        "category" : "HxCMods",
+        "category": "HxCMods",
         "active": true,
         "curse": {
             "id": "227594",
@@ -3183,7 +3183,7 @@
     },
     "HxC-Blocks": {
         "function": "CheckCurse",
-        "category" : "HxCMods",
+        "category": "HxCMods",
         "active": true,
         "curse": {
             "id": "227602",
@@ -3194,7 +3194,7 @@
     "HxC-Enchants": {
         "function": "CheckCurse",
         "active": true,
-        "category" : "HxCMods",
+        "category": "HxCMods",
         "curse": {
             "id": "227599",
             "name": "hxcenchants",
@@ -3204,7 +3204,7 @@
     "HxC-Link-Pads": {
         "function": "CheckCurse",
         "active": true,
-        "category" : "HxCMods",
+        "category": "HxCMods",
         "curse": {
             "id": "227603",
             "name": "hxclinkpads",
@@ -3214,7 +3214,7 @@
     "HxC-WorldGen": {
         "function": "CheckCurse",
         "active": true,
-        "category" : "HxCMods",
+        "category": "HxCMods",
         "curse": {
             "id": "227598",
             "name": "hxcworldgen",
@@ -3626,20 +3626,20 @@
             "regex": ".+?-(?P<mc>.+?)-(?P<version>.+).jar"
         }
     },
-    "ServerQueryExtender" : {
-        "function" : "CheckCurse",
-        "active" : true,
+    "ServerQueryExtender": {
+        "function": "CheckCurse",
+        "active": true,
         "curse": {
-            "id" : "236296",
-            "regex" : "-.+?-(?P<version>.+?)-universal.jar"
+            "id": "236296",
+            "regex": "-.+?-(?P<version>.+?)-universal.jar"
         }
     },
-    "ServerInfoViewer" : {
-        "function" : "CheckCurse",
-        "active" : true,
+    "ServerInfoViewer": {
+        "function": "CheckCurse",
+        "active": true,
         "curse": {
-            "id" : "236767",
-            "regex" : "-.+?-(?P<version>.+?)-universal.jar"
+            "id": "236767",
+            "regex": "-.+?-(?P<version>.+?)-universal.jar"
         }
     },
     "JustEnoughItems": {
@@ -4289,13 +4289,13 @@
             "regex": "CustomMobSpawner (?P<version>.+)"
         }
     },
-    "BiomeTweaker" : {
-        "function" : "CheckCurse",
-        "active" : true,
-        "curse" : {
+    "BiomeTweaker": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
             "id": "228895",
-            "name" : "biometweaker",
-            "regex" : "BiomeTweaker-(?P<mc>.+?) (?P<version>.+)"
+            "name": "biometweaker",
+            "regex": "BiomeTweaker-(?P<mc>.+?) (?P<version>.+)"
         }
     },
     "ChunkLoaderZ": {
@@ -4380,7 +4380,7 @@
         }
     },
     "Pokecube": {
-        "name" : "Pokecube",
+        "name": "Pokecube",
         "function": "CheckCurse",
         "active": true,
         "curse": {
@@ -4390,7 +4390,7 @@
         }
     },
     "Graves": {
-        "name" : "Graves",
+        "name": "Graves",
         "function": "CheckCurse",
         "active": true,
         "curse": {
@@ -4808,21 +4808,21 @@
         }
     },
     "BrainStoneMod": {
-        "function" : "CheckCurse",
-        "active" : false,
-        "curse" : {
+        "function": "CheckCurse",
+        "active": false,
+        "curse": {
             "id": "250836",
             "name": "brain-stone-mod",
-            "regex" : "BrainStoneMod-(?P<mc>.+?)-(?P<version>.+)"
+            "regex": "BrainStoneMod-(?P<mc>.+?)-(?P<version>.+)"
         }
     },
     "SuperCircuitMaker": {
-        "function" : "CheckCurse",
-        "active" : true,
-        "curse" : {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
             "id": "248619",
             "name": "super-circuit-maker",
-            "regex" : "Super Circuit Maker (?P<version>.+)"
+            "regex": "Super Circuit Maker (?P<version>.+)"
         }
     },
     "AkashicTome": {
@@ -4853,21 +4853,21 @@
         }
     },
     "HWYLA": {
-        "function" : "CheckCurse",
-        "active" : true,
-        "curse" : {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
             "id": "253449",
             "name": "hwyla",
-            "regex" : "Hwyla-(?P<version>.+)_(?P<mc>.+?).jar"
+            "regex": "Hwyla-(?P<version>.+)_(?P<mc>.+?).jar"
         }
     },
     "ActuallyAdditions": {
-        "function" : "CheckCurse",
-        "active" : true,
-        "curse" : {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
             "id": "228404",
             "name": "actually-additions",
-            "regex" : "ActuallyAdditions-(?P<version>.+)"
+            "regex": "ActuallyAdditions-(?P<version>.+)"
         }
     },
     "Cristallum": {
@@ -4879,7 +4879,7 @@
             "regex": "^(?P<mc>[0-9.]+)-v(?P<version>[0-9.]+)$"
         }
     },
-    "SuperMiner-1.10.2" : {
+    "SuperMiner-1.10.2": {
         "name": "SuperMiner",
         "function": "CheckForgeJson",
         "active": true,
@@ -4888,7 +4888,7 @@
             "mcversion": "1.10.2"
         }
     },
-    "SuperMiner-1.11" : {
+    "SuperMiner-1.11": {
         "name": "SuperMiner",
         "function": "CheckForgeJson",
         "active": true,
@@ -4897,7 +4897,7 @@
             "mcversion": "1.11"
         }
     },
-    "SuperMiner-1.11.2" : {
+    "SuperMiner-1.11.2": {
         "name": "SuperMiner",
         "function": "CheckForgeJson",
         "active": true,
@@ -4907,41 +4907,41 @@
         }
     },
     "AstralSorcery": {
-        "function" : "CheckCurse",
-        "active" : true,
-        "curse" : {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
             "id": "241721",
             "name": "astral-sorcery",
-            "regex" : "AstralSorcery-(?P<mc>.+?)-(?P<version>.+).jar"
+            "regex": "AstralSorcery-(?P<mc>.+?)-(?P<version>.+).jar"
         }
     },
-    "TickProfiler-1.7.10" : {
+    "TickProfiler-1.7.10": {
         "name": "TickProfiler",
         "category": "nallar",
-        "function" : "CheckJenkins",
-        "active" : true,
+        "function": "CheckJenkins",
+        "active": true,
         "jenkins": {
             "url": "https://jenkins.nallar.me/job/TickProfiler/branch/1.7.10/lastSuccessfulBuild/api/json",
             "regex": "TickProfiler-(?P<mc>.+?).jenkins.(?P<version>[0-9]+).jar$",
             "item": 0
         }
     },
-    "TickProfiler-1.8.9" : {
+    "TickProfiler-1.8.9": {
         "name": "TickProfiler",
         "category": "nallar",
-        "function" : "CheckJenkins",
-        "active" : true,
+        "function": "CheckJenkins",
+        "active": true,
         "jenkins": {
             "url": "https://jenkins.nallar.me/job/TickProfiler/branch/1.8.9/lastSuccessfulBuild/api/json",
             "regex": "TickProfiler-(?P<mc>.+?).jenkins.(?P<version>[0-9]+).jar$",
             "item": 1
         }
     },
-    "TickProfiler-1.10.2" : {
+    "TickProfiler-1.10.2": {
         "name": "TickProfiler",
         "category": "nallar",
-        "function" : "CheckJenkins",
-        "active" : true,
+        "function": "CheckJenkins",
+        "active": true,
         "jenkins": {
             "url": "https://jenkins.nallar.me/job/TickProfiler/branch/1.10.2/lastSuccessfulBuild/api/json",
             "regex": "TickProfiler-(?P<mc>.+?).jenkins.(?P<version>[0-9]+).jar$",
