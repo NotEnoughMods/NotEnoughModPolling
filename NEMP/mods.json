@@ -4947,5 +4947,23 @@
             "regex": "TickProfiler-(?P<mc>.+?).jenkins.(?P<version>[0-9]+).jar$",
             "item": 1
         }
+    },
+    "CompatLayer": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "id": "253729",
+            "name": "compatlayer",
+            "regex": "compatlayer-.+?-(?P<version>.+)\\.jar"
+        }
+    },
+    "XNet": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "id": "260912",
+            "name": "xnet",
+            "regex": "xnet-(?P<version>[0-9]+(?:\\.[0-9]+)+)"
+        }
     }
 }
