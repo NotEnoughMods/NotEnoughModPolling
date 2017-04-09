@@ -2950,7 +2950,7 @@
         "jenkins": {
             "url": "http://ci.tterrag.com/job/WAILAPlugins/lastSuccessfulBuild/api/json",
             "regex": ".+?-MC(?P<mc>.+?)-(?P<dev>.+?).jar",
-            "item": 2
+            "item": 1
         }
     },
     "Baubles": {
