@@ -2066,6 +2066,33 @@
             "regex": "CyclopsCore-(?P<mc>.+?)-(?P<version>.+?)\\.jar"
         }
     },
+    "EverlastingAbilities": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "id": "248353",
+            "name": "everlastingabilities",
+            "regex": "EverlastingAbilities-(?P<mc>.+?)-(?P<version>.+?)\\.jar"
+        }
+    },
+    "IntegratedTunnels": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "id": "251389",
+            "name": "integrated-tunnels",
+            "regex": "IntegratedTunnels-(?P<mc>.+?)-(?P<version>.+?)\\.jar"
+        }
+    },
+    "CapabilityProxy": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "id": "266479",
+            "name": "capabilityproxy",
+            "regex": "CapabilityProxy-(?P<mc>.+?)-(?P<version>.+?)\\.jar"
+        }
+    },
     "FluidConverters": {
         "function": "CheckCurse",
         "active": true,
