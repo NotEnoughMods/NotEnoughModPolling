@@ -1214,7 +1214,7 @@
         "active": true,
         "curse": {
             "name": "railcraft",
-            "regex": ".+? (?P<version>.+?)$"
+            "regex": "Railcraft (?P<version>\\S+)"
         }
     },
     "JABBA": {
@@ -1703,7 +1703,7 @@
         "active": true,
         "curse": {
             "name": "gravestone_mod",
-            "regex": "GraveStone-(?P<version>.+?).jar"
+            "regex": "GraveStone-Graves-(?P<version>.+)"
         }
     },
     "Natura" :{
