@@ -475,7 +475,7 @@
         "active": true,
         "jenkins": {
             "url": "http://ci.pc-logix.com/job/OpenSecurity%201.10/lastSuccessfulBuild/api/json",
-            "regex": "OpenSecurity-(?P<mc>.+?)-(?P<version>.+?).jar$",
+            "regex": "OpenSecurity-MC(?P<mc>.+?)-(?P<version>.+?).jar$",
             "item": 0
         }
     },
@@ -485,7 +485,7 @@
         "active": true,
         "jenkins": {
             "url": "http://ci.pc-logix.com/job/OpenSensors1.7/lastSuccessfulBuild/api/json",
-            "regex": "OpenSecurity-(?P<mc>.+?)-(?P<version>.+?).jar$",
+            "regex": "OpenSensors-MC(?P<mc>.+?)-(?P<version>.+?).jar$",
             "item": 0
         }
     },
