@@ -2893,7 +2893,7 @@
         "curse": {
             "id": "228363",
             "name": "bibliocraft-bibliowoods-forestry-edition",
-            "regex": "BiblioWoods Forestry edition v(?P<version>.+?) .+"
+            "regex": "BiblioWoods Forestry edition v(?P<version>[0-9]+\\.[0-9]+)"
         }
     },
     "BiblioWoodsBiomesO'Plenty": {
