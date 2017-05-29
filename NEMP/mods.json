@@ -469,6 +469,26 @@
             "item": 0
         }
     },
+    "OpenSecurity-1.10.2": {
+        "name": "OpenSecurity",
+        "function": "CheckJenkins",
+        "active": true,
+        "jenkins": {
+            "url": "http://ci.pc-logix.com/job/OpenSecurity%201.10/lastSuccessfulBuild/api/json",
+            "regex": "OpenSecurity-MC(?P<mc>.+?)-(?P<version>.+?).jar$",
+            "item": 0
+        }
+    },
+    "OpenSensors-1.7.10": {
+        "name": "OpenSensors",
+        "function": "CheckJenkins",
+        "active": true,
+        "jenkins": {
+            "url": "http://ci.pc-logix.com/job/OpenSensors1.7/lastSuccessfulBuild/api/json",
+            "regex": "OpenSensors-MC(?P<mc>.+?)-(?P<version>.+?).jar$",
+            "item": 0
+        }
+    },
     "MFFSv2Classic": {
         "function": "CheckJenkins",
         "active": false,
