@@ -312,6 +312,54 @@
             "promoType": "version"
         }
     },
+    "MinecraftForge-1.11.2-Dev": {
+        "name": "MinecraftForge",
+        "function": "CheckMCForge2",
+        "category": "forge",
+        "active": true,
+        "changelog": false,
+        "mcforge": {
+            "url": "http://files.minecraftforge.net/maven/net/minecraftforge/forge/promotions.json",
+            "promo": "1.11.2-latest",
+            "promoType": "dev"
+        }
+    },
+    "MinecraftForge-1.11.2-Release": {
+        "name": "MinecraftForge",
+        "function": "CheckMCForge2",
+        "category": "forge",
+        "active": true,
+        "changelog": false,
+        "mcforge": {
+            "url": "http://files.minecraftforge.net/maven/net/minecraftforge/forge/promotions.json",
+            "promo": "1.11.2-recommended",
+            "promoType": "version"
+        }
+    },
+    "MinecraftForge-1.12-Dev": {
+        "name": "MinecraftForge",
+        "function": "CheckMCForge2",
+        "category": "forge",
+        "active": true,
+        "changelog": false,
+        "mcforge": {
+            "url": "http://files.minecraftforge.net/maven/net/minecraftforge/forge/promotions.json",
+            "promo": "1.12-latest",
+            "promoType": "dev"
+        }
+    },
+    "MinecraftForge-1.12-Release": {
+        "name": "MinecraftForge",
+        "function": "CheckMCForge2",
+        "category": "forge",
+        "active": true,
+        "changelog": false,
+        "mcforge": {
+            "url": "http://files.minecraftforge.net/maven/net/minecraftforge/forge/promotions.json",
+            "promo": "1.12-recommended",
+            "promoType": "version"
+        }
+    },
     "OpenPeripheralCore": {
         "comment": "This isn't a core </3",
         "function": "CheckJenkins",
