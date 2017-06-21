@@ -5010,37 +5010,13 @@
             "regex": "AstralSorcery-(?P<mc>.+?)-(?P<version>.+).jar"
         }
     },
-    "TickProfiler-1.7.10": {
-        "name": "TickProfiler",
-        "category": "nallar",
-        "function": "CheckJenkins",
+    "TickProfiler": {
+        "function": "CheckCurse",
         "active": true,
-        "jenkins": {
-            "url": "https://jenkins.nallar.me/job/TickProfiler/branch/1.7.10/lastSuccessfulBuild/api/json",
-            "regex": "TickProfiler-(?P<mc>.+?).jenkins.(?P<version>[0-9]+).jar$",
-            "item": 0
-        }
-    },
-    "TickProfiler-1.8.9": {
-        "name": "TickProfiler",
-        "category": "nallar",
-        "function": "CheckJenkins",
-        "active": true,
-        "jenkins": {
-            "url": "https://jenkins.nallar.me/job/TickProfiler/branch/1.8.9/lastSuccessfulBuild/api/json",
-            "regex": "TickProfiler-(?P<mc>.+?).jenkins.(?P<version>[0-9]+).jar$",
-            "item": 1
-        }
-    },
-    "TickProfiler-1.10.2": {
-        "name": "TickProfiler",
-        "category": "nallar",
-        "function": "CheckJenkins",
-        "active": true,
-        "jenkins": {
-            "url": "https://jenkins.nallar.me/job/TickProfiler/branch/1.10.2/lastSuccessfulBuild/api/json",
-            "regex": "TickProfiler-(?P<mc>.+?).jenkins.(?P<version>[0-9]+).jar$",
-            "item": 1
+        "curse": {
+            "id": "270330",
+            "name": "tickprofiler",
+            "regex": "TickProfiler-.+?-jenkins\\.(?P<version>[0-9]+)"
         }
     },
     "CompatLayer": {
