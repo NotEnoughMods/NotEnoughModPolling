@@ -1233,7 +1233,7 @@
         "curse": {
             "name": "thermal-dynamics",
             "id": "227443",
-            "regex": "ThermalDynamics-\\[(?P<mc>.+?)\\](?P<version>.+?).jar"
+            "regex": "ThermalDynamics-.+?-(?P<version>.+?)-universal\\.jar"
         }
     },
     "SolarFlux": {
@@ -1318,7 +1318,7 @@
         "active": true,
         "curse": {
             "id": "220954",
-            "regex": "modtweaker-(?P<version>[0-9]+(?:\\.[0.9]+)+)$"
+            "regex": "ModTweaker2-(?P<version>[0-9]+(?:\\.[0-9]+)+)$"
         }
     },
     "Morpheus-1.7": {
@@ -1771,7 +1771,7 @@
         "active": true,
         "curse": {
             "name": "gravestone_mod",
-            "regex": "GraveStone-(?P<version>.+?)\\.jar"
+            "regex": "GraveStone-Graves-(?P<version>.+)"
         }
     },
     "Natura" :{
