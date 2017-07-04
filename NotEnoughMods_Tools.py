@@ -35,7 +35,7 @@ class NotEnoughClasses():
 
     def getLatestVersion(self):
         try:
-            return self.fetch_json("http://bot.notenoughmods.com/?json")
+            return self.fetch_json("https://bot.notenoughmods.com/?json")
         except:
             print("Failed to get NEM versions, falling back to hard-coded")
             nem_logger.exception("Failed to get NEM versions, falling back to hard-coded.")
@@ -181,7 +181,7 @@ def multilist(self, name, params, channel, userdata, rank):
             modName = params[1]
 
             for version in NEM.versions:
-                jsonres[version] = NEM.fetch_json("http://bot.notenoughmods.com/" + requests.utils.quote(version) + ".json", cache=True)
+                jsonres[version] = NEM.fetch_json("https://bot.notenoughmods.com/" + requests.utils.quote(version) + ".json", cache=True)
 
                 for i, mod in enumerate(jsonres[version]):
                     if modName.lower() == mod["name"].lower():
@@ -276,7 +276,7 @@ def list(self, name, params, channel, userdata, rank):
     else:
         version = NEM.version
     try:
-        result = NEM.fetch_page("http://bot.notenoughmods.com/" + requests.utils.quote(version) + ".json", cache=True)
+        result = NEM.fetch_page("https://bot.notenoughmods.com/" + requests.utils.quote(version) + ".json", cache=True)
         if not result:
             self.sendMessage(channel,
                              "{0}: Could not fetch the list. Are you sure it exists?".format(name)
@@ -370,9 +370,9 @@ def compare(self, name, params, channel, userdata, rank):
     try:
         oldVersion, newVersion = params[1], params[2]
 
-        oldJson = NEM.fetch_json("http://bot.notenoughmods.com/" + requests.utils.quote(oldVersion) + ".json", cache=True)
+        oldJson = NEM.fetch_json("https://bot.notenoughmods.com/" + requests.utils.quote(oldVersion) + ".json", cache=True)
 
-        newJson = NEM.fetch_json("http://bot.notenoughmods.com/" + requests.utils.quote(newVersion) + ".json", cache=True)
+        newJson = NEM.fetch_json("https://bot.notenoughmods.com/" + requests.utils.quote(newVersion) + ".json", cache=True)
 
         newMods = {modInfo["name"].lower(): True for modInfo in newJson}
 
@@ -418,7 +418,7 @@ def help(self, name, params, channel, userdata, rank):
 def force_cacheRedownload(self, name, params, channel, userdata, rank):
     if self.rankconvert[rank] >= 3:
         for version in NEM.versions:
-            url = "http://bot.notenoughmods.com/" + requests.utils.quote(version) + ".json"
+            url = "https://bot.notenoughmods.com/" + requests.utils.quote(version) + ".json"
             normalized = NEM.normalize_filename(url)
             filepath = os.path.join(NEM.cache_dir, normalized)
             if os.path.exists(filepath):

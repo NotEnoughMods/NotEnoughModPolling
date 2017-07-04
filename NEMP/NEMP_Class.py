@@ -150,7 +150,7 @@ class NotEnoughClasses():
             f.write(footerText)
 
     def QueryNEM(self):
-        self.nemVersions = self.fetch_json("http://bot.notenoughmods.com/?json")
+        self.nemVersions = self.fetch_json("https://bot.notenoughmods.com/?json")
 
     def InitiateVersions(self):
         # Store a list of mods so we dont override our version
@@ -159,7 +159,7 @@ class NotEnoughClasses():
         # for MC version in NEM's list
         for nem_list_name in self.nemVersions:
             # Get the NEM List for this MC Version
-            nem_list = self.fetch_json("http://bot.notenoughmods.com/" + nem_list_name + ".json")
+            nem_list = self.fetch_json("https://bot.notenoughmods.com/" + nem_list_name + ".json")
 
             # For each NEM Mod...
             for nem_mod in nem_list:
