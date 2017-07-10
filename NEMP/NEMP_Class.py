@@ -303,26 +303,6 @@ class NotEnoughClasses():
         output = match.groupdict()
         return output
 
-    def CheckAE(self, mod):
-        jsonres = self.fetch_json("http://ae-mod.info/releases")
-        jsonres = sorted(jsonres, key=lambda k: k['Released'])
-        relVersion = ""
-        #relMC = ""
-        devVersion = ""
-        devMC = ""
-        for version in jsonres:
-            if version["Channel"] == "Stable":
-                relVersion = version["Version"]
-                #relMC = version["Minecraft"]
-            else:
-                devVersion = version["Version"]
-                devMC = version["Minecraft"]
-        return {
-            "version": relVersion,
-            "dev": devVersion,
-            "mc": devMC  # TODO: this doesn't seem reliable...
-        }
-
     def CheckAE2(self, mod):
         jsonres = self.fetch_json("http://feeds.ae-mod.info/builds.json")
         jsonres = sorted(jsonres['Versions'], key=lambda k: k['Created'], reverse=True)

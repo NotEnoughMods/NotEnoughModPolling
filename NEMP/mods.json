@@ -133,29 +133,6 @@
             "promoType": "version"
         }
     },
-    "Cauldron": {
-        "function": "CheckMCForge2",
-        "category": "forge",
-        "active": false,
-        "changelog": false,
-        "mcforge": {
-            "url": "http://files.minecraftforge.net/maven/net/minecraftforge/cauldron/promotions.json",
-            "promo": "latest",
-            "promoType": "dev"
-        }
-    },
-    "Cauldron-Release": {
-        "name": "Cauldron",
-        "function": "CheckMCForge2",
-        "category": "forge",
-        "active": false,
-        "changelog": false,
-        "mcforge": {
-            "url": "http://files.minecraftforge.net/maven/net/minecraftforge/cauldron/promotions.json",
-            "promo": "recommended",
-            "promoType": "version"
-        }
-    },
     "FML-1.8": {
         "name": "FML",
         "function": "CheckMCForge2",
@@ -409,30 +386,11 @@
             "regex": "MineFactoryReloaded-\\[(?P<mc>.+?)\\](?P<version>.+?).jar"
         }
     },
-    "IndustrialCraft2": {
-        "function": "CheckJenkins",
-        "active": false,
-        "jenkins": {
-            "url": "http://ic2api.player.to:8080/job/IC2_lf/lastSuccessfulBuild/api/json",
-            "regex": "industrialcraft-2_(?P<dev>.+?)-lf.jar$",
-            "item": 2
-        }
-    },
     "LanteaCraft": {
         "function": "CheckCurse",
         "active": true,
         "curse": {
             "regex": "LanteaCraft-(?P<mc>.+?)-(?P<version>.+?).jar$"
-        }
-    },
-    "OpenPrinter-1.7.10": {
-        "name": "OpenPrinter",
-        "function": "CheckJenkins",
-        "active": false,
-        "jenkins": {
-            "url": "http://ci.pc-logix.com/job/OpenPrinter1.7/lastSuccessfulBuild/api/json",
-            "regex": "OpenPrinter-(?P<mc>.+?)-(?P<version>.+?).jar$",
-            "item": 0
         }
     },
     "OpenPrinter-1.8.9": {
@@ -537,24 +495,6 @@
             "item": 0
         }
     },
-    "MFFSv2Classic": {
-        "function": "CheckJenkins",
-        "active": false,
-        "jenkins": {
-            "url": "http://minalien.com:8080/job/Modular%20Forcefield%20System/lastSuccessfulBuild/api/json",
-            "regex": "ModularForcefieldSystem-(?P<dev>.+?).jar$",
-            "item": 0
-        }
-    },
-    "PowerConverters": {
-        "function": "CheckJenkins",
-        "active": false,
-        "jenkins": {
-            "url": "http://jamesmckay.id.au:8080/job/Power%20Converters/lastSuccessfulBuild/api/json",
-            "regex": "PowerConverters-(?P<mc>.+?)_(?P<dev>.+?).jar",
-            "item": 1
-        }
-    },
     "IndustrialCraft2-EXP": {
         "function": "CheckJenkins",
         "category": "Player",
@@ -563,15 +503,6 @@
             "url": "http://jenkins.ic2.player.to/job/IC2_experimental/lastSuccessfulBuild/api/json",
             "regex": "industrialcraft-2-(?P<version>.+?)-experimental.jar",
             "item": 2
-        }
-    },
-    "VanityBlocks": {
-        "function": "CheckJenkins",
-        "active": false,
-        "jenkins": {
-            "url": "https://ci.theender.net/job/VanityBlocks/lastSuccessfulBuild/api/json",
-            "regex": "VanityBlocks-V(?P<mc>.+?)--(?P<dev>.+?).jar",
-            "item": 0
         }
     },
     "AdditionalBuildcraftObjects": {
@@ -682,10 +613,6 @@
             "regex": "TMechworks-(?P<mc>.+?)-(?P<version>.+?).jar"
         }
     },
-    "AppliedEnergistics": {
-        "function": "CheckAE",
-        "active": false
-    },
     "AppliedEnergistics2": {
         "function": "CheckCurse",
         "active": true,
@@ -786,81 +713,6 @@
         "curse": {
             "regex": "INpureCore-\\[(?P<mc>.+?)\\](?P<version>.+?).jar",
             "id": "223792"
-        }
-    },
-    "denLib": {
-        "function": "CheckJenkins",
-        "category": "den",
-        "active": false,
-        "jenkins": {
-            "url": "http://denoflions.servehttp.com:8080/view/All/job/denLib%203.X/lastSuccessfulBuild/api/json",
-            "regex": "denLib-(?P<mc>.+?)-(?P<version>.+?).jar",
-            "item": 0
-        }
-    },
-    "DenPipes": {
-        "function": "CheckDropBox",
-        "category": "den",
-        "active": false,
-        "html": {
-            "url": "https://www.dropbox.com/sh/qqgsswnyxh2mq9f/KBRRnClA4f/DenPipes",
-            "regex": "DenPipes-(?P<mc>.+?)-(?P<version>.+?).jar"
-        }
-    },
-    "DenPipesEmerald": {
-        "function": "CheckDropBox",
-        "category": "den",
-        "active": false,
-        "html": {
-            "url": "https://www.dropbox.com/sh/qqgsswnyxh2mq9f/B9lEpmV2zD/DenPipes/Addons",
-            "regex": "DenPipes-Emerald-(?P<mc>.+?)-(?P<version>.+?).jar"
-        }
-    },
-    "GateCopy": {
-        "function": "CheckDropBox",
-        "category": "den",
-        "active": false,
-        "html": {
-            "url": "https://www.dropbox.com/sh/qqgsswnyxh2mq9f/PIj33yv4Gd/GateCopy",
-            "regex": "GateCopy-(?P<mc>.+?)-(?P<version>.+?).jar"
-        }
-    },
-    "HDSkinsandCloaks": {
-        "function": "CheckJenkins",
-        "category": "den",
-        "active": false,
-        "jenkins": {
-            "url": "http://denoflions.servehttp.com:8080/view/All/job/HDSAC%201.6.2/lastSuccessfulBuild/api/json",
-            "regex": "HDSAC-(?P<mc>.+?)-(?P<version>.+?).jar",
-            "item": 0
-        }
-    },
-    "INpureTools": {
-        "function": "CheckDropBox",
-        "category": "den",
-        "active": false,
-        "html": {
-            "url": "https://www.dropbox.com/sh/qqgsswnyxh2mq9f/3X9h2iJEcc/INpureTools",
-            "regex": "INpureTools-(?P<mc>.+?)-(?P<version>.+?).jar"
-        }
-    },
-    "INpureTools_CCTurtle": {
-        "function": "CheckDropBox",
-        "category": "den",
-        "active": false,
-        "html": {
-            "url": "https://www.dropbox.com/sh/qqgsswnyxh2mq9f/3pg3Hi0xaX/INpureTools/Turtles",
-            "regex": "INpureTools_CCTurtle-(?P<mc>.+?)-(?P<version>.+?).jar"
-        }
-    },
-    "PluginsForForestry": {
-        "function": "CheckJenkins",
-        "category": "den",
-        "active": false,
-        "jenkins": {
-            "url": "http://denoflions.servehttp.com:8080/job/PluginsForForestry/lastSuccessfulBuild/api/json",
-            "regex": "PluginsforForestry-(?P<mc>.+?)-(?P<version>.+?).jar",
-            "item": 0
         }
     },
     "StatusEffectHUD": {
@@ -1020,15 +872,6 @@
     "BigReactors": {
         "function": "CheckBigReactors",
         "active": true
-    },
-    "AppliedThermodynamics": {
-        "function": "CheckJenkins",
-        "active": false,
-        "jenkins": {
-            "url": "http://themattabase.com:9090/job/Applied%20Thermodynamics/lastSuccessfulBuild/api/json",
-            "regex": "apptherm-(?P<dev>.+?).jar$",
-            "item": 0
-        }
     },
     "EnderIO": {
         "function": "CheckJenkins",
@@ -1319,26 +1162,6 @@
         "curse": {
             "id": "220954",
             "regex": "ModTweaker2-(?P<version>[0-9]+(?:\\.[0-9]+)+)$"
-        }
-    },
-    "Morpheus-1.7": {
-        "name": "Morpheus",
-        "function": "CheckJenkins",
-        "active": false,
-        "jenkins": {
-            "url": "http://jenkins.qmunity.co.uk/job/Morpheus%201.7.x/lastSuccessfulBuild/api/json",
-            "regex": "-(?P<mc>.+?)-(?P<version>.+?).jar",
-            "item": 1
-        }
-    },
-    "Morpheus-1.8": {
-        "name": "Morpheus",
-        "function": "CheckJenkins",
-        "active": false,
-        "jenkins": {
-            "url": "http://jenkins.qmunity.co.uk/job/Morpheus%201.8.x/lastSuccessfulBuild/api/json",
-            "regex": "-(?P<mc>.+?)-(?P<version>.+?).jar",
-            "item": 2
         }
     },
     "Morpheus": {
@@ -1905,24 +1728,6 @@
             "regex": "MadScience-MC(?P<mc>.+?)-F.+?_v(?P<version>.+?)-universal.jar"
         }
     },
-    "Minechem": {
-        "function": "CheckJenkins",
-        "active": false,
-        "jenkins": {
-            "url": "http://jenkins.jakimfett.com/view/ForgeModding/job/Minechem%20v5%20for%201.7.10/lastSuccessfulBuild/api/json",
-            "regex": "Minechem-(?P<mc>.+?)-(?P<dev>.+?).jar",
-            "item": 1
-        }
-    },
-    "AlchemyPlusPlus": {
-        "function": "CheckJenkins",
-        "active": false,
-        "jenkins": {
-            "url": "https://jenkins.jakimfett.com/job/AlchemyPlusPlus_1.7.10/lastSuccessfulBuild/api/json",
-            "regex": "AlchemyPlusPlus-(?P<mc>.+?)-(?P<dev>.+?).jar",
-            "item": 0
-        }
-    },
     "Luppii'sLadders" :{
         "function": "CheckCurse",
         "active": true,
@@ -1941,15 +1746,6 @@
             "regex": "VersionChecker-(?P<version>.+?).jar"
         }
     },
-    "FluxedTrinkets": {
-        "function": "CheckCurse",
-        "active": false,
-        "curse": {
-            "id": "224164",
-            "name": "fluxed-trinkets",
-            "regex": "Fluxed Trinkets \\[(?P<version>.+?)\\]"
-        }
-    },
     "PneumaticCraft": {
         "function": "CheckCurse",
         "active": true,
@@ -1957,15 +1753,6 @@
             "id": "224125",
             "name": "pneumaticcraft",
             "regex": "PneumaticCraft-(?P<mc>.+?)-(?P<version>.+?)-universal.jar"
-        }
-    },
-    "IntelligentEnergistics": {
-        "function": "CheckCurse",
-        "active": false,
-        "curse": {
-            "id": "222848",
-            "name": "intelligent-energistics",
-            "regex": "IntelligentEnergistics-(?P<mc>.+?)-(?P<dev>.+?)-universal.jar"
         }
     },
     "CustomNPCs": {
@@ -2046,24 +1833,6 @@
             "regex": "Freedom-(?P<mc>.+?)-(?P<version>.+?).jar"
         }
     },
-    "Santa'sToys": {
-        "function": "CheckCurse",
-        "active": false,
-        "curse": {
-            "id": "222682",
-            "name": "santas-toys",
-            "regex": "-.+?-(?P<version>.+?).jar"
-        }
-    },
-    "SparklyPants": {
-        "function": "CheckCurse",
-        "active": false,
-        "curse": {
-            "id": "222513",
-            "name": "sparkly-pants",
-            "regex": "-.+?-(?P<version>.+?).jar"
-        }
-    },
     "Santa'sDecor": {
         "function": "CheckCurse",
         "active": true,
@@ -2079,15 +1848,6 @@
         "curse": {
             "name": "craftguide",
             "regex": "CraftGuide-(?P<version>.+?)-forge.jar"
-        }
-    },
-    "DarkMenagerie": {
-        "function": "CheckCurse",
-        "active": false,
-        "curse": {
-            "id": "224039",
-            "name": "dark-menagerie",
-            "regex": "dark_menagerie-(?P<mc>.+?)-(?P<version>.+?).jar"
         }
     },
     "DraconicEvolution": {
@@ -2232,14 +1992,6 @@
             "regex": "Thaumcraft-(?P<mc>.+?)-(?P<version>.+?).jar"
         }
     },
-    "ThaumicTinkerer": {
-        "function": "CheckCurse",
-        "active": false,
-        "curse": {
-            "name": "thaumic-tinkerer",
-            "regex": "ThaumicTinkerer-.+?-(?P<mc>.+?)-(?P<version>.+?).jar"
-        }
-    },
     "MorePistons-JiraiyahVersion": {
         "function": "CheckCurse",
         "active": true,
@@ -2354,16 +2106,6 @@
         "github": {
             "repo": "copygirl/BetterStorage",
             "regex": "BetterStorage-(?P<mc>.+?)-(?P<version>[0-9]+(?:\\.[0-9]+)+)\\.jar"
-        }
-    },
-    "BetterStorage-dev": {
-        "name": "BetterStorage",
-        "function": "CheckJenkins",
-        "active": false,
-        "jenkins": {
-            "url": "http://jenkins.rx14.co.uk/job/copygirl/job/BetterStorage/lastSuccessfulBuild/api/json",
-            "regex": "^BetterStorage-(?P<mc>.+)-(?P<dev>.+)\\.jar$",
-            "item": 3
         }
     },
     "PoorOres": {
@@ -2523,17 +2265,6 @@
             "item": 3
         }
     },
-    "TSteelworks-Ephys-dev": {
-        "name": "TinkersSteelworks-Ephys",
-        "function": "CheckJenkins",
-        "active": false,
-        "category": "Tehnut",
-        "jenkins": {
-            "url": "http://tehnut.info/jenkins/job/TSteelworks/lastSuccessfulBuild/api/json",
-            "regex": "TSteelworks-(?P<mc>.+?)-(?P<dev>.+?).jar",
-            "item": 3
-        }
-    },
     "Guide-API-1.7.10": {
         "name": "Guide-API",
         "function": "CheckJenkins",
@@ -2587,15 +2318,6 @@
             "url": "http://tehnut.info/jenkins/job/ResourcefulCrops/job/1.7.10/lastSuccessfulBuild/api/json",
             "regex": "ResourcefulCrops-(?P<mc>.+?)-(?P<version>.+)\\.jar",
             "item": 4
-        }
-    },
-    "TSteelworks-Ephys": {
-        "name": "TinkersSteelworks-Ephys",
-        "function": "CheckGitHubRelease",
-        "active": false,
-        "github": {
-            "repo": "Ephys/TinkersSteelworks",
-            "regex": "TSteelworks-(?P<mc>.+?)-(?P<version>.+?).jar"
         }
     },
     "AdvancedMachines": {
@@ -2912,14 +2634,6 @@
             "regex": ".+?_mc(?P<mc>.+?)-(?P<version>.+?).jar"
         }
     },
-    "KoreSample": {
-        "function": "CheckGitHubRelease",
-        "active": false,
-        "github": {
-            "repo": "MinecraftModArchive/KoreSample",
-            "regex": "KoreSample-(?P<mc>.+?)-(?P<version>.+?).jar"
-        }
-    },
     "ScottsTweaks": {
         "function": "CheckCurse",
         "active": true,
@@ -2936,14 +2650,6 @@
             "id": "227778",
             "name": "forge-teamspeak-3-integration",
             "regex": "ForgeTSIntegration-(?P<version>.+)$"
-        }
-    },
-    "AncientTrees": {
-        "function": "CheckGitHubRelease",
-        "active": false,
-        "github": {
-            "repo": "MinecraftModArchive/Dendrology",
-            "regex": "AncientTrees-(?P<mc>.+?)-(?P<version>[0-9]+(?:\\.[0-9]+)*).jar"
         }
     },
     "BiblioCraft": {
@@ -2998,15 +2704,6 @@
             "id": "228361",
             "name": "bibliocraft-bibliowoods-highlands-edition",
             "regex": "BiblioWoods Highlands edition v(?P<version>.+?) .+"
-        }
-    },
-    "Femtocraft": {
-        "function": "CheckJenkins",
-        "active": false,
-        "jenkins": {
-            "url": "http://ci.otegamers.com/job/Femtocraft-1.7.10-Dev/lastSuccessfulBuild/api/json",
-            "regex": "femtocraft-(?P<mc>.+?)-(?P<dev>.+)-dev\\.jar$",
-            "item": 0
         }
     },
     "JSONAbles": {
@@ -3897,15 +3594,6 @@
             "regex": "BedrockReplacer(?:-Forge)?(?:-(?P<mc>.+?))?-(?P<version>[0-9]+(?:\\.[0-9]+)+)",
             "id": "237108",
             "name": "bedrock-replacer"
-        }
-    },
-    "Caterpillar": {
-        "function": "CheckCurse",
-        "active": false,
-        "curse": {
-            "regex": "Caterpillar-(?P<version>.+)\\.jar",
-            "id": "237628",
-            "name": "caterpillar"
         }
     },
     "CommandKeybindings": {
@@ -4861,15 +4549,6 @@
             "id": "224428",
             "name": "thutcore",
             "regex": "thutcore-(?P<version>[0-9a-z\\.]+)\\.jar"
-        }
-    },
-    "Chisel": {
-        "function": "CheckCurse",
-        "active": false,
-        "curse": {
-            "id": "235279",
-            "name": "chisel",
-            "regex": "Chisel - MC(?P<mc>.+?)-(?P<version>.+)"
         }
     },
     "CraftTweaker": {
