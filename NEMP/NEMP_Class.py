@@ -7,7 +7,7 @@ import yaml
 
 from distutils.version import LooseVersion
 
-logging.getLogger('requests').setLevel(logging.WARNING)
+logging.getLogger('urllib3').setLevel(logging.WARNING)
 
 
 class InvalidVersion(Exception):
