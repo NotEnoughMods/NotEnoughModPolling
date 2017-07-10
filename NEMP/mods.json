@@ -4583,7 +4583,7 @@
     },
     "BrainStoneMod": {
         "function": "CheckCurse",
-        "active": false,
+        "active": true,
         "curse": {
             "id": "250836",
             "name": "brain-stone-mod",
