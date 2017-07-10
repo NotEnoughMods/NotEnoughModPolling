@@ -215,35 +215,6 @@ class NotEnoughClasses():
                 }
         return {}
 
-    def CheckMCForge(self, mod):
-        jsonres = self.fetch_json("http://files.minecraftforge.net/" + self.mods[mod]["mcforge"]["name"] + "/json")
-        promotionArray = jsonres["promotions"]
-        devMatch = ""
-        recMatch = ""
-        for promotion in promotionArray:
-            if promotion["name"] == self.mods[mod]["mcforge"]["dev"]:
-                for entry in promotion["files"]:
-                    if entry["type"] == "universal":
-                        info = entry["url"]
-                        devMatch = self.match_mod_regex(mod, info)
-            elif promotion["name"] == self.mods[mod]["mcforge"]["rec"]:
-                for entry in promotion["files"]:
-                    if entry["type"] == "universal":
-                        info = entry["url"]
-                        recMatch = self.match_mod_regex(mod, info)
-        if devMatch:
-            output = {}
-            tmpMC = "null"
-            if recMatch:
-                output["version"] = recMatch.group(2)
-                tmpMC = recMatch.group(1)
-            if devMatch.group(1) != tmpMC:
-                output["mc"] = devMatch.group(1)
-            else:
-                output["mc"] = tmpMC
-            output["dev"] = devMatch.group(2)
-            return output
-
     def CheckForgeJson(self, mod):
         jsonres = self.fetch_json(self.mods[mod]["forgejson"]["url"])
 
@@ -291,60 +262,6 @@ class NotEnoughClasses():
                 }
             else:
                 return {}
-
-    def CheckmDiyo(self, mod):
-        result = self.fetch_page("http://tanis.sunstrike.io/" + self.mods[mod]["mDiyo"]["location"])
-        lines = result.split()
-        result = ""
-        for line in lines:
-            if ".jar" in line.lower():
-                result = line
-        match = self.match_mod_regex(mod, result)
-        output = match.groupdict()
-        return output
-
-    def CheckAE2(self, mod):
-        jsonres = self.fetch_json("http://feeds.ae-mod.info/builds.json")
-        jsonres = sorted(jsonres['Versions'], key=lambda k: k['Created'], reverse=True)
-        relVersion = ""
-        MCversion = ""
-        devVersion = ""
-        if jsonres[0]["Channel"] == "stable":
-            relVersion = jsonres[0]["Version"]
-            MCversion = jsonres[0]["VersionMC"]
-        else:
-            devVersion = jsonres[0]["Version"]
-            MCversion = jsonres[0]["VersionMC"]
-        if relVersion:
-            return {
-                "version": relVersion,
-                "mc": MCversion
-            }
-        if devVersion:
-            return {
-                "dev": devVersion,
-                "mc": MCversion
-            }
-
-    def CheckDropBox(self, mod):
-        result = self.fetch_page(self.mods[mod]["html"]["url"])
-        match = None
-
-        # TODO: Why do we use an iter? Do we need that? Make it better.
-        for match in self.mods[mod]['_regex'].finditer(result):
-            pass
-        # "match" is still in this scope
-        # TODO: This seems extremely unpythonic
-        if match:
-            match = match.groupdict()
-
-            if 'mc' not in match:
-                match['mc'] = self.mods[mod]['mc']
-
-            # we already have the 'version', 'dev' and 'mc' fields from the regex
-            return match
-        else:
-            return {}
 
     def CheckHTML(self, mod):
         result = self.fetch_page(self.mods[mod]["html"]["url"])
