@@ -3361,7 +3361,7 @@
         "curse": {
             "id": "233019",
             "name": "ai-improvements",
-            "regex": "AI Improvements (?P<version>.+)"
+            "regex": "AI Improvements (?P<version>.+) build .+? for (?P<mc>.+)"
         }
     },
     "AddictedToRed": {
