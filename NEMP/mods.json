@@ -320,7 +320,6 @@
         }
     },
     "OpenPeripheralCore": {
-        "comment": "This isn't a core </3",
         "function": "CheckJenkins",
         "category": "openmods",
         "active": true,
@@ -1131,7 +1130,7 @@
             "item": 2
         }
     },
-    "EquivalentExchange3" :{
+    "EquivalentExchange3": {
         "function": "CheckHTML",
         "active": true,
         "html": {
@@ -1139,7 +1138,7 @@
             "regex": "/all/latest/EquivalentExchange3-(?P<mc>.+?)-(?P<version>.+?).jar"
         }
     },
-    "HardcoreQuestingMode" :{
+    "HardcoreQuestingMode": {
         "function": "CheckCurse",
         "active": true,
         "curse": {
@@ -1147,7 +1146,7 @@
             "regex": ".+-(?P<mc>.+?)-(?P<version>.+?).jar"
         }
     },
-    "MineMenu" :{
+    "MineMenu": {
         "function": "CheckCurse",
         "active": true,
         "curse": {
@@ -1156,7 +1155,7 @@
             "regex": "-.+?-(?P<version>.+?)-universal.jar"
         }
     },
-    "TooMuchRain" :{
+    "TooMuchRain": {
         "function": "CheckCurse",
         "active": true,
         "curse": {
@@ -1164,7 +1163,7 @@
             "regex": "-(?P<version>.+?)-universal.jar"
         }
     },
-    "Ping" :{
+    "Ping": {
         "function": "CheckCurse",
         "active": true,
         "curse": {
@@ -1172,14 +1171,14 @@
             "regex": "Ping-.+?-(?P<version>.+)\\.jar"
         }
     },
-    "Metallurgy" :{
+    "Metallurgy": {
         "function": "CheckCurse",
         "active": true,
         "curse": {
             "regex": "-.+?-(?P<version>.+?).jar"
         }
     },
-    "MetallurgyCore" :{
+    "MetallurgyCore": {
         "function": "CheckCurse",
         "active": true,
         "curse": {
@@ -1187,7 +1186,7 @@
             "regex": "-.+?-(?P<version>.+?).jar"
         }
     },
-    "Bagginses" :{
+    "Bagginses": {
         "function": "CheckCurse",
         "active": true,
         "curse": {
@@ -1195,7 +1194,7 @@
             "regex": "Bagginses (?P<version>.+?) - (?P<mc>.+?)$"
         }
     },
-    "OpenComputers" :{
+    "OpenComputers": {
         "function": "CheckJenkins",
         "active": true,
         "category": "OC",
@@ -1205,7 +1204,7 @@
             "item": 0
         }
     },
-    "OpenComputers-Dev" :{
+    "OpenComputers-Dev": {
         "name": "OpenComputers",
         "function": "CheckJenkins",
         "active": true,
@@ -1216,7 +1215,7 @@
             "item": 0
         }
     },
-    "OpenComputers-1.8" :{
+    "OpenComputers-1.8": {
         "name": "OpenComputers",
         "function": "CheckJenkins",
         "active": true,
@@ -1227,7 +1226,7 @@
             "item": 0
         }
     },
-    "OpenComputers-1.8-dev" :{
+    "OpenComputers-1.8-dev": {
         "name": "OpenComputers",
         "function": "CheckJenkins",
         "active": true,
@@ -1238,7 +1237,7 @@
             "item": 0
         }
     },
-    "SecurityCraft" :{
+    "SecurityCraft": {
         "function": "CheckCurse",
         "active": true,
         "curse": {
@@ -1246,7 +1245,7 @@
             "regex": ".+? SecurityCraft v(?P<version>.+?)(?:\\.jar|$)"
         }
     },
-    "GravestoneMod" :{
+    "GravestoneMod": {
         "function": "CheckCurse",
         "active": true,
         "curse": {
@@ -1254,14 +1253,14 @@
             "regex": "GraveStone(?:-Graves)-(?P<version>[0-9]+(?:\\.[0-9]+)+)"
         }
     },
-    "Natura" :{
+    "Natura": {
         "function": "CheckCurse",
         "active": true,
         "curse": {
             "regex": "-.+?-(?P<version>.+?).jar"
         }
     },
-    "TheSpiceofLife" :{
+    "TheSpiceofLife": {
         "function": "CheckCurse",
         "active": true,
         "curse": {
@@ -1270,7 +1269,7 @@
             "regex": "-.+?-(?P<version>.+?).jar"
         }
     },
-    "RefinedRelocation" :{
+    "RefinedRelocation": {
         "function": "CheckCurse",
         "active": true,
         "curse": {
