@@ -356,7 +356,7 @@
         "jenkins": {
             "url": "https://builds.openmods.info/job/OpenModsLib/lastSuccessfulBuild/api/json",
             "regex": "OpenModsLib-(?P<mc>.+?)-(?P<dev>.+?).jar$",
-            "item": 2
+            "item": 1
         }
     },
     "MineFactoryReloaded": {
@@ -2275,7 +2275,7 @@
         "curse": {
             "id": "232683",
             "name": "ffs-fancy-fluid-storage",
-            "regex": "FFS v(?P<version>\\S+)"
+            "regex": "Fancy Fluid Storage-.+?-(?P<version>.+)\\.jar"
         }
     },
     "HxC-Core": {
@@ -3393,7 +3393,7 @@
         "curse": {
             "id": "239197",
             "name": "crafttweaker",
-            "regex": "CraftTweaker-(?P<mc>.+?)-(?P<version>.+)"
+            "regex": "CraftTweaker2-.+?-(?P<version>.+)"
         }
     },
     "SpongeForge": {
