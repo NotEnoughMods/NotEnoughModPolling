@@ -2584,7 +2584,7 @@
         "curse": {
             "id": "233189",
             "name": "sbm-wooden-buckets",
-            "regex": ".+?-(?P<mc>.+?)-(?P<version>.+).jar"
+            "regex": "SBM-WoodenBucket (?P<version>.+) build .+? for"
         }
     },
     "SeedCopy": {
