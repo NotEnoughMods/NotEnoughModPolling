@@ -319,6 +319,30 @@
             "promoType": "version"
         }
     },
+    "MinecraftForge-1.12.1-Dev": {
+        "name": "MinecraftForge",
+        "function": "CheckMCForge2",
+        "category": "forge",
+        "active": true,
+        "changelog": false,
+        "mcforge": {
+            "url": "http://files.minecraftforge.net/maven/net/minecraftforge/forge/promotions.json",
+            "promo": "1.12.1-latest",
+            "promoType": "dev"
+        }
+    },
+    "MinecraftForge-1.12.1-Release": {
+        "name": "MinecraftForge",
+        "function": "CheckMCForge2",
+        "category": "forge",
+        "active": true,
+        "changelog": false,
+        "mcforge": {
+            "url": "http://files.minecraftforge.net/maven/net/minecraftforge/forge/promotions.json",
+            "promo": "1.12.1-recommended",
+            "promoType": "version"
+        }
+    },
     "OpenPeripheralCore": {
         "function": "CheckJenkins",
         "category": "openmods",
