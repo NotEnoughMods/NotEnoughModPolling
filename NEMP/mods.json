@@ -3583,5 +3583,14 @@
             "name": "kitteh6660s-morecraft",
             "regex": "MoreCraft v(?P<version>\\S+)"
         }
+    },
+    "AppleCore": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "id": "224472",
+            "name": "applecore",
+            "regex": "AppleCore-mc.+?-(?P<version>.+)\\.jar"
+        }
     }
 }
