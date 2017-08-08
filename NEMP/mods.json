@@ -3592,5 +3592,14 @@
             "name": "applecore",
             "regex": "AppleCore-mc.+?-(?P<version>.+)\\.jar"
         }
+    },
+    "AppleSkin": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "id": "248787",
+            "name": "appleskin",
+            "regex": "AppleSkin-mc.+?-(?P<version>.+)\\.jar"
+        }
     }
 }
