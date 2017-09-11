@@ -3501,7 +3501,7 @@
         "curse": {
             "id": "228404",
             "name": "actually-additions",
-            "regex": "ActuallyAdditions-(?P<version>.+)"
+            "regex": "ActuallyAdditions-(?P<version>.+)\\.jar"
         }
     },
     "Cristallum": {
