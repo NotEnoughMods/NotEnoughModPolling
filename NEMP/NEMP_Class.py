@@ -446,18 +446,24 @@ class NotEnoughClasses():
             return {}
 
     def CheckMekanism(self, mod):
-        # mostly a straight port from http://git.io/vL8tB
+        # mostly a straight port from https://git.io/v5X7y
 
-        result = self.fetch_page('https://dl.dropboxusercontent.com/u/90411166/Mod%20Versions/Mekanism.txt').split(':')
+        result = self.fetch_page('http://aidancbrady.com/data/versions/Mekanism.txt').splitlines()
 
-        if len(result) > 1 and 'UTF-8' not in result and 'HTML' not in result and 'http' not in result:
-            remote_version = result[0]
-            local_version = self.get_nem_version(mod)
+        # we can only return 1 result per parser so we just parse the first line
+        line = result[0]
+
+        text = line.split(':', 2)
+
+        if len(text) == 3 and 'UTF-8' not in text[0] and 'HTML' not in text[0] and 'http' not in text[0]:
+            remote_version = text[1]
+            local_version = self.get_nem_version(mod, text[0])
 
             if local_version == 'dev-only' or LooseVersion(remote_version) > LooseVersion(local_version):
                 return {
-                    'version': result[0],
-                    'change': result[1]
+                    'mc': text[0],
+                    'version': text[1],
+                    'change': text[2]
                 }
             else:
                 return {}
