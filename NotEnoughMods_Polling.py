@@ -215,7 +215,7 @@ def PollingThread(self, pipe):
         #    NEM.InitiateVersions()
         print "I'm still running!"
 
-        tempList = {}
+        poll_results = []
         SinZationalHax = []
         failed = []
 
@@ -232,7 +232,7 @@ def PollingThread(self, pipe):
                     for outputMod, outputInfo in results.iteritems():
                         result, exceptionRaised = results[outputMod]
                         if result[1] or result[2]:
-                            tempList.setdefault(NEM.mods[outputMod]['mc'], []).append((outputMod, result))
+                            poll_results.append((outputMod, result))
                         elif exceptionRaised:
                             failed.append(outputMod)
                     SinZationalHax.append(NEM.mods[mod]["SinZationalHax"]["id"])  # Remember this poll that we have done this set of mods
@@ -244,12 +244,12 @@ def PollingThread(self, pipe):
 
                 # if there is an update
                 if result[1] or result[2]:
-                    tempList.setdefault(NEM.mods[mod]['mc'], []).append((mod, result))
+                    poll_results.append((mod, result))
                 # if there's no update, we must check if there was an exception
                 elif exceptionRaised:
                     failed.append(mod)
 
-        pipe.send((tempList, failed))
+        pipe.send((poll_results, failed))
 
         # A more reasonable way of sleeping to quicken up the
         # shutdown of the thread. Sleep in steps of 30 seconds
@@ -291,60 +291,59 @@ def NEMP_TimerEvent(self, channels):
 
             return
 
-        tempList, failedMods = nemp_data
+        poll_results, failedMods = nemp_data
 
-        for version in tempList:
-            for item in tempList[version]:
-                # item[0] = name of mod
-                # item[1] = mc version, flags for dev/release change
-                # flags[0] = mc version (can be None)
-                # flags[1] = has dev version changed?
-                # flags[2] = has release version changed?
-                # flags[3] = previous dev version
-                # flags[4] = previous release version
-                mod = item[0]
-                flags = item[1]
+        for item in poll_results:
+            # item[0] = name of mod
+            # item[1] = mc version, flags for dev/release change
+            # flags[0] = mc version (can be None)
+            # flags[1] = has dev version changed?
+            # flags[2] = has release version changed?
+            # flags[3] = previous dev version
+            # flags[4] = previous release version
+            mod = item[0]
+            flags = item[1]
 
-                mc_version, dev_flag, release_flag, last_dev, last_release = flags
+            mc_version, dev_flag, release_flag, last_dev, last_release = flags
 
-                if mc_version is None:
-                    mc_version = self.NEM.mods[mod]['mc']
+            if mc_version is None:
+                mc_version = self.NEM.mods[mod]['mc']
 
-                if 'name' in self.NEM.mods[mod]:
-                    real_name = self.NEM.mods[mod]['name']
+            if 'name' in self.NEM.mods[mod]:
+                real_name = self.NEM.mods[mod]['name']
+            else:
+                real_name = mod
+
+            dev_version = self.NEM.get_nem_dev_version(mod, mc_version)
+            release_version = self.NEM.get_nem_version(mod, mc_version)
+            changes = self.NEM.mods[mod].get('change')
+
+            if not last_dev and not last_release:
+                # No previous information info, so it's new to this NEM list/MC version
+                if release_version:
+                    clone_version = release_version
                 else:
-                    real_name = mod
+                    clone_version = 'dev-only'
 
-                dev_version = self.NEM.get_nem_dev_version(mod, mc_version)
-                release_version = self.NEM.get_nem_version(mod, mc_version)
-                changes = self.NEM.mods[mod].get('change')
+                nemp_logger.debug('Cloning mod {} to {}, flags: {}'.format(mod, mc_version, flags))
+                for channel in channels:
+                    self.sendMessage(channel, '!clone {} {} {}'.format(real_name, mc_version, clone_version))
+            elif release_flag and release_version:
+                nemp_logger.debug("Updating Mod {0}, Flags: {1}".format(mod, flags))
+                for channel in channels:
+                    self.sendMessage(channel, "!lmod {0} {1} {2}".format(mc_version, real_name, unicode(release_version)))
 
-                if not last_dev and not last_release:
-                    # No previous information info, so it's new to this NEM list/MC version
-                    if release_version:
-                        clone_version = release_version
-                    else:
-                        clone_version = 'dev-only'
+            if dev_flag and dev_version:
+                nemp_logger.debug("Updating DevMod {0}, Flags: {1}".format(mod, flags))
+                for channel in channels:
+                    self.sendMessage(channel, "!ldev {0} {1} {2}".format(mc_version, real_name, unicode(dev_version)))
 
-                    nemp_logger.debug('Cloning mod {} to {}, flags: {}'.format(mod, mc_version, flags))
-                    for channel in channels:
-                        self.sendMessage(channel, '!clone {} {} {}'.format(real_name, mc_version, clone_version))
-                elif release_flag and release_version:
-                    nemp_logger.debug("Updating Mod {0}, Flags: {1}".format(mod, flags))
-                    for channel in channels:
-                        self.sendMessage(channel, "!lmod {0} {1} {2}".format(mc_version, real_name, unicode(release_version)))
-
-                if dev_flag and dev_version:
-                    nemp_logger.debug("Updating DevMod {0}, Flags: {1}".format(mod, flags))
-                    for channel in channels:
-                        self.sendMessage(channel, "!ldev {0} {1} {2}".format(mc_version, real_name, unicode(dev_version)))
-
-                if changes and "changelog" not in self.NEM.mods[mod]:
-                    nemp_logger.debug("Sending text for Mod {0}".format(mod))
-                    for channel in channels:
-                        self.sendMessage(channel, " * " + changes)
-                    # clean up changelog in case the next poll doesn't have one
-                    del self.NEM.mods[mod]['change']
+            if changes and "changelog" not in self.NEM.mods[mod]:
+                nemp_logger.debug("Sending text for Mod {0}".format(mod))
+                for channel in channels:
+                    self.sendMessage(channel, " * " + changes)
+                # clean up changelog in case the next poll doesn't have one
+                del self.NEM.mods[mod]['change']
 
         # A temporary list containing the mods that have failed to be polled so far.
         # We use it to check if the same mods had trouble in the newest polling attempt.
