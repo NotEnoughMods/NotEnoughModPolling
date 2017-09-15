@@ -564,14 +564,10 @@ class NotEnoughClasses():
             else:
                 output = getattr(self, self.mods[mod]["function"])(mod)
 
-            if "mc" in output:
-                # Update latest NEM list for this mod
-                self.mods[mod]["mc"] = output["mc"]
-                mc_version = output['mc']
-            else:
-                # If no MC version has been specified, use the latest one we
-                # have for this mod
-                mc_version = None
+            if not "mc" in output:
+                raise Exception('No Minecraft version was returned by the parser')
+
+            mc_version = output['mc']
 
             status[0] = mc_version
 
