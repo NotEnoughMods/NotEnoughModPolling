@@ -386,74 +386,76 @@ def cmd_poll(self, name, params, channel, userdata, rank):
     if len(params) < 3:
         self.sendMessage(channel, name + ": Insufficient amount of parameters provided. Required: 2")
         self.sendMessage(channel, name + ": " + helpDict["poll"][1])
+        return
 
+    if params[2].lower() in ("true", "yes", "on"):
+        setting = True
+    elif params[2].lower() in ("false", "no", "off"):
+        setting = False
     else:
-        if params[2].lower() in ("true", "yes", "on"):
-            setting = True
+        self.sendMessage(channel, '{}: Invalid value. Must be: on, off')
+        return
+
+    if params[1][0:2].lower() == "c:":
+        category = params[1][2:].lower()
+        match_mods = {k: v for k, v in self.NEM.mods.iteritems() if v.get('category', '').lower() == category}
+
+        if not match_mods:
+            self.sendMessage(channel, '{}: Could not find any matches.'.format(name))
         else:
-            setting = False
+            for mod, info in match_mods.iteritems():
+                info["active"] = setting
 
-        if params[1][0:2].lower() == "c:":
-            category = params[1][2:].lower()
-            match_mods = {k: v for k, v in self.NEM.mods.iteritems() if v.get('category', '').lower() == category}
+                # The mod has been manually activated or deactivated, so we remove it from the
+                # autodeactivatedMods dictionary.
+                if mod in self.NEM_autodeactivatedMods:
+                    del self.NEM_autodeactivatedMods[mod]
+                if mod in self.NEM_troubledMods:
+                    del self.NEM_troubledMods[mod]
+            self.sendMessage(channel, name + ": " + ', '.join(sorted(match_mods.keys(), key=lambda x: x.lower())) + "'s poll status is now " + str(setting))
 
-            if not match_mods:
-                self.sendMessage(channel, '{}: Could not find any matches.'.format(name))
-            else:
-                for mod, info in match_mods.iteritems():
-                    info["active"] = setting
+    elif params[1].lower().startswith('p:'):
+        parser = params[1][2:].lower()
+        match_mods = {k: v for k, v in self.NEM.mods.iteritems() if v['function'][5:].lower() == parser}
 
-                    # The mod has been manually activated or deactivated, so we remove it from the
-                    # autodeactivatedMods dictionary.
-                    if mod in self.NEM_autodeactivatedMods:
-                        del self.NEM_autodeactivatedMods[mod]
-                    if mod in self.NEM_troubledMods:
-                        del self.NEM_troubledMods[mod]
-                self.sendMessage(channel, name + ": " + ', '.join(sorted(match_mods.keys(), key=lambda x: x.lower())) + "'s poll status is now " + str(setting))
-
-        elif params[1].lower().startswith('p:'):
-            parser = params[1][2:].lower()
-            match_mods = {k: v for k, v in self.NEM.mods.iteritems() if v['function'][5:].lower() == parser}
-
-            if not match_mods:
-                self.sendMessage(channel, '{}: Could not find any matches.'.format(name))
-            else:
-                for mod, info in match_mods.iteritems():
-                    info['active'] = setting
-                    #self.sendMessage(channel, name + ": " + mod + "'s poll status is now " + str(setting))
-
-                    if mod in self.NEM_autodeactivatedMods:
-                        del self.NEM_autodeactivatedMods[mod]
-                    if mod in self.NEM_troubledMods:
-                        del self.NEM_troubledMods[mod]
-                self.sendMessage(channel, name + ": " + ', '.join(sorted(match_mods.keys(), key=lambda x: x.lower())) + "'s poll status is now " + str(setting))
-
-        elif params[1].lower() == "all":
-            for mod in self.NEM.mods:
-                self.NEM.mods[mod]["active"] = setting
+        if not match_mods:
+            self.sendMessage(channel, '{}: Could not find any matches.'.format(name))
+        else:
+            for mod, info in match_mods.iteritems():
+                info['active'] = setting
 
                 if mod in self.NEM_autodeactivatedMods:
                     del self.NEM_autodeactivatedMods[mod]
                 if mod in self.NEM_troubledMods:
                     del self.NEM_troubledMods[mod]
+            self.sendMessage(channel, name + ": " + ', '.join(sorted(match_mods.keys(), key=lambda x: x.lower())) + "'s poll status is now " + str(setting))
 
-            self.sendMessage(channel, name + ": All mods are now set to " + str(setting))
-
-        else:
-            mod = self.NEM.get_proper_name(params[1])
-
-            if not mod:
-                self.sendMessage(channel, name + ': No such mod in NEMP.')
-                return
-
+    elif params[1].lower() == "all":
+        for mod in self.NEM.mods:
             self.NEM.mods[mod]["active"] = setting
-            self.sendMessage(channel, name + ": " + mod + "'s poll status is now " + str(setting))
 
             if mod in self.NEM_autodeactivatedMods:
                 del self.NEM_autodeactivatedMods[mod]
             if mod in self.NEM_troubledMods:
                 del self.NEM_troubledMods[mod]
-        self.NEM.buildHTML()
+
+        self.sendMessage(channel, name + ": All mods are now set to " + str(setting))
+
+    else:
+        mod = self.NEM.get_proper_name(params[1])
+
+        if not mod:
+            self.sendMessage(channel, name + ': No such mod in NEMP.')
+            return
+
+        self.NEM.mods[mod]["active"] = setting
+        self.sendMessage(channel, name + ": " + mod + "'s poll status is now " + str(setting))
+
+        if mod in self.NEM_autodeactivatedMods:
+            del self.NEM_autodeactivatedMods[mod]
+        if mod in self.NEM_troubledMods:
+            del self.NEM_troubledMods[mod]
+    self.NEM.buildHTML()
 
 
 def cmd_list(self, name, params, channel, userdata, rank):
