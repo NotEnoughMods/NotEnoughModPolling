@@ -3625,5 +3625,104 @@
             "name": "appleskin",
             "regex": "AppleSkin-mc.+?-(?P<version>.+)\\.jar"
         }
+    },
+    "UnlimitedChiselWorks-1.10.2": {
+        "name": "UnlimitedChiselWorks",
+        "function": "CheckForgeJson",
+        "active": true,
+        "forgejson": {
+            "url": "https://asie.pl/files/minecraft/update/unlimitedchiselworks.json",
+            "mcversion": "1.10.2"
+        }
+    },
+    "UnlimitedChiselWorks-1.11.2": {
+        "name": "UnlimitedChiselWorks",
+        "function": "CheckForgeJson",
+        "active": true,
+        "forgejson": {
+            "url": "https://asie.pl/files/minecraft/update/unlimitedchiselworks.json",
+            "mcversion": "1.11.2"
+        }
+    },
+    "UnlimitedChiselWorks-1.12.1": {
+        "name": "UnlimitedChiselWorks",
+        "function": "CheckForgeJson",
+        "active": true,
+        "forgejson": {
+            "url": "https://asie.pl/files/minecraft/update/unlimitedchiselworks.json",
+            "mcversion": "1.12.1"
+        }
+    },
+    "UnlimitedChiselWorks-1.12.2": {
+        "name": "UnlimitedChiselWorks",
+        "function": "CheckForgeJson",
+        "active": true,
+        "forgejson": {
+            "url": "https://asie.pl/files/minecraft/update/unlimitedchiselworks.json",
+            "mcversion": "1.12.2"
+        }
+    },
+    "PonySocks-1.12.1": {
+        "name": "PonySocks",
+        "function": "CheckForgeJson",
+        "active": true,
+        "forgejson": {
+            "url": "https://asie.pl/files/minecraft/update/ponysocks.json",
+            "mcversion": "1.12.1"
+        }
+    },
+    "PonySocks-1.12.2": {
+        "name": "PonySocks",
+        "function": "CheckForgeJson",
+        "active": true,
+        "forgejson": {
+            "url": "https://asie.pl/files/minecraft/update/ponysocks.json",
+            "mcversion": "1.12.2"
+        }
+    },
+    "Charset-1.8.9": {
+        "name": "Charset",
+        "function": "CheckForgeJson",
+        "active": true,
+        "forgejson": {
+            "url": "https://asie.pl/files/minecraft/update/charset.json",
+            "mcversion": "1.8.9"
+        }
+    },
+    "Charset-1.9.4": {
+        "name": "Charset",
+        "function": "CheckForgeJson",
+        "active": true,
+        "forgejson": {
+            "url": "https://asie.pl/files/minecraft/update/charset.json",
+            "mcversion": "1.9.4"
+        }
+    },
+    "Charset-1.10.2": {
+        "name": "Charset",
+        "function": "CheckForgeJson",
+        "active": true,
+        "forgejson": {
+            "url": "https://asie.pl/files/minecraft/update/charset.json",
+            "mcversion": "1.10.2"
+        }
+    },
+    "Charset-1.11": {
+        "name": "Charset",
+        "function": "CheckForgeJson",
+        "active": true,
+        "forgejson": {
+            "url": "https://asie.pl/files/minecraft/update/charset.json",
+            "mcversion": "1.11"
+        }
+    },
+    "Charset-1.11.2": {
+        "name": "Charset",
+        "function": "CheckForgeJson",
+        "active": true,
+        "forgejson": {
+            "url": "https://asie.pl/files/minecraft/update/charset.json",
+            "mcversion": "1.11.2"
+        }
     }
 }
