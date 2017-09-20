@@ -3733,5 +3733,23 @@
             "name": "crafting-redstone",
             "regex": "Crafting Redstone-MC.+?-V(?P<version>.+)"
         }
+    },
+    "BetterPlacement": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "id": "278406",
+            "name": "better-placement",
+            "regex": "Better Placement (?P<version>\\S+)"
+        }
+    },
+    "DietHoppers": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "id": "278385",
+            "name": "diet-hoppers",
+            "regex": "Diet Hoppers (?P<version>.+)"
+        }
     }
 }
