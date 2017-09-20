@@ -3724,5 +3724,14 @@
             "url": "https://asie.pl/files/minecraft/update/charset.json",
             "mcversion": "1.11.2"
         }
+    },
+    "CraftingRedstone": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "id": "247644",
+            "name": "crafting-redstone",
+            "regex": "Crafting Redstone-MC.+?-V(?P<version>.+)"
+        }
     }
 }
