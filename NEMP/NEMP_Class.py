@@ -421,27 +421,34 @@ class NotEnoughClasses():
             'version': version
         }
 
-
-
-
-
-
     def CheckBotania(self, mod):
-        mc = self.mods[mod]['mc']
+        page = self.fetch_page('https://raw.githubusercontent.com/Vazkii/Botania/master/web/versions.ini')
 
-        online_version = self.fetch_page("https://raw.githubusercontent.com/Vazkii/Botania/master/version/" + mc + ".txt")
+        versions = {}
 
-        online_build = int(online_version.split('-')[1])
+        for line in reversed(page.splitlines()):
+            online_version, mc = line.split('=', 1)
 
-        local_build = int(self.get_nem_version(mod, mc).split('-')[1])
+            if mc in versions:
+                continue
 
-        if online_build > local_build:
-            return {
-                'version': online_version,
-                'mc': mc
-            }
-        else:
-            return {}
+            online_build = int(online_version.split('-', 1)[1])
+
+            local_version = self.get_nem_version(mod, mc)
+
+            if local_version:
+                local_build = int(local_version.split('-', 1)[1])
+
+                if online_build > local_build:
+                    versions[mc] = {
+                        'version': online_version
+                    }
+            else:
+                versions[mc] = {
+                    'version': online_version
+                }
+
+        return versions
 
     def CheckMekanism(self, mod):
         # mostly a straight port from https://git.io/v5X7y
@@ -551,62 +558,90 @@ class NotEnoughClasses():
 
         return None
 
-    def CheckMod(self, mod, document=None):
+    def CheckMod(self, mod, document=None, simulation=False):
         try:
-            # [mc version, dev change, version change, previous dev, previous release]
-            status = [None, False, False, '', '']
 
             if document:
                 output = getattr(self, self.mods[mod]["function"])(mod, document)
             else:
                 output = getattr(self, self.mods[mod]["function"])(mod)
 
-            if not "mc" in output:
-                raise Exception('No Minecraft version was returned by the parser')
+            if isinstance(output, dict) and ('version' in output or 'dev' in output):
+                # legacy parser
 
-            mc_version = output['mc']
+                # if it doesn't return a Minecraft version, we bail out
+                if not 'mc' in output:
+                    raise Exception('No Minecraft version was returned by the parser')
 
-            status[0] = mc_version
+                # convert to new format
+                mc = output['mc']
+                new_output = {
+                    mc: {}
+                }
 
-            local_dev = self.get_nem_dev_version(mod, mc_version)
+                if 'version' in output:
+                    new_output[mc]['version'] = output['version']
 
-            if "dev" in output:
-                # Remove whitespace at the end and start
-                remote_dev = self.clean_version(output['dev'].strip())
+                if 'dev' in output:
+                    new_output[mc]['dev'] = output['dev']
 
-                # validate version
-                if not remote_dev or not self.is_version_valid(remote_dev):
-                    raise InvalidVersion(remote_dev)
+                if 'change' in output:
+                    new_output[mc]['changelog'] = output['change']
 
-                if local_dev != remote_dev:
-                    self.set_nem_dev_version(mod, remote_dev, mc_version)
-                    status[1] = True
+                output = new_output
 
-            local_release = self.get_nem_version(mod, mc_version)
+            statuses = []
 
-            if "version" in output:
-                # Remove whitespace at the end and start
-                remote_release = self.clean_version(output['version'].strip())
+            for mc, version_info in output.iteritems():
+                # [mc version, dev change, version change, previous dev, previous release, changelog]
+                status = [None, False, False, '', '', None]
 
-                # validate version
-                if not remote_release or not self.is_version_valid(remote_release):
-                    raise InvalidVersion(remote_release)
+                status[0] = mc
 
-                if local_release != remote_release:
-                    self.set_nem_version(mod, remote_release, mc_version)
-                    status[2] = True
+                local_dev = self.get_nem_dev_version(mod, mc)
 
-            if "change" in output and "changelog" not in self.mods[mod]:
-                self.mods[mod]["change"] = output["change"]
+                if 'dev' in version_info:
+                    # Remove whitespace at the end and start
+                    remote_dev = self.clean_version(version_info['dev'].strip())
 
-            status[3] = local_dev
-            status[4] = local_release
+                    # validate version
+                    if not remote_dev or not self.is_version_valid(remote_dev):
+                        raise InvalidVersion(remote_dev)
 
-            return status, False  # Everything went fine, no exception raised
-        except:
+                    if local_dev != remote_dev:
+                        status[1] = True
+                        if not simulation:
+                            self.set_nem_dev_version(mod, remote_dev, mc)
+
+                local_release = self.get_nem_version(mod, mc)
+
+                if 'version' in version_info:
+                    # Remove whitespace at the end and start
+                    remote_release = self.clean_version(version_info['version'].strip())
+
+                    # validate version
+                    if not remote_release or not self.is_version_valid(remote_release):
+                        raise InvalidVersion(remote_release)
+
+                    if local_release != remote_release:
+                        status[2] = True
+                        if not simulation:
+                            self.set_nem_version(mod, remote_release, mc)
+
+                if 'changelog' in version_info and 'changelog' not in self.mods[mod]:
+                    status[5] = version_info['changelog']
+
+                status[3] = local_dev
+                status[4] = local_release
+
+                if simulation or (status[1] or status[2]):
+                    statuses.append(status)
+
+            return (statuses, None)
+        except Exception as e:
             print(mod + " failed to be polled...")
             traceback.print_exc()
-            return [None, False, False, '', ''], True  # an exception was raised, so we return a True
+            return ([], e)  # an exception was raised, so we return a True
 
     def CheckMods(self, mod):
         output = {}
@@ -619,11 +654,11 @@ class NotEnoughClasses():
             # Ok, time to parse it for each mod
             for tempMod in mods:
                 output[tempMod] = self.CheckMod(tempMod, document)
-        except:
+        except Exception as e:
             print(mod + " failed to be polled (SinZationalHax)")
             traceback.print_exc()
             # TODO: Fix this ugly hack
             if 'tempMod' in locals():
-                output[tempMod] = ([None, False, False, '', ''], True)
+                output[tempMod] = ([], e)
 
         return output
