@@ -576,32 +576,50 @@
     "CodeChickenCore": {
         "function": "CheckChickenBones",
         "category": "cb",
-        "active": true
+        "active": true,
+        "SinZationalHax":{
+            "id": "chickenbones"
+        }
     },
     "ChickenChunks": {
         "function": "CheckChickenBones",
         "category": "cb",
-        "active": true
+        "active": true,
+        "SinZationalHax":{
+            "id": "chickenbones"
+        }
     },
     "NotEnoughItems": {
         "function": "CheckChickenBones",
         "category": "cb",
-        "active": true
+        "active": true,
+        "SinZationalHax":{
+            "id": "chickenbones"
+        }
     },
     "EnderStorage": {
         "function": "CheckChickenBones",
         "category": "cb",
-        "active": true
+        "active": true,
+        "SinZationalHax":{
+            "id": "chickenbones"
+        }
     },
-    "Translocator": {
+    "Translocators": {
         "function": "CheckChickenBones",
         "category": "cb",
-        "active": true
+        "active": true,
+        "SinZationalHax":{
+            "id": "chickenbones"
+        }
     },
     "WR-CBE": {
         "function": "CheckChickenBones",
         "category": "cb",
-        "active": true
+        "active": true,
+        "SinZationalHax":{
+            "id": "chickenbones"
+        }
     },
     "TinkersConstruct": {
         "function": "CheckCurse",

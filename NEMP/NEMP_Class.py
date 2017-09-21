@@ -5,6 +5,8 @@ import simplejson
 import traceback
 import yaml
 
+from bs4 import BeautifulSoup
+
 from distutils.version import LooseVersion
 
 logging.getLogger('urllib3').setLevel(logging.WARNING)
@@ -252,19 +254,43 @@ class NotEnoughClasses():
             pass
         return output
 
-    def CheckChickenBones(self, mod):
-        mc_version = self.mods[mod]['mc']
-        local_version = self.get_nem_version(mod, mc_version)
+    def CheckChickenBones(self, mod, document=None):
+        if not document:
+            p = self.fetch_page('http://chickenbones.net/Pages/links.html')
 
-        result = self.fetch_page("http://www.chickenbones.net/Files/notification/version.php?version=" + mc_version + "&file=" + mod)
-        if result.startswith("Ret: "):  # Hacky I know, but this is how ChickenBones does it in his mod
-            new_version = result[5:].strip()
-            if local_version == 'dev-only' or LooseVersion(new_version) > LooseVersion(local_version):
-                return {
-                    "version": new_version
-                }
-            else:
-                return {}
+            d = BeautifulSoup(p, 'html5lib')
+
+            versions = {}
+
+            divs = d.find_all('div', id=re.compile(r'^[0-9.]+_Promotions$'))
+
+            for div in divs:
+                mc = div['id'].split('_', 1)[0]
+
+                tables = div.find_all('table')
+
+                latest_table = tables[-1]
+
+                trs = latest_table.find_all('tr')
+
+                for tr in trs[1:]:
+                    tds = tr.find_all('td')
+                    mod = tds[0].text
+                    if mod == "Translocator":
+                        mod = "Translocators"
+                    version = tds[1].text
+                    versions.setdefault(mod, {})[mc] = version
+
+            return versions
+
+        results = {}
+
+        for mc, version in document[mod].iteritems():
+            results[mc] = {
+                'version': version
+            }
+
+        return results
 
     def CheckHTML(self, mod):
         result = self.fetch_page(self.mods[mod]["html"]["url"])
