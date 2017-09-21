@@ -524,24 +524,22 @@ class NotEnoughClasses():
         version = re.sub(r'-+', '-', version)
         return version
 
-    def get_nem_version(self, mod, nem_list=None):
-        if nem_list is None:
-            nem_list = self.mods[mod]['mc']
-        return self.mods[mod]['nem_versions'].get(nem_list, {}).get('version', '')
+    def get_nem_version(self, mod, nem_list):
+        version = self.mods[mod]['nem_versions'].get(nem_list, {}).get('version', '')
 
-    def get_nem_dev_version(self, mod, nem_list=None):
-        if nem_list is None:
-            nem_list = self.mods[mod]['mc']
+        if version == 'dev-only':
+            # dev-only means there's no release version, so we make that transparent to the parsers
+            return ''
+        else:
+            return version
+
+    def get_nem_dev_version(self, mod, nem_list):
         return self.mods[mod]['nem_versions'].get(nem_list, {}).get('dev', '')
 
-    def set_nem_version(self, mod, version, nem_list=None):
-        if nem_list is None:
-            nem_list = self.mods[mod]['mc']
+    def set_nem_version(self, mod, version, nem_list):
         self.mods[mod]['nem_versions'].setdefault(nem_list, {})['version'] = version
 
-    def set_nem_dev_version(self, mod, version, nem_list=None):
-        if nem_list is None:
-            nem_list = self.mods[mod]['mc']
+    def set_nem_dev_version(self, mod, version, nem_list):
         self.mods[mod]['nem_versions'].setdefault(nem_list, {})['dev'] = version
 
     def get_proper_name(self, mod):
