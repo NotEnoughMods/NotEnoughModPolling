@@ -524,12 +524,16 @@ def cmd_test(self, name, params, channel, userdata, rank):
         self.sendMessage(channel, name + ": Mod \"" + params[1] + "\" does not exist in the database.")
         return
 
-    if 'SinZationalHax' in self.NEM.mods[mod]:
-        # TODO: Allow a way to test them
-        self.sendMessage(channel, name + ": Cannot test that mod because it's SinZationalHax")
+    try:
+        if 'SinZationalHax' in self.NEM.mods[mod]:
+            document = getattr(self.NEM, self.NEM.mods[mod]["function"])(mod, None)
+        else:
+            document = None
+    except Exception as e:
+        self.sendMessage(channel, name + ": Failed to obtain document for SinZationalHax: " + str(e))
         return
 
-    statuses, exception = self.NEM.CheckMod(mod, simulation=True)
+    statuses, exception = self.NEM.CheckMod(mod, document=document, simulation=True)
 
     if exception:
         self.sendMessage(channel, 'Got an exception: ' + str(exception))
