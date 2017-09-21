@@ -22,7 +22,6 @@ class InvalidVersion(Exception):
 class NotEnoughClasses():
     nemVersions = []
 
-    newMods = False
     mods = {}
     SinZationalHax = {}
 

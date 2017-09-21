@@ -210,9 +210,6 @@ def PollingThread(self, pipe):
     sleepTime = self.base["PollTime"]
 
     while self.signal == False:
-        # if NEM.newMods:
-        #    NEM.mods = NEM.newMods
-        #    NEM.InitiateVersions()
         print "I'm still running!"
 
         poll_results = []
