@@ -1,3 +1,4 @@
+beautifulsoup4==4.6.0
 PyYAML==3.12
 requests[security]==2.18.1
 simplejson==3.11.1
