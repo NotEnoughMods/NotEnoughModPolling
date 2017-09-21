@@ -224,15 +224,15 @@ def PollingThread(self, pipe):
                 continue
 
             if "SinZationalHax" in NEM.mods[mod]:
-                continue
                 if NEM.mods[mod]["SinZationalHax"]["id"] not in SinZationalHax:  # have we polled this set of mods before
                     results = NEM.CheckMods(mod)
                     for outputMod, outputInfo in results.iteritems():
                         result, exceptionRaised = results[outputMod]
-                        if result[1] or result[2]:
-                            poll_results.append((outputMod, result))
-                        elif exceptionRaised:
+
+                        if exceptionRaised:
                             failed.append(outputMod)
+                        else:
+                            poll_results.append((outputMod, result))
                     SinZationalHax.append(NEM.mods[mod]["SinZationalHax"]["id"])  # Remember this poll that we have done this set of mods
                 else:
                     # nemp_logger.debug("Already polled {} before".format(NEM.mods[mod]["SinZationalHax"]["id"]))
