@@ -172,9 +172,6 @@ class NotEnoughClasses():
 
                 # Is it in our list?
                 if nem_mod_name in templist:
-                    # Store latest MC version (since the NEM lists are sorted from oldest to newest)
-                    self.mods[nem_mod_name]["mc"] = nem_list_name
-
                     # Grab the dev and release version
                     self.mods[nem_mod_name]['nem_versions'][nem_list_name] = {
                         'dev': nem_mod.get('dev', ''),
@@ -189,9 +186,6 @@ class NotEnoughClasses():
                     for nem_mod in nem_list:
                         # Is it here?
                         if self.mods[lonelyMod]["name"] == nem_mod["name"]:
-                            # Store latest MC version (since the NEM lists are sorted from oldest to newest)
-                            self.mods[lonelyMod]["mc"] = nem_list_name
-
                             # Grab the dev and release version
                             self.mods[lonelyMod]['nem_versions'][nem_list_name] = {
                                 'dev': nem_mod.get('dev', ''),
