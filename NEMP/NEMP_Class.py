@@ -583,13 +583,16 @@ class NotEnoughClasses():
 
             if isinstance(output, dict) and ('version' in output or 'dev' in output):
                 # legacy parser
-
-                # if it doesn't return a Minecraft version, we bail out
                 if not 'mc' in output:
-                    raise Exception('No Minecraft version was returned by the parser')
+                    if 'mc' in self.mods[mod]:
+                        mc = self.mods[mod]['mc']
+                    else:
+                        # if it doesn't return a Minecraft version and there's no default, we bail out
+                        raise NEMPException('No Minecraft version was returned by the parser')
+                else:
+                    mc = output['mc']
 
                 # convert to new format
-                mc = output['mc']
                 new_output = {
                     mc: {}
                 }
