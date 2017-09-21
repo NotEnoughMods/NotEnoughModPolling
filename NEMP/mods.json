@@ -2178,11 +2178,12 @@
         }
     },
     "PlaceableItems": {
-        "function": "CheckHTML",
+        "function": "CheckCurse",
         "active": true,
-        "html": {
-            "url": "https://raw.githubusercontent.com/Ferdzz/PlaceableItems/master/version.txt",
-            "regex": "(?P<version>.+)"
+        "curse": {
+            "id": "227951",
+            "name": "placeable-items",
+            "regex": "Placeable Items (?P<version>[0-9.]+)"
         }
     },
     "FancyFluidStorage": {
