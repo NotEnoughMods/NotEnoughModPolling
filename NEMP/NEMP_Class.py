@@ -299,19 +299,17 @@ class NotEnoughClasses():
     def CheckSpacechase(self, mod):
         jsonres = self.fetch_json("http://spacechase0.com/core/latest.php?obj=mods/minecraft/" + self.mods[mod]["spacechase"]["slug"])
 
-        k = jsonres['downloads'].keys()
+        version = jsonres['version']
 
-        if len(k) > 1:
-            raise NEMPException('keys number changed')
+        results = {}
 
-        mc = k[0]
+        for mc in jsonres['downloads'].iterkeys():
+            results[mc] = {
+                'version': version,
+                'changelog': jsonres['summary']
+            }
 
-        output = {
-            "version": jsonres["version"],
-            "change": jsonres["summary"],
-            "mc": mc
-        }
-        return output
+        return results
 
     def CheckLunatrius(self, mod):
         jsonres = self.fetch_json("http://mc.lunatri.us/json?latest&mod=" + mod + "&v=2")
