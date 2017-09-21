@@ -270,9 +270,12 @@ class NotEnoughClasses():
         results = {}
 
         for mc, version in document[mod].iteritems():
-            results[mc] = {
-                'version': version
-            }
+            local_version = self.get_nem_version(mod, mc)
+
+            if not local_version or LooseVersion(version) > LooseVersion(local_version):
+                results[mc] = {
+                    'version': version
+                }
 
         return results
 
