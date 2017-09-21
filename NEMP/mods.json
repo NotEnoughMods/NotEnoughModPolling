@@ -503,16 +503,6 @@
             "item": 0
         }
     },
-    "IndustrialCraft2-EXP": {
-        "function": "CheckJenkins",
-        "category": "Player",
-        "active": true,
-        "jenkins": {
-            "url": "http://jenkins.ic2.player.to/job/IC2_experimental/lastSuccessfulBuild/api/json",
-            "regex": "industrialcraft-2-(?P<version>.+?)-experimental.jar",
-            "item": 2
-        }
-    },
     "AdditionalBuildcraftObjects": {
         "function": "CheckGitHubRelease",
         "active": true,
