@@ -421,24 +421,10 @@ class NotEnoughClasses():
             'version': version
         }
 
-    def Check4Space(self, mod):
-        page = self.fetch_page('http://4space.mods.center/version.html')
 
-        parts = page.strip().replace('Version=', '').split('#')
 
-        if len(parts) != 3:
-            raise RuntimeError('Invalid amount of version parts')
 
-        new_version = '.'.join(parts)
 
-        local_version = self.get_nem_version(mod)
-
-        if local_version == 'dev-only' or LooseVersion(new_version) > LooseVersion(local_version):
-            return {
-                "version": new_version
-            }
-        else:
-            return {}
 
     def CheckBotania(self, mod):
         mc = self.mods[mod]['mc']
