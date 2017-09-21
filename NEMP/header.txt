@@ -9,7 +9,6 @@
     <thead><tr>
         <th>Mod Name</th>
         <th>Function</th>
-        <th>MC Version</th>
         <th>Category</th>
     </tr></thead>
     <tbody>

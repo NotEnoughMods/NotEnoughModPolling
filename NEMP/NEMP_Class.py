@@ -145,8 +145,7 @@ class NotEnoughClasses():
             <td class='name'>{}</td>""".format(isDisabled, modName))
                 f.write("""
             <td class='function'>{}</td>
-            <td class='mc_version'>{}</td>
-""".format(info["function"], info["mc"]))
+""".format(info["function"]))
                 try:
                     f.write("            <td class='category'>{}</td>\r\n".format(info["category"]))
                 except:
