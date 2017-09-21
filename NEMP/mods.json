@@ -514,6 +514,7 @@
     "Galacticraft": {
         "function": "CheckJenkins",
         "active": true,
+        "mc": "1.7.10",
         "jenkins": {
             "url": "http://ci.micdoodle8.com:8080/job/Galacticraft-1.7/lastSuccessfulBuild/api/json",
             "regex": "GalacticraftCore-.+?-(?P<dev>.+?).jar",
@@ -523,6 +524,7 @@
     "MicdoodleCore": {
         "function": "CheckJenkins",
         "active": true,
+        "mc": "1.7.10",
         "jenkins": {
             "url": "http://ci.micdoodle8.com:8080/job/Galacticraft-1.7/lastSuccessfulBuild/api/json",
             "regex": "MicdoodleCore-.+?-(?P<dev>.+?).jar",
@@ -543,6 +545,7 @@
     "LogisticsPipes": {
         "function": "CheckJenkins",
         "active": true,
+        "mc": "1.7.10",
         "jenkins": {
             "url": "http://ci.rs485.network/view/Logistics%20Pipes/job/LogisticsPipes-0.9-mc17-bc7/lastSuccessfulBuild/api/json",
             "regex": "logisticspipes-(?P<dev>.+?).jar",
