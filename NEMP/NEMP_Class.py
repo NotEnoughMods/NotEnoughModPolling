@@ -10,7 +10,11 @@ from distutils.version import LooseVersion
 logging.getLogger('urllib3').setLevel(logging.WARNING)
 
 
-class InvalidVersion(Exception):
+class NEMPException(Exception):
+    pass
+
+
+class InvalidVersion(NEMPException):
 
     def __init__(self, version):
         self.version = version
