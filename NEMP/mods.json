@@ -2181,12 +2181,10 @@
         }
     },
     "PlaceableItems": {
-        "function": "CheckCurse",
+        "function": "CheckForgeJson",
         "active": true,
-        "curse": {
-            "id": "227951",
-            "name": "placeable-items",
-            "regex": "Placeable Items (?P<version>[0-9.]+)"
+        "forgejson": {
+            "url": "https://raw.githubusercontent.com/Ferdzz/PlaceableItems/master/update.json"
         }
     },
     "FancyFluidStorage": {
@@ -2956,139 +2954,39 @@
             "regex": "chiselsandbits-(?P<version>.+?).jar"
         }
     },
-    "BuildingBricks-1.9": {
-        "name": "BuildingBricks",
+    "BuildingBricks": {
         "function": "CheckForgeJson",
         "active": true,
         "forgejson": {
-            "url": "https://raw.githubusercontent.com/hea3ven/BuildingBricks/master/media/update.json",
-            "mcversion": "1.9"
+            "url": "https://raw.githubusercontent.com/hea3ven/BuildingBricks/master/media/update.json"
         }
     },
-    "Malleable-1.9": {
-        "name": "Malleable",
+    "Malleable": {
         "function": "CheckForgeJson",
         "active": true,
         "forgejson": {
-            "url": "https://raw.githubusercontent.com/hea3ven/Malleable/version/media/update.json",
-            "mcversion": "1.9"
+            "url": "https://raw.githubusercontent.com/hea3ven/Malleable/version/media/update.json"
         }
     },
-    "BuildingBricks-1.9.4": {
-        "name": "BuildingBricks",
+    "HardModeTweaks": {
         "function": "CheckForgeJson",
         "active": true,
         "forgejson": {
-            "url": "https://raw.githubusercontent.com/hea3ven/BuildingBricks/version/media/update.json",
-            "mcversion": "1.9.4"
+            "url": "https://raw.githubusercontent.com/hea3ven/HardModeTweaks/version/media/update.json"
         }
     },
-    "HardModeTweaks-1.9": {
-        "name": "HardModeTweaks",
+    "TwinTails": {
         "function": "CheckForgeJson",
         "active": true,
         "forgejson": {
-            "url": "https://raw.githubusercontent.com/hea3ven/HardModeTweaks/version/media/update.json",
-            "mcversion": "1.9"
+            "url": "https://raw.githubusercontent.com/hea3ven/TwinTails/version/media/update.json"
         }
     },
-    "HardModeTweaks-1.9.4": {
-        "name": "HardModeTweaks",
+    "DulceDeLeche": {
         "function": "CheckForgeJson",
         "active": true,
         "forgejson": {
-            "url": "https://raw.githubusercontent.com/hea3ven/HardModeTweaks/version/media/update.json",
-            "mcversion": "1.9.4"
-        }
-    },
-    "TwinTails-1.9": {
-        "name": "TwinTails",
-        "function": "CheckForgeJson",
-        "active": true,
-        "forgejson": {
-            "url": "https://raw.githubusercontent.com/hea3ven/TwinTails/version/media/update.json",
-            "mcversion": "1.9"
-        }
-    },
-    "TwinTails-1.9.4": {
-        "name": "TwinTails",
-        "function": "CheckForgeJson",
-        "active": true,
-        "forgejson": {
-            "url": "https://raw.githubusercontent.com/hea3ven/TwinTails/version/media/update.json",
-            "mcversion": "1.9.4"
-        }
-    },
-    "DulceDeLeche-1.9": {
-        "name": "DulceDeLeche",
-        "function": "CheckForgeJson",
-        "active": true,
-        "forgejson": {
-            "url": "https://raw.githubusercontent.com/hea3ven/DulceDeLeche/version/media/update.json",
-            "mcversion": "1.9"
-        }
-    },
-    "DulceDeLeche-1.9.4": {
-        "name": "DulceDeLeche",
-        "function": "CheckForgeJson",
-        "active": true,
-        "forgejson": {
-            "url": "https://raw.githubusercontent.com/hea3ven/DulceDeLeche/version/media/update.json",
-            "mcversion": "1.9.4"
-        }
-    },
-    "Malleable-1.9.4": {
-        "name": "Malleable",
-        "function": "CheckForgeJson",
-        "active": true,
-        "forgejson": {
-            "url": "https://raw.githubusercontent.com/hea3ven/Malleable/version/media/update.json",
-            "mcversion": "1.9.4"
-        }
-    },
-    "BuildingBricks-1.10": {
-        "name": "BuildingBricks",
-        "function": "CheckForgeJson",
-        "active": true,
-        "forgejson": {
-            "url": "https://raw.githubusercontent.com/hea3ven/BuildingBricks/version/media/update.json",
-            "mcversion": "1.10"
-        }
-    },
-    "HardModeTweaks-1.10": {
-        "name": "HardModeTweaks",
-        "function": "CheckForgeJson",
-        "active": true,
-        "forgejson": {
-            "url": "https://raw.githubusercontent.com/hea3ven/HardModeTweaks/version/media/update.json",
-            "mcversion": "1.10"
-        }
-    },
-    "TwinTails-1.10": {
-        "name": "TwinTails",
-        "function": "CheckForgeJson",
-        "active": true,
-        "forgejson": {
-            "url": "https://raw.githubusercontent.com/hea3ven/TwinTails/version/media/update.json",
-            "mcversion": "1.10"
-        }
-    },
-    "DulceDeLeche-1.10": {
-        "name": "DulceDeLeche",
-        "function": "CheckForgeJson",
-        "active": true,
-        "forgejson": {
-            "url": "https://raw.githubusercontent.com/hea3ven/DulceDeLeche/version/media/update.json",
-            "mcversion": "1.10"
-        }
-    },
-    "Malleable-1.10": {
-        "name": "Malleable",
-        "function": "CheckForgeJson",
-        "active": true,
-        "forgejson": {
-            "url": "https://raw.githubusercontent.com/hea3ven/Malleable/version/media/update.json",
-            "mcversion": "1.10"
+            "url": "https://raw.githubusercontent.com/hea3ven/DulceDeLeche/version/media/update.json"
         }
     },
     "RebornCore": {
@@ -3226,58 +3124,18 @@
             "regex": "underphangables-(?P<mc>[0-9\\.]+)-(?P<version>.+?)\\.jar"
         }
     },
-    "ArmorPlus-1.10.2": {
-        "name": "ArmorPlus",
+    "ArmorPlus": {
         "function": "CheckForgeJson",
         "active": true,
         "forgejson": {
-            "url": "http://fdn.redstone.tech/TheDragonTeam/armorplus/update.json",
-            "mcversion": "1.10.2"
+            "url": "http://fdn.redstone.tech/TheDragonTeam/armorplus/update.json"
         }
     },
-    "ArmorPlus-1.11": {
-        "name": "ArmorPlus",
+    "TheDragonLib": {
         "function": "CheckForgeJson",
         "active": true,
         "forgejson": {
-            "url": "http://fdn.redstone.tech/TheDragonTeam/armorplus/update.json",
-            "mcversion": "1.11"
-        }
-    },
-    "ArmorPlus-1.11.2": {
-        "name": "ArmorPlus",
-        "function": "CheckForgeJson",
-        "active": true,
-        "forgejson": {
-            "url": "http://fdn.redstone.tech/TheDragonTeam/armorplus/update.json",
-            "mcversion": "1.11.2"
-        }
-    },
-    "TheDragonLib-1.10.2": {
-        "name": "TheDragonLib",
-        "function": "CheckForgeJson",
-        "active": true,
-        "forgejson": {
-            "url": "http://fdn.redstone.tech/TheDragonTeam/thedragonlib/update.json",
-            "mcversion": "1.10.2"
-        }
-    },
-    "TheDragonLib-1.11": {
-        "name": "TheDragonLib",
-        "function": "CheckForgeJson",
-        "active": true,
-        "forgejson": {
-            "url": "http://fdn.redstone.tech/TheDragonTeam/thedragonlib/update.json",
-            "mcversion": "1.11"
-        }
-    },
-    "TheDragonLib-1.11.2": {
-        "name": "TheDragonLib",
-        "function": "CheckForgeJson",
-        "active": true,
-        "forgejson": {
-            "url": "http://fdn.redstone.tech/TheDragonTeam/thedragonlib/update.json",
-            "mcversion": "1.11.2"
+            "url": "http://fdn.redstone.tech/TheDragonTeam/thedragonlib/update.json"
         }
     },
     "MCMultiPart": {
@@ -3400,31 +3258,11 @@
             "regex": "^(?P<mc>[0-9.]+)-v(?P<version>[0-9.]+)$"
         }
     },
-    "SuperMiner-1.10.2": {
-        "name": "SuperMiner",
+    "SuperMiner": {
         "function": "CheckForgeJson",
         "active": true,
         "forgejson": {
-            "url": "http://www.duelmonster.talktalk.net/Minecraft/SuperMiner/forge_update.json",
-            "mcversion": "1.10.2"
-        }
-    },
-    "SuperMiner-1.11": {
-        "name": "SuperMiner",
-        "function": "CheckForgeJson",
-        "active": true,
-        "forgejson": {
-            "url": "http://www.duelmonster.talktalk.net/Minecraft/SuperMiner/forge_update.json",
-            "mcversion": "1.11"
-        }
-    },
-    "SuperMiner-1.11.2": {
-        "name": "SuperMiner",
-        "function": "CheckForgeJson",
-        "active": true,
-        "forgejson": {
-            "url": "http://www.duelmonster.talktalk.net/Minecraft/SuperMiner/forge_update.json",
-            "mcversion": "1.11.2"
+            "url": "http://www.duelmonster.talktalk.net/Minecraft/SuperMiner/forge_update.json"
         }
     },
     "AstralSorcery": {
@@ -3489,103 +3327,25 @@
             "regex": "AppleSkin-mc.+?-(?P<version>.+)\\.jar"
         }
     },
-    "UnlimitedChiselWorks-1.10.2": {
-        "name": "UnlimitedChiselWorks",
+    "UnlimitedChiselWorks": {
         "function": "CheckForgeJson",
         "active": true,
         "forgejson": {
-            "url": "https://asie.pl/files/minecraft/update/unlimitedchiselworks.json",
-            "mcversion": "1.10.2"
+            "url": "https://asie.pl/files/minecraft/update/unlimitedchiselworks.json"
         }
     },
-    "UnlimitedChiselWorks-1.11.2": {
-        "name": "UnlimitedChiselWorks",
+    "PonySocks": {
         "function": "CheckForgeJson",
         "active": true,
         "forgejson": {
-            "url": "https://asie.pl/files/minecraft/update/unlimitedchiselworks.json",
-            "mcversion": "1.11.2"
+            "url": "https://asie.pl/files/minecraft/update/ponysocks.json"
         }
     },
-    "UnlimitedChiselWorks-1.12.1": {
-        "name": "UnlimitedChiselWorks",
+    "Charset": {
         "function": "CheckForgeJson",
         "active": true,
         "forgejson": {
-            "url": "https://asie.pl/files/minecraft/update/unlimitedchiselworks.json",
-            "mcversion": "1.12.1"
-        }
-    },
-    "UnlimitedChiselWorks-1.12.2": {
-        "name": "UnlimitedChiselWorks",
-        "function": "CheckForgeJson",
-        "active": true,
-        "forgejson": {
-            "url": "https://asie.pl/files/minecraft/update/unlimitedchiselworks.json",
-            "mcversion": "1.12.2"
-        }
-    },
-    "PonySocks-1.12.1": {
-        "name": "PonySocks",
-        "function": "CheckForgeJson",
-        "active": true,
-        "forgejson": {
-            "url": "https://asie.pl/files/minecraft/update/ponysocks.json",
-            "mcversion": "1.12.1"
-        }
-    },
-    "PonySocks-1.12.2": {
-        "name": "PonySocks",
-        "function": "CheckForgeJson",
-        "active": true,
-        "forgejson": {
-            "url": "https://asie.pl/files/minecraft/update/ponysocks.json",
-            "mcversion": "1.12.2"
-        }
-    },
-    "Charset-1.8.9": {
-        "name": "Charset",
-        "function": "CheckForgeJson",
-        "active": true,
-        "forgejson": {
-            "url": "https://asie.pl/files/minecraft/update/charset.json",
-            "mcversion": "1.8.9"
-        }
-    },
-    "Charset-1.9.4": {
-        "name": "Charset",
-        "function": "CheckForgeJson",
-        "active": true,
-        "forgejson": {
-            "url": "https://asie.pl/files/minecraft/update/charset.json",
-            "mcversion": "1.9.4"
-        }
-    },
-    "Charset-1.10.2": {
-        "name": "Charset",
-        "function": "CheckForgeJson",
-        "active": true,
-        "forgejson": {
-            "url": "https://asie.pl/files/minecraft/update/charset.json",
-            "mcversion": "1.10.2"
-        }
-    },
-    "Charset-1.11": {
-        "name": "Charset",
-        "function": "CheckForgeJson",
-        "active": true,
-        "forgejson": {
-            "url": "https://asie.pl/files/minecraft/update/charset.json",
-            "mcversion": "1.11"
-        }
-    },
-    "Charset-1.11.2": {
-        "name": "Charset",
-        "function": "CheckForgeJson",
-        "active": true,
-        "forgejson": {
-            "url": "https://asie.pl/files/minecraft/update/charset.json",
-            "mcversion": "1.11.2"
+            "url": "https://asie.pl/files/minecraft/update/charset.json"
         }
     },
     "CraftingRedstone": {

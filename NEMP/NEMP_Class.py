@@ -219,33 +219,24 @@ class NotEnoughClasses():
         if "promos" not in jsonres:
             return {}
 
-        mc_version = self.mods[mod]["forgejson"]["mcversion"]
-        promo = mc_version + "-recommended"
-        dev_promo = mc_version + "-latest"
+        versions = {}
 
-        if promo not in jsonres["promos"] and dev_promo not in jsonres["promos"]:
-            return {}
+        for promo, version in jsonres['promos'].iteritems():
+            mc, promo_type = promo.split('-', 1)
 
-        output = {"mc": mc_version}
-        if promo in jsonres["promos"]:
-            if dev_promo in jsonres["promos"] and jsonres["promos"][promo] != jsonres["promos"][dev_promo]:
-                output["dev"] = jsonres["promos"][dev_promo]
+            if promo_type == 'latest':
+                version_type = 'dev'
             else:
-                output["version"] = jsonres["promos"][promo]
-        else:
-            output["dev"] = jsonres["promos"][dev_promo]
+                version_type = 'version'
 
-        try:
-            if "version" in output:
-                version = output["version"]
-            else:
-                version = output["dev"]
+            versions.setdefault(mc, {})[version_type] = version
 
-            if jsonres[mc_version][version]:
-                output["change"] = jsonres[mc_version][version]
-        except:
-            pass
-        return output
+        # Finishing touches
+        for mc, version_info in versions.iteritems():
+            if 'dev' in version_info and 'version' in version_info and version_info['dev'] == version_info['version']:
+                del versions[mc]['dev']
+
+        return versions
 
     def CheckChickenBones(self, mod, document=None):
         if not document:
