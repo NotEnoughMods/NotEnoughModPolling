@@ -73,27 +73,6 @@
             "promoType": "dev"
         }
     },
-    "CompactSolars": {
-        "function": "CheckMCForge2",
-        "category": "forge",
-        "active": true,
-        "mcforge": {
-            "url": "http://files.minecraftforge.net/maven/cpw/mods/CompactSolars/promotions.json",
-            "promo": "latest",
-            "promoType": "dev"
-        }
-    },
-    "CompactSolars-Release": {
-        "name": "CompactSolars",
-        "function": "CheckMCForge2",
-        "category": "forge",
-        "active": true,
-        "mcforge": {
-            "url": "http://files.minecraftforge.net/maven/cpw/mods/CompactSolars/promotions.json",
-            "promo": "recommended",
-            "promoType": "version"
-        }
-    },
     "BiomesOPlenty": {
         "function": "CheckMCForge2",
         "category": "forge",
@@ -705,105 +684,6 @@
             "regex": "BloodMagic-(?P<mc>.+?)-(?P<version>.+?).jar",
             "id": "224791",
             "name": "blood-magic"
-        }
-    },
-    "StatusEffectHUD": {
-        "function": "CheckHTML",
-        "category": "bspkrs",
-        "active": true,
-        "html": {
-            "url": "http://bspk.rs/Minecraft/1.7.10/statusEffectHUD.version",
-            "regex": "(?P<version>.+?)$"
-        }
-    },
-    "ArmorStatusHUD": {
-        "function": "CheckHTML",
-        "category": "bspkrs",
-        "active": true,
-        "html": {
-            "url": "http://bspk.rs/Minecraft/1.7.10/armorStatusHUD.version",
-            "regex": "(?P<version>.+?)$"
-        }
-    },
-    "BlockBreaker": {
-        "function": "CheckHTML",
-        "category": "bspkrs",
-        "active": true,
-        "html": {
-            "url": "http://bspk.rs/Minecraft/1.6.4/blockBreakerForge.version",
-            "regex": "Forge (?P<version>.+?)$"
-        }
-    },
-    "bspkrsCore": {
-        "function": "CheckHTML",
-        "category": "bspkrs",
-        "active": true,
-        "html": {
-            "url": "http://bspk.rs/Minecraft/1.7.10/bspkrsCore.version",
-            "regex": "(?P<version>.+?)$"
-        }
-    },
-    "CrystalWing": {
-        "function": "CheckHTML",
-        "category": "bspkrs",
-        "active": true,
-        "html": {
-            "url": "http://bspk.rs/Minecraft/1.7.10/crystalWingForge.version",
-            "regex": "(?P<version>.+?)$"
-        }
-    },
-    "DirectionHUD": {
-        "function": "CheckHTML",
-        "category": "bspkrs",
-        "active": true,
-        "html": {
-            "url": "http://bspk.rs/Minecraft/1.7.10/directionHUD.version",
-            "regex": "(?P<version>.+?)$"
-        }
-    },
-    "FloatingRuins": {
-        "function": "CheckHTML",
-        "category": "bspkrs",
-        "active": true,
-        "html": {
-            "url": "http://bspk.rs/Minecraft/1.7.10/floatingRuinsForge.version",
-            "regex": "(?P<version>.+?)$"
-        }
-    },
-    "IngameInfo": {
-        "function": "CheckHTML",
-        "category": "bspkrs",
-        "active": true,
-        "html": {
-            "url": "http://bspk.rs/Minecraft/1.6.4/ingameInfo.version",
-            "regex": "ML (?P<version>.+?)$"
-        }
-    },
-    "StartingInventory": {
-        "function": "CheckHTML",
-        "category": "bspkrs",
-        "active": true,
-        "html": {
-            "url": "http://bspk.rs/Minecraft/1.7.10/startingInventoryForge.version",
-            "regex": "(?P<version>.+?)$"
-        }
-    },
-    "TreeCapitator": {
-        "function": "CheckHTML",
-        "category": "bspkrs",
-        "active": true,
-        "html": {
-            "url": "http://bspk.rs/Minecraft/1.7.10/treecapitator.version",
-            "regex": "(?P<version>.+?)$"
-        }
-    },
-    "WorldStateCheckpoints": {
-        "function": "CheckHTML",
-        "category": "bspkrs",
-        "active": true,
-        "html": {
-            "url": "http://bspk.rs/Minecraft/1.7.10/worldStateCheckpointsForge.version",
-            "regex": "(?P<version>.+?)$"
         }
     },
     "DynIMC": {
@@ -2244,10 +2124,6 @@
             "regex": "copycore-(?P<mc>.+?)-(?P<version>.+?)\\.jar"
         }
     },
-    "4Space": {
-        "function": "Check4Space",
-        "active": true
-    },
     "HelpFixer": {
         "function": "CheckCurse",
         "active": true,
@@ -2562,15 +2438,6 @@
             "url": "http://jenkins.bdew.net/job/compacter-1.7.10/lastSuccessfulBuild/api/json",
             "regex": "compacter-(?P<version>.+?)-mc(?P<mc>1\\..+).jar",
             "item": 0
-        }
-    },
-    "ArmourersWorkshop": {
-        "function": "CheckJenkins",
-        "active": true,
-        "jenkins": {
-            "url": "http://jenkins.rx14.co.uk/job/RiskyKen/job/Armourers-Workshop/lastSuccessfulBuild/api/json",
-            "regex": "Armourers-Workshop-(?P<mc>1\\..+)-(?P<version>.+)\\.jar",
-            "item": 3
         }
     },
     "Decocraft": {
