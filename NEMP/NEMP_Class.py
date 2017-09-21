@@ -222,6 +222,10 @@ class NotEnoughClasses():
         versions = {}
 
         for promo, version in jsonres['promos'].iteritems():
+            if promo == 'reserved':
+                # thanks Hea3veN
+                continue
+
             mc, promo_type = promo.split('-', 1)
 
             if promo_type == 'latest':
