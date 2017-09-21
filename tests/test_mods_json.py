@@ -50,4 +50,3 @@ class TestModsJson(unittest.TestCase):
 
             self.assertIn('forgejson', mod_info, msg=msg)
             self.assertIn('url', mod_info['forgejson'], msg=msg)
-            self.assertIn('mcversion', mod_info['forgejson'], msg=msg)

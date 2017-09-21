@@ -40,10 +40,9 @@ class TestModsJson(unittest.TestCase):
 
         result = self.nec.CheckForgeJson("testmod")
 
-        self.assertEquals("1.8.9", result["mc"])
-        self.assertEquals("1.0.0", result["version"])
-        self.assertNotIn("dev", result)
-        self.assertEquals("test changelog", result["change"])
+        self.assertIn("1.8.9", result)
+        self.assertEquals("1.0.0", result['1.8.9']["version"])
+        self.assertNotIn("dev", result['1.8.9'])
 
     def test_forgejson_dev_version(self):
         self.nec.set_url_json("testurl", {
@@ -57,10 +56,9 @@ class TestModsJson(unittest.TestCase):
 
         result = self.nec.CheckForgeJson("testmod")
 
-        self.assertEquals("1.8.9", result["mc"])
-        self.assertNotIn("version", result)
-        self.assertEquals("1.0.0", result["dev"])
-        self.assertEquals("test changelog", result["change"])
+        self.assertIn("1.8.9", result)
+        self.assertNotIn("version", result['1.8.9'])
+        self.assertEquals("1.0.0", result['1.8.9']["dev"])
 
     def test_forgejson_both_versions_equal(self):
         self.nec.set_url_json("testurl", {
@@ -75,10 +73,9 @@ class TestModsJson(unittest.TestCase):
 
         result = self.nec.CheckForgeJson("testmod")
 
-        self.assertEquals("1.8.9", result["mc"])
-        self.assertEquals("1.0.0", result["version"])
-        self.assertNotIn("dev", result)
-        self.assertEquals("test changelog", result["change"])
+        self.assertIn("1.8.9", result)
+        self.assertEquals("1.0.0", result['1.8.9']["version"])
+        self.assertNotIn("dev", result['1.8.9'])
 
     def test_forgejson_both_versions_different(self):
         self.nec.set_url_json("testurl", {
@@ -94,10 +91,9 @@ class TestModsJson(unittest.TestCase):
 
         result = self.nec.CheckForgeJson("testmod")
 
-        self.assertEquals("1.8.9", result["mc"])
-        self.assertNotIn("version", result)
-        self.assertEquals("1.0.1", result["dev"])
-        self.assertEquals("other changelog", result["change"])
+        self.assertIn("1.8.9", result)
+        self.assertIn("version", result['1.8.9'])
+        self.assertEquals("1.0.1", result['1.8.9']["dev"])
 
     def test_forgejson_no_changelog(self):
         self.nec.set_url_json("testurl", {
@@ -110,10 +106,9 @@ class TestModsJson(unittest.TestCase):
 
         result = self.nec.CheckForgeJson("testmod")
 
-        self.assertEquals("1.8.9", result["mc"])
-        self.assertEquals("1.0.0", result["version"])
-        self.assertNotIn("dev", result)
-        self.assertNotIn("change", result)
+        self.assertIn("1.8.9", result)
+        self.assertEquals("1.0.0", result['1.8.9']["version"])
+        self.assertNotIn("dev", result['1.8.9'])
 
     def test_forgejson_no_mcversion_data(self):
         self.nec.set_url_json("testurl", {
@@ -124,24 +119,9 @@ class TestModsJson(unittest.TestCase):
 
         result = self.nec.CheckForgeJson("testmod")
 
-        self.assertEquals("1.8.9", result["mc"])
-        self.assertEquals("1.0.0", result["version"])
-        self.assertNotIn("dev", result)
-        self.assertNotIn("change", result)
-
-    def test_forgejson_no_promo_for_mcversion(self):
-        self.nec.set_url_json("testurl", {
-            "promos": {
-                "1.8.8-recommended": "1.0.0"
-            },
-            "1.8.8": {
-                "1.0.0": "test changelog"
-            }
-        })
-
-        result = self.nec.CheckForgeJson("testmod")
-
-        self.assertEquals({}, result)
+        self.assertIn("1.8.9", result)
+        self.assertEquals("1.0.0", result['1.8.9']["version"])
+        self.assertNotIn("dev", result['1.8.9'])
 
     def test_forgejson_no_promos(self):
         self.nec.set_url_json("testurl", {
