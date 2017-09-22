@@ -3280,7 +3280,7 @@
         "curse": {
             "id": "270330",
             "name": "tickprofiler",
-            "regex": "TickProfiler-.+?-jenkins\\.(?P<version>[0-9]+)"
+            "regex": "TickProfiler-.+?-(?P<version>.+)\\.jar"
         }
     },
     "CompatLayer": {
