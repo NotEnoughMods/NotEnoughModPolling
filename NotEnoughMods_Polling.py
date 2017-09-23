@@ -292,12 +292,10 @@ def NEMP_TimerEvent(self, channels):
         for item in poll_results:
             # item[0] = name of mod
             # item[1] = mc version, flags for dev/release change
-            # result flags[0] = mc version (can be None)
-            # result flags[1] = has dev version changed?
-            # result flags[2] = has release version changed?
-            # result flags[3] = previous dev version
-            # result flags[4] = previous release version
-            # result flags[5] = changelog
+            # result status[0] = mc version
+            # result status[1] = dev version
+            # result status[2] = release version
+            # result status[3] = changelog
             mod = item[0]
             statuses = item[1]
 
@@ -307,10 +305,10 @@ def NEMP_TimerEvent(self, channels):
                 real_name = mod
 
             for status in statuses:
-                mc_version, dev_flag, release_flag, last_dev, last_release, changelog = status
+                mc_version, dev_version, release_version, changelog = status
 
-                dev_version = self.NEM.get_nem_dev_version(mod, mc_version)
-                release_version = self.NEM.get_nem_version(mod, mc_version)
+                last_dev = self.NEM.get_nem_dev_version(mod, mc_version)
+                last_release = self.NEM.get_nem_version(mod, mc_version)
 
                 if not last_dev and not last_release:
                     # No previous information info, so it's new to this NEM list/MC version
@@ -319,18 +317,22 @@ def NEMP_TimerEvent(self, channels):
                     else:
                         clone_version = 'dev-only'
 
+                    self.NEM.set_nem_version(mod, clone_version, mc_version)
+
                     nemp_logger.debug('Cloning mod {} to {}, status: {}'.format(mod, mc_version, status))
                     for channel in channels:
                         self.sendMessage(channel, '!clone {} {} {}'.format(real_name, mc_version, clone_version))
-                elif release_flag and release_version:
+                elif release_version:
                     nemp_logger.debug("Updating Mod {0}, status: {1}".format(mod, status))
+                    self.NEM.set_nem_version(mod, release_version, mc_version)
                     for channel in channels:
-                        self.sendMessage(channel, "!lmod {0} {1} {2}".format(mc_version, real_name, unicode(release_version)))
+                        self.sendMessage(channel, "!lmod {0} {1} {2}".format(mc_version, real_name, release_version))
 
-                if dev_flag and dev_version:
+                if dev_version:
                     nemp_logger.debug("Updating DevMod {0}, status: {1}".format(mod, status))
+                    self.NEM.set_nem_dev_version(mod, dev_version, mc_version)
                     for channel in channels:
-                        self.sendMessage(channel, "!ldev {0} {1} {2}".format(mc_version, real_name, unicode(dev_version)))
+                        self.sendMessage(channel, "!ldev {0} {1} {2}".format(mc_version, real_name, dev_version))
 
                 if changelog and "changelog" not in self.NEM.mods[mod]:
                     nemp_logger.debug("Sending text for Mod {0}".format(mod))
@@ -542,13 +544,31 @@ def cmd_test(self, name, params, channel, userdata, rank):
     if not statuses:
         self.sendMessage(channel, name + ": Got no results from the parser")
 
+    real_name = self.NEM.mods[mod].get('name', mod)
+
+    print '{} {!r}'.format(mod, statuses)
+
     for status in statuses:
-        mc_version, dev_flag, release_flag, last_dev, last_release, changelog = status
+        mc_version, dev_version, release_version, changelog = status
 
-        self.sendMessage(channel, 'MC={}, version_flag={!r}, dev_flag={!r}'.format(mc_version, release_flag, dev_flag))
+        last_dev = self.NEM.get_nem_dev_version(mod, mc_version)
+        last_release = self.NEM.get_nem_version(mod, mc_version)
 
-        if changelog:
-            self.sendMessage(channel, 'changelog={}'.format(changelog))
+        if not last_dev and not last_release:
+            if release_version:
+                clone_version = release_version
+            else:
+                clone_version = 'dev-only'
+
+            self.sendMessage(channel, 'clone {} {} {}'.format(real_name, mc_version, clone_version))
+        elif release_version:
+            self.sendMessage(channel, 'lmod {} {} {}'.format(mc_version, real_name, release_version))
+
+        if dev_version:
+            self.sendMessage(channel, 'ldev {} {} {}'.format(mc_version, real_name, dev_version))
+
+        if changelog and 'changelog' not in self.NEM.mods[mod]:
+            self.sendMessage(channel, ' * ' + ' | '.join(changelog.splitlines())[:300])
 
 def cmd_html(self, name, params, channel, userdata, rank):
     self.NEM.buildHTML()

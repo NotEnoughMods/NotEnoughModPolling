@@ -611,8 +611,9 @@ class NotEnoughClasses():
             statuses = []
 
             for mc, version_info in output.iteritems():
-                # [mc version, dev change, version change, previous dev, previous release, changelog]
-                status = [None, False, False, '', '', None]
+                # [mc version, dev version, release version, changelog]
+                status = [None, '', '', None]
+                status = [None, '', '', None]
 
                 status[0] = mc
 
@@ -626,10 +627,8 @@ class NotEnoughClasses():
                     if not remote_dev or not self.is_version_valid(remote_dev):
                         raise InvalidVersion(remote_dev)
 
-                    if local_dev != remote_dev:
-                        status[1] = True
-                        if not simulation:
-                            self.set_nem_dev_version(mod, remote_dev, mc)
+                    if simulation or local_dev != remote_dev:
+                        status[1] = remote_dev
 
                 local_release = self.get_nem_version(mod, mc)
 
@@ -641,16 +640,11 @@ class NotEnoughClasses():
                     if not remote_release or not self.is_version_valid(remote_release):
                         raise InvalidVersion(remote_release)
 
-                    if local_release != remote_release:
-                        status[2] = True
-                        if not simulation:
-                            self.set_nem_version(mod, remote_release, mc)
+                    if simulation or local_release != remote_release:
+                        status[2] = remote_release
 
                 if 'changelog' in version_info and 'changelog' not in self.mods[mod]:
-                    status[5] = version_info['changelog']
-
-                status[3] = local_dev
-                status[4] = local_release
+                    status[3] = version_info['changelog']
 
                 if simulation or (status[1] or status[2]):
                     statuses.append(status)
