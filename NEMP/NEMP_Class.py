@@ -580,7 +580,6 @@ class NotEnoughClasses():
 
     def CheckMod(self, mod, document=None, simulation=False):
         try:
-
             output = getattr(self, self.mods[mod]["function"])(mod, document=document, simulation=simulation)
 
             if output is None:
