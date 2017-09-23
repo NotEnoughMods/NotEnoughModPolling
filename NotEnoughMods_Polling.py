@@ -347,31 +347,49 @@ def NEMP_TimerEvent(self, channels):
         completely_failed_mods = []
 
         for item in failedMods:
+            nemp_logger.debug('Processing failedMods entry {!r}'.format(item))
+
+            assert(isinstance(item, tuple))
+
             mod = item[0]
             exception = item[1]
 
-            if mod not in self.NEM_troubledMods:
-                self.NEM_troubledMods[mod] = 1
-                nemp_logger.debug("Mod {0} had trouble being polled once. Counter set to 1".format(mod))
+            if isinstance(exception, (NEMP_Class.NEMPException, )):
+                nemp_logger.debug('Mod {} got a {}, failing immediately'.format(mod, type(exception).__name__))
 
-            else:
-                self.NEM_troubledMods[mod] += 1
-
-                # We have checked the mod, so we remove it from our temporary list
-                current_troubled_mods.remove(mod)
-
-                if self.NEM_troubledMods[mod] >= 5:
-                    self.NEM_autodeactivatedMods[mod] = True
-                    self.NEM.mods[mod]["active"] = False
+                if mod in self.NEM_troubledMods:
                     del self.NEM_troubledMods[mod]
 
-                    completely_failed_mods.append(mod)
+                self.NEM_autodeactivatedMods[mod] = True
+                self.NEM.mods[mod]['active'] = False
 
-                    nemp_logger.debug("Mod {0} has failed to be polled at least 5 times, it has been disabled.".format(mod))
-                    self.NEM.buildHTML()
+                if staff_channel:
+                    self.sendMessage(staff_channel, 'Mod {} failed with a {}: {}'.format(mod, type(exception).__name__, exception))
+            else:
+                if mod not in self.NEM_troubledMods:
+                    self.NEM_troubledMods[mod] = 1
+                    nemp_logger.debug("Mod {0} had trouble being polled once. Counter set to 1".format(mod))
+
+                else:
+                    self.NEM_troubledMods[mod] += 1
+
+                    # We have checked the mod, so we remove it from our temporary list
+                    current_troubled_mods.remove(mod)
+
+                    if self.NEM_troubledMods[mod] >= 5:
+                        self.NEM_autodeactivatedMods[mod] = True
+                        self.NEM.mods[mod]["active"] = False
+                        del self.NEM_troubledMods[mod]
+
+                        completely_failed_mods.append(mod)
+
+                        nemp_logger.debug("Mod {0} has failed to be polled at least 5 times, it has been disabled.".format(mod))
+
+        if failedMods:
+            self.NEM.buildHTML()
 
         if staff_channel and completely_failed_mods:
-            self.sendMessage(staff_channel, 'The following mod(s) failed: {0}.'.format(', '.join(sorted(completely_failed_mods))))
+            self.sendMessage(staff_channel, 'The following mod(s) failed: {0}.'.format(', '.join(sorted(completely_failed_mods, key=lambda x: x.lower()))))
 
         # Reset counter for any mod that is still in the list.
         for mod in current_troubled_mods:
