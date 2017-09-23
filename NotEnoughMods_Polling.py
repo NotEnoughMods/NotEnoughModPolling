@@ -385,8 +385,7 @@ def NEMP_TimerEvent(self, channels):
 
                         nemp_logger.debug("Mod {0} has failed to be polled at least 5 times, it has been disabled.".format(mod))
 
-        if failedMods:
-            self.NEM.buildHTML()
+        self.NEM.buildHTML()
 
         if staff_channel and completely_failed_mods:
             self.sendMessage(staff_channel, 'The following mod(s) failed: {0}.'.format(', '.join(sorted(completely_failed_mods, key=lambda x: x.lower()))))
