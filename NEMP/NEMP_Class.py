@@ -242,7 +242,7 @@ class NotEnoughClasses():
 
         return versions
 
-    def CheckChickenBones(self, mod, document=None):
+    def CheckChickenBones(self, mod, document=None, simulation=False):
         if not document:
             p = self.fetch_page('http://chickenbones.net/Pages/links.html')
 
@@ -276,7 +276,7 @@ class NotEnoughClasses():
         for mc, version in document[mod].iteritems():
             local_version = self.get_nem_version(mod, mc)
 
-            if not local_version or LooseVersion(version) > LooseVersion(local_version):
+            if simulation or not local_version or LooseVersion(version) > LooseVersion(local_version):
                 results[mc] = {
                     'version': version
                 }
@@ -436,7 +436,7 @@ class NotEnoughClasses():
             'version': version
         }
 
-    def CheckBotania(self, mod):
+    def CheckBotania(self, mod, document=None, simulation=False):
         page = self.fetch_page('https://raw.githubusercontent.com/Vazkii/Botania/master/web/versions.ini')
 
         versions = {}
@@ -451,7 +451,7 @@ class NotEnoughClasses():
 
             local_version = self.get_nem_version(mod, mc)
 
-            if local_version:
+            if local_version and not simulation:
                 local_build = int(local_version.split('-', 1)[1])
 
                 if online_build > local_build:
@@ -465,28 +465,33 @@ class NotEnoughClasses():
 
         return versions
 
-    def CheckMekanism(self, mod):
+    def CheckMekanism(self, mod, simulation=False):
         # mostly a straight port from https://git.io/v5X7y
+        result = self.fetch_page('http://aidancbrady.com/data/versions/Mekanism.txt')
 
-        result = self.fetch_page('http://aidancbrady.com/data/versions/Mekanism.txt').splitlines()
+        # adapted sanity check ported from the mod's code
+        if 'UTF-8' in result and 'HTML' in result and 'http' in result:
+            raise NEMPException('Got an HTML page')
 
-        # we can only return 1 result per parser so we just parse the first line
-        line = result[0]
+        lines = result.splitlines()
 
-        text = line.split(':', 2)
+        versions = {}
 
-        if len(text) == 3 and 'UTF-8' not in text[0] and 'HTML' not in text[0] and 'http' not in text[0]:
+        for line in lines:
+            text = line.split(':', 2)
+
+            mc = text[0]
             remote_version = text[1]
-            local_version = self.get_nem_version(mod, text[0])
 
-            if local_version == 'dev-only' or LooseVersion(remote_version) > LooseVersion(local_version):
-                return {
-                    'mc': text[0],
-                    'version': text[1],
-                    'change': text[2]
+            local_version = self.get_nem_version(mod, mc)
+
+            if simulation or not local_version or LooseVersion(remote_version) > LooseVersion(local_version):
+                versions[mc] = {
+                    'version': remote_version,
+                    'changelog': text[2]
                 }
-            else:
-                return {}
+
+        return versions
 
     def CheckAtomicStryker(self, mod, document):
         if not document:
@@ -577,9 +582,12 @@ class NotEnoughClasses():
         try:
 
             if document:
-                output = getattr(self, self.mods[mod]["function"])(mod, document)
+                output = getattr(self, self.mods[mod]["function"])(mod, document, simulation=simulation)
             else:
-                output = getattr(self, self.mods[mod]["function"])(mod)
+                output = getattr(self, self.mods[mod]["function"])(mod, simulation=simulation)
+
+            if output is None:
+                raise NEMPException('Parser returned null')
 
             if isinstance(output, dict) and ('version' in output or 'dev' in output):
                 # legacy parser
