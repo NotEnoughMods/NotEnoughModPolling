@@ -670,7 +670,7 @@ class NotEnoughClasses():
             # We need to know what mods this SinZationalHax uses
             mods = self.SinZationalHax[self.mods[mod]["SinZationalHax"]["id"]]
             # Lets get the page/json/whatever all the mods want
-            document = getattr(self, self.mods[mod]["function"])(mod, None)
+            document = getattr(self, self.mods[mod]["function"])(mod, document=None)
             # Ok, time to parse it for each mod
             for tempMod in mods:
                 output[tempMod] = self.CheckMod(tempMod, document)
