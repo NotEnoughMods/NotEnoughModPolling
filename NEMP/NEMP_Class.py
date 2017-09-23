@@ -191,7 +191,7 @@ class NotEnoughClasses():
                                 'version': nem_mod.get('version', '')
                             }
 
-    def CheckJenkins(self, mod):
+    def CheckJenkins(self, mod, document=None, simulation=False):
         jsonres = self.fetch_json(self.mods[mod]["jenkins"]["url"] + '?tree=changeSet[items[msg]],artifacts[fileName]')
         filename = jsonres["artifacts"][self.mods[mod]["jenkins"]["item"]]["fileName"]
         match = self.match_mod_regex(mod, filename)
@@ -202,7 +202,7 @@ class NotEnoughClasses():
             pass
         return output
 
-    def CheckMCForge2(self, mod):
+    def CheckMCForge2(self, mod, document=None, simulation=False):
         jsonres = self.fetch_json(self.mods[mod]["mcforge"]["url"])
 
         for promo in jsonres["promos"]:
@@ -213,7 +213,7 @@ class NotEnoughClasses():
                 }
         return {}
 
-    def CheckForgeJson(self, mod):
+    def CheckForgeJson(self, mod, document=None, simulation=False):
         jsonres = self.fetch_json(self.mods[mod]["forgejson"]["url"])
 
         if "promos" not in jsonres:
@@ -283,7 +283,7 @@ class NotEnoughClasses():
 
         return results
 
-    def CheckHTML(self, mod):
+    def CheckHTML(self, mod, document=None, simulation=False):
         result = self.fetch_page(self.mods[mod]["html"]["url"])
         output = {}
         # TODO: Maybe change this to work like the Dropbox one
@@ -294,7 +294,7 @@ class NotEnoughClasses():
                 output = match.groupdict()
         return output
 
-    def CheckSpacechase(self, mod):
+    def CheckSpacechase(self, mod, document=None, simulation=False):
         jsonres = self.fetch_json("http://spacechase0.com/core/latest.php?obj=mods/minecraft/" + self.mods[mod]["spacechase"]["slug"])
 
         version = jsonres['version']
@@ -309,7 +309,7 @@ class NotEnoughClasses():
 
         return results
 
-    def CheckLunatrius(self, mod):
+    def CheckLunatrius(self, mod, document=None, simulation=False):
         jsonres = self.fetch_json("http://mc.lunatri.us/json?latest&mod=" + mod + "&v=2")
         info = jsonres["mods"][mod]["latest"]
         output = {
@@ -320,7 +320,7 @@ class NotEnoughClasses():
             output["change"] = info['changes'][0]
         return output
 
-    def CheckBigReactors(self, mod):
+    def CheckBigReactors(self, mod, document=None, simulation=False):
         info = self.fetch_json("http://big-reactors.com/version.json")
 
         ret = {
@@ -338,7 +338,7 @@ class NotEnoughClasses():
 
         return ret
 
-    def CheckCurse(self, mod):
+    def CheckCurse(self, mod, document=None, simulation=False):
         modid = self.mods[mod]['curse'].get('id')
 
         # Accounts for discrepancies between NEM mod names and the Curse link format
@@ -375,7 +375,7 @@ class NotEnoughClasses():
 
         return res
 
-    def CheckGitHubRelease(self, mod):
+    def CheckGitHubRelease(self, mod, document=None, simulation=False):
         repo = self.mods[mod]['github'].get('repo')
 
         client_id = self.config.get('github', {}).get('client_id')
@@ -423,7 +423,7 @@ class NotEnoughClasses():
         else:
             raise ValueError('Invalid type {!r} for CheckGitHubRelease parser'.format(type_))
 
-    def CheckBuildCraft(self, mod):
+    def CheckBuildCraft(self, mod, document=None, simulation=False):
         page = self.fetch_page('https://raw.githubusercontent.com/BuildCraft/BuildCraft/master/buildcraft_resources/versions.txt')
 
         # filter empty lines
@@ -465,7 +465,7 @@ class NotEnoughClasses():
 
         return versions
 
-    def CheckMekanism(self, mod, simulation=False):
+    def CheckMekanism(self, mod, document=None, simulation=False):
         # mostly a straight port from https://git.io/v5X7y
         result = self.fetch_page('http://aidancbrady.com/data/versions/Mekanism.txt')
 
@@ -493,7 +493,7 @@ class NotEnoughClasses():
 
         return versions
 
-    def CheckAtomicStryker(self, mod, document):
+    def CheckAtomicStryker(self, mod, document=None, simulation=False):
         if not document:
             return self.fetch_page("http://atomicstryker.net/updatemanager/modversions.txt")
 
@@ -520,7 +520,7 @@ class NotEnoughClasses():
 
         return {}
 
-    def CheckModsIO(self, mod):
+    def CheckModsIO(self, mod, document=None, simulation=False):
         mod_id = str(self.mods[mod]['modsio']['id'])
 
         response = self.fetch_json('https://mods.io/mods/' + mod_id + '.json')
@@ -581,10 +581,7 @@ class NotEnoughClasses():
     def CheckMod(self, mod, document=None, simulation=False):
         try:
 
-            if document:
-                output = getattr(self, self.mods[mod]["function"])(mod, document, simulation=simulation)
-            else:
-                output = getattr(self, self.mods[mod]["function"])(mod, simulation=simulation)
+            output = getattr(self, self.mods[mod]["function"])(mod, document=document, simulation=simulation)
 
             if output is None:
                 raise NEMPException('Parser returned null')
