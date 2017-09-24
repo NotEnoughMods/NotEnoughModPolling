@@ -17,12 +17,8 @@ class NEMPException(Exception):
 
 
 class InvalidVersion(NEMPException):
-
-    def __init__(self, version):
-        self.version = version
-
     def __str__(self):
-        return 'Invalid version: {!r}'.format(self.version)
+        return repr(self.message)
 
 
 class NotEnoughClasses():
