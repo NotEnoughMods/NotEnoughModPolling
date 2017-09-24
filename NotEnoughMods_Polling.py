@@ -26,7 +26,7 @@ helpDict = {
                   "Mods that have failed being polled 5 times are excluded from this list. Check {0} failedmods for those mods."],
     "showinfo": ["{0} showinfo <mod> [<path> [...]]", "Shows polling information for the specified mod."],
     "url": ["{0} url <mod>", "Spits out the URL of the specified mod."],
-    'reloadbans': ['{0} reloadbans', 'Reloads the banned versions configuration file (bans.yml).'],
+    'reloadbans': ['{0} reloadbans', 'Reloads the banned versions configuration file (version_blacklist.yml).'],
 }
 
 
@@ -717,9 +717,11 @@ def cmd_url(self, name, params, channel, userdata, rank):
         self.sendMessage(channel, name + ": This mod doesn't have a well-defined URL")
 
 
-def cmd_reload_bans(self, name, params, channel, userdata, rank):
-    self.NEM.load_version_bans()
-    self.sendMessage(channel, 'Done, {} bans loaded.'.format(len(self.NEM.invalid_versions)))
+def cmd_reload_blacklist(self, name, params, channel, userdata, rank):
+    self.NEM.load_version_blacklist()
+    self.NEM.load_mc_blacklist()
+    self.NEM.load_mc_mapping()
+    self.sendMessage(channel, 'Done, blacklists reloaded.')
 
 
 # In each entry, the second value in the tuple is the
@@ -743,7 +745,7 @@ commands = {
     "resetfailed": (cmd_reset_failed, VOICED),
     "showinfo": (cmd_show_info, VOICED),
     "url": (cmd_url, VOICED),
-    'reloadbans': (cmd_reload_bans, VOICED),
+    'reloadblacklist': (cmd_reload_blacklist, VOICED),
 
     # -- ALIASES -- #
     "polling": (cmd_running, VOICED),
@@ -751,6 +753,7 @@ commands = {
     "disabled": (cmd_disabled_mods, VOICED),
     "failed": (cmd_failed_mods, VOICED),
     "cleanfailed": (cmd_reset_failed, VOICED),
-    "show": (cmd_show_info, VOICED)
+    "show": (cmd_show_info, VOICED),
+    'reloadblacklists': (cmd_reload_blacklist, VOICED),
     # -- END ALIASES -- #
 }

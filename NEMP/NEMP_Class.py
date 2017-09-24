@@ -37,7 +37,9 @@ class NotEnoughClasses():
         self.requests_session.max_redirects = 5
 
         self.load_config()
-        self.load_version_bans()
+        self.load_version_blacklist()
+        self.load_mc_blacklist()
+        self.load_mc_mapping()
         self.buildModDict()
         self.QueryNEM()
         self.InitiateVersions()
@@ -64,17 +66,25 @@ class NotEnoughClasses():
             print('You need to setup the NEMP/config.yml file')
             raise
 
-    def load_version_bans(self):
+    def load_version_blacklist(self):
         try:
-            with open('commands/NEMP/bans.yml', 'r') as f:
+            with open('commands/NEMP/version_blacklist.yml', 'r') as f:
                 self.invalid_versions = yaml.load(f)
         except:
-            print('You need to setup the NEMP/bans.yml file')
+            print('You need to setup the NEMP/version_blacklist.yml file')
             raise
 
         # compile regexes for performance
         for i, regex in enumerate(self.invalid_versions[:]):
             self.invalid_versions[i] = re.compile(regex, re.I)
+
+    def load_mc_blacklist(self):
+        with open('commands/NEMP/mc_blacklist.yml', 'r') as f:
+            self.mc_blacklist = yaml.load(f)
+
+    def load_mc_mapping(self):
+        with open('commands/NEMP/mc_mapping.yml', 'r') as f:
+            self.mc_mapping = yaml.load(f)
 
     def _find_regex(self, data):
         """
@@ -158,6 +168,9 @@ class NotEnoughClasses():
 
         # for MC version in NEM's list
         for nem_list_name in self.nemVersions:
+            if nem_list_name in self.mc_mapping:
+                continue
+
             # Get the NEM List for this MC Version
             nem_list = self.fetch_json("https://bot.notenoughmods.com/" + nem_list_name + ".json")
 
@@ -562,6 +575,11 @@ class NotEnoughClasses():
         return version
 
     def get_nem_version(self, mod, nem_list):
+        mapped_list = self.mc_mapping.get(nem_list)
+
+        if mapped_list:
+            nem_list = mapped_list
+
         version = self.mods[mod]['nem_versions'].get(nem_list, {}).get('version', '')
 
         if version == 'dev-only':
@@ -571,12 +589,27 @@ class NotEnoughClasses():
             return version
 
     def get_nem_dev_version(self, mod, nem_list):
+        mapped_list = self.mc_mapping.get(nem_list)
+
+        if mapped_list:
+            nem_list = mapped_list
+
         return self.mods[mod]['nem_versions'].get(nem_list, {}).get('dev', '')
 
     def set_nem_version(self, mod, version, nem_list):
+        mapped_list = self.mc_mapping.get(nem_list)
+
+        if mapped_list:
+            nem_list = mapped_list
+
         self.mods[mod]['nem_versions'].setdefault(nem_list, {})['version'] = version
 
     def set_nem_dev_version(self, mod, version, nem_list):
+        mapped_list = self.mc_mapping.get(nem_list)
+
+        if mapped_list:
+            nem_list = mapped_list
+
         self.mods[mod]['nem_versions'].setdefault(nem_list, {})['dev'] = version
 
     def get_proper_name(self, mod):
@@ -627,7 +660,13 @@ class NotEnoughClasses():
             for mc, version_info in output.iteritems():
                 # [mc version, dev version, release version, changelog]
                 status = [None, '', '', None]
-                status = [None, '', '', None]
+
+                if mc in self.mc_mapping:
+                    mc = self.mc_mapping[mc]
+
+                if mc in self.mc_blacklist:
+                    print 'Skipping blacklisted MC version {} for {}, version_info={!r}'.format(mc, mod, version_info)
+                    continue
 
                 status[0] = mc
 
