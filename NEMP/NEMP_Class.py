@@ -352,28 +352,44 @@ class NotEnoughClasses():
             jsonres = self.fetch_json("https://widget.mcf.li/mc-mods/minecraft/" + modname + ".json")
 
         if jsonres.get('code') == '200' and jsonres.get('error') == 'No Files Found':
-            return {}
+            # This automatically raises an exception and stops this mod from polling after the current cycle
+            return None
 
         release_type = jsonres['release_type'].lower()
 
-        releases = sorted(jsonres['files'].values(), key=lambda x: x['id'], reverse=True)
+        latest_release = sorted(jsonres['files'].values(), key=lambda x: x['id'], reverse=True)[0]
 
-        release = releases[0]
+        versions = {}
 
-        match = self.match_mod_regex(mod, release['name'])
+        for mc_version, releases in jsonres['versions'].iteritems():
+            # the releases are ordered from newest to oldest
+            release = releases[0]
 
-        output = match.groupdict()
+            print 'Processing release {!r}'.format(release)
 
-        res = {
-            'mc': release['version']
-        }
+            match = self.match_mod_regex(mod, release['name'])
 
-        if release['type'].lower() == release_type:
-            res['version'] = output['version']
-        else:
-            res['dev'] = output['version']
+            if not match:
+                if release['id'] == latest_release['id']:
+                    raise NEMPException("Regex is outdated (doesn't match against latest release)")
 
-        return res
+                # If this release isn't the latest one, we just assume it's an old one and skip it
+                continue
+
+            output = match.groupdict()
+
+            res = {}
+
+            if release['type'].lower() == release_type:
+                version_type = 'version'
+            else:
+                version_type = 'dev'
+
+            res[version_type] = output['version']
+
+            versions[mc_version] = res
+
+        return versions
 
     def CheckGitHubRelease(self, mod, document=None, simulation=False):
         repo = self.mods[mod]['github'].get('repo')
