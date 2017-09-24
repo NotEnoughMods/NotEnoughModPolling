@@ -548,14 +548,16 @@ def cmd_test(self, name, params, channel, userdata, rank):
             document = getattr(self.NEM, self.NEM.mods[mod]["function"])(mod, None)
         else:
             document = None
-    except Exception as e:
-        self.sendMessage(channel, name + ": Failed to obtain document for SinZationalHax: " + str(e))
+    except Exception as exception:
+        self.sendMessage(channel, '{}: Failed to obtain document for SinZationalHax: {}: {}'.format(
+            name, type(exception).__name__, exception
+        ))
         return
 
     statuses, exception = self.NEM.CheckMod(mod, document=document, simulation=True)
 
     if exception:
-        self.sendMessage(channel, 'Got an exception: ' + str(exception))
+        self.sendMessage(channel, 'Got an exception: {}: {}'.format(type(exception).__name__, exception))
         return
 
     if not statuses:
