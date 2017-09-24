@@ -549,7 +549,7 @@ def cmd_test(self, name, params, channel, userdata, rank):
         else:
             document = None
     except Exception as exception:
-        self.sendMessage(channel, '{}: Failed to obtain document for SinZationalHax: {}: {}'.format(
+        self.sendMessage(channel, '{}: Failed to obtain document for mod: {}: {}'.format(
             name, type(exception).__name__, exception
         ))
         return
