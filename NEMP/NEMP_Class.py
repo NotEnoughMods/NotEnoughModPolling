@@ -365,8 +365,6 @@ class NotEnoughClasses():
             # the releases are ordered from newest to oldest
             release = releases[0]
 
-            print 'Processing release {!r}'.format(release)
-
             match = self.match_mod_regex(mod, release['name'])
 
             if not match:
