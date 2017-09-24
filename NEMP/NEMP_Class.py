@@ -347,9 +347,9 @@ class NotEnoughClasses():
 
         # As IDs only work with newer mods we have to support two versions of the URL
         if modid:
-            jsonres = self.fetch_json("http://widget.mcf.li/mc-mods/minecraft/" + modid + "-" + modname + ".json")
+            jsonres = self.fetch_json("https://widget.mcf.li/mc-mods/minecraft/" + modid + "-" + modname + ".json")
         else:
-            jsonres = self.fetch_json("http://widget.mcf.li/mc-mods/minecraft/" + modname + ".json")
+            jsonres = self.fetch_json("https://widget.mcf.li/mc-mods/minecraft/" + modname + ".json")
 
         if jsonres.get('code') == '200' and jsonres.get('error') == 'No Files Found':
             return {}
