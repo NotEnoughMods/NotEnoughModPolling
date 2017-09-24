@@ -2745,15 +2745,6 @@
             "name": "minetweaker-recipemaker"
         }
     },
-    "Omnis-Core": {
-        "function": "CheckCurse",
-        "active": true,
-        "curse": {
-            "regex": ".+?-(?P<mc>.+?)-(?P<version>.+?).jar",
-            "id": "225813",
-            "name": "omnis-core"
-        }
-    },
     "Whitelister": {
         "function": "CheckCurse",
         "active": true,
