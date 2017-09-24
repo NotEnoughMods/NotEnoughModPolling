@@ -3374,5 +3374,14 @@
             "name": "diet-hoppers",
             "regex": "Diet Hoppers (?P<version>.+)"
         }
+    },
+    "BetterWithMods": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "id": "246760",
+            "name": "better-with-mods",
+            "regex": "BetterWithMods-.+?-(?P<version>.+)\\.jar"
+        }
     }
 }
