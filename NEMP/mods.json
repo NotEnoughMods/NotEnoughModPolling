@@ -53,26 +53,6 @@
             "promoType": "version"
         }
     },
-    "ForgeMultipart": {
-        "function": "CheckMCForge2",
-        "category": "forge",
-        "active": true,
-        "mcforge": {
-            "url": "http://files.minecraftforge.net/maven/codechicken/ForgeMultipart/promotions.json",
-            "promo": "latest",
-            "promoType": "version"
-        }
-    },
-    "CodeChickenLib": {
-        "function": "CheckMCForge2",
-        "category": "forge",
-        "active": true,
-        "mcforge": {
-            "url": "http://files.minecraftforge.net/maven/codechicken/CodeChickenLib/promotions.json",
-            "promo": "latest",
-            "promoType": "dev"
-        }
-    },
     "BiomesOPlenty": {
         "function": "CheckMCForge2",
         "category": "forge",
@@ -566,9 +546,15 @@
         "function": "CheckMekanism",
         "active": true
     },
+    "CodeChickenLib": {
+        "function": "CheckChickenBones",
+        "active": true,
+        "SinZationalHax": {
+            "id": "chickenbones"
+        }
+    },
     "CodeChickenCore": {
         "function": "CheckChickenBones",
-        "category": "cb",
         "active": true,
         "SinZationalHax":{
             "id": "chickenbones"
@@ -607,6 +593,14 @@
         }
     },
     "WR-CBE": {
+        "function": "CheckChickenBones",
+        "category": "cb",
+        "active": true,
+        "SinZationalHax":{
+            "id": "chickenbones"
+        }
+    },
+    "ForgeMultipart": {
         "function": "CheckChickenBones",
         "category": "cb",
         "active": true,
