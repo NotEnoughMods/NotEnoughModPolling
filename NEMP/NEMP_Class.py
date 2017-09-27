@@ -574,6 +574,13 @@ class NotEnoughClasses():
         version = re.sub(r'-+', '-', version)
         return version
 
+    # Trims additional ".0" at the end of the version until the
+    # version has only 2 groups ("1.0")
+    def clean_mc_version(self, version):
+        while version.endswith('.0') and version.count('.') > 1:
+            version = version[:-2]
+        return version
+
     def get_nem_version(self, mod, nem_list):
         mapped_list = self.mc_mapping.get(nem_list)
 
@@ -660,6 +667,8 @@ class NotEnoughClasses():
             for mc, version_info in output.iteritems():
                 # [mc version, dev version, release version, changelog]
                 status = [None, '', '', None]
+
+                mc = self.clean_mc_version(mc)
 
                 if mc in self.mc_mapping:
                     mc = self.mc_mapping[mc]
