@@ -1890,15 +1890,6 @@
             "name": "Necromancy"
         }
     },
-    "Chisel-2": {
-        "function": "CheckCurse",
-        "active": true,
-        "curse": {
-            "id": "225236",
-            "name": "chisel-2",
-            "regex": "Chisel 2 - (?P<version>.+)"
-        }
-    },
     "ANSSRPG": {
         "function": "CheckGitHubRelease",
         "active": true,
