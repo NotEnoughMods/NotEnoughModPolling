@@ -164,7 +164,7 @@ class NotEnoughClasses():
 
     def InitiateVersions(self):
         # Store a list of mods so we dont override our version
-        templist = self.mods.keys()
+        our_mods = {x.lower(): x for x in self.mods.iterkeys()}
 
         # for MC version in NEM's list
         for nem_list_name in self.nemVersions:
@@ -178,27 +178,31 @@ class NotEnoughClasses():
             for nem_mod in nem_list:
                 nem_mod_name = nem_mod['name']
 
+                our_name = our_mods.get(nem_mod_name.lower())
+
                 # Is it in our list?
-                if nem_mod_name in templist:
+                if our_name:
                     # Grab the dev and release version
-                    self.mods[nem_mod_name]['nem_versions'][nem_list_name] = {
+                    self.mods[our_name]['nem_versions'][nem_list_name] = {
                         'dev': nem_mod.get('dev', ''),
                         'version': nem_mod.get('version', '')
                     }
 
             # ok, so it wasn't directly on the list, is it indirectly on the list though.
-            for lonelyMod in templist[:]:
+            for lonelyMod in self.mods.iterkeys():
                 # Is this mod a PykerHack(tm)
-                if "name" in self.mods[lonelyMod]:
-                    # ok, this is a PykerHack(tm) mod, lets loop through NEM again to find it
-                    for nem_mod in nem_list:
-                        # Is it here?
-                        if self.mods[lonelyMod]["name"] == nem_mod["name"]:
-                            # Grab the dev and release version
-                            self.mods[lonelyMod]['nem_versions'][nem_list_name] = {
-                                'dev': nem_mod.get('dev', ''),
-                                'version': nem_mod.get('version', '')
-                            }
+                if not 'name' in self.mods[lonelyMod]:
+                    continue
+
+                # ok, this is a PykerHack(tm) mod, lets loop through NEM again to find it
+                for nem_mod in nem_list:
+                    # Is it here?
+                    if self.mods[lonelyMod]["name"].lower() == nem_mod["name"].lower():
+                        # Grab the dev and release version
+                        self.mods[lonelyMod]['nem_versions'][nem_list_name] = {
+                            'dev': nem_mod.get('dev', ''),
+                            'version': nem_mod.get('version', '')
+                        }
 
     def CheckJenkins(self, mod, document=None, simulation=False):
         jsonres = self.fetch_json(self.mods[mod]["jenkins"]["url"] + '?tree=changeSet[items[msg]],artifacts[fileName]')
