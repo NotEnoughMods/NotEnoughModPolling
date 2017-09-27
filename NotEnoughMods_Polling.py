@@ -72,7 +72,7 @@ def cmd_running(self, name, params, channel, userdata, rank):
     if len(params) >= 2 and (params[1] == "true" or params[1] == "on"):
         if not self.events["time"].doesExist("NotEnoughModPolling"):
             self.sendMessage(channel, "Turning NotEnoughModPolling on.")
-            self.NEM.InitiateVersions()
+            self.NEM.init_nem_versions()
             self.NEM_cycle_count = 0
 
             timerForPolls = 60 * 5
@@ -526,7 +526,7 @@ def cmd_reload(self, name, params, channel, userdata, rank):
 
     self.NEM.buildModDict()
     self.NEM.QueryNEM()
-    self.NEM.InitiateVersions()
+    self.NEM.init_nem_versions()
     self.NEM.buildHTML()
 
     self.sendMessage(channel, "Reloaded the NEMP Database")
