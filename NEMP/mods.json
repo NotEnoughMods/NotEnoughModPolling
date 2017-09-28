@@ -2436,7 +2436,7 @@
             "regex": "Immersive Engineering (?P<version>.+)"
         }
     },
-    "ICBM-BBM": {
+    "ICBM": {
         "function": "CheckCurse",
         "active": true,
         "curse": {
