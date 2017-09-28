@@ -1512,7 +1512,7 @@
         "curse": {
             "id": "223896",
             "name": "malisiscore",
-            "regex": "malisiscore-(?P<mc>.+?)-(?P<version>.+).jar"
+            "regex": "malisiscore-.+?-(?P<version>[0-9]+(\\.[0-9]+)+)"
         }
     },
     "MalisisDoors": {
