@@ -3377,5 +3377,14 @@
             "name": "pams-harvestcraft",
             "regex": "Pam's HarvestCraft (?P<version>[0-9]+(\\.[0-9]+)+[a-z]*)"
         }
+    },
+    "HexxitGear": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "id": "278826",
+            "name": "hexxit-gear",
+            "regex": "hexxitgear-(?P<version>[0-9]+(\\.[0-9]+)+)\\.jar"
+        }
     }
 }
