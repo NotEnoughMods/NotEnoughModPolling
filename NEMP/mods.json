@@ -3368,5 +3368,14 @@
             "name": "totemic",
             "regex": "Totemic-.+?-(?P<version>.+)\\.jar"
         }
+    },
+    "Pam'sHarvestCraft": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "id": "221857",
+            "name": "pams-harvestcraft",
+            "regex": "Pam's HarvestCraft (?P<version>[0-9]+(\\.[0-9]+)+[a-z]*)"
+        }
     }
 }
