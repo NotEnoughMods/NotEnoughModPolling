@@ -3324,6 +3324,13 @@
             "url": "https://asie.pl/files/minecraft/update/charset.json"
         }
     },
+    "FoamFix": {
+        "function": "CheckForgeJson",
+        "active": true,
+        "forgejson": {
+            "url": "https://asie.pl/files/minecraft/update/foamfix.json"
+        }
+    },
     "CraftingRedstone": {
         "function": "CheckCurse",
         "active": true,
