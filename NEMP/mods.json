@@ -381,117 +381,39 @@
             "regex": "LanteaCraft-(?P<mc>.+?)-(?P<version>.+?).jar$"
         }
     },
-    "OpenPrinter-1.8.9": {
-        "name": "OpenPrinter",
-        "function": "CheckJenkins",
+    "OpenPrinter": {
+        "function": "CheckForgeJson",
         "active": true,
-        "jenkins": {
-            "url": "http://ci.pc-logix.com/job/OpenPrinter-1.8.9/lastSuccessfulBuild/api/json",
-            "regex": "OpenPrinter-(?P<mc>.+?)-(?P<version>.+?).jar$",
-            "item": 1
+        "forgejson": {
+            "url": "http://modupdates.pc-logix.com/openprinter"
         }
     },
-    "OpenPrinter-1.9.4": {
-        "name": "OpenPrinter",
-        "function": "CheckJenkins",
+    "OpenFM": {
+        "function": "CheckForgeJson",
         "active": true,
-        "jenkins": {
-            "url": "http://ci.pc-logix.com/job/OpenPrinter-1.9.4/lastSuccessfulBuild/api/json",
-            "regex": "OpenPrinter-(?P<mc>.+?)-(?P<version>.+?).jar$",
-            "item": 1
+        "forgejson": {
+            "url": "http://modupdates.pc-logix.com/openfm"
         }
     },
-    "OpenPrinter-1.10.2": {
-        "name": "OpenPrinter",
-        "function": "CheckJenkins",
+    "OpenSecurity": {
+        "function": "CheckForgeJson",
         "active": true,
-        "mc": "1.10.2",
-        "jenkins": {
-            "url": "http://ci.pc-logix.com/job/OpenPrinter-1.9.4/lastSuccessfulBuild/api/json",
-            "regex": "OpenPrinter-.+?-(?P<version>.+?).jar$",
-            "item": 1
+        "forgejson": {
+            "url": "http://modupdates.pc-logix.com/opensecurity"
         }
     },
-    "OpenPrinter-1.11.2": {
-        "name": "OpenPrinter",
-        "function": "CheckJenkins",
+    "OpenSensors": {
+        "function": "CheckForgeJson",
         "active": true,
-        "mc": "1.11.2",
-        "jenkins": {
-            "url": "http://ci.pc-logix.com/job/OpenPrinter-1.11/lastSuccessfulBuild/api/json",
-            "regex": "OpenPrinter-.+?-(?P<version>.+?).jar$",
-            "item": 1
+        "forgejson": {
+            "url": "http://modupdates.pc-logix.com/opensensors"
         }
     },
-    "OpenFM-1.7.10": {
-        "name": "OpenFM",
-        "function": "CheckJenkins",
+    "OpenLights": {
+        "function": "CheckForgeJson",
         "active": true,
-        "jenkins": {
-            "url": "http://ci.pc-logix.com/job/OpenFM/lastSuccessfulBuild/api/json",
-            "regex": "OpenFM-(?P<mc>.+?)-(?P<version>.+?).jar$",
-            "item": 0
-        }
-    },
-    "OpenFM-1.8.9": {
-        "name": "OpenFM",
-        "function": "CheckJenkins",
-        "active": true,
-        "jenkins": {
-            "url": "http://ci.pc-logix.com/job/OpenFM-1.8/lastSuccessfulBuild/api/json",
-            "regex": "OpenFM-(?P<mc>.+?)-(?P<version>.+?).jar$",
-            "item": 0
-        }
-    },
-    "OpenFM-1.9.4": {
-        "name": "OpenFM",
-        "function": "CheckJenkins",
-        "active": true,
-        "jenkins": {
-            "url": "http://ci.pc-logix.com/job/OpenFM-1.9.4/lastSuccessfulBuild/api/json",
-            "regex": "OpenFM-(?P<mc>.+?)-(?P<version>.+?).jar$",
-            "item": 0
-        }
-    },
-    "OpenFM-1.10.2": {
-        "name": "OpenFM",
-        "function": "CheckJenkins",
-        "active": true,
-        "mc": "1.10.2",
-        "jenkins": {
-            "url": "http://ci.pc-logix.com/job/OpenFM-1.9.4/lastSuccessfulBuild/api/json",
-            "regex": "OpenFM-.+?-(?P<version>.+?).jar$",
-            "item": 0
-        }
-    },
-    "OpenSecurity-1.7.10": {
-        "name": "OpenSecurity",
-        "function": "CheckJenkins",
-        "active": true,
-        "jenkins": {
-            "url": "http://ci.pc-logix.com/job/OpenSecurity/lastSuccessfulBuild/api/json",
-            "regex": "OpenSecurity-(?P<mc>.+?)-(?P<version>.+?).jar$",
-            "item": 0
-        }
-    },
-    "OpenSecurity-1.10.2": {
-        "name": "OpenSecurity",
-        "function": "CheckJenkins",
-        "active": true,
-        "jenkins": {
-            "url": "http://ci.pc-logix.com/job/OpenSecurity%201.10/lastSuccessfulBuild/api/json",
-            "regex": "OpenSecurity-MC(?P<mc>.+?)-(?P<version>.+?).jar$",
-            "item": 0
-        }
-    },
-    "OpenSensors-1.7.10": {
-        "name": "OpenSensors",
-        "function": "CheckJenkins",
-        "active": true,
-        "jenkins": {
-            "url": "http://ci.pc-logix.com/job/OpenSensors1.7/lastSuccessfulBuild/api/json",
-            "regex": "OpenSensors-MC(?P<mc>.+?)-(?P<version>.+?).jar$",
-            "item": 0
+        "forgejson": {
+            "url": "http://modupdates.pc-logix.com/openlights"
         }
     },
     "AdditionalBuildcraftObjects": {
