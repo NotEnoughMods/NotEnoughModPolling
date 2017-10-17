@@ -412,6 +412,17 @@
             "item": 1
         }
     },
+    "OpenPrinter-1.11.2": {
+        "name": "OpenPrinter",
+        "function": "CheckJenkins",
+        "active": true,
+        "mc": "1.11.2",
+        "jenkins": {
+            "url": "http://ci.pc-logix.com/job/OpenPrinter-1.11/lastSuccessfulBuild/api/json",
+            "regex": "OpenPrinter-.+?-(?P<version>.+?).jar$",
+            "item": 1
+        }
+    },
     "OpenFM-1.7.10": {
         "name": "OpenFM",
         "function": "CheckJenkins",
