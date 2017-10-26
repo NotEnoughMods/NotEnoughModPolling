@@ -3056,7 +3056,7 @@
         "active": true,
         "curse": {
             "id": "256411",
-            "name": "cct",
+            "name": "custom-crafting-tables",
             "regex": "cct-(?P<mc>[0-9\\.]+)-(?P<version>.+?)\\.jar"
         }
     },
