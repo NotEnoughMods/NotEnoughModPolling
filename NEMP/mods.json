@@ -3348,5 +3348,12 @@
             "name": "hexxit-gear",
             "regex": "hexxitgear-(?P<version>[0-9]+(\\.[0-9]+)+)\\.jar"
         }
+    },
+    "Cyclic": {
+        "function": "CheckForgeJson",
+        "active": true,
+        "forgejson": {
+            "url": "https://raw.githubusercontent.com/PrinceOfAmber/CyclicMagic/master/update.json"
+        }
     }
 }
