@@ -370,6 +370,9 @@ class NotEnoughClasses():
         versions = {}
 
         for mc_version, releases in jsonres['versions'].iteritems():
+            if mc_version.startswith('Java'):
+                continue
+
             # the releases are ordered from newest to oldest
             release = releases[0]
 
