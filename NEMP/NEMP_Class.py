@@ -351,17 +351,21 @@ class NotEnoughClasses():
 
         # As IDs only work with newer mods we have to support two versions of the URL
         if modid:
-            jsonres = self.fetch_json("https://widget.mcf.li/mc-mods/minecraft/" + modid + "-" + modname + ".json")
+            jsonres = self.fetch_json("https://api.cfwidget.com/mc-mods/minecraft/" + modid + "-" + modname + ".json")
         else:
-            jsonres = self.fetch_json("https://widget.mcf.li/mc-mods/minecraft/" + modname + ".json")
+            jsonres = self.fetch_json("https://api.cfwidget.com/mc-mods/minecraft/" + modname + ".json")
 
-        if jsonres.get('code') == '200' and jsonres.get('error') == 'No Files Found':
-            # This automatically raises an exception and stops this mod from polling after the current cycle
-            return None
+        if jsonres.get('code') == '200'
+            if jsonres.get('error') == 'not_found':
+                # This automatically raises an exception and stops this mod from polling after the current cycle
+                return None
+            elif jsonres.get('error') == 'in_queue':
+                # The widget doesn't have the information and queued up an update
+                return {}
 
-        release_type = jsonres['release_type'].lower()
+        release_type = 'release'
 
-        latest_release = sorted(jsonres['files'].values(), key=lambda x: x['id'], reverse=True)[0]
+        latest_release = sorted(jsonres['files'], key=lambda x: x['id'], reverse=True)[0]
 
         versions = {}
 
