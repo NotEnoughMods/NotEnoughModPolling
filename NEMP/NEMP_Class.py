@@ -355,7 +355,7 @@ class NotEnoughClasses():
         else:
             jsonres = self.fetch_json("https://api.cfwidget.com/mc-mods/minecraft/" + modname + ".json")
 
-        if jsonres.get('code') == '200'
+        if jsonres.get('code') == '200':
             if jsonres.get('error') == 'not_found':
                 # This automatically raises an exception and stops this mod from polling after the current cycle
                 return None
