@@ -351,9 +351,9 @@ class NotEnoughClasses():
 
         # As IDs only work with newer mods we have to support two versions of the URL
         if modid:
-            jsonres = self.fetch_json("https://api.cfwidget.com/mc-mods/minecraft/" + modid + "-" + modname + ".json")
+            jsonres = self.fetch_json("https://api.cfwidget.com/mc-mods/minecraft/" + modid + "-" + modname)
         else:
-            jsonres = self.fetch_json("https://api.cfwidget.com/mc-mods/minecraft/" + modname + ".json")
+            jsonres = self.fetch_json("https://api.cfwidget.com/mc-mods/minecraft/" + modname)
 
         if jsonres.get('code') == '200':
             if jsonres.get('error') == 'not_found':
