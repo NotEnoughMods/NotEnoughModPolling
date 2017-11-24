@@ -3355,5 +3355,245 @@
         "forgejson": {
             "url": "https://raw.githubusercontent.com/PrinceOfAmber/CyclicMagic/master/update.json"
         }
+    },
+    "Ding": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "name": "ding",
+            "regex": "Ding-.+-(?P<version>.+)\\.jar"
+        }
+    },
+    "BetterThanBunnies": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "name": "better-than-bunnies",
+            "regex": "BetterThanBunnies-.+-(?P<version>.+)\\.jar"
+        }
+    },
+    "BetterThanLlamas": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "name": "better-than-llamas",
+            "regex": "BetterThanLlamas-.+-(?P<version>.+)\\.jar"
+        }
+    },
+    "BetterThanLlamas": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "name": "better-than-llamas",
+            "regex": "BetterThanLlamas-.+-(?P<version>.+)\\.jar"
+        }
+    },
+    "DeathCounter": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "name": "death-counter",
+            "regex": "DeathCounter-.+-(?P<version>.+)\\.jar"
+        }
+    },
+    "LimitedLives": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "name": "limited-lives",
+            "regex": "LimitedLives-.+-(?P<version>.+)\\.jar"
+        }
+    },
+    "PartyParrots": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "name": "party-parrots",
+            "regex": "PartyParrots-.+-(?P<version>.+)\\.jar"
+        }
+    },
+    "ModLister": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "name": "modlister",
+            "regex": "ModLister-.+-(?P<version>.+)\\.jar"
+        }
+    },
+    "BackTools": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "name": "back-tools",
+            "regex": "BackTools-.+-(?P<version>.+)\\.jar"
+        }
+    },
+    "GravityGun": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "name": "gravity-gun",
+            "regex": "GravityGun-.+-(?P<version>.+)\\.jar"
+        }
+    },
+    "HatStand": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "name": "hat-stand",
+            "regex": "HatStand-.+-(?P<version>.+)\\.jar"
+        }
+    },
+    "MobAmputation": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "name": "mob-amputation",
+            "regex": "MobAmputation-.+-(?P<version>.+)\\.jar"
+        }
+    },
+    "MobDismemberment": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "name": "mob-dismemberment",
+            "regex": "MobDismemberment-.+-(?P<version>.+)\\.jar"
+        }
+    },
+    "Picture-in-Picture": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "name": "picture-in-picture-pip",
+            "regex": "PiP-.+-(?P<version>.+)\\.jar"
+        }
+    },
+    "Sync": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "name": "sync",
+            "regex": "Sync-.+-(?P<version>.+)\\.jar"
+        }
+    },
+    "Tabula": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "name": "tabula-minecraft-modeler",
+            "regex": "Tabula-.+-(?P<version>.+)\\.jar"
+        }
+    },
+    "TrailMix": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "name": "trail-mix",
+            "regex": "TrailMix-.+-(?P<version>.+)\\.jar"
+        }
+    },
+    "PortalGun": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "name": "portal-gun",
+            "regex": "PortalGun-.+-(?P<version>.+)\\.jar"
+        }
+    },
+    "AttachableGrinder": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "name": "attachable-grinder",
+            "regex": "AttachableGrinder-.+-(?P<version>.+)\\.jar"
+        }
+    },
+    "BeeBarker": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "name": "bee-barker",
+            "regex": "BeeBarker-.+-(?P<version>.+)\\.jar"
+        }
+    },
+    "Clef": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "name": "clef",
+            "regex": "Clef-.+-(?P<version>.+)\\.jar"
+        }
+    },
+    "GooglyEyes": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "name": "googlyeyes",
+            "regex": "GooglyEyes-.+-(?P<version>.+)\\.jar"
+        }
+    },
+    "GuiltTrip": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "name": "guilt-trip",
+            "regex": "GuiltTrip-.+-(?P<version>.+)\\.jar"
+        }
+    },
+    "Hats": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "name": "hats",
+            "regex": "Hats-.+-(?P<version>.+)\\.jar"
+        }
+    },
+    "Shatter": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "name": "shatter",
+            "regex": "Shatter-.+-(?P<version>.+)\\.jar"
+        }
+    },
+    "Streak": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "name": "streak",
+            "regex": "Streak-.+-(?P<version>.+)\\.jar"
+        }
+    },
+    "Torched": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "name": "torched",
+            "regex": "Torched-.+-(?P<version>.+)\\.jar"
+        }
+    },
+    "Morph": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "name": "morph",
+            "regex": "Morph-.+-(?P<version>.+)\\.jar"
+        }
+    },
+    "GeneralLayman'sAestheticSpyingScreen": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "name": "general-laymans-aesthetic-spying-screen-glass",
+            "regex": "GeneralLaymansAestheticSpyingScreen-.+-(?P<version>.+)\\.jar"
+        }
+    },
+    "iChunUtil": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "name": "ichunutil",
+            "regex": "iChunUtil-.+-(?P<version>.+)\\.jar"
+        }
     }
 }
