@@ -3380,14 +3380,6 @@
             "regex": "BetterThanLlamas-.+-(?P<version>.+)\\.jar"
         }
     },
-    "BetterThanLlamas": {
-        "function": "CheckCurse",
-        "active": true,
-        "curse": {
-            "name": "better-than-llamas",
-            "regex": "BetterThanLlamas-.+-(?P<version>.+)\\.jar"
-        }
-    },
     "DeathCounter": {
         "function": "CheckCurse",
         "active": true,
