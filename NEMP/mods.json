@@ -3489,7 +3489,7 @@
         "active": true,
         "curse": {
             "name": "portal-gun",
-            "regex": "PortalGun-.+-(?P<version>.+)\\.jar"
+            "regex": "PortalGun-.+?-(?P<version>.+)\\.jar"
         }
     },
     "AttachableGrinder": {
