@@ -3286,6 +3286,13 @@
             "url": "https://asie.pl/files/minecraft/update/foamfix.json"
         }
     },
+    "YNot": {
+        "function": "CheckForgeJson",
+        "active": true,
+        "forgejson": {
+            "url": "http://asie.pl/files/minecraft/update/ynot.json"
+        }
+    },
     "CraftingRedstone": {
         "function": "CheckCurse",
         "active": true,
