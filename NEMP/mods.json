@@ -3361,7 +3361,7 @@
         "active": true,
         "curse": {
             "name": "ding",
-            "regex": "Ding-.+-(?P<version>.+)\\.jar"
+            "regex": "Ding-.+?-(?P<version>.+)\\.jar"
         }
     },
     "BetterThanBunnies": {
@@ -3369,7 +3369,7 @@
         "active": true,
         "curse": {
             "name": "better-than-bunnies",
-            "regex": "BetterThanBunnies-.+-(?P<version>.+)\\.jar"
+            "regex": "BetterThanBunnies-.+?-(?P<version>.+)\\.jar"
         }
     },
     "BetterThanLlamas": {
@@ -3377,7 +3377,7 @@
         "active": true,
         "curse": {
             "name": "better-than-llamas",
-            "regex": "BetterThanLlamas-.+-(?P<version>.+)\\.jar"
+            "regex": "BetterThanLlamas-.+?-(?P<version>.+)\\.jar"
         }
     },
     "DeathCounter": {
@@ -3385,7 +3385,7 @@
         "active": true,
         "curse": {
             "name": "death-counter",
-            "regex": "DeathCounter-.+-(?P<version>.+)\\.jar"
+            "regex": "DeathCounter-.+?-(?P<version>.+)\\.jar"
         }
     },
     "LimitedLives": {
@@ -3393,7 +3393,7 @@
         "active": true,
         "curse": {
             "name": "limited-lives",
-            "regex": "LimitedLives-.+-(?P<version>.+)\\.jar"
+            "regex": "LimitedLives-.+?-(?P<version>.+)\\.jar"
         }
     },
     "PartyParrots": {
@@ -3401,7 +3401,7 @@
         "active": true,
         "curse": {
             "name": "party-parrots",
-            "regex": "PartyParrots-.+-(?P<version>.+)\\.jar"
+            "regex": "PartyParrots-.+?-(?P<version>.+)\\.jar"
         }
     },
     "ModLister": {
@@ -3409,7 +3409,7 @@
         "active": true,
         "curse": {
             "name": "modlister",
-            "regex": "ModLister-.+-(?P<version>.+)\\.jar"
+            "regex": "ModLister-.+?-(?P<version>.+)\\.jar"
         }
     },
     "BackTools": {
@@ -3417,7 +3417,7 @@
         "active": true,
         "curse": {
             "name": "back-tools",
-            "regex": "BackTools-.+-(?P<version>.+)\\.jar"
+            "regex": "BackTools-.+?-(?P<version>.+)\\.jar"
         }
     },
     "GravityGun": {
@@ -3425,7 +3425,7 @@
         "active": true,
         "curse": {
             "name": "gravity-gun",
-            "regex": "GravityGun-.+-(?P<version>.+)\\.jar"
+            "regex": "GravityGun(?:-[0-9]+(?:\\.[0-9]+)+)?-(?P<version>[0-9]+.+)\\.jar"
         }
     },
     "HatStand": {
@@ -3433,7 +3433,7 @@
         "active": true,
         "curse": {
             "name": "hat-stand",
-            "regex": "HatStand-.+-(?P<version>.+)\\.jar"
+            "regex": "HatStand-.+?-(?P<version>.+)\\.jar"
         }
     },
     "MobAmputation": {
@@ -3441,7 +3441,7 @@
         "active": true,
         "curse": {
             "name": "mob-amputation",
-            "regex": "MobAmputation-.+-(?P<version>.+)\\.jar"
+            "regex": "MobAmputation-.+?-(?P<version>.+)\\.jar"
         }
     },
     "MobDismemberment": {
@@ -3449,7 +3449,7 @@
         "active": true,
         "curse": {
             "name": "mob-dismemberment",
-            "regex": "MobDismemberment-.+-(?P<version>.+)\\.jar"
+            "regex": "MobDismemberment-.+?-(?P<version>.+)\\.jar"
         }
     },
     "Picture-in-Picture": {
@@ -3457,7 +3457,7 @@
         "active": true,
         "curse": {
             "name": "picture-in-picture-pip",
-            "regex": "PiP-.+-(?P<version>.+)\\.jar"
+            "regex": "PiP-.+?-(?P<version>.+)\\.jar"
         }
     },
     "Sync": {
@@ -3465,7 +3465,7 @@
         "active": true,
         "curse": {
             "name": "sync",
-            "regex": "Sync-.+-(?P<version>.+)\\.jar"
+            "regex": "Sync-.+?-(?P<version>.+)\\.jar"
         }
     },
     "Tabula": {
@@ -3473,7 +3473,7 @@
         "active": true,
         "curse": {
             "name": "tabula-minecraft-modeler",
-            "regex": "Tabula-.+-(?P<version>.+)\\.jar"
+            "regex": "Tabula-.+?-(?P<version>.+)\\.jar"
         }
     },
     "TrailMix": {
@@ -3481,7 +3481,7 @@
         "active": true,
         "curse": {
             "name": "trail-mix",
-            "regex": "TrailMix-.+-(?P<version>.+)\\.jar"
+            "regex": "TrailMix-.+?-(?P<version>.+)\\.jar"
         }
     },
     "PortalGun": {
@@ -3497,7 +3497,7 @@
         "active": true,
         "curse": {
             "name": "attachable-grinder",
-            "regex": "AttachableGrinder-.+-(?P<version>.+)\\.jar"
+            "regex": "AttachableGrinder-.+?-(?P<version>.+)\\.jar"
         }
     },
     "BeeBarker": {
@@ -3505,7 +3505,7 @@
         "active": true,
         "curse": {
             "name": "bee-barker",
-            "regex": "BeeBarker-.+-(?P<version>.+)\\.jar"
+            "regex": "BeeBarker-.+?-(?P<version>.+)\\.jar"
         }
     },
     "Clef": {
@@ -3513,7 +3513,7 @@
         "active": true,
         "curse": {
             "name": "clef",
-            "regex": "Clef-.+-(?P<version>.+)\\.jar"
+            "regex": "Clef-.+?-(?P<version>.+)\\.jar"
         }
     },
     "GooglyEyes": {
@@ -3521,7 +3521,7 @@
         "active": true,
         "curse": {
             "name": "googlyeyes",
-            "regex": "GooglyEyes-.+-(?P<version>.+)\\.jar"
+            "regex": "GooglyEyes-.+?-(?P<version>.+)\\.jar"
         }
     },
     "GuiltTrip": {
@@ -3529,7 +3529,7 @@
         "active": true,
         "curse": {
             "name": "guilt-trip",
-            "regex": "GuiltTrip-.+-(?P<version>.+)\\.jar"
+            "regex": "GuiltTrip-.+?-(?P<version>.+)\\.jar"
         }
     },
     "Hats": {
@@ -3537,7 +3537,7 @@
         "active": true,
         "curse": {
             "name": "hats",
-            "regex": "Hats-.+-(?P<version>.+)\\.jar"
+            "regex": "Hats-.+?-(?P<version>.+)\\.jar"
         }
     },
     "Shatter": {
@@ -3545,7 +3545,7 @@
         "active": true,
         "curse": {
             "name": "shatter",
-            "regex": "Shatter-.+-(?P<version>.+)\\.jar"
+            "regex": "Shatter-.+?-(?P<version>.+)\\.jar"
         }
     },
     "Streak": {
@@ -3553,7 +3553,7 @@
         "active": true,
         "curse": {
             "name": "streak",
-            "regex": "Streak-.+-(?P<version>.+)\\.jar"
+            "regex": "Streak-.+?-(?P<version>.+)\\.jar"
         }
     },
     "Torched": {
@@ -3561,7 +3561,7 @@
         "active": true,
         "curse": {
             "name": "torched",
-            "regex": "Torched-.+-(?P<version>.+)\\.jar"
+            "regex": "Torched-.+?-(?P<version>.+)\\.jar"
         }
     },
     "Morph": {
@@ -3569,7 +3569,7 @@
         "active": true,
         "curse": {
             "name": "morph",
-            "regex": "Morph-.+-(?P<version>.+)\\.jar"
+            "regex": "Morph-.+?-(?P<version>.+)\\.jar"
         }
     },
     "GeneralLayman'sAestheticSpyingScreen": {
@@ -3577,7 +3577,7 @@
         "active": true,
         "curse": {
             "name": "general-laymans-aesthetic-spying-screen-glass",
-            "regex": "GeneralLaymansAestheticSpyingScreen-.+-(?P<version>.+)\\.jar"
+            "regex": "GeneralLaymansAestheticSpyingScreen-.+?-(?P<version>.+)\\.jar"
         }
     },
     "iChunUtil": {
@@ -3585,7 +3585,7 @@
         "active": true,
         "curse": {
             "name": "ichunutil",
-            "regex": "iChunUtil-.+-(?P<version>.+)\\.jar"
+            "regex": "iChunUtil-.+?-(?P<version>.+)\\.jar"
         }
     }
 }
