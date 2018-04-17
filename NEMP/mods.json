@@ -382,38 +382,43 @@
         }
     },
     "OpenPrinter": {
-        "function": "CheckForgeJson",
+        "function": "CheckCurse",
         "active": true,
-        "forgejson": {
-            "url": "http://modupdates.pc-logix.com/openprinter"
+        "curse": {
+            "name": "openprinter",
+            "regex": "-.+?-(?P<version>.+)\\.jar"
         }
     },
     "OpenFM": {
-        "function": "CheckForgeJson",
+        "function": "CheckCurse",
         "active": true,
-        "forgejson": {
-            "url": "http://modupdates.pc-logix.com/openfm"
+        "curse": {
+            "name": "openfm",
+            "regex": "-.+?-(?P<version>.+)\\.jar"
         }
     },
     "OpenSecurity": {
-        "function": "CheckForgeJson",
+        "function": "CheckCurse",
         "active": true,
-        "forgejson": {
-            "url": "http://modupdates.pc-logix.com/opensecurity"
+        "curse": {
+            "name": "opensecurity",
+            "regex": "-.+?-(?P<version>.+)\\.jar"
         }
     },
     "OpenSensors": {
-        "function": "CheckForgeJson",
+        "function": "CheckCurse",
         "active": true,
-        "forgejson": {
-            "url": "http://modupdates.pc-logix.com/opensensors"
+        "curse": {
+            "name": "opensensors",
+            "regex": "-.+?-(?P<version>.+)\\.jar"
         }
     },
     "OpenLights": {
-        "function": "CheckForgeJson",
+        "function": "CheckCurse",
         "active": true,
-        "forgejson": {
-            "url": "http://modupdates.pc-logix.com/openlights"
+        "curse": {
+            "name": "openlights",
+            "regex": "-.+?-(?P<version>.+)\\.jar"
         }
     },
     "AdditionalBuildcraftObjects": {
