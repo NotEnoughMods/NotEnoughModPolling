@@ -3084,7 +3084,7 @@
         "curse": {
             "id": "224428",
             "name": "thutcore",
-            "regex": "thutcore-(?P<version>[0-9a-z\\.]+)\\.jar"
+            "regex": "thutcore-.+?-(?P<version>.+?)\\.jar"
         }
     },
     "CraftTweaker": {
