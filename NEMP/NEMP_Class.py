@@ -351,9 +351,9 @@ class NotEnoughClasses():
 
         # As IDs only work with newer mods we have to support two versions of the URL
         if modid:
-            jsonres = self.fetch_json("https://api.cfwidget.com/mc-mods/minecraft/" + modid + "-" + modname)
+            jsonres = self.fetch_json("https://api.cfwidget.com/minecraft/mc-mods/" + modid + "-" + modname)
         else:
-            jsonres = self.fetch_json("https://api.cfwidget.com/mc-mods/minecraft/" + modname)
+            jsonres = self.fetch_json("https://api.cfwidget.com/minecraft/mc-mods/" + modname)
 
         if jsonres.get('error') == 'not_found':
             # This automatically raises an exception and stops this mod from polling after the current cycle
