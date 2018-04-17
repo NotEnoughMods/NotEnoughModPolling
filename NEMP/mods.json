@@ -1009,7 +1009,7 @@
         "active": true,
         "curse": {
             "name": "hardcore-questing-mode",
-            "regex": ".+-(?P<mc>.+?)-(?P<version>.+?).jar"
+            "regex": "HQM[- ]New[ -]Heights(?:-| \\()(?P<version>.+?)(?:\\)|\\.jar)$"
         }
     },
     "MineMenu": {
