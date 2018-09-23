@@ -48,7 +48,13 @@ class NotEnoughClasses():
     def fetch_page(self, url, timeout=10, decode_json=False):
         request = self.requests_session.get(url, timeout=timeout)
 
-        request.raise_for_status()
+        try:
+            request.raise_for_status()
+        except requests.HTTPError as e:
+            if request.status_code >= 400 and request.status_code < 500:
+                raise NEMPException(e)
+            else:
+                raise
 
         if decode_json:
             return request.json()
