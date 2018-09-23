@@ -364,38 +364,41 @@ class NotEnoughClasses():
 
         release_type = 'release'
 
-        latest_release = sorted(jsonres['files'], key=lambda x: x['id'], reverse=True)[0]
+        sorted_files = sorted(jsonres['files'], key=lambda x: x['id'], reverse=True)
+
+        latest_release_id = sorted_files[0]['id']
 
         versions = {}
 
-        for mc_version, releases in jsonres['versions'].iteritems():
-            if mc_version.startswith('Java'):
-                continue
+        for release in sorted_files:
+            for mc_version in release['versions']:
+                if mc_version.startswith('Java') or mc_version.endswith('-Snapshot'):
+                    continue
 
-            # the releases are ordered from newest to oldest
-            release = releases[0]
+                if mc_version in versions:
+                    continue
 
-            match = self.match_mod_regex(mod, release['name'])
+                match = self.match_mod_regex(mod, release['name'])
 
-            if not match:
-                if release['id'] == latest_release['id']:
-                    raise NEMPException("Regex is outdated (doesn't match against latest release)")
+                if not match:
+                    if release['id'] == latest_release_id:
+                        raise NEMPException("Regex is outdated (doesn't match against latest release)")
 
-                # If this release isn't the latest one, we just assume it's an old one and skip it
-                continue
+                    # If this release isn't the latest one, we just assume it's an old one and skip it
+                    continue
 
-            output = match.groupdict()
+                output = match.groupdict()
 
-            res = {}
+                res = {}
 
-            if release['type'].lower() == release_type:
-                version_type = 'version'
-            else:
-                version_type = 'dev'
+                if release['type'].lower() == release_type:
+                    version_type = 'version'
+                else:
+                    version_type = 'dev'
 
-            res[version_type] = output['version']
+                res[version_type] = output['version']
 
-            versions[mc_version] = res
+                versions[mc_version] = res
 
         return versions
 
