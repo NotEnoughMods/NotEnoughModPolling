@@ -1,4 +1,4 @@
-beautifulsoup4==4.6.0
-PyYAML==3.12
-requests[security]==2.18.1
+beautifulsoup4==4.6.3
+PyYAML==3.13
+requests[security]==2.20.0
 simplejson==3.11.1
