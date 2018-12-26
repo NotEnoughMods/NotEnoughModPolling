@@ -444,7 +444,7 @@ def cmd_poll(self, name, params, channel, userdata, rank):
                     del self.NEM_troubledMods[mod]
             self.sendMessage(channel, name + ": " + ', '.join(sorted(match_mods.keys(), key=lambda x: x.lower())) + "'s poll status is now " + str(setting))
 
-    elif params[1].lower() == "all":
+    elif params[1].lower() == "all" or params[1] == '*':
         for mod in self.NEM.mods:
             self.NEM.mods[mod]["active"] = setting
 
