@@ -3585,5 +3585,14 @@
             "name": "ichunutil",
             "regex": "iChunUtil-.+?-(?P<version>.+)\\.jar"
         }
+    },
+    "Rift": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "name": "rift",
+            "base_path": "minecraft/mc-mods",
+            "regex": "Rift-(?P<version>.+)\\.jar"
+        }
     }
 }
