@@ -501,34 +501,6 @@ class NotEnoughClasses():
 
         return versions
 
-    def CheckMekanism(self, mod, document=None, simulation=False):
-        # mostly a straight port from https://git.io/v5X7y
-        result = self.fetch_page('http://aidancbrady.com/data/versions/Mekanism.txt')
-
-        # adapted sanity check ported from the mod's code
-        if 'UTF-8' in result and 'HTML' in result and 'http' in result:
-            raise NEMPException('Got an HTML page')
-
-        lines = result.splitlines()
-
-        versions = {}
-
-        for line in lines:
-            text = line.split(':', 2)
-
-            mc = text[0]
-            remote_version = text[1]
-
-            local_version = self.get_nem_version(mod, mc)
-
-            if simulation or not local_version or LooseVersion(remote_version) > LooseVersion(local_version):
-                versions[mc] = {
-                    'version': remote_version,
-                    'changelog': text[2]
-                }
-
-        return versions
-
     def CheckAtomicStryker(self, mod, document=None, simulation=False):
         if not document:
             return self.fetch_page("http://atomicstryker.net/updatemanager/modversions.txt")
