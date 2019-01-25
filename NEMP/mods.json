@@ -3612,5 +3612,13 @@
             "base_path": "minecraft/mc-mods",
             "regex": "AoA3?-(?P<version>.+)\\.jar"
         }
+    },
+    "Flan'sMod": {
+        "function": "CheckHTML",
+        "active": true,
+        "html": {
+            "url": "https://flansmod.com/download",
+            "regex": "(?P<version>[0-9]+(?:\\.[0-9]+)+) for(?: MC)? (?P<mc>[0-9]+(\\.[0-9]+)+)"
+        }
     }
 }
