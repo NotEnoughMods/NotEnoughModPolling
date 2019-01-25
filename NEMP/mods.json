@@ -3603,5 +3603,14 @@
             "base_path": "projects",
             "regex": "millenaire-(?:[0-9.]+-)?(?P<version>[0-9]+(?:\\.[0-9]+)+.*)\\.jar"
         }
+    },
+    "AdventOfAscension": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "name": "advent-of-ascension-nevermine",
+            "base_path": "minecraft/mc-mods",
+            "regex": "AoA3?-(?P<version>.+)\\.jar"
+        }
     }
 }
