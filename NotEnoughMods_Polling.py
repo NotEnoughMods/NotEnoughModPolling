@@ -1,6 +1,7 @@
 import logging
 import shlex
 import time
+import textwrap
 
 from commands.NEMP import NEMP_Class
 
@@ -567,6 +568,8 @@ def cmd_test(self, name, params, channel, userdata, rank):
 
     print '{} {!r}'.format(mod, statuses)
 
+    commands = []
+
     for status in statuses:
         mc_version, dev_version, release_version, changelog = status
 
@@ -579,15 +582,18 @@ def cmd_test(self, name, params, channel, userdata, rank):
             else:
                 clone_version = 'dev-only'
 
-            self.sendMessage(channel, 'clone {} {} {}'.format(real_name, mc_version, clone_version))
+            commands.append('clone {} {} {}'.format(real_name, mc_version, clone_version))
         elif release_version:
-            self.sendMessage(channel, 'lmod {} {} {}'.format(mc_version, real_name, release_version))
+            commands.append('lmod {} {} {}'.format(mc_version, real_name, release_version))
 
         if dev_version:
-            self.sendMessage(channel, 'ldev {} {} {}'.format(mc_version, real_name, dev_version))
+            commands.append('ldev {} {} {}'.format(mc_version, real_name, dev_version))
 
         if changelog and 'changelog' not in self.NEM.mods[mod]:
-            self.sendMessage(channel, ' * ' + ' | '.join(changelog.splitlines())[:300])
+            commands.append(' * ' + ' | '.join(changelog.splitlines())[:300])
+
+    for line in textwrap.wrap(', '.join(commands), width=300):
+        self.sendMessage(channel, line)
 
 def cmd_html(self, name, params, channel, userdata, rank):
     self.NEM.buildHTML()
