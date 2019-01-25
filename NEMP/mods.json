@@ -3594,5 +3594,14 @@
             "base_path": "minecraft/mc-mods",
             "regex": "Rift-(?P<version>.+)\\.jar"
         }
+    },
+    "Millenaire": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "name": "millenaire",
+            "base_path": "projects",
+            "regex": "millenaire-(?:[0-9.]+-)?(?P<version>[0-9]+(?:\\.[0-9]+)+.*)\\.jar"
+        }
     }
 }
