@@ -294,15 +294,27 @@ class NotEnoughClasses():
         return results
 
     def CheckHTML(self, mod, document=None, simulation=False):
-        result = self.fetch_page(self.mods[mod]["html"]["url"])
-        output = {}
-        # TODO: Maybe change this to work like the Dropbox one
-        for line in result.splitlines():
-            match = self.match_mod_regex(mod, line)
+        page = self.fetch_page(self.mods[mod]['html']['url'])
 
-            if match:
-                output = match.groupdict()
-        return output
+        reverse = self.mods[mod]['html'].get('reverse', False)
+        version_type = self.mods[mod]['html'].get('version_type', 'version')
+        regex = self.get_mod_regex(mod)
+
+        versions = {}
+
+        for match in regex.finditer(page):
+            mc_version = match.group('mc')
+            mod_version = match.group('version')
+
+            if mc_version not in versions or reverse:
+                versions[mc_version] = mod_version
+
+        result = {}
+
+        for mc_version, mod_version in versions.iteritems():
+            result[mc_version] = {version_type: mod_version}
+
+        return result
 
     def CheckSpacechase(self, mod, document=None, simulation=False):
         jsonres = self.fetch_json("http://spacechase0.com/core/latest.php?obj=mods/minecraft/" + self.mods[mod]["spacechase"]["slug"])
