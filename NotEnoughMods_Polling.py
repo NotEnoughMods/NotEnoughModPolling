@@ -698,23 +698,29 @@ def cmd_url(self, name, params, channel, userdata, rank):
     if len(params) < 2:
         self.sendMessage(channel, name + ": You have to specify at least the mod's name.")
         return
+
     modname = self.NEM.get_proper_name(params[1])
 
     if not modname:
         self.sendMessage(channel, name + ": No such mod in NEMP.")
         return
+
     mod = self.NEM.mods[modname]
     func = mod["function"]
+
     if func == "CheckGitHubRelease":
         self.sendMessage(channel, name + ": https://github.com/" + mod["github"]["repo"])
     elif func == "CheckCurse":
-        prefix = ""
-        _name = modname.lower()
-        if "id" in mod["curse"]:
-            prefix = mod["curse"]["id"] + "-"
-        if "name" in mod["curse"]:
-            _name = mod["curse"]["name"]
-        self.sendMessage(channel, name + ": http://curse.com/mc-mods/minecraft/" + prefix + _name)
+        modid = mod['curse'].get('id')
+        modname = mod['curse'].get('name', modname.lower())
+        base_path = mod['curse'].get('base_path', 'mc-mods/minecraft')
+
+        if modid:
+            project_url = modid + "-" + modname
+        else:
+            project_url = modname
+
+        self.sendMessage(channel, name + ': https://api.cfwidget.com/' + base_path + '/' + project_url)
     elif func == "CheckJenkins":
         self.sendMessage(channel, name + ": " + mod["jenkins"]["url"][:-28])
     elif func == "CheckChickenBones":
