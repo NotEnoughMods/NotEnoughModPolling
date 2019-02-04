@@ -3620,5 +3620,14 @@
             "url": "https://flansmod.com/download",
             "regex": "(?P<version>[0-9]+(?:\\.[0-9]+)+) for(?: MC)? (?P<mc>[0-9]+(\\.[0-9]+)+)"
         }
+    },
+    "LagGoggles": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "name": "laggoggles",
+            "base_path": "projects",
+            "regex": "LagGoggles-(?:SPONGE)?FORGE-(?:[0-9]+(?:\\.[0-9]+)+)-(?P<version>[0-9]+(?:\\.[0-9]+)+)\\.jar"
+        }
     }
 }
