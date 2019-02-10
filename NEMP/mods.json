@@ -3629,5 +3629,14 @@
             "base_path": "projects",
             "regex": "LagGoggles-(?:SPONGE)?FORGE-(?:[0-9]+(?:\\.[0-9]+)+)-(?P<version>[0-9]+(?:\\.[0-9]+)+)\\.jar"
         }
+    },
+    "LumySkinPatch": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "name": "lumy-skin-patch",
+            "base_path": "minecraft/mc-mods",
+            "regex": "LumySkinPatch-(?P<version>[0-9]+(?:\\.[0-9]+)+)\\.jar"
+        }
     }
 }
