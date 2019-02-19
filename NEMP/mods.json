@@ -1127,13 +1127,11 @@
         }
     },
     "SecretRoomsMod": {
-        "function": "CheckMCForge2",
-        "category": "forge",
+        "function": "CheckCurse",
         "active": true,
-        "mcforge": {
-            "url": "http://files.minecraftforge.net/maven/com/github/abrarsyed/secretroomsmod/promotions.json",
-            "promo": "latest",
-            "promoType": "dev"
+        "curse": {
+            "name": "secretroomsmod",
+            "regex": "secretroomsmod-[0-9.]+-(?P<version>[0-9]+(?:\\.[0-9]+)+)\\.jar"
         }
     },
     "Botania": {
