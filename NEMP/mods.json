@@ -1,56 +1,11 @@
 {
-    "MinecraftForge-1.7.10": {
-        "name": "MinecraftForge",
-        "function": "CheckMCForge2",
-        "category": "forge",
-        "active": true,
-        "mcforge": {
-            "url": "http://files.minecraftforge.net/maven/net/minecraftforge/forge/promotions.json",
-            "promo": "1.7.10-latest",
-            "promoType": "dev"
-        }
-    },
-    "MinecraftForge-1.7.10-Release": {
-        "name": "MinecraftForge",
-        "function": "CheckMCForge2",
-        "category": "forge",
-        "active": true,
-        "mcforge": {
-            "url": "http://files.minecraftforge.net/maven/net/minecraftforge/forge/promotions.json",
-            "promo": "1.7.10-recommended",
-            "promoType": "version"
-        }
-    },
     "IronChests": {
         "function": "CheckMCForge2",
         "category": "forge",
         "active": true,
         "mcforge": {
-            "url": "http://files.minecraftforge.net/maven/cpw/mods/ironchest/promotions.json",
-            "promo": "latest",
-            "promoType": "dev"
-        }
-    },
-    "IronChests-Release": {
-        "name": "IronChests",
-        "function": "CheckMCForge2",
-        "category": "forge",
-        "active": true,
-        "mcforge": {
-            "url": "http://files.minecraftforge.net/maven/cpw/mods/ironchest/promotions.json",
-            "promo": "recommended",
-            "promoType": "version"
-        }
-    },
-    "IronChests-1.7.10": {
-        "name": "IronChests",
-        "function": "CheckMCForge2",
-        "category": "forge",
-        "active": true,
-        "mcforge": {
-            "url": "http://files.minecraftforge.net/maven/cpw/mods/ironchest/promotions.json",
-            "promo": "1.7.10-latest",
-            "promoType": "version"
+            "url": "http://files.minecraftforge.net/maven/cpw/mods/ironchest/promotions_slim.json",
+            "slim": true
         }
     },
     "BiomesOPlenty": {
@@ -58,272 +13,26 @@
         "category": "forge",
         "active": true,
         "mcforge": {
-            "url": "http://files.minecraftforge.net/maven/com/github/glitchfiend/biomesoplenty/BiomesOPlenty/promotions.json",
-            "promo": "latest",
-            "promoType": "dev"
+            "url": "http://files.minecraftforge.net/maven/com/github/glitchfiend/biomesoplenty/BiomesOPlenty/promotions_slim.json",
+            "slim": true
         }
     },
-    "BiomesOPlenty-Release": {
-        "name": "BiomesOPlenty",
+    "FML": {
         "function": "CheckMCForge2",
         "category": "forge",
         "active": true,
         "mcforge": {
-            "url": "http://files.minecraftforge.net/maven/com/github/glitchfiend/biomesoplenty/BiomesOPlenty/promotions.json",
-            "promo": "recommended",
-            "promoType": "version"
+            "url": "http://files.minecraftforge.net/maven/net/minecraftforge/fml/promotions_slim.json",
+            "slim": true
         }
     },
-    "FML-1.8": {
-        "name": "FML",
+    "MinecraftForge": {
         "function": "CheckMCForge2",
         "category": "forge",
         "active": true,
-        "changelog": false,
         "mcforge": {
-            "url": "http://files.minecraftforge.net/maven/net/minecraftforge/fml/promotions.json",
-            "promo": "latest-1.8",
-            "promoType": "dev"
-        }
-    },
-    "MinecraftForge-1.8": {
-        "name": "MinecraftForge",
-        "function": "CheckMCForge2",
-        "category": "forge",
-        "active": true,
-        "changelog": false,
-        "mcforge": {
-            "url": "http://files.minecraftforge.net/maven/net/minecraftforge/forge/promotions.json",
-            "promo": "1.8.8-latest",
-            "promoType": "dev"
-        }
-    },
-    "MinecraftForge-1.8-Release": {
-        "name": "MinecraftForge",
-        "function": "CheckMCForge2",
-        "category": "forge",
-        "active": true,
-        "changelog": false,
-        "mcforge": {
-            "url": "http://files.minecraftforge.net/maven/net/minecraftforge/forge/promotions.json",
-            "promo": "1.8-recommended",
-            "promoType": "version"
-        }
-    },
-    "MinecraftForge-1.8.8": {
-        "name": "MinecraftForge",
-        "function": "CheckMCForge2",
-        "category": "forge",
-        "active": true,
-        "changelog": false,
-        "mcforge": {
-            "url": "http://files.minecraftforge.net/maven/net/minecraftforge/forge/promotions.json",
-            "promo": "1.8.8-latest",
-            "promoType": "dev"
-        }
-    },
-    "MinecraftForge-1.8.9-Release": {
-        "name": "MinecraftForge",
-        "function": "CheckMCForge2",
-        "category": "forge",
-        "active": true,
-        "changelog": false,
-        "mcforge": {
-            "url": "http://files.minecraftforge.net/maven/net/minecraftforge/forge/promotions.json",
-            "promo": "1.8.9-recommended",
-            "promoType": "version"
-        }
-    },
-    "MinecraftForge-1.8.9": {
-        "name": "MinecraftForge",
-        "function": "CheckMCForge2",
-        "category": "forge",
-        "active": true,
-        "changelog": false,
-        "mcforge": {
-            "url": "http://files.minecraftforge.net/maven/net/minecraftforge/forge/promotions.json",
-            "promo": "1.8.9-latest",
-            "promoType": "dev"
-        }
-    },
-    "MinecraftForge-1.9.4": {
-        "name": "MinecraftForge",
-        "function": "CheckMCForge2",
-        "category": "forge",
-        "active": true,
-        "changelog": false,
-        "mcforge": {
-            "url": "http://files.minecraftforge.net/maven/net/minecraftforge/forge/promotions.json",
-            "promo": "1.9.4-latest",
-            "promoType": "dev"
-        }
-    },
-    "MinecraftForge-1.9-Release": {
-        "name": "MinecraftForge",
-        "function": "CheckMCForge2",
-        "category": "forge",
-        "active": true,
-        "changelog": false,
-        "mcforge": {
-            "url": "http://files.minecraftforge.net/maven/net/minecraftforge/forge/promotions.json",
-            "promo": "1.9-recommended",
-            "promoType": "version"
-        }
-    },
-    "MinecraftForge-1.10": {
-        "name": "MinecraftForge",
-        "function": "CheckMCForge2",
-        "category": "forge",
-        "active": true,
-        "changelog": false,
-        "mcforge": {
-            "url": "http://files.minecraftforge.net/maven/net/minecraftforge/forge/promotions.json",
-            "promo": "1.10-latest",
-            "promoType": "dev"
-        }
-    },
-    "MinecraftForge-1.10.2-Dev": {
-        "name": "MinecraftForge",
-        "function": "CheckMCForge2",
-        "category": "forge",
-        "active": true,
-        "changelog": false,
-        "mcforge": {
-            "url": "http://files.minecraftforge.net/maven/net/minecraftforge/forge/promotions.json",
-            "promo": "1.10.2-latest",
-            "promoType": "dev"
-        }
-    },
-    "MinecraftForge-1.10.2-Release": {
-        "name": "MinecraftForge",
-        "function": "CheckMCForge2",
-        "category": "forge",
-        "active": true,
-        "changelog": false,
-        "mcforge": {
-            "url": "http://files.minecraftforge.net/maven/net/minecraftforge/forge/promotions.json",
-            "promo": "1.10.2-recommended",
-            "promoType": "version"
-        }
-    },
-    "MinecraftForge-1.11-Dev": {
-        "name": "MinecraftForge",
-        "function": "CheckMCForge2",
-        "category": "forge",
-        "active": true,
-        "changelog": false,
-        "mcforge": {
-            "url": "http://files.minecraftforge.net/maven/net/minecraftforge/forge/promotions.json",
-            "promo": "1.11-latest",
-            "promoType": "dev"
-        }
-    },
-    "MinecraftForge-1.11-Release": {
-        "name": "MinecraftForge",
-        "function": "CheckMCForge2",
-        "category": "forge",
-        "active": true,
-        "changelog": false,
-        "mcforge": {
-            "url": "http://files.minecraftforge.net/maven/net/minecraftforge/forge/promotions.json",
-            "promo": "1.11-recommended",
-            "promoType": "version"
-        }
-    },
-    "MinecraftForge-1.11.2-Dev": {
-        "name": "MinecraftForge",
-        "function": "CheckMCForge2",
-        "category": "forge",
-        "active": true,
-        "changelog": false,
-        "mcforge": {
-            "url": "http://files.minecraftforge.net/maven/net/minecraftforge/forge/promotions.json",
-            "promo": "1.11.2-latest",
-            "promoType": "dev"
-        }
-    },
-    "MinecraftForge-1.11.2-Release": {
-        "name": "MinecraftForge",
-        "function": "CheckMCForge2",
-        "category": "forge",
-        "active": true,
-        "changelog": false,
-        "mcforge": {
-            "url": "http://files.minecraftforge.net/maven/net/minecraftforge/forge/promotions.json",
-            "promo": "1.11.2-recommended",
-            "promoType": "version"
-        }
-    },
-    "MinecraftForge-1.12-Dev": {
-        "name": "MinecraftForge",
-        "function": "CheckMCForge2",
-        "category": "forge",
-        "active": true,
-        "changelog": false,
-        "mcforge": {
-            "url": "http://files.minecraftforge.net/maven/net/minecraftforge/forge/promotions.json",
-            "promo": "1.12-latest",
-            "promoType": "dev"
-        }
-    },
-    "MinecraftForge-1.12-Release": {
-        "name": "MinecraftForge",
-        "function": "CheckMCForge2",
-        "category": "forge",
-        "active": true,
-        "changelog": false,
-        "mcforge": {
-            "url": "http://files.minecraftforge.net/maven/net/minecraftforge/forge/promotions.json",
-            "promo": "1.12-recommended",
-            "promoType": "version"
-        }
-    },
-    "MinecraftForge-1.12.1-Dev": {
-        "name": "MinecraftForge",
-        "function": "CheckMCForge2",
-        "category": "forge",
-        "active": true,
-        "changelog": false,
-        "mcforge": {
-            "url": "http://files.minecraftforge.net/maven/net/minecraftforge/forge/promotions.json",
-            "promo": "1.12.1-latest",
-            "promoType": "dev"
-        }
-    },
-    "MinecraftForge-1.12.1-Release": {
-        "name": "MinecraftForge",
-        "function": "CheckMCForge2",
-        "category": "forge",
-        "active": true,
-        "changelog": false,
-        "mcforge": {
-            "url": "http://files.minecraftforge.net/maven/net/minecraftforge/forge/promotions.json",
-            "promo": "1.12.1-recommended",
-            "promoType": "version"
-        }
-    },
-    "MinecraftForge-1.12.2-Dev": {
-        "name": "MinecraftForge",
-        "function": "CheckMCForge2",
-        "category": "forge",
-        "active": true,
-        "changelog": false,
-        "mcforge": {
-            "url": "http://files.minecraftforge.net/maven/net/minecraftforge/forge/promotions.json",
-            "promo": "1.12.2-latest",
-            "promoType": "dev"
-        }
-    },
-    "MinecraftForge-1.12.2-Release": {
-        "name": "MinecraftForge",
-        "function": "CheckMCForge2",
-        "category": "forge",
-        "active": true,
-        "changelog": false,
-        "mcforge": {
-            "url": "http://files.minecraftforge.net/maven/net/minecraftforge/forge/promotions.json",
-            "promo": "1.12.2-recommended",
-            "promoType": "version"
+            "url": "https://files.minecraftforge.net/maven/net/minecraftforge/forge/promotions_slim.json",
+            "slim": true
         }
     },
     "OpenPeripheralCore": {
@@ -3083,20 +2792,8 @@
         "category": "forge",
         "active": true,
         "mcforge": {
-            "url": "http://files.minecraftforge.net/maven/org/spongepowered/spongeforge/promotions.json",
-            "promo": "latest",
-            "promoType": "dev"
-        }
-    },
-    "SpongeForge-Release": {
-        "name": "SpongeForge",
-        "function": "CheckMCForge2",
-        "category": "forge",
-        "active": true,
-        "mcforge": {
-            "url": "http://files.minecraftforge.net/maven/org/spongepowered/spongeforge/promotions.json",
-            "promo": "recommended",
-            "promoType": "version"
+            "url": "http://files.minecraftforge.net/maven/org/spongepowered/spongeforge/promotions_slim.json",
+            "slim": true
         }
     },
     "BrainStoneMod": {

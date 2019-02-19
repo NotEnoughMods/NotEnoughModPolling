@@ -213,15 +213,38 @@ class NotEnoughClasses():
         return output
 
     def CheckMCForge2(self, mod, document=None, simulation=False):
-        jsonres = self.fetch_json(self.mods[mod]["mcforge"]["url"])
+        jsonres = self.fetch_json(self.mods[mod]['mcforge']['url'])
 
-        for promo in jsonres["promos"]:
-            if promo == self.mods[mod]["mcforge"]["promo"]:
-                return {
-                    self.mods[mod]["mcforge"]["promoType"]: jsonres["promos"][promo]["version"],
-                    "mc": jsonres["promos"][promo]["mcversion"]
-                }
-        return {}
+        if self.mods[mod]['mcforge'].get('slim', False):
+            result = {}
+
+            for promo_name, version in jsonres['promos'].iteritems():
+                match = re.match(r'^(?P<mc>[0-9]+(?:\.[0-9]+)+)-(?P<type>latest|recommended)$', promo_name)
+
+                if not match:
+                    print 'MCForge2: skipping invalid promo_name {}'.format(promo_name)
+                    continue
+
+                mc_version = match.group('mc')
+                promo_type = match.group('type')
+
+                if promo_type == 'recommended':
+                    field = 'version'
+                else:
+                    field = 'dev'
+
+                result.setdefault(mc_version, {})[field] = version
+
+            return result
+        else:
+            for promo in jsonres["promos"]:
+                if promo == self.mods[mod]["mcforge"]["promo"]:
+                    return {
+                        self.mods[mod]["mcforge"]["promoType"]: jsonres["promos"][promo]["version"],
+                        "mc": jsonres["promos"][promo]["mcversion"]
+                    }
+
+            return {}
 
     def CheckForgeJson(self, mod, document=None, simulation=False):
         jsonres = self.fetch_json(self.mods[mod]["forgejson"]["url"])
