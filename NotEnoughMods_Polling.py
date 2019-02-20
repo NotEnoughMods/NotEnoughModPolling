@@ -327,13 +327,22 @@ def NEMP_TimerEvent(self, channels):
                     nemp_logger.debug("Updating Mod {0}, status: {1}".format(mod, status))
                     self.NEM.set_nem_version(mod, release_version, mc_version)
                     for channel in channels:
-                        self.sendMessage(channel, "!lmod {0} {1} {2}".format(mc_version, real_name, release_version))
+                        self.sendMessage(channel, "!lmod {} {} {}".format(mc_version, real_name, release_version))
 
                 if dev_version:
-                    nemp_logger.debug("Updating DevMod {0}, status: {1}".format(mod, status))
-                    self.NEM.set_nem_dev_version(mod, dev_version, mc_version)
-                    for channel in channels:
-                        self.sendMessage(channel, "!ldev {0} {1} {2}".format(mc_version, real_name, dev_version))
+                    if release_version and dev_version == release_version:
+                        nemp_logger.warning("Would update mod {} to dev {}, but it matches the new release {}".format(
+                            mod, dev_version, release_version
+                        ))
+                    elif last_release and dev_version == last_release:
+                        nemp_logger.warning("Would update mod {} to dev {}, but it matches the current release {}".format(
+                            mod, dev_version, release_version
+                        ))
+                    else:
+                        nemp_logger.debug("Updating mod {} to dev {}, status: {}".format(mod, dev_version, status))
+                        self.NEM.set_nem_dev_version(mod, dev_version, mc_version)
+                        for channel in channels:
+                            self.sendMessage(channel, "!ldev {} {} {}".format(mc_version, real_name, dev_version))
 
                 if changelog and "changelog" not in self.NEM.mods[mod]:
                     nemp_logger.debug("Sending text for Mod {0}".format(mod))
