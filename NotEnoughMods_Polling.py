@@ -331,11 +331,11 @@ def NEMP_TimerEvent(self, channels):
 
                 if dev_version:
                     if release_version and dev_version == release_version:
-                        nemp_logger.warning("Would update mod {} to dev {}, but it matches the new release {}".format(
+                        nemp_logger.debug("Would update mod {} to dev {}, but it matches the new release {}".format(
                             mod, dev_version, release_version
                         ))
                     elif last_release and dev_version == last_release:
-                        nemp_logger.warning("Would update mod {} to dev {}, but it matches the current release {}".format(
+                        nemp_logger.debug("Would update mod {} to dev {}, but it matches the current release {}".format(
                             mod, dev_version, release_version
                         ))
                     else:
