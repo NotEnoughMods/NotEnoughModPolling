@@ -222,7 +222,6 @@ class NotEnoughClasses():
                 match = re.match(r'^(?P<mc>[0-9]+(?:\.[0-9]+)+)-(?P<type>latest|recommended)$', promo_name)
 
                 if not match:
-                    print 'MCForge2: skipping invalid promo_name {}'.format(promo_name)
                     continue
 
                 mc_version = match.group('mc')
