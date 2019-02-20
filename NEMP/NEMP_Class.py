@@ -81,8 +81,7 @@ class NotEnoughClasses():
             raise
 
         # compile regexes for performance
-        for i, regex in enumerate(self.invalid_versions[:]):
-            self.invalid_versions[i] = re.compile(regex, re.I)
+        self.invalid_versions = [re.compile(regex, re.I) for regex in self.invalid_versions[:]]
 
     def load_mc_blacklist(self):
         with open('commands/NEMP/mc_blacklist.yml', 'r') as f:
@@ -181,6 +180,7 @@ class NotEnoughClasses():
         # for MC version in NEM's list
         for nem_list_name in self.nemVersions:
             if nem_list_name in self.mc_mapping:
+                # TODO
                 continue
 
             # Get the NEM List for this MC Version
