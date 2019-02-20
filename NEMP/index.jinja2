@@ -1,0 +1,25 @@
+<html>
+<head>
+<title>Not Enough Mods:Polling</title>
+<link rel="stylesheet" type="text/css" href="/master.css">
+</head>
+<body>
+<h1>Welcome to NotEnoughMods:Polling, the service that keeps {{ mods|length }} mods up-to-date</h1>
+<table>
+    <thead><tr>
+        <th>Mod Name</th>
+        <th>Function</th>
+        <th>Category</th>
+    </tr></thead>
+    <tbody>
+    {%- for mod_name, info in mods.iteritems() %}
+    <tr class="{{ 'active' if info['active'] else 'disabled' }}">
+        <td class="name">{{ mod_name }}</td>
+        <td class="function">{{ info['function'] }}</td>
+        <td class="category">{% if 'category' in info %}{{ info['category'] }}{% endif %}</td>
+    </tr>
+    {%- endfor %}
+    </tbody>
+</table>
+</body>
+</html>

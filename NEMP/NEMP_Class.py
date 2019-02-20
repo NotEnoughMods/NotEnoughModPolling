@@ -6,8 +6,8 @@ import traceback
 import yaml
 
 from bs4 import BeautifulSoup
-
 from distutils.version import LooseVersion
+from jinja2 import Environment, FileSystemLoader, select_autoescape
 
 logging.getLogger('urllib3').setLevel(logging.WARNING)
 
@@ -35,6 +35,11 @@ class NotEnoughClasses():
             'User-agent': 'NotEnoughMods:Polling/1.X (+https://github.com/NotEnoughMods/NotEnoughModPolling)'
         }
         self.requests_session.max_redirects = 5
+
+        self.jinja_env = Environment(
+            loader=FileSystemLoader('commands/NEMP'),
+            autoescape=select_autoescape(['html'])
+        )
 
         self.load_config()
         self.load_version_blacklist()
@@ -138,31 +143,7 @@ class NotEnoughClasses():
                     self.SinZationalHax[self.mods[mod]["SinZationalHax"]["id"]] = [mod]
 
     def buildHTML(self):
-        headerText = ""
-        with open("commands/NEMP/header.txt", "r") as f:
-            headerText = f.read()
-        footerText = ""
-        with open("commands/NEMP/footer.txt", "r") as f:
-            footerText = f.read()
-        with open("commands/NEMP/htdocs/index.html", "w") as f:
-            f.write(re.sub("~MOD_COUNT~", str(len(self.mods)), headerText))
-            for modName, info in sorted(self.mods.iteritems()):  # TODO: make this not terrible
-                if info["active"]:
-                    isDisabled = "active"
-                else:
-                    isDisabled = "disabled"
-                f.write("""
-        <tr class='{}'>
-            <td class='name'>{}</td>""".format(isDisabled, modName))
-                f.write("""
-            <td class='function'>{}</td>
-""".format(info["function"]))
-                try:
-                    f.write("            <td class='category'>{}</td>\r\n".format(info["category"]))
-                except:
-                    pass
-                f.write("        </tr>\r\n")
-            f.write(footerText)
+        self.jinja_env.get_template('index.jinja2').stream(mods=self.mods).dump('commands/NEMP/htdocs/index.html')
 
     def QueryNEM(self):
         self.nemVersions = self.fetch_json("https://bot.notenoughmods.com/?json")
