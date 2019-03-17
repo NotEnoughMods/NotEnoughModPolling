@@ -3032,7 +3032,7 @@
         "function": "CheckForgeJson",
         "active": true,
         "forgejson": {
-            "url": "https://raw.githubusercontent.com/PrinceOfAmber/CyclicMagic/master/update.json"
+            "url": "https://raw.githubusercontent.com/Lothrazar/Cyclic/master/update.json"
         }
     },
     "Ding": {
