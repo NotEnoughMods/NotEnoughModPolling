@@ -755,33 +755,33 @@ def cmd_reload_blacklist(self, name, params, channel, userdata, rank):
 # In each entry, the second value in the tuple is the
 # rank that is required to be able to use the command.
 VOICED = 1
-#OP = 2
+OP = 2
 commands = {
-    "running": (cmd_running, VOICED),
-    "poll": (cmd_poll, VOICED),
-    "list": (cmd_list, VOICED),
+    "running": (cmd_running, OP),
+    "poll": (cmd_poll, OP),
+    "list": (cmd_list, OP),
     "about": (cmd_about, VOICED),
-    "help": (cmd_help, VOICED),
-    "test": (cmd_test, VOICED),
-    "reload": (cmd_reload, VOICED),
-    "html": (cmd_html, VOICED),
-    "set": (cmd_set, VOICED),
+    "help": (cmd_help, OP),
+    "test": (cmd_test, OP),
+    "reload": (cmd_reload, OP),
+    "html": (cmd_html, OP),
+    "set": (cmd_set, OP),
     "status": (cmd_status, VOICED),
-    "disabledmods": (cmd_disabled_mods, VOICED),
-    "failedmods": (cmd_failed_mods, VOICED),
-    "failcount": (cmd_fail_count, VOICED),
-    "resetfailed": (cmd_reset_failed, VOICED),
-    "showinfo": (cmd_show_info, VOICED),
+    "disabledmods": (cmd_disabled_mods, OP),
+    "failedmods": (cmd_failed_mods, OP),
+    "failcount": (cmd_fail_count, OP),
+    "resetfailed": (cmd_reset_failed, OP),
+    "showinfo": (cmd_show_info, OP),
     "url": (cmd_url, VOICED),
-    'reloadblacklist': (cmd_reload_blacklist, VOICED),
+    'reloadblacklist': (cmd_reload_blacklist, OP),
 
     # -- ALIASES -- #
-    "polling": (cmd_running, VOICED),
-    "refresh": (cmd_reload, VOICED),
-    "disabled": (cmd_disabled_mods, VOICED),
-    "failed": (cmd_failed_mods, VOICED),
-    "cleanfailed": (cmd_reset_failed, VOICED),
-    "show": (cmd_show_info, VOICED),
-    'reloadblacklists': (cmd_reload_blacklist, VOICED),
+    "polling": (cmd_running, OP),
+    "refresh": (cmd_reload, OP),
+    "disabled": (cmd_disabled_mods, OP),
+    "failed": (cmd_failed_mods, OP),
+    "cleanfailed": (cmd_reset_failed, OP),
+    "show": (cmd_show_info, OP),
+    'reloadblacklists': (cmd_reload_blacklist, OP),
     # -- END ALIASES -- #
 }
