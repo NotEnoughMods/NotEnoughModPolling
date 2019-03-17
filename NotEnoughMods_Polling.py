@@ -717,8 +717,6 @@ def cmd_url(self, name, params, channel, userdata, rank):
     mod = self.NEM.mods[modname]
     func = mod["function"]
 
-    url = None
-
     if func == "CheckGitHubRelease":
         url = "https://github.com/" + mod["github"]["repo"]
     elif func == "CheckCurse":
@@ -738,6 +736,8 @@ def cmd_url(self, name, params, channel, userdata, rank):
         url = "http://www.chickenbones.net/Files/notification/version.php?version=" + mod['mc'] + "&file=" + modname
     elif func == 'CheckForgeJson':
         url = mod['forgejson']['url']
+    else:
+        url = None
 
     if url:
         self.sendMessage(channel, name + ": " + url)
