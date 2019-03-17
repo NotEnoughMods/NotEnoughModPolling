@@ -717,8 +717,10 @@ def cmd_url(self, name, params, channel, userdata, rank):
     mod = self.NEM.mods[modname]
     func = mod["function"]
 
+    url = None
+
     if func == "CheckGitHubRelease":
-        self.sendMessage(channel, name + ": https://github.com/" + mod["github"]["repo"])
+        url = "https://github.com/" + mod["github"]["repo"]
     elif func == "CheckCurse":
         modid = mod['curse'].get('id')
         modname = mod['curse'].get('name', modname.lower())
@@ -729,11 +731,16 @@ def cmd_url(self, name, params, channel, userdata, rank):
         else:
             project_url = modname
 
-        self.sendMessage(channel, name + ': https://api.cfwidget.com/' + base_path + '/' + project_url)
+        url = 'https://api.cfwidget.com/' + base_path + '/' + project_url
     elif func == "CheckJenkins":
-        self.sendMessage(channel, name + ": " + mod["jenkins"]["url"][:-28])
+        url = mod["jenkins"]["url"][:-28]
     elif func == "CheckChickenBones":
-        self.sendMessage(channel, name + ": http://www.chickenbones.net/Files/notification/version.php?version=" + mod['mc'] + "&file=" + modname)
+        url = "http://www.chickenbones.net/Files/notification/version.php?version=" + mod['mc'] + "&file=" + modname
+    elif func == 'CheckForgeJson':
+        url = mod['forgejson']['url']
+
+    if url:
+        self.sendMessage(channel, name + ": " + url)
     else:
         self.sendMessage(channel, name + ": This mod doesn't have a well-defined URL")
 
