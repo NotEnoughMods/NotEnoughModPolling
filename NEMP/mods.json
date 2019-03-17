@@ -709,7 +709,7 @@
         "curse": {
             "name": "minemenu",
             "id": "222378",
-            "regex": "-.+?-(?P<version>.+?)-universal.jar"
+            "regex": "MineMenu-[0-9.]+-(?P<version>[0-9]+(?:\\.[0-9]+)+)(?:-universal)?\\.jar"
         }
     },
     "TooMuchRain": {
