@@ -2784,7 +2784,7 @@
         "curse": {
             "id": "239197",
             "name": "crafttweaker",
-            "regex": "CraftTweaker2-.+?-(?P<version>.+)\\.jar"
+            "regex": "CraftTweaker2(?:\\.5)?-.+?-(?P<version>.+)\\.jar"
         }
     },
     "SpongeForge": {
