@@ -647,16 +647,6 @@
             "regex": "-.+?-(?P<version>.+?).jar"
         }
     },
-    "Pay2Spawn": {
-        "function": "CheckJenkins",
-        "active": true,
-        "category": "DDdev",
-        "jenkins": {
-            "url": "http://jenkins.dries007.net/job/Pay2Spawn/lastSuccessfulBuild/api/json",
-            "regex": "Pay2Spawn-(?P<mc>.+?)-(?P<version>.+?).jar",
-            "item": 2
-        }
-    },
     "HoloInventory": {
         "function": "CheckJenkins",
         "active": true,
