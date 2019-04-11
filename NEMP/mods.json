@@ -424,14 +424,12 @@
             "item": 0
         }
     },
-    "ExtraCells-dev": {
-        "name": "ExtraCells",
-        "function": "CheckJenkins",
+    "ExtraCells": {
+        "function": "CheckCurse",
         "active": true,
-        "jenkins": {
-            "url": "http://shadows.dmodoomsirius.me:8080/job/ecrv2/lastSuccessfulBuild/api/json",
-            "regex": "ExtraCells-(?P<mc>.+?)-(?P<dev>.+?).jar",
-            "item": 0
+        "curse": {
+            "name": "extracells2",
+            "regex": "ExtraCells-[0-9.]+-(?P<version>[0-9]+(?:\\.[0-9]+)+.+?)\\.jar"
         }
     },
     "SuperMassiveTech": {
@@ -648,33 +646,11 @@
         }
     },
     "HoloInventory": {
-        "function": "CheckJenkins",
+        "function": "CheckCurse",
         "active": true,
-        "category": "DDdev",
-        "jenkins": {
-            "url": "http://jenkins.dries007.net/job/HoloInventory/lastSuccessfulBuild/api/json",
-            "regex": "HoloInventory-(?P<mc>.+?)-(?P<version>.+?).jar",
-            "item": 2
-        }
-    },
-    "PlaceableTools": {
-        "function": "CheckJenkins",
-        "active": true,
-        "category": "DDdev",
-        "jenkins": {
-            "url": "http://jenkins.dries007.net/job/PlaceableTools/lastSuccessfulBuild/api/json",
-            "regex": "PlaceableTools-(?P<mc>.+?)-(?P<version>.+?).jar",
-            "item": 2
-        }
-    },
-    "TorchTools": {
-        "function": "CheckJenkins",
-        "active": true,
-        "category": "DDdev",
-        "jenkins": {
-            "url": "http://jenkins.dries007.net/job/TorchTools/lastSuccessfulBuild/api/json",
-            "regex": "TorchTools-(?P<mc>.+?)-(?P<version>.+?).jar",
-            "item": 2
+        "curse": {
+            "name": "holoinventory",
+            "regex": "HoloInventory-[0-9.]+-(?P<version>[0-9]+(?:\\.[0-9]+)+).jar"
         }
     },
     "EquivalentExchange3": {
@@ -837,64 +813,30 @@
         "function": "CheckBotania",
         "active": true
     },
-    "AutoCrafter2000": {
-        "function": "CheckJenkins",
-        "active": true,
-        "category": "DDdev",
-        "jenkins": {
-            "url": "http://jenkins.dries007.net/job/AutoCrafter2000/lastSuccessfulBuild/api/json",
-            "regex": "AutoCrafter2000-(?P<mc>.+?)-(?P<version>.+?).jar",
-            "item": 2
-        }
-    },
-    "CrayCrafting": {
-        "function": "CheckJenkins",
-        "category": "DDdev",
-        "active": true,
-        "jenkins": {
-            "url": "http://jenkins.dries007.net/job/CrayCrafting/lastSuccessfulBuild/api/json",
-            "regex": "CrayCrafting-(?P<mc>.+?)-(?P<version>.+?).jar",
-            "item": 2
-        }
-    },
     "D3Core": {
-        "function": "CheckJenkins",
+        "function": "CheckCurse",
         "active": true,
-        "category": "DDdev",
-        "jenkins": {
-            "url": "http://jenkins.dries007.net/job/D3Core/lastSuccessfulBuild/api/json",
-            "regex": "D3Core-(?P<mc>.+?)-(?P<version>.+?).jar",
-            "item": 2
-        }
-    },
-    "GreenThumb": {
-        "function": "CheckJenkins",
-        "active": true,
-        "category": "DDdev",
-        "jenkins": {
-            "url": "http://jenkins.dries007.net/job/GreenThumb/lastSuccessfulBuild/api/json",
-            "regex": "GreenThumb-(?P<mc>.+?)-(?P<version>.+?).jar",
-            "item": 2
+        "curse": {
+            "name": "d3core",
+            "regex": "D3Core-[0-9.]+-(?P<version>[0-9]+(?:\\.[0-9]+)+)\\.jar"
         }
     },
     "Let-it-Burn": {
-        "function": "CheckJenkins",
+        "function": "CheckCurse",
         "active": true,
-        "category": "DDdev",
-        "jenkins": {
-            "url": "http://jenkins.dries007.net/job/Let-it-Burn/lastSuccessfulBuild/api/json",
-            "regex": "LetItBurn-(?P<mc>.+?)-(?P<version>.+?).jar",
-            "item": 2
+        "curse": {
+            "name": "let-it-burn-add-furnace-fuel-with-config",
+            "base_path": "projects",
+            "regex": "LetItBurn-[0-9.]+-(?P<version>[0-9]+(?:\\.[0-9]+)+)\\.jar"
         }
     },
     "Lumberjack": {
-        "function": "CheckJenkins",
+        "function": "CheckCurse",
         "active": true,
-        "category": "DDdev",
-        "jenkins": {
-            "url": "http://jenkins.dries007.net/job/Lumberjack/lastSuccessfulBuild/api/json",
-            "regex": "Lumberjack-(?P<mc>.+?)-(?P<version>.+?).jar",
-            "item": 2
+        "curse": {
+            "name": "lumberjack",
+            "base_path": "projects",
+            "regex": "Lumberjack(?:-[0-9.]+)?-(?P<version>[0-9]+(?:\\.[0-9]+)+)\\.jar"
         }
     },
     "HexWool": {
