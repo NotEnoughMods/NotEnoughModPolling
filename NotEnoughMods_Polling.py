@@ -374,7 +374,7 @@ def NEMP_TimerEvent(self, channels):
                 self.NEM.mods[mod]['active'] = False
 
                 if staff_channel:
-                    self.sendMessage(staff_channel, 'Mod {} failed with a {}: {}'.format(mod, type(exception).__name__, exception))
+                    self.sendMessage(staff_channel, 'Mod {} \00304failed\003 with a {}: {}'.format(mod, type(exception).__name__, exception))
             else:
                 if mod not in self.NEM_troubledMods:
                     self.NEM_troubledMods[mod] = 1
@@ -398,7 +398,7 @@ def NEMP_TimerEvent(self, channels):
         self.NEM.buildHTML()
 
         if staff_channel and completely_failed_mods:
-            self.sendMessage(staff_channel, 'The following mod(s) failed: {0}.'.format(', '.join(sorted(completely_failed_mods, key=lambda x: x.lower()))))
+            self.sendMessage(staff_channel, 'The following mod(s) \00304failed\003: {0}.'.format(', '.join(sorted(completely_failed_mods, key=lambda x: x.lower()))))
 
         # Reset counter for any mod that is still in the list.
         for mod in current_troubled_mods:
