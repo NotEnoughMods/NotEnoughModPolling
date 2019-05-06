@@ -2599,7 +2599,7 @@
         "curse": {
             "id": "242064",
             "name": "item-scroller",
-            "regex": "itemscroller-rift-(?P<mc>[0-9\\.]+)-(?P<version>.+?)\\.jar"
+            "regex": "itemscroller(-rift|-fabric)?-(?P<mc>[0-9\\.]+)-(?P<version>.+?)\\.jar"
         }
     },
     "MiniHUD": {
