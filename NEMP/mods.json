@@ -1031,7 +1031,7 @@
         "active": true,
         "curse": {
             "name": "journeymap",
-            "regex": "journeymap-(?P<mc>.+?)-(?P<version>[0-9]+(?:\\.[0-9]+)+)\\.jar"
+            "regex": "journeymap-(?P<mc>.+?)-(?P<version>[0-9]+(?:\\.[0-9]+)+(?:[a-z][0-9]*)?)\\.jar"
         }
     },
     "RoguelikeDungeons": {
@@ -2779,7 +2779,7 @@
         "curse": {
             "id": "253449",
             "name": "hwyla",
-            "regex": "Hwyla-(?P<version>.+)_(?P<mc>.+?).jar"
+            "regex": "Hwyla-fabric-(?:[0-9.]+)-(?P<version>[0-9]+(?:\\.[0-9]+)+-[0-9]+)\\.jar"
         }
     },
     "ActuallyAdditions": {
@@ -3241,7 +3241,7 @@
         "curse": {
             "name": "laggoggles",
             "base_path": "projects",
-            "regex": "LagGoggles-(?:SPONGE)?FORGE-(?:[0-9]+(?:\\.[0-9]+)+)-(?P<version>[0-9]+(?:\\.[0-9]+)+)\\.jar"
+            "regex": "LagGoggles-(?:SPONGE)?FORGE-(?:[0-9]+(?:\\.[0-9]+)+)-(?P<version>[0-9]+(?:\\.[0-9]+)+(?:-.+)?)\\.jar"
         }
     },
     "LumySkinPatch": {
