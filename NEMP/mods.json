@@ -839,15 +839,6 @@
             "regex": "Lumberjack(?:-[0-9.]+)?-(?P<version>[0-9]+(?:\\.[0-9]+)+)\\.jar"
         }
     },
-    "HexWool": {
-        "function": "CheckJenkins",
-        "active": true,
-        "jenkins": {
-            "url": "http://ci.techjargaming.com/job/HexWool/lastSuccessfulBuild/api/json",
-            "regex": "HexWool-(?P<mc>.+?)-(?P<version>.+?).jar",
-            "item": 0
-        }
-    },
     "VersionChecker": {
         "function": "CheckCurse",
         "active": true,
