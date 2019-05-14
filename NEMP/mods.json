@@ -666,7 +666,7 @@
         "active": true,
         "curse": {
             "name": "hardcore-questing-mode",
-            "regex": "HQM-.+?-(?P<version>[0-9]+(?:\\.[0-9]+)+)\\.jar"
+            "regex": "HQM-[0-9.]+-(?P<version>[0-9]+(?:\\.[0-9]+)+(?:.+)?)\\.jar"
         }
     },
     "MineMenu": {
@@ -1458,7 +1458,7 @@
         "curse": {
             "id": "225608",
             "name": "worldedit",
-            "regex": "worldedit-forge-mc.+?-(?P<version>.+)-dist\\.jar"
+            "regex": "worldedit-forge-mc.+?-(?P<version>.+?)(?:-dist)?\\.jar"
         }
     },
     "Binnie'sMods": {
