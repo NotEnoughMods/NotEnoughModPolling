@@ -2599,7 +2599,7 @@
         "curse": {
             "id": "244260",
             "name": "minihud",
-            "regex": "minihud-rift-(?P<mc>[0-9\\.]+)-(?P<version>.+?)\\.jar"
+            "regex": "minihud(?:-rift|-fabric)?-(?P<mc>[0-9\\.]+)-(?P<version>.+?)\\.jar"
         }
     },
     "Multishot": {
