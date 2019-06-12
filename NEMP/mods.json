@@ -165,13 +165,12 @@
         }
     },
     "LogisticsPipes": {
-        "function": "CheckJenkins",
+        "function": "CheckCurse",
         "active": true,
-        "mc": "1.7.10",
-        "jenkins": {
-            "url": "http://ci.rs485.network/view/Logistics%20Pipes/job/LogisticsPipes-0.9-mc17-bc7/lastSuccessfulBuild/api/json",
-            "regex": "logisticspipes-(?P<dev>.+?).jar",
-            "item": 2
+        "curse": {
+            "name": "logistics-pipes",
+            "regex": "logisticspipes-(?P<version>.+?)\\.jar",
+            "base_path": "minecraft/mc-mods"
         }
     },
     "Mekanism": {
