@@ -543,23 +543,6 @@ class NotEnoughClasses():
 
         return {}
 
-    def CheckModsIO(self, mod, document=None, simulation=False):
-        mod_id = str(self.mods[mod]['modsio']['id'])
-
-        response = self.fetch_json('https://mods.io/mods/' + mod_id + '.json')
-
-        current_version = response['current_version']
-
-        ret = {
-            'mc': current_version['minecraft'],
-            'version': current_version['name']
-        }
-
-        if current_version.get('changelog'):
-            ret['change'] = current_version['changelog']
-
-        return ret
-
     def is_version_valid(self, version):
         for regex in self.invalid_versions:
             if regex.search(version):

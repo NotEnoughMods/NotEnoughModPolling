@@ -157,13 +157,6 @@
         "function": "CheckBuildCraft",
         "active": true
     },
-    "Artifice": {
-        "function": "CheckModsIO",
-        "active": true,
-        "modsio": {
-            "id": 1139
-        }
-    },
     "LogisticsPipes": {
         "function": "CheckCurse",
         "active": true,
