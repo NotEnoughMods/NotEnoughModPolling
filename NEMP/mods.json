@@ -2769,7 +2769,7 @@
         "curse": {
             "id": "253449",
             "name": "hwyla",
-            "regex": "Hwyla-fabric-(?:[0-9.]+)-(?P<version>[0-9]+(?:\\.[0-9]+)+-[0-9]+)\\.jar"
+            "regex": "Hwyla-(?:fabric-(?:[0-9.]+)|forge)-(?P<version>[0-9]+(?:\\.[0-9]+)+-B?[0-9]+)(?:_[0-9.]+)?\\.jar"
         }
     },
     "ActuallyAdditions": {
