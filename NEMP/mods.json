@@ -3235,5 +3235,22 @@
             "base_path": "minecraft/mc-mods",
             "regex": "LumySkinPatch-(?P<version>[0-9]+(?:\\.[0-9]+)+)\\.jar"
         }
+    },
+    "SonarCore": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "name": "sonar-core",
+            "regex": "sonarcore-[0-9.]+-(?P<version>[0-9]+(?:\\.[0-9]+)+(?:-[0-9]+)?)\\.jar"
+        }
+    },
+    "Silent'sGems": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "id": "220311",
+            "name": "silents-gems",
+            "regex": "SilentGems-[0-9.]+-(?P<version>[0-9]+(?:\\.[0-9]+)+[a-z0-9+\\-_]+)\\.jar"
+        }
     }
 }
