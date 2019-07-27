@@ -3252,5 +3252,41 @@
             "name": "silents-gems",
             "regex": "SilentGems-[0-9.]+-(?P<version>[0-9]+(?:\\.[0-9]+)+[a-z0-9+\\-_]+)\\.jar"
         }
+    },
+    "NGTLib": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "name": "ngtlib",
+            "base_path": "minecraft/mc-mods",
+            "regex": "NGTLib(?P<version>[0-9]+(?:\\.[0-9]+)+-[0-9]+)_forge"
+        }
+    },
+    "EpicSiegeMod": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "id": "229449",
+            "name": "epic-siege-mod",
+            "regex": "EpicSiegeMod-(?P<version>[0-9]+(?:\\.[0-9]+)+)\\.jar"
+        }
+    },
+    "MCTerrainEditor": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "name": "mc-terrain-editor",
+            "base_path": "minecraft/mc-mods",
+            "regex": "MCTE(?P<version>[0-9]+(?:\\.[0-9]+)+-[0-9]+)_forge"
+        }
+    },
+    "RealTrainMod": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "name": "realtrainmod",
+            "base_path": "minecraft/mc-mods",
+            "regex": "RTM(?P<version>[0-9]+(?:\\.[0-9]+)+-[0-9]+)_forge"
+        }
     }
 }
