@@ -3288,5 +3288,57 @@
             "base_path": "minecraft/mc-mods",
             "regex": "RTM(?P<version>[0-9]+(?:\\.[0-9]+)+-[0-9]+)_forge"
         }
+    },
+    "AncientWarfare2": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "name": "ancient-warfare-2",
+            "base_path": "projects",
+            "regex": "ancientwarfare-[0-9.]+-(?P<version>[0-9]+(?:\\.[0-9]+)+)\\.jar"
+        }
+    },
+    "IceAndFire": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "name": "ice-and-fire-dragons-in-a-whole-new-light",
+            "base_path": "projects",
+            "regex": "iceandfire-(?P<version>[0-9]+(?:\\.[0-9]+)+)-[0-9.]+\\.jar"
+        }
+    },
+    "MysticalAgriculture": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "name": "mystical-agriculture",
+            "regex": "MysticalAgriculture-[0-9.]+-(?P<version>[0-9]+(?:\\.[0-9]+)+)\\.jar"
+        }
+    },
+    "Roots": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "name": "roots",
+            "regex": "roots-(?P<version>(?:[0-9]+-)?[0-9]+(?:\\.[0-9]+)+)\\.jar"
+        }
+    },
+    "RpgInventory": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "id":"251752",
+            "name": "the-rpg-inventory-and-classarmor-mod",
+            "regex": "rpginventory-[0-9.]+-(?P<version>[0-9]+(?:\\.[0-9]+)+)\\.jar"
+        }
+    },
+    "MysticalAgradditions": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "id": "256247",
+            "name": "mystical-agradditions",
+            "regex": "MysticalAgradditions-[0-9.]+-(?P<version>[0-9]+(?:\\.[0-9]+)+)\\.jar"
+        }
     }
 }
