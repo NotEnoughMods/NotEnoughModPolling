@@ -8,10 +8,9 @@ A plugin for the [Renol IRC bot][renol] that automatically keeps some mods in [N
 Requirements
 ------------
 - Python 2.7
+- Pipenv
 
-`pip install -r requirements.txt`
-
-Python < 2.7.9 also requires these packages to support SNI: `pyOpenSSL ndg-httpsclient pyasn1`
+`pipenv install`
 
 Contact
 ------------
