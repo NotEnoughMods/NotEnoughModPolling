@@ -1,6 +1,7 @@
 Not Enough Mods Polling Plugin 
 =============
 [![Build Status](https://travis-ci.org/NotEnoughMods/NotEnoughModPolling.svg?branch=master)](https://travis-ci.org/NotEnoughMods/NotEnoughModPolling)
+[![Dependabot Status](https://api.dependabot.com/badges/status?host=github&repo=NotEnoughMods/NotEnoughModPolling)](https://dependabot.com)
 
 A plugin for the [Renol IRC bot][renol] that automatically keeps some mods in [Not Enough Mods][nem] up-to-date by polling information from several sources.
 
