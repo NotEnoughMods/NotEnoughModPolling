@@ -14,7 +14,7 @@ Requirements
 
 Contact
 ------------
-You can contact SinZ or NightKev in #test at EsperNet.
+You can contact us at the NEM Discord server: <https://discord.gg/D7vNaZM>.
 
 Credits
 ------------
