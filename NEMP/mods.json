@@ -3349,6 +3349,14 @@
             "regex": "ExtremeReactors-[0-9.]+-(?P<version>[0-9]+(?:\\.[0-9]+)+)\\.jar"
         }
     },
+    "ZeroCore": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "name": "zerocore",
+            "regex": "ZeroCore-[0-9.]+-(?P<version>[0-9]+(?:\\.[0-9]+)+)\\.jar"
+        }
+    },
     "LittleTiles": {
         "function": "CheckCurse",
         "active": true,
