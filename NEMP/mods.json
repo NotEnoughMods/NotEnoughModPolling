@@ -90,41 +90,6 @@
             "regex": "LanteaCraft-(?P<mc>.+?)-(?P<version>.+?).jar$"
         }
     },
-    "OpenPrinter": {
-        "function": "CheckForgeJson",
-        "active": true,
-        "forgejson": {
-            "url": "http://modupdates.pc-logix.com/openprinter"
-        }
-    },
-    "OpenFM": {
-        "function": "CheckForgeJson",
-        "active": true,
-        "forgejson": {
-            "url": "http://modupdates.pc-logix.com/openfm"
-        }
-    },
-    "OpenSecurity": {
-        "function": "CheckForgeJson",
-        "active": true,
-        "forgejson": {
-            "url": "http://modupdates.pc-logix.com/opensecurity"
-        }
-    },
-    "OpenSensors": {
-        "function": "CheckForgeJson",
-        "active": true,
-        "forgejson": {
-            "url": "http://modupdates.pc-logix.com/opensensors"
-        }
-    },
-    "OpenLights": {
-        "function": "CheckForgeJson",
-        "active": true,
-        "forgejson": {
-            "url": "http://modupdates.pc-logix.com/openlights"
-        }
-    },
     "AdditionalBuildcraftObjects": {
         "function": "CheckGitHubRelease",
         "active": true,
@@ -643,14 +608,6 @@
         "curse": {
             "name": "holoinventory",
             "regex": "HoloInventory-[0-9.]+-(?P<version>[0-9]+(?:\\.[0-9]+)+).jar"
-        }
-    },
-    "EquivalentExchange3": {
-        "function": "CheckHTML",
-        "active": true,
-        "html": {
-            "url": "http://ee3.pahimar.com/",
-            "regex": "/all/latest/EquivalentExchange3-(?P<mc>.+?)-(?P<version>.+?).jar"
         }
     },
     "HardcoreQuestingMode": {
