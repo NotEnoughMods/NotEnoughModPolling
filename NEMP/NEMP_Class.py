@@ -394,9 +394,12 @@ class NotEnoughClasses():
 
         versions = {}
 
+        MC_VERSION_REGEX = re.compile(r'^[0-9]+(?:\.[0-9]+)+$')
+
         for release in sorted_files:
             for mc_version in release['versions']:
-                if mc_version.startswith('Java') or mc_version.endswith('-Snapshot'):
+                # Skip this "mc version" if it's not actually a MC version (Forge, snapshots, Java, etc)
+                if not MC_VERSION_REGEX.match(mc_version):
                     continue
 
                 if mc_version in versions:
