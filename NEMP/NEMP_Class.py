@@ -50,8 +50,8 @@ class NotEnoughClasses():
         self.init_nem_versions()
         self.buildHTML()
 
-    def fetch_page(self, url, timeout=10, decode_json=False):
-        request = self.requests_session.get(url, timeout=timeout)
+    def fetch_page(self, url, timeout=10, decode_json=False, *args, **kwargs):
+        request = self.requests_session.get(url, timeout=timeout, *args, **kwargs)
 
         try:
             request.raise_for_status()
@@ -435,9 +435,9 @@ class NotEnoughClasses():
         url = 'https://api.github.com/repos/' + repo + '/releases'
 
         if client_id and client_secret:
-            url += '?client_id={}&client_secret={}'.format(client_id, client_secret)
-
-        releases = self.fetch_json(url)
+            releases = self.fetch_json(url, auth=(client_id, client_secret))
+        else:
+            releases = self.fetch_json(url)
 
         type_ = self.mods[mod]['github'].get('type', 'asset')
 
