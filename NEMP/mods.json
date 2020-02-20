@@ -2334,7 +2334,7 @@
             "regex": "DrZhark'?s Mo'?Creatures Mod-(?P<version>[0-9]+(\\.[0-9]+)+)\\.jar"
         }
     },
-    "   ": {
+    "CustomMobSpawner": {
         "function": "CheckCurse",
         "active": true,
         "curse": {
