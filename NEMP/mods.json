@@ -450,7 +450,7 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "regex": "CoFHCore-.+?-(?P<version>[0-9]+(?:\\.[0-9]+)+)-universal.jar"
+            "regex": "cofh_?core-.+?-(?P<version>[0-9]+(?:\\.[0-9]+)+[a-z]?)(?:-universal)?\\.jar"
         }
     },
     "CoFHLib": {
@@ -755,7 +755,7 @@
         "active": true,
         "curse": {
             "name": "secretroomsmod",
-            "regex": "secretroomsmod-[0-9.]+-(?P<version>[0-9]+(?:\\.[0-9]+)+)\\.jar"
+            "regex": "secretrooms(?:mod)?(?:-[0-9.]+)?-(?P<version>[0-9]+(?:\\.[0-9]+)+)\\.jar"
         }
     },
     "Botania": {
@@ -803,7 +803,7 @@
         "curse": {
             "id": "221826",
             "name": "custom-npcs",
-            "regex": "CustomN(?:PC|pc)s_(?P<version>.+?)\\("
+            "regex": "CustomNPCs_(?P<version>.+?)-?\\("
         }
     },
     "MinecraftComesAlive": {
@@ -1865,7 +1865,7 @@
         "curse": {
             "id": "227391",
             "name": "eleccore-dimensionapi",
-            "regex": "ElecCore-.+?-(?P<version>[0-9.]+)(?:-sources)?\\.jar"
+            "regex": "ElecCore-.+?-(?P<version>.+?)(?:-sources)?\\.jar"
         }
     },
     "MagicBees": {
@@ -1955,7 +1955,7 @@
         "curse": {
             "id": "233019",
             "name": "ai-improvements",
-            "regex": "AIImprovements-.+?-(?P<version>[0-9]+(?:\\.[0-9]+)+b[0-9]+)(?:-universal)?\\.jar"
+            "regex": "AI-Improvements-[0-9.]+-(?P<version>[0-9]+(?:\\.[0-9]+)+)\\.jar"
         }
     },
     "AddictedToRed": {
@@ -2024,7 +2024,7 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "regex": ".+?-(?P<mc>.+?)-(?P<version>.+?).jar",
+            "regex": "ender_?compass(?:-[0-9.x]+)?-(?P<version>.+?)\\.jar",
             "id": "223106",
             "name": "ender-compass"
         }
@@ -2334,13 +2334,13 @@
             "regex": "DrZhark'?s Mo'?Creatures Mod-(?P<version>[0-9]+(\\.[0-9]+)+)\\.jar"
         }
     },
-    "CustomMobSpawner": {
+    "   ": {
         "function": "CheckCurse",
         "active": true,
         "curse": {
             "id": "229261",
             "name": "custom-mob-spawner",
-            "regex": "CustomMobSpawner (?P<version>[0-9]+(\\.[0-9]+)+)"
+            "regex": "CustomMobSpawner[ \\-](?P<version>[0-9]+(\\.[0-9]+)+)"
         }
     },
     "BiomeTweaker": {
@@ -2467,7 +2467,7 @@
         "curse": {
             "id": "237903",
             "name": "reborncore",
-            "regex": "RebornCore-(?P<mc>.+)-(?P<version>.+?)-universal.jar"
+            "regex": "RebornCore-[0-9.]+-(?P<version>.+?)(?:-universal)?\\.jar"
         }
     },
     "TechReborn": {
@@ -2476,7 +2476,7 @@
         "curse": {
             "id": "233564",
             "name": "techreborn",
-            "regex": "TechReborn-(?P<mc>.+)-(?P<version>.+?)-universal.jar"
+            "regex": "TechReborn-[0-9.]+-(?P<version>.+?)(?:-universal)?\\.jar"
         }
     },
     "MoarCarts": {
@@ -2494,7 +2494,7 @@
         "curse": {
             "id": "237422",
             "name": "lightningcraft",
-            "regex": "lightningcraft-(?P<version>.+?)-\\["
+            "regex": "lightningcraft-(?P<version>.+?)(?:-\\[|\\.jar)"
         }
     },
     "AdvancedCombat": {
@@ -2530,7 +2530,7 @@
         "curse": {
             "id": "246320",
             "name": "environmental-creepers",
-            "regex": "environmentalcreepers-(?P<mc>[0-9\\.]+)-(?P<version>.+?)\\.jar"
+            "regex": "environmentalcreepers-(?:forge-)?[0-9.]+-(?P<version>[0-9]+(?:\\.[0-9]+)+)\\.jar"
         }
     },
     "ItemScroller": {
@@ -2656,7 +2656,7 @@
         "curse": {
             "id": "239197",
             "name": "crafttweaker",
-            "regex": "CraftTweaker2(?:\\.5)?-.+?-(?P<version>.+)\\.jar"
+            "regex": "CraftTweaker(?:2(?:\\.5)?)?-[0-9.]+-(?P<version>.+)\\.jar"
         }
     },
     "SpongeForge": {
@@ -2843,7 +2843,7 @@
         "curse": {
             "id": "247644",
             "name": "crafting-redstone",
-            "regex": "Crafting Redstone-MC.+?-V(?P<version>.+)\\.jar"
+            "regex": "Crafting ?Redstone-MC[0-9.]+-V(?P<version>.+)\\.jar"
         }
     },
     "BetterPlacement": {
@@ -3216,7 +3216,7 @@
         "curse": {
             "name": "ngtlib",
             "base_path": "minecraft/mc-mods",
-            "regex": "NGTLib(?P<version>[0-9]+(?:\\.[0-9]+)+-[0-9]+)_forge"
+            "regex": "NGTLib(?P<version>[0-9]+(?:\\.[0-9]+)+(?:-[0-9]+)?)_Forge"
         }
     },
     "EpicSiegeMod": {
@@ -3243,7 +3243,7 @@
         "curse": {
             "name": "realtrainmod",
             "base_path": "minecraft/mc-mods",
-            "regex": "RTM(?P<version>[0-9]+(?:\\.[0-9]+)+-[0-9]+)_forge"
+            "regex": "RTM(?P<version>[0-9]+(?:\\.[0-9]+)+(?:-[0-9]+)?)_forge"
         }
     },
     "AncientWarfare2": {
@@ -3261,7 +3261,7 @@
         "curse": {
             "name": "ice-and-fire-dragons-in-a-whole-new-light",
             "base_path": "projects",
-            "regex": "iceandfire-(?P<version>[0-9]+(?:\\.[0-9]+)+)-[0-9.]+\\.jar"
+            "regex": "iceandfire-(?P<version>[0-9]+(?:\\.[0-9]+)+)(?:-[0-9.]+)?\\.jar"
         }
     },
     "MysticalAgriculture": {
@@ -3277,7 +3277,7 @@
         "active": true,
         "curse": {
             "name": "roots",
-            "regex": "roots-(?P<version>(?:[0-9]+-)?[0-9]+(?:\\.[0-9]+)+)\\.jar"
+            "regex": "roots(?:-[0-9.]+)?-(?P<version>(?:[0-9]+-)?[0-9]+(?:\\.[0-9]+)+)\\.jar"
         }
     },
     "RpgInventory": {
