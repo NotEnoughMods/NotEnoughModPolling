@@ -409,7 +409,7 @@ class NotEnoughClasses():
 
                 if not match:
                     if release['id'] == latest_release_id:
-                        raise NEMPException("Regex is outdated (doesn't match against latest release). Latest: " + release['name'])
+                        raise NEMPException("Regex is outdated (doesn't match against latest release). Latest: " + release['name'] + ", Regex: " + self.get_mod_regex(mod).pattern)
 
                     # If this release isn't the latest one, we just assume it's an old one and skip it
                     continue
