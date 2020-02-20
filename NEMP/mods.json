@@ -2467,7 +2467,7 @@
         "curse": {
             "id": "237903",
             "name": "reborncore",
-            "regex": "RebornCore-[0-9.]+-(?P<version>.+?)(?:-universal)?\\.jar"
+            "regex": "RebornCore(?:-[0-9.]+)?-(?P<version>[0-9]+(?:\\.[0-9]+)+(?:\\+build\\.[0-9]+)?)(?:-universal)?\\.jar"
         }
     },
     "TechReborn": {
@@ -2476,7 +2476,7 @@
         "curse": {
             "id": "233564",
             "name": "techreborn",
-            "regex": "TechReborn-[0-9.]+-(?P<version>.+?)(?:-universal)?\\.jar"
+            "regex": "TechReborn(?:-[0-9.]+)?-(?P<version>[0-9]+(?:\\.[0-9]+)+(?:\\+build\\.[0-9]+)?)(?:-universal)?\\.jar"
         }
     },
     "MoarCarts": {
