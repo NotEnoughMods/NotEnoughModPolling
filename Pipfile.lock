@@ -112,7 +112,7 @@
                 "sha256:708aabfb3d5898f99674c390d360d59efdd08547019763622365f19e84a7fef4",
                 "sha256:98df1f1937840b7d8012fea7f0b36392a3e6fd8a2f429c48a3ff4b1aad907f3f"
             ],
-            "index": "pypi",
+            "markers": "python_version < '3'",
             "version": "==1.1.9"
         },
         "idna": {
@@ -178,9 +178,11 @@
         },
         "pycparser": {
             "hashes": [
-                "sha256:a988718abfad80b6b157acce7bf130a30876d27603738ac39f140993246b25b3"
+                "sha256:2d475327684562c3a96cc71adf7dc8c4f0565175cf86b6d7a404ff4c771f15f0",
+                "sha256:7582ad22678f0fcd81102833f60ef8d0e57288b6b5fb00323d101be910e35705"
             ],
-            "version": "==2.19"
+            "index": "pypi",
+            "version": "==2.20"
         },
         "pyopenssl": {
             "hashes": [
@@ -291,7 +293,7 @@
                 "sha256:708aabfb3d5898f99674c390d360d59efdd08547019763622365f19e84a7fef4",
                 "sha256:98df1f1937840b7d8012fea7f0b36392a3e6fd8a2f429c48a3ff4b1aad907f3f"
             ],
-            "index": "pypi",
+            "markers": "python_version < '3'",
             "version": "==1.1.9"
         },
         "futures": {
