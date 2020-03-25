@@ -388,6 +388,11 @@ class NotEnoughClasses():
 
         release_type = 'release'
 
+        # Sometimes CFWidget returns no files, but the issue resolves itself after a while,
+        # so we just temporarily return an empty result
+        if not jsonres['files']:
+            return {}
+
         sorted_files = sorted(jsonres['files'], key=lambda x: x['id'], reverse=True)
 
         latest_release_id = sorted_files[0]['id']
