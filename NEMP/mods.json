@@ -2539,7 +2539,7 @@
         "curse": {
             "id": "242064",
             "name": "item-scroller",
-            "regex": "itemscroller(-rift|-fabric)?-(?P<mc>[0-9\\.]+)-(?P<version>.+?)\\.jar"
+            "regex": "itemscroller(-rift|-fabric|-forge)?-(?P<mc>[0-9\\.]+)-(?P<version>.+?)\\.jar"
         }
     },
     "MiniHUD": {
@@ -2548,7 +2548,7 @@
         "curse": {
             "id": "244260",
             "name": "minihud",
-            "regex": "minihud(?:-rift|-fabric)?-(?P<mc>[0-9\\.]+)-(?P<version>.+?)\\.jar"
+            "regex": "minihud(?:-rift|-fabric|-forge)?-(?P<mc>[0-9\\.]+)-(?P<version>.+?)\\.jar"
         }
     },
     "Multishot": {
@@ -3181,7 +3181,7 @@
         "curse": {
             "name": "laggoggles",
             "base_path": "projects",
-            "regex": "LagGoggles-(?:(?:SPONGE)?FORGE|THIN|FAT)-(?:[0-9]+(?:\\.[0-9]+)+)-(?P<version>[0-9]+(?:\\.[0-9]+)+(?:-.+)?)\\.jar"
+            "regex": "LagGoggles(?:-(?:(?:SPONGE)?FORGE|THIN|FAT))?-(?:[0-9]+(?:\\.[0-9]+)+)-(?P<version>[0-9]+(?:\\.[0-9]+)+(?:-.+)?)\\.jar"
         }
     },
     "LumySkinPatch": {
@@ -3234,7 +3234,7 @@
         "curse": {
             "name": "mc-terrain-editor",
             "base_path": "minecraft/mc-mods",
-            "regex": "MCTE(?P<version>[0-9]+(?:\\.[0-9]+)+-[0-9]+)_forge"
+            "regex": "MCTE(?P<version>[0-9]+(?:\\.[0-9]+)+(?:-[0-9]+)?)_forge"
         }
     },
     "RealTrainMod": {
