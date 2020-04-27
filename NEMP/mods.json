@@ -3383,5 +3383,14 @@
             "regex": "mcw-furnitures-(?P<version>[0-9]+(?:\\.[0-9]+)+)-mc[0-9.]+\\.jar",
             "base_path": "minecraft/mc-mods"
         }
+    },
+    "AUNIS": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "name": "aunis",
+            "regex": "aunis-([0-9.]+)-(?P<version>.+)\\.jar",
+            "base_path": "minecraft/mc-mods"
+        }
     }
 }
