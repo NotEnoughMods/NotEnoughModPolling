@@ -501,6 +501,10 @@ class NotEnoughClasses():
         versions = {}
 
         for line in reversed(page.splitlines()):
+            # Skip empty lines
+            if not line:
+                continue
+
             online_version, mc = line.split('=', 1)
 
             if mc in versions:
