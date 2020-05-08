@@ -345,17 +345,6 @@
         "active": true
     },
     "EnderIO": {
-        "function": "CheckJenkins",
-        "category": "tterrag",
-        "active": true,
-        "jenkins": {
-            "url": "http://ci.tterrag.com/job/EnderIO/lastSuccessfulBuild/api/json",
-            "regex": "EnderIO-(?P<mc>.+?)-(?P<dev>.+?).jar",
-            "item": 3
-        }
-    },
-    "EnderIO-Release": {
-        "name": "EnderIO",
         "function": "CheckCurse",
         "active": true,
         "curse": {
@@ -387,16 +376,6 @@
         "curse": {
             "name": "extracells2",
             "regex": "ExtraCells-[0-9.]+-(?P<version>[0-9]+(?:\\.[0-9]+)+.+?)\\.jar"
-        }
-    },
-    "SuperMassiveTech": {
-        "function": "CheckJenkins",
-        "category": "tterrag",
-        "active": true,
-        "jenkins": {
-            "url": "http://ci.tterrag.com/job/Super%20Massive%20Tech/lastSuccessfulBuild/api/json",
-            "regex": "SuperMassiveTech-MC(?P<mc>.+?)-(?P<dev>.+?).jar",
-            "item": 3
         }
     },
     "Mariculture": {
@@ -1270,17 +1249,6 @@
             "regex": ".+?-(?P<mc>.+?)-(?P<version>.+?).jar"
         }
     },
-    "EnderZoo-dev": {
-        "name": "EnderZoo",
-        "function": "CheckJenkins",
-        "active": true,
-        "category": "tterrag",
-        "jenkins": {
-            "url": "http://ci.tterrag.com/job/Ender%20Zoo/lastSuccessfulBuild/api/json",
-            "regex": ".+?-(?P<mc>.+?)-(?P<dev>.+?).jar",
-            "item": 1
-        }
-    },
     "Flamingo": {
         "function": "CheckGitHubRelease",
         "active": true,
@@ -1341,28 +1309,6 @@
             "id": "228364",
             "name": "bibliocraft-bibliowoods-natura-edition",
             "regex": "BiblioWoods\\[Natura\\]\\[v(?P<version>[0-9]+(?:\\.[0-9]+)+)\\]"
-        }
-    },
-    "ttCore": {
-        "name": "ttCore",
-        "function": "CheckJenkins",
-        "active": true,
-        "category": "tterrag",
-        "jenkins": {
-            "url": "http://ci.tterrag.com/job/ttCore/lastSuccessfulBuild/api/json",
-            "regex": ".+?-MC(?P<mc>.+?)-(?P<dev>.+?).jar",
-            "item": 2
-        }
-    },
-    "WAILAPlugins": {
-        "name": "WAILAPlugins",
-        "function": "CheckJenkins",
-        "active": true,
-        "category": "tterrag",
-        "jenkins": {
-            "url": "http://ci.tterrag.com/job/WAILAPlugins/lastSuccessfulBuild/api/json",
-            "regex": ".+?-MC(?P<mc>.+?)-(?P<dev>.+?).jar",
-            "item": 1
         }
     },
     "Baubles": {
