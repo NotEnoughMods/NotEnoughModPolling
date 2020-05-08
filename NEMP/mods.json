@@ -2584,7 +2584,7 @@
         "curse": {
             "id": "225781",
             "name": "tellme",
-            "regex": "tellme-(?P<mc>[0-9\\.]+)-(?P<version>.+?)\\.jar"
+            "regex": "tellme(?:-forge)?-(?P<mc>[0-9\\.]+)-(?P<version>.+?)\\.jar"
         }
     },
     "UnderpHangables": {
