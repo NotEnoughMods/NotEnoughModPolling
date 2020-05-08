@@ -3392,5 +3392,14 @@
             "regex": "aunis-([0-9.]+)-(?P<version>.+)\\.jar",
             "base_path": "minecraft/mc-mods"
         }
+    },
+    "ReAuth": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "id": "237701",
+            "name": "reauth",
+            "regex": "ReAuth(?:-1\\.[0-9]+)*-(?P<version>[0-9]+(?:\\.[0-9]+)+)\\.jar"
+        }
     }
 }
