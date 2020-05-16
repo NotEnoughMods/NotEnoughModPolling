@@ -693,16 +693,17 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "name": "securitycraft-mod",
-            "regex": ".+? SecurityCraft v(?P<version>.+?)(?:\\.jar|$)"
+            "name": "security-craft",
+            "regex": "SecurityCraft[ _]v?(?P<version>.+?)(?:[ _]for[ _][0-9.]+)?(?:\\.(?:jar|zip)|$)",
+            "base_path": "projects"
         }
     },
     "GravestoneMod": {
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "name": "gravestone_mod",
-            "regex": "GraveStone-.+?-Graves-(?P<version>[0-9]+(?:\\.[0-9]+)+)\\.jar"
+            "name": "gravestone-mod",
+            "regex": "GraveStone(?: Mod)?[- ](?P<version>[0-9]+(?:\\.[0-9]+)+)[\\s_]*\\.jar"
         }
     },
     "Natura": {
