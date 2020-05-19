@@ -3172,5 +3172,13 @@
             "name": "reauth",
             "regex": "ReAuth(?:-1(?:\\.[0-9]+)+)*-(?P<version>[0-9]+(?:\\.[0-9]+)+)\\.jar"
         }
+    },
+    "AdvancedRocketry": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "name": "advanced-rocketry",
+            "regex": "AdvancedRocketry(?:-[0-9.]+)?-(?P<version>[0-9]+(?:\\.[0-9]+)+(?:[\\-a-z0-9]+?)?)(?:-universal)?\\.jar"
+        }
     }
 }
