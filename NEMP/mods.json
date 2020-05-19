@@ -98,26 +98,6 @@
             "regex": "ABO-MC(?P<mc>.+?)-BC[0-9.]+release(?P<version>.+?)\\.jar"
         }
     },
-    "Galacticraft": {
-        "function": "CheckJenkins",
-        "active": true,
-        "mc": "1.7.10",
-        "jenkins": {
-            "url": "http://ci.micdoodle8.com:8080/job/Galacticraft-1.7/lastSuccessfulBuild/api/json",
-            "regex": "GalacticraftCore-.+?-(?P<dev>.+?).jar",
-            "item": 1
-        }
-    },
-    "MicdoodleCore": {
-        "function": "CheckJenkins",
-        "active": true,
-        "mc": "1.7.10",
-        "jenkins": {
-            "url": "http://ci.micdoodle8.com:8080/job/Galacticraft-1.7/lastSuccessfulBuild/api/json",
-            "regex": "MicdoodleCore-.+?-(?P<dev>.+?).jar",
-            "item": 2
-        }
-    },
     "BuildCraft": {
         "function": "CheckBuildCraft",
         "active": true
