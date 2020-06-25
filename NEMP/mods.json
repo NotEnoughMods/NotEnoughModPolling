@@ -2073,7 +2073,7 @@
         "curse": {
             "id": "222718",
             "name": "animal-bikes",
-            "regex": "AnimalBikes_(?P<version>.+)\\("
+            "regex": "AnimalBikes_(?P<version>[0-9]+(?:\\.[0-9]+)+)-?\\("
         }
     },
     "Mo'Creatures": {
