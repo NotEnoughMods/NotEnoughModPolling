@@ -2655,7 +2655,7 @@
         "function": "CheckForgeJson",
         "active": true,
         "forgejson": {
-            "url": "https://raw.githubusercontent.com/Lothrazar/Cyclic/master/update.json"
+            "url": "https://raw.githubusercontent.com/Lothrazar/Cyclic/trunk/1.12/update.json"
         }
     },
     "Ding": {
