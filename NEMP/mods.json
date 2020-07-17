@@ -3150,7 +3150,7 @@
         "curse": {
             "id": "237701",
             "name": "reauth",
-            "regex": "ReAuth(?:-1(?:\\.[0-9]+)+)*-(?P<version>[0-9]+(?:\\.[0-9]+)+)\\.jar"
+            "regex": "ReAuth(?:-1(?:\\.[0-9]+)+)*(?:-(?:Fabric|Forge))?-(?P<version>[0-9]+(?:\\.[0-9]+)+)\\.jar"
         }
     },
     "AdvancedRocketry": {
