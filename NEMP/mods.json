@@ -719,8 +719,12 @@
         }
     },
     "Botania": {
-        "function": "CheckBotania",
-        "active": true
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "name": "botania",
+            "regex": "Botania[- ](?P<version>[0-9]+(?:\\.[0-9]+)+-[0-9]+(?:\\.[0-9]+)*|r[0-9]+(?:\\.[0-9]+)+-[0-9]+)\\.jar"
+        }
     },
     "D3Core": {
         "function": "CheckCurse",

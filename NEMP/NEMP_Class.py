@@ -495,39 +495,6 @@ class NotEnoughClasses():
             'version': version
         }
 
-    def CheckBotania(self, mod, document=None, simulation=False):
-        page = self.fetch_page('https://raw.githubusercontent.com/Vazkii/Botania/master/web/versions.ini')
-
-        versions = {}
-
-        for line in reversed(page.splitlines()):
-            # Skip empty lines
-            if not line:
-                continue
-
-            online_version, mc = line.split('=', 1)
-
-            if mc in versions:
-                continue
-
-            online_build = int(online_version.split('-', 1)[1])
-
-            local_version = self.get_nem_version(mod, mc)
-
-            if local_version and not simulation:
-                local_build = int(local_version.split('-', 1)[1])
-
-                if online_build > local_build:
-                    versions[mc] = {
-                        'version': online_version
-                    }
-            else:
-                versions[mc] = {
-                    'version': online_version
-                }
-
-        return versions
-
     def CheckAtomicStryker(self, mod, document=None, simulation=False):
         if not document:
             return self.fetch_page("http://atomicstryker.net/updatemanager/modversions.txt")
