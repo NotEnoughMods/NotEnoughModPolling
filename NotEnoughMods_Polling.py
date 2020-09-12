@@ -268,6 +268,8 @@ def NEMP_TimerEvent(self, channels):
 
         if staff_channel and self.NEM_cycle_count % 50 == 0:
             self.sendMessage(staff_channel, 'Full cycles completed: {}'.format(self.NEM_cycle_count))
+            if self.NEM_autodeactivatedMods:
+                self.sendMessage(staff_channel, 'There are {} failed mod(s)'.format(len(self.NEM_autodeactivatedMods)))
 
         # self.threading.sigquitThread("NEMP")
         # self.events["time"].removeEvent("NEMP_ThreadClock")
