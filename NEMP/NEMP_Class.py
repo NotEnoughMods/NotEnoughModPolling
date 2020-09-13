@@ -373,6 +373,9 @@ class NotEnoughClasses():
         # Sometimes it's "mc-mods/minecraft", sometimes it's "minecraft/mc-mods", sometimes it's "project"...
         base_path = self.mods[mod]['curse'].get('base_path', 'mc-mods/minecraft')
 
+        # Field name from the JSON to be used against the regex (name or display, name by default)
+        field_name = self.mods[mod]['curse'].get('field', 'name')
+
         # As IDs only work with newer mods we have to support two versions of the URL
         if modid:
             jsonres = self.fetch_json("https://api.cfwidget.com/" + base_path + "/" + modid + "-" + modname)
@@ -410,11 +413,11 @@ class NotEnoughClasses():
                 if mc_version in versions:
                     continue
 
-                match = self.match_mod_regex(mod, release['name'])
+                match = self.match_mod_regex(mod, release[field_name])
 
                 if not match:
                     if release['id'] == latest_release_id:
-                        raise NEMPException("Regex is outdated (doesn't match against latest release). Latest: " + release['name'] + ", Regex: " + self.get_mod_regex(mod).pattern)
+                        raise NEMPException("Regex is outdated (doesn't match against latest release). Latest: " + release[field_name] + ", Regex: " + self.get_mod_regex(mod).pattern)
 
                     # If this release isn't the latest one, we just assume it's an old one and skip it
                     continue
