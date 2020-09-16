@@ -1897,7 +1897,7 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "regex": "MobRebirth(?:-Forge)?(?:-(?P<mc>.+?))?-(?P<version>[0-9]+(?:\\.[0-9]+)+)",
+            "regex": "(\\[[0-9.+]\\])?Mob ?Rebirth[- ]?(Forge-)?([0-9.]+-)?(?P<version>(bp1(\\.[0-9]+)+\\()?[0-9.]+(dev[0-9]+)?\\)?)\\.jar",
             "id": "226212",
             "name": "mob-rebirth"
         }
