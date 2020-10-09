@@ -2179,7 +2179,7 @@
         "curse": {
             "id": "231095",
             "name": "chisels-bits",
-            "regex": "chiselsandbits-(?P<version>[0-9]+(?:\\.[0-9]+)+)\\.jar"
+            "regex": "chiselsandbits-(?P<version>[0-9]+(?:\\.[0-9]+)+(?:-BETA)?)\\.jar"
         }
     },
     "BuildingBricks": {
