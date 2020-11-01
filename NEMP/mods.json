@@ -3067,7 +3067,7 @@
         "active": true,
         "curse": {
             "name": "zerocore",
-            "regex": "ZeroCore-[0-9.]+-(?P<version>[0-9]+(?:\\.[0-9]+)+)\\.jar"
+            "regex": "ZeroCore2?-[0-9.]+-(?P<version>[0-9]+(?:\\.[0-9]+)+)\\.jar"
         }
     },
     "LittleTiles": {
