@@ -3059,7 +3059,7 @@
         "active": true,
         "curse": {
             "name": "extreme-reactors",
-            "regex": "ExtremeReactors-[0-9.]+-(?P<version>[0-9]+(?:\\.[0-9]+)+)\\.jar"
+            "regex": "ExtremeReactors2?-[0-9.]+-(?P<version>[0-9]+(?:\\.[0-9]+)+)\\.jar"
         }
     },
     "ZeroCore": {
