@@ -2286,7 +2286,7 @@
         "curse": {
             "id": "246320",
             "name": "environmental-creepers",
-            "regex": "environmentalcreepers-(?:forge-)?[0-9.]+-(?P<version>[0-9]+(?:\\.[0-9]+)+)\\.jar"
+            "regex": "environmentalcreepers-(?:forge-|fabric-)?[0-9.]+-(?P<version>[0-9]+(?:\\.[0-9]+)+)\\.jar"
         }
     },
     "ItemScroller": {
