@@ -105,7 +105,6 @@
                 "sha256:c366df0401d1ec4e548bebe8f91d55ebcc0ec3137900d214dd7aac8427ef3030",
                 "sha256:dc42f645f8f3a489c3dd416730a514e7a91a59510ddaadc09d04224c098d3302"
             ],
-            "index": "pypi",
             "version": "==3.3.1"
         },
         "enum34": {
@@ -187,10 +186,11 @@
         },
         "pyopenssl": {
             "hashes": [
-                "sha256:898aefbde331ba718570244c3b01dcddb1b31a3b336613436a45e52e27d9a82d",
-                "sha256:92f08eccbd73701cf744e8ffd6989aa7842d48cbe3fea8a7c031c5647f590ac5"
+                "sha256:4c231c759543ba02560fcd2480c48dcec4dae34c9da7d3747c508227e0624b51",
+                "sha256:818ae18e06922c066f777a33f1fca45786d85edfe71cd043de6379337a7f274b"
             ],
-            "version": "==20.0.0"
+            "index": "pypi",
+            "version": "==20.0.1"
         },
         "pyyaml": {
             "hashes": [
