@@ -3173,5 +3173,13 @@
             "name": "libvulpes",
             "regex": "LibVulpes(?:-[0-9.]+)?-(?P<version>[0-9]+(?:\\.[0-9]+)+(?:-?[a-z]?[0-9]*)?)(?:-universal)?\\.jar"
         }
+    },
+    "Curios": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "name": "curios",
+            "regex": "curios(?:-FORGE)?-1(?:\\.[0-9]+)+-(?P<version>[0-9]+(?:\\.[0-9]+)+(?:-[a-z0-9]+)?)\\.jar"
+        }
     }
 }
