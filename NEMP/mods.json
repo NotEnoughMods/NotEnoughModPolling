@@ -434,7 +434,7 @@
         "curse": {
             "name": "thermal-foundation",
             "id": "222880",
-            "regex": "(?:ThermalFoundation|thermal)-[0-9.]+-(?P<version>[0-9]+(?:\\.[0-9]+)+[a-z]*)(?:-universal)?\\.jar"
+            "regex": "(?:Thermal_?Foundation|thermal)-\\[?[0-9.]+\\]?-(?P<version>[0-9]+(?:\\.[0-9]+)+)(?:-universal)?\\.jar"
         }
     },
     "ThermalDynamics": {
@@ -2179,7 +2179,7 @@
         "curse": {
             "id": "231095",
             "name": "chisels-bits",
-            "regex": "chiselsandbits-(?P<version>[0-9]+(?:\\.[0-9]+)+(?:-BETA|-ALPHA)?)\\.jar"
+            "regex": "chiselsandbits(?:-mc1(?:\\.[0-9]+)+)?-v?(?P<version>[0-9]+(?:\\.[0-9]+)+)(?:(?:-BETA|-ALPHA|-RELEASE)[0-9]*)?\\.jar"
         }
     },
     "BuildingBricks": {
@@ -3127,7 +3127,7 @@
         "active": true,
         "curse": {
             "name": "macaws-roofs",
-            "regex": "mcws-roofs-1\\.[0-9.]+-v(?P<version>[0-9]+(?:\\.[0-9]+)+)\\.jar",
+            "regex": "mcws?-roofs-(?P<version>[0-9]+(?:\\.[0-9]+)+)-mc1\\.[0-9.]+\\.jar",
             "base_path": "minecraft/mc-mods"
         }
     },
