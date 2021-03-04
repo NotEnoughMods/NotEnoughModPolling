@@ -1196,7 +1196,7 @@
         "curse": {
             "id": "225608",
             "name": "worldedit",
-            "regex": "worldedit-forge-mc.+?-(?P<version>.+?)(?:-dist)?\\.jar"
+            "regex": "worldedit-mod-(?P<version>[0-9]+(\\.[0-9]+)+)\\.jar"
         }
     },
     "Binnie'sMods": {
