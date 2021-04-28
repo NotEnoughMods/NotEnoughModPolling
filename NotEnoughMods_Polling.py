@@ -48,15 +48,39 @@ def execute(self, name, params, channel, userdata, rank, chan):
     else:
         self.sendMessage(channel, name + ": see \"{0} help\" for a list of commands".format(self.cmdprefix + ID))
 
+TIME_EVENT_NAME = 'NotEnoughModPolling'
+THREAD_NAME = 'NEMP'
+
+def is_running(self):
+    return self.events["time"].doesExist(TIME_EVENT_NAME)
+
+
+def start_polling(self, timer, channel):
+    self.NEM.init_nem_versions()
+    self.NEM_cycle_count = 0
+
+    self.threading.addThread(THREAD_NAME, PollingThread, {"NEM": self.NEM, "PollTime": timer})
+
+    self.events["time"].addEvent(TIME_EVENT_NAME, 60, NEMP_TimerEvent, [channel])
+
+
+def stop_polling(self):
+    self.events["time"].removeEvent(TIME_EVENT_NAME)
+    nemp_logger.debug("Removed NEM Polling Event")
+    self.threading.sigquitThread(THREAD_NAME)
+    nemp_logger.debug("Sigquit to NEMP Thread sent")
+
+    self.NEM_troubledMods = {}
+    #self.NEM_autodeactivatedMods = {}
+
 
 def __initialize__(self, Startup):
     if Startup:
         self.NEM = NEMP_Class.NotEnoughClasses()
     else:
         # kill events, threads
-        if self.events["time"].doesExist("NotEnoughModPolling"):
-            self.events["time"].removeEvent("NotEnoughModPolling")
-            self.threading.sigquitThread("NEMP")
+        if is_running(self):
+            stop_polling(self)
 
             nemp_logger.info("NEMP Polling has been disabled.")
 
@@ -69,48 +93,45 @@ def __initialize__(self, Startup):
     self.NEM_cycle_count = 0
 
 
+def cmd_enable(self, name, params, channel, userdata, rank):
+    if is_running(self):
+        self.sendMessage(channel, "NotEnoughModPolling is already running.")
+        return
+
+    self.sendMessage(channel, "Enabling NotEnoughModPolling")
+
+    timerForPolls = 60 * 5
+
+    if len(params) == 2:
+        timerForPolls = int(params[1])
+        self.sendMessage(channel, "Timer is set to {} seconds".format(timerForPolls))
+
+    start_polling(self, timerForPolls, channel)
+
+
+def cmd_disable(self, name, params, channel, userdata, rank):
+    if not is_running(self):
+        self.sendMessage(channel, "NotEnoughModPolling isn't running!")
+        return
+
+    self.sendMessage(channel, "Disabling NotEnoughModPolling")
+
+    try:
+        stop_polling(self)
+    except Exception as error:
+        nemp_logger.exception("Exception appeared while trying to disable NotEnoughModPolling")
+        self.sendMessage(channel, "Exception appeared while trying to disable NotEnoughModPolling")
+
+
 def cmd_running(self, name, params, channel, userdata, rank):
-    if len(params) >= 2 and (params[1] == "true" or params[1] == "on"):
-        if not self.events["time"].doesExist("NotEnoughModPolling"):
-            self.sendMessage(channel, "Turning NotEnoughModPolling on.")
-            self.NEM.init_nem_versions()
-            self.NEM_cycle_count = 0
+    if len(params) > 1:
+        self.sendMessage(channel, name + ": This command doesn't take any parameters")
+        return
 
-            timerForPolls = 60 * 5
-
-            if len(params) == 3:
-                timerForPolls = int(params[2])
-
-            self.threading.addThread("NEMP", PollingThread, {"NEM": self.NEM, "PollTime": timerForPolls})
-
-            self.events["time"].addEvent("NotEnoughModPolling", 60, NEMP_TimerEvent, [channel])
-        else:
-            self.sendMessage(channel, "NotEnoughModPolling is already running.")
-    elif len(params) == 2 and (params[1] == "false" or params[1] == "off"):
-        if self.events["time"].doesExist("NotEnoughModPolling"):
-            self.sendMessage(channel, "Turning NotEnoughModPolling off.")
-
-            try:
-                self.events["time"].removeEvent("NotEnoughModPolling")
-                nemp_logger.debug("Removed NEM Polling Event")
-                self.threading.sigquitThread("NEMP")
-                nemp_logger.debug("Sigquit to NEMP Thread sent")
-
-                self.NEM_troubledMods = {}
-                #self.NEM_autodeactivatedMods = {}
-
-            except Exception as error:
-                nemp_logger.exception("Exception appeared while trying to turn NotEnoughModPolling off")
-                self.sendMessage(channel, "Exception appeared while trying to turn NotEnoughModPolling off.")
-        else:
-            self.sendMessage(channel, "NotEnoughModPolling isn't running!")
-    elif len(params) == 1:
-        if self.events['time'].doesExist('NotEnoughModPolling'):
-            self.sendMessage(channel, 'NEMP is running')
-        else:
-            self.sendMessage(channel, "NEMP isn't running")
+    if is_running(self):
+        self.sendMessage(channel, 'NEMP is running')
     else:
-        self.sendMessage(channel, name + ": Wrong number of arguments")
+        self.sendMessage(channel, "NEMP isn't running")
 
 
 def cmd_about(self, name, params, channel, userdata, rank):
@@ -133,8 +154,8 @@ def cmd_help(self, name, params, channel, userdata, rank):
 
 
 def cmd_status(self, name, params, channel, userdata, rank):
-    if self.events["time"].doesExist("NotEnoughModPolling"):
-        channels = ", ".join(self.events["time"].getChannels("NotEnoughModPolling"))
+    if is_running(self):
+        channels = ", ".join(self.events["time"].getChannels(TIME_EVENT_NAME))
         self.sendMessage(channel,
                          "NEM Polling is currently running "
                          "in the following channel(s): {0}. "
@@ -211,7 +232,7 @@ def PollingThread(self, pipe):
     sleepTime = self.base["PollTime"]
 
     while self.signal == False:
-        print "I'm still running!"
+        print("PollingThread: I'm still running!")
 
         poll_results = []
         SinZationalHax = []
@@ -259,8 +280,8 @@ def PollingThread(self, pipe):
 
 
 def NEMP_TimerEvent(self, channels):
-    if self.threading.poll("NEMP"):
-        nemp_data = self.threading.recv("NEMP")
+    if self.threading.poll(THREAD_NAME):
+        nemp_data = self.threading.recv(THREAD_NAME)
 
         self.NEM_cycle_count += 1
 
@@ -271,9 +292,6 @@ def NEMP_TimerEvent(self, channels):
             if self.NEM_autodeactivatedMods:
                 self.sendMessage(staff_channel, 'There are {} failed mod(s)'.format(len(self.NEM_autodeactivatedMods)))
 
-        # self.threading.sigquitThread("NEMP")
-        # self.events["time"].removeEvent("NEMP_ThreadClock")
-
         if isinstance(nemp_data, dict) and "action" in nemp_data and nemp_data["action"] == "exceptionOccured":
             nemp_logger.error("NEMP Thread {0} encountered an unhandled exception: {1}".format(nemp_data["functionName"],
                                                                                                str(nemp_data["exception"])))
@@ -282,8 +300,7 @@ def NEMP_TimerEvent(self, channels):
             nemp_logger.error("Traceback End")
 
             nemp_logger.error("Shutting down NEMP Events and Polling")
-            self.threading.sigquitThread("NEMP")
-            self.events["time"].removeEvent("NotEnoughModPolling")
+            stop_polling(self)
 
             self.NEM_troubledMods = {}
             self.NEM_autodeactivatedMods = {}
@@ -419,9 +436,10 @@ def cmd_poll(self, name, params, channel, userdata, rank):
     elif params[2].lower() in ("false", "no", "off"):
         setting = False
     else:
-        self.sendMessage(channel, '{}: Invalid value. Must be: on, off')
+        self.sendMessage(channel, '{}: Invalid value. Must be: on/yes/true, off/no/false')
         return
 
+    # "c:" is the category operator
     if params[1][0:2].lower() == "c:":
         category = params[1][2:].lower()
         match_mods = {k: v for k, v in self.NEM.mods.iteritems() if v.get('category', '').lower() == category}
@@ -440,6 +458,7 @@ def cmd_poll(self, name, params, channel, userdata, rank):
                     del self.NEM_troubledMods[mod]
             self.sendMessage(channel, name + ": " + ', '.join(sorted(match_mods.keys(), key=lambda x: x.lower())) + "'s poll status is now " + str(setting))
 
+    # "p:" is the parser operator
     elif params[1].lower().startswith('p:'):
         parser = params[1][2:].lower()
         match_mods = {k: v for k, v in self.NEM.mods.iteritems() if v['function'][5:].lower() == parser}
@@ -456,6 +475,7 @@ def cmd_poll(self, name, params, channel, userdata, rank):
                     del self.NEM_troubledMods[mod]
             self.sendMessage(channel, name + ": " + ', '.join(sorted(match_mods.keys(), key=lambda x: x.lower())) + "'s poll status is now " + str(setting))
 
+    # "all" or "*" matches all mods
     elif params[1].lower() == "all" or params[1] == '*':
         for mod in self.NEM.mods:
             self.NEM.mods[mod]["active"] = setting
@@ -527,9 +547,8 @@ def cmd_list(self, name, params, channel, userdata, rank):
 
 
 def cmd_reload(self, name, params, channel, userdata, rank):
-    if self.events["time"].doesExist("NotEnoughModPolling"):
-        self.events["time"].removeEvent("NotEnoughModPolling")
-        self.threading.sigquitThread("NEMP")
+    if is_running(self):
+        stop_polling(self)
 
         self.sendMessage(channel, "NEMP Polling has been deactivated")
 
@@ -605,6 +624,7 @@ def cmd_test(self, name, params, channel, userdata, rank):
 
     for line in textwrap.wrap(', '.join(commands), width=300):
         self.sendMessage(channel, line)
+
 
 def cmd_html(self, name, params, channel, userdata, rank):
     self.NEM.buildHTML()
@@ -760,6 +780,8 @@ VOICED = 1
 OP = 2
 commands = {
     "running": (cmd_running, OP),
+    "enable": (cmd_enable, OP),
+    "disable": (cmd_disable, OP),
     "poll": (cmd_poll, OP),
     "list": (cmd_list, OP),
     "about": (cmd_about, VOICED),
