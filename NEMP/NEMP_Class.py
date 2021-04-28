@@ -169,18 +169,21 @@ class NotEnoughClasses():
 
             # For each NEM Mod...
             for nem_mod in nem_list:
-                nem_mod_name = nem_mod['name']
+                # Possible NEM name for the mod are the name itself and its aliases
+                nem_mod_names = [nem_mod['name']] + nem_mod['aliases']
 
-                our_names = our_mods.get(nem_mod_name.lower())
+                for nem_mod_name in nem_mod_names:
+                    # This is a map of NEM mod name -> internal (mods.json) mod name
+                    our_names = our_mods.get(nem_mod_name.lower())
 
-                # Is it in our mods.json?
-                if our_names:
-                    # Grab the dev and release version
-                    for our_name in our_names:
-                        self.mods[our_name]['nem_versions'][nem_list_name] = {
-                            'dev': nem_mod.get('dev', ''),
-                            'version': nem_mod.get('version', '')
-                        }
+                    # Is it in our mods.json?
+                    if our_names:
+                        # Grab the dev and release version
+                        for our_name in our_names:
+                            self.mods[our_name]['nem_versions'][nem_list_name] = {
+                                'dev': nem_mod.get('dev', ''),
+                                'version': nem_mod.get('version', '')
+                            }
 
     def CheckJenkins(self, mod, document=None, simulation=False):
         jsonres = self.fetch_json(self.mods[mod]["jenkins"]["url"] + '?tree=changeSet[items[msg]],artifacts[fileName]')
