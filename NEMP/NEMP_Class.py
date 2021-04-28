@@ -706,8 +706,14 @@ class NotEnoughClasses():
         try:
             # We need to know what mods this SinZationalHax uses
             mods = self.SinZationalHax[self.mods[mod]["SinZationalHax"]["id"]]
-            # Lets get the page/json/whatever all the mods want
-            document = getattr(self, self.mods[mod]["function"])(mod, document=None)
+            try:
+                # Lets get the page/json/whatever all the mods want
+                document = getattr(self, self.mods[mod]["function"])(mod, document=None)
+            except Exception as e:
+                # If getting the document fails, we want to abort immediately
+                print("Failed to pool SinZationalHax for " + mod)
+                traceback.print_exc()
+                return e
             # Ok, time to parse it for each mod
             for tempMod in mods:
                 output[tempMod] = self.CheckMod(tempMod, document)
