@@ -42,8 +42,8 @@ class NotEnoughClasses():
         )
 
         self.load_config()
-        self.load_version_blacklist()
-        self.load_mc_blacklist()
+        self.load_version_blocklist()
+        self.load_mc_blocklist()
         self.load_mc_mapping()
         self.buildModDict()
         self.QueryNEM()
@@ -77,20 +77,20 @@ class NotEnoughClasses():
             print('You need to setup the NEMP/config.yml file')
             raise
 
-    def load_version_blacklist(self):
+    def load_version_blocklist(self):
         try:
-            with open('commands/NEMP/version_blacklist.yml', 'r') as f:
+            with open('commands/NEMP/version_blocklist.yml', 'r') as f:
                 self.invalid_versions = yaml.safe_load(f)
         except:
-            print('You need to setup the NEMP/version_blacklist.yml file')
+            print('You need to setup the NEMP/version_blocklist.yml file')
             raise
 
         # compile regexes for performance
         self.invalid_versions = [re.compile(regex, re.I) for regex in self.invalid_versions[:]]
 
-    def load_mc_blacklist(self):
-        with open('commands/NEMP/mc_blacklist.yml', 'r') as f:
-            self.mc_blacklist = yaml.safe_load(f)  # type: list[str]
+    def load_mc_blocklist(self):
+        with open('commands/NEMP/mc_blocklist.yml', 'r') as f:
+            self.mc_blocklist = yaml.safe_load(f)  # type: list[str]
 
         # Load additional versions from the Mojang version manifest
         # It's ok if this happens to fail
@@ -99,13 +99,13 @@ class NotEnoughClasses():
 
             # Add anything that isn't a release to the blocklist
             additional = [version['id'] for version in r['versions'] if version['type'] != 'release']
-            self.mc_blacklist.extend(additional)
+            self.mc_blocklist.extend(additional)
         except:
             print('Failed to load additional blocked MC versions from Mojang version manifest')
             traceback.print_exc()
 
         # Deduplicate versions
-        self.mc_blacklist = set(self.mc_blacklist)
+        self.mc_blocklist = set(self.mc_blocklist)
 
     def load_mc_mapping(self):
         with open('commands/NEMP/mc_mapping.yml', 'r') as f:
@@ -656,8 +656,8 @@ class NotEnoughClasses():
                 if mc in self.mc_mapping:
                     mc = self.mc_mapping[mc]
 
-                if mc in self.mc_blacklist:
-                    print 'Skipping blacklisted MC version {} for {}, version_info={!r}'.format(mc, mod, version_info)
+                if mc in self.mc_blocklist:
+                    print 'Skipping blocked MC version {} for {}, version_info={!r}'.format(mc, mod, version_info)
                     continue
 
                 status[0] = mc
