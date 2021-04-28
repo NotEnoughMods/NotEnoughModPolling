@@ -90,7 +90,22 @@ class NotEnoughClasses():
 
     def load_mc_blacklist(self):
         with open('commands/NEMP/mc_blacklist.yml', 'r') as f:
-            self.mc_blacklist = yaml.load(f)
+            self.mc_blacklist = yaml.load(f)  # type: list[str]
+
+        # Load additional versions from the Mojang version manifest
+        # It's ok if this happens to fail
+        try:
+            r = self.requests_session.get('https://launchermeta.mojang.com/mc/game/version_manifest.json').json()
+
+            # Add anything that isn't a release to the blocklist
+            additional = [version['id'] for version in r['versions'] if version['type'] != 'release']
+            self.mc_blacklist.extend(additional)
+        except:
+            print('Failed to load additional blocked MC versions from Mojang version manifest')
+            traceback.print_exc()
+
+        # Deduplicate versions
+        self.mc_blacklist = set(self.mc_blacklist)
 
     def load_mc_mapping(self):
         with open('commands/NEMP/mc_mapping.yml', 'r') as f:
