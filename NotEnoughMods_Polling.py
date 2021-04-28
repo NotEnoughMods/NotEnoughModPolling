@@ -123,17 +123,6 @@ def cmd_disable(self, name, params, channel, userdata, rank):
         self.sendMessage(channel, "Exception appeared while trying to disable NotEnoughModPolling")
 
 
-def cmd_running(self, name, params, channel, userdata, rank):
-    if len(params) > 1:
-        self.sendMessage(channel, name + ": This command doesn't take any parameters")
-        return
-
-    if is_running(self):
-        self.sendMessage(channel, 'NEMP is running')
-    else:
-        self.sendMessage(channel, "NEMP isn't running")
-
-
 def cmd_about(self, name, params, channel, userdata, rank):
     self.sendMessage(channel, "Not Enough Mods: Polling - Helps keep NEM updated!")
     self.sendMessage(channel, "Source code available at https://github.com/NotEnoughMods/NotEnoughModPolling")
@@ -789,7 +778,6 @@ def cmd_reload_blocklist(self, name, params, channel, userdata, rank):
 VOICED = 1
 OP = 2
 commands = {
-    "running": (cmd_running, OP),
     "enable": (cmd_enable, OP),
     "disable": (cmd_disable, OP),
     "poll": (cmd_poll, OP),
@@ -810,12 +798,13 @@ commands = {
     'reloadblocklist': (cmd_reload_blocklist, OP),
 
     # -- ALIASES -- #
-    "polling": (cmd_running, OP),
+    "polling": (cmd_status, OP),
     "refresh": (cmd_reload, OP),
     "disabled": (cmd_disabled_mods, OP),
     "failed": (cmd_failed_mods, OP),
     "cleanfailed": (cmd_reset_failed, OP),
     "show": (cmd_show_info, OP),
     'reloadblocklists': (cmd_reload_blocklist, OP),
+    "running": (cmd_status, OP),
     # -- END ALIASES -- #
 }
