@@ -72,7 +72,7 @@ class NotEnoughClasses():
     def load_config(self):
         try:
             with open('commands/NEMP/config.yml', 'r') as f:
-                self.config = yaml.load(f)
+                self.config = yaml.safe_load(f)
         except:
             print('You need to setup the NEMP/config.yml file')
             raise
@@ -80,7 +80,7 @@ class NotEnoughClasses():
     def load_version_blacklist(self):
         try:
             with open('commands/NEMP/version_blacklist.yml', 'r') as f:
-                self.invalid_versions = yaml.load(f)
+                self.invalid_versions = yaml.safe_load(f)
         except:
             print('You need to setup the NEMP/version_blacklist.yml file')
             raise
@@ -90,7 +90,7 @@ class NotEnoughClasses():
 
     def load_mc_blacklist(self):
         with open('commands/NEMP/mc_blacklist.yml', 'r') as f:
-            self.mc_blacklist = yaml.load(f)  # type: list[str]
+            self.mc_blacklist = yaml.safe_load(f)  # type: list[str]
 
         # Load additional versions from the Mojang version manifest
         # It's ok if this happens to fail
@@ -109,7 +109,7 @@ class NotEnoughClasses():
 
     def load_mc_mapping(self):
         with open('commands/NEMP/mc_mapping.yml', 'r') as f:
-            self.mc_mapping = yaml.load(f)
+            self.mc_mapping = yaml.safe_load(f)
 
     def _find_regex(self, data):
         """
