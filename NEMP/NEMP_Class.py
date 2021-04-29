@@ -273,47 +273,6 @@ class NotEnoughClasses():
 
         return versions
 
-    def CheckChickenBones(self, mod, document=None, simulation=False):
-        if not document:
-            p = self.fetch_page('http://chickenbones.net/Pages/links.html')
-
-            d = BeautifulSoup(p, 'html5lib')
-
-            versions = {}
-
-            divs = d.find_all('div', id=re.compile(r'^[0-9.]+_Promotions$'))
-
-            for div in divs:
-                mc = div['id'].split('_', 1)[0]
-
-                tables = div.find_all('table')
-
-                latest_table = tables[-1]
-
-                trs = latest_table.find_all('tr')
-
-                for tr in trs[1:]:
-                    tds = tr.find_all('td')
-                    mod = tds[0].text
-                    if mod == "Translocator":
-                        mod = "Translocators"
-                    version = tds[1].text
-                    versions.setdefault(mod, {})[mc] = version
-
-            return versions
-
-        results = {}
-
-        for mc, version in document[mod].iteritems():
-            local_version = self.get_nem_version(mod, mc)
-
-            if simulation or not local_version or LooseVersion(version) > LooseVersion(local_version):
-                results[mc] = {
-                    'version': version
-                }
-
-        return results
-
     def CheckHTML(self, mod, document=None, simulation=False):
         page = self.fetch_page(self.mods[mod]['html']['url'])
 

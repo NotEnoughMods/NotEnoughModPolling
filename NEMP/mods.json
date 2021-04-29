@@ -121,65 +121,59 @@
         }
     },
     "CodeChickenLib": {
-        "function": "CheckChickenBones",
+        "function": "CheckCurse",
         "active": true,
-        "document_group": {
-            "id": "chickenbones"
-        }
-    },
-    "CodeChickenCore": {
-        "function": "CheckChickenBones",
-        "active": true,
-        "document_group":{
-            "id": "chickenbones"
+        "curse": {
+            "name": "codechicken-lib-1-8",
+            "regex": "CodeChickenLib-(?:[0-9]+(?:\\.[0-9]+)+)-(?P<version>[0-9]+(?:\\.[0-9]+)+)-universal\\.jar"
         }
     },
     "ChickenChunks": {
-        "function": "CheckChickenBones",
-        "category": "cb",
+        "function": "CheckCurse",
         "active": true,
-        "document_group":{
-            "id": "chickenbones"
+        "curse": {
+            "name": "chicken-chunks-1-8",
+            "regex": "ChickenChunks-(?:[0-9]+(?:\\.[0-9]+)+)-(?P<version>[0-9]+(?:\\.[0-9]+)+)-universal\\.jar"
         }
     },
     "NotEnoughItems": {
-        "function": "CheckChickenBones",
-        "category": "cb",
+        "function": "CheckCurse",
         "active": true,
-        "document_group":{
-            "id": "chickenbones"
+        "curse": {
+            "name": "not-enough-items-1-8",
+            "regex": "NotEnoughItems-(?:[0-9]+(?:\\.[0-9]+)+)-(?P<version>[0-9]+(?:\\.[0-9]+)+)-universal\\.jar"
         }
     },
     "EnderStorage": {
-        "function": "CheckChickenBones",
-        "category": "cb",
+        "function": "CheckCurse",
         "active": true,
-        "document_group":{
-            "id": "chickenbones"
+        "curse": {
+            "name": "ender-storage-1-8",
+            "regex": "EnderStorage-(?:[0-9]+(?:\\.[0-9]+)+)-(?P<version>[0-9]+(?:\\.[0-9]+)+)-universal\\.jar"
         }
     },
     "Translocators": {
-        "function": "CheckChickenBones",
-        "category": "cb",
+        "function": "CheckCurse",
         "active": true,
-        "document_group":{
-            "id": "chickenbones"
+        "curse": {
+            "name": "translocators-1-8",
+            "regex": "Translocators-(?:[0-9]+(?:\\.[0-9]+)+)-(?P<version>[0-9]+(?:\\.[0-9]+)+)-universal\\.jar"
         }
     },
     "WR-CBE": {
-        "function": "CheckChickenBones",
-        "category": "cb",
+        "function": "CheckCurse",
         "active": true,
-        "document_group":{
-            "id": "chickenbones"
+        "curse": {
+            "name": "wireless-redstone-cbe",
+            "regex": "WR-CBE-(?:[0-9]+(?:\\.[0-9]+)+)-(?P<version>[0-9]+(?:\\.[0-9]+)+)-universal\\.jar"
         }
     },
     "ForgeMultipart": {
-        "function": "CheckChickenBones",
-        "category": "cb",
+        "function": "CheckCurse",
         "active": true,
-        "document_group":{
-            "id": "chickenbones"
+        "curse": {
+            "name": "forge-multipart-cbe",
+            "regex": "ForgeMultipart-(?:[0-9]+(?:\\.[0-9]+)+)-(?P<version>[0-9]+(?:\\.[0-9]+)+)-universal\\.jar"
         }
     },
     "TinkersConstruct": {
