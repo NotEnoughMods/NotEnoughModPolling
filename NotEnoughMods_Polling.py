@@ -288,150 +288,168 @@ def PollingThread(self, pipe):
                 time.sleep(30)
 
 
+# This runs on a timer (once every minute)
 def NEMP_TimerEvent(self, channels):
-    if self.threading.poll(THREAD_NAME):
-        nemp_data = self.threading.recv(THREAD_NAME)
+    # Check if we have any data from PollingThread to process
+    if not self.threading.poll(THREAD_NAME):
+        return
 
-        self.NEM_cycle_count += 1
+    # nemp_data is either:
+    # - (poll_results, failed_mods)
+    # - { 'action': 'exceptionOccured', 'functionName': 'NEMP_TimerEvent', 'exception': exception, 'traceback': traceback }
+    # The latter comes from Renol thread handling
+    nemp_data = self.threading.recv(THREAD_NAME)
 
-        staff_channel = self.NEM.config.get('irc', {}).get('staff_channel')
+    self.NEM_cycle_count += 1
 
-        if staff_channel and self.NEM_cycle_count % 50 == 0:
-            self.sendMessage(staff_channel, 'Full cycles completed: {}'.format(self.NEM_cycle_count))
-            if self.NEM_autodeactivatedMods:
-                self.sendMessage(staff_channel, 'There are {} failed mod(s)'.format(len(self.NEM_autodeactivatedMods)))
+    staff_channel = self.NEM.config.get('irc', {}).get('staff_channel')
 
-        if isinstance(nemp_data, dict) and "action" in nemp_data and nemp_data["action"] == "exceptionOccured":
-            nemp_logger.error("NEMP Thread {0} encountered an unhandled exception: {1}".format(nemp_data["functionName"],
-                                                                                               str(nemp_data["exception"])))
-            nemp_logger.error("Traceback Start")
-            nemp_logger.error(nemp_data["traceback"])
-            nemp_logger.error("Traceback End")
+    if staff_channel and self.NEM_cycle_count % 50 == 0:
+        self.sendMessage(staff_channel, 'Full cycles completed: {}'.format(self.NEM_cycle_count))
+        if self.NEM_autodeactivatedMods:
+            self.sendMessage(staff_channel, 'There are {} failed mod(s)'.format(len(self.NEM_autodeactivatedMods)))
 
-            nemp_logger.error("Shutting down NEMP Events and Polling")
-            stop_polling(self)
+    if isinstance(nemp_data, dict) and "action" in nemp_data and nemp_data["action"] == "exceptionOccured":
+        nemp_logger.error("NEMP Thread {0} encountered an unhandled exception: {1}".format(nemp_data["functionName"],
+                                                                                           str(nemp_data["exception"])))
+        nemp_logger.error("Traceback Start")
+        nemp_logger.error(nemp_data["traceback"])
+        nemp_logger.error("Traceback End")
 
-            self.NEM_troubledMods = {}
-            self.NEM_autodeactivatedMods = {}
+        nemp_logger.error("Shutting down NEMP Events and Polling")
+        stop_polling(self)
 
-            return
+        self.NEM_troubledMods = {}
+        self.NEM_autodeactivatedMods = {}
 
-        poll_results, failedMods = nemp_data
+        return
 
-        for item in poll_results:
-            # item[0] = name of mod
-            # item[1] = mc version, flags for dev/release change
-            # result status[0] = mc version
-            # result status[1] = dev version
-            # result status[2] = release version
-            # result status[3] = changelog
-            mod = item[0]
-            statuses = item[1]
+    poll_results, failedMods = nemp_data
 
-            if 'name' in self.NEM.mods[mod]:
-                real_name = self.NEM.mods[mod]['name']
-            else:
-                real_name = mod
+    for item in poll_results:
+        # item[0] = name of mod
+        # item[1] = list of versions
+        # assume status = item[1][x]:
+        # status[0] = mc version
+        # status[1] = dev version
+        # status[2] = release version
+        # status[3] = changelog
+        mod_name = item[0]
+        new_versions = item[1]
 
-            for status in statuses:
-                mc_version, dev_version, release_version, changelog = status
+        # Get the mod's NEM name, defaults to NEMP name
+        nem_mod_name = self.NEM.mods[mod_name].get('name', mod_name)
 
-                last_dev = self.NEM.get_nem_dev_version(mod, mc_version)
-                last_release = self.NEM.get_nem_version(mod, mc_version)
+        for new_version in new_versions:
+            mc_version, dev_version, release_version, changelog = new_version
 
-                if not last_dev and not last_release:
-                    # No previous information info, so it's new to this NEM list/MC version
-                    if release_version:
-                        clone_version = release_version
-                    else:
-                        clone_version = 'dev-only'
+            last_dev = self.NEM.get_nem_dev_version(mod_name, mc_version)
+            last_release = self.NEM.get_nem_version(mod_name, mc_version)
 
-                    self.NEM.set_nem_version(mod, clone_version, mc_version)
+            if not last_dev and not last_release:
+                # There's no previously known dev or release version in NEM, so it's new to this NEM list/MC version.
+                # This means we need to run the !clone command
 
-                    nemp_logger.debug('Cloning mod {} to {}, status: {}'.format(mod, mc_version, status))
-                    for channel in channels:
-                        self.sendMessage(channel, '!clone {} {} {}'.format(real_name, mc_version, clone_version))
-                elif release_version:
-                    nemp_logger.debug("Updating Mod {0}, status: {1}".format(mod, status))
-                    self.NEM.set_nem_version(mod, release_version, mc_version)
-                    for channel in channels:
-                        self.sendMessage(channel, "!lmod {} {} {}".format(mc_version, real_name, release_version))
-
-                if dev_version:
-                    if release_version and dev_version == release_version:
-                        nemp_logger.debug("Would update mod {} to dev {}, but it matches the new release {}".format(
-                            mod, dev_version, release_version
-                        ))
-                    elif last_release and dev_version == last_release:
-                        nemp_logger.debug("Would update mod {} to dev {}, but it matches the current release {}".format(
-                            mod, dev_version, release_version
-                        ))
-                    else:
-                        nemp_logger.debug("Updating mod {} to dev {}, status: {}".format(mod, dev_version, status))
-                        self.NEM.set_nem_dev_version(mod, dev_version, mc_version)
-                        for channel in channels:
-                            self.sendMessage(channel, "!ldev {} {} {}".format(mc_version, real_name, dev_version))
-
-                if changelog and "changelog" not in self.NEM.mods[mod]:
-                    nemp_logger.debug("Sending text for Mod {0}".format(mod))
-                    for channel in channels:
-                        self.sendMessage(channel, " * " + ' | '.join(changelog.splitlines())[:300])
-
-        # A temporary list containing the mods that have failed to be polled so far.
-        # We use it to check if the same mods had trouble in the newest polling attempt.
-        # If not, the counter for each mod that succeeded to be polled will be reset.
-        current_troubled_mods = self.NEM_troubledMods.keys()
-
-        completely_failed_mods = []
-
-        for item in failedMods:  # type: FailedModEntry
-            nemp_logger.debug('Processing failedMods entry {!r}'.format(item))
-
-            assert(isinstance(item, FailedModEntry))
-
-            mod = item.name
-            exception = item.exception
-
-            if isinstance(exception, (NEMP_Class.NEMPException, )):
-                nemp_logger.debug('Mod {} got a {}, failing immediately'.format(mod, type(exception).__name__))
-
-                if mod in self.NEM_troubledMods:
-                    del self.NEM_troubledMods[mod]
-
-                self.NEM_autodeactivatedMods[mod] = True
-                self.NEM.mods[mod]['active'] = False
-
-                if staff_channel:
-                    self.sendMessage(staff_channel, 'Mod {} \00304failed\003 with a {}: {}'.format(mod, type(exception).__name__, exception))
-            else:
-                if mod not in self.NEM_troubledMods:
-                    self.NEM_troubledMods[mod] = 1
-                    nemp_logger.debug("Mod {0} had trouble being polled once. Counter set to 1".format(mod))
-
+                # Check if we have a release version to use in the clone command
+                # Setting the dev version is handled later
+                if release_version:
+                    clone_version = release_version
                 else:
-                    self.NEM_troubledMods[mod] += 1
+                    clone_version = 'dev-only'
 
-                    # We have checked the mod, so we remove it from our temporary list
-                    current_troubled_mods.remove(mod)
+                self.NEM.set_nem_version(mod_name, clone_version, mc_version)
 
-                    if self.NEM_troubledMods[mod] >= 5:
-                        self.NEM_autodeactivatedMods[mod] = True
-                        self.NEM.mods[mod]["active"] = False
-                        del self.NEM_troubledMods[mod]
+                nemp_logger.debug('Cloning mod {} to {}, status: {}'.format(mod_name, mc_version, new_version))
+                for channel in channels:
+                    self.sendMessage(channel, '!clone {} {} {}'.format(nem_mod_name, mc_version, clone_version))
+            elif release_version:
+                # The mod has a previous release/stable version in NEM, so we simply update that
+                nemp_logger.debug("Updating Mod {0}, status: {1}".format(mod_name, new_version))
+                self.NEM.set_nem_version(mod_name, release_version, mc_version)
+                for channel in channels:
+                    self.sendMessage(channel, "!lmod {} {} {}".format(mc_version, nem_mod_name, release_version))
 
-                        completely_failed_mods.append(mod)
+            if dev_version:
+                # If this version update has a release version, and the dev version is the same, we ignore it
+                if release_version and dev_version == release_version:
+                    nemp_logger.debug("Would update mod {} to dev {}, but it matches the new release {}".format(
+                        mod_name, dev_version, release_version
+                    ))
+                # If the dev version in this version update matches the current NEM release/stable version, we ignore it
+                elif last_release and dev_version == last_release:
+                    nemp_logger.debug("Would update mod {} to dev {}, but it matches the current release {}".format(
+                        mod_name, dev_version, release_version
+                    ))
+                # This mod is new to this NEM list/MC version (no last release version) and we have a dev version, so
+                # we set it here
+                else:
+                    nemp_logger.debug("Updating mod {} to dev {}, status: {}".format(mod_name, dev_version, new_version))
+                    self.NEM.set_nem_dev_version(mod_name, dev_version, mc_version)
+                    for channel in channels:
+                        self.sendMessage(channel, "!ldev {} {} {}".format(mc_version, nem_mod_name, dev_version))
 
-                        nemp_logger.debug("Mod {0} has failed to be polled at least 5 times, it has been disabled.".format(mod))
+            # If we have a changelog, and it's explicitely enabled in the mod's configuration (via an existing
+            # "changelog" key), then we send it to the channel. The value of the "changelog" key is ignored entirely.
+            if changelog and "changelog" not in self.NEM.mods[mod_name]:
+                nemp_logger.debug("Sending text for Mod {0}".format(mod_name))
+                for channel in channels:
+                    self.sendMessage(channel, " * " + ' | '.join(changelog.splitlines())[:300])
 
-        self.NEM.buildHTML()
+    # A temporary list containing the mods that have failed to be polled so far.
+    # We use it to check if the same mods had trouble in the newest polling attempt.
+    # If not, the counter for each mod that succeeded to be polled will be reset.
+    current_troubled_mods = self.NEM_troubledMods.keys()
 
-        if staff_channel and completely_failed_mods:
-            self.sendMessage(staff_channel, 'The following mod(s) \00304failed\003: {0}.'.format(', '.join(sorted(completely_failed_mods, key=lambda x: x.lower()))))
+    completely_failed_mods = []
 
-        # Reset counter for any mod that is still in the list.
-        for mod in current_troubled_mods:
-            nemp_logger.debug("Mod {0} is working again. Counter reset (Counter was at {1}) ".format(mod, self.NEM_troubledMods[mod]))
-            del self.NEM_troubledMods[mod]
+    for item in failedMods:  # type: FailedModEntry
+        nemp_logger.debug('Processing failedMods entry {!r}'.format(item))
+
+        assert(isinstance(item, FailedModEntry))
+
+        mod_name = item.name
+        exception = item.exception
+
+        if isinstance(exception, (NEMP_Class.NEMPException, )):
+            nemp_logger.debug('Mod {} got a {}, failing immediately'.format(mod_name, type(exception).__name__))
+
+            if mod_name in self.NEM_troubledMods:
+                del self.NEM_troubledMods[mod_name]
+
+            self.NEM_autodeactivatedMods[mod_name] = True
+            self.NEM.mods[mod_name]['active'] = False
+
+            if staff_channel:
+                self.sendMessage(staff_channel, 'Mod {} \00304failed\003 with a {}: {}'.format(mod_name, type(exception).__name__, exception))
+        else:
+            if mod_name not in self.NEM_troubledMods:
+                self.NEM_troubledMods[mod_name] = 1
+                nemp_logger.debug("Mod {0} had trouble being polled once. Counter set to 1".format(mod_name))
+
+            else:
+                self.NEM_troubledMods[mod_name] += 1
+
+                # We have checked the mod, so we remove it from our temporary list
+                current_troubled_mods.remove(mod_name)
+
+                if self.NEM_troubledMods[mod_name] >= 5:
+                    self.NEM_autodeactivatedMods[mod_name] = True
+                    self.NEM.mods[mod_name]["active"] = False
+                    del self.NEM_troubledMods[mod_name]
+
+                    completely_failed_mods.append(mod_name)
+
+                    nemp_logger.debug("Mod {0} has failed to be polled at least 5 times, it has been disabled.".format(mod_name))
+
+    self.NEM.buildHTML()
+
+    if staff_channel and completely_failed_mods:
+        self.sendMessage(staff_channel, 'The following mod(s) \00304failed\003: {0}.'.format(', '.join(sorted(completely_failed_mods, key=lambda x: x.lower()))))
+
+    # Reset counter for any mod that is still in the list.
+    for mod_name in current_troubled_mods:
+        nemp_logger.debug("Mod {0} is working again. Counter reset (Counter was at {1}) ".format(mod_name, self.NEM_troubledMods[mod_name]))
+        del self.NEM_troubledMods[mod_name]
 
 
 def cmd_poll(self, name, params, channel, userdata, rank):
