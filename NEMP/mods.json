@@ -123,14 +123,14 @@
     "CodeChickenLib": {
         "function": "CheckChickenBones",
         "active": true,
-        "SinZationalHax": {
+        "document_group": {
             "id": "chickenbones"
         }
     },
     "CodeChickenCore": {
         "function": "CheckChickenBones",
         "active": true,
-        "SinZationalHax":{
+        "document_group":{
             "id": "chickenbones"
         }
     },
@@ -138,7 +138,7 @@
         "function": "CheckChickenBones",
         "category": "cb",
         "active": true,
-        "SinZationalHax":{
+        "document_group":{
             "id": "chickenbones"
         }
     },
@@ -146,7 +146,7 @@
         "function": "CheckChickenBones",
         "category": "cb",
         "active": true,
-        "SinZationalHax":{
+        "document_group":{
             "id": "chickenbones"
         }
     },
@@ -154,7 +154,7 @@
         "function": "CheckChickenBones",
         "category": "cb",
         "active": true,
-        "SinZationalHax":{
+        "document_group":{
             "id": "chickenbones"
         }
     },
@@ -162,7 +162,7 @@
         "function": "CheckChickenBones",
         "category": "cb",
         "active": true,
-        "SinZationalHax":{
+        "document_group":{
             "id": "chickenbones"
         }
     },
@@ -170,7 +170,7 @@
         "function": "CheckChickenBones",
         "category": "cb",
         "active": true,
-        "SinZationalHax":{
+        "document_group":{
             "id": "chickenbones"
         }
     },
@@ -178,7 +178,7 @@
         "function": "CheckChickenBones",
         "category": "cb",
         "active": true,
-        "SinZationalHax":{
+        "document_group":{
             "id": "chickenbones"
         }
     },
@@ -1024,7 +1024,7 @@
         "function": "CheckAtomicStryker",
         "active": true,
         "category": "AtomicStryker",
-        "SinZationalHax": {
+        "document_group": {
             "id": "atomicstryker"
         },
         "AtomicStryker": {
@@ -1035,7 +1035,7 @@
         "function": "CheckAtomicStryker",
         "active": true,
         "category": "AtomicStryker",
-        "SinZationalHax": {
+        "document_group": {
             "id": "atomicstryker"
         },
         "AtomicStryker": {
@@ -1046,7 +1046,7 @@
         "function": "CheckAtomicStryker",
         "active": true,
         "category": "AtomicStryker",
-        "SinZationalHax": {
+        "document_group": {
             "id": "atomicstryker"
         },
         "AtomicStryker": {
@@ -1057,7 +1057,7 @@
         "function": "CheckAtomicStryker",
         "active": true,
         "category": "AtomicStryker",
-        "SinZationalHax": {
+        "document_group": {
             "id": "atomicstryker"
         },
         "AtomicStryker": {
@@ -1068,7 +1068,7 @@
         "function": "CheckAtomicStryker",
         "active": true,
         "category": "AtomicStryker",
-        "SinZationalHax": {
+        "document_group": {
             "id": "atomicstryker"
         },
         "AtomicStryker": {
@@ -1079,7 +1079,7 @@
         "function": "CheckAtomicStryker",
         "active": true,
         "category": "AtomicStryker",
-        "SinZationalHax": {
+        "document_group": {
             "id": "atomicstryker"
         },
         "AtomicStryker": {
@@ -1090,7 +1090,7 @@
         "function": "CheckAtomicStryker",
         "active": true,
         "category": "AtomicStryker",
-        "SinZationalHax": {
+        "document_group": {
             "id": "atomicstryker"
         },
         "AtomicStryker": {
@@ -1101,7 +1101,7 @@
         "function": "CheckAtomicStryker",
         "active": true,
         "category": "AtomicStryker",
-        "SinZationalHax": {
+        "document_group": {
             "id": "atomicstryker"
         },
         "AtomicStryker": {
@@ -1112,7 +1112,7 @@
         "function": "CheckAtomicStryker",
         "active": true,
         "category": "AtomicStryker",
-        "SinZationalHax": {
+        "document_group": {
             "id": "atomicstryker"
         },
         "AtomicStryker": {
@@ -1123,7 +1123,7 @@
         "function": "CheckAtomicStryker",
         "active": true,
         "category": "AtomicStryker",
-        "SinZationalHax": {
+        "document_group": {
             "id": "atomicstryker"
         },
         "AtomicStryker": {
@@ -1134,7 +1134,7 @@
             "function": "CheckAtomicStryker",
         "active": true,
         "category": "AtomicStryker",
-        "SinZationalHax": {
+        "document_group": {
             "id": "atomicstryker"
         },
         "AtomicStryker": {
@@ -1145,7 +1145,7 @@
         "function": "CheckAtomicStryker",
         "active": true,
         "category": "AtomicStryker",
-        "SinZationalHax": {
+        "document_group": {
             "id": "atomicstryker"
         },
         "AtomicStryker": {
@@ -1156,7 +1156,7 @@
         "function": "CheckAtomicStryker",
         "active": true,
         "category": "AtomicStryker",
-        "SinZationalHax": {
+        "document_group": {
             "id": "atomicstryker"
         },
         "AtomicStryker": {
@@ -1167,7 +1167,7 @@
         "function": "CheckAtomicStryker",
         "active": true,
         "category": "AtomicStryker",
-        "SinZationalHax": {
+        "document_group": {
             "id": "atomicstryker"
         },
         "AtomicStryker": {

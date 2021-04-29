@@ -3,6 +3,7 @@ import shlex
 import time
 import textwrap
 
+from collections import namedtuple
 from commands.NEMP import NEMP_Class
 
 ID = "nemp"
@@ -216,55 +217,64 @@ def cmd_fail_count(self, name, params, channel, userdata, rank):
                             )
 
 
+FailedModEntry = namedtuple('FailedModEntry', 'name exception')
+
+
 def PollingThread(self, pipe):
     NEM = self.base["NEM"]
     sleepTime = self.base["PollTime"]
 
     while self.signal == False:
-        print("PollingThread: I'm still running!")
+        nemp_logger.debug("PollingThread: I'm still running!")
 
         poll_results = []
-        SinZationalHax = []
-        failed = []
+        document_groups_done = []
+        failed = []  # type: List[FailedModEntry]
 
-        for mod, info in NEM.mods.iteritems():
+        for mod_name, mod_info in NEM.mods.iteritems():
+            # Check if the thread was requested to terminate
             if self.signal:
                 return
 
-            if not NEM.mods[mod]["active"]:
+            if not mod_info["active"]:
                 continue
 
-            if "SinZationalHax" in NEM.mods[mod]:
-                if NEM.mods[mod]["SinZationalHax"]["id"] not in SinZationalHax:  # have we polled this set of mods before
-                    results = NEM.CheckMods(mod)
+            document_group = mod_info.get('document_group', {}).get('id')
 
-                    SinZationalHax.append(NEM.mods[mod]["SinZationalHax"]["id"])  # Remember this poll that we have done this set of mods
+            if document_group:
+                # Have we processed this document group before? If we have, skip mods from this group.
+                if document_group in document_groups_done:
+                    # nemp_logger.debug("Already polled document group {} before".format(document_group))
+                    # continue to next mod
+                    continue
 
-                    if isinstance(results, Exception):
-                        # We got an exception when getting the document, so we mark every mod in this group as failed
-                        hax_mods = NEM.SinZationalHax[NEM.mods[mod]["SinZationalHax"]["id"]]
-                        for hax_mod in hax_mods:
-                            failed.append((hax_mod, results))
-                        # drop out (to the next mod)
-                        continue
+                # Remember this poll cycle that we have processed this document group
+                document_groups_done.append(document_group)
 
-                    for outputMod, outputInfo in results.iteritems():
-                        result, exception = outputInfo
+                try:
+                    results = NEM.CheckMods(mod_name)
+                except Exception as e:
+                    # We got an exception when getting the document, so we mark every mod in this group as failed
+                    document_group_mods = NEM.document_groups[document_group]
+                    for document_group_mod in document_group_mods:
+                        failed.append(FailedModEntry(name=document_group_mod, exception=e))
+                    # drop out (to the next mod)
+                    continue
 
-                        if exception:
-                            failed.append((outputMod, exception))
-                        else:
-                            poll_results.append((outputMod, result))
-                else:
-                    # nemp_logger.debug("Already polled {} before".format(NEM.mods[mod]["SinZationalHax"]["id"]))
-                    pass
+                for outputMod, outputInfo in results.iteritems():
+                    result, exception = outputInfo
+
+                    if exception:
+                        failed.append(FailedModEntry(name=outputMod, exception=exception))
+                    else:
+                        poll_results.append((outputMod, result))
             else:
-                statuses, exception = NEM.CheckMod(mod)
+                statuses, exception = NEM.CheckMod(mod_name)
 
                 if exception:
-                    failed.append((mod, exception))
+                    failed.append(FailedModEntry(name=mod_name, exception=exception))
                 else:
-                    poll_results.append((mod, statuses))
+                    poll_results.append((mod_name, statuses))
 
         pipe.send((poll_results, failed))
 
@@ -374,13 +384,13 @@ def NEMP_TimerEvent(self, channels):
 
         completely_failed_mods = []
 
-        for item in failedMods:
+        for item in failedMods:  # type: FailedModEntry
             nemp_logger.debug('Processing failedMods entry {!r}'.format(item))
 
-            assert(isinstance(item, tuple))
+            assert(isinstance(item, FailedModEntry))
 
-            mod = item[0]
-            exception = item[1]
+            mod = item.name
+            exception = item.exception
 
             if isinstance(exception, (NEMP_Class.NEMPException, )):
                 nemp_logger.debug('Mod {} got a {}, failing immediately'.format(mod, type(exception).__name__))
@@ -574,7 +584,7 @@ def cmd_test(self, name, params, channel, userdata, rank):
         return
 
     try:
-        if 'SinZationalHax' in self.NEM.mods[mod]:
+        if 'document_group' in self.NEM.mods[mod]:
             document = getattr(self.NEM, self.NEM.mods[mod]["function"])(mod, None)
         else:
             document = None

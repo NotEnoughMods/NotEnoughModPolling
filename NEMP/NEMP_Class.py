@@ -25,7 +25,7 @@ class NotEnoughClasses():
     nemVersions = []
 
     mods = {}
-    SinZationalHax = {}
+    document_groups = {}
 
     invalid_versions = []
 
@@ -151,11 +151,11 @@ class NotEnoughClasses():
 
             self.mods[mod]['nem_versions'] = {}
 
-            if "SinZationalHax" in self.mods[mod]:
-                if self.mods[mod]["SinZationalHax"]["id"] in self.SinZationalHax:
-                    self.SinZationalHax[self.mods[mod]["SinZationalHax"]["id"]].append(mod)
+            if "document_group" in self.mods[mod]:
+                if self.mods[mod]["document_group"]["id"] in self.document_groups:
+                    self.document_groups[self.mods[mod]["document_group"]["id"]].append(mod)
                 else:
-                    self.SinZationalHax[self.mods[mod]["SinZationalHax"]["id"]] = [mod]
+                    self.document_groups[self.mods[mod]["document_group"]["id"]] = [mod]
 
     def buildHTML(self):
         self.jinja_env.get_template('index.jinja2').stream(mods=self.mods).dump('commands/NEMP/htdocs/index.html')
@@ -701,27 +701,37 @@ class NotEnoughClasses():
             return ([], e)  # an exception was raised, so we return a True
 
     def CheckMods(self, mod):
-        output = {}
+        # We need to know what mods this document_group uses
+        group_mod_names = self.document_groups[self.mods[mod]["document_group"]["id"]]
+
+        # Get all functions (Check*) this document_group uses
+        function_names = set(self.mods[group_mod_name]['function'] for group_mod_name in group_mod_names)
+        # Sanity check: a document_group should only use one function
+        if len(function_names) != 1:
+            raise NEMPException("Failed to poll document_group for " + mod + ": Too many functions: " + str(function_names))
+
+        func_name = list(function_names)[0]
 
         try:
-            # We need to know what mods this SinZationalHax uses
-            mods = self.SinZationalHax[self.mods[mod]["SinZationalHax"]["id"]]
-            try:
-                # Lets get the page/json/whatever all the mods want
-                document = getattr(self, self.mods[mod]["function"])(mod, document=None)
-            except Exception as e:
-                # If getting the document fails, we want to abort immediately
-                print("Failed to pool SinZationalHax for " + mod)
-                traceback.print_exc()
-                return e
-            # Ok, time to parse it for each mod
-            for tempMod in mods:
-                output[tempMod] = self.CheckMod(tempMod, document)
+            # Let's get the page/json/whatever all the mods want
+            # TODO: Ensure the function is the same for all mods in the document group
+            document = getattr(self, func_name)(mod, document=None)
         except Exception as e:
-            print(mod + " failed to be polled (SinZationalHax)")
+            # If getting the document fails, we want to abort immediately
+            print("Failed to poll document_group for " + mod)
             traceback.print_exc()
-            # TODO: Fix this ugly hack
-            if 'tempMod' in locals():
+            # Pass the exception along to the polling thread
+            raise
+
+        output = {}
+
+        # Ok, time to parse it for each mod
+        for tempMod in group_mod_names:
+            try:
+                output[tempMod] = self.CheckMod(tempMod, document)
+            except Exception as e:
+                print(tempMod + " failed to be polled (document_group)")
+                traceback.print_exc()
                 output[tempMod] = ([], e)
 
         return output
