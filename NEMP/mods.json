@@ -173,7 +173,7 @@
         "active": true,
         "curse": {
             "name": "forge-multipart-cbe",
-            "regex": "ForgeMultipart-(?:[0-9]+(?:\\.[0-9]+)+)-(?P<version>[0-9]+(?:\\.[0-9]+)+)-universal\\.jar"
+            "regex": "CBMultipart-(?:[0-9]+(?:\\.[0-9]+)+)-(?P<version>[0-9]+(?:\\.[0-9]+)+)-universal\\.jar"
         }
     },
     "TinkersConstruct": {
