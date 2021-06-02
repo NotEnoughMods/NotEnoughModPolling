@@ -336,12 +336,11 @@
     },
     "NEIAddons": {
         "category": "bdew",
-        "function": "CheckJenkins",
+        "function": "CheckCurse",
         "active": true,
-        "jenkins": {
-            "url": "http://jenkins.bdew.net/job/neiaddons-1.7.10/lastSuccessfulBuild/api/json",
-            "regex": "neiaddons-(?P<version>.+?)-mc(?P<mc>1\\..+?)\\.jar",
-            "item": 0
+        "curse": {
+            "name": "nei-addons",
+            "regex": "neiaddons-(?P<version>.+?)-mc(?P<mc>1\\..+?)\\.jar"
         }
     },
     "ExtraCells": {
@@ -491,7 +490,7 @@
         "function": "CheckJenkins",
         "active": true,
         "jenkins": {
-            "url": "http://jenkins.bdew.net/job/bdlib-1.7.10/lastSuccessfulBuild/api/json",
+            "url": "https://jenkins.bdew.net/job/bdlib-1.16.5/lastSuccessfulBuild/api/json",
             "regex": "bdlib-(?P<version>.+?)-mc(?P<mc>1\\..+).jar",
             "item": 0
         }
@@ -501,7 +500,7 @@
         "function": "CheckJenkins",
         "active": true,
         "jenkins": {
-            "url": "http://jenkins.bdew.net/job/gendustry-1.7.10/lastSuccessfulBuild/api/json",
+            "url": "https://jenkins.bdew.net/job/gendustry-1.12/lastSuccessfulBuild/api/json",
             "regex": "gendustry-(?P<version>.+?)-mc(?P<mc>1\\..+).jar",
             "item": 1
         }
@@ -511,7 +510,7 @@
         "function": "CheckJenkins",
         "active": true,
         "jenkins": {
-            "url": "http://jenkins.bdew.net/job/pressure-1.7.10/lastSuccessfulBuild/api/json",
+            "url": "https://jenkins.bdew.net/job/pressure-1.12/lastSuccessfulBuild/api/json",
             "regex": "pressure-(?P<version>.+?)-mc(?P<mc>1\\..+).jar",
             "item": 1
         }
@@ -718,7 +717,7 @@
         "active": true,
         "curse": {
             "name": "botania",
-            "regex": "Botania[- ](?P<version>[0-9]+(?:\\.[0-9]+)+-[0-9]+(?:\\.[0-9]+)*|r[0-9]+(?:\\.[0-9]+)+-[0-9]+)\\.jar"
+            "regex": "Botania[- ](?P<version>r?[0-9]+(?:\\.[0-9]+)+-[0-9]+(?:\\.[0-9]+)*|r[0-9]+(?:\\.[0-9]+)+-[0-9]+)\\.jar"
         }
     },
     "D3Core": {
@@ -1639,7 +1638,7 @@
         "function": "CheckJenkins",
         "active": true,
         "jenkins": {
-            "url": "http://jenkins.bdew.net/job/generators-1.7.10/lastSuccessfulBuild/api/json",
+            "url": "https://jenkins.bdew.net/job/generators-1.16.5/lastSuccessfulBuild/api/json",
             "regex": "generators-(?P<version>.+?)-mc(?P<mc>1\\..+).jar",
             "item": 0
         }
@@ -1649,7 +1648,7 @@
         "function": "CheckJenkins",
         "active": true,
         "jenkins": {
-            "url": "http://jenkins.bdew.net/job/ae2stuff-1.7.10/lastSuccessfulBuild/api/json",
+            "url": "https://jenkins.bdew.net/job/ae2stuff-1.12/lastSuccessfulBuild/api/json",
             "regex": "ae2stuff-(?P<version>.+?)-mc(?P<mc>1\\..+).jar",
             "item": 0
         }
@@ -1659,7 +1658,7 @@
         "function": "CheckJenkins",
         "active": true,
         "jenkins": {
-            "url": "http://jenkins.bdew.net/job/compacter-1.7.10/lastSuccessfulBuild/api/json",
+            "url": "https://jenkins.bdew.net/job/compacter-1.16.5/lastSuccessfulBuild/api/json",
             "regex": "compacter-(?P<version>.+?)-mc(?P<mc>1\\..+).jar",
             "item": 0
         }
