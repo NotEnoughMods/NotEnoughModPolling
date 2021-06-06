@@ -388,7 +388,7 @@ def NEMP_TimerEvent(self, channels):
                     for channel in channels:
                         self.sendMessage(channel, "!ldev {} {} {}".format(mc_version, nem_mod_name, dev_version))
 
-            # If we have a changelog, and it's explicitly enabled in the mod's configuration (via an existing
+            # If we have a changelog, and it's not explicitly disabled in the mod's configuration (via an existing
             # "changelog" key), then we send it to the channel. The value of the "changelog" key is ignored entirely.
             if changelog and "changelog" not in self.NEM.mods[mod_name]:
                 nemp_logger.debug("Sending text for Mod {0}".format(mod_name))
