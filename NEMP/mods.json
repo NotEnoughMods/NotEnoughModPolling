@@ -13,7 +13,7 @@
         "category": "forge",
         "active": true,
         "mcforge": {
-            "url": "http://files.minecraftforge.net/maven/com/github/glitchfiend/biomesoplenty/BiomesOPlenty/promotions_slim.json",
+            "url": "https://files.minecraftforge.net/com/github/glitchfiend/biomesoplenty/BiomesOPlenty/promotions_slim.json",
             "slim": true
         }
     },
@@ -22,7 +22,7 @@
         "category": "forge",
         "active": true,
         "mcforge": {
-            "url": "http://files.minecraftforge.net/maven/net/minecraftforge/fml/promotions_slim.json",
+            "url": "https://files.minecraftforge.net/net/minecraftforge/fml/promotions_slim.json",
             "slim": true
         }
     },
@@ -31,7 +31,7 @@
         "category": "forge",
         "active": true,
         "mcforge": {
-            "url": "https://files.minecraftforge.net/maven/net/minecraftforge/forge/promotions_slim.json",
+            "url": "https://files.minecraftforge.net/net/minecraftforge/forge/promotions_slim.json",
             "slim": true
         }
     },
@@ -2357,7 +2357,7 @@
         "category": "forge",
         "active": true,
         "mcforge": {
-            "url": "http://files.minecraftforge.net/maven/org/spongepowered/spongeforge/promotions_slim.json",
+            "url": "https://files.minecraftforge.net/org/spongepowered/spongeforge/promotions_slim.json",
             "slim": true
         }
     },
