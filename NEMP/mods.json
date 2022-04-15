@@ -1549,7 +1549,7 @@
         "curse": {
             "id": "233398",
             "name": "deep-resonance",
-            "regex": "deepresonance-(?P<mc>.+?)-(?P<version>.+?)\\.jar"
+            "regex": "deepresonance(?:-(?P<mc>[0-9]+(?:\\.[0-9]+)+))?-(?P<version>[0-9].+?)\\.jar"
         }
     },
     "ElecCore": {
