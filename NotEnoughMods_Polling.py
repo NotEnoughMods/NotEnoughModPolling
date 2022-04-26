@@ -127,7 +127,7 @@ def cmd_disable(self, name, params, channel, userdata, rank):
 def cmd_about(self, name, params, channel, userdata, rank):
     self.sendMessage(channel, "Not Enough Mods: Polling - Helps keep NEM updated!")
     self.sendMessage(channel, "Source code available at https://github.com/NotEnoughMods/NotEnoughModPolling")
-    self.sendMessage(channel, "A list of contributors is available at https://git.io/nemp-contribs")
+    self.sendMessage(channel, "A list of contributors is available at https://github.com/NotEnoughMods/NotEnoughModPolling/graphs/contributors")
 
 
 def cmd_help(self, name, params, channel, userdata, rank):
