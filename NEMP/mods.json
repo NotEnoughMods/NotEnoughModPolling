@@ -4,7 +4,6 @@
         "active": true,
         "curse": {
             "id": "228756",
-            "name": "iron-chests",
             "regex": "ironchest-[0-9.]+-(?P<version>[0-9]+(?:\\.[0-9]+)+)\\.jar"
         }
     },
@@ -79,7 +78,7 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "name": "minefactory-reloaded",
+            "id": "66672",
             "regex": "MineFactoryReloaded-\\[(?P<mc>.+?)\\](?P<version>.+?).jar"
         }
     },
@@ -87,6 +86,7 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
+            "id": "77342",
             "regex": "LanteaCraft-(?P<mc>.+?)-(?P<version>.+?).jar$"
         }
     },
@@ -106,17 +106,15 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "name": "logistics-pipes",
-            "regex": "logisticspipes-(?P<version>.+?)\\.jar",
-            "base_path": "minecraft/mc-mods"
+            "id": "232838",
+            "regex": "logisticspipes-(?P<version>.+?)\\.jar"
         }
     },
     "Mekanism": {
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "name": "mekanism",
-            "base_path": "minecraft/mc-mods",
+            "id": "268560",
             "regex": "Mekanism-(?P<mc>.+?)-(?P<version>[0-9]+(?:\\.[0-9]+)+)\\.jar"
         }
     },
@@ -124,7 +122,7 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "name": "codechicken-lib-1-8",
+            "id": "242818",
             "regex": "CodeChickenLib-(?:[0-9]+(?:\\.[0-9]+)+)-(?P<version>[0-9]+(?:\\.[0-9]+)+)-universal\\.jar"
         }
     },
@@ -132,7 +130,7 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "name": "chicken-chunks-1-8",
+            "id": "243883",
             "regex": "ChickenChunks-(?:[0-9]+(?:\\.[0-9]+)+)-(?P<version>[0-9]+(?:\\.[0-9]+)+)-universal\\.jar"
         }
     },
@@ -140,7 +138,7 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "name": "not-enough-items-1-8",
+            "id": "247694",
             "regex": "NotEnoughItems-(?:[0-9]+(?:\\.[0-9]+)+)-(?P<version>[0-9]+(?:\\.[0-9]+)+)-universal\\.jar"
         }
     },
@@ -148,7 +146,7 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "name": "ender-storage-1-8",
+            "id": "245174",
             "regex": "EnderStorage-(?:[0-9]+(?:\\.[0-9]+)+)-(?P<version>[0-9]+(?:\\.[0-9]+)+)-universal\\.jar"
         }
     },
@@ -156,7 +154,7 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "name": "translocators-1-8",
+            "id": "247695",
             "regex": "Translocators-(?:[0-9]+(?:\\.[0-9]+)+)-(?P<version>[0-9]+(?:\\.[0-9]+)+)-universal\\.jar"
         }
     },
@@ -164,7 +162,7 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "name": "wireless-redstone-cbe",
+            "id": "260824",
             "regex": "WR-CBE-(?:[0-9]+(?:\\.[0-9]+)+)-(?P<version>[0-9]+(?:\\.[0-9]+)+)-universal\\.jar"
         }
     },
@@ -172,7 +170,7 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "name": "forge-multipart-cbe",
+            "id": "258426",
             "regex": "CBMultipart-(?:[0-9]+(?:\\.[0-9]+)+)-(?P<version>[0-9]+(?:\\.[0-9]+)+)-universal\\.jar"
         }
     },
@@ -181,7 +179,7 @@
         "category": "mdiyo",
         "active": true,
         "curse": {
-            "name": "tinkers-construct",
+            "id": "74072",
             "regex": "TConstruct-(?P<mc>.+?)-(?P<version>.+?).jar"
         }
     },
@@ -190,7 +188,6 @@
         "active": true,
         "curse": {
             "id": "223794",
-            "name": "applied-energistics-2",
             "regex": "appliedenergistics2-(?P<version>.+)\\.jar"
         }
     },
@@ -198,9 +195,8 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "regex": "BloodMagic-(?P<mc>.+?)-(?P<version>.+?).jar",
             "id": "224791",
-            "name": "blood-magic"
+            "regex": "BloodMagic-(?P<mc>.+?)-(?P<version>.+?).jar"
         }
     },
     "DynIMC": {
@@ -266,15 +262,15 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "regex": "EnderIO ?- ?(?P<mc>.+?)-(?P<version>.+?)(?:.jar|$)",
-            "name": "ender-io"
+            "id": "64578",
+            "regex": "EnderIO ?- ?(?P<mc>.+?)-(?P<version>.+?)(?:.jar|$)"
         }
     },
     "ServerTools-CORE": {
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "name": "forgeservertools",
+            "id": "64744",
             "regex": "ServerTools(?:-CORE)?-[0-9.]+-(?P<version>.+?)\\.jar"
         }
     },
@@ -283,7 +279,7 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "name": "nei-addons",
+            "id": "63352",
             "regex": "neiaddons-(?P<version>.+?)-mc(?P<mc>1\\..+?)\\.jar"
         }
     },
@@ -291,7 +287,7 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "name": "extracells2",
+            "id": "229218",
             "regex": "ExtraCells-[0-9.]+-(?P<version>[0-9]+(?:\\.[0-9]+)+.+?)\\.jar"
         }
     },
@@ -299,7 +295,7 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "name": "mariculture",
+            "id": "68023",
             "regex": "Mariculture-Deluxe-(?P<mc>.+?)-(?P<version>.+).jar"
         }
     },
@@ -328,7 +324,6 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "name": "mrtjpcore",
             "id": "229002",
             "regex": "MrTJPCore-(?P<version>.+?)-universal.jar"
         }
@@ -337,7 +332,6 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "name": "project-red-base",
             "id": "228702",
             "regex": "ProjectRed-(?P<mc>.+?)-(?P<version>.+?)-.+?.jar"
         }
@@ -346,6 +340,7 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
+            "id": "69162",
             "regex": "cofh_?core-.+?-(?P<version>[0-9]+(?:\\.[0-9]+)+[a-z]?)(?:-universal)?\\.jar"
         }
     },
@@ -361,15 +356,14 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "regex": "(?:ThermalExpansion|thermal_expansion)-[0-9.]+-(?P<version>[0-9]+(?:\\.[0-9]+)+[a-z]*)(?:-universal)?\\.jar",
-            "name": "thermalexpansion"
+            "id": "69163",
+            "regex": "(?:ThermalExpansion|thermal_expansion)-[0-9.]+-(?P<version>[0-9]+(?:\\.[0-9]+)+[a-z]*)(?:-universal)?\\.jar"
         }
     },
     "ThermalFoundation": {
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "name": "thermal-foundation",
             "id": "222880",
             "regex": "(?:Thermal_?Foundation|thermal)-\\[?[0-9.]+\\]?-(?P<version>[0-9]+(?:\\.[0-9]+)+)(?:-universal)?\\.jar"
         }
@@ -378,7 +372,6 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "name": "thermal-dynamics",
             "id": "227443",
             "regex": "ThermalDynamics-.+?-(?P<version>.+?)-universal\\.jar"
         }
@@ -387,7 +380,7 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "name": "enchanting-plus",
+            "id": "59413",
             "regex": "-.+?-(?P<version>.+?).jar"
         }
     },
@@ -395,7 +388,7 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "name": "railcraft",
+            "id": "51195",
             "regex": "railcraft-(?P<version>.+)\\.jar"
         }
     },
@@ -403,6 +396,7 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
+            "id": "73488",
             "regex": ".+?-(?P<version>.+?)_.+?"
         }
     },
@@ -418,6 +412,7 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
+            "id": "69118",
             "regex": "-.+?-(?P<version>[0-9]+(\\.[0-9]+)+)\\.jar"
         }
     },
@@ -425,7 +420,7 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "name": "redstone-arsenal",
+            "id": "70631",
             "regex": "RedstoneArsenal-.+?-(?P<version>[0-9]+(?:\\.[0-9]+)+)-universal.jar"
         }
     },
@@ -463,7 +458,6 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "name": "progressive-automation-early-miner",
             "id": "220606",
             "regex": "-.+?-(?P<version>.+?).jar"
         }
@@ -472,7 +466,7 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "name": "simplefluidtanks",
+            "id": "519952",
             "regex": "simplefluidtanks-(?P<mc>.+?)-(?P<version>.+?).jar"
         }
     },
@@ -480,6 +474,7 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
+            "id": "72744",
             "regex": "-.+?-(?P<version>.+?).jar"
         }
     },
@@ -487,7 +482,7 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "name": "veinminer",
+            "id": "67133",
             "regex": "VeinMiner-.+?-(?P<version>.+?)\\.jar"
         }
     },
@@ -495,6 +490,7 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
+            "id": "60028",
             "regex": "-.+?-(?P<version>.+?).jar"
         }
     },
@@ -502,7 +498,7 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "name": "holoinventory",
+            "id": "78608",
             "regex": "HoloInventory-[0-9.]+-(?P<version>[0-9]+(?:\\.[0-9]+)+).jar"
         }
     },
@@ -510,7 +506,7 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "name": "hardcore-questing-mode",
+            "id": "77027",
             "regex": "HQM-[0-9.]+[+\\-](?P<version>[0-9]+(?:\\.[0-9]+)+(?:.+)?)\\.jar"
         }
     },
@@ -518,7 +514,6 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "name": "minemenu",
             "id": "222378",
             "regex": "MineMenu-[0-9.]+-(?P<version>[0-9]+(?:\\.[0-9]+)+)(?:-universal)?\\.jar"
         }
@@ -543,6 +538,7 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
+            "id": "59641",
             "regex": "-.+?-(?P<version>.+?).jar"
         }
     },
@@ -550,8 +546,7 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "name": "metallurgy-core",
-            "base_path": "minecraft/mc-mods",
+            "id": "78640",
             "regex": "MetallurgyCore-[0-9.]+-(?P<version>[0-9]+(?:\\.[0-9]+)+)\\.jar"
         }
     },
@@ -610,16 +605,15 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "name": "security-craft",
-            "regex": "SecurityCraft[ _]v?(?P<version>.+?)(?:[ _]for[ _][0-9.]+)?(?:\\.(?:jar|zip)|$)",
-            "base_path": "projects"
+            "id": "64760",
+            "regex": "SecurityCraft[ _]v?(?P<version>.+?)(?:[ _]for[ _][0-9.]+)?(?:\\.(?:jar|zip)|$)"
         }
     },
     "GravestoneMod": {
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "name": "gravestone-mod",
+            "id": "238551",
             "field": "display",
             "regex": "\\[[0-9.]+\\] Gravestone Mod +(?P<version>[0-9.-]+)$"
         }
@@ -628,6 +622,7 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
+            "id": "74120",
             "regex": "-.+?-(?P<version>.+?).jar"
         }
     },
@@ -636,7 +631,6 @@
         "active": true,
         "curse": {
             "id": "220811",
-            "name": "the-spice-of-life",
             "regex": "-.+?-(?P<version>.+?).jar"
         }
     },
@@ -644,7 +638,7 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "name": "refined-relocation",
+            "id": "75811",
             "regex": "-.+?-(?P<version>.+?).jar"
         }
     },
@@ -652,7 +646,7 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "name": "secretroomsmod",
+            "id": "59652",
             "regex": "secretrooms(?:mod)?(?:-[0-9.]+)?-(?P<version>[0-9]+(?:\\.[0-9]+)+)\\.jar"
         }
     },
@@ -660,7 +654,7 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "name": "botania",
+            "id": "225643",
             "regex": "Botania[- ](?P<version>r?[0-9]+(?:\\.[0-9]+)+-[0-9]+(?:\\.[0-9]+)*|r[0-9]+(?:\\.[0-9]+)+-[0-9]+)\\.jar"
         }
     },
@@ -668,7 +662,7 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "name": "d3core",
+            "id": "223569",
             "regex": "D3Core-[0-9.]+-(?P<version>[0-9]+(?:\\.[0-9]+)+)\\.jar"
         }
     },
@@ -676,8 +670,7 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "name": "let-it-burn-add-furnace-fuel-with-config",
-            "base_path": "projects",
+            "id": "223215",
             "regex": "LetItBurn-[0-9.]+-(?P<version>[0-9]+(?:\\.[0-9]+)+)\\.jar"
         }
     },
@@ -685,8 +678,7 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "name": "lumberjack",
-            "base_path": "projects",
+            "id": "223439",
             "regex": "Lumberjack(?:-[0-9.]+)?-(?P<version>[0-9]+(?:\\.[0-9]+)+)\\.jar"
         }
     },
@@ -695,7 +687,6 @@
         "active": true,
         "curse": {
             "id": "221140",
-            "name": "version-checker",
             "regex": "VersionChecker-(?P<version>.+?).jar"
         }
     },
@@ -704,7 +695,6 @@
         "active": true,
         "curse": {
             "id": "221826",
-            "name": "custom-npcs",
             "regex": "CustomNPCs_(?P<version>.+?)-?\\("
         }
     },
@@ -712,7 +702,7 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "name": "mca",
+            "id": "59693",
             "regex": "MCA-(?P<version>1\\..+?-.+?)-universal.jar"
         }
     },
@@ -721,7 +711,6 @@
         "active": true,
         "curse": {
             "id": "222477",
-            "name": "the-mists-of-riov",
             "regex": "The Mists of RioV[ -]v(?P<version>[0-9]+(?:\\.[0-9]+)+)\\.jar"
         }
     },
@@ -730,7 +719,6 @@
         "active": true,
         "curse": {
             "id": "223272",
-            "name": "dual-hotbar",
             "regex": "dualhotbar-(?P<mc>.+?)-(?P<version>.+?).jar"
         }
     },
@@ -739,7 +727,6 @@
         "active": true,
         "curse": {
             "id": "222395",
-            "name": "freedom",
             "regex": "Freedom-(?P<mc>.+?)-(?P<version>.+?).jar"
         }
     },
@@ -748,7 +735,6 @@
         "active": true,
         "curse": {
             "id": "222394",
-            "name": "santas-decor",
             "regex": "Santa'?sDecor-(?P<mc>.+?)-(?P<version>.+?).jar"
         }
     },
@@ -756,7 +742,7 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "name": "craftguide",
+            "id": "75557",
             "regex": "CraftGuide-(?P<version>.+?)-forge.jar"
         }
     },
@@ -765,7 +751,6 @@
         "active": true,
         "curse": {
             "id": "223565",
-            "name": "draconic-evolution",
             "regex": "Draconic-Evolution-.+?-(?P<version>[0-9]+(?:\\.[0-9]+)+)-universal"
         }
     },
@@ -773,8 +758,7 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "id": "",
-            "name": "evilcraft",
+            "id": "74610",
             "regex": "EvilCraft-(?P<mc>.+?)-(?P<version>.+?)\\.jar"
         }
     },
@@ -783,7 +767,6 @@
         "active": true,
         "curse": {
             "id": "232758",
-            "name": "cyclops-core",
             "regex": "CyclopsCore-(?P<mc>.+?)-(?P<version>.+?)\\.jar"
         }
     },
@@ -792,7 +775,6 @@
         "active": true,
         "curse": {
             "id": "248353",
-            "name": "everlastingabilities",
             "regex": "EverlastingAbilities-(?P<mc>.+?)-(?P<version>.+?)\\.jar"
         }
     },
@@ -801,7 +783,6 @@
         "active": true,
         "curse": {
             "id": "251389",
-            "name": "integrated-tunnels",
             "regex": "IntegratedTunnels-(?P<mc>.+?)-(?P<version>.+?)\\.jar"
         }
     },
@@ -810,7 +791,6 @@
         "active": true,
         "curse": {
             "id": "266479",
-            "name": "capabilityproxy",
             "regex": "CapabilityProxy-(?P<mc>.+?)-(?P<version>.+?)\\.jar"
         }
     },
@@ -819,7 +799,6 @@
         "active": true,
         "curse": {
             "id": "223737",
-            "name": "fluidconverters",
             "regex": "FluidConverters-(?P<mc>.+?)-(?P<version>.+?)\\.jar"
         }
     },
@@ -828,7 +807,6 @@
         "active": true,
         "curse": {
             "id": "233151",
-            "name": "structured-crafting",
             "regex": "StructuredCrafting-(?P<mc>.+?)-(?P<version>.+?)\\.jar"
         }
     },
@@ -837,7 +815,6 @@
         "active": true,
         "curse": {
             "id": "237875",
-            "name": "colossal-chests",
             "regex": "ColossalChests-(?P<mc>.+?)-(?P<version>.+?)\\.jar"
         }
     },
@@ -846,7 +823,6 @@
         "active": true,
         "curse": {
             "id": "236307",
-            "name": "integrated-dynamics",
             "regex": "IntegratedDynamics-(?P<mc>.+?)-(?P<version>.+?)\\.jar"
         }
     },
@@ -855,7 +831,6 @@
         "active": true,
         "curse": {
             "id": "247007",
-            "name": "common-capabilities",
             "regex": "CommonCapabilities-(?P<mc>.+?)-(?P<version>.+?)\\.jar"
         }
     },
@@ -863,8 +838,7 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "name": "energysynergy",
-            "base_path": "minecraft/mc-mods",
+            "id": "247043",
             "regex": "EnergySynergy-(?P<mc>.+?)-(?P<version>.+?)\\.jar"
         }
     },
@@ -872,7 +846,7 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "name": "journeymap",
+            "id": "32274",
             "regex": "journeymap-(?P<mc>.+?)-(?P<version>[0-9]+(?:\\.[0-9]+)+(?:[a-z]+[0-9]*)?)\\.jar"
         }
     },
@@ -881,7 +855,6 @@
         "active": true,
         "curse": {
             "id": "221585",
-            "name": "roguelike-dungeons",
             "regex": ".+-(?P<mc>.+)-(?P<version>.+).jar"
         }
     },
@@ -890,7 +863,6 @@
         "active": true,
         "curse": {
             "id": "224599",
-            "name": "mystcraft",
             "regex": "mystcraft-(?P<mc>.+?)-(?P<version>.+?).jar"
         }
     },
@@ -899,7 +871,6 @@
         "active": true,
         "curse": {
             "id": "226410",
-            "name": "projecte",
             "regex": "ProjectE-(?P<version>.+?).jar"
         }
     },
@@ -908,7 +879,6 @@
         "active": true,
         "curse": {
             "id": "223896",
-            "name": "malisiscore",
             "regex": "malisiscore-.+?-(?P<version>[0-9]+(\\.[0-9]+)+)"
         }
     },
@@ -917,7 +887,6 @@
         "active": true,
         "curse": {
             "id": "223891",
-            "name": "malisis-doors",
             "regex": "malisisdoors-(?P<mc>.+?)-(?P<version>.+).jar"
         }
     },
@@ -926,7 +895,6 @@
         "active": true,
         "curse": {
             "id": "224728",
-            "name": "floodlights",
             "regex": "FloodLights-(?P<mc>.+?)-(?P<version>.+).jar"
         }
     },
@@ -935,7 +903,6 @@
         "active": true,
         "curse": {
             "id": "225561",
-            "name": "extra-utilities",
             "regex": "extrautils2-.+-(?P<version>[0-9\\.]+)\\.jar"
         }
     },
@@ -953,7 +920,6 @@
         "active": true,
         "curse": {
             "id": "224641",
-            "name": "rftools",
             "regex": "rftools-(.+?)?-(?P<version>.+).jar"
         }
     },
@@ -1068,7 +1034,7 @@
         }
     },
     "RopesPlus": {
-            "function": "CheckAtomicStryker",
+        "function": "CheckAtomicStryker",
         "active": true,
         "category": "AtomicStryker",
         "document_group": {
@@ -1123,7 +1089,7 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "name": "mb-battlegear-2",
+            "id": "59710",
             "regex": "MB_Battlegear2-Bullseye-(?P<version>[0-9]+(?:\\.[0-9]+)+)"
         }
     },
@@ -1132,7 +1098,6 @@
         "active": true,
         "curse": {
             "id": "225608",
-            "name": "worldedit",
             "regex": "worldedit-(?:mod|forge|fabric)(?:-mc[0-9.]+)?-(?P<version>[0-9]+(\\.[0-9]+)+)(?:-dist)?\\.jar"
         }
     },
@@ -1141,7 +1106,6 @@
         "active": true,
         "curse": {
             "id": "223525",
-            "name": "binnies-mods",
             "regex": "-.+?-(?P<version>.+?).jar"
         }
     },
@@ -1150,7 +1114,6 @@
         "active": true,
         "curse": {
             "id": "224712",
-            "name": "wawla-what-are-we-looking-at",
             "regex": "Wawla-(?P<version>.+?)-.+.jar"
         }
     },
@@ -1158,8 +1121,7 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "name": "dimensional-pockets",
-            "base_path": "minecraft/mc-mods",
+            "id": "226990",
             "regex": "DimensionalPockets-(?P<mc>.+?)-(?P<version>[0-9]+(?:\\.[0-9]+)+)-universal\\.jar"
         }
     },
@@ -1168,7 +1130,6 @@
         "active": true,
         "curse": {
             "id": "225247",
-            "name": "ender-zoo",
             "regex": ".+?-(?P<mc>.+?)-(?P<version>.+?).jar"
         }
     },
@@ -1185,7 +1146,6 @@
         "active": true,
         "curse": {
             "id": "223275",
-            "name": "betterbedrockgen",
             "regex": "BetterBedrockGenerator-.+?-(?P<version>[0-9]+(?:\\.[0-9]+)+)(?:\\.jar|$)"
         }
     },
@@ -1194,7 +1154,6 @@
         "active": true,
         "curse": {
             "id": "226834",
-            "name": "glass-shards",
             "regex": ".+?_mc(?P<mc>.+?)-(?P<version>.+?).jar"
         }
     },
@@ -1203,7 +1162,6 @@
         "active": true,
         "curse": {
             "id": "228027",
-            "name": "bibliocraft",
             "regex": "BiblioCraft\\[v(?P<version>.+?)\\]"
         }
     },
@@ -1212,7 +1170,6 @@
         "active": true,
         "curse": {
             "id": "228363",
-            "name": "bibliocraft-bibliowoods-forestry-edition",
             "regex": "BiblioWoods\\[Forestry\\]\\[v(?P<version>[0-9]+(?:\\.[0-9]+)+)\\]"
         }
     },
@@ -1221,7 +1178,6 @@
         "active": true,
         "curse": {
             "id": "228362",
-            "name": "bibliocraft-bibliowoods-biomes-oplenty-edition",
             "regex": "BiblioWoods\\[BiomesOPlenty\\]\\[v(?P<version>[0-9]+(?:\\.[0-9]+)+)\\]"
         }
     },
@@ -1230,7 +1186,6 @@
         "active": true,
         "curse": {
             "id": "228364",
-            "name": "bibliocraft-bibliowoods-natura-edition",
             "regex": "BiblioWoods\\[Natura\\]\\[v(?P<version>[0-9]+(?:\\.[0-9]+)+)\\]"
         }
     },
@@ -1239,7 +1194,6 @@
         "active": true,
         "curse": {
             "id": "227083",
-            "name": "baubles",
             "regex": "Baubles-(?P<mc>.+?)-(?P<version>.+?).jar"
         }
     },
@@ -1272,7 +1226,6 @@
         "active": true,
         "curse": {
             "id": "239106",
-            "name": "fast-travel",
             "regex": "-.+?-(?P<version>.+?)-universal.jar"
         }
     },
@@ -1305,7 +1258,6 @@
         "active": true,
         "curse": {
             "id": "223797",
-            "name": "helpfixer",
             "regex": "HelpFixer-.+?-(?P<version>.+)\\.jar"
         }
     },
@@ -1314,7 +1266,6 @@
         "active": true,
         "curse": {
             "id": "229598",
-            "name": "ice-shards",
             "regex": "ice_shards_mc.+?-(?P<version>.+?)\\.jar"
         }
     },
@@ -1323,7 +1274,6 @@
         "active": true,
         "curse": {
             "id": "232784",
-            "name": "bookshelf-api-library",
             "regex": "Bookshelf-API-(?P<mc>[^-]+)-(?P<version>.+?).jar"
         }
     },
@@ -1331,7 +1281,7 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "name": "modular-systems",
+            "id": "68528",
             "regex": "ModularSystems-(?P<mc>[^-]+)-(?P<version>.+?).jar"
         }
     },
@@ -1340,7 +1290,6 @@
         "active": true,
         "curse": {
             "id": "228643",
-            "name": "neotech",
             "regex": "NeoTech-(?P<mc>[^-]+)-(?P<version>.+?).jar"
         }
     },
@@ -1349,7 +1298,6 @@
         "active": true,
         "curse": {
             "id": "224663",
-            "name": "openmodularturrets",
             "regex": "OpenModularTurrets-(?P<mc>.+?)-(?P<version>.+).jar"
         }
     },
@@ -1365,7 +1313,6 @@
         "active": true,
         "curse": {
             "id": "232683",
-            "name": "ffs-fancy-fluid-storage",
             "regex": "Fancy Fluid Storage-.+?-(?P<version>.+)\\.jar"
         }
     },
@@ -1375,7 +1322,6 @@
         "active": true,
         "curse": {
             "id": "227594",
-            "name": "hxc-core",
             "regex": "hxccore-.+?-(?P<version>.+)-universal"
         }
     },
@@ -1385,7 +1331,6 @@
         "category": "HxCMods",
         "curse": {
             "id": "227599",
-            "name": "hxcenchants",
             "regex": "hxcenchants-.+?-(?P<version>[0-9]+(\\.[0-9]+)+)\\.jar"
         }
     },
@@ -1395,7 +1340,6 @@
         "category": "HxCMods",
         "curse": {
             "id": "227598",
-            "name": "hxcworldgen",
             "regex": "HxCWorldGen-.+?-(?P<version>.+)\\.jar"
         }
     },
@@ -1404,7 +1348,6 @@
         "active": true,
         "curse": {
             "id": "235591",
-            "name": "dragonapi",
             "regex": "[Vv](?P<version>[0-9]+[a-zA-Z]+)\\.jar"
         }
     },
@@ -1413,7 +1356,6 @@
         "active": true,
         "curse": {
             "id": "235590",
-            "name": "chromaticraft",
             "regex": "[Vv](?P<version>[0-9]+[a-zA-Z]+)\\.jar"
         }
     },
@@ -1422,7 +1364,6 @@
         "active": true,
         "curse": {
             "id": "235596",
-            "name": "rotarycraft",
             "regex": "[Vv](?P<version>[0-9]+[a-zA-Z]+)\\.jar"
         }
     },
@@ -1431,7 +1372,6 @@
         "active": true,
         "curse": {
             "id": "235593",
-            "name": "reactorcraft",
             "regex": "[Vv](?P<version>[0-9]+[a-zA-Z]+)\\.jar"
         }
     },
@@ -1440,7 +1380,6 @@
         "active": true,
         "curse": {
             "id": "235594",
-            "name": "electricraft",
             "regex": "[Vv](?P<version>[0-9]+[a-zA-Z]+)\\.jar"
         }
     },
@@ -1449,7 +1388,6 @@
         "active": true,
         "curse": {
             "id": "235602",
-            "name": "expandedredstone",
             "regex": "[Vv](?P<version>[0-9]+[a-zA-Z]+)\\.jar"
         }
     },
@@ -1458,7 +1396,6 @@
         "active": true,
         "curse": {
             "id": "235601",
-            "name": "geostrata",
             "regex": "[Vv](?P<version>[0-9]+[a-zA-Z]+)\\.jar"
         }
     },
@@ -1467,7 +1404,6 @@
         "active": true,
         "curse": {
             "id": "235610",
-            "name": "territoryzone",
             "regex": "[Vv](?P<version>[0-9]+[a-zA-Z]+)\\.jar"
         }
     },
@@ -1476,7 +1412,6 @@
         "active": true,
         "curse": {
             "id": "235604",
-            "name": "meteorcraft",
             "regex": "[Vv](?P<version>[0-9]+[a-zA-Z]+)\\.jar"
         }
     },
@@ -1485,7 +1420,6 @@
         "active": true,
         "curse": {
             "id": "235605",
-            "name": "cavecontrol",
             "regex": "[Vv](?P<version>[0-9]+[a-zA-Z]+)\\.jar"
         }
     },
@@ -1494,7 +1428,6 @@
         "active": true,
         "curse": {
             "id": "235608",
-            "name": "critterpet",
             "regex": "[Vv](?P<version>[0-9]+[a-zA-Z]+)\\.jar"
         }
     },
@@ -1503,7 +1436,6 @@
         "active": true,
         "curse": {
             "id": "235612",
-            "name": "usefultnt",
             "regex": "[Vv](?P<version>[0-9]+[a-zA-Z]+)\\.jar"
         }
     },
@@ -1512,7 +1444,6 @@
         "active": true,
         "curse": {
             "id": "235611",
-            "name": "legacycraft",
             "regex": "[Vv](?P<version>[0-9]+[a-zA-Z]+)\\.jar"
         }
     },
@@ -1521,7 +1452,6 @@
         "active": true,
         "curse": {
             "id": "235609",
-            "name": "void-monster",
             "regex": "[Vv](?P<version>[0-9]+[a-zA-Z]+)\\.jar"
         }
     },
@@ -1530,7 +1460,6 @@
         "active": true,
         "curse": {
             "id": "231868",
-            "name": "endercore",
             "regex": "EnderCore ?- ?(?P<version>.+?)(?:\\.jar)?$"
         }
     },
@@ -1539,7 +1468,6 @@
         "active": true,
         "curse": {
             "id": "233105",
-            "name": "mcjtylib",
             "regex": "mcjtylib-(?P<version>.+)\\.jar"
         }
     },
@@ -1548,7 +1476,6 @@
         "active": true,
         "curse": {
             "id": "233398",
-            "name": "deep-resonance",
             "regex": "deepresonance(?:-(?P<mc>[0-9]+(?:\\.[0-9]+)+))?-(?P<version>[0-9].+?)\\.jar"
         }
     },
@@ -1557,7 +1484,6 @@
         "active": true,
         "curse": {
             "id": "227391",
-            "name": "eleccore-dimensionapi",
             "regex": "ElecCore-.+?-(?P<version>.+?)(?:-sources)?\\.jar"
         }
     },
@@ -1565,7 +1491,7 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "name": "magic-bees",
+            "id": "65764",
             "regex": "magicbees-(?P<mc>.+?)-(?P<version>.+)\\.jar"
         }
     },
@@ -1573,7 +1499,7 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "name": "mantle",
+            "id": "74924",
             "regex": "Mantle-(?P<mc>.+?)-(?P<version>.+)\\.jar"
         }
     },
@@ -1611,7 +1537,7 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "name": "decocraft2",
+            "id": "79616",
             "regex": "Decocraft-(?P<version>.+)_(?P<mc>.+?).jar"
         }
     },
@@ -1620,7 +1546,6 @@
         "active": true,
         "curse": {
             "id": "231951",
-            "name": "immersive-engineering",
             "regex": "ImmersiveEngineering-(?P<version>.+)\\.jar"
         }
     },
@@ -1629,7 +1554,6 @@
         "active": true,
         "curse": {
             "id": "225502",
-            "name": "icbm",
             "regex": "ICBM-.+?-(?P<version>.+)\\.jar"
         }
     },
@@ -1638,7 +1562,6 @@
         "active": true,
         "curse": {
             "id": "227048",
-            "name": "voltz-engine",
             "regex": "VoltzEngine-.+?-(?P<version>.+)\\.jar"
         }
     },
@@ -1647,7 +1570,6 @@
         "active": true,
         "curse": {
             "id": "233019",
-            "name": "ai-improvements",
             "regex": "AI-Improvements-[0-9.]+-(?P<version>[0-9]+(?:\\.[0-9]+)+)\\.jar"
         }
     },
@@ -1656,7 +1578,6 @@
         "active": true,
         "curse": {
             "id": "236575",
-            "name": "addicted-to-red",
             "regex": "AddictedToRed-.+?-(?P<version>[0-9]+(?:\\.[0-9]+)+b[0-9]+)"
         }
     },
@@ -1665,7 +1586,6 @@
         "active": true,
         "curse": {
             "id": "233189",
-            "name": "sbm-wooden-buckets",
             "regex": "WoodenBuckets-.+?-(?P<version>.+)\\.jar"
         }
     },
@@ -1674,7 +1594,6 @@
         "active": true,
         "curse": {
             "id": "235201",
-            "name": "seedcopy",
             "regex": ".+?-(?P<mc>.+?)-(?P<version>.+).jar"
         }
     },
@@ -1682,8 +1601,7 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "name": "serverinfoprovider",
-            "base_path": "minecraft/mc-mods",
+            "id": "236296",
             "regex": "ServerInfoProvider-.+?-(?P<version>.+?)-universal.jar"
         }
     },
@@ -1700,7 +1618,6 @@
         "active": true,
         "curse": {
             "id": "238222",
-            "name": "just-enough-items-jei",
             "regex": "jei[_-](?P<mc>.+)-(?P<version>.+)\\.jar"
         }
     },
@@ -1709,7 +1626,6 @@
         "active": true,
         "curse": {
             "id": "235107",
-            "name": "notenoughids",
             "regex": "NotEnoughIDs-(?P<version>[0-9]+(?:\\.[0-9]+)+)\\.jar"
         }
     },
@@ -1717,9 +1633,8 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "regex": "ender_?compass(?:-[0-9.x]+)?-(?P<version>.+?)\\.jar",
-            "id": "223106",
-            "name": "ender-compass"
+            "id": "374785",
+            "regex": "endercompass-(?P<version>[0-9]+(?:\\.[0-9]+)+)-[0-9.]+\\.jar"
         }
     },
     "BoilerPlate": {
@@ -1727,7 +1642,6 @@
         "active": true,
         "curse": {
             "id": "224018",
-            "name": "boilerplate-lib",
             "regex": "Boilerplate-(?P<mc>[0-9.]+)-(?P<version>[0-9]+(?:\\.[0-9]+)+)(?:-universal)?\\.jar"
         }
     },
@@ -1735,143 +1649,127 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "regex": "ThermalSmeltery-(?P<version>[0-9]+(?:\\.[0-9]+)+)\\.jar",
             "id": "227661",
-            "name": "thermal-smeltery"
+            "regex": "ThermalSmeltery-(?P<version>[0-9]+(?:\\.[0-9]+)+)\\.jar"
         }
     },
     "SoulShardsTheOldWays": {
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "regex": "SoulShards-TOW-.+?-(?P<version>.+)\\.jar",
             "id": "226958",
-            "name": "soul-shards-the-old-ways"
+            "regex": "SoulShards-TOW-.+?-(?P<version>.+)\\.jar"
         }
     },
     "Cannibalism": {
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "regex": "Cannibalism-(?P<version>.+?)-.+\\.jar",
             "id": "224588",
-            "name": "cannibalism"
+            "regex": "Cannibalism-(?P<version>.+?)-.+\\.jar"
         }
     },
     "CookingForBlockheads": {
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "regex": "CookingForBlockheads_.+?-(?P<version>[0-9]+(?:\\.[0-9]+)+)\\.jar",
             "id": "231484",
-            "name": "cooking-for-blockheads"
+            "regex": "CookingForBlockheads_.+?-(?P<version>[0-9]+(?:\\.[0-9]+)+)\\.jar"
         }
     },
     "AdobeBlocks": {
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "regex": "AdobeBlocks(?:-Forge)?(?:-(?P<mc>.+?))?-(?P<version>[0-9]+(?:\\.[0-9]+)+)",
             "id": "236104",
-            "name": "adobe-blocks-2"
+            "regex": "AdobeBlocks(?:-Forge)?(?:-(?P<mc>.+?))?-(?P<version>[0-9]+(?:\\.[0-9]+)+)"
         }
     },
     "BedrockReplacer": {
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "regex": "BedrockReplacer(?:-Forge)?(?:-(?P<mc>.+?))?-(?P<version>[0-9]+(?:\\.[0-9]+)+)",
             "id": "237108",
-            "name": "bedrock-replacer"
+            "regex": "BedrockReplacer(?:-Forge)?(?:-(?P<mc>.+?))?-(?P<version>[0-9]+(?:\\.[0-9]+)+)"
         }
     },
     "CommandKeybindings": {
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "regex": "CommandKeybindings(?:-(Forge|LiteLoader))?(?:-(?P<mc>.+?))?-(?P<version>[0-9]+(?:\\.[0-9]+)+)",
             "id": "242907",
-            "name": "command-keybindings"
+            "regex": "CommandKeybindings(?:-(Forge|LiteLoader))?(?:-(?P<mc>.+?))?-(?P<version>[0-9]+(?:\\.[0-9]+)+)"
         }
     },
     "FiresClaySpawn": {
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "regex": "Fire'?s ?Clay ?Spawn(?:-Forge)?(?:-(?P<mc>.+?))?-(?P<version>[0-9]+(?:\\.[0-9]+)+)",
             "id": "225539",
-            "name": "fires-clay-spawn"
+            "regex": "Fire'?s ?Clay ?Spawn(?:-Forge)?(?:-(?P<mc>.+?))?-(?P<version>[0-9]+(?:\\.[0-9]+)+)"
         }
     },
     "FiresRandomThings": {
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "regex": "FiresRandomThings(?:-Forge)?(?:-(?P<mc>.+?))?-(?P<version>[0-9]+(?:\\.[0-9]+)+)",
             "id": "244507",
-            "name": "fires-random-things"
+            "regex": "FiresRandomThings(?:-Forge)?(?:-(?P<mc>.+?))?-(?P<version>[0-9]+(?:\\.[0-9]+)+)"
         }
     },
     "Fluidity": {
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "regex": "Fluidity(?:-Forge)?(?:-(?P<mc>.+?))?-(?P<version>[0-9]+(?:\\.[0-9]+)+)",
             "id": "241409",
-            "name": "fluidity"
+            "regex": "Fluidity(?:-Forge)?(?:-(?P<mc>.+?))?-(?P<version>[0-9]+(?:\\.[0-9]+)+)"
         }
     },
     "InGameAccountSwitcher": {
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "regex": "InGameAccountSwitcher(?:-(Forge|LiteLoader))?(?:-(?P<mc>.+?))?-(?P<version>[0-9]+(?:\\.[0-9]+)+)",
             "id": "232676",
-            "name": "in-game-account-switcher"
+            "regex": "InGameAccountSwitcher(?:-(Forge|LiteLoader))?(?:-(?P<mc>.+?))?-(?P<version>[0-9]+(?:\\.[0-9]+)+)"
         }
     },
     "MobRebirth": {
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "regex": "(\\[[0-9.+]\\])?Mob ?Rebirth[- ]?(Forge-)?([0-9.]+-)?(?P<version>(?P<bp>bp1(\\.[0-9]+)+\\()?[0-9.]+(dev[0-9]+)?(?(bp)\\)))\\.jar",
             "id": "226212",
-            "name": "mob-rebirth"
+            "regex": "(\\[[0-9.+]\\])?Mob ?Rebirth[- ]?(Forge-)?([0-9.]+-)?(?P<version>(?P<bp>bp1(\\.[0-9]+)+\\()?[0-9.]+(dev[0-9]+)?(?(bp)\\)))\\.jar"
         }
     },
     "MoreAnvils": {
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "regex": "MoreAnvils(?:-Forge)?(?:-(?P<mc>.+?))?-(?P<version>[0-9]+(?:\\.[0-9]+)+)",
             "id": "243578",
-            "name": "more-anvils"
+            "regex": "MoreAnvils(?:-Forge)?(?:-(?P<mc>.+?))?-(?P<version>[0-9]+(?:\\.[0-9]+)+)"
         }
     },
     "NetherEssence": {
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "regex": "NetherEssence(?:-Forge)?(?:-(?P<mc>.+?))?-(?P<version>[0-9]+(?:\\.[0-9]+)+)",
             "id": "238223",
-            "name": "nether-essence"
+            "regex": "NetherEssence(?:-Forge)?(?:-(?P<mc>.+?))?-(?P<version>[0-9]+(?:\\.[0-9]+)+)"
         }
     },
     "Overlord": {
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "regex": "Overlord(?:-Forge)?(?:-(?P<mc>.+?))?-(?P<version>[0-9]+(?:\\.[0-9]+)+)",
             "id": "251732",
-            "name": "overlord"
+            "regex": "Overlord(?:-Forge)?(?:-(?P<mc>.+?))?-(?P<version>[0-9]+(?:\\.[0-9]+)+)"
         }
     },
     "RabbitsBreedLikeRabbits": {
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "name": "rabbits-breed-like-rabbits",
-            "base_path": "minecraft/mc-mods",
+            "id": "240916",
             "regex": "RabbitsBreedLikeRabbits(?:-Forge)?(?:-(?P<mc>.+?))?-(?P<version>[0-9]+(?:\\.[0-9]+)+)\\.jar"
         }
     },
@@ -1879,97 +1777,87 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "regex": "(?:FiresSurvivalTweaks|Real ?Stone ?Tools)(?:-Forge)?-(?P<version>[0-9]+(?:\\.[0-9]+)+)(?:\\+|-|\\.jar)",
             "id": "232464",
-            "name": "fires-survival-tweaks"
+            "regex": "(?:FiresSurvivalTweaks|Real ?Stone ?Tools)(?:-Forge)?-(?P<version>[0-9]+(?:\\.[0-9]+)+)(?:\\+|-|\\.jar)"
         }
     },
     "SimplyCaterpillar": {
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "regex": "SimplyCaterpillar(?:-Forge)?(?:-(?P<mc>.+?))?-(?P<version>[0-9]+(?:\\.[0-9]+)+)",
             "id": "245437",
-            "name": "simply-caterpillar"
+            "regex": "SimplyCaterpillar(?:-Forge)?(?:-(?P<mc>.+?))?-(?P<version>[0-9]+(?:\\.[0-9]+)+)"
         }
     },
     "TimeHUD": {
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "regex": "TimeHUD(?:-(Forge|LiteLoader))?(?:-(?P<mc>.+?))?-(?P<version>[0-9]+(?:\\.[0-9]+)+)",
             "id": "239110",
-            "name": "time-hud"
+            "regex": "TimeHUD(?:-(Forge|LiteLoader))?(?:-(?P<mc>.+?))?-(?P<version>[0-9]+(?:\\.[0-9]+)+)"
         }
     },
     "WarsMod": {
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "regex": "WarsMod(?:-Forge)?(?:-(?P<mc>.+?))?-(?P<version>[0-9]+(?:\\.[0-9]+)+)",
-            "name": "warsmod"
+            "id": "59679",
+            "regex": "WarsMod(?:-Forge)?(?:-(?P<mc>.+?))?-(?P<version>[0-9]+(?:\\.[0-9]+)+)"
         }
     },
     "MineTweakerRecipeMaker": {
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "regex": ".+?-(?P<mc>.+?)-(?P<version>.+?).jar",
             "id": "226294",
-            "name": "minetweaker-recipemaker"
+            "regex": ".+?-(?P<mc>.+?)-(?P<version>.+?).jar"
         }
     },
     "Whitelister": {
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "regex": ".+?-(?P<mc>.+?)-(?P<version>.+?).jar",
             "id": "224493",
-            "name": "whitelister"
+            "regex": ".+?-(?P<mc>.+?)-(?P<version>.+?).jar"
         }
     },
     "LootBags": {
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "regex": ".+?-[0-9.]+-(?P<version>[0-9]+(?:\\.[0-9]+)+)",
             "id": "225946",
-            "name": "lootbags"
+            "regex": ".+?-[0-9.]+-(?P<version>[0-9]+(?:\\.[0-9]+)+)"
         }
     },
     "CuteMobModels": {
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "regex": "YarrCuteMobModelsRemake-(?P<version>.+?)-.+\\.jar",
             "id": "222028",
-            "name": "cute-mob-models"
+            "regex": "YarrCuteMobModelsRemake-(?P<version>.+?)-.+\\.jar"
         }
     },
     "IvToolkit": {
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "regex": "IvToolkit-(?P<version>.+?).jar",
             "id": "224535",
-            "name": "ivtoolkit"
+            "regex": "IvToolkit-(?P<version>.+?).jar"
         }
     },
     "Tinkers'Defense": {
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "regex": ".+?-(?P<version>.+?).jar",
             "id": "226910",
-            "name": "tinkers-defense"
+            "regex": ".+?-(?P<version>.+?).jar"
         }
     },
     "WhatsThisPack": {
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "name": "wtp-whats-this-pack",
-            "base_path": "minecraft/mc-mods",
+            "id": "221658",
             "regex": "WTP-(?P<mc>.+?)-(?P<version>.+)\\.jar"
         }
     },
@@ -1977,26 +1865,23 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "regex": ".+?-(?P<version>.+?).jar",
             "id": "225738",
-            "name": "mmmmmmmmmmmm"
+            "regex": ".+?-(?P<version>.+?).jar"
         }
     },
     "Pandora'sBox": {
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "regex": "-(?P<version>.+?).jar",
             "id": "222896",
-            "name": "pandoras-box"
+            "regex": "-(?P<version>.+?).jar"
         }
     },
     "Calculator": {
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "name": "calculator",
-            "base_path": "projects",
+            "id": "225104",
             "regex": "calculator-(?P<mc>[0-9.]+)-(?P<version>[0-9]+(?:\\.[0-9]+)+-[0-9]+)\\.jar"
         }
     },
@@ -2004,9 +1889,8 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "regex": "-(?P<version>.+?).jar",
             "id": "223150",
-            "name": "recurrent-complex"
+            "regex": "-(?P<version>.+?).jar"
         }
     },
     "AnimalBikes": {
@@ -2014,7 +1898,6 @@
         "active": true,
         "curse": {
             "id": "222718",
-            "name": "animal-bikes",
             "regex": "AnimalBikes_(?P<version>[0-9]+(?:\\.[0-9]+)+)-?\\("
         }
     },
@@ -2023,7 +1906,6 @@
         "active": true,
         "curse": {
             "id": "229260",
-            "name": "mo-creatures",
             "regex": "DrZhark'?s Mo'?Creatures Mod-(?P<version>[0-9]+(\\.[0-9]+)+)\\.jar"
         }
     },
@@ -2032,7 +1914,6 @@
         "active": true,
         "curse": {
             "id": "229261",
-            "name": "custom-mob-spawner",
             "regex": "CustomMobSpawner[ \\-](?P<version>[0-9]+(\\.[0-9]+)+)"
         }
     },
@@ -2041,7 +1922,6 @@
         "active": true,
         "curse": {
             "id": "228895",
-            "name": "biometweaker",
             "regex": "BiomeTweaker-(?P<mc>.+?)[ -](?P<version>.+)\\.jar"
         }
     },
@@ -2049,9 +1929,8 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "regex": "-.+?-(?P<version>.+)\\.jar",
             "id": "223852",
-            "name": "storage-drawers"
+            "regex": "-.+?-(?P<version>.+)\\.jar"
         }
     },
     "RealisticTorches": {
@@ -2059,7 +1938,6 @@
         "active": true,
         "curse": {
             "id": "235729",
-            "name": "realistic-torches",
             "regex": "RealisticTorches-.+?-(?P<version>.+)\\.jar"
         }
     },
@@ -2067,27 +1945,24 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "regex": ".+?-(?P<mc>.+?)-(?P<version>.+?).jar",
             "id": "240655",
-            "name": "portable-crafting"
+            "regex": ".+?-(?P<mc>.+?)-(?P<version>.+?).jar"
         }
     },
     "IronBackpacks": {
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "regex": ".+?-(?P<mc>.+?)-(?P<version>.+?).jar",
             "id": "227049",
-            "name": "iron-backpacks"
+            "regex": ".+?-(?P<mc>.+?)-(?P<version>.+?).jar"
         }
     },
     "ExtraPlanets": {
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "regex": "ExtraPlanets-(?P<version>.+?)\\.jar",
             "id": "241291",
-            "name": "extraplanets"
+            "regex": "ExtraPlanets-(?P<version>.+?)\\.jar"
         }
     },
     "Pokecube": {
@@ -2096,7 +1971,6 @@
         "active": true,
         "curse": {
             "id": "238253",
-            "name": "pokecube-core",
             "regex": "pokecube-core-.+?-(?P<version>.+).jar"
         }
     },
@@ -2106,7 +1980,6 @@
         "active": true,
         "curse": {
             "id": "240877",
-            "name": "graves",
             "regex": "Graves-(?P<mc>.+?)-(?P<version>.+?)-universal.jar"
         }
     },
@@ -2115,7 +1988,6 @@
         "active": true,
         "curse": {
             "id": "231095",
-            "name": "chisels-bits",
             "regex": "chiselsandbits(?:-mc1(?:\\.[0-9]+)+)?-v?(?P<version>[0-9]+(?:\\.[0-9]+)+)(?:(?:-BETA|-ALPHA|-RELEASE)[0-9]*)?\\.jar"
         }
     },
@@ -2159,7 +2031,6 @@
         "active": true,
         "curse": {
             "id": "237903",
-            "name": "reborncore",
             "regex": "RebornCore(?:-[0-9.]+)?-(?P<version>[0-9]+(?:\\.[0-9]+)+(?:\\+build\\.[0-9]+)?)(?:-universal)?\\.jar"
         }
     },
@@ -2168,7 +2039,6 @@
         "active": true,
         "curse": {
             "id": "233564",
-            "name": "techreborn",
             "regex": "TechReborn(?:-[0-9.]+)?-(?P<version>[0-9]+(?:\\.[0-9]+)+(?:\\+build\\.[0-9]+)?)(?:-universal)?\\.jar"
         }
     },
@@ -2177,7 +2047,6 @@
         "active": true,
         "curse": {
             "id": "238471",
-            "name": "moarcarts",
             "regex": "moarcarts-(?P<mc>.+?)-(?P<version>.+?).jar"
         }
     },
@@ -2186,7 +2055,6 @@
         "active": true,
         "curse": {
             "id": "237422",
-            "name": "lightningcraft",
             "regex": "lightningcraft-(?P<version>.+?)(?:-\\[|\\.jar)"
         }
     },
@@ -2195,7 +2063,6 @@
         "active": true,
         "curse": {
             "id": "242657",
-            "name": "advanced-combat",
             "regex": "advancedcombat-(?P<version>.+?)-"
         }
     },
@@ -2204,7 +2071,6 @@
         "active": true,
         "curse": {
             "id": "245194",
-            "name": "autoverse",
             "regex": "autoverse-(?P<mc>[0-9\\.]+)-(?P<version>.+?)\\.jar"
         }
     },
@@ -2213,7 +2079,6 @@
         "active": true,
         "curse": {
             "id": "224320",
-            "name": "ender-utilities",
             "regex": "enderutilities-(?P<mc>[0-9\\.]+)-(?P<version>.+?)\\.jar"
         }
     },
@@ -2222,7 +2087,6 @@
         "active": true,
         "curse": {
             "id": "246320",
-            "name": "environmental-creepers",
             "regex": "environmentalcreepers-(?:forge-|fabric-)?[0-9.]+-(?P<version>[0-9]+(?:\\.[0-9]+)+)\\.jar"
         }
     },
@@ -2231,7 +2095,6 @@
         "active": true,
         "curse": {
             "id": "242064",
-            "name": "item-scroller",
             "regex": "itemscroller(-rift|-fabric|-forge)?-(?P<mc>[0-9\\.]+)-(?P<version>.+?)\\.jar"
         }
     },
@@ -2240,7 +2103,6 @@
         "active": true,
         "curse": {
             "id": "244260",
-            "name": "minihud",
             "regex": "minihud(?:-rift|-fabric|-forge)?-(?P<mc>[0-9\\.]+)-(?P<version>.+?)\\.jar"
         }
     },
@@ -2249,7 +2111,6 @@
         "active": true,
         "curse": {
             "id": "225875",
-            "name": "multishot",
             "regex": "multishot-(?P<mc>[0-9\\.]+)-(?P<version>.+?)\\.jar"
         }
     },
@@ -2257,8 +2118,7 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "name": "ore-control",
-            "base_path": "minecraft/mc-mods",
+            "id": "226665",
             "regex": "orecontrol-(?P<mc>[0-9\\.]+)-(?P<version>.+?)\\.jar"
         }
     },
@@ -2267,7 +2127,6 @@
         "active": true,
         "curse": {
             "id": "229009",
-            "name": "painted-biomes",
             "regex": "paintedbiomes-(?P<mc>[0-9\\.]+)-(?P<version>.+?)\\.jar"
         }
     },
@@ -2276,7 +2135,6 @@
         "active": true,
         "curse": {
             "id": "225781",
-            "name": "tellme",
             "regex": "tellme(?:-forge|-fabric)?-(?P<mc>[0-9\\.]+)-(?P<version>.+?)\\.jar"
         }
     },
@@ -2284,8 +2142,7 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "name": "underp-hangables",
-            "base_path": "minecraft/mc-mods",
+            "id": "240757",
             "regex": "underphangables-(?P<mc>[0-9\\.]+)-(?P<version>.+?)\\.jar"
         }
     },
@@ -2294,7 +2151,6 @@
         "active": true,
         "curse": {
             "id": "237366",
-            "name": "armorplus",
             "regex": "armorplus-(?P<mc>[0-9\\.]+)-(?P<version>.+?)\\.jar"
         }
     },
@@ -2303,7 +2159,6 @@
         "active": true,
         "curse": {
             "id": "248055",
-            "name": "thedragonlib",
             "regex": "thedragonlib-(?P<mc>[0-9\\.]+)-(?P<version>.+?)\\.jar"
         }
     },
@@ -2311,8 +2166,7 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "name": "cct",
-            "base_path": "minecraft/mc-mods",
+            "id": "256411",
             "regex": "cct-(?P<mc>[0-9\\.]+)-(?P<version>.+?)\\.jar"
         }
     },
@@ -2321,7 +2175,6 @@
         "active": true,
         "curse": {
             "id": "247819",
-            "name": "mobsettings",
             "regex": "mobsettings-(?P<mc>[0-9\\.]+)-(?P<version>.+?)\\.jar"
         }
     },
@@ -2330,7 +2183,6 @@
         "active": true,
         "curse": {
             "id": "239431",
-            "name": "mcmultipart",
             "regex": "MCMultiPart-(?P<version>.+?)(?:-universal)?\\.jar"
         }
     },
@@ -2339,7 +2191,6 @@
         "active": true,
         "curse": {
             "id": "224428",
-            "name": "thutcore",
             "regex": "thutcore-.+?-(?P<version>.+?)\\.jar"
         }
     },
@@ -2348,7 +2199,6 @@
         "active": true,
         "curse": {
             "id": "239197",
-            "name": "crafttweaker",
             "regex": "CraftTweaker(?:2(?:\\.5)?)?-[0-9.]+-(?P<version>.+)\\.jar"
         }
     },
@@ -2366,7 +2216,6 @@
         "active": true,
         "curse": {
             "id": "250836",
-            "name": "brain-stone-mod",
             "regex": "BrainStoneMod-(?P<mc>.+?)-(?P<version>.+)\\.jar"
         }
     },
@@ -2375,7 +2224,6 @@
         "active": true,
         "curse": {
             "id": "248619",
-            "name": "super-circuit-maker",
             "regex": "SuperCircuitMaker-(?P<version>.+)\\.jar"
         }
     },
@@ -2384,7 +2232,6 @@
         "active": true,
         "curse": {
             "id": "250577",
-            "name": "akashic-tome",
             "regex": "AkashicTome-(?P<version>.+).jar"
         }
     },
@@ -2393,7 +2240,6 @@
         "active": true,
         "curse": {
             "id": "245287",
-            "name": "morph-o-tool",
             "regex": "Morph-o-Tool-(?P<version>.+).jar"
         }
     },
@@ -2402,7 +2248,6 @@
         "active": true,
         "curse": {
             "id": "250363",
-            "name": "autoreglib",
             "regex": "AutoRegLib-(?P<version>.+).jar"
         }
     },
@@ -2411,7 +2256,6 @@
         "active": true,
         "curse": {
             "id": "253449",
-            "name": "hwyla",
             "regex": "Hwyla-(?:fabric-(?:[0-9.]+)|forge)-(?P<version>[0-9]+(?:\\.[0-9]+)+-B?[0-9]+)(?:_[0-9.]+)?\\.jar"
         }
     },
@@ -2420,7 +2264,6 @@
         "active": true,
         "curse": {
             "id": "228404",
-            "name": "actually-additions",
             "regex": "ActuallyAdditions-(?P<version>.+)\\.jar"
         }
     },
@@ -2438,7 +2281,6 @@
         "active": true,
         "curse": {
             "id": "241721",
-            "name": "astral-sorcery",
             "regex": "AstralSorcery-(?P<mc>.+?)-(?P<version>.+).jar"
         }
     },
@@ -2447,7 +2289,6 @@
         "active": true,
         "curse": {
             "id": "270330",
-            "name": "tickprofiler",
             "regex": "TickProfiler-.+?-(?P<version>.+)\\.jar"
         }
     },
@@ -2456,7 +2297,6 @@
         "active": true,
         "curse": {
             "id": "253729",
-            "name": "compatlayer",
             "regex": "compatlayer-.+?-(?P<version>.+)\\.jar"
         }
     },
@@ -2465,7 +2305,6 @@
         "active": true,
         "curse": {
             "id": "260912",
-            "name": "xnet",
             "regex": "xnet-(?P<version>[0-9]+(?:\\.[0-9]+)+)"
         }
     },
@@ -2473,7 +2312,7 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "name": "kitteh6660s-morecraft",
+            "id": "59648",
             "regex": "MoreCraft[_\\-][0-9.]+-(?P<version>[0-9]+(?:\\.[0-9]+)+(?:[a-z][0-9]+)?)\\.jar"
         }
     },
@@ -2482,7 +2321,6 @@
         "active": true,
         "curse": {
             "id": "224472",
-            "name": "applecore",
             "regex": "AppleCore-mc.+?-(?P<version>.+)\\.jar"
         }
     },
@@ -2491,7 +2329,6 @@
         "active": true,
         "curse": {
             "id": "248787",
-            "name": "appleskin",
             "regex": "AppleSkin-mc.+?-(?P<version>.+)\\.jar"
         }
     },
@@ -2535,7 +2372,6 @@
         "active": true,
         "curse": {
             "id": "247644",
-            "name": "crafting-redstone",
             "regex": "Crafting ?Redstone-MC[0-9.]+-V(?P<version>.+)\\.jar"
         }
     },
@@ -2544,7 +2380,6 @@
         "active": true,
         "curse": {
             "id": "278406",
-            "name": "better-placement",
             "regex": "BetterPlacement-MC.+?-(?P<version>.+)\\.jar"
         }
     },
@@ -2553,7 +2388,6 @@
         "active": true,
         "curse": {
             "id": "278385",
-            "name": "diet-hoppers",
             "regex": "diethopper-(?P<version>.+)\\.jar"
         }
     },
@@ -2562,7 +2396,6 @@
         "active": true,
         "curse": {
             "id": "246760",
-            "name": "better-with-mods",
             "regex": "BetterWithMods-.+?-(?P<version>.+)\\.jar"
         }
     },
@@ -2571,7 +2404,6 @@
         "active": true,
         "curse": {
             "id": "237541",
-            "name": "totemic",
             "regex": "Totemic-.+?-(?P<version>.+)\\.jar"
         }
     },
@@ -2580,7 +2412,6 @@
         "active": true,
         "curse": {
             "id": "221857",
-            "name": "pams-harvestcraft",
             "regex": "Pam's HarvestCraft (?P<version>[0-9]+(\\.[0-9]+)+[a-z]*)"
         }
     },
@@ -2589,7 +2420,6 @@
         "active": true,
         "curse": {
             "id": "278826",
-            "name": "hexxit-gear",
             "regex": "Hexxit Gear-.+?-(?P<version>[0-9]+(\\.[0-9]+)+)\\.jar"
         }
     },
@@ -2604,7 +2434,7 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "name": "ding",
+            "id": "231275",
             "regex": "Ding-.+?-(?P<version>.+)\\.jar"
         }
     },
@@ -2612,7 +2442,7 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "name": "better-than-bunnies",
+            "id": "241015",
             "regex": "BetterThanBunnies-.+?-(?P<version>.+)\\.jar"
         }
     },
@@ -2620,7 +2450,7 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "name": "better-than-llamas",
+            "id": "264161",
             "regex": "BetterThanLlamas-.+?-(?P<version>.+)\\.jar"
         }
     },
@@ -2628,7 +2458,7 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "name": "death-counter",
+            "id": "229068",
             "regex": "DeathCounter-.+?-(?P<version>.+)\\.jar"
         }
     },
@@ -2636,7 +2466,7 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "name": "limited-lives",
+            "id": "233040",
             "regex": "LimitedLives-.+?-(?P<version>.+)\\.jar"
         }
     },
@@ -2644,7 +2474,7 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "name": "party-parrots",
+            "id": "277681",
             "regex": "PartyParrots-.+?-(?P<version>.+)\\.jar"
         }
     },
@@ -2652,7 +2482,7 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "name": "modlister",
+            "id": "237863",
             "regex": "ModLister-.+?-(?P<version>.+)\\.jar"
         }
     },
@@ -2660,7 +2490,7 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "name": "back-tools",
+            "id": "229061",
             "regex": "BackTools-.+?-(?P<version>.+)\\.jar"
         }
     },
@@ -2668,7 +2498,7 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "name": "gravity-gun",
+            "id": "229072",
             "regex": "GravityGun(?:-[0-9]+(?:\\.[0-9]+)+)?-(?P<version>[0-9]+.+)\\.jar"
         }
     },
@@ -2676,7 +2506,7 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "name": "hat-stand",
+            "id": "229076",
             "regex": "HatStand-.+?-(?P<version>.+)\\.jar"
         }
     },
@@ -2684,7 +2514,7 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "name": "mob-amputation",
+            "id": "229105",
             "regex": "MobAmputation-.+?-(?P<version>.+)\\.jar"
         }
     },
@@ -2692,7 +2522,7 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "name": "mob-dismemberment",
+            "id": "229067",
             "regex": "MobDismemberment-.+?-(?P<version>.+)\\.jar"
         }
     },
@@ -2700,8 +2530,7 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "name": "picture-in-picture-pip",
-            "base_path": "projects",
+            "id": "229083",
             "regex": "PiP-.+?-(?P<version>.+)\\.jar"
         }
     },
@@ -2709,7 +2538,7 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "name": "sync",
+            "id": "229090",
             "regex": "Sync-.+?-(?P<version>.+)\\.jar"
         }
     },
@@ -2717,7 +2546,7 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "name": "tabula-minecraft-modeler",
+            "id": "229092",
             "regex": "Tabula-.+?-(?P<version>.+)\\.jar"
         }
     },
@@ -2725,7 +2554,7 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "name": "trail-mix",
+            "id": "229094",
             "regex": "TrailMix-.+?-(?P<version>.+)\\.jar"
         }
     },
@@ -2733,7 +2562,7 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "name": "portal-gun",
+            "id": "229084",
             "regex": "PortalGun-.+?-(?P<version>.+)\\.jar"
         }
     },
@@ -2741,7 +2570,7 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "name": "attachable-grinder",
+            "id": "229059",
             "regex": "AttachableGrinder-.+?-(?P<version>.+)\\.jar"
         }
     },
@@ -2749,7 +2578,7 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "name": "bee-barker",
+            "id": "236644",
             "regex": "BeeBarker-.+?-(?P<version>.+)\\.jar"
         }
     },
@@ -2757,7 +2586,7 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "name": "clef",
+            "id": "274783",
             "regex": "Clef-.+?-(?P<version>.+)\\.jar"
         }
     },
@@ -2765,7 +2594,7 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "name": "googlyeyes",
+            "id": "252188",
             "regex": "GooglyEyes-.+?-(?P<version>.+)\\.jar"
         }
     },
@@ -2773,7 +2602,7 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "name": "guilt-trip",
+            "id": "229071",
             "regex": "GuiltTrip-.+?-(?P<version>.+)\\.jar"
         }
     },
@@ -2781,7 +2610,7 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "name": "hats",
+            "id": "229073",
             "regex": "Hats-.+?-(?P<version>.+)\\.jar"
         }
     },
@@ -2789,7 +2618,7 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "name": "shatter",
+            "id": "229087",
             "regex": "Shatter-.+?-(?P<version>.+)\\.jar"
         }
     },
@@ -2797,7 +2626,7 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "name": "streak",
+            "id": "229089",
             "regex": "Streak-.+?-(?P<version>.+)\\.jar"
         }
     },
@@ -2805,7 +2634,7 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "name": "torched",
+            "id": "229093",
             "regex": "Torched-.+?-(?P<version>.+)\\.jar"
         }
     },
@@ -2813,7 +2642,7 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "name": "morph",
+            "id": "229080",
             "regex": "Morph-.+?-(?P<version>.+)\\.jar"
         }
     },
@@ -2821,7 +2650,7 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "name": "general-laymans-aesthetic-spying-screen-glass",
+            "id": "282164",
             "regex": "GeneralLaymansAestheticSpyingScreen-.+?-(?P<version>.+)\\.jar"
         }
     },
@@ -2829,7 +2658,7 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "name": "ichunutil",
+            "id": "229060",
             "regex": "iChunUtil-.+?-(?P<version>.+)\\.jar"
         }
     },
@@ -2837,8 +2666,7 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "name": "rift",
-            "base_path": "minecraft/mc-mods",
+            "id": "297501",
             "regex": "Rift-(?P<version>.+)\\.jar"
         }
     },
@@ -2846,8 +2674,7 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "name": "millenaire",
-            "base_path": "projects",
+            "id": "270871",
             "regex": "millenaire-(?:[0-9.]+-)?(?P<version>[0-9]+(?:\\.[0-9]+)+.*)\\.jar"
         }
     },
@@ -2855,8 +2682,7 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "name": "advent-of-ascension-nevermine",
-            "base_path": "minecraft/mc-mods",
+            "id": "311054",
             "regex": "AoA3?-(?P<version>.+)\\.jar"
         }
     },
@@ -2872,8 +2698,7 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "name": "laggoggles",
-            "base_path": "projects",
+            "id": "283525",
             "regex": "LagGoggles(?:-(?:(?:SPONGE)?FORGE|THIN|FAT))?-(?:[0-9]+(?:\\.[0-9]+)+)-(?P<version>[0-9]+(?:\\.[0-9]+)+(?:-.+)?)\\.jar"
         }
     },
@@ -2881,8 +2706,7 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "name": "lumy-skin-patch",
-            "base_path": "minecraft/mc-mods",
+            "id": "288957",
             "regex": "LumySkinPatch-(?P<version>[0-9]+(?:\\.[0-9]+)+)\\.jar"
         }
     },
@@ -2890,7 +2714,7 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "name": "sonar-core",
+            "id": "239418",
             "regex": "sonarcore-[0-9.]+-(?P<version>[0-9]+(?:\\.[0-9]+)+(?:-[0-9]+)?)\\.jar"
         }
     },
@@ -2899,7 +2723,6 @@
         "active": true,
         "curse": {
             "id": "220311",
-            "name": "silents-gems",
             "regex": "SilentGems-[0-9.]+-(?P<version>[0-9]+(?:\\.[0-9]+)+[a-z0-9+\\-_]+)\\.jar"
         }
     },
@@ -2907,8 +2730,7 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "name": "ngtlib",
-            "base_path": "minecraft/mc-mods",
+            "id": "288989",
             "regex": "NGTLib(?P<version>[0-9]+(?:\\.[0-9]+)+(?:-[0-9]+)?)_Forge"
         }
     },
@@ -2917,7 +2739,6 @@
         "active": true,
         "curse": {
             "id": "229449",
-            "name": "epic-siege-mod",
             "regex": "EpicSiegeMod-(?P<version>[0-9]+(?:\\.[0-9]+)+)\\.jar"
         }
     },
@@ -2925,8 +2746,7 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "name": "mc-terrain-editor",
-            "base_path": "minecraft/mc-mods",
+            "id": "289840",
             "regex": "MCTE(?P<version>[0-9]+(?:\\.[0-9]+)+(?:-[0-9]+)?)_forge"
         }
     },
@@ -2934,8 +2754,7 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "name": "realtrainmod",
-            "base_path": "minecraft/mc-mods",
+            "id": "288988",
             "regex": "RTM(?P<version>[0-9]+(?:\\.[0-9]+)+(?:-[0-9]+)?)_forge"
         }
     },
@@ -2943,8 +2762,7 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "name": "ancient-warfare-2",
-            "base_path": "projects",
+            "id": "224602",
             "regex": "ancientwarfare-[0-9.]+-(?P<version>[0-9]+(?:\\.[0-9]+)+)\\.jar"
         }
     },
@@ -2952,8 +2770,7 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "name": "ice-and-fire-dragons-in-a-whole-new-light",
-            "base_path": "projects",
+            "id": "264231",
             "regex": "iceandfire-(?P<version>[0-9]+(?:\\.[0-9]+)+)(?:-[0-9.]+)?\\.jar"
         }
     },
@@ -2961,7 +2778,7 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "name": "mystical-agriculture",
+            "id": "246640",
             "regex": "MysticalAgriculture-[0-9.]+-(?P<version>[0-9]+(?:\\.[0-9]+)+)\\.jar"
         }
     },
@@ -2969,7 +2786,7 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "name": "roots",
+            "id": "246183",
             "regex": "roots(?:-[0-9.]+)?-(?P<version>(?:[0-9]+-)?[0-9]+(?:\\.[0-9]+)+)\\.jar"
         }
     },
@@ -2977,8 +2794,7 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "id":"251752",
-            "name": "the-rpg-inventory-and-classarmor-mod",
+            "id": "251752",
             "regex": "rpginventory-[0-9.]+-(?P<version>[0-9]+(?:\\.[0-9]+)+)\\.jar"
         }
     },
@@ -2987,7 +2803,6 @@
         "active": true,
         "curse": {
             "id": "256247",
-            "name": "mystical-agradditions",
             "regex": "MysticalAgradditions-[0-9.]+-(?P<version>[0-9]+(?:\\.[0-9]+)+)\\.jar"
         }
     },
@@ -2995,7 +2810,7 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "name": "extreme-reactors",
+            "id": "250277",
             "regex": "ExtremeReactors2?-[0-9.]+-(?P<version>[0-9]+(?:\\.[0-9]+)+)\\.jar"
         }
     },
@@ -3003,7 +2818,7 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "name": "zerocore",
+            "id": "247921",
             "regex": "ZeroCore2?-[0-9.]+-(?P<version>[0-9]+(?:\\.[0-9]+)+)\\.jar"
         }
     },
@@ -3011,7 +2826,7 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "name": "littletiles",
+            "id": "257818",
             "regex": "LittleTiles[ _]v(?P<version>[0-9]+(?:\\.[0-9]+)+(?:-pre[0-9]+)?(?:_[0-9]+)?)[ _]mc[0-9.]+\\.jar"
         }
     },
@@ -3019,7 +2834,7 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "name": "creativecore",
+            "id": "257814",
             "regex": "CreativeCore[ _]v(?P<version>[0-9]+(?:\\.[0-9]+)+(?:-pre[0-9]+)?)[ _]mc[0-9.]+\\.jar"
         }
     },
@@ -3027,9 +2842,8 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "name": "stuff-a-sock-in-it",
-            "regex": "StuffASockInIt-[0-9.]+-(?P<version>[0-9]+(?:\\.[0-9]+)+)\\.jar",
-            "base_path": "projects"
+            "id": "262137",
+            "regex": "StuffASockInIt-[0-9.]+-(?P<version>[0-9]+(?:\\.[0-9]+)+)\\.jar"
         }
     },
     "ViesCraft": {
@@ -3037,7 +2851,6 @@
         "active": true,
         "curse": {
             "id": "246795",
-            "name": "viescraft-airships",
             "regex": "ViesCraft-[0-9]+(?:\\.[0-9]+)+(?:\\.X)?-(?P<version>[0-9]+(?:\\.[0-9]+)+(?:-.+)?)\\.jar"
         }
     },
@@ -3045,45 +2858,40 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "name": "vies-machines",
-            "regex": "viesmachines-[0-9]+(?:\\.[0-9]+)+(?:\\.X)?-(?P<version>[0-9]+(?:\\.[0-9]+)+(?:-.+)?)\\.jar",
-            "base_path": "minecraft/mc-mods"
+            "id": "308134",
+            "regex": "viesmachines-[0-9]+(?:\\.[0-9]+)+(?:\\.X)?-(?P<version>[0-9]+(?:\\.[0-9]+)+(?:-.+)?)\\.jar"
         }
     },
     "Macaw'sBridges": {
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "name": "macaws-bridges",
-            "regex": "mcw-bridges-(?P<version>[0-9]+(?:\\.[0-9]+)+.+?)-mc[0-9.-]+\\.jar",
-            "base_path": "minecraft/mc-mods"
+            "id": "351725",
+            "regex": "mcw-bridges-(?P<version>[0-9]+(?:\\.[0-9]+)+.+?)-mc[0-9.-]+\\.jar"
         }
     },
     "Macaw'sRoofs": {
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "name": "macaws-roofs",
-            "regex": "mcws?-roofs-(?P<version>[0-9]+(?:\\.[0-9]+)+)-mc1\\.[0-9.-]+\\.jar",
-            "base_path": "minecraft/mc-mods"
+            "id": "352039",
+            "regex": "mcws?-roofs-(?P<version>[0-9]+(?:\\.[0-9]+)+)-mc1\\.[0-9.-]+\\.jar"
         }
     },
     "Macaw'sFurniture": {
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "name": "macaws-furniture",
-            "regex": "mcw-furnitures?-(?P<version>[0-9]+(?:\\.[0-9]+)+)-mc[0-9a-z. ]+\\.jar",
-            "base_path": "minecraft/mc-mods"
+            "id": "359540",
+            "regex": "mcw-furnitures?-(?P<version>[0-9]+(?:\\.[0-9]+)+)-mc[0-9a-z. ]+\\.jar"
         }
     },
     "AUNIS": {
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "name": "aunis",
-            "regex": "aunis-([0-9.]+)-(?P<version>.+)\\.jar",
-            "base_path": "minecraft/mc-mods"
+            "id": "324500",
+            "regex": "aunis-([0-9.]+)-(?P<version>.+)\\.jar"
         }
     },
     "ReAuth": {
@@ -3091,7 +2899,6 @@
         "active": true,
         "curse": {
             "id": "237701",
-            "name": "reauth",
             "regex": "ReAuth(?:-1(?:\\.[0-9]+)+)*(?:-(?:Fabric|Forge))?-(?P<version>[0-9]+(?:\\.[0-9]+)+)\\.jar"
         }
     },
@@ -3099,7 +2906,7 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "name": "advanced-rocketry",
+            "id": "236542",
             "regex": "AdvancedRocketry(?:-[0-9.]+)?-(?P<version>[0-9]+(?:\\.[0-9]+)+(?:[\\-a-z0-9]+?)?)(?:-universal)?\\.jar"
         }
     },
@@ -3107,7 +2914,7 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "name": "libvulpes",
+            "id": "236541",
             "regex": "LibVulpes(?:-[0-9.]+)?-(?P<version>[0-9]+(?:\\.[0-9]+)+(?:-?[a-z]?[0-9]*)?)(?:-universal)?\\.jar"
         }
     },
@@ -3115,7 +2922,7 @@
         "function": "CheckCurse",
         "active": true,
         "curse": {
-            "name": "curios",
+            "id": "309927",
             "regex": "curios(?:-FORGE)?-1(?:\\.[0-9]+)+-(?P<version>[0-9]+(?:\\.[0-9]+)+(?:-[a-z0-9]+)?)\\.jar"
         }
     }

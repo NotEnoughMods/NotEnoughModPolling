@@ -56,7 +56,7 @@ class NotEnoughClasses():
         try:
             request.raise_for_status()
         except requests.HTTPError as e:
-            if request.status_code >= 400 and request.status_code < 500:
+            if 400 <= request.status_code < 500:
                 raise NEMPException(e)
             else:
                 raise
@@ -341,30 +341,16 @@ class NotEnoughClasses():
         return ret
 
     def CheckCurse(self, mod, document=None, simulation=False):
-        modid = self.mods[mod]['curse'].get('id')
-
-        # Accounts for discrepancies between NEM mod names and the Curse link format
-        # Uses Curse name if there is one specified. Defaults to the mod's name in lowercase.
-        modname = self.mods[mod]['curse'].get('name', mod.lower())
-
-        # Sometimes it's "mc-mods/minecraft", sometimes it's "minecraft/mc-mods", sometimes it's "project"...
-        base_path = self.mods[mod]['curse'].get('base_path', 'mc-mods/minecraft')
-
         # Field name from the JSON to be used against the regex (name or display, name by default)
         field_name = self.mods[mod]['curse'].get('field', 'name')
 
-        # As IDs only work with newer mods we have to support two versions of the URL
-        if modid:
-            jsonres = self.fetch_json("https://api.cfwidget.com/" + base_path + "/" + modid + "-" + modname)
-        else:
-            jsonres = self.fetch_json("https://api.cfwidget.com/" + base_path + "/" + modname)
+        jsonres = self.fetch_json("https://api.cfwidget.com/" + self.mods[mod]['curse']['id'])
 
-        if jsonres.get('error') == 'not_found':
-            # This automatically raises an exception and stops this mod from polling after the current cycle
-            return None
-        elif jsonres.get('error') == 'in_queue':
-            # The widget doesn't have the information and queued up an update
+        if jsonres.get('accepted'):
+            # CFWidget doesn't have the information and queued up an update
             return {}
+        elif 'error' in jsonres:
+            raise NEMPException('cfwidget: ' + jsonres.get('error'))
 
         release_type = 'release'
 

@@ -769,16 +769,7 @@ def cmd_url(self, name, params, channel, userdata, rank):
     if func == "CheckGitHubRelease":
         url = "https://github.com/" + mod["github"]["repo"]
     elif func == "CheckCurse":
-        modid = mod['curse'].get('id')
-        modname = mod['curse'].get('name', modname.lower())
-        base_path = mod['curse'].get('base_path', 'mc-mods/minecraft')
-
-        if modid:
-            project_url = modid + "-" + modname
-        else:
-            project_url = modname
-
-        url = 'https://api.cfwidget.com/' + base_path + '/' + project_url
+        url = 'https://api.cfwidget.com/' + mod['curse']['id']
     elif func == "CheckJenkins":
         url = mod["jenkins"]["url"][:-28]
     elif func == "CheckChickenBones":

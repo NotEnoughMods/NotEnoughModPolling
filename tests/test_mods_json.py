@@ -37,7 +37,10 @@ class TestModsJson(unittest.TestCase):
             msg = 'Mod {!r} has missing Curse parser information'.format(mod)
 
             self.assertIn('curse', mod_info, msg=msg)
+            self.assertIn('id', mod_info['curse'], msg=msg)
             self.assertIn('regex', mod_info['curse'], msg=msg)
+            self.assertNotIn('name', mod_info['curse'])
+            self.assertNotIn('base_path', mod_info['curse'])
 
     def test_forgejson_parser(self):
         for mod, mod_info in self.mods.iteritems():
