@@ -202,57 +202,57 @@
     "DynIMC": {
         "function": "CheckLunatrius",
         "category": "lunatrius",
-        "active": true
+        "active": false
     },
     "ExtensionFixer": {
         "function": "CheckLunatrius",
         "category": "lunatrius",
-        "active": true
+        "active": false
     },
     "LunatriusCore": {
         "function": "CheckLunatrius",
         "category": "lunatrius",
-        "active": true
+        "active": false
     },
     "InGameInfoXML": {
         "function": "CheckLunatrius",
         "category": "lunatrius",
-        "active": true
+        "active": false
     },
     "InGameModConfigs": {
         "function": "CheckLunatrius",
         "category": "lunatrius",
-        "active": true
+        "active": false
     },
     "LaserLevel": {
         "function": "CheckLunatrius",
         "category": "lunatrius",
-        "active": true
+        "active": false
     },
     "MonsterSpawnHighlighter": {
         "function": "CheckLunatrius",
         "category": "lunatrius",
-        "active": true
+        "active": false
     },
     "Profiles": {
         "function": "CheckLunatrius",
         "category": "lunatrius",
-        "active": true
+        "active": false
     },
     "Stackie": {
         "function": "CheckLunatrius",
         "category": "lunatrius",
-        "active": true
+        "active": false
     },
     "Schematica": {
         "function": "CheckLunatrius",
         "category": "lunatrius",
-        "active": true
+        "active": false
     },
     "Tracer": {
         "function": "CheckLunatrius",
         "category": "lunatrius",
-        "active": true
+        "active": false
     },
     "BigReactors": {
         "function": "CheckBigReactors",
