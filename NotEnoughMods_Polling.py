@@ -776,6 +776,8 @@ def cmd_url(self, name, params, channel, userdata, rank):
         url = "http://www.chickenbones.net/Files/notification/version.php?version=" + mod['mc'] + "&file=" + modname
     elif func == 'CheckForgeJson':
         url = mod['forgejson']['url']
+    elif func == 'CheckHTML':
+        url = mod['html']['url']
     else:
         url = None
 
