@@ -827,5 +827,7 @@ commands = {
     "show": (cmd_show_info, OP),
     'reloadblocklists': (cmd_reload_blocklist, OP),
     "running": (cmd_status, OP),
+    "start": (cmd_enable, OP),
+    "stop": (cmd_disable, OP),
     # -- END ALIASES -- #
 }
