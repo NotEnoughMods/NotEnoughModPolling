@@ -421,7 +421,7 @@
         "active": true,
         "curse": {
             "id": "70631",
-            "regex": "RedstoneArsenal-.+?-(?P<version>[0-9]+(?:\\.[0-9]+)+)-universal.jar"
+            "regex": "Redstone_?Arsenal-[0-9.]+-(?P<version>[0-9]+(?:\\.[0-9]+)+(?:b\\.[0-9]+)?)(?:-universal)?\\.jar"
         }
     },
     "BDLib": {
@@ -695,7 +695,7 @@
         "active": true,
         "curse": {
             "id": "221826",
-            "regex": "CustomNPCs_(?P<version>.+?)-?\\("
+            "regex": "CustomNPCs[_-](?P<version>[0-9]+(?:\\.[0-9]+)+)(?:-?\\(\\d{2}[A-Za-z]{3}\\d{2}\\)|\\.2\\d{7})?.jar"
         }
     },
     "MinecraftComesAlive": {
@@ -847,7 +847,7 @@
         "active": true,
         "curse": {
             "id": "32274",
-            "regex": "journeymap-(?P<mc>.+?)-(?P<version>[0-9]+(?:\\.[0-9]+)+(?:[a-z]+[0-9]*)?)\\.jar"
+            "regex": "journeymap-(?P<mc>.+?)-(?P<version>[0-9]+(?:\\.[0-9]+)+(?:[a-z]+[0-9]*)?(?:-(?:fabric|forge|unlimited))?)\\.jar"
         }
     },
     "RoguelikeDungeons": {
@@ -1674,7 +1674,7 @@
         "active": true,
         "curse": {
             "id": "231484",
-            "regex": "CookingForBlockheads_.+?-(?P<version>[0-9]+(?:\\.[0-9]+)+)\\.jar"
+            "regex": "cookingforblockheads-forge-[0-9.]+-(?P<version>[0-9]+(?:\\.[0-9]+)+)\\.jar"
         }
     },
     "AdobeBlocks": {
@@ -1738,7 +1738,7 @@
         "active": true,
         "curse": {
             "id": "226212",
-            "regex": "(\\[[0-9.+]\\])?Mob ?Rebirth[- ]?(Forge-)?([0-9.]+-)?(?P<version>(?P<bp>bp1(\\.[0-9]+)+\\()?[0-9.]+(dev[0-9]+)?(?(bp)\\)))\\.jar"
+            "regex": "Mob-Rebirth-(?P<version>[0-9]+(?:\\.[0-9]+)+)\\+[0-9.]+\\.jar"
         }
     },
     "MoreAnvils": {
@@ -1778,7 +1778,7 @@
         "active": true,
         "curse": {
             "id": "232464",
-            "regex": "(?:FiresSurvivalTweaks|Real ?Stone ?Tools)(?:-Forge)?-(?P<version>[0-9]+(?:\\.[0-9]+)+)(?:\\+|-|\\.jar)"
+            "regex": "(?:Fires-?Survival-?Tweaks|Real ?Stone ?Tools)(?:-Forge)?-(?P<version>[0-9]+(?:\\.[0-9]+)+)(?:\\+|-|\\.jar)"
         }
     },
     "SimplyCaterpillar": {
@@ -1898,7 +1898,7 @@
         "active": true,
         "curse": {
             "id": "222718",
-            "regex": "AnimalBikes_(?P<version>[0-9]+(?:\\.[0-9]+)+)-?\\("
+            "regex": "AnimalBikes[_-](?P<version>[0-9]+(?:\\.[0-9]+)+)(?:-?\\(\\d{2}[A-Za-z]{3}\\d{2}\\)|\\.2\\d{7})?.jar"
         }
     },
     "Mo'Creatures": {
@@ -1988,7 +1988,7 @@
         "active": true,
         "curse": {
             "id": "231095",
-            "regex": "chiselsandbits(?:-mc1(?:\\.[0-9]+)+)?-v?(?P<version>[0-9]+(?:\\.[0-9]+)+)(?:(?:-BETA|-ALPHA|-RELEASE)[0-9]*)?\\.jar"
+            "regex": "ChiselsBits-forge-[0-9.]+-(?P<version>[0-9]+(?:\\.[0-9]+)+)-universal\\.jar"
         }
     },
     "BuildingBricks": {
@@ -2031,7 +2031,7 @@
         "active": true,
         "curse": {
             "id": "237903",
-            "regex": "RebornCore(?:-[0-9.]+)?-(?P<version>[0-9]+(?:\\.[0-9]+)+(?:\\+build\\.[0-9]+)?)(?:-universal)?\\.jar"
+            "regex": "RebornCore-(?P<version>[0-9]+(?:\\.[0-9]+)+(?:-beta(?:\\.[0-9]+)?)?)\\.jar"
         }
     },
     "TechReborn": {
@@ -2039,7 +2039,7 @@
         "active": true,
         "curse": {
             "id": "233564",
-            "regex": "TechReborn(?:-[0-9.]+)?-(?P<version>[0-9]+(?:\\.[0-9]+)+(?:\\+build\\.[0-9]+)?)(?:-universal)?\\.jar"
+            "regex": "TechReborn(?:-[0-9.]+)?-(?P<version>[0-9]+(?:\\.[0-9]+)+(?:-beta(?:\\.[0-9]+)?)?(?:\\+build\\.[0-9]+)?)(?:-universal)?\\.jar"
         }
     },
     "MoarCarts": {
@@ -2199,7 +2199,7 @@
         "active": true,
         "curse": {
             "id": "239197",
-            "regex": "CraftTweaker(?:2(?:\\.5)?)?-[0-9.]+-(?P<version>.+)\\.jar"
+            "regex": "CraftTweaker(?:2(?:\\.5)?)?(?:-forge|-fabric)?-[0-9.]+-(?P<version>.+)\\.jar"
         }
     },
     "SpongeForge": {
@@ -2224,7 +2224,7 @@
         "active": true,
         "curse": {
             "id": "248619",
-            "regex": "SuperCircuitMaker-(?P<version>.+)\\.jar"
+            "regex": "SuperCircuitMaker2-(?P<version>.+)\\+[0-9.]+\\.jar"
         }
     },
     "AkashicTome": {
@@ -2329,7 +2329,7 @@
         "active": true,
         "curse": {
             "id": "248787",
-            "regex": "AppleSkin-mc.+?-(?P<version>.+)\\.jar"
+            "regex": "AppleSkin-(?:forge|fabric)-mc.+?-(?P<version>.+)\\.jar"
         }
     },
     "UnlimitedChiselWorks": {
@@ -2723,7 +2723,7 @@
         "active": true,
         "curse": {
             "id": "220311",
-            "regex": "SilentGems-[0-9.]+-(?P<version>[0-9]+(?:\\.[0-9]+)+[a-z0-9+\\-_]+)\\.jar"
+            "regex": "Silent(?:s-)?Gems-[0-9.]+-(?P<version>[0-9]+(?:\\.[0-9]+)+(?:[a-z0-9+\\-_]+)?)\\.jar"
         }
     },
     "NGTLib": {
@@ -2835,7 +2835,7 @@
         "active": true,
         "curse": {
             "id": "257814",
-            "regex": "CreativeCore[ _]v(?P<version>[0-9]+(?:\\.[0-9]+)+(?:-pre[0-9]+)?)[ _]mc[0-9.]+\\.jar"
+            "regex": "CreativeCore(?:_(?:FORGE|FABRIC))?[ _]v(?P<version>[0-9]+(?:\\.[0-9]+)+(?:-pre[0-9]+)?)[ _]mc[0-9.]+\\.jar"
         }
     },
     "StuffASockInIt": {
@@ -2875,7 +2875,7 @@
         "active": true,
         "curse": {
             "id": "352039",
-            "regex": "mcws?-roofs-(?P<version>[0-9]+(?:\\.[0-9]+)+)-mc1\\.[0-9.-]+\\.jar"
+            "regex": "mcws?-roofs-(?P<version>[0-9]+(?:\\.[0-9]+)+(?:fabric)?)-mc1\\.[0-9.-]+\\.jar"
         }
     },
     "Macaw'sFurniture": {
