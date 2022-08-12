@@ -415,6 +415,7 @@ def NEMP_TimerEvent(self, channels):
 
             if mod_name in self.NEM_troubledMods:
                 del self.NEM_troubledMods[mod_name]
+                current_troubled_mods.remove(mod_name)
 
             self.NEM_autodeactivatedMods[mod_name] = True
             self.NEM.mods[mod_name]['active'] = False
