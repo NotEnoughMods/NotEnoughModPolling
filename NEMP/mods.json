@@ -558,49 +558,6 @@
             "regex": "Bagginses-.+?-(?P<version>.+)\\.jar"
         }
     },
-    "OpenComputers": {
-        "function": "CheckJenkins",
-        "active": true,
-        "category": "OC",
-        "jenkins": {
-            "url": "http://ci.cil.li/job/OpenComputers-1.5-MC1.7.10/lastSuccessfulBuild/api/json",
-            "regex": ".+?-MC(?P<mc>.+?)-(?P<version>.+?)-.+?.jar",
-            "item": 0
-        }
-    },
-    "OpenComputers-Dev": {
-        "name": "OpenComputers",
-        "function": "CheckJenkins",
-        "active": true,
-        "category": "OC",
-        "jenkins": {
-            "url": "http://ci.cil.li/job/OpenComputers-dev-MC1.7.10/lastSuccessfulBuild/api/json",
-            "regex": ".+?-MC(?P<mc>.+?)-(?P<dev>.+?)-.+?.jar",
-            "item": 0
-        }
-    },
-    "OpenComputers-1.8": {
-        "name": "OpenComputers",
-        "function": "CheckJenkins",
-        "active": true,
-        "category": "OC",
-        "jenkins": {
-            "url": "http://ci.cil.li/job/OpenComputers-1.5-MC1.8/lastSuccessfulBuild/api/json",
-            "regex": ".+?-MC(?P<mc>.+?)-(?P<version>.+?)-.+?.jar",
-            "item": 0
-        }
-    },
-    "OpenComputers-1.8-dev": {
-        "name": "OpenComputers",
-        "function": "CheckJenkins",
-        "active": true,
-        "category": "OC",
-        "jenkins": {
-            "url": "http://ci.cil.li/job/OpenComputers-dev-MC1.8/lastSuccessfulBuild/api/json",
-            "regex": ".+?-MC(?P<mc>.+?)-(?P<dev>.+?)-.+?.jar",
-            "item": 0
-        }
-    },
     "SecurityCraft": {
         "function": "CheckCurse",
         "active": true,
