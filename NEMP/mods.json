@@ -804,7 +804,7 @@
         "active": true,
         "curse": {
             "id": "32274",
-            "regex": "journeymap-(?P<mc>.+?)-(?P<version>[0-9]+(?:\\.[0-9]+)+(?:[a-z]+[0-9]*)?(?:-(?:fabric|forge|unlimited))?)\\.jar"
+            "regex": "journeymap-(?P<mc>.+?)-(?P<version>[0-9]+(?:\\.[0-9]+)+(?:[a-z]+[0-9]*)?(?:-(?:fabric|(?:neo)?forge|unlimited))?)\\.jar"
         }
     },
     "RoguelikeDungeons": {
