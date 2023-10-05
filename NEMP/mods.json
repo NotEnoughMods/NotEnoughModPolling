@@ -74,6 +74,14 @@
             "item": 1
         }
     },
+    "OpenComputers": {
+        "function": "CheckCurse",
+        "active": true,
+        "curse": {
+            "id": "223008",
+            "regex": "OpenComputers-MC\\d+(?:\\.\\d+)+-(?P<version>\\d+(?:\\.[a-z\\d]+)+(?:-(?:beta|rc|pre)(?:\\.\\d+)?|-snapshot-20\\d{6})?)(?:\\+[a-z0-9]{7,8})?(?:-universal)?\\.jar"
+        }
+    },
     "MineFactoryReloaded": {
         "function": "CheckCurse",
         "active": true,
