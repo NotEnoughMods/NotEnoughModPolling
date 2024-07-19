@@ -708,7 +708,7 @@
         "active": true,
         "curse": {
             "id": "75557",
-            "regex": "CraftGuide-(?P<version>.+?)-forge.jar"
+            "regex": "CraftGuide-(?P<version>.+?)-(?:neo)?forge.jar"
         }
     },
     "DraconicEvolution": {
@@ -909,7 +909,7 @@
         "active": true,
         "curse": {
             "id": "225608",
-            "regex": "worldedit-(?:mod|forge|fabric)(?:-mc[0-9.]+)?-(?P<version>[0-9]+(\\.[0-9]+)+)(?:-dist)?\\.jar"
+            "regex": "worldedit-(?:mod|(?:neo)?forge|fabric)(?:-mc[0-9.]+)?-(?P<version>[0-9]+(\\.[0-9]+)+)(?:-dist)?\\.jar"
         }
     },
     "Binnie'sMods": {
@@ -1485,7 +1485,7 @@
         "active": true,
         "curse": {
             "id": "231484",
-            "regex": "cookingforblockheads-forge-[0-9.]+-(?P<version>[0-9]+(?:\\.[0-9]+)+)\\.jar"
+            "regex": "cookingforblockheads-(?:neo)?forge-[0-9.]+-(?P<version>[0-9]+(?:\\.[0-9]+)+)\\.jar"
         }
     },
     "AdobeBlocks": {
@@ -1799,7 +1799,7 @@
         "active": true,
         "curse": {
             "id": "231095",
-            "regex": "ChiselsBits-forge-[0-9.]+-(?P<version>[0-9]+(?:\\.[0-9]+)+)-universal\\.jar"
+            "regex": "ChiselsBits-(?:neo)?forge-[0-9.]+-(?P<version>[0-9]+(?:\\.[0-9]+)+)-universal\\.jar"
         }
     },
     "BuildingBricks": {
@@ -1898,7 +1898,7 @@
         "active": true,
         "curse": {
             "id": "246320",
-            "regex": "environmentalcreepers-(?:forge-|fabric-)?[0-9.]+-(?P<version>[0-9]+(?:\\.[0-9]+)+)\\.jar"
+            "regex": "environmentalcreepers-(?:(?:neo)?forge-|fabric-)?[0-9.]+-(?P<version>[0-9]+(?:\\.[0-9]+)+)\\.jar"
         }
     },
     "ItemScroller": {
@@ -1906,7 +1906,7 @@
         "active": true,
         "curse": {
             "id": "242064",
-            "regex": "itemscroller(-rift|-fabric|-forge)?-(?P<mc>[0-9\\.]+)-(?P<version>.+?)\\.jar"
+            "regex": "itemscroller(-rift|-fabric|-(?:neo)?forge)?-(?P<mc>[0-9\\.]+)-(?P<version>.+?)\\.jar"
         }
     },
     "MiniHUD": {
@@ -1914,7 +1914,7 @@
         "active": true,
         "curse": {
             "id": "244260",
-            "regex": "minihud(?:-rift|-fabric|-forge)?-(?P<mc>[0-9\\.]+)-(?P<version>.+?)\\.jar"
+            "regex": "minihud(?:-rift|-fabric|-(?:neo)?forge)?-(?P<mc>[0-9\\.]+)-(?P<version>.+?)\\.jar"
         }
     },
     "Multishot": {
@@ -1946,7 +1946,7 @@
         "active": true,
         "curse": {
             "id": "225781",
-            "regex": "tellme(?:-forge|-fabric)?-(?P<mc>[0-9\\.]+)-(?P<version>.+?)\\.jar"
+            "regex": "tellme(?:-(?:neo)?forge|-fabric)?-(?P<mc>[0-9\\.]+)-(?P<version>.+?)\\.jar"
         }
     },
     "UnderpHangables": {
@@ -2010,7 +2010,7 @@
         "active": true,
         "curse": {
             "id": "239197",
-            "regex": "CraftTweaker(?:2(?:\\.5)?)?(?:-forge|-fabric)?-[0-9.]+-(?P<version>.+)\\.jar"
+            "regex": "CraftTweaker(?:2(?:\\.5)?)?(?:-(?:neo)?forge|-fabric)?-[0-9.]+-(?P<version>.+)\\.jar"
         }
     },
     "SpongeForge": {
@@ -2067,7 +2067,7 @@
         "active": true,
         "curse": {
             "id": "253449",
-            "regex": "Hwyla-(?:fabric-(?:[0-9.]+)|forge)-(?P<version>[0-9]+(?:\\.[0-9]+)+-B?[0-9]+)(?:_[0-9.]+)?\\.jar"
+            "regex": "Hwyla-(?:fabric-(?:[0-9.]+)|(?:neo)?forge)-(?P<version>[0-9]+(?:\\.[0-9]+)+-B?[0-9]+)(?:_[0-9.]+)?\\.jar"
         }
     },
     "ActuallyAdditions": {
@@ -2140,7 +2140,7 @@
         "active": true,
         "curse": {
             "id": "248787",
-            "regex": "AppleSkin-(?:forge|fabric)-mc.+?-(?P<version>.+)\\.jar"
+            "regex": "AppleSkin-(?:(?:neo)?forge|fabric)-mc.+?-(?P<version>.+)\\.jar"
         }
     },
     "UnlimitedChiselWorks": {
@@ -2558,7 +2558,7 @@
         "active": true,
         "curse": {
             "id": "289840",
-            "regex": "MCTE(?P<version>[0-9]+(?:\\.[0-9]+)+(?:-[0-9]+)?)_forge"
+            "regex": "MCTE(?P<version>[0-9]+(?:\\.[0-9]+)+(?:-[0-9]+)?)_(?:neo)?forge"
         }
     },
     "RealTrainMod": {
@@ -2566,7 +2566,7 @@
         "active": true,
         "curse": {
             "id": "288988",
-            "regex": "RTM(?P<version>[0-9]+(?:\\.[0-9]+)+(?:-[0-9]+)?)_forge"
+            "regex": "RTM(?P<version>[0-9]+(?:\\.[0-9]+)+(?:-[0-9]+)?)_(?:neo)?forge"
         }
     },
     "AncientWarfare2": {
