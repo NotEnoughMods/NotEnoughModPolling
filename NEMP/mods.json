@@ -2646,7 +2646,7 @@
         "active": true,
         "curse": {
             "id": "257814",
-            "regex": "CreativeCore(?:_(?:FORGE|FABRIC))?[ _]v(?P<version>[0-9]+(?:\\.[0-9]+)+(?:-pre[0-9]+)?)[ _]mc[0-9.]+\\.jar"
+            "regex": "CreativeCore(?:_(?:NEOFORGE|FORGE|FABRIC))?[ _]v(?P<version>[0-9]+(?:\\.[0-9]+)+(?:-pre[0-9]+)?)[ _]mc[0-9.]+\\.jar"
         }
     },
     "StuffASockInIt": {
