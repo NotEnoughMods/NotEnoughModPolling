@@ -1,4 +1,5 @@
 import asyncio
+import logging
 import traceback
 
 
@@ -19,6 +20,7 @@ class IrcConnection:
         self.error = None
         self._write_queue = asyncio.Queue()
         self._linebuffer = b""
+        self._logger = logging.getLogger("IRCConnection")
 
     async def connect(self, host, port, *, local_addr=None, family=0):
         self.reader, self.writer = await asyncio.open_connection(host, port, local_addr=local_addr, family=family)
@@ -40,7 +42,9 @@ class IrcConnection:
 
                 for line in lines:
                     line = line.rstrip()
-                    yield line.decode("utf-8", errors="replace")
+                    decoded = line.decode("utf-8", errors="replace")
+                    self._logger.debug("<< %s", decoded)
+                    yield decoded
         except Exception as error:
             print()
             print(f"ERROR: {error}")
@@ -79,6 +83,7 @@ class IrcConnection:
     async def sendMsg(self, msg, priority=False):
         msg = msg.replace(chr(13), " ")
         msg = msg.replace(chr(10), " ")
+        self._logger.debug(">> %s", msg)
         await self._write_queue.put(msg + "\r\n")
 
     async def close(self):
