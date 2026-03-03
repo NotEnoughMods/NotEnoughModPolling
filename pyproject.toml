@@ -1,13 +1,13 @@
 [project]
-name = "renol-irc"
+name = "not-enough-mods"
 version = "0.1.0"
-description = "An IRC bot framework with a plugin architecture"
+description = "An IRC bot that automatically keeps mods in Not Enough Mods up-to-date"
 requires-python = ">=3.12"
 dependencies = [
+    "aiohttp>=3.9",
     "beautifulsoup4>=4.12",
     "Jinja2>=3.1",
     "PyYAML>=6.0",
-    "requests[security]>=2.31",
-    "simplejson>=3.19",
     "packaging>=23.0",
+    "requests>=2.31",
 ]
