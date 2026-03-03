@@ -146,19 +146,18 @@ async def async_main():
         await bot.start()
     except Exception as error:
         if getattr(bot, "_logger", None) is not None:
-            bot._logger.exception("The bot has encountered an exception and had to shut down.")
+            bot._logger.exception("Fatal error during startup or runtime.")
             log = True
         else:
-            print("Tried to log an error, but logger wasn't initialized.")
+            print("Logger was not initialized, cannot write to log file.")
 
-        print("OH NO I DIED: " + str(error))
-        traceb = str(traceback.format_exc())
+        print(f"Fatal error: {type(error).__name__}: {error}")
+        traceb = traceback.format_exc()
         print(traceb)
 
         with open("exception.txt", "w") as excFile:
-            excFile.write(
-                "Oh no! The bot died! \n" + str(traceb) + "\nTime of death: " + str(datetime.datetime.today()) + "\n"
-            )
+            excFile.write(f"Fatal error at {datetime.datetime.today()}\n")
+            excFile.write(traceb + "\n")
             excFile.write("-----------------------------------------------------\n")
 
             if getattr(bot, "command_router", None) is not None:
