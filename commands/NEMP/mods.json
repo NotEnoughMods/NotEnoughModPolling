@@ -4,7 +4,7 @@
         "active": true,
         "curse": {
             "id": "228756",
-            "regex": "ironchest-[0-9.]+-(?P<version>[0-9]+(?:\\.[0-9]+)+)\\.jar"
+            "regex": "ironchest-[0-9.]+-(?:(?:neo)?forge-)?(?P<version>[0-9]+(?:\\.[0-9]+)+)\\.jar"
         }
     },
     "BiomesOPlenty": {
@@ -67,7 +67,7 @@
         "active": true,
         "curse": {
             "id": "242818",
-            "regex": "CodeChickenLib-(?:[0-9]+(?:\\.[0-9]+)+)-(?P<version>[0-9]+(?:\\.[0-9]+)+)-universal\\.jar"
+            "regex": "CodeChickenLib-(?:[0-9]+(?:\\.[0-9]+)+)-(?P<version>[0-9]+(?:\\.[0-9]+)+)(?:-universal)?\\.jar"
         }
     },
     "ChickenChunks": {
@@ -75,7 +75,7 @@
         "active": true,
         "curse": {
             "id": "243883",
-            "regex": "ChickenChunks-(?:[0-9]+(?:\\.[0-9]+)+)-(?P<version>[0-9]+(?:\\.[0-9]+)+)-universal\\.jar"
+            "regex": "ChickenChunks-(?:[0-9]+(?:\\.[0-9]+)+)-(?P<version>[0-9]+(?:\\.[0-9]+)+)(?:-universal)?\\.jar"
         }
     },
     "EnderStorage": {
@@ -83,7 +83,7 @@
         "active": true,
         "curse": {
             "id": "245174",
-            "regex": "EnderStorage-(?:[0-9]+(?:\\.[0-9]+)+)-(?P<version>[0-9]+(?:\\.[0-9]+)+)-universal\\.jar"
+            "regex": "EnderStorage-(?:[0-9]+(?:\\.[0-9]+)+)-(?P<version>[0-9]+(?:\\.[0-9]+)+)(?:-universal)?\\.jar"
         }
     },
     "Translocators": {
@@ -91,7 +91,7 @@
         "active": true,
         "curse": {
             "id": "247695",
-            "regex": "Translocators-(?:[0-9]+(?:\\.[0-9]+)+)-(?P<version>[0-9]+(?:\\.[0-9]+)+)-universal\\.jar"
+            "regex": "Translocators-(?:[0-9]+(?:\\.[0-9]+)+)-(?P<version>[0-9]+(?:\\.[0-9]+)+)(?:-universal)?\\.jar"
         }
     },
     "ForgeMultipart": {
@@ -99,7 +99,7 @@
         "active": true,
         "curse": {
             "id": "258426",
-            "regex": "CBMultipart-(?:[0-9]+(?:\\.[0-9]+)+)-(?P<version>[0-9]+(?:\\.[0-9]+)+)-universal\\.jar"
+            "regex": "CBMultipart-(?:[0-9]+(?:\\.[0-9]+)+)-(?P<version>[0-9]+(?:\\.[0-9]+)+)(?:-universal)?\\.jar"
         }
     },
     "TinkersConstruct": {
@@ -227,7 +227,7 @@
         "active": true,
         "curse": {
             "id": "227443",
-            "regex": "ThermalDynamics-.+?-(?P<version>.+?)-universal\\.jar"
+            "regex": "(?:ThermalDynamics|thermal_dynamics)-.+?-(?P<version>[0-9]+(?:\\.[0-9]+)+)(?:-universal)?\\.jar"
         }
     },
     "RedstoneArsenal": {
@@ -259,7 +259,7 @@
         "active": true,
         "curse": {
             "id": "222378",
-            "regex": "MineMenu-[0-9.]+-(?P<version>[0-9]+(?:\\.[0-9]+)+)(?:-universal)?\\.jar"
+            "regex": "MineMenu-(?:(?:neo)?forge-)?[0-9.]+-(?P<version>[0-9]+(?:\\.[0-9]+)+)(?:-universal)?\\.jar"
         }
     },
     "Ping": {
@@ -292,7 +292,7 @@
         "active": true,
         "curse": {
             "id": "225643",
-            "regex": "Botania[- ](?P<version>r?[0-9]+(?:\\.[0-9]+)+-[0-9]+(?:\\.[0-9]+)*|r[0-9]+(?:\\.[0-9]+)+-[0-9]+)\\.jar"
+            "regex": "Botania[- ](?:[0-9]+(?:\\.[0-9]+)+-)?(?P<version>r?[0-9]+(?:\\.[0-9]+)*(?:-[0-9]+(?:\\.[0-9]+)*)?)(?:-(?:FORGE|FABRIC|NEOFORGE))?\\.jar"
         }
     },
     "Lumberjack": {
@@ -308,7 +308,7 @@
         "active": true,
         "curse": {
             "id": "223565",
-            "regex": "Draconic-Evolution-.+?-(?P<version>[0-9]+(?:\\.[0-9]+)+)-universal"
+            "regex": "Draconic-Evolution-.+?-(?P<version>[0-9]+(?:\\.[0-9]+)+)(?:-universal)?"
         }
     },
     "EvilCraft": {
@@ -388,7 +388,7 @@
         "active": true,
         "curse": {
             "id": "32274",
-            "regex": "journeymap-(?P<mc>.+?)-(?P<version>[0-9]+(?:\\.[0-9]+)+(?:[a-z]+[0-9]*)?(?:-(?:fabric|(?:neo)?forge|unlimited))?)\\.jar"
+            "regex": "journeymap-(?:(?:fabric|(?:neo)?forge)-)?(?P<mc>[0-9]+(?:\\.[0-9]+)+)-(?P<version>[0-9]+(?:\\.[0-9]+)+(?:[a-z]+[0-9]*)?(?:-[a-z]+(?:\\.[0-9]+)?)?(?:-(?:fabric|(?:neo)?forge|unlimited))?)\\.jar"
         }
     },
     "ProjectE": {
@@ -412,7 +412,7 @@
         "active": true,
         "curse": {
             "id": "68528",
-            "regex": "ModularSystems-(?P<mc>[^-]+)-(?P<version>.+?).jar"
+            "regex": "(?:ModularSystems|modular_systems)-(?P<mc>[^-]+)-(?P<version>.+?)\\.jar"
         }
     },
     "OpenModularTurrets": {
@@ -587,7 +587,7 @@
         "active": true,
         "curse": {
             "id": "79616",
-            "regex": "Decocraft-(?P<version>.+)_(?P<mc>.+?).jar"
+            "regex": "[Dd]ecocraft-(?P<version>[0-9]+(?:\\.[0-9]+)+)[_-](?P<mc>[0-9]+(?:\\.[0-9]+)+)(?:-(?:(?:neo)?forge|fabric))?\\.jar"
         }
     },
     "ImmersiveEngineering": {
@@ -627,7 +627,7 @@
         "active": true,
         "curse": {
             "id": "231484",
-            "regex": "cookingforblockheads-(?:neo)?forge-[0-9.]+-(?P<version>[0-9]+(?:\\.[0-9]+)+)\\.jar"
+            "regex": "cookingforblockheads-(?:(?:neo)?forge|fabric)-[0-9.]+-(?P<version>[0-9]+(?:\\.[0-9]+)+)\\.jar"
         }
     },
     "InGameAccountSwitcher": {
@@ -635,7 +635,7 @@
         "active": true,
         "curse": {
             "id": "232676",
-            "regex": "InGameAccountSwitcher(?:-(Forge|LiteLoader))?(?:-(?P<mc>.+?))?-(?P<version>[0-9]+(?:\\.[0-9]+)+)"
+            "regex": "(?:InGameAccountSwitcher|IAS)(?:-(?:Forge|LiteLoader|Quilt|Fabric|NeoForge))?(?:-(?P<mc>.+?))?-(?P<version>[0-9]+(?:\\.[0-9]+)+)"
         }
     },
     "MobRebirth": {
@@ -731,7 +731,7 @@
         "active": true,
         "curse": {
             "id": "231095",
-            "regex": "ChiselsBits-(?:neo)?forge-[0-9.]+-(?P<version>[0-9]+(?:\\.[0-9]+)+)-universal\\.jar"
+            "regex": "(?:ChiselsBits|chisels-and-bits)-(?:(?:neo)?forge-)?(?:[0-9.]+-)?(?P<version>[0-9]+(?:\\.[0-9]+)+)(?:-universal)?\\.jar"
         }
     },
     "BuildingBricks": {
@@ -830,7 +830,7 @@
         "active": true,
         "curse": {
             "id": "248055",
-            "regex": "thedragonlib-(?P<mc>[0-9\\.]+)-(?P<version>.+?)\\.jar"
+            "regex": "thedragonlib-(?:(?:neo)?forge-)?(?P<mc>[0-9\\.]+)-(?P<version>.+?)\\.jar"
         }
     },
     "ThutCore": {
@@ -879,7 +879,7 @@
         "active": true,
         "curse": {
             "id": "228404",
-            "regex": "ActuallyAdditions-(?P<version>.+)\\.jar"
+            "regex": "ActuallyAdditions-(?P<version>[0-9]+(?:\\.[0-9]+)+)(?:\\+mc[0-9.]+)?\\.jar"
         }
     },
     "XNet": {
@@ -1057,7 +1057,7 @@
         "active": true,
         "curse": {
             "id": "220311",
-            "regex": "Silent(?:s-)?Gems-[0-9.]+-(?P<version>[0-9]+(?:\\.[0-9]+)+(?:[a-z0-9+\\-_]+)?)\\.jar"
+            "regex": "[Ss]ilent(?:s-?)?[Gg]ems-[0-9.]+-(?:(?:neo)?forge-)?(?P<version>[0-9]+(?:\\.[0-9]+)+(?:[a-z0-9+\\-_]+)?)\\.jar"
         }
     },
     "NGTLib": {
@@ -1097,7 +1097,7 @@
         "active": true,
         "curse": {
             "id": "264231",
-            "regex": "iceandfire-(?P<version>[0-9]+(?:\\.[0-9]+)+)(?:-[0-9.]+)?\\.jar"
+            "regex": "iceandfire-(?P<version>[0-9]+(?:\\.[0-9]+)+)(?:-[0-9.]+)?(?:-(?:beta|alpha|rc)(?:-[0-9]+)?)?\\.jar"
         }
     },
     "MysticalAgriculture": {
@@ -1113,7 +1113,7 @@
         "active": true,
         "curse": {
             "id": "246183",
-            "regex": "roots(?:-[0-9.]+)?-(?P<version>(?:[0-9]+-)?[0-9]+(?:\\.[0-9]+)+)\\.jar"
+            "regex": "roots(?:-[0-9.]+)?-(?P<version>(?:[0-9]+-)?[0-9]+(?:\\.[0-9]+)+(?:-(?:alpha|beta|rc))?)\\.jar"
         }
     },
     "MysticalAgradditions": {
@@ -1145,7 +1145,7 @@
         "active": true,
         "curse": {
             "id": "257818",
-            "regex": "LittleTiles(?:_ALPHA)?[ _]v(?P<version>[0-9]+(?:\\.[0-9]+)+(?:-pre[0-9]+)?(?:_[0-9]+)?)[ _]mc[0-9.]+\\.jar"
+            "regex": "LittleTiles(?:_(?:ALPHA|BETA))?[ _]v(?P<version>[0-9]+(?:\\.[0-9]+)+(?:-pre[0-9]+)?(?:_[0-9]+)?)[ _]mc[0-9.]+\\.jar"
         }
     },
     "CreativeCore": {
@@ -1169,7 +1169,7 @@
         "active": true,
         "curse": {
             "id": "351725",
-            "regex": "mcw-bridges-(?P<version>[0-9]+(?:\\.[0-9]+)+.+?)-mc[0-9.-]+\\.jar"
+            "regex": "mcw-bridges-(?P<version>[0-9]+(?:\\.[0-9]+)+)-mc[0-9.]+(?:fabric|(?:neo)?forge)?\\.jar"
         }
     },
     "Macaw'sRoofs": {
@@ -1177,7 +1177,7 @@
         "active": true,
         "curse": {
             "id": "352039",
-            "regex": "mcws?-roofs-(?P<version>[0-9]+(?:\\.[0-9]+)+(?:fabric)?)-mc1\\.[0-9.-]+\\.jar"
+            "regex": "mcws?-roofs-(?P<version>[0-9]+(?:\\.[0-9]+)+)-mc[0-9.]+(?:fabric|(?:neo)?forge)?\\.jar"
         }
     },
     "Macaw'sFurniture": {
@@ -1201,7 +1201,7 @@
         "active": true,
         "curse": {
             "id": "309927",
-            "regex": "curios(?:-FORGE)?-1(?:\\.[0-9]+)+-(?P<version>[0-9]+(?:\\.[0-9]+)+(?:-[a-z0-9]+)?)\\.jar"
+            "regex": "curios(?:-(?:FORGE|(?:neo)?forge))?-(?:(?:[0-9]+(?:\\.[0-9]+)+-)?)?(?P<version>[0-9]+(?:\\.[0-9]+)+(?:-[a-z0-9]+)?)(?:\\+[0-9.]+)?\\.jar"
         }
     }
 }
