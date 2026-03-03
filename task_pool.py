@@ -47,7 +47,7 @@ class TaskHandle:
 class TaskPool:
     def __init__(self):
         self.pool = {}
-        self.__threadPool_log__ = logging.getLogger("ThreadPool")
+        self._logger = logging.getLogger("ThreadPool")
 
     def addThread(self, name, function, baseReference=None):
         if name in self.pool:
@@ -78,14 +78,14 @@ class TaskPool:
         task = asyncio.create_task(_wrapper())
         handle = TaskHandle(name, task, queue)
         self.pool[name] = {"handle": handle, "queue": queue}
-        self.__threadPool_log__.debug("New task '%s' started", name)
+        self._logger.debug("New task '%s' started", name)
 
     def sigquitThread(self, name):
         handle = self.pool[name]["handle"]
         handle.signal = True
         handle.task.cancel()
         del self.pool[name]
-        self.__threadPool_log__.debug("Cancelling task '%s'", name)
+        self._logger.debug("Cancelling task '%s'", name)
 
     async def send(self, name, obj):
         await self.pool[name]["queue"].put(obj)
@@ -103,11 +103,11 @@ class TaskPool:
         return True, isRunning
 
     def sigquitAll(self):
-        self.__threadPool_log__.debug("Cancelling all running tasks")
+        self._logger.debug("Cancelling all running tasks")
         names = list(self.pool.keys())
         for name in names:
             handle = self.pool[name]["handle"]
             handle.signal = True
             handle.task.cancel()
             del self.pool[name]
-        self.__threadPool_log__.debug("All tasks cancelled")
+        self._logger.debug("All tasks cancelled")

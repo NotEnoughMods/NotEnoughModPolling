@@ -9,11 +9,11 @@ async def execute(self, user, params, channel, userdata, rank):
     if len(params) >= 1:
         userstring = params[0]
 
-        bans = self.Banlist.getBans(matchingString=userstring)
+        bans = self.ban_list.getBans(matchingString=userstring)
 
         output = []
         for ban in bans:
-            info = f"{self.Banlist.unescape_banstring(ban[1])} [{ban[0]}] Reason: {ban[2]}"
+            info = f"{self.ban_list.unescape_banstring(ban[1])} [{ban[0]}] Reason: {ban[2]}"
             output.append(info)
 
         output = " | ".join(output)

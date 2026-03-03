@@ -20,7 +20,7 @@ async def execute(self, name, params, channel, userdata, rank):
         await self.sendNotice(name, "Specify a command you want to know more about.")
         return
 
-    if self.rankconvert[rank] < help.rank:
+    if self.rank_values[rank] < help.rank:
         await self.sendNotice(name, "Command is restricted.")
         help_log.debug("Looking up command '%s', but it is restricted.", name, cmdname)
         return

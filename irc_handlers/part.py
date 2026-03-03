@@ -26,14 +26,14 @@ async def execute(self, sendMsg, prefix, command, params):
     await self.events["channelpart"].tryAllEvents(self, name, ident, host, channel)
 
     if channel:
-        for i in range(len(self.channelData[channel]["Userlist"])):
-            user, _pref = self.channelData[channel]["Userlist"][i]
+        for i in range(len(self.channel_data[channel]["Userlist"])):
+            user, _pref = self.channel_data[channel]["Userlist"][i]
             if user == name:
-                del self.channelData[channel]["Userlist"][i]
+                del self.channel_data[channel]["Userlist"][i]
                 break
     else:
-        self.__CMDHandler_log__.debug("Channel %s not found", params)
+        self._logger.debug("Channel %s not found", params)
 
-    if self.Bot_Auth.doesExist(name) and self.Bot_Auth.isRegistered(name) and not self.userInSight(name):
+    if self.auth_tracker.doesExist(name) and self.auth_tracker.isRegistered(name) and not self.userInSight(name):
         # print "OK, WE LOST SIGHT OF HIM"
-        self.Bot_Auth.unregisterUser(name)
+        self.auth_tracker.unregisterUser(name)

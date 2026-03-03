@@ -422,7 +422,7 @@ async def help(self, name, params, channel, userdata, rank):
 
 
 async def force_cacheRedownload(self, name, params, channel, userdata, rank):
-    if self.rankconvert[rank] >= 3:
+    if self.rank_values[rank] >= 3:
         for ver in versions:
             url = "https://bot.notenoughmods.com/" + urlquote(ver) + ".json"
             normalized = normalize_filename(url)

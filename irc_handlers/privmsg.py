@@ -51,7 +51,7 @@ async def execute(self, sendMsg, msgprefix, command, params):
         usedPrfx = ""
     # print "ok"
 
-    if name in self.bot_userlist and self.Bot_Auth.isRegistered(name):  # and (perms == "@" or perms == "+"):
+    if name in self.operators and self.auth_tracker.isRegistered(name):  # and (perms == "@" or perms == "+"):
         # print name + " is in Botlist"
         rank = 3
         perms = "@@"
@@ -69,7 +69,7 @@ async def execute(self, sendMsg, msgprefix, command, params):
     # print self.commands
     # print chatCmd
     if usedPrfx == cmdprefix and chatCmd in self.commands:
-        bannedInfo = self.Banlist.checkBan(name, ident, host)
+        bannedInfo = self.ban_list.checkBan(name, ident, host)
 
         if bannedInfo[0]:
             msg_log.info(

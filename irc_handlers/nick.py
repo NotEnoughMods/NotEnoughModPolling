@@ -12,18 +12,18 @@ async def execute(self, sendMsg, prefix, command, params):
     newName = params[1:]
     print("NICKCHANGE")
 
-    if self.Bot_Auth.doesExist(name):
-        self.Bot_Auth.unregisterUser(name)
+    if self.auth_tracker.doesExist(name):
+        self.auth_tracker.unregisterUser(name)
 
-    if self.Bot_Auth.doesExist(newName):
+    if self.auth_tracker.doesExist(newName):
         await self.whoisUser(newName)
 
     affectedChannels = []
-    for chan in self.channelData:
-        for i in range(len(self.channelData[chan]["Userlist"])):
-            user, pref = self.channelData[chan]["Userlist"][i]
+    for chan in self.channel_data:
+        for i in range(len(self.channel_data[chan]["Userlist"])):
+            user, pref = self.channel_data[chan]["Userlist"][i]
             if user == name:
-                self.channelData[chan]["Userlist"][i] = (newName, pref)
+                self.channel_data[chan]["Userlist"][i] = (newName, pref)
                 affectedChannels.append(chan)
                 break
 

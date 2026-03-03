@@ -92,7 +92,7 @@ async def execute(self, name, params, channel, userdata, rank, chan):
         await self.sendMessage(channel, finalString)
 
         threadInfo = []
-        for threadName, threadData in self.threading.pool.items():
+        for threadName, threadData in self.task_pool.pool.items():
             timeDelta = threadData["thread"].timeDelta
             if timeDelta is None:
                 timeDelta = 0

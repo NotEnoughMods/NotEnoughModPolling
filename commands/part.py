@@ -29,7 +29,7 @@ async def execute(self, name, params, channel, userdata, rank, isChannel):
     if len(partParams) > 0:
         await self.send("PART :" + partParams + "", 4)
         for chan in channels:
-            del self.channelData[chan]
+            del self.channel_data[chan]
 
 
 async def setup(self, Startup):

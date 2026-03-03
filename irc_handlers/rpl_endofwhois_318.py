@@ -12,13 +12,13 @@ async def execute(self, sendMsg, prefix, command, params):
     username = names[1]
     names[2]
 
-    if self.Bot_Auth.isQueued(username) and self.Bot_Auth.doesExist(username):
-        if not self.Bot_Auth.isRegistered(username):
+    if self.auth_tracker.isQueued(username) and self.auth_tracker.doesExist(username):
+        if not self.auth_tracker.isRegistered(username):
             # print "User is not registered"
-            self.Bot_Auth.unregisterUser(username)
+            self.auth_tracker.unregisterUser(username)
         else:
             pass
             # print "User is registered"
 
-    if self.Bot_Auth.isQueued(username):
-        self.Bot_Auth.unqueueUser(username)
+    if self.auth_tracker.isQueued(username):
+        self.auth_tracker.unqueueUser(username)

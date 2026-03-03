@@ -26,14 +26,14 @@ async def execute(self, user, params, channel, userdata, rank):
 
             try:
                 if len(params) == 1:
-                    result = self.Banlist.unbanUser(username, ident, host)
+                    result = self.ban_list.unbanUser(username, ident, host)
                     if result:
                         await self.sendNotice(user, f"Userstring {userstring} unbanned.")
                     if not result:
                         await self.sendNotice(user, f"Userstring {userstring} is not banned.")
                 else:
                     group = params[1]
-                    result = self.Banlist.unbanUser(username, ident, host, group)
+                    result = self.ban_list.unbanUser(username, ident, host, group)
                     if result:
                         await self.sendNotice(
                             user,

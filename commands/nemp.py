@@ -73,7 +73,7 @@ async def execute(self, name, params, channel, userdata, rank, chan):
     if len(params) > 0:
         cmdName = params[0].lower()
         if cmdName in commands:
-            userRank = self.rankconvert[rank]
+            userRank = self.rank_values[rank]
 
             command, requiredRank = commands[cmdName]
             nemp_logger.debug(f"Needed rank: {requiredRank} User rank: {userRank}")
@@ -105,7 +105,7 @@ async def start_polling(self, timer, channel):
     await self.NEM.init_nem_versions()
     self.NEM_cycle_count = 0
 
-    self.threading.addThread(THREAD_NAME, PollingThread, {"NEM": self.NEM, "PollTime": timer})
+    self.task_pool.addThread(THREAD_NAME, PollingThread, {"NEM": self.NEM, "PollTime": timer})
 
     self.events["time"].addEvent(TIME_EVENT_NAME, 60, NEMP_TimerEvent, [channel])
 
@@ -113,7 +113,7 @@ async def start_polling(self, timer, channel):
 def stop_polling(self):
     self.events["time"].removeEvent(TIME_EVENT_NAME)
     nemp_logger.debug("Removed NEM Polling Event")
-    self.threading.sigquitThread(THREAD_NAME)
+    self.task_pool.sigquitThread(THREAD_NAME)
     nemp_logger.debug("Sigquit to NEMP Thread sent")
 
     self.NEM_troubledMods = {}
@@ -345,10 +345,10 @@ async def PollingThread(self, pipe):
 # This runs on a timer (once every minute)
 async def NEMP_TimerEvent(self, channels):
     # Check if we have any data from PollingThread to process
-    if not self.threading.poll(THREAD_NAME):
+    if not self.task_pool.poll(THREAD_NAME):
         return
 
-    nemp_data = await self.threading.recv(THREAD_NAME)
+    nemp_data = await self.task_pool.recv(THREAD_NAME)
 
     self.NEM_cycle_count += 1
 

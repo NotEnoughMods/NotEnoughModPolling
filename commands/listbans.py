@@ -6,7 +6,7 @@ permission = 3
 
 async def execute(self, user, params, channel, userdata, rank):
     if len(params) == 0:
-        groups = self.Banlist.getGroups()
+        groups = self.ban_list.getGroups()
 
         await self.sendNotice(
             user,
@@ -17,7 +17,7 @@ async def execute(self, user, params, channel, userdata, rank):
         groupName = params[0]
 
         try:
-            bans = [self.Banlist.unescape_banstring(banTuple[1]) for banTuple in self.Banlist.getBans(groupName)]
+            bans = [self.ban_list.unescape_banstring(banTuple[1]) for banTuple in self.ban_list.getBans(groupName)]
             output = ", ".join(bans)
 
             if len(bans) == 0:

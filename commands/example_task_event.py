@@ -19,17 +19,17 @@ async def thread(self, pipe):
 
 
 async def threadChecker(self, channels):
-    yes = self.threading.poll("threadTest")
+    yes = self.task_pool.poll("threadTest")
 
     # print yes
     if yes:
-        msg = await self.threading.recv("threadTest")
+        msg = await self.task_pool.recv("threadTest")
         if isinstance(msg, dict) and "action" in msg and msg["action"] == "exceptionOccured":
             print("EXCEPTION")
             print(msg["traceback"])
         else:
             await self.sendChatMessage(self.send, channels[0], "Message from Thread: " + msg)
-            await self.threading.send("threadTest", random.choice(["0", "1", "2", "3"]))
+            await self.task_pool.send("threadTest", random.choice(["0", "1", "2", "3"]))
         # print "sent message"
 
 
@@ -41,7 +41,7 @@ async def execute(self, name, params, channel, userdata, rank):
             self.timerChannel = channel
             self.events["time"].addEvent("threadChecker", 1, threadChecker, [channel])
 
-            self.threading.addThread("threadTest", thread)
+            self.task_pool.addThread("threadTest", thread)
         else:
             await self.sendChatMessage(self.send, channel, "threadevent is already running.")
 
@@ -50,7 +50,7 @@ async def execute(self, name, params, channel, userdata, rank):
             await self.sendChatMessage(self.send, channel, "Turning threadevent off.")
             self.events["time"].removeEvent("threadChecker")
 
-            self.threading.sigquitThread("threadTest")
+            self.task_pool.sigquitThread("threadTest")
         else:
             await self.sendChatMessage(self.send, channel, "threadevent isn't running!")
 

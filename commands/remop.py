@@ -18,14 +18,14 @@ async def execute(self, username, params, channel, userdata, rank):
     removed = []
 
     for name in names:
-        result, correctName = notInList(name, self.bot_userlist)
+        result, correctName = notInList(name, self.operators)
         if not result and correctName != username:
-            self.bot_userlist.remove(correctName)
+            self.operators.remove(correctName)
             removed.append(correctName)
-            self.Bot_Auth.unregisterUser(correctName)
-            self.Bot_Auth.remUser(correctName)
-            if self.Bot_Auth.isQueued(correctName):
-                self.Bot_Auth.unqueueUser(correctName)
+            self.auth_tracker.unregisterUser(correctName)
+            self.auth_tracker.remUser(correctName)
+            if self.auth_tracker.isQueued(correctName):
+                self.auth_tracker.unqueueUser(correctName)
         else:
             notremoved.append(name)
 

@@ -1,6 +1,6 @@
 class PluginModule:
     def __init__(self):
-        self.__plugins__ = {}
+        self._plugins = {}
 
     def LoadPlugins(self, directory):
         pass
@@ -9,8 +9,8 @@ class PluginModule:
 class Plugin:
     def __init__(self):
         self.__events__ = {}
-        self.__commands__ = {}
-        self.__threads__ = {}
+        self._commands = {}
+        self._threads = {}
 
     def addCommand(self, cmdname, rank, function):
         pass

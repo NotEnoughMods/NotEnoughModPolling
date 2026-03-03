@@ -3,11 +3,11 @@ permission = 2
 
 
 async def execute(self, name, params, channel, userdata, rank):
-    if len(self.bot_userlist) > 0:
+    if len(self.operators) > 0:
         await self.sendChatMessage(
             self.send,
             channel,
-            "The following users are Operators of this bot: " + ", ".join(self.bot_userlist),
+            "The following users are Operators of this bot: " + ", ".join(self.operators),
         )
-    if len(self.bot_userlist) == 0:
+    if len(self.operators) == 0:
         await self.sendChatMessage(self.send, channel, "Nobody is Operator of this bot!")

@@ -18,9 +18,9 @@ class IrcBot:
         self.port = config.getint("Connection Info", "port")
 
         self.name = config.get("Connection Info", "nickname")
-        self.passw = config.get("Connection Info", "password")
+        self.password = config.get("Connection Info", "password")
         self.channels = configObj.getChannels()
-        self.myident = config.get("Connection Info", "ident")
+        self.ident = config.get("Connection Info", "ident")
         self.realname = config.get("Connection Info", "realname")
 
         self.forceIPv6 = config.getboolean("Networking", "force ipv6")
@@ -30,7 +30,7 @@ class IrcBot:
         self.prefix = config.get("Administration", "command prefix")
         self.loglevel = config.get("Administration", "logging level")
 
-        self.nsAuth = False
+        self.nickserv_auth = False
         self.shutdown = False
 
     async def start(self):
@@ -54,23 +54,23 @@ class IrcBot:
         # Start the write loop as a background task
         write_task = asyncio.create_task(self.conn.write_loop())
 
-        if self.passw:
-            await self.conn.sendMsg("PASS " + self.passw)
+        if self.password:
+            await self.conn.sendMsg("PASS " + self.password)
         await self.conn.sendMsg("NICK " + self.name)
-        await self.conn.sendMsg(f"USER {self.myident} * * {self.realname}")
+        await self.conn.sendMsg(f"USER {self.ident} * * {self.realname}")
 
-        self.comHandle = CommandRouter(
+        self.command_router = CommandRouter(
             self.channels,
             self.prefix,
             self.name,
-            self.myident,
+            self.ident,
             self.adminlist,
             self.loglevel,
         )
 
-        self.__root_logger__ = logging.getLogger("IRCMainLoop")
-        self.__root_logger__.info("Connected to %s", self.host)
-        self.__root_logger__.info("BOT IS NOW ONLINE: Starting to listen for server responses.")
+        self._logger = logging.getLogger("IRCMainLoop")
+        self._logger.info("Connected to %s", self.host)
+        self._logger.info("BOT IS NOW ONLINE: Starting to listen for server responses.")
 
         # Timer event checker runs as a periodic background task
         timer_task = asyncio.create_task(self._timer_loop())
@@ -97,9 +97,9 @@ class IrcBot:
                     except IndexError:
                         commandParameters = ""
 
-                await self.comHandle.handle(self.conn.sendMsg, prefix, command, commandParameters, self.nsAuth)
+                await self.command_router.handle(self.conn.sendMsg, prefix, command, commandParameters, self.nickserv_auth)
         finally:
-            self.__root_logger__.info("Main loop has been stopped")
+            self._logger.info("Main loop has been stopped")
             timer_task.cancel()
             with contextlib.suppress(asyncio.CancelledError):
                 await timer_task
@@ -107,20 +107,20 @@ class IrcBot:
             write_task.cancel()
             with contextlib.suppress(asyncio.CancelledError):
                 await write_task
-            self.__root_logger__.info("Connection closed.")
+            self._logger.info("Connection closed.")
 
     async def _timer_loop(self):
         """Periodically check timer events."""
         try:
             while not self.shutdown:
-                await self.comHandle.timeEventChecker()
+                await self.command_router.timeEventChecker()
                 await asyncio.sleep(0.5)
         except asyncio.CancelledError:
             pass
 
     def customNickAuth(self, result):
         if isinstance(result, str):
-            self.nsAuth = result
+            self.nickserv_auth = result
         else:
             raise TypeError
 
@@ -143,8 +143,8 @@ async def async_main():
     try:
         await bot.start()
     except Exception as error:
-        if getattr(bot, "__root_logger__", None) is not None:
-            bot.__root_logger__.exception("The bot has encountered an exception and had to shut down.")
+        if getattr(bot, "_logger", None) is not None:
+            bot._logger.exception("The bot has encountered an exception and had to shut down.")
             log = True
         else:
             print("Tried to log an error, but logger wasn't initialized.")
@@ -159,14 +159,14 @@ async def async_main():
             )
             excFile.write("-----------------------------------------------------\n")
 
-            if getattr(bot, "comHandle", None) is not None:
-                while not bot.comHandle.PacketsReceivedBeforeDeath.empty():
-                    msg = bot.comHandle.PacketsReceivedBeforeDeath.get_nowait()
+            if getattr(bot, "command_router", None) is not None:
+                while not bot.command_router.recent_messages.empty():
+                    msg = bot.command_router.recent_messages.get_nowait()
                     excFile.write(msg)
                     excFile.write("\n")
-                bot.comHandle.threading.sigquitAll()
+                bot.command_router.task_pool.sigquitAll()
                 if log:
-                    bot.__root_logger__.debug("All tasks were signaled to shut down.")
+                    bot._logger.debug("All tasks were signaled to shut down.")
 
             excFile.write("-----------------------------------------------------\n")
             excFile.write("Connection Exception: \n")
@@ -179,7 +179,7 @@ async def async_main():
             excFile.write("-----------------------------------------------------\n")
 
     if log:
-        bot.__root_logger__.info("End of Session\n\n\n\n")
+        bot._logger.info("End of Session\n\n\n\n")
     logging.shutdown()
 
 

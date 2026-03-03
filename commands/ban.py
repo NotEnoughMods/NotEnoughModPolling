@@ -38,7 +38,7 @@ async def execute(self, user, params, channel, userdata, rank):
 
             try:
                 if len(params) == 1:
-                    result = self.Banlist.banUser(username, ident, host, ban_reason="None")
+                    result = self.ban_list.banUser(username, ident, host, ban_reason="None")
                     if result is True:
                         await self.sendNotice(user, f"Userstring {userstring} banned.")
                     if result is False:
@@ -47,7 +47,7 @@ async def execute(self, user, params, channel, userdata, rank):
                     group = params[1]
                     ban_reason = " ".join(params[2:]) if len(params) > 2 else "None"
 
-                    result = self.Banlist.banUser(username, ident, host, group, ban_reason=ban_reason)
+                    result = self.ban_list.banUser(username, ident, host, group, ban_reason=ban_reason)
 
                     if result is True:
                         await self.sendNotice(

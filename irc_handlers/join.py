@@ -21,28 +21,28 @@ async def execute(self, sendMsg, prefix, command, params):
 
     channel = self.retrieveTrueCase(chan)
 
-    if self.Bot_Auth.doesExist(name) and not self.Bot_Auth.isRegistered(name):
+    if self.auth_tracker.doesExist(name) and not self.auth_tracker.isRegistered(name):
         await self.whoisUser(name)
 
     await self.events["channeljoin"].tryAllEvents(self, name, ident, host, channel)
 
     if channel:
         nothere = True
-        for derp in self.channelData[channel]["Userlist"]:
+        for derp in self.channel_data[channel]["Userlist"]:
             if derp[0] == name:
                 nothere = False
                 break
 
         if nothere:
-            self.channelData[channel]["Userlist"].append((name, ""))
+            self.channel_data[channel]["Userlist"].append((name, ""))
         else:
-            self.__CMDHandler_log__.debug(
+            self._logger.debug(
                 "%s has joined channel %s, but he is already in the user list!",
                 name,
                 channel,
             )
     else:
-        self.__CMDHandler_log__.debug(
+        self._logger.debug(
             "Channel mismatch: %s has joined channel '%s', But retrieveTrueCase returned False.",
             name,
             params,

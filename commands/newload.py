@@ -28,16 +28,16 @@ async def execute(self, name, params, channel, userdata, rank):
             try:
                 if not callable(module.setup):
                     module.setup = False
-                    self.__CMDHandler_log__.debug(f"File {filename} does not use a setup function")
+                    self._logger.debug(f"File {filename} does not use a setup function")
             except AttributeError:
                 module.setup = False
-                self.__CMDHandler_log__.debug(f"File {filename} does not use a setup function")
+                self._logger.debug(f"File {filename} does not use a setup function")
 
             if module.setup:
                 await module.setup(self, True)
 
             await self.sendMessage(channel, f"{path} has been loaded.")
-            self.__CMDHandler_log__.info(f"File {filename} has been newly loaded.")
+            self._logger.info(f"File {filename} has been newly loaded.")
 
 
 async def setup(self, Startup):

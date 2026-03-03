@@ -7,4 +7,4 @@ async def execute(self, sendMsg, prefix, command, params):
     channel = data[1]
     mode = data[2]
 
-    self.channelData[self.retrieveTrueCase(channel)]["Mode"] = mode
+    self.channel_data[self.retrieveTrueCase(channel)]["Mode"] = mode

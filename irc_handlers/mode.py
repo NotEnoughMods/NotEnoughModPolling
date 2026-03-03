@@ -14,7 +14,7 @@ async def execute(self, sendMsg, prefix, command, params):
         add = modes[0] == "+"
         perm = ""
 
-        if self.Bot_Auth.doesExist(name) and not self.Bot_Auth.isRegistered(name) and not self.Bot_Auth.isQueued(name):
+        if self.auth_tracker.doesExist(name) and not self.auth_tracker.isRegistered(name) and not self.auth_tracker.isQueued(name):
             await self.whoisUser(name)
 
         for char in modes[1:]:
@@ -23,14 +23,14 @@ async def execute(self, sendMsg, prefix, command, params):
             if char == "o":
                 perm = "@"
 
-        for i in range(len(self.channelData[chan]["Userlist"])):
-            user, pref = self.channelData[chan]["Userlist"][i]
+        for i in range(len(self.channel_data[chan]["Userlist"])):
+            user, pref = self.channel_data[chan]["Userlist"][i]
             if user == name:
                 if add:
                     if pref != "@":
-                        self.channelData[chan]["Userlist"][i] = (user, perm)
+                        self.channel_data[chan]["Userlist"][i] = (user, perm)
                 else:
-                    self.channelData[chan]["Userlist"][i] = (user, "")
+                    self.channel_data[chan]["Userlist"][i] = (user, "")
 
                 break
 

@@ -20,7 +20,7 @@ async def execute(self, name, params, channel, userdata, rank):
     print(channels)
     await self.send("PART :" + partParams + "", 4)
     for chan in channels:
-        del self.channelData[chan]
+        del self.channel_data[chan]
 
     await self.joinChannel(self.send, channels)
 
