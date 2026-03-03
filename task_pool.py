@@ -20,11 +20,9 @@ class TaskHandle:
         self.task = task
         self.queue = queue
         self.base = base
-        self.signal = False
         self.running = True
         self._startTime = None
         self._lastTimeRunning = None
-        self._metadata = {}
 
     def setTimer(self):
         self._startTime = default_timer()
@@ -61,6 +59,8 @@ class TaskPool:
             try:
                 handle.running = True
                 await function(handle, queue)
+            except asyncio.QueueShutDown:
+                self._logger.debug("Task '%s' stopped via queue shutdown", name)
             except Exception as error:
                 exception = traceback.format_exc()
                 await queue.put(
@@ -83,7 +83,7 @@ class TaskPool:
 
     def cancel_task(self, name):
         handle = self.pool[name]["handle"]
-        handle.signal = True
+        handle.queue.shutdown(immediate=True)
         handle.task.cancel()
         del self.pool[name]
         self._logger.debug("Cancelling task '%s'", name)
@@ -94,7 +94,7 @@ class TaskPool:
     async def recv(self, name):
         return await self.pool[name]["queue"].get()
 
-    def poll(self, name, timeout=0.0):
+    def poll(self, name):
         return not self.pool[name]["queue"].empty()
 
     def check_status(self, name):
@@ -108,7 +108,7 @@ class TaskPool:
         names = list(self.pool.keys())
         for name in names:
             handle = self.pool[name]["handle"]
-            handle.signal = True
+            handle.queue.shutdown(immediate=True)
             handle.task.cancel()
             del self.pool[name]
         self._logger.debug("All tasks cancelled")

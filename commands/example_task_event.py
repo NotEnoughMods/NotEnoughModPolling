@@ -12,7 +12,7 @@ logger = logging.getLogger("cmd.taskevent")
 async def example_task(self, pipe):
     # print channels
     # print currChannel
-    while not self.signal:
+    while True:
         rand = random.randint(10, 20)
 
         await pipe.put(f"I will wait {rand} seconds!")

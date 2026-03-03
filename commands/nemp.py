@@ -296,7 +296,7 @@ async def polling_task(self, pipe):
     NEM = self.base["NEM"]
     sleepTime = self.base["PollTime"]
 
-    while not self.signal:
+    while True:
         nemp_logger.debug("polling_task: I'm still running!")
 
         poll_results = []
@@ -304,9 +304,6 @@ async def polling_task(self, pipe):
         failed = []  # type: List[FailedModEntry]
 
         for mod_name, mod_info in NEM.mods.items():
-            if self.signal:
-                break
-
             if not mod_info["active"]:
                 continue
 
@@ -340,11 +337,7 @@ async def polling_task(self, pipe):
 
         await pipe.put((poll_results, failed))
 
-        # Sleep in steps of 30 seconds to allow quick shutdown
-        for _i in range(sleepTime // 30 + 1):
-            if self.signal:
-                return
-            await asyncio.sleep(30)
+        await asyncio.sleep(sleepTime)
 
 
 # This runs on a timer (once every minute)
