@@ -255,7 +255,7 @@ async def cmd_reset_failed(self, name, params, channel, userdata, rank):
 
 
 async def cmd_fail_count(self, name, params, channel, userdata, rank):
-    print(self.NEM_troubledMods)
+    nemp_logger.debug("Troubled mods: %s", self.NEM_troubledMods)
     if len(self.NEM_troubledMods) == 0:
         await self.send_notice(name, "No mods have had trouble polling so far.")
     else:
@@ -704,7 +704,7 @@ async def cmd_test(self, name, params, channel, userdata, rank):
 
     real_name = self.NEM.mods[mod].get("name", mod)
 
-    print(f"{mod} {statuses!r}")
+    nemp_logger.debug("%s %r", mod, statuses)
 
     commands_list = []
 

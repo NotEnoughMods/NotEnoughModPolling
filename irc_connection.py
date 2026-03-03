@@ -45,14 +45,12 @@ class IrcConnection:
                     decoded = line.decode("utf-8", errors="replace")
                     self._logger.debug("<< %s", decoded)
                     yield decoded
-        except Exception as error:
-            print()
-            print(f"ERROR: {error}")
-            print()
+        except Exception:
+            self._logger.exception("Read loop error")
             self.error = traceback.format_exc()
             self.ready = False
         finally:
-            print("Reader is done!")
+            self._logger.debug("Read loop finished")
 
     async def write_loop(self):
         """Drains the write queue, sending messages with rate limiting."""
@@ -72,14 +70,12 @@ class IrcConnection:
                     await asyncio.sleep(3)
                 else:
                     await asyncio.sleep(2)
-        except Exception as error:
-            print()
-            print(f"ERROR: {error}")
-            print()
+        except Exception:
+            self._logger.exception("Write loop error")
             self.error = traceback.format_exc()
             self.ready = False
         finally:
-            print("Writer is done!")
+            self._logger.debug("Write loop finished")
 
     async def sendMsg(self, msg, priority=False):
         msg = msg.replace(chr(13), " ")

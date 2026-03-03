@@ -1,6 +1,9 @@
+import logging
 import time
 
 ID = "ERROR"
+
+logger = logging.getLogger("irc.error")
 
 
 class ForceShutdown(Exception):
@@ -17,7 +20,5 @@ class ForceShutdown(Exception):
 
 
 async def execute(self, sendMsg, prefix, command, params):
-    print("~Server sent an ERROR packet~")
-    print(prefix)
-    print(params)
+    logger.warning("Server sent an ERROR packet: %s %s", prefix, params)
     raise ForceShutdown(prefix, command, params)

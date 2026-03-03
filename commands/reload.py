@@ -1,12 +1,16 @@
+import logging
+
 ID = "reload"
 permission = 3
+
+logger = logging.getLogger("cmd.reload")
 
 
 async def execute(self, name, params, channel, userdata, rank):
     if len(params) > 0 and params[0] in self.commands:
         cmd = params[0]
         path = self.commands[cmd][1]
-        print(path)
+        logger.debug("Reloading command at path: %s", path)
 
         # To load the plugin in a similar way to commandHandler's _load_modules method,
         # we need to retrieve the filename of the command from the path.

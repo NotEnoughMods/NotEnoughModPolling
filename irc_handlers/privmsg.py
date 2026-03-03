@@ -36,7 +36,7 @@ async def execute(self, sendMsg, msgprefix, command, params):
 
     # print msgprefix, params
 
-    print("<" + name + "> " + chatMessage)
+    msg_log.debug("<%s> %s", name, chatMessage)
 
     chatParams = chatMessage.rstrip().split(" ")
 
@@ -132,10 +132,10 @@ async def execute(self, sendMsg, msgprefix, command, params):
                 elif not support and is_channel:
                     await self.commands[chatCmd][0].execute(self, name, chatParams[1:], channel, (ident, host), perms)
 
-        except KeyError as error:
-            print("KeyError for command: " + str(error))
-        except AttributeError as error:
-            print("AttributeError for command: " + str(error))
+        except KeyError:
+            msg_log.exception("KeyError for command")
+        except AttributeError:
+            msg_log.exception("AttributeError for command")
     else:
         # if the message comes from a user, set channel to False
         # otherwise, set channel to the channel from which the message was received

@@ -1,6 +1,10 @@
+import logging
+
 ID = "part"
 permission = 3
 privmsgEnabled = True
+
+logger = logging.getLogger("cmd.part")
 
 
 async def execute(self, name, params, channel, userdata, rank, isChannel):
@@ -20,11 +24,10 @@ async def execute(self, name, params, channel, userdata, rank, isChannel):
             if chan:
                 channels.append(chan)
             else:
-                print(chanEntry, "wat")
+                logger.debug("Unknown channel: %s", chanEntry)
 
     partParams = ",".join(channels)
-    print(partParams)
-    print(channels)
+    logger.debug("Parting: %s (channels=%s)", partParams, channels)
 
     if len(partParams) > 0:
         await self.send("PART :" + partParams + "", 4)

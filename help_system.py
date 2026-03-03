@@ -64,7 +64,7 @@ def setup(self, Startup):
 # function for showing information about the command.
 
 def helpHandler(self, name, params, channel, userdata, rank):
-    print("Hi, I am an example for a custom help handler!")
+    help_log.debug("Hi, I am an example for a custom help handler!")
 
 def setup(self, Startup):
     entry = self.helper.new_help(commandName)
@@ -90,7 +90,6 @@ class HelpEntity:
         self.rank = 0
 
         self.custom_handler = None
-        help_log.debug("HelpEntry for '%s' initialized", cmdname)
 
     def add_description(self, description):
         if isinstance(description, str):
@@ -144,7 +143,7 @@ class HelpModule:
         elif helpObject.cmdname in self.helpDB and not overwrite:
             raise RuntimeError("Conflict Error: A command with such a name already exists!")
         elif helpObject.cmdname in self.helpDB and overwrite:
-            print("ATTENTION: A command with such a name is already registered.")
+            help_log.warning("A command with such a name is already registered: '%s'", helpObject.cmdname)
             self.helpDB[helpObject.cmdname] = helpObject
             help_log.debug(
                 "Registered Help for command '%s', but a help entry already exists.",

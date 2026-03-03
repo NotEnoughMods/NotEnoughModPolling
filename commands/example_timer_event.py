@@ -1,9 +1,13 @@
+import logging
+
 ID = "event"
 permission = 3
 
+logger = logging.getLogger("cmd.event")
+
 
 async def timer(self, channels):
-    print("executing")
+    logger.debug("executing timer event")
     if channels and len(channels) > 0:
         await self.send_chat_message(self.send, channels[0], "Time has passed.")
 

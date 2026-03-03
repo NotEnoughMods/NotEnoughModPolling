@@ -1,9 +1,12 @@
 import asyncio
+import logging
 import random
 
 ID = "taskevent"
 permission = 3
 privmsgEnabled = False
+
+logger = logging.getLogger("cmd.taskevent")
 
 
 async def example_task(self, pipe):
@@ -14,8 +17,8 @@ async def example_task(self, pipe):
 
         await pipe.put(f"I will wait {rand} seconds!")
         await asyncio.sleep(rand)
-        print(await pipe.get())
-        print("success")
+        logger.debug("Received from pipe: %s", await pipe.get())
+        logger.debug("success")
 
 
 async def task_checker(self, channels):
@@ -25,8 +28,7 @@ async def task_checker(self, channels):
     if yes:
         msg = await self.task_pool.recv("taskTest")
         if isinstance(msg, dict) and "action" in msg and msg["action"] == "exceptionOccured":
-            print("EXCEPTION")
-            print(msg["traceback"])
+            logger.debug("EXCEPTION: %s", msg["traceback"])
         else:
             await self.send_chat_message(self.send, channels[0], "Message from task: " + msg)
             await self.task_pool.send("taskTest", random.choice(["0", "1", "2", "3"]))

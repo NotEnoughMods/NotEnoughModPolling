@@ -85,9 +85,8 @@ class CommandRouter:
                 # 0 is the lowest possible log level. Messages about unimplemented packets are
                 # very common, so they will clutter up the file even if logging is set to DEBUG
                 self._logger.log(0, "Unimplemented Packet: %s", command)
-        except KeyError as error:
+        except KeyError:
             self._logger.exception("Missing channel or other KeyError caught")
-            print("Missing channel or other KeyError caught: " + str(error))
 
     async def wait_for(self, event, check=None, timeout=None):
         """Wait for an IRC event matching the predicate.
@@ -230,7 +229,7 @@ class CommandRouter:
                 type(channel),
             )
             raise TypeError
-        print(self.channel_data)
+        self._logger.debug("channel_data after join: %s", self.channel_data)
 
     async def whois_user(self, user):
         """Send WHOIS and wait for the response. Returns True if user is a registered operator."""
@@ -274,7 +273,7 @@ class CommandRouter:
             return False
 
     def is_user_visible(self, user):
-        print(self.channel_data)
+        self._logger.debug("channel_data: %s", self.channel_data)
         self._logger.debug(
             "Checking if user '%s' is in the following channels: %s",
             user,
@@ -328,6 +327,5 @@ class CommandRouter:
 
             Packet[module.ID] = (module, path + "/" + i)
 
-        print("ALL MODULES LOADED")
         self._logger.info("Modules in path '%s' loaded.", path)
         return Packet

@@ -1,6 +1,9 @@
+import logging
+
 ID = "221"
+
+logger = logging.getLogger("irc.rpl.221")
 
 
 async def execute(self, sendMsg, prefix, command, params):
-    print(prefix)
-    print(params)
+    logger.debug("RPL_UMODEIS: %s %s", prefix, params)

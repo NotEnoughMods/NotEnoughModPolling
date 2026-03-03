@@ -1,10 +1,12 @@
+import logging
+
 ID = "JOIN"
+
+logger = logging.getLogger("irc.join")
 
 
 async def execute(self, sendMsg, prefix, command, params):
-    print("SOMEBODY JOINED CHANNEL:")
-    print(prefix)
-    print(params)
+    logger.debug("Channel join: %s %s", prefix, params)
 
     part1 = prefix.partition("!")
     part2 = part1[2].partition("@")

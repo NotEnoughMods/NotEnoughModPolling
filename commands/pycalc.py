@@ -1,5 +1,5 @@
+import logging
 import math
-import traceback
 from timeit import default_timer as timer
 from types import MethodType
 
@@ -28,6 +28,8 @@ class CalcTimeoutException(Exception):
 
 ID = "pycalc"
 permission = 0
+
+pycalc_logger = logging.getLogger("cmd.pycalc")
 
 
 # pycalc command by Yoshi2
@@ -354,7 +356,5 @@ async def execute(self, name, params, channel, userdata, rank):
     except CalcTimeoutException as error:
         await self.send_message(channel, str(error))
     except Exception as error:
-        traceb = str(traceback.format_exc())
         await self.send_message(channel, "ParseError: '" + str(error) + "'")
-        print("error: " + str(error))
-        print(traceb)
+        pycalc_logger.exception("Parse error in pycalc")

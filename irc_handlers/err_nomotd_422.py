@@ -2,9 +2,11 @@ import logging
 
 ID = "422"
 
+logger = logging.getLogger("irc.err.422")
+
 
 async def execute(self, sendMsg, prefix, command, params):
-    print(self.channels)
+    logger.debug("Channels to join: %s", self.channels)
     logging.info("MotD is missing: 422. If you see 'End of MotD: 376', please notify the author of the bot.")
     await self.join_channel(sendMsg, self.channels)
 

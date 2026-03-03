@@ -26,13 +26,12 @@ class LoggingModule:
         monthfoldername = self.date.strftime("%Y-%m")
         dayfilename = self.date.strftime("%d-%m-%Y")
 
-        print(monthfoldername, dayfilename)
         self._create_directory(f"BotLogs/{monthfoldername}")
 
         logging.basicConfig(
             filename=f"BotLogs/{monthfoldername}/{dayfilename}.log",
             level=self.logLevel,
-            format="%(asctime)s [%(levelname)s] --[%(name)s:%(module)s/%(funcName)s]-- %(message)s",
+            format="%(asctime)s [%(levelname)s] %(name)s:%(module)s/%(funcName)s: %(message)s",
             datefmt="%H:%M:%S",
         )
 
@@ -41,7 +40,7 @@ class LoggingModule:
         consoleHandler.setLevel(self.logLevel)
 
         format = logging.Formatter(
-            "%(asctime)s  [%(levelname)s] --[%(name)s:%(module)s/%(funcName)s]-- %(message)s",
+            "%(asctime)s [%(levelname)s] %(name)s:%(module)s/%(funcName)s: %(message)s",
             datefmt="%H:%M:%S",
         )
         consoleHandler.setFormatter(format)
@@ -62,12 +61,8 @@ class LoggingModule:
     def _create_directory(self, dirpath):
         if not os.path.exists(dirpath):
             os.mkdir(dirpath)
-            print("created dir")
         elif not os.path.isdir(dirpath):
             raise RuntimeError(f"A file with the path {dirpath} already exists, please delete or rename it.")
-        else:
-            print("no dir needs to be created")
-            pass
 
     def _switch_filehandle_daily(self, *args):
         newDate = datetime.date.today()
@@ -92,7 +87,7 @@ class LoggingModule:
             #
             # POTENTIAL BUG: is handlers[0] always the file handler pointing to the log file?
             # Should be tested with more than one handler.
-            print(logging.getLogger().handlers)
+            self._logger.debug("Current root handlers: %s", logging.getLogger().handlers)
             logging.getLogger().handlers[0].stream.close()
             logging.getLogger().removeHandler(logging.getLogger().handlers[0])
 
@@ -104,7 +99,7 @@ class LoggingModule:
             newfile_handler.setLevel = self.logLevel
 
             msgformat = logging.Formatter(
-                "%(asctime)s  [%(levelname)s] --[%(name)s:%(module)s/%(funcName)s]-- %(message)s",
+                "%(asctime)s [%(levelname)s] %(name)s:%(module)s/%(funcName)s: %(message)s",
                 datefmt="%H:%M:%S",
             )
             newfile_handler.setFormatter(msgformat)

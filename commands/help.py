@@ -12,8 +12,8 @@ async def execute(self, name, params, channel, userdata, rank):
 
         try:
             help = self.helper.get_command_help(cmdname)
-        except KeyError as error:
-            print(str(error))
+        except KeyError:
+            help_log.error("Command not found: %s", cmdname)
             await self.send_notice(name, "No such command exists.")
             return
     else:
@@ -78,7 +78,7 @@ async def execute(self, name, params, channel, userdata, rank):
 
 
 def test(self, name, params, channel, userdata, rank):
-    print(name)
+    help_log.debug("test called for: %s", name)
 
 
 async def setup(self, Startup):

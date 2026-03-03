@@ -1,7 +1,6 @@
 import json
 import logging
 import os
-import traceback
 from collections import OrderedDict
 from string import ascii_letters, digits
 from urllib.parse import quote as urlquote
@@ -49,7 +48,6 @@ async def get_latest_version():
     try:
         return await fetch_json("https://bot.notenoughmods.com/?json")
     except Exception:
-        print("Failed to get NEM versions, falling back to hard-coded")
         nem_logger.exception("Failed to get NEM versions, falling back to hard-coded.")
         return [
             "1.4.5",
@@ -126,8 +124,7 @@ async def fetch_page(url, timeout=10, decode_json=False, cache=False):
                 else:
                     return await response.text()
     except Exception:
-        traceback.print_exc()
-        pass
+        nem_logger.exception("Failed to fetch page: %s", url)
 
 
 async def fetch_json(*args, **kwargs):
@@ -250,9 +247,8 @@ async def multilist(self, name, params, channel, userdata, rank):
                             version=modData["dev"],
                         )
 
-                except Exception as error:
-                    print(error)
-                    traceback.print_exc()
+                except Exception:
+                    nem_logger.error("Error getting dev version for %s in %s", modName, ver, exc_info=True)
 
                 await self.send_message(
                     channel,
@@ -278,7 +274,7 @@ async def multilist(self, name, params, channel, userdata, rank):
 
         except Exception as error:
             await self.send_message(channel, name + ": " + str(error))
-            traceback.print_exc()
+            nem_logger.exception("Error in multilist")
 
 
 async def list(self, name, params, channel, userdata, rank):
@@ -349,9 +345,8 @@ async def list(self, name, params, channel, userdata, rank):
                         colour2=RED,
                         version=jsonres[line]["dev"],
                     )
-            except Exception as error:
-                print(error)
-                traceback.print_exc()
+            except Exception:
+                nem_logger.error("Error getting dev version for %s", params[1], exc_info=True)
 
             await self.send_message(
                 channel,
@@ -372,7 +367,7 @@ async def list(self, name, params, channel, userdata, rank):
             )
     except Exception as error:
         await self.send_message(channel, f"{name}: {error}")
-        traceback.print_exc()
+        nem_logger.exception("Error in list")
 
 
 async def compare(self, name, params, channel, userdata, rank):
@@ -409,7 +404,7 @@ async def compare(self, name, params, channel, userdata, rank):
 
     except Exception as error:
         await self.send_message(channel, f"{name}: {error}")
-        traceback.print_exc()
+        nem_logger.exception("Error in compare")
 
 
 async def about(self, name, params, channel, userdata, rank):

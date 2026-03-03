@@ -1,10 +1,12 @@
+import logging
+
 ID = "KICK"
+
+logger = logging.getLogger("irc.kick")
 
 
 async def execute(self, sendMsg, prefix, command, params):
-    print("SOMEBODY WAS KICKED:")
-    print(prefix)
-    print(params)
+    logger.debug("Channel kick: %s %s", prefix, params)
 
     fields = params.split(" ")
 

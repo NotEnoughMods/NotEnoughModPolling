@@ -1,9 +1,12 @@
+import logging
+
 ID = "319"
+
+logger = logging.getLogger("irc.rpl.319")
 
 
 async def execute(self, sendMsg, prefix, command, params):
-    # print "WHOIS WHAT", prefix, params
-    print(params)
+    logger.debug("RPL_WHOISCHANNELS: %s", params)
 
     fields = params.split(":")
 
@@ -12,4 +15,4 @@ async def execute(self, sendMsg, prefix, command, params):
 
     userinfo[1]
 
-    print(userinfo, channelinfo)
+    logger.debug("WHOIS channels: user=%s channels=%s", userinfo, channelinfo)

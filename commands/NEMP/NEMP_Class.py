@@ -1,11 +1,13 @@
 import contextlib
 import json
+import logging
 import re
-import traceback
 
 import aiohttp
 import yaml
 from jinja2 import Environment, FileSystemLoader, select_autoescape
+
+logger = logging.getLogger("NEMP_Class")
 
 
 class NEMPException(Exception):
@@ -54,7 +56,7 @@ class NotEnoughClasses:
             with open("commands/NEMP/config.yml") as f:
                 self.config = yaml.safe_load(f)
         except:
-            print("You need to setup the NEMP/config.yml file")
+            logger.error("You need to setup the NEMP/config.yml file")
             raise
 
     def load_version_blocklist(self):
@@ -62,7 +64,7 @@ class NotEnoughClasses:
             with open("commands/NEMP/version_blocklist.yml") as f:
                 self.invalid_versions = yaml.safe_load(f)
         except:
-            print("You need to setup the NEMP/version_blocklist.yml file")
+            logger.error("You need to setup the NEMP/version_blocklist.yml file")
             raise
 
         # compile regexes for performance
@@ -82,8 +84,7 @@ class NotEnoughClasses:
             additional = [version["id"] for version in r["versions"] if version["type"] != "release"]
             self.mc_blocklist.extend(additional)
         except Exception:
-            print("Failed to load additional blocked MC versions from Mojang version manifest")
-            traceback.print_exc()
+            logger.warning("Failed to load additional blocked MC versions from Mojang version manifest", exc_info=True)
 
         # Deduplicate versions
         self.mc_blocklist = set(self.mc_blocklist)
@@ -543,7 +544,7 @@ class NotEnoughClasses:
                     mc = self.mc_mapping[mc]
 
                 if mc in self.mc_blocklist:
-                    print(f"Skipping blocked MC version {mc} for {mod}, version_info={version_info!r}")
+                    logger.debug("Skipping blocked MC version %s for %s, version_info=%r", mc, mod, version_info)
                     continue
 
                 status[0] = mc
@@ -582,8 +583,7 @@ class NotEnoughClasses:
 
             return (statuses, None)
         except Exception as e:
-            print(mod + " failed to be polled...")
-            traceback.print_exc()
+            logger.error("%s failed to be polled", mod, exc_info=True)
             return ([], e)  # an exception was raised, so we return a True
 
     async def CheckMods(self, mod):
@@ -606,8 +606,7 @@ class NotEnoughClasses:
             document = await getattr(self, func_name)(mod, document=None)
         except Exception:
             # If getting the document fails, we want to abort immediately
-            print("Failed to poll document_group for " + mod)
-            traceback.print_exc()
+            logger.error("Failed to poll document_group for %s", mod, exc_info=True)
             # Pass the exception along to the polling task
             raise
 
@@ -618,8 +617,7 @@ class NotEnoughClasses:
             try:
                 output[tempMod] = await self.CheckMod(tempMod, document)
             except Exception as e:
-                print(tempMod + " failed to be polled (document_group)")
-                traceback.print_exc()
+                logger.error("%s failed to be polled (document_group)", tempMod, exc_info=True)
                 output[tempMod] = ([], e)
 
         return output

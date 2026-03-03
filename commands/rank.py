@@ -1,11 +1,15 @@
+import logging
+
 ID = "rank"
 permission = 1
+
+logger = logging.getLogger("cmd.rank")
 
 
 async def execute(self, name, params, channel, userdata, rank):
     if len(params) == 0:
         rank = self.get_user_rank_num(channel, name)
-        print(rank)
+        logger.debug("User %s rank: %s", name, rank)
 
         await self.send_chat_message(
             self.send,

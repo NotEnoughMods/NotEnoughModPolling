@@ -2,9 +2,11 @@ import logging
 
 ID = "376"
 
+logger = logging.getLogger("irc.rpl.376")
+
 
 async def execute(self, sendMsg, prefix, command, params):
-    print(self.channels)
+    logger.debug("Channels to join: %s", self.channels)
     logging.info("End of MotD: 376. If you see 'MotD is missing: 422', please notify the author of the bot.")
     await self.join_channel(sendMsg, self.channels)
 

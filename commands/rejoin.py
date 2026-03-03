@@ -1,5 +1,9 @@
+import logging
+
 ID = "rejoin"
 permission = 3
+
+logger = logging.getLogger("cmd.rejoin")
 
 
 async def execute(self, name, params, channel, userdata, rank):
@@ -16,8 +20,7 @@ async def execute(self, name, params, channel, userdata, rank):
                     channels.append(chan)
 
     partParams = ",".join(channels)
-    print(partParams)
-    print(channels)
+    logger.debug("Rejoining: %s (channels=%s)", partParams, channels)
     await self.send("PART :" + partParams + "", 4)
     for chan in channels:
         del self.channel_data[chan]

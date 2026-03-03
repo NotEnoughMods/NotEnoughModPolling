@@ -1,10 +1,12 @@
+import logging
+
 ID = "PART"
+
+logger = logging.getLogger("irc.part")
 
 
 async def execute(self, sendMsg, prefix, command, params):
-    print("SOMEBODY LEFT CHANNEL:")
-    print(prefix)
-    print(params)
+    logger.debug("Channel part: %s %s", prefix, params)
 
     part1 = prefix.partition("!")
     part2 = part1[2].partition("@")
@@ -12,8 +14,6 @@ async def execute(self, sendMsg, prefix, command, params):
     name = part1[0]
     ident = part2[0]
     host = part2[2]
-
-    print("CHANNEL LEAVE")
 
     if params.startswith(":"):
         chan_string = params.lstrip(":")
@@ -35,5 +35,4 @@ async def execute(self, sendMsg, prefix, command, params):
         self._logger.debug("Channel %s not found", params)
 
     if self.auth_tracker.user_exists(name) and self.auth_tracker.is_registered(name) and not self.is_user_visible(name):
-        # print "OK, WE LOST SIGHT OF HIM"
         self.auth_tracker.unregister_user(name)

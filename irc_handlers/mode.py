@@ -1,11 +1,14 @@
+import logging
+
 ID = "MODE"
+
+logger = logging.getLogger("irc.mode")
 
 
 async def execute(self, sendMsg, prefix, command, params):
-    print(prefix, params)
+    logger.debug("Mode change: %s %s", prefix, params)
     splitted = params.split(" ")
 
-    print(splitted)
     if len(splitted) == 3:
         chan = self.get_channel_true_case(splitted[0])
         modes = splitted[1]

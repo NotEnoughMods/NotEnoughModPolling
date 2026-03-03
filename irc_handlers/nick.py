@@ -1,4 +1,8 @@
+import logging
+
 ID = "NICK"
+
+logger = logging.getLogger("irc.nick")
 
 
 async def execute(self, sendMsg, prefix, command, params):
@@ -10,7 +14,7 @@ async def execute(self, sendMsg, prefix, command, params):
     host = part2[2]
 
     newName = params[1:]
-    print("NICKCHANGE")
+    logger.debug("Nick change: %s -> %s", name, newName)
 
     if self.auth_tracker.user_exists(name):
         self.auth_tracker.unregister_user(name)

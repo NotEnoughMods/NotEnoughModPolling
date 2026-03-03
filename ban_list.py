@@ -1,5 +1,8 @@
+import logging
 import sqlite3
 from io import StringIO
+
+logger = logging.getLogger("BanList")
 
 ALLOWEDCHARS = "-0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}"
 ALLOWEDCHARS_IDENT = ALLOWEDCHARS + "~"
@@ -279,7 +282,7 @@ class BanList:
         )
 
         result = self.cursor.fetchone()
-        print(result, type(result))
+        logger.debug("Query result: %s (type: %s)", result, type(result))
         return bool(result is not None and result[0] == 1)
 
     def _group_exists(self, groupName):
@@ -292,7 +295,7 @@ class BanList:
         )
 
         result = self.cursor.fetchone()
-        print(result, type(result))
+        logger.debug("Query result: %s (type: %s)", result, type(result))
         return bool(result is not None and result[0] == 1)
 
     def _is_valid_string(self, string):
