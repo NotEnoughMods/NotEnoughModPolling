@@ -21,7 +21,7 @@ class commandHandling:
 
         self.name = name
         self.ident = ident
-        self.Plugin = self.__LoadModules__("IRCpackets")
+        self.Plugin = self.__LoadModules__("irc_handlers")
         self.commands = self.__LoadModules__("commands")
 
         self.bot_userlist = adminlist
