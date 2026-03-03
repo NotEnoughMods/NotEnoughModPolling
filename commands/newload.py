@@ -40,7 +40,7 @@ async def execute(self, name, params, channel, userdata, rank):
             self._logger.info(f"File {filename} has been newly loaded.")
 
 
-async def setup(self, Startup):
+async def setup(self, startup):
     entry = self.helper.new_help(ID)
 
     entry.add_description(

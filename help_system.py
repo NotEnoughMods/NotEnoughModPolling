@@ -9,7 +9,7 @@ resulting text accordingly.
 Example of usage in commands/showHelp.py, with added comments:
 
 #We need to define a setup function so that the code is executed on startup:
-def setup(self, Startup):
+def setup(self, startup):
 
     # self.helper is a HelpModule object.
     # Using help.new_help, we are creating a new HelpEntity object with the ID, i.e. the name of the command,
@@ -66,7 +66,7 @@ def setup(self, Startup):
 def helpHandler(self, name, params, channel, userdata, rank):
     help_log.debug("Hi, I am an example for a custom help handler!")
 
-def setup(self, Startup):
+def setup(self, startup):
     entry = self.helper.new_help(commandName)
     entry.set_custom_handler(helpHandler)
     entry.rank = 0

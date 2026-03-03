@@ -81,7 +81,7 @@ def test(self, name, params, channel, userdata, rank):
     help_log.debug("test called for: %s", name)
 
 
-async def setup(self, Startup):
+async def setup(self, startup):
     entry = self.helper.new_help(ID)
 
     entry.add_description(

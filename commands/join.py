@@ -20,7 +20,7 @@ async def execute(self, name, params, channel, userdata, rank, chan):
         await self.send_notice(name, "Please specify a channel")
 
 
-async def setup(self, Startup):
+async def setup(self, startup):
     entry = self.helper.new_help(ID)
 
     entry.add_description(

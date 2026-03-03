@@ -125,8 +125,8 @@ def stop_polling(self):
     # self.NEM_autodeactivatedMods = {}
 
 
-async def setup(self, Startup):
-    if Startup:
+async def setup(self, startup):
+    if startup:
         self.NEM = await poller.setup()
     else:
         # kill events, tasks
@@ -143,6 +143,14 @@ async def setup(self, Startup):
     self.NEM_autodeactivatedMods = {}
     self.NEM_cycle_count = 0
 
+    if startup:
+        polling_config = self.NEM.config.get("polling", {})
+        if polling_config.get("auto_start") and polling_config.get("channel"):
+            interval = polling_config.get("interval", 300)
+            channel = polling_config["channel"]
+            nemp_logger.info("Auto-starting polling (interval=%ds, channel=%s)", interval, channel)
+            await start_polling(self, interval, channel)
+
 
 async def cmd_enable(self, name, params, channel, userdata, rank):
     if is_running(self):
@@ -151,7 +159,7 @@ async def cmd_enable(self, name, params, channel, userdata, rank):
 
     await self.send_message(channel, "Enabling NotEnoughModPolling")
 
-    timerForPolls = 60 * 5
+    timerForPolls = self.NEM.config.get("polling", {}).get("interval", 300)
 
     if len(params) == 2:
         timerForPolls = int(params[1])

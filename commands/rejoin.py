@@ -28,7 +28,7 @@ async def execute(self, name, params, channel, userdata, rank):
     await self.join_channel(self.send, channels)
 
 
-async def setup(self, Startup):
+async def setup(self, startup):
     entry = self.helper.new_help(ID)
 
     entry.add_description(

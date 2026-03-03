@@ -36,7 +36,7 @@ async def execute(self, name, params, channel, userdata, rank):
         await self.send_message(channel, "Please specify a command.")
 
 
-async def setup(self, Startup):
+async def setup(self, startup):
     entry = self.helper.new_help(ID)
 
     entry.add_description(

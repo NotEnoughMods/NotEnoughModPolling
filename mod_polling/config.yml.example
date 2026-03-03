@@ -3,5 +3,8 @@ github:
   client_secret: CLIENT_SECRET
 polling:
   host_delay: 0.5
+  auto_start: false
+  interval: 300
+  channel: ""
 irc:
   staff_channel: '#test'

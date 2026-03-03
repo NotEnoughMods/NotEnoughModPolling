@@ -131,7 +131,7 @@ async def fetch_json(*args, **kwargs):
     return await fetch_page(*args, decode_json=True, **kwargs)
 
 
-async def setup(self, Startup):
+async def setup(self, startup):
     global session, versions, version
     if session:
         await session.close()

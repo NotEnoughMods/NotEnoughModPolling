@@ -103,7 +103,7 @@ def format_day_of_month(day):
         return day + choose_st_nd_rd_th(day)
 
 
-async def setup(self, Startup):
+async def setup(self, startup):
     entry = self.helper.new_help(ID)
 
     entry.add_description(

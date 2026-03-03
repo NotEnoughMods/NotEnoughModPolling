@@ -35,7 +35,7 @@ async def execute(self, name, params, channel, userdata, rank, isChannel):
             del self.channel_data[chan]
 
 
-async def setup(self, Startup):
+async def setup(self, startup):
     entry = self.helper.new_help(ID)
 
     entry.add_description(
