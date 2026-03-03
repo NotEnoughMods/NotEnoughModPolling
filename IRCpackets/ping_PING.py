@@ -1,15 +1,10 @@
 ID = "PING"
 
 
-
 async def execute(self, sendMsg, prefix, command, params):
-    print("RECEIVED PING: "+params)
-    
-    
+    print("RECEIVED PING: " + params)
+
     derp = params.strip()
-    if derp[0] == ":":
-        toSend = derp[1:]
-    else:
-        toSend = derp
-    
-    await sendMsg("PONG "+derp, 0)
+    derp[1:] if derp[0] == ":" else derp
+
+    await sendMsg("PONG " + derp, 0)

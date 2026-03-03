@@ -1,40 +1,40 @@
+import asyncio
+import random
+
 ID = "threadevent"
 permission = 3
 privmsgEnabled = False
 
-import asyncio
-import random
-import os
 
 async def thread(self, pipe):
-    #print channels
-    #print currChannel
+    # print channels
+    # print currChannel
     while not self.signal:
         rand = random.randint(10, 20)
 
-        await pipe.put("I will wait {0} seconds!".format(rand))
+        await pipe.put(f"I will wait {rand} seconds!")
         await asyncio.sleep(rand)
         print(await pipe.get())
         print("success")
 
+
 async def threadChecker(self, channels):
     yes = self.threading.poll("threadTest")
 
-    #print yes
+    # print yes
     if yes:
         msg = await self.threading.recv("threadTest")
         if isinstance(msg, dict) and "action" in msg and msg["action"] == "exceptionOccured":
             print("EXCEPTION")
             print(msg["traceback"])
         else:
-            await self.sendChatMessage(self.send, channels[0], "Message from Thread: "+msg)
+            await self.sendChatMessage(self.send, channels[0], "Message from Thread: " + msg)
             await self.threading.send("threadTest", random.choice(["0", "1", "2", "3"]))
-        #print "sent message"
-
+        # print "sent message"
 
 
 async def execute(self, name, params, channel, userdata, rank):
-    #print "running"
+    # print "running"
     if len(params) == 1 and params[0] == "on":
         if not self.events["time"].doesExist("threadChecker"):
             await self.sendChatMessage(self.send, channel, "Turning threadevent on.")
@@ -54,17 +54,16 @@ async def execute(self, name, params, channel, userdata, rank):
         else:
             await self.sendChatMessage(self.send, channel, "threadevent isn't running!")
 
-
     elif len(params) == 2 and params[0] == "add":
         channel = self.retrieveTrueCase(params[1])
 
-        if channel != False:
+        if channel:
             await self.sendChatMessage(self.send, channel, "added")
             self.events["time"].addChannel("threadChecker", channel)
 
     elif len(params) == 2 and params[0] == "rem":
         channel = self.retrieveTrueCase(params[1])
 
-        if channel != False:
+        if channel:
             await self.sendChatMessage(self.send, channel, "removed")
             self.events["time"].removeChannel("threadChecker", channel)

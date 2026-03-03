@@ -1,11 +1,11 @@
-
-from io import StringIO
 from fnmatch import fnmatch
+from io import StringIO
 
 from BanList import InvalidCharacterUsed, NoSuchBanGroup
 
 ID = "ban"
 permission = 3
+
 
 async def execute(self, user, params, channel, userdata, rank):
     if len(params) == 0:
@@ -20,22 +20,18 @@ async def execute(self, user, params, channel, userdata, rank):
         # We need to confirm that the string is formatted correctly:
         # 1. Exactly one ! and one @
         # 2. ! comes before @
-        if (
-            (countExclamationMark != 1)
-            or (countAt != 1)
-            or (userstring.find("!") > userstring.find("@"))
-            ):
+        if (countExclamationMark != 1) or (countAt != 1) or (userstring.find("!") > userstring.find("@")):
             await self.sendNotice(user, "User string should be formatted like this: username!ident@host")
             return
         else:
-            username, sep, identAndHost = userstring.partition("!")
-            ident, sep, host = identAndHost.partition("@")
+            username, _, identAndHost = userstring.partition("!")
+            ident, _sep, host = identAndHost.partition("@")
 
             if username == "*" and ident == "*" and host == "*":
                 await self.sendNotice(user, "You can't ban everyone!")
                 return
 
-            selfstring = "{0}!{1}@{2}".format(user, userdata[0], userdata[1]) # User, ident, hostname
+            selfstring = f"{user}!{userdata[0]}@{userdata[1]}"  # User, ident, hostname
             if check_if_self_banned(selfstring, userstring) is True:
                 await self.sendNotice(user, "You can't ban yourself!")
                 return
@@ -44,63 +40,60 @@ async def execute(self, user, params, channel, userdata, rank):
                 if len(params) == 1:
                     result = self.Banlist.banUser(username, ident, host, ban_reason="None")
                     if result is True:
-                        await self.sendNotice(user, u"Userstring {0} banned.".format(userstring))
+                        await self.sendNotice(user, f"Userstring {userstring} banned.")
                     if result is False:
-                        await self.sendNotice(user, u"Userstring {0} is already banned.".format(userstring))
+                        await self.sendNotice(user, f"Userstring {userstring} is already banned.")
                 else:
                     group = params[1]
-                    if len(params) > 2:
-                        ban_reason = " ".join(params[2:])
-                    else:
-                        ban_reason = "None"
+                    ban_reason = " ".join(params[2:]) if len(params) > 2 else "None"
 
                     result = self.Banlist.banUser(username, ident, host, group, ban_reason=ban_reason)
 
                     if result is True:
-                        await self.sendNotice(user,
-                                        u"Userstring {0} banned in group '{1}'.".format(userstring, group)
-                                        )
+                        await self.sendNotice(
+                            user,
+                            f"Userstring {userstring} banned in group '{group}'.",
+                        )
                     if result is False:
-                        await self.sendNotice(user,
-                                        u"Userstring {0} is already banned in group {1}.".format(userstring, group)
-                                        )
+                        await self.sendNotice(
+                            user,
+                            f"Userstring {userstring} is already banned in group {group}.",
+                        )
 
             except NoSuchBanGroup as error:
-                await self.sendNotice(user, u"Ban group '{0}' does not exist.".format(error.group))
+                await self.sendNotice(user, f"Ban group '{error.group}' does not exist.")
                 return
             except InvalidCharacterUsed as error:
-                await self.sendNotice(user,
-                                u"Invalid character '{0}' found in position {1} of '{2}'.".format(error.char,
-                                                                                                  error.pos,
-                                                                                                  error.string))
+                await self.sendNotice(
+                    user,
+                    f"Invalid character '{error.char}' found in position {error.pos} of '{error.string}'.",
+                )
                 return
 
+
 def check_if_self_banned(userstring, pattern):
-    
+
     ESCAPECHAR = "/"
     TOESCAPE = "[]"
-    
+
     string = StringIO()
-    
+
     # fnmatch uses '!' for excluding character sets, but
     # GLOB in sqlite uses '^'. Because we only use fnmatch to
     # check if the user is banning himself, we will replace
     # occurences of ^ with !.
     pattern = pattern.replace("/[^", "/[!")
-    
+
     for pos, letter in enumerate(pattern):
         if letter == ESCAPECHAR:
             continue
-        if letter in TOESCAPE and pattern[pos-1] == ESCAPECHAR:
+        if letter in TOESCAPE and pattern[pos - 1] == ESCAPECHAR:
             string.write(letter)
         elif letter in TOESCAPE:
-            string.write("["+letter+"]")
+            string.write("[" + letter + "]")
         else:
             string.write(letter)
-    
+
     escaped_pattern = string.getvalue()
-    
-    if fnmatch(userstring, escaped_pattern):
-        return True
-    else:
-        return False
+
+    return bool(fnmatch(userstring, escaped_pattern))

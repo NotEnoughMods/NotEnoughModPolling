@@ -1,8 +1,7 @@
 ### BotEvents.py contains various kinds of Event Handlers
 ### For the moment, only Timer and Message events are used
-import time
 import logging
-
+import time
 from timeit import default_timer
 
 
@@ -30,11 +29,17 @@ class StandardEvent:
         self.__event_log__ = logging.getLogger("Event")
         self.eventStats = {}
 
-    def addEvent(self, name, function, channel=[], from_event=False):
+    def addEvent(self, name, function, channel=None, from_event=False):
+        if channel is None:
+            channel = []
         if not self.comes_from_event:
             self.__event_log__.debug("Adding event '%s' for channels '%s'", name, channel)
         else:
-            self.__event_log__.debug("Adding event '%s' for channels '%s'; Used from inside an event", name, channel)
+            self.__event_log__.debug(
+                "Adding event '%s' for channels '%s'; Used from inside an event",
+                name,
+                channel,
+            )
 
         if not callable(function):
             raise TypeError(str(function) + " is not a callable function!")
@@ -85,7 +90,7 @@ class StandardEvent:
         self.comes_from_event = False
 
         if len(self.operationQueue) > 0:
-            for i in range(len(self.operationQueue)):
+            for _i in range(len(self.operationQueue)):
                 oper = self.operationQueue.pop(0)
                 if oper[0] == "add":
                     name, function, channels = oper[1], oper[2], oper[3]
@@ -115,10 +120,7 @@ class StandardEvent:
             raise KeyError("Trying to remove " + event + ", but it doesn't exist!")
 
     def doesExist(self, event):
-        if event in self.__events__:
-            return True
-        else:
-            return False
+        return event in self.__events__
 
     def addChannel(self, eventName, channel):
         self.__event_log__.debug("Adding channels '%s' to event '%s'", channel, eventName)
@@ -145,16 +147,22 @@ class StandardEvent:
 
 
 class TimerEvent(StandardEvent):
-    def addEvent(self, name, interval, function, channel=[], from_event=False):
+    def addEvent(self, name, interval, function, channel=None, from_event=False):
+        if channel is None:
+            channel = []
         if not self.comes_from_event:
             self.__event_log__.debug(
                 "Adding time event '%s' for channels '%s' with interval = %s second(s)",
-                name, channel, interval,
+                name,
+                channel,
+                interval,
             )
         else:
             self.__event_log__.debug(
                 "Adding time event '%s' for channels '%s' with interval = %s second(s); Used from inside an event",
-                name, channel, interval,
+                name,
+                channel,
+                interval,
             )
 
         if not isinstance(interval, (int, float)):
@@ -190,7 +198,7 @@ class TimerEvent(StandardEvent):
         self.comes_from_event = False
 
         if len(self.operationQueue) > 0:
-            for i in range(len(self.operationQueue)):
+            for _i in range(len(self.operationQueue)):
                 oper = self.operationQueue.pop(0)
 
                 if oper[0] == "add":
@@ -213,9 +221,7 @@ class TimerEvent(StandardEvent):
         if ntime - last >= timeInterval:
             start = default_timer()
 
-            result = self.__events__[eventName]["function"](
-                commandHandler, self.__events__[eventName]["channels"]
-            )
+            result = self.__events__[eventName]["function"](commandHandler, self.__events__[eventName]["channels"])
             if hasattr(result, "__await__"):
                 await result
 
@@ -248,7 +254,7 @@ class MsgEvent(StandardEvent):
         self.comes_from_event = False
 
         if len(self.operationQueue) > 0:
-            for i in range(len(self.operationQueue)):
+            for _i in range(len(self.operationQueue)):
                 oper = self.operationQueue.pop(0)
 
                 if oper[0] == "add":
@@ -266,7 +272,11 @@ class MsgEvent(StandardEvent):
         start = default_timer()
 
         result = self.__events__[eventName]["function"](
-            commandHandler, self.__events__[eventName]["channels"], userdata, message, channel
+            commandHandler,
+            self.__events__[eventName]["channels"],
+            userdata,
+            message,
+            channel,
         )
         if hasattr(result, "__await__"):
             await result

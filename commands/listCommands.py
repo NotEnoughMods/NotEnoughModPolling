@@ -1,14 +1,15 @@
 ID = "commands"
 permission = 0
 
-rankdict = {"@@" : 3, "@" : 2, "+" : 1, "" : 0}
+rankdict = {"@@": 3, "@": 2, "+": 1, "": 0}
 rankname = ("Guest", "Voiced", "OP", "Owner")
+
 
 async def execute(self, name, params, channel, userdata, rank):
 
     perms = rankdict[rank]
     group = {}
-    for i in range(perms+1):
+    for i in range(perms + 1):
         group[i] = []
 
     for cmd in self.commands:
@@ -16,10 +17,7 @@ async def execute(self, name, params, channel, userdata, rank):
         if perms >= cmdrank:
             group[cmdrank].append(cmd)
 
-
-
     await self.sendNotice(name, "Available commands:")
     for i in group:
         group[i].sort()
-        await self.sendNotice(name, "{0}: {1}".format(rankname[i], " | ".join(group[i])))
-    
+        await self.sendNotice(name, "{}: {}".format(rankname[i], " | ".join(group[i])))

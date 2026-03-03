@@ -4,13 +4,15 @@ ID = "watchdog"
 permission = 3
 privmsgEnabled = True
 
+
 def choose_singular_or_plural(num, singular, plural):
     if num > 1:
-        return "{0} {1}".format(num, plural)
+        return f"{num} {plural}"
     elif num == 1:
-        return "{0} {1}".format(num, singular)
+        return f"{num} {singular}"
     else:
         return None
+
 
 async def execute(self, name, params, channel, userdata, rank, chan):
     if len(params) == 0:
@@ -19,20 +21,24 @@ async def execute(self, name, params, channel, userdata, rank, chan):
         weeks = uptime.days // 7
         days = uptime.days % 7
 
-        hours = uptime.seconds // (60*60)
-        minutes = (uptime.seconds % (60*60)) // 60
+        hours = uptime.seconds // (60 * 60)
+        minutes = (uptime.seconds % (60 * 60)) // 60
 
         timeList = []
 
-        weekString  = choose_singular_or_plural(weeks, "week", "weeks")
-        dayString   = choose_singular_or_plural(days, "day", "days")
-        hourString  = choose_singular_or_plural(hours, "hour", "hours")
-        minString   = choose_singular_or_plural(minutes, "minute", "minutes")
+        weekString = choose_singular_or_plural(weeks, "week", "weeks")
+        dayString = choose_singular_or_plural(days, "day", "days")
+        hourString = choose_singular_or_plural(hours, "hour", "hours")
+        minString = choose_singular_or_plural(minutes, "minute", "minutes")
 
-        if weekString   != None: timeList.append(weekString)
-        if dayString    != None: timeList.append(dayString)
-        if hourString   != None: timeList.append(hourString)
-        if minString    != None: timeList.append(minString)
+        if weekString is not None:
+            timeList.append(weekString)
+        if dayString is not None:
+            timeList.append(dayString)
+        if hourString is not None:
+            timeList.append(hourString)
+        if minString is not None:
+            timeList.append(minString)
 
         if len(timeList) == 0:
             timeList.append("Just started")
@@ -50,7 +56,11 @@ async def execute(self, name, params, channel, userdata, rank, chan):
                 eventStats = self.events[eventType].__events__[event]["stats"]
 
                 if average is None:
-                    average, minimum, maximum = eventStats["average"], eventStats["min"], eventStats["max"]
+                    average, minimum, maximum = (
+                        eventStats["average"],
+                        eventStats["min"],
+                        eventStats["max"],
+                    )
                 else:
                     if eventStats["average"] is None:
                         continue
@@ -71,14 +81,13 @@ async def execute(self, name, params, channel, userdata, rank, chan):
                 average, minimum, maximum = 0, 0, 0
 
             # The micro prefix in unicode
-            dataOutput.append(u"{0}: [{1}\u00B5s/{2}\u00B5s/{3}\u00B5s]".format(event,
-                                                          round(minimum / (10**-6), 2),
-                                                          round(maximum / (10**-6), 2),
-                                                          round(average / (10**-6), 2)
-                                                          )
-                              )
+            dataOutput.append(
+                f"{event}: [{round(minimum / (10**-6), 2)}\u00b5s/"
+                f"{round(maximum / (10**-6), 2)}\u00b5s/"
+                f"{round(average / (10**-6), 2)}\u00b5s]"
+            )
 
-        finalString = "Event statistics: (min/max/average): "+", ".join(dataOutput)
+        finalString = "Event statistics: (min/max/average): " + ", ".join(dataOutput)
 
         await self.sendMessage(channel, finalString)
 
@@ -88,15 +97,13 @@ async def execute(self, name, params, channel, userdata, rank, chan):
             if timeDelta is None:
                 timeDelta = 0
 
-            threadInfo.append(u"{0} [{1}\u00B5s]".format(threadName,
-                                                         round(timeDelta, 2)))
+            threadInfo.append(f"{threadName} [{round(timeDelta, 2)}\u00b5s]")
 
         if len(threadInfo) == 0:
             await self.sendMessage(channel, "No threads running right now.")
         else:
-            finalString = u"The following threads are running: "+", ".join(threadInfo)
+            finalString = "The following threads are running: " + ", ".join(threadInfo)
             await self.sendMessage(channel, finalString)
-
 
     else:
         eventType = params[0]
@@ -114,20 +121,16 @@ async def execute(self, name, params, channel, userdata, rank, chan):
                     average, minimum, maximum = 0, 0, 0
 
                 # The micro prefix in unicode
-                dataOutput.append(u"{0}: [{1}\u00B5s/{2}\u00B5s/{3}\u00B5s]".format(event,
-                                                                    round(minimum / (10**-6), 2),
-                                                                    round(maximum / (10**-6), 2),
-                                                                    round(average / (10**-6), 2)
-                                                                    )
-                                  )
+                dataOutput.append(
+                    f"{event}: [{round(minimum / (10**-6), 2)}\u00b5s/"
+                    f"{round(maximum / (10**-6), 2)}\u00b5s/"
+                    f"{round(average / (10**-6), 2)}\u00b5s]"
+                )
 
-            await self.sendMessage(channel, u"Statistics for event type '{0}': {1}".format(eventType,
-                                                                                    ", ".join(dataOutput)
-                                                                                    )
-                             )
+            await self.sendMessage(
+                channel,
+                "Statistics for event type '{}': {}".format(eventType, ", ".join(dataOutput)),
+            )
 
         else:
             await self.sendMessage(channel, "No such event type.")
-    
-    
-    

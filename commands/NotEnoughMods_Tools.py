@@ -1,12 +1,12 @@
 import json
-import traceback
 import logging
 import os
-import aiohttp
-
+import traceback
 from collections import OrderedDict
 from string import ascii_letters, digits
 from urllib.parse import quote as urlquote
+
+import aiohttp
 
 ID = "nem"
 permission = 1
@@ -27,7 +27,7 @@ PINK = COLOURPREFIX + "13"
 GRAY = COLOURPREFIX + "14"
 LIGHTGRAY = COLOURPREFIX + "15"
 
-ALLOWED_IN_FILENAME = "-_.() %s%s" % (ascii_letters, digits)
+ALLOWED_IN_FILENAME = f"-_.() {ascii_letters}{digits}"
 
 
 # Colour Constants End
@@ -42,17 +42,30 @@ cache_etag = {}
 
 
 def normalize_filename(name):
-    return ''.join(c for c in name if c in ALLOWED_IN_FILENAME)
+    return "".join(c for c in name if c in ALLOWED_IN_FILENAME)
 
 
 async def get_latest_version():
     try:
         return await fetch_json("https://bot.notenoughmods.com/?json")
-    except:
+    except Exception:
         print("Failed to get NEM versions, falling back to hard-coded")
         nem_logger.exception("Failed to get NEM versions, falling back to hard-coded.")
-        return ["1.4.5", "1.4.6-1.4.7", "1.5.1", "1.5.2", "1.6.1", "1.6.2", "1.6.4",
-                "1.7.2", "1.7.4", "1.7.5", "1.7.7", "1.7.9", "1.7.10"]
+        return [
+            "1.4.5",
+            "1.4.6-1.4.7",
+            "1.5.1",
+            "1.5.2",
+            "1.6.1",
+            "1.6.2",
+            "1.6.4",
+            "1.7.2",
+            "1.7.4",
+            "1.7.5",
+            "1.7.7",
+            "1.7.9",
+            "1.7.10",
+        ]
 
 
 async def fetch_page(url, timeout=10, decode_json=False, cache=False):
@@ -66,15 +79,15 @@ async def fetch_page(url, timeout=10, decode_json=False, cache=False):
 
                 etag = cache_etag.get(url)
                 if etag:
-                    headers['If-None-Match'] = etag
+                    headers["If-None-Match"] = etag
 
                 last_modified = cache_last_modified.get(url)
                 if last_modified:
-                    headers['If-Modified-Since'] = '"{}"'.format(last_modified)
+                    headers["If-Modified-Since"] = f'"{last_modified}"'
 
                 async with session.get(url, timeout=aiohttp.ClientTimeout(total=timeout), headers=headers) as response:
                     if response.status == 304:
-                        with open(filepath, 'r') as f:
+                        with open(filepath) as f:
                             if decode_json:
                                 return json.load(f)
                             else:
@@ -82,11 +95,11 @@ async def fetch_page(url, timeout=10, decode_json=False, cache=False):
                     else:
                         text = await response.text()
 
-                        with open(filepath, 'w') as f:
+                        with open(filepath, "w") as f:
                             f.write(text)
 
-                        cache_etag[url] = response.headers.get('etag')
-                        cache_last_modified[url] = response.headers.get('last-modified')
+                        cache_etag[url] = response.headers.get("etag")
+                        cache_last_modified[url] = response.headers.get("last-modified")
 
                         if decode_json:
                             return json.loads(text)
@@ -96,11 +109,11 @@ async def fetch_page(url, timeout=10, decode_json=False, cache=False):
                 async with session.get(url, timeout=aiohttp.ClientTimeout(total=timeout)) as response:
                     text = await response.text()
 
-                    with open(filepath, 'w') as f:
+                    with open(filepath, "w") as f:
                         f.write(text)
 
-                    cache_etag[url] = response.headers.get('etag')
-                    cache_last_modified[url] = response.headers.get('last-modified')
+                    cache_etag[url] = response.headers.get("etag")
+                    cache_last_modified[url] = response.headers.get("last-modified")
 
                     if decode_json:
                         return json.loads(text)
@@ -112,7 +125,7 @@ async def fetch_page(url, timeout=10, decode_json=False, cache=False):
                     return await response.json(content_type=None)
                 else:
                     return await response.text()
-    except:
+    except Exception:
         traceback.print_exc()
         pass
 
@@ -126,7 +139,7 @@ async def setup(self, Startup):
     if session:
         await session.close()
     session = aiohttp.ClientSession(
-        headers={'User-agent': 'NotEnoughMods:Tools/1.X (+https://github.com/NotEnoughMods/NotEnoughModPolling)'},
+        headers={"User-agent": "NotEnoughMods:Tools/1.X (+https://github.com/NotEnoughMods/NotEnoughModPolling)"},
     )
     versions = await get_latest_version()
     version = versions[-1]
@@ -136,40 +149,40 @@ async def execute(self, name, params, channel, userdata, rank):
     try:
         command = commands[params[0]]
         await command(self, name, params, channel, userdata, rank)
-    except:
+    except Exception:
         await self.sendMessage(channel, "Invalid sub-command!")
-        await self.sendMessage(channel, "See \"=nem help\" for help")
+        await self.sendMessage(channel, 'See "=nem help" for help')
 
 
 async def setlist(self, name, params, channel, userdata, rank):
     global version
     if len(params) != 2:
-        await self.sendMessage(channel,
-                         "{name}: Insufficient amount of parameters provided.".format(name=name)
-                         )
-        await self.sendMessage(channel,
-                         "{name}: {setlistHelp}".format(name=name,
-                                                        setlistHelp=help["setlist"][0])
-                         )
+        await self.sendMessage(
+            channel,
+            f"{name}: Insufficient amount of parameters provided.",
+        )
+        await self.sendMessage(
+            channel,
+            "{name}: {setlistHelp}".format(name=name, setlistHelp=help["setlist"][0]),
+        )
     else:
         version = str(params[1])
-        await self.sendMessage(channel,
-                         "switched list to: "
-                         "{bold}{blue}{version}{colourEnd}".format(bold=BOLD,
-                                                                   blue=BLUE,
-                                                                   version=params[1],
-                                                                   colourEnd=COLOUREND)
-                         )
+        await self.sendMessage(
+            channel,
+            f"switched list to: {BOLD}{BLUE}{params[1]}{COLOUREND}",
+        )
 
 
 async def multilist(self, name, params, channel, userdata, rank):
     if len(params) != 2:
-        await self.sendMessage(channel,
-                         "{name}: Insufficient amount of parameters provided.".format(name=name))
-        await self.sendMessage(channel,
-                         "{name}: {multilistHelp}".format(name=name,
-                                                          multilistHelp=help["multilist"][0])
-                         )
+        await self.sendMessage(
+            channel,
+            f"{name}: Insufficient amount of parameters provided.",
+        )
+        await self.sendMessage(
+            channel,
+            "{name}: {multilistHelp}".format(name=name, multilistHelp=help["multilist"][0]),
+        )
     else:
         try:
             jsonres = {}
@@ -178,7 +191,10 @@ async def multilist(self, name, params, channel, userdata, rank):
             modName = params[1]
 
             for ver in versions:
-                jsonres[ver] = await fetch_json("https://bot.notenoughmods.com/" + urlquote(ver) + ".json", cache=True)
+                jsonres[ver] = await fetch_json(
+                    "https://bot.notenoughmods.com/" + urlquote(ver) + ".json",
+                    cache=True,
+                )
 
                 for i, mod in enumerate(jsonres[ver]):
                     if modName.lower() == mod["name"].lower():
@@ -199,60 +215,59 @@ async def multilist(self, name, params, channel, userdata, rank):
             else:
                 count = str(count) + " MC versions"
 
-            await self.sendMessage(channel, "Listing " + count + " for \"" + params[1] + "\":")
+            await self.sendMessage(channel, "Listing " + count + ' for "' + params[1] + '":')
 
-            for ver in results.keys():
+            for ver in results:
                 alias = ""
                 modData = jsonres[ver][results[ver]]
 
                 if modData["aliases"]:
-                    alias_joinText = "{colourEnd}, {colour}".format(colourEnd=COLOUREND,
-                                                                    colour=PINK)
+                    alias_joinText = f"{COLOUREND}, {PINK}"
                     alias_text = alias_joinText.join(modData["aliases"])
 
-                    alias = "({colour}{text}{colourEnd}) ".format(colourEnd=COLOUREND,
-                                                                  colour=PINK,
-                                                                  text=alias_text)
+                    alias = f"({PINK}{alias_text}{COLOUREND}) "
 
                 comment = ""
                 if modData["comment"] != "":
-                    comment = "({colour}{text}{colourEnd}) ".format(colourEnd=COLOUREND,
-                                                                    colour=GRAY,
-                                                                    text=modData["comment"])
+                    comment = "({colour}{text}{colourEnd}) ".format(
+                        colourEnd=COLOUREND, colour=GRAY, text=modData["comment"]
+                    )
 
                 dev = ""
                 try:
                     if modData["dev"] != "":
-                        dev = ("({colour}dev{colourEnd}: "
-                               "{colour2}{version}{colourEnd}) ".format(colourEnd=COLOUREND,
-                                                                        colour=GRAY,
-                                                                        colour2=RED,
-                                                                        version=modData["dev"])
-                               )
+                        dev = "({colour}dev{colourEnd}: {colour2}{version}{colourEnd}) ".format(
+                            colourEnd=COLOUREND,
+                            colour=GRAY,
+                            colour2=RED,
+                            version=modData["dev"],
+                        )
 
                 except Exception as error:
                     print(error)
                     traceback.print_exc()
 
-                await self.sendMessage(channel,
-                                 "{bold}{blue}{mcversion}{colourEnd}{bold}: "
-                                 "{purple}{name}{colourEnd} {aliasString}"
-                                 "{darkgreen}{version}{colourEnd} {devString}"
-                                 "{comment}{orange}{shorturl}{colourEnd}".format(name=modData["name"],
-                                                                                 aliasString=alias,
-                                                                                 devString=dev,
-                                                                                 comment=comment,
-                                                                                 version=modData["version"],
-                                                                                 shorturl=modData["shorturl"],
-                                                                                 mcversion=ver,
-
-                                                                                 bold=BOLD,
-                                                                                 blue=BLUE,
-                                                                                 purple=PURPLE,
-                                                                                 darkgreen=DARKGREEN,
-                                                                                 orange=ORANGE,
-                                                                                 colourEnd=COLOUREND)
-                                 )
+                await self.sendMessage(
+                    channel,
+                    "{bold}{blue}{mcversion}{colourEnd}{bold}: "
+                    "{purple}{name}{colourEnd} {aliasString}"
+                    "{darkgreen}{version}{colourEnd} {devString}"
+                    "{comment}{orange}{shorturl}{colourEnd}".format(
+                        name=modData["name"],
+                        aliasString=alias,
+                        devString=dev,
+                        comment=comment,
+                        version=modData["version"],
+                        shorturl=modData["shorturl"],
+                        mcversion=ver,
+                        bold=BOLD,
+                        blue=BLUE,
+                        purple=PURPLE,
+                        darkgreen=DARKGREEN,
+                        orange=ORANGE,
+                        colourEnd=COLOUREND,
+                    ),
+                )
 
         except Exception as error:
             await self.sendMessage(channel, name + ": " + str(error))
@@ -261,23 +276,20 @@ async def multilist(self, name, params, channel, userdata, rank):
 
 async def list(self, name, params, channel, userdata, rank):
     if len(params) < 2:
-        await self.sendMessage(channel,
-                         "{name}: Insufficient amount of parameters provided.".format(name=name))
-        await self.sendMessage(channel,
-                         "{name}: {helpEntry}".format(name=name,
-                                                      helpEntry=help["list"][0])
-                         )
+        await self.sendMessage(
+            channel,
+            f"{name}: Insufficient amount of parameters provided.",
+        )
+        await self.sendMessage(channel, "{name}: {helpEntry}".format(name=name, helpEntry=help["list"][0]))
         return
-    if len(params) >= 3:
-        ver = params[2]
-    else:
-        ver = version
+    ver = params[2] if len(params) >= 3 else version
     try:
         result = await fetch_page("https://bot.notenoughmods.com/" + urlquote(ver) + ".json", cache=True)
         if not result:
-            await self.sendMessage(channel,
-                             "{0}: Could not fetch the list. Are you sure it exists?".format(name)
-                             )
+            await self.sendMessage(
+                channel,
+                f"{name}: Could not fetch the list. Are you sure it exists?",
+            )
             return
         jsonres = json.loads(result)
         results = []
@@ -304,62 +316,55 @@ async def list(self, name, params, channel, userdata, rank):
         else:
             count = str(count) + " results"
 
-        await self.sendMessage(channel,
-                         "Listing {count} for \"{term}\" in "
-                         "{bold}{colour}{version}"
-                         "{colourEnd}{bold}".format(count=count,
-                                                    term=params[1],
-                                                    version=ver,
-                                                    bold=BOLD,
-                                                    colourEnd=COLOUREND,
-                                                    colour=BLUE)
-                         )
+        await self.sendMessage(
+            channel,
+            f'Listing {count} for "{params[1]}" in {BOLD}{BLUE}{ver}{COLOUREND}{BOLD}',
+        )
 
         for line in results:
             alias = COLOURPREFIX
             if jsonres[line]["aliases"]:
-                alias_joinText = "{colourEnd}, {colour}".format(colourEnd=COLOUREND,
-                                                                colour=PINK)
+                alias_joinText = f"{COLOUREND}, {PINK}"
                 alias_text = alias_joinText.join(jsonres[line]["aliases"])
 
-                alias = "({colour}{text}{colourEnd}) ".format(colourEnd=COLOUREND,
-                                                              colour=PINK,
-                                                              text=alias_text)
+                alias = f"({PINK}{alias_text}{COLOUREND}) "
             comment = ""
             if jsonres[line]["comment"] != "":
-                comment = "({colour}{text}{colourEnd}) ".format(colourEnd=COLOUREND,
-                                                                colour=GRAY,
-                                                                text=jsonres[line]["comment"])
+                comment = "({colour}{text}{colourEnd}) ".format(
+                    colourEnd=COLOUREND, colour=GRAY, text=jsonres[line]["comment"]
+                )
             dev = ""
             try:
                 if jsonres[line]["dev"] != "":
-                    dev = ("({colour}dev{colourEnd}): "
-                           "{colour2}{version}{colourEnd})".format(colourEnd=COLOUREND,
-                                                                   colour=GRAY,
-                                                                   colour2=RED,
-                                                                   version=jsonres[line]["dev"])
-                           )
+                    dev = "({colour}dev{colourEnd}): {colour2}{version}{colourEnd})".format(
+                        colourEnd=COLOUREND,
+                        colour=GRAY,
+                        colour2=RED,
+                        version=jsonres[line]["dev"],
+                    )
             except Exception as error:
                 print(error)
                 traceback.print_exc()
 
-            await self.sendMessage(channel,
-                             "{purple}{name}{colourEnd} {aliasString}"
-                             "{darkgreen}{version}{colourEnd} {devString}"
-                             "{comment}{orange}{shorturl}{colourEnd}".format(name=jsonres[line]["name"],
-                                                                             aliasString=alias,
-                                                                             devString=dev,
-                                                                             comment=comment,
-                                                                             version=jsonres[line]["version"],
-                                                                             shorturl=jsonres[line]["shorturl"],
-
-                                                                             purple=PURPLE,
-                                                                             darkgreen=DARKGREEN,
-                                                                             orange=ORANGE,
-                                                                             colourEnd=COLOUREND)
-                             )
+            await self.sendMessage(
+                channel,
+                "{purple}{name}{colourEnd} {aliasString}"
+                "{darkgreen}{version}{colourEnd} {devString}"
+                "{comment}{orange}{shorturl}{colourEnd}".format(
+                    name=jsonres[line]["name"],
+                    aliasString=alias,
+                    devString=dev,
+                    comment=comment,
+                    version=jsonres[line]["version"],
+                    shorturl=jsonres[line]["shorturl"],
+                    purple=PURPLE,
+                    darkgreen=DARKGREEN,
+                    orange=ORANGE,
+                    colourEnd=COLOUREND,
+                ),
+            )
     except Exception as error:
-        await self.sendMessage(channel, "{0}: {1}".format(name, error))
+        await self.sendMessage(channel, f"{name}: {error}")
         traceback.print_exc()
 
 
@@ -367,9 +372,15 @@ async def compare(self, name, params, channel, userdata, rank):
     try:
         oldVersion, newVersion = params[1], params[2]
 
-        oldJson = await fetch_json("https://bot.notenoughmods.com/" + urlquote(oldVersion) + ".json", cache=True)
+        oldJson = await fetch_json(
+            "https://bot.notenoughmods.com/" + urlquote(oldVersion) + ".json",
+            cache=True,
+        )
 
-        newJson = await fetch_json("https://bot.notenoughmods.com/" + urlquote(newVersion) + ".json", cache=True)
+        newJson = await fetch_json(
+            "https://bot.notenoughmods.com/" + urlquote(newVersion) + ".json",
+            cache=True,
+        )
 
         newMods = {modInfo["name"].lower(): True for modInfo in newJson}
 
@@ -380,16 +391,17 @@ async def compare(self, name, params, channel, userdata, rank):
             if old_modName not in newMods:
                 missingMods.append(modInfo["name"])
 
-        path = "commands/modbot.mca.d3s.co/htdocs/compare/{0}...{1}.json".format(oldVersion, newVersion)
+        path = f"commands/modbot.mca.d3s.co/htdocs/compare/{oldVersion}...{newVersion}.json"
         with open(path, "w") as f:
-            f.write(json.dumps(missingMods, sort_keys=True, indent=4 * ' '))
+            f.write(json.dumps(missingMods, sort_keys=True, indent=4 * " "))
 
-        await self.sendMessage(channel,
-                         "{0} mods died trying to update to {1}".format(len(missingMods), newVersion)
-                         )
+        await self.sendMessage(
+            channel,
+            f"{len(missingMods)} mods died trying to update to {newVersion}",
+        )
 
     except Exception as error:
-        await self.sendMessage(channel, "{0}: {1}".format(name, error))
+        await self.sendMessage(channel, f"{name}: {error}")
         traceback.print_exc()
 
 
@@ -399,10 +411,7 @@ async def about(self, name, params, channel, userdata, rank):
 
 async def help(self, name, params, channel, userdata, rank):
     if len(params) == 1:
-        await self.sendMessage(channel,
-                         "{0}: Available commands: {1}".format(name,
-                                                               ", ".join(help))
-                         )
+        await self.sendMessage(channel, "{}: Available commands: {}".format(name, ", ".join(help)))
     else:
         command = params[1]
         if command in help:
@@ -421,7 +430,11 @@ async def force_cacheRedownload(self, name, params, channel, userdata, rank):
             if os.path.exists(filepath):
                 cache_last_modified[normalized] = 0
 
-        await self.sendMessage(channel, "Cache Timestamps have been reset. Cache will be redownloaded on the next fetching.")
+        await self.sendMessage(
+            channel,
+            "Cache Timestamps have been reset. Cache will be redownloaded on the next fetching.",
+        )
+
 
 commands = {
     "list": list,
@@ -430,20 +443,30 @@ commands = {
     "help": help,
     "setlist": setlist,
     "compare": compare,
-    "forceredownload": force_cacheRedownload
+    "forceredownload": force_cacheRedownload,
 }
 
 help = {
-    "list": ["=nem list <search> <version>",
-             "Searches the NotEnoughMods database for <search> and returns all results to IRC."],
-    "about": ["=nem about",
-              "Shows some info about the NEM plugin."],
-    "help": ["=nem help [command]",
-             "Shows the help info about [command] or lists all commands for this plugin."],
-    "setlist": ["=nem setlist <version>",
-                "Sets the default version to be used by other commands to <version>."],
-    "multilist": ["=nem multilist <modName or alias>",
-                  "Searches the NotEnoughMods database for modName or alias in all MC versions."],
-    "compare": ["=nem compare <oldVersion> <newVersion>",
-                "Compares the NEMP entries for two different MC versions and says how many mods haven't been updated to the new version."]
+    "list": [
+        "=nem list <search> <version>",
+        "Searches the NotEnoughMods database for <search> and returns all results to IRC.",
+    ],
+    "about": ["=nem about", "Shows some info about the NEM plugin."],
+    "help": [
+        "=nem help [command]",
+        "Shows the help info about [command] or lists all commands for this plugin.",
+    ],
+    "setlist": [
+        "=nem setlist <version>",
+        "Sets the default version to be used by other commands to <version>.",
+    ],
+    "multilist": [
+        "=nem multilist <modName or alias>",
+        "Searches the NotEnoughMods database for modName or alias in all MC versions.",
+    ],
+    "compare": [
+        "=nem compare <oldVersion> <newVersion>",
+        "Compares the NEMP entries for two different MC versions and says how many mods "
+        "haven't been updated to the new version.",
+    ],
 }

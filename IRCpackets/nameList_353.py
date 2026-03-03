@@ -1,5 +1,6 @@
 ID = "353"
 
+
 async def execute(self, sendMsg, prefix, command, params):
     data = params.split(" ", 3)
     channel = data[2]
@@ -11,8 +12,8 @@ async def execute(self, sendMsg, prefix, command, params):
             name = name[1:]
         else:
             self.channelData[self.retrieveTrueCase(channel)]["Userlist"].append((name, ""))
-            
+
         if self.Bot_Auth.doesExist(name) and not self.Bot_Auth.isRegistered(name) and not self.Bot_Auth.isQueued(name):
-            #print "OK"
+            # print "OK"
             await self.whoisUser(name)
-    #print params
+    # print params

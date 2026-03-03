@@ -1,5 +1,4 @@
 import asyncio
-import time
 import traceback
 
 
@@ -22,9 +21,7 @@ class IRC_Connection:
         self._linebuffer = b""
 
     async def connect(self, host, port, *, local_addr=None, family=0):
-        self.reader, self.writer = await asyncio.open_connection(
-            host, port, local_addr=local_addr, family=family
-        )
+        self.reader, self.writer = await asyncio.open_connection(host, port, local_addr=local_addr, family=family)
         self.ready = True
 
     async def read_lines(self):
@@ -59,7 +56,7 @@ class IRC_Connection:
             while self.ready:
                 try:
                     msg = await asyncio.wait_for(self._write_queue.get(), timeout=0.1)
-                except asyncio.TimeoutError:
+                except TimeoutError:
                     continue
 
                 send_away = msg.encode("utf-8", "replace")

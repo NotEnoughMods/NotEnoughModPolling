@@ -7,15 +7,17 @@ privmsgEnabled = True
 
 async def execute(self, name, params, channel, userdata, rank, chan):
     await self.sendMessage(channel, __create_date())
-    
+
+
 def __create_date():
     local_derp = time.localtime()
-    datetimestring = time.strftime("%I:%M%p, {0} of %B %Y", local_derp) 
+    datetimestring = time.strftime("%I:%M%p, {0} of %B %Y", local_derp)
     day = time.strftime("%d", local_derp)
     day = day.lstrip("0")
 
     return datetimestring.format(format_day_of_month(day))
-    
+
+
 def choose_st_nd_rd_th(number):
     if number.endswith("1"):
         return "st"
@@ -25,6 +27,7 @@ def choose_st_nd_rd_th(number):
         return "rd"
     else:
         return "th"
+
 
 def format_day_of_month(day):
     if len(day) > 1:

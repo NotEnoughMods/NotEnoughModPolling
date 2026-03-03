@@ -1,12 +1,10 @@
-import logging
-import re
-import aiohttp
+import contextlib
 import json
+import re
 import traceback
-import yaml
 
-from bs4 import BeautifulSoup
-from packaging.version import Version
+import aiohttp
+import yaml
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 
 
@@ -19,20 +17,17 @@ class InvalidVersion(NEMPException):
         return repr(self.args[0])
 
 
-class NotEnoughClasses():
-    nemVersions = []
-
-    mods = {}
-    document_groups = {}
-
-    invalid_versions = []
-
+class NotEnoughClasses:
     def __init__(self):
+        self.nemVersions = []
+        self.mods = {}
+        self.document_groups = {}
+        self.invalid_versions = []
         self.session = None
 
         self.jinja_env = Environment(
-            loader=FileSystemLoader('commands/NEMP'),
-            autoescape=select_autoescape(['html'])
+            loader=FileSystemLoader("commands/NEMP"),
+            autoescape=select_autoescape(["html"]),
         )
 
         self.load_config()
@@ -56,45 +51,45 @@ class NotEnoughClasses():
 
     def load_config(self):
         try:
-            with open('commands/NEMP/config.yml', 'r') as f:
+            with open("commands/NEMP/config.yml") as f:
                 self.config = yaml.safe_load(f)
         except:
-            print('You need to setup the NEMP/config.yml file')
+            print("You need to setup the NEMP/config.yml file")
             raise
 
     def load_version_blocklist(self):
         try:
-            with open('commands/NEMP/version_blocklist.yml', 'r') as f:
+            with open("commands/NEMP/version_blocklist.yml") as f:
                 self.invalid_versions = yaml.safe_load(f)
         except:
-            print('You need to setup the NEMP/version_blocklist.yml file')
+            print("You need to setup the NEMP/version_blocklist.yml file")
             raise
 
         # compile regexes for performance
         self.invalid_versions = [re.compile(regex, re.I) for regex in self.invalid_versions[:]]
 
     async def load_mc_blocklist(self):
-        with open('commands/NEMP/mc_blocklist.yml', 'r') as f:
+        with open("commands/NEMP/mc_blocklist.yml") as f:
             self.mc_blocklist = yaml.safe_load(f)  # type: list[str]
 
         # Load additional versions from the Mojang version manifest
         # It's ok if this happens to fail
         try:
-            async with self.session.get('https://launchermeta.mojang.com/mc/game/version_manifest.json') as response:
+            async with self.session.get("https://launchermeta.mojang.com/mc/game/version_manifest.json") as response:
                 r = await response.json(content_type=None)
 
             # Add anything that isn't a release to the blocklist
-            additional = [version['id'] for version in r['versions'] if version['type'] != 'release']
+            additional = [version["id"] for version in r["versions"] if version["type"] != "release"]
             self.mc_blocklist.extend(additional)
-        except:
-            print('Failed to load additional blocked MC versions from Mojang version manifest')
+        except Exception:
+            print("Failed to load additional blocked MC versions from Mojang version manifest")
             traceback.print_exc()
 
         # Deduplicate versions
         self.mc_blocklist = set(self.mc_blocklist)
 
     def load_mc_mapping(self):
-        with open('commands/NEMP/mc_mapping.yml', 'r') as f:
+        with open("commands/NEMP/mc_mapping.yml") as f:
             self.mc_mapping = yaml.safe_load(f)
 
     def _find_regex(self, data):
@@ -105,10 +100,10 @@ class NotEnoughClasses():
         things which rely on a unique 'regex' key.
         """
         if isinstance(data, dict):
-            if 'regex' in data:
-                return data['regex']
+            if "regex" in data:
+                return data["regex"]
             else:
-                for k, v in data.items():
+                for _k, v in data.items():
                     ret = self._find_regex(v)
                     if ret:
                         return ret
@@ -120,13 +115,13 @@ class NotEnoughClasses():
         regex = self._find_regex(self.mods[mod])
 
         if regex:
-            self.mods[mod]['_regex'] = re.compile(regex, re.I)
+            self.mods[mod]["_regex"] = re.compile(regex, re.I)
 
     def get_mod_regex(self, mod):
-        return self.mods[mod].get('_regex')
+        return self.mods[mod].get("_regex")
 
     def match_mod_regex(self, mod, data):
-        return self.mods[mod]['_regex'].search(data)
+        return self.mods[mod]["_regex"].search(data)
 
     def buildModDict(self):
         with open("commands/NEMP/mods.json", "rb") as modList:
@@ -135,7 +130,7 @@ class NotEnoughClasses():
         for mod in self.mods:
             self.compile_regex(mod)
 
-            self.mods[mod]['nem_versions'] = {}
+            self.mods[mod]["nem_versions"] = {}
 
             if "document_group" in self.mods[mod]:
                 if self.mods[mod]["document_group"]["id"] in self.document_groups:
@@ -144,7 +139,7 @@ class NotEnoughClasses():
                     self.document_groups[self.mods[mod]["document_group"]["id"]] = [mod]
 
     def buildHTML(self):
-        self.jinja_env.get_template('index.jinja2').stream(mods=self.mods).dump('commands/NEMP/htdocs/index.html')
+        self.jinja_env.get_template("index.jinja2").stream(mods=self.mods).dump("commands/NEMP/htdocs/index.html")
 
     async def QueryNEM(self):
         self.nemVersions = await self.fetch_json("https://bot.notenoughmods.com/?json")
@@ -155,7 +150,7 @@ class NotEnoughClasses():
         for json_mod_name, json_info in self.mods.items():
             # The NEM mod name is set in 'name', defaults to json_mod_name
             # We then convert it to lowercase so we can make a case-insensitive comparison
-            nem_mod_name = json_info.get('name', json_mod_name).lower()
+            nem_mod_name = json_info.get("name", json_mod_name).lower()
 
             our_mods.setdefault(nem_mod_name, []).append(json_mod_name)
 
@@ -171,7 +166,7 @@ class NotEnoughClasses():
             # For each NEM Mod...
             for nem_mod in nem_list:
                 # Possible NEM name for the mod are the name itself and its aliases
-                nem_mod_names = [nem_mod['name']] + nem_mod['aliases']
+                nem_mod_names = [nem_mod["name"]] + nem_mod["aliases"]
 
                 for nem_mod_name in nem_mod_names:
                     # This is a map of NEM mod name -> internal (mods.json) mod name
@@ -181,41 +176,41 @@ class NotEnoughClasses():
                     if our_names:
                         # Grab the dev and release version
                         for our_name in our_names:
-                            self.mods[our_name]['nem_versions'][nem_list_name] = {
-                                'dev': nem_mod.get('dev', ''),
-                                'version': nem_mod.get('version', '')
+                            self.mods[our_name]["nem_versions"][nem_list_name] = {
+                                "dev": nem_mod.get("dev", ""),
+                                "version": nem_mod.get("version", ""),
                             }
 
     async def CheckJenkins(self, mod, document=None, simulation=False):
-        jsonres = await self.fetch_json(self.mods[mod]["jenkins"]["url"] + '?tree=changeSet[items[msg]],artifacts[fileName]')
+        jsonres = await self.fetch_json(
+            self.mods[mod]["jenkins"]["url"] + "?tree=changeSet[items[msg]],artifacts[fileName]"
+        )
         filename = jsonres["artifacts"][self.mods[mod]["jenkins"]["item"]]["fileName"]
         match = self.match_mod_regex(mod, filename)
         output = match.groupdict()
-        try:
+        with contextlib.suppress(BaseException):
             output["change"] = jsonres["changeSet"]["items"][0]["msg"]
-        except:
-            pass
         return output
 
     async def CheckMCForge2(self, mod, document=None, simulation=False):
-        jsonres = await self.fetch_json(self.mods[mod]['mcforge']['url'])
+        jsonres = await self.fetch_json(self.mods[mod]["mcforge"]["url"])
 
-        if self.mods[mod]['mcforge'].get('slim', False):
+        if self.mods[mod]["mcforge"].get("slim", False):
             result = {}
 
-            for promo_name, version in jsonres['promos'].items():
-                match = re.match(r'^(?P<mc>[0-9]+(?:\.[0-9]+)+)-(?P<type>latest|recommended)$', promo_name)
+            for promo_name, version in jsonres["promos"].items():
+                match = re.match(
+                    r"^(?P<mc>[0-9]+(?:\.[0-9]+)+)-(?P<type>latest|recommended)$",
+                    promo_name,
+                )
 
                 if not match:
                     continue
 
-                mc_version = match.group('mc')
-                promo_type = match.group('type')
+                mc_version = match.group("mc")
+                promo_type = match.group("type")
 
-                if promo_type == 'recommended':
-                    field = 'version'
-                else:
-                    field = 'dev'
+                field = "version" if promo_type == "recommended" else "dev"
 
                 result.setdefault(mc_version, {})[field] = version
 
@@ -225,7 +220,7 @@ class NotEnoughClasses():
                 if promo == self.mods[mod]["mcforge"]["promo"]:
                     return {
                         self.mods[mod]["mcforge"]["promoType"]: jsonres["promos"][promo]["version"],
-                        "mc": jsonres["promos"][promo]["mcversion"]
+                        "mc": jsonres["promos"][promo]["mcversion"],
                     }
 
             return {}
@@ -238,39 +233,36 @@ class NotEnoughClasses():
 
         versions = {}
 
-        for promo, version in jsonres['promos'].items():
-            if promo == 'reserved':
+        for promo, version in jsonres["promos"].items():
+            if promo == "reserved":
                 # thanks Hea3veN
                 continue
 
-            mc, promo_type = promo.split('-', 1)
+            mc, promo_type = promo.split("-", 1)
 
-            if promo_type == 'latest':
-                version_type = 'dev'
-            else:
-                version_type = 'version'
+            version_type = "dev" if promo_type == "latest" else "version"
 
             versions.setdefault(mc, {})[version_type] = version
 
         # Finishing touches
         for mc, version_info in versions.items():
-            if 'dev' in version_info and 'version' in version_info and version_info['dev'] == version_info['version']:
-                del versions[mc]['dev']
+            if "dev" in version_info and "version" in version_info and version_info["dev"] == version_info["version"]:
+                del versions[mc]["dev"]
 
         return versions
 
     async def CheckHTML(self, mod, document=None, simulation=False):
-        page = await self.fetch_page(self.mods[mod]['html']['url'])
+        page = await self.fetch_page(self.mods[mod]["html"]["url"])
 
-        reverse = self.mods[mod]['html'].get('reverse', False)
-        version_type = self.mods[mod]['html'].get('version_type', 'version')
+        reverse = self.mods[mod]["html"].get("reverse", False)
+        version_type = self.mods[mod]["html"].get("version_type", "version")
         regex = self.get_mod_regex(mod)
 
         versions = {}
 
         for match in regex.finditer(page):
-            mc_version = match.group('mc')
-            mod_version = match.group('version')
+            mc_version = match.group("mc")
+            mod_version = match.group("version")
 
             if mc_version not in versions or reverse:
                 versions[mc_version] = mod_version
@@ -283,78 +275,72 @@ class NotEnoughClasses():
         return result
 
     async def CheckSpacechase(self, mod, document=None, simulation=False):
-        jsonres = await self.fetch_json("http://spacechase0.com/core/latest.php?obj=mods/minecraft/" + self.mods[mod]["spacechase"]["slug"])
+        jsonres = await self.fetch_json(
+            "http://spacechase0.com/core/latest.php?obj=mods/minecraft/" + self.mods[mod]["spacechase"]["slug"]
+        )
 
-        version = jsonres['version']
+        version = jsonres["version"]
 
         results = {}
 
-        for mc in jsonres['downloads'].keys():
-            results[mc] = {
-                'version': version,
-                'changelog': jsonres['summary']
-            }
+        for mc in jsonres["downloads"]:
+            results[mc] = {"version": version, "changelog": jsonres["summary"]}
 
         return results
 
     async def CheckLunatrius(self, mod, document=None, simulation=False):
         jsonres = await self.fetch_json("http://mc.lunatri.us/json?latest&mod=" + mod + "&v=2")
         info = jsonres["mods"][mod]["latest"]
-        output = {
-            "version": info["version"],
-            "mc": info["mc"]
-        }
-        if len(info['changes']) > 0:
-            output["change"] = info['changes'][0]
+        output = {"version": info["version"], "mc": info["mc"]}
+        if len(info["changes"]) > 0:
+            output["change"] = info["changes"][0]
         return output
 
     async def CheckBigReactors(self, mod, document=None, simulation=False):
         info = await self.fetch_json("http://big-reactors.com/version.json")
 
-        ret = {
-            'mc': info['mcVersion']
-        }
+        ret = {"mc": info["mcVersion"]}
 
-        if info['stable']:
-            ret['version'] = info['version']
+        if info["stable"]:
+            ret["version"] = info["version"]
         else:
-            ret['dev'] = info['version']
+            ret["dev"] = info["version"]
 
-        if info['changelog']:
+        if info["changelog"]:
             # send only the first line of the changelog
-            ret['change'] = info['changelog'][0]
+            ret["change"] = info["changelog"][0]
 
         return ret
 
     async def CheckCurse(self, mod, document=None, simulation=False):
         # Field name from the JSON to be used against the regex (name or display, name by default)
-        field_name = self.mods[mod]['curse'].get('field', 'name')
+        field_name = self.mods[mod]["curse"].get("field", "name")
 
-        jsonres = await self.fetch_json("https://api.cfwidget.com/" + self.mods[mod]['curse']['id'])
+        jsonres = await self.fetch_json("https://api.cfwidget.com/" + self.mods[mod]["curse"]["id"])
 
-        if jsonres.get('accepted'):
+        if jsonres.get("accepted"):
             # CFWidget doesn't have the information and queued up an update
             return {}
-        elif 'error' in jsonres:
-            raise NEMPException('cfwidget: ' + jsonres.get('error'))
+        elif "error" in jsonres:
+            raise NEMPException("cfwidget: " + jsonres.get("error"))
 
-        release_type = 'release'
+        release_type = "release"
 
         # Sometimes CFWidget returns no files, but the issue resolves itself after a while,
         # so we just temporarily return an empty result
-        if not jsonres['files']:
+        if not jsonres["files"]:
             return {}
 
-        sorted_files = sorted(jsonres['files'], key=lambda x: x['id'], reverse=True)
+        sorted_files = sorted(jsonres["files"], key=lambda x: x["id"], reverse=True)
 
-        latest_release_id = sorted_files[0]['id']
+        latest_release_id = sorted_files[0]["id"]
 
         versions = {}
 
-        MC_VERSION_REGEX = re.compile(r'^[0-9]+(?:\.[0-9]+)+$')
+        MC_VERSION_REGEX = re.compile(r"^[0-9]+(?:\.[0-9]+)+$")
 
         for release in sorted_files:
-            for mc_version in release['versions']:
+            for mc_version in release["versions"]:
                 # Skip this "mc version" if it's not actually a MC version (Forge, snapshots, Java, etc)
                 if not MC_VERSION_REGEX.match(mc_version):
                     continue
@@ -365,8 +351,13 @@ class NotEnoughClasses():
                 match = self.match_mod_regex(mod, release[field_name])
 
                 if not match:
-                    if release['id'] == latest_release_id:
-                        raise NEMPException("Regex is outdated (doesn't match against latest release). Latest: " + release[field_name] + ", Regex: " + self.get_mod_regex(mod).pattern)
+                    if release["id"] == latest_release_id:
+                        raise NEMPException(
+                            "Regex is outdated (doesn't match against latest release). Latest: "
+                            + release[field_name]
+                            + ", Regex: "
+                            + self.get_mod_regex(mod).pattern
+                        )
 
                     # If this release isn't the latest one, we just assume it's an old one and skip it
                     continue
@@ -375,96 +366,89 @@ class NotEnoughClasses():
 
                 res = {}
 
-                if release['type'].lower() == release_type:
-                    version_type = 'version'
-                else:
-                    version_type = 'dev'
+                version_type = "version" if release["type"].lower() == release_type else "dev"
 
-                res[version_type] = output['version']
+                res[version_type] = output["version"]
 
                 versions[mc_version] = res
 
         return versions
 
     async def CheckGitHubRelease(self, mod, document=None, simulation=False):
-        repo = self.mods[mod]['github'].get('repo')
+        repo = self.mods[mod]["github"].get("repo")
 
-        client_id = self.config.get('github', {}).get('client_id')
-        client_secret = self.config.get('github', {}).get('client_secret')
+        client_id = self.config.get("github", {}).get("client_id")
+        client_secret = self.config.get("github", {}).get("client_secret")
 
-        url = 'https://api.github.com/repos/' + repo + '/releases'
+        url = "https://api.github.com/repos/" + repo + "/releases"
 
         if client_id and client_secret:
             releases = await self.fetch_json(url, auth=aiohttp.BasicAuth(client_id, client_secret))
         else:
             releases = await self.fetch_json(url)
 
-        type_ = self.mods[mod]['github'].get('type', 'asset')
+        type_ = self.mods[mod]["github"].get("type", "asset")
 
-        if type_ == 'asset':
+        if type_ == "asset":
             regex = self.get_mod_regex(mod)
 
             for release in releases:
-                for asset in release['assets']:
-                    match = regex.search(asset['name'])
+                for asset in release["assets"]:
+                    match = regex.search(asset["name"])
                     if match:
                         result = match.groupdict()
-                        if release['prerelease']:
-                            result['dev'] = result['version']
-                            del result['version']
+                        if release["prerelease"]:
+                            result["dev"] = result["version"]
+                            del result["version"]
                         return result
-        elif type_ == 'tag':
+        elif type_ == "tag":
             release = releases[0]
 
-            tag_name = release['tag_name']
+            tag_name = release["tag_name"]
 
-            if 'regex' in self.mods[mod]['github']:
+            if "regex" in self.mods[mod]["github"]:
                 result = self.match_mod_regex(mod, tag_name).groupdict()
 
-                if release['prerelease']:
-                    result['dev'] = result['version']
-                    del result['version']
+                if release["prerelease"]:
+                    result["dev"] = result["version"]
+                    del result["version"]
 
                 return result
             else:
-                if release['prerelease']:
-                    return {'dev': tag_name}
+                if release["prerelease"]:
+                    return {"dev": tag_name}
                 else:
-                    return {'version': tag_name}
+                    return {"version": tag_name}
         else:
-            raise ValueError('Invalid type {!r} for CheckGitHubRelease parser'.format(type_))
+            raise ValueError(f"Invalid type {type_!r} for CheckGitHubRelease parser")
 
     async def CheckBuildCraft(self, mod, document=None, simulation=False):
-        page = await self.fetch_page('https://raw.githubusercontent.com/BuildCraft/BuildCraft/master/buildcraft_resources/versions.txt')
+        page = await self.fetch_page(
+            "https://raw.githubusercontent.com/BuildCraft/BuildCraft/master/buildcraft_resources/versions.txt"
+        )
 
         # filter empty lines
         lines = [line for line in page.splitlines() if line]
 
-        mc, mod_name, version = lines[-1].split(':')
+        mc, _mod_name, version = lines[-1].split(":")
 
-        return {
-            'mc': mc,
-            'version': version
-        }
+        return {"mc": mc, "version": version}
 
     def is_version_valid(self, version):
-        for regex in self.invalid_versions:
-            if regex.search(version):
-                return False
-        return True
+        return all(not regex.search(version) for regex in self.invalid_versions)
 
     # Returns the version string with some replacements, like:
     # - whitespace (space/tab/etc) replaced by hyphen
     def clean_version(self, version):
-        version = re.sub(r'\s+', '-', version)
+        version = re.sub(r"\s+", "-", version)
         # remove any extra hyphens
-        version = re.sub(r'-+', '-', version)
+        version = re.sub(r"-+", "-", version)
         return version
 
     # Trims additional ".0" at the end of the version until the
     # version has only 2 groups ("1.0")
     def clean_mc_version(self, version):
-        while version.endswith('.0') and version.count('.') > 1:
+        while version.endswith(".0") and version.count(".") > 1:
             version = version[:-2]
         return version
 
@@ -474,11 +458,11 @@ class NotEnoughClasses():
         if mapped_list:
             nem_list = mapped_list
 
-        version = self.mods[mod]['nem_versions'].get(nem_list, {}).get('version', '')
+        version = self.mods[mod]["nem_versions"].get(nem_list, {}).get("version", "")
 
-        if version == 'dev-only':
+        if version == "dev-only":
             # dev-only means there's no release version, so we make that transparent to the parsers
-            return ''
+            return ""
         else:
             return version
 
@@ -488,7 +472,7 @@ class NotEnoughClasses():
         if mapped_list:
             nem_list = mapped_list
 
-        return self.mods[mod]['nem_versions'].get(nem_list, {}).get('dev', '')
+        return self.mods[mod]["nem_versions"].get(nem_list, {}).get("dev", "")
 
     def set_nem_version(self, mod, version, nem_list):
         mapped_list = self.mc_mapping.get(nem_list)
@@ -496,7 +480,7 @@ class NotEnoughClasses():
         if mapped_list:
             nem_list = mapped_list
 
-        self.mods[mod]['nem_versions'].setdefault(nem_list, {})['version'] = version
+        self.mods[mod]["nem_versions"].setdefault(nem_list, {})["version"] = version
 
     def set_nem_dev_version(self, mod, version, nem_list):
         mapped_list = self.mc_mapping.get(nem_list)
@@ -504,12 +488,12 @@ class NotEnoughClasses():
         if mapped_list:
             nem_list = mapped_list
 
-        self.mods[mod]['nem_versions'].setdefault(nem_list, {})['dev'] = version
+        self.mods[mod]["nem_versions"].setdefault(nem_list, {})["dev"] = version
 
     def get_proper_name(self, mod):
         lower_mod = mod.lower()
 
-        for mod_name in self.mods.keys():
+        for mod_name in self.mods:
             if lower_mod == mod_name.lower():
                 return mod_name
 
@@ -520,32 +504,30 @@ class NotEnoughClasses():
             output = await getattr(self, self.mods[mod]["function"])(mod, document=document, simulation=simulation)
 
             if output is None:
-                raise NEMPException('Parser returned null')
+                raise NEMPException("Parser returned null")
 
-            if isinstance(output, dict) and ('version' in output or 'dev' in output):
+            if isinstance(output, dict) and ("version" in output or "dev" in output):
                 # legacy parser
-                if not 'mc' in output:
-                    if 'mc' in self.mods[mod]:
-                        mc = self.mods[mod]['mc']
+                if "mc" not in output:
+                    if "mc" in self.mods[mod]:
+                        mc = self.mods[mod]["mc"]
                     else:
                         # if it doesn't return a Minecraft version and there's no default, we bail out
-                        raise NEMPException('No Minecraft version was returned by the parser')
+                        raise NEMPException("No Minecraft version was returned by the parser")
                 else:
-                    mc = output['mc']
+                    mc = output["mc"]
 
                 # convert to new format
-                new_output = {
-                    mc: {}
-                }
+                new_output = {mc: {}}
 
-                if 'version' in output:
-                    new_output[mc]['version'] = output['version']
+                if "version" in output:
+                    new_output[mc]["version"] = output["version"]
 
-                if 'dev' in output:
-                    new_output[mc]['dev'] = output['dev']
+                if "dev" in output:
+                    new_output[mc]["dev"] = output["dev"]
 
-                if 'change' in output:
-                    new_output[mc]['changelog'] = output['change']
+                if "change" in output:
+                    new_output[mc]["changelog"] = output["change"]
 
                 output = new_output
 
@@ -553,7 +535,7 @@ class NotEnoughClasses():
 
             for mc, version_info in output.items():
                 # [mc version, dev version, release version, changelog]
-                status = [None, '', '', None]
+                status = [None, "", "", None]
 
                 mc = self.clean_mc_version(mc)
 
@@ -561,16 +543,16 @@ class NotEnoughClasses():
                     mc = self.mc_mapping[mc]
 
                 if mc in self.mc_blocklist:
-                    print('Skipping blocked MC version {} for {}, version_info={!r}'.format(mc, mod, version_info))
+                    print(f"Skipping blocked MC version {mc} for {mod}, version_info={version_info!r}")
                     continue
 
                 status[0] = mc
 
                 local_dev = self.get_nem_dev_version(mod, mc)
 
-                if 'dev' in version_info:
+                if "dev" in version_info:
                     # Remove whitespace at the end and start
-                    remote_dev = self.clean_version(version_info['dev'].strip())
+                    remote_dev = self.clean_version(version_info["dev"].strip())
 
                     # validate version
                     if not remote_dev or not self.is_version_valid(remote_dev):
@@ -581,9 +563,9 @@ class NotEnoughClasses():
 
                 local_release = self.get_nem_version(mod, mc)
 
-                if 'version' in version_info:
+                if "version" in version_info:
                     # Remove whitespace at the end and start
-                    remote_release = self.clean_version(version_info['version'].strip())
+                    remote_release = self.clean_version(version_info["version"].strip())
 
                     # validate version
                     if not remote_release or not self.is_version_valid(remote_release):
@@ -592,8 +574,8 @@ class NotEnoughClasses():
                     if simulation or local_release != remote_release:
                         status[2] = remote_release
 
-                if 'changelog' in version_info and 'changelog' not in self.mods[mod]:
-                    status[3] = version_info['changelog']
+                if "changelog" in version_info and "changelog" not in self.mods[mod]:
+                    status[3] = version_info["changelog"]
 
                 if simulation or (status[1] or status[2]):
                     statuses.append(status)
@@ -609,18 +591,20 @@ class NotEnoughClasses():
         group_mod_names = self.document_groups[self.mods[mod]["document_group"]["id"]]
 
         # Get all functions (Check*) this document_group uses
-        function_names = set(self.mods[group_mod_name]['function'] for group_mod_name in group_mod_names)
+        function_names = set(self.mods[group_mod_name]["function"] for group_mod_name in group_mod_names)
         # Sanity check: a document_group should only use one function
         if len(function_names) != 1:
-            raise NEMPException("Failed to poll document_group for " + mod + ": Too many functions: " + str(function_names))
+            raise NEMPException(
+                "Failed to poll document_group for " + mod + ": Too many functions: " + str(function_names)
+            )
 
-        func_name = list(function_names)[0]
+        func_name = next(iter(function_names))
 
         try:
             # Let's get the page/json/whatever all the mods want
             # TODO: Ensure the function is the same for all mods in the document group
             document = await getattr(self, func_name)(mod, document=None)
-        except Exception as e:
+        except Exception:
             # If getting the document fails, we want to abort immediately
             print("Failed to poll document_group for " + mod)
             traceback.print_exc()
@@ -644,7 +628,7 @@ class NotEnoughClasses():
 async def setup():
     nem = NotEnoughClasses()
     nem.session = aiohttp.ClientSession(
-        headers={'User-agent': 'NotEnoughMods:Polling/1.X (+https://github.com/NotEnoughMods/NotEnoughModPolling)'},
+        headers={"User-agent": "NotEnoughMods:Polling/1.X (+https://github.com/NotEnoughMods/NotEnoughModPolling)"},
     )
     await nem.load_mc_blocklist()
     await nem.QueryNEM()

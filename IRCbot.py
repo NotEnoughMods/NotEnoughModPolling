@@ -1,16 +1,13 @@
-import warnings
-warnings.simplefilter("ignore", RuntimeWarning)
-
 import asyncio
-import socket
-import time
-import traceback
+import contextlib
 import datetime
 import logging
+import socket
+import traceback
 
-from IRC_readwrite_threads import IRC_Connection, ConnectionDown
 from commandHandler import commandHandling
 from configReader import Configuration
+from IRC_readwrite_threads import IRC_Connection
 
 
 class IRC_Main:
@@ -44,9 +41,7 @@ class IRC_Main:
 
         if self.forceIPv6:
             if not socket.has_ipv6:
-                raise RuntimeError(
-                    "IPv6 isn't supported on this platform. Please check the config file."
-                )
+                raise RuntimeError("IPv6 isn't supported on this platform. Please check the config file.")
             family = socket.AF_INET6
             if self.bindIP:
                 local_addr = (self.bindIP, 0)
@@ -59,13 +54,17 @@ class IRC_Main:
         # Start the write loop as a background task
         write_task = asyncio.create_task(self.conn.write_loop())
 
-        await self.conn.sendMsg('PASS ' + self.passw)
-        await self.conn.sendMsg('NICK ' + self.name)
-        await self.conn.sendMsg(f'USER {self.myident} * * {self.realname}')
+        await self.conn.sendMsg("PASS " + self.passw)
+        await self.conn.sendMsg("NICK " + self.name)
+        await self.conn.sendMsg(f"USER {self.myident} * * {self.realname}")
 
         self.comHandle = commandHandling(
-            self.channels, self.prefix, self.name, self.myident,
-            self.adminlist, self.loglevel,
+            self.channels,
+            self.prefix,
+            self.name,
+            self.myident,
+            self.adminlist,
+            self.loglevel,
         )
 
         self.__root_logger__ = logging.getLogger("IRCMainLoop")
@@ -82,10 +81,7 @@ class IRC_Main:
 
                 msgParts = msg.split(" ", 2)
 
-                if msgParts[0][0] == ":":
-                    prefix = msgParts[0][1:]
-                else:
-                    prefix = None
+                prefix = msgParts[0][1:] if msgParts[0][0] == ":" else None
 
                 if prefix is None:
                     command = msgParts[0]
@@ -100,22 +96,16 @@ class IRC_Main:
                     except IndexError:
                         commandParameters = ""
 
-                await self.comHandle.handle(
-                    self.conn.sendMsg, prefix, command, commandParameters, self.nsAuth
-                )
+                await self.comHandle.handle(self.conn.sendMsg, prefix, command, commandParameters, self.nsAuth)
         finally:
             self.__root_logger__.info("Main loop has been stopped")
             timer_task.cancel()
-            try:
+            with contextlib.suppress(asyncio.CancelledError):
                 await timer_task
-            except asyncio.CancelledError:
-                pass
             await self.conn.close()
             write_task.cancel()
-            try:
+            with contextlib.suppress(asyncio.CancelledError):
                 await write_task
-            except asyncio.CancelledError:
-                pass
             self.__root_logger__.info("Connection closed.")
 
     async def _timer_loop(self):
@@ -153,9 +143,7 @@ async def async_main():
         await bot.start()
     except Exception as error:
         if getattr(bot, "__root_logger__", None) is not None:
-            bot.__root_logger__.exception(
-                "The bot has encountered an exception and had to shut down."
-            )
+            bot.__root_logger__.exception("The bot has encountered an exception and had to shut down.")
             log = True
         else:
             print("Tried to log an error, but logger wasn't initialized.")
@@ -166,11 +154,7 @@ async def async_main():
 
         with open("exception.txt", "w") as excFile:
             excFile.write(
-                "Oh no! The bot died! \n"
-                + str(traceb)
-                + "\nTime of death: "
-                + str(datetime.datetime.today())
-                + "\n"
+                "Oh no! The bot died! \n" + str(traceb) + "\nTime of death: " + str(datetime.datetime.today()) + "\n"
             )
             excFile.write("-----------------------------------------------------\n")
 

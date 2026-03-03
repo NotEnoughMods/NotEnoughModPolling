@@ -1,18 +1,16 @@
-import importlib.util
-import os
 import asyncio
+import importlib.util
 import logging
-
-from time import strftime
-from timeit import default_timer
+import os
 from datetime import datetime
+from time import strftime
 
 import centralizedThreading
-from BotEvents import TimerEvent, MsgEvent, StandardEvent
-from IRC_registration import trackVerification
-from CommandHelp import HelpModule
-from IRCLogging import LoggingModule
 from BanList import BanList
+from BotEvents import MsgEvent, StandardEvent, TimerEvent
+from CommandHelp import HelpModule
+from IRC_registration import trackVerification
+from IRCLogging import LoggingModule
 
 
 class commandHandling:
@@ -127,9 +125,7 @@ class commandHandling:
 
             for part in msgpart:
                 await send(f"PRIVMSG {channel} :{part}")
-                self.__CMDHandler_log__.debug(
-                    "Sending parted message to channel/user %s: '%s'", channel, msg
-                )
+                self.__CMDHandler_log__.debug("Sending parted message to channel/user %s: '%s'", channel, msg)
         else:
             await send(f"PRIVMSG {channel} :{msg}")
             self.__CMDHandler_log__.debug("Sending to channel/user %s: '%s'", channel, msg)
@@ -147,14 +143,10 @@ class commandHandling:
 
             for part in msgpart:
                 await self.send(f"NOTICE {destination} :{part}")
-                self.__CMDHandler_log__.debug(
-                    "Sending parted notice to channel/user %s: '%s'", destination, msg
-                )
+                self.__CMDHandler_log__.debug("Sending parted notice to channel/user %s: '%s'", destination, msg)
         else:
             await self.send(f"NOTICE {destination} :{msg}")
-            self.__CMDHandler_log__.debug(
-                "Sending notice to channel/user %s: '%s'", destination, msg
-            )
+            self.__CMDHandler_log__.debug("Sending notice to channel/user %s: '%s'", destination, msg)
 
     def defaultsplitter(self, msg, length, splitAt):
 
@@ -177,15 +169,13 @@ class commandHandling:
         if start < len(msg):
             items.append(msg[start:])
 
-        for i in range(items.count("")):
+        for _i in range(items.count("")):
             items.remove("")
 
         return items
 
     def writeQueue(self, string, modulename="no_name_given"):
-        entryString = "DebugEntry at {0} [{1!r}]: {2!r}".format(
-            strftime("%H:%M:%S (%z)"), modulename, string
-        )
+        entryString = "DebugEntry at {} [{!r}]: {!r}".format(strftime("%H:%M:%S (%z)"), modulename, string)
         self.__CMDHandler_log__.debug("Added DebugEntry: '%s'", entryString)
         try:
             self.PacketsReceivedBeforeDeath.put_nowait(entryString)
@@ -217,7 +207,7 @@ class commandHandling:
         print(self.channelData)
 
     async def whoisUser(self, user):
-        await self.send("WHOIS {0}".format(user))
+        await self.send(f"WHOIS {user}")
         self.Bot_Auth.queueUser(user)
         self.__CMDHandler_log__.debug("Sending WHOIS for user '%s'", user)
 
@@ -263,14 +253,10 @@ class commandHandling:
             try:
                 if not callable(module.setup):
                     module.setup = False
-                    self.__CMDHandler_log__.log(
-                        0, "File %s does not use a setup function", i
-                    )
+                    self.__CMDHandler_log__.log(0, "File %s does not use a setup function", i)
             except AttributeError:
                 module.setup = False
-                self.__CMDHandler_log__.log(
-                    0, "File %s does not use a setup function", i
-                )
+                self.__CMDHandler_log__.log(0, "File %s does not use a setup function", i)
 
             Packet[module.ID] = (module, path + "/" + i)
 

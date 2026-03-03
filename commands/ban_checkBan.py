@@ -1,6 +1,6 @@
-
 ID = "checkban"
 permission = 3
+
 
 async def execute(self, user, params, channel, userdata, rank):
     if len(params) == 0:
@@ -13,17 +13,15 @@ async def execute(self, user, params, channel, userdata, rank):
 
         output = []
         for ban in bans:
-            info = u"{pattern} [{group}] Reason: {reason}".format(
-                pattern=self.Banlist.unescape_banstring(ban[1]),
-                group=ban[0], reason=ban[2])
+            info = f"{self.Banlist.unescape_banstring(ban[1])} [{ban[0]}] Reason: {ban[2]}"
             output.append(info)
 
-        output = u" | ".join(output)
+        output = " | ".join(output)
 
         if len(output) == 0:
             await self.sendNotice(user, "The user is not affected by any bans.")
         elif len(output) == 1:
-            await self.sendNotice(user, u"The user is affected by the following ban: {0}".format(output))
+            await self.sendNotice(user, f"The user is affected by the following ban: {output}")
         elif len(output) > 1:
-            await self.sendNotice(user, u"The user is affected by the following bans:")
+            await self.sendNotice(user, "The user is affected by the following bans:")
             await self.sendNotice(user, output)

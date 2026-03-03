@@ -1,7 +1,6 @@
 import asyncio
-import traceback
 import logging
-
+import traceback
 from timeit import default_timer
 
 _threadlogger = logging.getLogger("ThreadPoolExceptions")
@@ -63,12 +62,14 @@ class ThreadPool:
                 await function(handle, queue)
             except Exception as error:
                 exception = traceback.format_exc()
-                await queue.put({
-                    "action": "exceptionOccured",
-                    "exception": error,
-                    "functionName": name,
-                    "traceback": exception,
-                })
+                await queue.put(
+                    {
+                        "action": "exceptionOccured",
+                        "exception": error,
+                        "functionName": name,
+                        "traceback": exception,
+                    }
+                )
                 _threadlogger.warning("Task '%s' crashed! Exception follows.", name)
                 _threadlogger.exception("Task exception of '%s':", name)
             finally:
