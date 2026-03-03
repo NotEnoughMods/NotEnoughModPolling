@@ -21,25 +21,25 @@ uv sync
 1. **IRC bot config** — copy the template and fill in your server details:
 
    ```bash
-   cp config.cfg-dist config.cfg
+   cp config.yml.example config.yml
    ```
 
-   Key settings in `config.cfg`:
+   Key settings in `config.yml`:
 
    | Section | Key | Description |
    |---------|-----|-------------|
-   | Connection Info | `server`, `port` | IRC server to connect to |
-   | Connection Info | `nickname`, `ident` | Bot identity |
-   | Connection Info | `password` | Server password (optional) |
-   | Administration | `channels` | Comma-separated channel list |
-   | Administration | `bot operators` | Users with admin privileges |
-   | Administration | `command prefix` | Command trigger (default: `=`) |
-   | Administration | `logging level` | `DEBUG`, `INFO`, `WARNING`, etc. |
+   | connection | `server`, `port` | IRC server to connect to |
+   | connection | `nickname`, `ident` | Bot identity |
+   | connection | `password` | Server password (optional) |
+   | administration | `channels` | Channel list |
+   | administration | `operators` | Users with admin privileges |
+   | administration | `command_prefix` | Command trigger (default: `=`) |
+   | administration | `logging_level` | `DEBUG`, `INFO`, `WARNING`, etc. |
 
 2. **NEMP polling config** — only needed if you want mod-polling features:
 
    ```bash
-   cp mod_polling/config.example.yml mod_polling/config.yml
+   cp mod_polling/config.yml.example mod_polling/config.yml
    ```
 
    Add your GitHub API credentials (optional, increases rate limits) and set the staff IRC channel.
@@ -75,7 +75,7 @@ Permission levels: 0 = everyone, 1 = voiced+, 2 = channel op, 3 = bot admin.
 irc_bot.py              Main entry point — async IRC event loop
 command_router.py       Command dispatch and dynamic plugin loading
 irc_connection.py       Low-level async IRC read/write with rate limiting
-config.py               Configuration file loader
+config.py               YAML configuration loader
 bot_events.py           Timer, message, and channel event system
 task_pool.py            Background async task manager
 plugin_loader.py        Plugin interface definition

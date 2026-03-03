@@ -1,0 +1,17 @@
+connection:
+  server: ""
+  port: 6667
+  nickname: MyIRCBot
+  password: ""
+  ident: MyIRCBot
+  realname: RenolIRCBot
+
+administration:
+  operators: []
+  channels: []
+  command_prefix: "="
+  logging_level: INFO
+
+networking:
+  force_ipv6: false
+  bind_address: ""

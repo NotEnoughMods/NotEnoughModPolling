@@ -14,21 +14,20 @@ class IrcBot:
     def __init__(self, configObj):
         config = configObj.config
 
-        self.host = config.get("Connection Info", "server")
-        self.port = config.getint("Connection Info", "port")
+        self.host = config["connection"]["server"]
+        self.port = config["connection"]["port"]
+        self.name = config["connection"]["nickname"]
+        self.password = config["connection"]["password"]
+        self.ident = config["connection"]["ident"]
+        self.realname = config["connection"]["realname"]
 
-        self.name = config.get("Connection Info", "nickname")
-        self.password = config.get("Connection Info", "password")
-        self.channels = configObj.get_channels()
-        self.ident = config.get("Connection Info", "ident")
-        self.realname = config.get("Connection Info", "realname")
+        self.forceIPv6 = config["networking"]["force_ipv6"]
+        self.bindIP = config["networking"]["bind_address"]
 
-        self.forceIPv6 = config.getboolean("Networking", "force ipv6")
-        self.bindIP = config.get("Networking", "bind address")
-
-        self.adminlist = configObj.get_admins()
-        self.prefix = config.get("Administration", "command prefix")
-        self.loglevel = config.get("Administration", "logging level")
+        self.adminlist = config["administration"]["operators"]
+        self.prefix = config["administration"]["command_prefix"]
+        self.loglevel = config["administration"]["logging_level"]
+        self.channels = config["administration"]["channels"]
 
         self.nickserv_auth = False
         self.shutdown = False

@@ -1,48 +1,18 @@
-import configparser
+import shutil
+from pathlib import Path
 
+import yaml
 
-class InvalidConfig(Exception):
-    def __init__(self, key, line):
-        self.line = line + 1
-        self.key = key
-
-    def __str__(self):
-        return f"Invalid data on line {self.line}: {self.key}"
-
-
-def CreateDefaultConfig():
-    Parser = configparser.ConfigParser(allow_no_value=True)
-
-    Parser.add_section("Connection Info")
-    Parser.set("Connection Info", "nickname", "MyIRCBot")
-    Parser.set("Connection Info", "password", "foobar")
-    Parser.set("Connection Info", "ident", "MyIRCBot")
-    Parser.set("Connection Info", "realname", "RenolIRCBot")
-
-    Parser.set("Connection Info", "server", "")
-    Parser.set("Connection Info", "port", "6667")
-
-    Parser.add_section("Administration")
-    Parser.set("Administration", "bot operators", "")
-    Parser.set("Administration", "channels", "")
-    Parser.set("Administration", "command prefix", "=")
-    Parser.set("Administration", "logging level", "INFO")
-
-    Parser.add_section("Networking")
-    Parser.set("Networking", "force IPv6", "False")
-    Parser.set("Networking", "bind address", "")
-
-    return Parser
+CONFIG_FILE = Path("config.yml")
+CONFIG_EXAMPLE = Path("config.yml.example")
 
 
 class Configuration:
     def __init__(self):
         self.config = None
 
-        self.configname = "config.cfg"
-
-        self.mandatoryVariables = {
-            "Connection Info": {
+        self.mandatory_options = {
+            "connection": {
                 "nickname": True,
                 "password": False,
                 "ident": True,
@@ -50,65 +20,33 @@ class Configuration:
                 "server": True,
                 "port": True,
             },
-            "Administration": {
-                "bot operators": False,
+            "administration": {
+                "operators": False,
                 "channels": False,
-                "command prefix": True,
-                "logging level": True,
+                "command_prefix": True,
+                "logging_level": True,
             },
-            "Networking": {"force ipv6": True, "bind address": False},
+            "networking": {"force_ipv6": True, "bind_address": False},
         }
 
-        self.found = []
-
     def load_config(self):
-        try:
-            with open(self.configname) as conFile:
-                self.config = configparser.ConfigParser()
-                self.config.read_file(conFile)
-        except OSError as err:
-            config = CreateDefaultConfig()
-
-            with open(self.configname, "w") as configFile:
-                config.write(configFile)
-
+        if not CONFIG_FILE.exists():
+            shutil.copy(CONFIG_EXAMPLE, CONFIG_FILE)
             raise RuntimeError(
-                f"The '{self.configname}' file was missing. A new config file has been created. "
-                "Please fill in the information."
-            ) from err
+                f"'{CONFIG_FILE}' was missing. A new config file has been created from "
+                f"'{CONFIG_EXAMPLE}'. Please fill in the information."
+            )
+
+        with open(CONFIG_FILE) as f:
+            self.config = yaml.safe_load(f)
 
     def check_options(self):
-        for section in self.mandatoryVariables:
-            options = self.mandatoryVariables[section]
+        for section, options in self.mandatory_options.items():
+            for option, required in options.items():
+                val = self.config.get(section, {}).get(option)
 
-            for option in options:
-                val = self.config.get(section, option)
-
-                if options[option] is True and val == "":
+                if required and (val is None or val == ""):
                     raise RuntimeError(
                         f"Option '{option}' in section '{section}' has no value, but is required to have one. "
                         "Please fill in the missing information."
                     )
-
-    def get_channels(self):
-        chans = self.config.get("Administration", "channels").split(",")
-
-        newchans = []
-        for chan in chans:
-            chan = chan.strip()
-            if chans[0].isalnum():
-                newchans.append("#" + chan)
-            else:
-                newchans.append(chan)
-
-        return newchans
-
-    def get_admins(self):
-        admins = self.config.get("Administration", "bot operators").split(",")
-
-        newadmins = []
-        for admin in admins:
-            admin = admin.strip()
-            newadmins.append(admin)
-
-        return newadmins
