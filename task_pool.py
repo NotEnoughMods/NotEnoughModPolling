@@ -44,7 +44,7 @@ class TaskHandle:
         return self._lastTimeRunning
 
 
-class ThreadPool:
+class TaskPool:
     def __init__(self):
         self.pool = {}
         self.__threadPool_log__ = logging.getLogger("ThreadPool")

@@ -9,7 +9,7 @@ class NameAlreadyExists(Exception):
         return self.name
 
 
-class trackVerification:
+class AuthTracker:
     def __init__(self, userlist):
         self.users = {}
         for item in userlist:

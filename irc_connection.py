@@ -11,7 +11,7 @@ class ConnectionDown(Exception):
         return f"{self.name} has been shut down at {self.time}"
 
 
-class IRC_Connection:
+class IrcConnection:
     def __init__(self):
         self.reader = None
         self.writer = None

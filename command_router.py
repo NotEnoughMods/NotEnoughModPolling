@@ -10,10 +10,10 @@ from ban_list import BanList
 from bot_events import MsgEvent, StandardEvent, TimerEvent
 from help_system import HelpModule
 from irc_logging import LoggingModule
-from user_auth import trackVerification
+from user_auth import AuthTracker
 
 
-class commandHandling:
+class CommandRouter:
     def __init__(self, channels, cmdprefix, name, ident, adminlist, loglevel):
 
         self.LoggingModule = LoggingModule(loglevel)
@@ -25,7 +25,7 @@ class commandHandling:
         self.commands = self.__LoadModules__("commands")
 
         self.bot_userlist = adminlist
-        self.Bot_Auth = trackVerification(adminlist)
+        self.Bot_Auth = AuthTracker(adminlist)
 
         self.channels = channels
         self.channelData = {}
@@ -52,7 +52,7 @@ class commandHandling:
 
         self.PacketsReceivedBeforeDeath = asyncio.Queue(maxsize=50)
 
-        self.threading = task_pool.ThreadPool()
+        self.threading = task_pool.TaskPool()
         self.Banlist = BanList("BannedUsers.db")
 
         self.helper = HelpModule()

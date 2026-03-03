@@ -5,12 +5,12 @@ import logging
 import socket
 import traceback
 
-from command_router import commandHandling
+from command_router import CommandRouter
 from config import Configuration
-from irc_connection import IRC_Connection
+from irc_connection import IrcConnection
 
 
-class IRC_Main:
+class IrcBot:
     def __init__(self, configObj):
         config = configObj.config
 
@@ -34,7 +34,7 @@ class IRC_Main:
         self.shutdown = False
 
     async def start(self):
-        self.conn = IRC_Connection()
+        self.conn = IrcConnection()
 
         local_addr = None
         family = 0
@@ -59,7 +59,7 @@ class IRC_Main:
         await self.conn.sendMsg("NICK " + self.name)
         await self.conn.sendMsg(f"USER {self.myident} * * {self.realname}")
 
-        self.comHandle = commandHandling(
+        self.comHandle = CommandRouter(
             self.channels,
             self.prefix,
             self.name,
@@ -137,7 +137,7 @@ async def async_main():
     configObj.loadConfig()
     configObj.check_options()
 
-    bot = IRC_Main(configObj)
+    bot = IrcBot(configObj)
     log = False
 
     try:

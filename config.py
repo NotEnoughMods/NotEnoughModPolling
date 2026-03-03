@@ -1,7 +1,7 @@
 import configparser
 
 
-class invalidConfig(Exception):
+class InvalidConfig(Exception):
     def __init__(self, key, line):
         self.line = line + 1
         self.key = key
