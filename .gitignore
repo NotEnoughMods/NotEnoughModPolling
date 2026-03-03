@@ -1,6 +1,13 @@
+#################
+## Project
+#################
+
+config.cfg
+config.yml
+lastStart.txt
+exception.txt
 test.py
 index.html
-config.yml
 
 #################
 ## Eclipse

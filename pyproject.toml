@@ -1,0 +1,13 @@
+[project]
+name = "renol-irc"
+version = "0.1.0"
+description = "An IRC bot framework with a plugin architecture"
+requires-python = ">=3.12"
+dependencies = [
+    "beautifulsoup4>=4.12",
+    "Jinja2>=3.1",
+    "PyYAML>=6.0",
+    "requests[security]>=2.31",
+    "simplejson>=3.19",
+    "packaging>=23.0",
+]

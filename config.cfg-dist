@@ -1,0 +1,18 @@
+[Connection Info]
+nickname = MyIRCBot
+password = foobar
+ident = MyIRCBot
+realname = RenolIRCBot
+server = 
+port = 6667
+
+[Administration]
+bot operators = 
+channels = 
+command prefix = =
+logging level = INFO
+
+[Networking]
+force ipv6 = False
+bind address = 
+

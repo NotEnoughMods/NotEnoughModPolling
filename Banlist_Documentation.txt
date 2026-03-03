@@ -1,0 +1,93 @@
+Banlist Module Methods:
+
+
+ - self.Banlist.defineGroup(groupName)
+ * groupName is a string
+ You need to define new group names first before being able
+ to use them with banUser, unbanUser, getBans and checkBans
+ (Otherwise, a NoSuchBanGroup exception will be raised).
+ 
+ The method inserts the groupName into the Bangroups table of
+ the banlist database for future look-ups.
+ 
+ * returns True if the group didn't exist already
+ * returns False if the group already exists
+
+
+ - self.Banlist.banUser(user, ident = "*", host = "*", groupName = "Global", timestamp = -1, banlength = -1)
+ * user, ident, host, groupName are strings, timestamp and banlength are integers
+ This method assembles user, ident and host into a ban string which
+ is added to the banlist database. The wildcards * (0 or more characters)
+ and ? (any single character) are supported.
+ 
+ timestamp and banlength are for support of temporary bans in the future
+ and do not have a function yet.
+ * Raises a NoSuchBanGroup exception if the group groupName does not exist.
+ * Raises an InvalidCharacterUsed exception if non-ascii characters are used, or
+   characters that are not in the ALLOWEDCHARS string.
+ 
+ * returns True if the particular ban string hasn't been banned yet
+ * returns False if the string has already been banned
+
+ 
+ - self.Banlist.unbanUser(user, ident = "*", host = "*", groupName = "Global")
+ * user, ident, host, groupName are strings
+ Similar to banUser, but deletes the assembled banstring from the banlist database.
+ 
+ * Raises a NoSuchBanGroup exception if the group groupName does not exist.
+ * Raises an InvalidCharacterUsed exception if non-ascii characters are used, or
+   characters that are not in the ALLOWEDCHARS string.
+ 
+ * Returns True if the particular ban string was banned.
+ * Returns False if no ban on the string existed
+   
+   
+ - self.Banlist.clearBanlist_all()
+ - self.Banlist.clearBanlist_group(groupName)
+ * groupName is a string
+ clearBanlist_all() deletes all bans in the database.
+ clearBanlist_group(groupName) deletes all bans in that specific group.
+ * clearBanlist_group will not do anything if the group does not exist.
+ 
+ 
+ - self.Banlist.getBans(groupName = None, matchingString = None)
+ * groupName can be a string or None, matchingString can be a string or None
+ Returns a list of bans from the database which can be filtered based on
+ groupName and matchingString. matchingString can be None or a string in
+ the format of "user!ident@host", which will return a list of all bans
+ that affect this particular string, if there are any.
+ 
+ If groupName is not None, returns a list of all bans from the ban group, or,
+ if matchingString is not None, all bans from the ban group that affect the string.
+ 
+ * Each item in the list is a tuple containing group name, ban string, 
+   timestamp and ban length.
+ 
+ - self.Banlist.getGroups()
+ Returns a list of all ban groups that have been defined in the database.
+ Each item in the list is a string containing the name of group.
+ 
+ - self.Banlist.checkBan(user, ident, host, groupName = "Global")
+ * user, ident, host, groupName are strings
+ Use this method to check if that particular combination of user, ident
+ and host is banned from the group groupName.
+ 
+ * Returns True, and a tuple containing group name, ban string, time stamp
+   and ban length from the first entry that bans this combination of user,
+   ident and host, if it has been banned.
+ * Returns False, None, if this combination has not been banned yet.
+ 
+
+Exceptions:
+(with attributes that can be taken from a
+ an example exception that was catched as 'e')
+
+InvalidCharacterUsed(string, char, pos)
+ - Useful variables:
+ - e.string (the entire string that triggered the exception)
+ - e.char (the incorrect character)
+ - e.pos (the position of the incorrect character in the string)
+ 
+
+NoSuchBanGroup(groupName)
+ - e.group (the group name that does not exist)

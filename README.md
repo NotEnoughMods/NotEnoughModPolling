@@ -1,16 +1,13 @@
-Not Enough Mods Polling Plugin 
-=============
-[![Build Status](https://travis-ci.org/NotEnoughMods/NotEnoughModPolling.svg?branch=master)](https://travis-ci.org/NotEnoughMods/NotEnoughModPolling)
-[![Dependabot Status](https://api.dependabot.com/badges/status?host=github&repo=NotEnoughMods/NotEnoughModPolling)](https://dependabot.com)
+Not Enough Mods
+===============
 
-A plugin for the [Renol IRC bot][renol] that automatically keeps some mods in [Not Enough Mods][nem] up-to-date by polling information from several sources.
+An IRC bot with a plugin that automatically keeps some mods in [Not Enough Mods][nem] up-to-date by polling information from several sources.
+
+Built on the Renol IRC bot framework.
 
 Requirements
 ------------
-- Python 2.7
-- Pipenv
-
-`pipenv install`
+- Python 3.12+
 
 Contact
 ------------
@@ -33,6 +30,8 @@ Contributors:
 
 Website CSS by [GenPage][genpage]
 
+IRC bot (Renol) by [RenolY2][renoly2]
+
 [sinz]: https://github.com/SinZ163
 [nightkev]: https://github.com/NightKev
 [pyker]: https://github.com/Pyker
@@ -40,6 +39,6 @@ Website CSS by [GenPage][genpage]
 [spacechase0]: https://github.com/spacechase0
 [genpage]: https://github.com/GenPage
 [dmod]: https://github.com/dmodoomsirius
-[renol]: https://github.com/RenolY2/Renol-IRC
+[renoly2]: https://github.com/RenolY2
 [nem]: https://bot.notenoughmods.com/
 [contributors]: https://github.com/NotEnoughMods/NotEnoughModPolling/graphs/contributors
