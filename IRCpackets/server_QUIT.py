@@ -1,9 +1,9 @@
 ID = "QUIT"
 
 def execute(self, sendMsg, prefix, command, params):
-    print "SOMEBODY LEFT SERVER:"
-    print prefix.encode("ascii", "replace")
-    print params.encode("ascii", "replace")
+    print("SOMEBODY LEFT SERVER:")
+    print(prefix)
+    print(params)
     
     part1 = prefix.partition("!")
     part2 = part1[2].partition("@")
@@ -13,14 +13,14 @@ def execute(self, sendMsg, prefix, command, params):
     host = part2[2]
     
     quitReason = params[1:]
-    print "SERVER LEAVE"
-    print name.encode("ascii", "replace"), ident.encode("ascii", "replace"), host.encode("ascii", "replace")
-    print quitReason.encode("ascii", "replace")
+    print("SERVER LEAVE")
+    print(name, ident, host)
+    print(quitReason)
 
     self.events["userquit"].tryAllEvents(self, name, ident, host, quitReason)
     
     for chan in self.channelData:
-        print chan
+        print(chan)
         for i in range(len(self.channelData[chan]["Userlist"])):
             user, pref = self.channelData[chan]["Userlist"][i]
             if user == name:
@@ -28,5 +28,5 @@ def execute(self, sendMsg, prefix, command, params):
                 break
     
     if self.Bot_Auth.doesExist(name) and self.Bot_Auth.isRegistered(name):
-        print "HE DIED"
+        print("HE DIED")
         self.Bot_Auth.unregisterUser(name)
