@@ -1,4 +1,4 @@
-import imp
+import importlib.util
 
 ID = "newload"
 permission = 3
@@ -21,7 +21,7 @@ def execute(self, name, params, channel, userdata, rank):
         
         for filename in files:
             path = "commands/"+filename
-            module = imp.load_source("RenolIRC_"+filename[0:-3], path)
+            module = self._load_source("RenolIRC_"+filename[0:-3], path)
             cmd = module.ID
             
             self.commands[cmd] = (module, path)

@@ -1,5 +1,6 @@
-import imp, os
-import Queue
+import importlib.util
+import os
+import queue
 import logging
 
 from time import strftime
@@ -49,7 +50,7 @@ class commandHandling():
         self.rankconvert = {"@@" : 3, "@" : 2, "+" : 1, "" : 0}
         self.startupTime = datetime.now()
         
-        self.PacketsReceivedBeforeDeath = Queue.Queue(maxsize = 50)
+        self.PacketsReceivedBeforeDeath = queue.Queue(maxsize = 50)
         
         self.threading = centralizedThreading.ThreadPool()
         self.Banlist = BanList("BannedUsers.db")
@@ -69,7 +70,7 @@ class commandHandling():
         ## There is room for 50 entries, number can be increased or lowered at a later point
         try:
             self.PacketsReceivedBeforeDeath.put(u"{0} {1} {2}".format(prefix, command, params), False)
-        except Queue.Full:
+        except queue.Full:
             self.PacketsReceivedBeforeDeath.get(block = False)
             self.PacketsReceivedBeforeDeath.put(u"{0} {1} {2}".format(prefix, command, params), False)
         
@@ -84,7 +85,7 @@ class commandHandling():
         except KeyError as error:
             #print "Unknown command '"+command+"'"
             self.__CMDHandler_log__.exception("Missing channel or other KeyError caught")
-            print "Missing channel or other KeyError caught: "+str(error)
+            print("Missing channel or other KeyError caught: "+str(error))
             
     
     def timeEventChecker(self):
@@ -236,7 +237,7 @@ class commandHandling():
         self.__CMDHandler_log__.debug("Added DebugEntry: '%s'", entryString)
         try:
             self.PacketsReceivedBeforeDeath.put(entryString, False)
-        except Queue.Full:
+        except queue.Full:
             self.PacketsReceivedBeforeDeath.get(block = False)
             self.PacketsReceivedBeforeDeath.put(entryString, False)
     
@@ -259,7 +260,7 @@ class commandHandling():
         else:
             self.__CMDHandler_log__.error("Trying to join a channel, but channel is not list or string: %s [%s]", channel, type(channel))
             raise TypeError
-        print self.channelData
+        print(self.channelData)
     
     def whoisUser(self, user):
         self.send("WHOIS {0}".format(user))
@@ -267,7 +268,7 @@ class commandHandling():
         self.__CMDHandler_log__.debug("Sending WHOIS for user '%s'", user)
     
     def userInSight(self, user):
-        print self.channelData
+        print(self.channelData)
         self.__CMDHandler_log__.debug("Checking if user '%s' is in the following channels: %s", user, self.channelData.keys())
         for channel in self.channelData:
             for userD in self.channelData[channel]["Userlist"]:
@@ -287,13 +288,20 @@ class commandHandling():
                 
         return newlist
     
-    def __LoadModules__(self,path):     
+    @staticmethod
+    def _load_source(name, path):
+        spec = importlib.util.spec_from_file_location(name, path)
+        module = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(module)
+        return module
+
+    def __LoadModules__(self,path):
         ModuleList = self.__ListDir__(path)
         self.__CMDHandler_log__.info("Loading modules in path '%s'...", path)
         Packet = {}
         for i in ModuleList:
             self.__CMDHandler_log__.debug("Loading file %s in path '%s'", i, path)
-            module = imp.load_source("RenolIRC_"+i[0:-3], path+"/"+i)
+            module = self._load_source("RenolIRC_"+i[0:-3], path+"/"+i)
             #print i
             Packet[module.ID] = (module, path+"/"+i)
             
@@ -310,7 +318,7 @@ class commandHandling():
             #Packet[i[1].lower()].PATH = path + "/"+i[2]
             #self.Packet[i[1]] = self.Packet[i[1]].EXEC()
         
-        print "ALL MODULES LOADED"   
+        print("ALL MODULES LOADED"   )
         self.__CMDHandler_log__.info("Modules in path '%s' loaded.", path)
         return Packet
     
