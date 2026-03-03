@@ -44,7 +44,7 @@ class Configuration:
         self.mandatoryVariables = {
             "Connection Info": {
                 "nickname": True,
-                "password": True,
+                "password": False,
                 "ident": True,
                 "realname": True,
                 "server": True,

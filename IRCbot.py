@@ -54,7 +54,8 @@ class IRC_Main:
         # Start the write loop as a background task
         write_task = asyncio.create_task(self.conn.write_loop())
 
-        await self.conn.sendMsg("PASS " + self.passw)
+        if self.passw:
+            await self.conn.sendMsg("PASS " + self.passw)
         await self.conn.sendMsg("NICK " + self.name)
         await self.conn.sendMsg(f"USER {self.myident} * * {self.realname}")
 
