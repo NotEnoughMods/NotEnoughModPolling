@@ -4,7 +4,7 @@ permission = 1
 def execute(self, name, params, channel, userdata, rank):
     if len(params) == 0:
         rank = self.userGetRankNum(channel, name)
-        print rank
+        print(rank)
         
         self.sendChatMessage(self.send, channel, "You "+{2 : "are OP", 1 : "are voiced", 0 : "do not have a special rank", 3 : "are Bot OP"}[rank])
     else:

@@ -14,9 +14,9 @@ class ForceShutdown(Exception):
         Time: {3}".format(self.cmd, self.pref, self.params, self.time) 
 
 def execute(self, sendMsg, prefix, command, params):
-    print "~Server sent an ERROR packet~"
-    print prefix
-    print params
+    print("~Server sent an ERROR packet~")
+    print(prefix)
+    print(params)
     raise ForceShutdown(prefix, command, params)
 
 

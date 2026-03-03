@@ -3,9 +3,9 @@
 ID = "JOIN"
 
 def execute(self, sendMsg, prefix, command, params):
-    print "SOMEBODY JOINED CHANNEL:"
-    print prefix
-    print params
+    print("SOMEBODY JOINED CHANNEL:")
+    print(prefix)
+    print(params)
     
     part1 = prefix.partition("!")
     part2 = part1[2].partition("@")

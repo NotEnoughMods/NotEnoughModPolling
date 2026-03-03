@@ -1,9 +1,9 @@
 ID = "KICK"
 
 def execute(self, sendMsg, prefix, command, params):
-    print "SOMEBODY WAS KICKED:"
-    print prefix
-    print params
+    print("SOMEBODY WAS KICKED:")
+    print(prefix)
+    print(params)
     
     fields = params.split(" ")
     

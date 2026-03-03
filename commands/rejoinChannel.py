@@ -16,8 +16,8 @@ def execute(self, name, params, channel, userdata, rank):
     
                 
     partParams = ",".join(channels)
-    print partParams
-    print channels
+    print(partParams)
+    print(channels)
     self.send("PART :"+partParams+"", 4)
     for chan in channels:
         del self.channelData[chan]

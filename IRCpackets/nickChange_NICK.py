@@ -9,7 +9,7 @@ def execute(self, sendMsg, prefix, command, params):
     host = part2[2]
     
     newName = params[1:]
-    print "NICKCHANGE"
+    print("NICKCHANGE")
     
     if self.Bot_Auth.doesExist(name): 
         self.Bot_Auth.unregisterUser(name)

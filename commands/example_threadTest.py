@@ -14,8 +14,8 @@ def thread(self, pipe):
         
         pipe.send("I will wait {0} seconds!".format(rand))
         time.sleep(rand)
-        print pipe.recv()
-        print "success"
+        print(pipe.recv())
+        print("success")
 
 def threadChecker(self, channels):
     yes = self.threading.poll("threadTest")
@@ -24,8 +24,8 @@ def threadChecker(self, channels):
     if yes:
         msg = self.threading.recv("threadTest")
         if isinstance(msg, dict) and "action" in msg and msg["action"] == "exceptionOccured":
-            print "EXCEPTION"
-            print msg["traceback"]
+            print("EXCEPTION")
+            print(msg["traceback"])
         else:
             self.sendChatMessage(self.send, channels[0], "Message from Thread: "+msg)
             self.threading.send("threadTest", random.choice(["0", "1", "2", "3"]))

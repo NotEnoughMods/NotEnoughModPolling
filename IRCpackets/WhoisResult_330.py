@@ -1,9 +1,9 @@
 ID = "330"
 
 def execute(self, sendMsg, prefix, command, params):
-    print "WHOIS END: ",prefix,"-", command,"-", params
+    print("WHOIS END: ",prefix,"-", command,"-", params)
     fields = params.split(":")
-    print fields[0],fields[1]
+    print(fields[0],fields[1])
     
     names = fields[0].split(" ")
     #print ",".join(names)
@@ -22,4 +22,4 @@ def execute(self, sendMsg, prefix, command, params):
                 self.Bot_Auth.unregisterUser(username)
                 #print "nope, User is not registered :("
     else:
-        print "NONSTANDARD FIELD: "+fields[1]
+        print("NONSTANDARD FIELD: "+fields[1])

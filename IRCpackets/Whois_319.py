@@ -2,7 +2,7 @@ ID = "319"
 
 def execute(self, sendMsg, prefix, command, params):
     #print "WHOIS WHAT", prefix, params
-    print params
+    print(params)
     
     fields = params.split(":")
     
@@ -11,4 +11,4 @@ def execute(self, sendMsg, prefix, command, params):
     
     name = userinfo[1]
     
-    print userinfo, channelinfo
+    print(userinfo, channelinfo)

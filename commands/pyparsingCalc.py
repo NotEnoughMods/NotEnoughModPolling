@@ -94,7 +94,7 @@ class EvalConstant():
 class EvalPow():
     def __init__(self, tokens):
         self.value = tokens[0]
-        print self.value
+        print(self.value)
     def eval(self, vars_):
         prod = self.value[0].eval( vars_ )
         
@@ -167,7 +167,7 @@ class EvalHexBinDisp():
     "An additional class for converting numbers to binary/hexadecimal"
     def __init__(self, tokens):
         self.value = tokens[0]
-        print self.value
+        print(self.value)
     def eval(self, vars_):
         sign = self.value[0]
         if sign == "bin":
@@ -226,8 +226,8 @@ class Arith():
             | Combine(Word(nums) + Optional("." + Word(nums)) ) 
             | Word(alphas)) 
     
-    print Word(nums)
-    print nums
+    print(Word(nums))
+    print(nums)
 
     operand = real 
     
@@ -272,7 +272,7 @@ class Arith():
         setattr(self.arith_expr, "__startTime", timer())
         
         ret = self.arith_expr.parseString( strExpr, parseAll=False)[0]
-        print ret
+        print(ret)
         result = ret.eval(self.vars_)
         return result
     
@@ -321,5 +321,5 @@ def execute(self, name, params, channel, userdata, rank):
     except Exception as error:
         traceb = str(traceback.format_exc())
         self.sendMessage(channel, u"ParseError: '"+str(error)+u"'")
-        print "error: "+str(error)
-        print traceb
+        print("error: "+str(error))
+        print(traceb)

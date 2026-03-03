@@ -5,7 +5,7 @@ ID = "376"
 
         
 def execute(self, sendMsg, prefix, command, params):
-    print self.channels
+    print(self.channels)
     logging.info("End of MotD: 376. If you see 'MotD is missing: 422', please notify the author of the bot.")
     self.joinChannel(sendMsg, self.channels)
         

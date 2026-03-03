@@ -4,7 +4,7 @@ def execute(self, sendMsg, prefix, command, params):
     data = params.split(" ", 3)
     channel = data[2]
     users = data[3]
-    print users
+    print(users)
     for name in users[1:].split(" "):
         if "@" in name[0] or "+" in name[0]:
             self.channelData[self.retrieveTrueCase(channel)]["Userlist"].append((name[1:], name[0]))

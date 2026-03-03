@@ -1,10 +1,10 @@
 ID = "MODE"
 
 def execute(self, sendMsg, prefix, command, params):
-    print prefix, params
+    print(prefix, params)
     splitted = params.split(" ")
     
-    print splitted
+    print(splitted)
     if len(splitted) == 3:
         
         chan = self.retrieveTrueCase(splitted[0])

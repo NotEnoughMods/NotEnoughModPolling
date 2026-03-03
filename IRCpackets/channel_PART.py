@@ -1,9 +1,9 @@
 ID = "PART"
 
 def execute(self, sendMsg, prefix, command, params):
-    print "SOMEBODY LEFT CHANNEL:"
-    print prefix
-    print params
+    print("SOMEBODY LEFT CHANNEL:")
+    print(prefix)
+    print(params)
     
     part1 = prefix.partition("!")
     part2 = part1[2].partition("@")
@@ -12,7 +12,7 @@ def execute(self, sendMsg, prefix, command, params):
     ident = part2[0]
     host = part2[2]
     
-    print "CHANNEL LEAVE"
+    print("CHANNEL LEAVE")
 
     if params.startswith(":"):
         chan_string = params.lstrip(":")

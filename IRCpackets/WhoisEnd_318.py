@@ -1,13 +1,13 @@
 ID = "318"
 
 def execute(self, sendMsg, prefix, command, params):
-    print "WHOIS RESULT: ",prefix, command, params
+    print("WHOIS RESULT: ",prefix, command, params)
     
     fields = params.split(":")
-    print fields[0],fields[1]
+    print(fields[0],fields[1])
     
     names = fields[0].split(" ")
-    print ",".join(names)
+    print(",".join(names))
     username = names[1]
     registeredAs = names[2]
     

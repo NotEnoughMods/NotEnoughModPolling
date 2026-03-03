@@ -4,7 +4,7 @@ ID = "event"
 permission = 3
 
 def timer(self, channels):
-    print "executing"
+    print("executing")
     if channels != False and len(channels) > 0:
         self.sendChatMessage(self.send, channels[0], "Time has passed.") 
         

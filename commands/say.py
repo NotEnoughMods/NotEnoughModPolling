@@ -2,8 +2,8 @@ ID = "say"
 permission = 4
 
 def execute(self, name, params, channel, userdata, rank):
-    print "Executing.. "
+    print("Executing.. ")
     result = " ".join(params)
-    print result
+    print(result)
     self.sendChatMessage(self.send, channel, result)
     

@@ -12,7 +12,7 @@ def execute(self, name, params, channel, userdata, rank):
         try:
             help = self.helper.getCmdHelp(cmdname)
         except KeyError as error:
-            print str(error)
+            print(str(error))
             self.sendNotice(name, "No such command exists.")
             return
     else:
@@ -77,7 +77,7 @@ def execute(self, name, params, channel, userdata, rank):
         self.sendNotice(name, "No arguments provided.")
 
 def test(self, name, params, channel, userdata, rank):
-    print name
+    print(name)
 
 def __initialize__(self, Startup):
     entry = self.helper.newHelp(ID)

@@ -3,7 +3,7 @@ ID = "PING"
 
 
 def execute(self, sendMsg, prefix, command, params):
-    print "RECEIVED PING: "+params
+    print("RECEIVED PING: "+params)
     
     
     derp = params.strip()

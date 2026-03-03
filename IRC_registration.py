@@ -12,7 +12,7 @@ class trackVerification():
         self.users = {}
         for item in userlist:
             self.users[item.lower()] = False
-        print self.users
+        print(self.users)
         self.userQueue = []
         
         self.__verify_log__ = logging.getLogger("UserVerification")

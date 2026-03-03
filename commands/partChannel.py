@@ -19,11 +19,11 @@ def execute(self, name, params, channel, userdata, rank, isChannel):
             if chan != False:
                 channels.append(chan)
             else:
-                print chanEntry, "wat"
+                print(chanEntry, "wat")
                 
     partParams = ",".join(channels)
-    print partParams
-    print channels
+    print(partParams)
+    print(channels)
     
     if len(partParams) > 0:
         self.send("PART :"+partParams+"", 4)
