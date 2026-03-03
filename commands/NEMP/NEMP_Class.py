@@ -1,7 +1,9 @@
+import asyncio
 import contextlib
 import json
 import logging
 import re
+import urllib.parse
 
 import aiohttp
 import yaml
@@ -26,6 +28,8 @@ class NotEnoughClasses:
         self.document_groups = {}
         self.invalid_versions = []
         self.session = None
+        self._host_locks: dict[str, asyncio.Lock] = {}
+        self._host_delay: float = 0.5
 
         self.jinja_env = Environment(
             loader=FileSystemLoader("commands/NEMP"),
@@ -38,15 +42,23 @@ class NotEnoughClasses:
         self.buildModDict()
 
     async def fetch_page(self, url, timeout=10, decode_json=False, **kwargs):
-        async with self.session.get(url, timeout=aiohttp.ClientTimeout(total=timeout), **kwargs) as response:
-            if 400 <= response.status < 500:
-                raise NEMPException(f"HTTP {response.status} for {url}")
-            response.raise_for_status()
+        host = urllib.parse.urlparse(url).hostname
+        if host not in self._host_locks:
+            self._host_locks[host] = asyncio.Lock()
 
-            if decode_json:
-                return await response.json(content_type=None)
-            else:
-                return await response.text()
+        async with self._host_locks[host]:
+            async with self.session.get(url, timeout=aiohttp.ClientTimeout(total=timeout), **kwargs) as response:
+                if 400 <= response.status < 500:
+                    raise NEMPException(f"HTTP {response.status} for {url}")
+                response.raise_for_status()
+
+                if decode_json:
+                    result = await response.json(content_type=None)
+                else:
+                    result = await response.text()
+
+            await asyncio.sleep(self._host_delay)
+            return result
 
     async def fetch_json(self, *args, **kwargs):
         return await self.fetch_page(*args, decode_json=True, **kwargs)
@@ -58,6 +70,8 @@ class NotEnoughClasses:
         except:
             logger.error("You need to setup the NEMP/config.yml file")
             raise
+
+        self._host_delay = self.config.get("polling", {}).get("host_delay", 0.5)
 
     def load_version_blocklist(self):
         try:

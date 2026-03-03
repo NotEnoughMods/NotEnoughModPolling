@@ -1,5 +1,7 @@
 github:
   client_id: CLIENT_ID
   client_secret: CLIENT_SECRET
+polling:
+  host_delay: 0.5
 irc:
   staff_channel: '#test'

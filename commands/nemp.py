@@ -292,6 +292,33 @@ async def cmd_fail_count(self, name, params, channel, userdata, rank):
 FailedModEntry = namedtuple("FailedModEntry", "name exception")
 
 
+async def _poll_single_mod(NEM, mod_name):
+    """Poll a single mod, returning (poll_results, failed)."""
+    statuses, exception = await NEM.CheckMod(mod_name)
+    if exception:
+        return ([], [FailedModEntry(name=mod_name, exception=exception)])
+    return ([(mod_name, statuses)], [])
+
+
+async def _poll_document_group(NEM, mod_name, document_group):
+    """Poll a document group, returning (poll_results, failed)."""
+    try:
+        mod_results = await NEM.CheckMods(mod_name)
+    except Exception as e:
+        document_group_mods = NEM.document_groups[document_group]
+        return ([], [FailedModEntry(name=m, exception=e) for m in document_group_mods])
+
+    poll_results = []
+    failed = []
+    for output_mod, output_info in mod_results.items():
+        result, exception = output_info
+        if exception:
+            failed.append(FailedModEntry(name=output_mod, exception=exception))
+        else:
+            poll_results.append((output_mod, result))
+    return (poll_results, failed)
+
+
 async def polling_task(self, pipe):
     NEM = self.base["NEM"]
     sleepTime = self.base["PollTime"]
@@ -299,9 +326,8 @@ async def polling_task(self, pipe):
     while True:
         nemp_logger.debug("polling_task: I'm still running!")
 
-        poll_results = []
-        document_groups_done = []
-        failed = []  # type: List[FailedModEntry]
+        coros = []
+        document_groups_done = set()
 
         for mod_name, mod_info in NEM.mods.items():
             if not mod_info["active"]:
@@ -312,28 +338,23 @@ async def polling_task(self, pipe):
             if document_group:
                 if document_group in document_groups_done:
                     continue
-                document_groups_done.append(document_group)
-
-                try:
-                    mod_results = await NEM.CheckMods(mod_name)
-                except Exception as e:
-                    document_group_mods = NEM.document_groups[document_group]
-                    for document_group_mod in document_group_mods:
-                        failed.append(FailedModEntry(name=document_group_mod, exception=e))
-                    continue
-
-                for outputMod, outputInfo in mod_results.items():
-                    result, exception = outputInfo
-                    if exception:
-                        failed.append(FailedModEntry(name=outputMod, exception=exception))
-                    else:
-                        poll_results.append((outputMod, result))
+                document_groups_done.add(document_group)
+                coros.append(_poll_document_group(NEM, mod_name, document_group))
             else:
-                statuses, exception = await NEM.CheckMod(mod_name)
-                if exception:
-                    failed.append(FailedModEntry(name=mod_name, exception=exception))
-                else:
-                    poll_results.append((mod_name, statuses))
+                coros.append(_poll_single_mod(NEM, mod_name))
+
+        results = await asyncio.gather(*coros, return_exceptions=True)
+
+        poll_results = []
+        failed = []
+
+        for result in results:
+            if isinstance(result, BaseException):
+                nemp_logger.error("Unexpected exception in polling coroutine", exc_info=result)
+                continue
+            successes, failures = result
+            poll_results.extend(successes)
+            failed.extend(failures)
 
         await pipe.put((poll_results, failed))
 
