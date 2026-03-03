@@ -1,8 +1,8 @@
 [project]
-name = "not-enough-mods"
-version = "0.1.0"
+name = "not-enough-mods-polling"
+version = "2.0.0"
 description = "An IRC bot that automatically keeps mods in Not Enough Mods up-to-date"
-requires-python = ">=3.12"
+requires-python = ">=3.14"
 dependencies = [
     "aiohttp>=3.9",
     "beautifulsoup4>=4.12",
@@ -18,7 +18,7 @@ dev = [
 ]
 
 [tool.ruff]
-target-version = "py312"
+target-version = "py314"
 line-length = 120
 
 [tool.ruff.lint]

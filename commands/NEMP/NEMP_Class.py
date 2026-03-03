@@ -626,7 +626,7 @@ class NotEnoughClasses:
 async def setup():
     nem = NotEnoughClasses()
     nem.session = aiohttp.ClientSession(
-        headers={"User-agent": "NotEnoughMods:Polling/1.X (+https://github.com/NotEnoughMods/NotEnoughModPolling)"},
+        headers={"User-agent": "NotEnoughMods:Polling/2.0 (+https://github.com/NotEnoughMods/NotEnoughModPolling)"},
     )
     await nem.load_mc_blocklist()
     await nem.QueryNEM()

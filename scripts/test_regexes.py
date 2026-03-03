@@ -315,13 +315,9 @@ async def test_mod(session, mod_name, mod_data, config):
 
     try:
         if function == "CheckGitHubRelease":
-            status, detail, last_update, samples = await checker(
-                session, mod_name, mod_data, compiled_regex, config
-            )
+            status, detail, last_update, samples = await checker(session, mod_name, mod_data, compiled_regex, config)
         else:
-            status, detail, last_update, samples = await checker(
-                session, mod_name, mod_data, compiled_regex
-            )
+            status, detail, last_update, samples = await checker(session, mod_name, mod_data, compiled_regex)
     except Exception as e:
         status = DEAD
         detail = f"Exception: {type(e).__name__}: {e}"
@@ -349,9 +345,7 @@ async def main():
     async with aiohttp.ClientSession(
         timeout=timeout,
         connector=connector,
-        headers={
-            "User-Agent": "NotEnoughMods:RegexTest/1.0 (+https://github.com/NotEnoughMods/NotEnoughModPolling)"
-        },
+        headers={"User-Agent": "NotEnoughMods:RegexTest/2.0 (+https://github.com/NotEnoughMods/NotEnoughModPolling)"},
     ) as session:
         results = []
         total = len(mods)

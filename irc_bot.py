@@ -88,9 +88,7 @@ class IrcBot:
 
                 # PING must respond instantly — run inline, no lock
                 if command == "PING":
-                    await self.command_router.handle(
-                        self.conn.sendMsg, prefix, command, params, self.nickserv_auth
-                    )
+                    await self.command_router.handle(self.conn.sendMsg, prefix, command, params, self.nickserv_auth)
                 else:
                     # All other handlers run as tasks, serialized by lock
                     task = asyncio.create_task(self._locked_handle(prefix, command, params))
@@ -131,9 +129,7 @@ class IrcBot:
 
     async def _locked_handle(self, prefix, command, params):
         async with self.command_router._handler_lock:
-            await self.command_router.handle(
-                self.conn.sendMsg, prefix, command, params, self.nickserv_auth
-            )
+            await self.command_router.handle(self.conn.sendMsg, prefix, command, params, self.nickserv_auth)
 
     async def _timer_loop(self):
         """Periodically check timer events."""

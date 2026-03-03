@@ -136,7 +136,7 @@ async def setup(self, Startup):
     if session:
         await session.close()
     session = aiohttp.ClientSession(
-        headers={"User-agent": "NotEnoughMods:Tools/1.X (+https://github.com/NotEnoughMods/NotEnoughModPolling)"},
+        headers={"User-agent": "NotEnoughMods:Tools/2.0 (+https://github.com/NotEnoughMods/NotEnoughModPolling)"},
     )
     versions = await get_latest_version()
     version = versions[-1]
