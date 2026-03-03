@@ -15,10 +15,11 @@ class FunctionNameAlreadyExists(Exception):
 
 
 class TaskHandle:
-    def __init__(self, name, task, queue):
+    def __init__(self, name, task, queue, base=None):
         self.name = name
         self.task = task
         self.queue = queue
+        self.base = base
         self.signal = False
         self.running = True
         self._startTime = None
@@ -76,7 +77,7 @@ class TaskPool:
                 handle.running = False
 
         task = asyncio.create_task(_wrapper())
-        handle = TaskHandle(name, task, queue)
+        handle = TaskHandle(name, task, queue, base=baseReference)
         self.pool[name] = {"handle": handle, "queue": queue}
         self._logger.debug("New task '%s' started", name)
 

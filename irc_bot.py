@@ -96,8 +96,13 @@ class IrcBot:
                     task = asyncio.create_task(self._locked_handle(prefix, command, params))
                     self._handler_tasks.add(task)
                     task.add_done_callback(self._handler_tasks.discard)
+        except asyncio.CancelledError:
+            self._logger.info("Main loop cancelled (shutdown)")
         finally:
             self._logger.info("Main loop has been stopped")
+            self.command_router.task_pool.cancel_all()
+            for t in self._handler_tasks:
+                t.cancel()
             timer_task.cancel()
             with contextlib.suppress(asyncio.CancelledError):
                 await timer_task
@@ -198,4 +203,5 @@ async def async_main():
 
 
 if __name__ == "__main__":
-    asyncio.run(async_main())
+    with contextlib.suppress(KeyboardInterrupt):
+        asyncio.run(async_main())
