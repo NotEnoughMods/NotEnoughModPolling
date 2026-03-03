@@ -1,3 +1,4 @@
+import importlib
 import logging
 import shlex
 import time
@@ -85,7 +86,7 @@ def __initialize__(self, Startup):
 
             nemp_logger.info("NEMP Polling has been disabled.")
 
-        reload(NEMP_Class)
+        importlib.reload(NEMP_Class)
 
         self.NEM = NEMP_Class.NotEnoughClasses()
 
@@ -156,7 +157,7 @@ def cmd_status(self, name, params, channel, userdata, rank):
 
 
 def cmd_disabled_mods(self, name, params, channel, userdata, rank):
-    disabled = [mod for mod, info in self.NEM.mods.iteritems() if not info['active']]
+    disabled = [mod for mod, info in self.NEM.mods.items() if not info['active']]
 
     if len(disabled) == 0:
         self.sendNotice(name, "No mods are disabled right now.")
@@ -186,7 +187,7 @@ def cmd_reset_failed(self, name, params, channel, userdata, rank):
 
 
 def cmd_fail_count(self, name, params, channel, userdata, rank):
-    print self.NEM_troubledMods
+    print(self.NEM_troubledMods)
     if len(self.NEM_troubledMods) == 0:
         self.sendNotice(name, "No mods have had trouble polling so far.")
     else:
@@ -231,7 +232,7 @@ def PollingThread(self, pipe):
         document_groups_done = []
         failed = []  # type: List[FailedModEntry]
 
-        for mod_name, mod_info in NEM.mods.iteritems():
+        for mod_name, mod_info in NEM.mods.items():
             # Check if the thread was requested to terminate
             if self.signal:
                 return
@@ -261,7 +262,7 @@ def PollingThread(self, pipe):
                     # drop out (to the next mod)
                     continue
 
-                for outputMod, outputInfo in results.iteritems():
+                for outputMod, outputInfo in results.items():
                     result, exception = outputInfo
 
                     if exception:
@@ -280,7 +281,7 @@ def PollingThread(self, pipe):
 
         # A more reasonable way of sleeping to quicken up the
         # shutdown of the thread. Sleep in steps of 30 seconds
-        for i in xrange(sleepTime // 30 + 1):
+        for i in range(sleepTime // 30 + 1):
             # print "Sleeping for 30s, step %s" % i
             if self.signal:
                 return
@@ -470,12 +471,12 @@ def cmd_poll(self, name, params, channel, userdata, rank):
     # "c:" is the category operator
     if params[1][0:2].lower() == "c:":
         category = params[1][2:].lower()
-        match_mods = {k: v for k, v in self.NEM.mods.iteritems() if v.get('category', '').lower() == category}
+        match_mods = {k: v for k, v in self.NEM.mods.items() if v.get('category', '').lower() == category}
 
         if not match_mods:
             self.sendMessage(channel, '{}: Could not find any matches.'.format(name))
         else:
-            for mod, info in match_mods.iteritems():
+            for mod, info in match_mods.items():
                 info["active"] = setting
 
                 # The mod has been manually activated or deactivated, so we remove it from the
@@ -489,12 +490,12 @@ def cmd_poll(self, name, params, channel, userdata, rank):
     # "p:" is the parser operator
     elif params[1].lower().startswith('p:'):
         parser = params[1][2:].lower()
-        match_mods = {k: v for k, v in self.NEM.mods.iteritems() if v['function'][5:].lower() == parser}
+        match_mods = {k: v for k, v in self.NEM.mods.items() if v['function'][5:].lower() == parser}
 
         if not match_mods:
             self.sendMessage(channel, '{}: Could not find any matches.'.format(name))
         else:
-            for mod, info in match_mods.iteritems():
+            for mod, info in match_mods.items():
                 info['active'] = setting
 
                 if mod in self.NEM_autodeactivatedMods:
@@ -551,10 +552,10 @@ def cmd_list(self, name, params, channel, userdata, rank):
     darkgreen = "03"
     red = "05"
     blue = "12"
-    bold = unichr(2)
-    color = unichr(3)
+    bold = chr(2)
+    color = chr(3)
     tempList = {}
-    for key, info in self.NEM.mods.iteritems():
+    for key, info in self.NEM.mods.items():
         real_name = info.get('name', key)
         if self.NEM.mods[key]["active"]:
             relType = ""
@@ -569,7 +570,7 @@ def cmd_list(self, name, params, channel, userdata, rank):
             tempList[mcver].append("{0}{1}".format(real_name, relType))
 
     del mcver
-    for mcver in sorted(tempList.iterkeys()):
+    for mcver in sorted(tempList.keys()):
         tempList[mcver] = sorted(tempList[mcver], key=lambda s: s.lower())
         self.sendMessage(dest, "Mods checked for {} ({}): {}".format(color + blue + bold + mcver + color + bold, len(tempList[mcver]), ', '.join(tempList[mcver])))
 
@@ -624,7 +625,7 @@ def cmd_test(self, name, params, channel, userdata, rank):
 
     real_name = self.NEM.mods[mod].get('name', mod)
 
-    print '{} {!r}'.format(mod, statuses)
+    print('{} {!r}'.format(mod, statuses))
 
     commands = []
 
@@ -687,7 +688,7 @@ def cmd_set(self, name, params, channel, userdata, rank):
             # Trim out these 2 args so the rest will work just fine
             args = args[2:]
         else:
-            self.sendMessage(channel, "Unknown type. Available types are: " + ', '.join(available_casts.iterkeys()))
+            self.sendMessage(channel, "Unknown type. Available types are: " + ', '.join(available_casts.keys()))
             return
 
     mod = self.NEM.get_proper_name(args[0])

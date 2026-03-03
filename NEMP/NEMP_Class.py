@@ -6,7 +6,7 @@ import traceback
 import yaml
 
 from bs4 import BeautifulSoup
-from distutils.version import LooseVersion
+from packaging.version import Version
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 
 logging.getLogger('urllib3').setLevel(logging.WARNING)
@@ -18,7 +18,7 @@ class NEMPException(Exception):
 
 class InvalidVersion(NEMPException):
     def __str__(self):
-        return repr(self.message)
+        return repr(self.args[0])
 
 
 class NotEnoughClasses():
@@ -122,7 +122,7 @@ class NotEnoughClasses():
             if 'regex' in data:
                 return data['regex']
             else:
-                for k, v in data.iteritems():
+                for k, v in data.items():
                     ret = self._find_regex(v)
                     if ret:
                         return ret
@@ -166,7 +166,7 @@ class NotEnoughClasses():
     def init_nem_versions(self):
         our_mods = {}
 
-        for json_mod_name, json_info in self.mods.iteritems():
+        for json_mod_name, json_info in self.mods.items():
             # The NEM mod name is set in 'name', defaults to json_mod_name
             # We then convert it to lowercase so we can make a case-insensitive comparison
             nem_mod_name = json_info.get('name', json_mod_name).lower()
@@ -217,7 +217,7 @@ class NotEnoughClasses():
         if self.mods[mod]['mcforge'].get('slim', False):
             result = {}
 
-            for promo_name, version in jsonres['promos'].iteritems():
+            for promo_name, version in jsonres['promos'].items():
                 match = re.match(r'^(?P<mc>[0-9]+(?:\.[0-9]+)+)-(?P<type>latest|recommended)$', promo_name)
 
                 if not match:
@@ -252,7 +252,7 @@ class NotEnoughClasses():
 
         versions = {}
 
-        for promo, version in jsonres['promos'].iteritems():
+        for promo, version in jsonres['promos'].items():
             if promo == 'reserved':
                 # thanks Hea3veN
                 continue
@@ -267,7 +267,7 @@ class NotEnoughClasses():
             versions.setdefault(mc, {})[version_type] = version
 
         # Finishing touches
-        for mc, version_info in versions.iteritems():
+        for mc, version_info in versions.items():
             if 'dev' in version_info and 'version' in version_info and version_info['dev'] == version_info['version']:
                 del versions[mc]['dev']
 
@@ -291,7 +291,7 @@ class NotEnoughClasses():
 
         result = {}
 
-        for mc_version, mod_version in versions.iteritems():
+        for mc_version, mod_version in versions.items():
             result[mc_version] = {version_type: mod_version}
 
         return result
@@ -303,7 +303,7 @@ class NotEnoughClasses():
 
         results = {}
 
-        for mc in jsonres['downloads'].iterkeys():
+        for mc in jsonres['downloads'].keys():
             results[mc] = {
                 'version': version,
                 'changelog': jsonres['summary']
@@ -523,7 +523,7 @@ class NotEnoughClasses():
     def get_proper_name(self, mod):
         lower_mod = mod.lower()
 
-        for mod_name in self.mods.iterkeys():
+        for mod_name in self.mods.keys():
             if lower_mod == mod_name.lower():
                 return mod_name
 
@@ -565,7 +565,7 @@ class NotEnoughClasses():
 
             statuses = []
 
-            for mc, version_info in output.iteritems():
+            for mc, version_info in output.items():
                 # [mc version, dev version, release version, changelog]
                 status = [None, '', '', None]
 
@@ -575,7 +575,7 @@ class NotEnoughClasses():
                     mc = self.mc_mapping[mc]
 
                 if mc in self.mc_blocklist:
-                    print 'Skipping blocked MC version {} for {}, version_info={!r}'.format(mc, mod, version_info)
+                    print('Skipping blocked MC version {} for {}, version_info={!r}'.format(mc, mod, version_info))
                     continue
 
                 status[0] = mc

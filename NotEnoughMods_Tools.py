@@ -13,9 +13,9 @@ permission = 1
 nem_logger = logging.getLogger("NEM_Tools")
 
 # Colour Constants for List and Multilist command
-COLOURPREFIX = unichr(3)
+COLOURPREFIX = chr(3)
 COLOUREND = COLOURPREFIX
-BOLD = unichr(2)
+BOLD = chr(2)
 
 DARKGREEN = COLOURPREFIX + "03"
 RED = COLOURPREFIX + "05"
@@ -204,7 +204,7 @@ def multilist(self, name, params, channel, userdata, rank):
 
             self.sendMessage(channel, "Listing " + count + " for \"" + params[1] + "\":")
 
-            for version in results.iterkeys():
+            for version in results.keys():
                 alias = ""
                 modData = jsonres[version][results[version]]
 
