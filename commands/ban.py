@@ -1,7 +1,7 @@
 from fnmatch import fnmatch
 from io import StringIO
 
-from BanList import InvalidCharacterUsed, NoSuchBanGroup
+from ban_list import InvalidCharacterUsed, NoSuchBanGroup
 
 ID = "ban"
 permission = 3

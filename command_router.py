@@ -5,12 +5,12 @@ import os
 from datetime import datetime
 from time import strftime
 
-import centralizedThreading
-from BanList import BanList
-from BotEvents import MsgEvent, StandardEvent, TimerEvent
-from CommandHelp import HelpModule
-from IRC_registration import trackVerification
-from IRCLogging import LoggingModule
+import task_pool
+from ban_list import BanList
+from bot_events import MsgEvent, StandardEvent, TimerEvent
+from help_system import HelpModule
+from irc_logging import LoggingModule
+from user_auth import trackVerification
 
 
 class commandHandling:
@@ -52,7 +52,7 @@ class commandHandling:
 
         self.PacketsReceivedBeforeDeath = asyncio.Queue(maxsize=50)
 
-        self.threading = centralizedThreading.ThreadPool()
+        self.threading = task_pool.ThreadPool()
         self.Banlist = BanList("BannedUsers.db")
 
         self.helper = HelpModule()

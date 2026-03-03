@@ -5,9 +5,9 @@ import logging
 import socket
 import traceback
 
-from commandHandler import commandHandling
-from configReader import Configuration
-from IRC_readwrite_threads import IRC_Connection
+from command_router import commandHandling
+from config import Configuration
+from irc_connection import IRC_Connection
 
 
 class IRC_Main:

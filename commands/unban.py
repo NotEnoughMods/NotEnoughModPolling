@@ -1,4 +1,4 @@
-from BanList import InvalidCharacterUsed, NoSuchBanGroup
+from ban_list import InvalidCharacterUsed, NoSuchBanGroup
 
 ID = "unban"
 permission = 3

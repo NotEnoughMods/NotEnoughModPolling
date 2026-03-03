@@ -1,4 +1,4 @@
-from BanList import NoSuchBanGroup
+from ban_list import NoSuchBanGroup
 
 ID = "listbans"
 permission = 3
