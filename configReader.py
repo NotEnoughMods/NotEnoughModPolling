@@ -73,7 +73,7 @@ class Configuration():
             for option in options:
                 val = self.config.get(section, option)
                 
-                if options[option] == True and val == "":
+                if options[option] is True and val == "":
                     raise RuntimeError("Option '{0}' in section '{1}' has no value, but is required to have one. "
                                         "Please fill in the missing information.".format(option, section))
     

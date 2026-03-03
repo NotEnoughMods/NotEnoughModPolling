@@ -1,6 +1,6 @@
 ID = "NICK"
 
-def execute(self, sendMsg, prefix, command, params):
+async def execute(self, sendMsg, prefix, command, params):
     part1 = prefix.partition("!")
     part2 = part1[2].partition("@")
     
@@ -15,7 +15,7 @@ def execute(self, sendMsg, prefix, command, params):
         self.Bot_Auth.unregisterUser(name)
         
     if self.Bot_Auth.doesExist(newName): 
-        self.whoisUser(newName)
+        await self.whoisUser(newName)
     
     affectedChannels = []
     for chan in self.channelData:
@@ -26,4 +26,4 @@ def execute(self, sendMsg, prefix, command, params):
                 affectedChannels.append(chan)
                 break
     
-    self.events["nickchange"].tryAllEvents(self, name, newName, ident, host, affectedChannels)
+    await self.events["nickchange"].tryAllEvents(self, name, newName, ident, host, affectedChannels)

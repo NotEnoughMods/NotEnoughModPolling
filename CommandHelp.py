@@ -104,7 +104,7 @@ class HelpEntity():
         if optional != False and optional != True:
             raise TypeError("Wrong type! Variable 'optional' should be False or True, but is {0}: {1}".format(type(description), description))
         
-        if description == None:
+        if description is None:
             self.arguments.append((argument, None, optional))
         elif isinstance(description, str):
             self.arguments.append((argument, description, optional))
@@ -135,9 +135,9 @@ class HelpModule():
         
         if not isinstance(helpObject, HelpEntity):
             raise TypeError("Invalid Object provided: '{0}' (type: {1})".format(helpObject, type(helpObject)))
-        elif helpObject.cmdname in self.helpDB and overwrite == False:
+        elif helpObject.cmdname in self.helpDB and not overwrite:
             raise RuntimeError("Conflict Error: A command with such a name already exists!")
-        elif helpObject.cmdname in self.helpDB and overwrite == True:
+        elif helpObject.cmdname in self.helpDB and overwrite:
             print("ATTENTION: A command with such a name is already registered.")
             self.helpDB[helpObject.cmdname] = helpObject
             help_log.debug("Registered Help for command '%s', but a help entry already exists.", helpObject.cmdname)

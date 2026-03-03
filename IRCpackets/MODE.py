@@ -1,6 +1,6 @@
 ID = "MODE"
 
-def execute(self, sendMsg, prefix, command, params):
+async def execute(self, sendMsg, prefix, command, params):
     print(prefix, params)
     splitted = params.split(" ")
     
@@ -15,7 +15,7 @@ def execute(self, sendMsg, prefix, command, params):
         perm = ""
         
         if self.Bot_Auth.doesExist(name) and not self.Bot_Auth.isRegistered(name) and not self.Bot_Auth.isQueued(name):
-            self.whoisUser(name)
+            await self.whoisUser(name)
         
         for char in modes[1:]:
             if char == "v" and perm == "": perm = "+"
@@ -24,7 +24,7 @@ def execute(self, sendMsg, prefix, command, params):
         for i in range(len(self.channelData[chan]["Userlist"])):
             user, pref = self.channelData[chan]["Userlist"][i]
             if user == name:
-                if add == True:
+                if add:
                     if pref != "@":
                         self.channelData[chan]["Userlist"][i] = (user, perm)
                 else:

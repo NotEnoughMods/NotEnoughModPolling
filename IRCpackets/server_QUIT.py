@@ -1,6 +1,6 @@
 ID = "QUIT"
 
-def execute(self, sendMsg, prefix, command, params):
+async def execute(self, sendMsg, prefix, command, params):
     print("SOMEBODY LEFT SERVER:")
     print(prefix)
     print(params)
@@ -17,7 +17,7 @@ def execute(self, sendMsg, prefix, command, params):
     print(name, ident, host)
     print(quitReason)
 
-    self.events["userquit"].tryAllEvents(self, name, ident, host, quitReason)
+    await self.events["userquit"].tryAllEvents(self, name, ident, host, quitReason)
     
     for chan in self.channelData:
         print(chan)

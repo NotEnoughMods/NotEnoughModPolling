@@ -4,7 +4,7 @@ ID = "PRIVMSG"
 
 msg_log = logging.getLogger("PRIVMSG")
 
-def execute(self, sendMsg, msgprefix, command, params):
+async def execute(self, sendMsg, msgprefix, command, params):
     #print params, prefix
     
     part1 = msgprefix.partition("!")
@@ -73,7 +73,7 @@ def execute(self, sendMsg, msgprefix, command, params):
     if usedPrfx == cmdprefix and chatCmd in self.commands:
         bannedInfo = self.Banlist.checkBan(name, ident, host)
         
-        if bannedInfo[0] == True:
+        if bannedInfo[0]:
             msg_log.info("User '%s' uses command '%s', but user is globally banned.",
                          name, chatCmd)
             msg_log.info("Ban information: %s", 
@@ -89,8 +89,8 @@ def execute(self, sendMsg, msgprefix, command, params):
             
         try:
             if rank >= self.commands[chatCmd][0].permission:
-                if is_channel == True:
-                    msg_log.info("User '%s' uses command '%s' in channel '%s'", 
+                if is_channel:
+                    msg_log.info("User '%s' uses command '%s' in channel '%s'",
                                  name , chatCmd, channel)
                     msg_log.debug("User info for '%s': [%s@%s] Used parameters: %s Rank: %s", 
                                   name, ident, host, chatParams[1:], perms)
@@ -100,10 +100,10 @@ def execute(self, sendMsg, msgprefix, command, params):
                                   name, ident, host, chatParams[1:], perms)
                     msg_log.debug("User '%s' - destination: '%s' (should be the same)", name, channel)
                     
-                if support == True:
-                    self.commands[chatCmd][0].execute(self, name, chatParams[1:], channel, (ident, host), perms, is_channel)
-                elif support == False and is_channel == True:
-                    self.commands[chatCmd][0].execute(self, name, chatParams[1:], channel, (ident, host), perms)
+                if support:
+                    await self.commands[chatCmd][0].execute(self, name, chatParams[1:], channel, (ident, host), perms, is_channel)
+                elif not support and is_channel:
+                    await self.commands[chatCmd][0].execute(self, name, chatParams[1:], channel, (ident, host), perms)
                     
         except KeyError as error:
             print("KeyError for command: "+str(error))
@@ -112,11 +112,11 @@ def execute(self, sendMsg, msgprefix, command, params):
     else:
         # if the message comes from a user, set channel to False
         # otherwise, set channel to the channel from which the message was received
-        channel = is_channel == True and channel or False
-        
-        if channel == False: 
+        channel = is_channel and channel or False
+
+        if not channel:
             msg_log.debug("Passing a PM from user '%s' [%s@%s] to chat events: '%s'", name, ident, host, chatMessage)
         
-        self.events["chat"].tryAllEvents(self, {"name" : name, "ident" : ident, "host" : host}, chatMessage, channel)
+        await self.events["chat"].tryAllEvents(self, {"name" : name, "ident" : ident, "host" : host}, chatMessage, channel)
             
             

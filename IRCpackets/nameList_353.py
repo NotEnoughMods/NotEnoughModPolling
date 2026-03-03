@@ -1,6 +1,6 @@
 ID = "353"
 
-def execute(self, sendMsg, prefix, command, params):
+async def execute(self, sendMsg, prefix, command, params):
     data = params.split(" ", 3)
     channel = data[2]
     users = data[3]
@@ -14,5 +14,5 @@ def execute(self, sendMsg, prefix, command, params):
             
         if self.Bot_Auth.doesExist(name) and not self.Bot_Auth.isRegistered(name) and not self.Bot_Auth.isQueued(name):
             #print "OK"
-            self.whoisUser(name)
+            await self.whoisUser(name)
     #print params

@@ -10,14 +10,14 @@ def notInList(user, userlist):
     
     return (True, "NOPE")
 
-def execute(self, username, params, channel, userdata, rank):
+async def execute(self, username, params, channel, userdata, rank):
     names = params
     notremoved = []
     removed = []
-    
+
     for name in names:
         result, correctName =  notInList(name, self.bot_userlist)
-        if result == False and correctName != username:
+        if not result and correctName != username:
             self.bot_userlist.remove(correctName)
             removed.append(correctName)
             self.Bot_Auth.unregisterUser(correctName)
@@ -25,10 +25,10 @@ def execute(self, username, params, channel, userdata, rank):
             if self.Bot_Auth.isQueued(correctName): self.Bot_Auth.unqueueUser(correctName)
         else:
             notremoved.append(name)
-    
+
     if len(removed) > 0:
         logging.info("User '%s' has removed user(s) '%s'", username, ", ".join(removed))
-        self.sendChatMessage(self.send, channel, "Removed "+", ".join(removed))
+        await self.sendChatMessage(self.send, channel, "Removed "+", ".join(removed))
     if len(notremoved) > 0:
-        self.sendChatMessage(self.send, channel, "Didn't remove "+", ".join(notremoved))
+        await self.sendChatMessage(self.send, channel, "Didn't remove "+", ".join(notremoved))
     

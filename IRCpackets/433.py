@@ -1,4 +1,4 @@
 ID = "433"
 
-def execute(self, sendMsg, msgprefix, command, params):
+async def execute(self, sendMsg, msgprefix, command, params):
     print(msgprefix, params)

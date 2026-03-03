@@ -293,7 +293,7 @@ arith.arith_expr._parse = modified_parse
 # Thanks to Pyker for helping with testing the command
 # And thanks to spacechase0 for rescuing us when we were fighting against the evil radians.
 
-def execute(self, name, params, channel, userdata, rank):
+async def execute(self, name, params, channel, userdata, rank):
 
     if len(params) > 1 and params[0] == "#fancy":
         fancy = True
@@ -303,7 +303,7 @@ def execute(self, name, params, channel, userdata, rank):
         new_params = params
 
     calc = "".join(new_params)
-    
+
     try:
         result = arith.eval(calc)
         fin = str(result)
@@ -312,14 +312,14 @@ def execute(self, name, params, channel, userdata, rank):
             raise RuntimeError(u"Result is too long ({0} characters)".format(len(fin)))
         else:
             if fancy:
-                self.sendChatMessage(self.send, channel, "{:,}".format(result))
+                await self.sendChatMessage(self.send, channel, "{:,}".format(result))
             else:
-                self.sendChatMessage(self.send, channel, fin)
+                await self.sendChatMessage(self.send, channel, fin)
 
     except CalcTimeoutException as error:
-        self.sendMessage(channel, str(error))
+        await self.sendMessage(channel, str(error))
     except Exception as error:
         traceb = str(traceback.format_exc())
-        self.sendMessage(channel, u"ParseError: '"+str(error)+u"'")
+        await self.sendMessage(channel, u"ParseError: '"+str(error)+u"'")
         print("error: "+str(error))
         print(traceb)

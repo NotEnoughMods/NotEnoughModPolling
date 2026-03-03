@@ -2,7 +2,7 @@ ID = "PING"
 
 
 
-def execute(self, sendMsg, prefix, command, params):
+async def execute(self, sendMsg, prefix, command, params):
     print("RECEIVED PING: "+params)
     
     
@@ -12,4 +12,4 @@ def execute(self, sendMsg, prefix, command, params):
     else:
         toSend = derp
     
-    sendMsg("PONG "+derp, 0)
+    await sendMsg("PONG "+derp, 0)

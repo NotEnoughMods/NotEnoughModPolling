@@ -2,7 +2,7 @@
 
 ID = "JOIN"
 
-def execute(self, sendMsg, prefix, command, params):
+async def execute(self, sendMsg, prefix, command, params):
     print("SOMEBODY JOINED CHANNEL:")
     print(prefix)
     print(params)
@@ -23,9 +23,9 @@ def execute(self, sendMsg, prefix, command, params):
     channel = self.retrieveTrueCase(chan)
     
     if self.Bot_Auth.doesExist(name) and not self.Bot_Auth.isRegistered(name):
-            self.whoisUser(name)
+            await self.whoisUser(name)
     
-    self.events["channeljoin"].tryAllEvents(self, name, ident, host, channel)
+    await self.events["channeljoin"].tryAllEvents(self, name, ident, host, channel)
     
     if channel != False:
         nothere = True
@@ -34,7 +34,7 @@ def execute(self, sendMsg, prefix, command, params):
                 nothere = False
                 break
         
-        if nothere == True:
+        if nothere:
             self.channelData[channel]["Userlist"].append((name, ""))
         else:
             self.__CMDHandler_log__.debug("%s has joined channel %s, "

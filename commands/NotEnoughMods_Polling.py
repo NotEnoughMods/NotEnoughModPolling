@@ -1,7 +1,7 @@
+import asyncio
 import importlib
 import logging
 import shlex
-import time
 import textwrap
 
 from collections import namedtuple
@@ -33,7 +33,7 @@ helpDict = {
 }
 
 
-def execute(self, name, params, channel, userdata, rank, chan):
+async def execute(self, name, params, channel, userdata, rank, chan):
     if len(params) > 0:
         cmdName = params[0].lower()
         if cmdName in commands:
@@ -42,13 +42,13 @@ def execute(self, name, params, channel, userdata, rank, chan):
             command, requiredRank = commands[cmdName]
             nemp_logger.debug("Needed rank: {0} User rank: {1}".format(requiredRank, userRank))
             if userRank >= requiredRank:
-                command(self, name, params, channel, userdata, rank)
+                await command(self, name, params, channel, userdata, rank)
             else:
-                self.sendMessage(channel, "You're not authorized to use this command.")
+                await self.sendMessage(channel, "You're not authorized to use this command.")
         else:
-            self.sendMessage(channel, name + ": Invalid command! See {0} help for a list of commands".format(self.cmdprefix + ID))
+            await self.sendMessage(channel, name + ": Invalid command! See {0} help for a list of commands".format(self.cmdprefix + ID))
     else:
-        self.sendMessage(channel, name + ": see \"{0} help\" for a list of commands".format(self.cmdprefix + ID))
+        await self.sendMessage(channel, name + ": see \"{0} help\" for a list of commands".format(self.cmdprefix + ID))
 
 TIME_EVENT_NAME = 'NotEnoughModPolling'
 THREAD_NAME = 'NEMP'
@@ -76,7 +76,7 @@ def stop_polling(self):
     #self.NEM_autodeactivatedMods = {}
 
 
-def __initialize__(self, Startup):
+async def __initialize__(self, Startup):
     if Startup:
         self.NEM = NEMP_Class.NotEnoughClasses()
     else:
@@ -95,101 +95,101 @@ def __initialize__(self, Startup):
     self.NEM_cycle_count = 0
 
 
-def cmd_enable(self, name, params, channel, userdata, rank):
+async def cmd_enable(self, name, params, channel, userdata, rank):
     if is_running(self):
-        self.sendMessage(channel, "NotEnoughModPolling is already running.")
+        await self.sendMessage(channel, "NotEnoughModPolling is already running.")
         return
 
-    self.sendMessage(channel, "Enabling NotEnoughModPolling")
+    await self.sendMessage(channel, "Enabling NotEnoughModPolling")
 
     timerForPolls = 60 * 5
 
     if len(params) == 2:
         timerForPolls = int(params[1])
-        self.sendMessage(channel, "Timer is set to {} seconds".format(timerForPolls))
+        await self.sendMessage(channel, "Timer is set to {} seconds".format(timerForPolls))
 
     start_polling(self, timerForPolls, channel)
 
 
-def cmd_disable(self, name, params, channel, userdata, rank):
+async def cmd_disable(self, name, params, channel, userdata, rank):
     if not is_running(self):
-        self.sendMessage(channel, "NotEnoughModPolling isn't running!")
+        await self.sendMessage(channel, "NotEnoughModPolling isn't running!")
         return
 
-    self.sendMessage(channel, "Disabling NotEnoughModPolling")
+    await self.sendMessage(channel, "Disabling NotEnoughModPolling")
 
     try:
         stop_polling(self)
     except Exception as error:
         nemp_logger.exception("Exception appeared while trying to disable NotEnoughModPolling")
-        self.sendMessage(channel, "Exception appeared while trying to disable NotEnoughModPolling")
+        await self.sendMessage(channel, "Exception appeared while trying to disable NotEnoughModPolling")
 
 
-def cmd_about(self, name, params, channel, userdata, rank):
-    self.sendMessage(channel, "Not Enough Mods: Polling - Helps keep NEM updated!")
-    self.sendMessage(channel, "Source code available at https://github.com/NotEnoughMods/NotEnoughModPolling")
-    self.sendMessage(channel, "A list of contributors is available at https://github.com/NotEnoughMods/NotEnoughModPolling/graphs/contributors")
+async def cmd_about(self, name, params, channel, userdata, rank):
+    await self.sendMessage(channel, "Not Enough Mods: Polling - Helps keep NEM updated!")
+    await self.sendMessage(channel, "Source code available at https://github.com/NotEnoughMods/NotEnoughModPolling")
+    await self.sendMessage(channel, "A list of contributors is available at https://github.com/NotEnoughMods/NotEnoughModPolling/graphs/contributors")
 
 
-def cmd_help(self, name, params, channel, userdata, rank):
+async def cmd_help(self, name, params, channel, userdata, rank):
     if len(params) == 1:
-        self.sendMessage(channel, name + ": Available commands: " + ", ".join(sorted(helpDict.keys())))
-        self.sendMessage(channel, name + ": For command usage, use \"{0} help <command>\".".format(self.cmdprefix + ID))
+        await self.sendMessage(channel, name + ": Available commands: " + ", ".join(sorted(helpDict.keys())))
+        await self.sendMessage(channel, name + ": For command usage, use \"{0} help <command>\".".format(self.cmdprefix + ID))
     else:
         command = params[1]
         if command in helpDict:
             for line in helpDict[command]:
-                self.sendMessage(channel, name + ": " + line.format(self.cmdprefix + ID))
+                await self.sendMessage(channel, name + ": " + line.format(self.cmdprefix + ID))
         else:
-            self.sendMessage(channel, name + ": Invalid command provided")
+            await self.sendMessage(channel, name + ": Invalid command provided")
 
 
-def cmd_status(self, name, params, channel, userdata, rank):
+async def cmd_status(self, name, params, channel, userdata, rank):
     if is_running(self):
         channels = ", ".join(self.events["time"].getChannels(TIME_EVENT_NAME))
-        self.sendMessage(channel,
+        await self.sendMessage(channel,
                          "NEM Polling is currently running "
                          "in the following channel(s): {0}. "
                          "Full cycles completed: {1}".format(channels, self.NEM_cycle_count)
                          )
     else:
-        self.sendMessage(channel, "NEM Polling is not running.")
+        await self.sendMessage(channel, "NEM Polling is not running.")
 
 
-def cmd_disabled_mods(self, name, params, channel, userdata, rank):
+async def cmd_disabled_mods(self, name, params, channel, userdata, rank):
     disabled = [mod for mod, info in self.NEM.mods.items() if not info['active']]
 
     if len(disabled) == 0:
-        self.sendNotice(name, "No mods are disabled right now.")
+        await self.sendNotice(name, "No mods are disabled right now.")
     else:
-        self.sendNotice(name,
+        await self.sendNotice(name,
                         "The following mods are disabled right now: {0}. "
                         "{1} mod(s) total. ".format(", ".join(disabled), len(disabled))
                         )
 
 
-def cmd_failed_mods(self, name, params, channel, userdata, rank):
+async def cmd_failed_mods(self, name, params, channel, userdata, rank):
     if len(self.NEM_autodeactivatedMods) == 0:
-        self.sendNotice(name, "No mods have been automatically disabled so far.")
+        await self.sendNotice(name, "No mods have been automatically disabled so far.")
     else:
         disabled = self.NEM_autodeactivatedMods.keys()
-        self.sendNotice(name, "The following mods have been automatically disabled so far: "
+        await self.sendNotice(name, "The following mods have been automatically disabled so far: "
                         "{0}. {1} mod(s) total".format(", ".join(disabled), len(disabled)))
 
 
-def cmd_reset_failed(self, name, params, channel, userdata, rank):
+async def cmd_reset_failed(self, name, params, channel, userdata, rank):
     failed_mods = self.NEM_autodeactivatedMods.keys()
     for failed_mod in self.NEM_autodeactivatedMods:
         self.NEM.mods[failed_mod]['active'] = True
     self.NEM_autodeactivatedMods = {}
-    self.sendMessage(channel, "Re-enabled {0} automatically disabled mods.".format(len(failed_mods)))
+    await self.sendMessage(channel, "Re-enabled {0} automatically disabled mods.".format(len(failed_mods)))
     self.NEM.buildHTML()
 
 
-def cmd_fail_count(self, name, params, channel, userdata, rank):
+async def cmd_fail_count(self, name, params, channel, userdata, rank):
     print(self.NEM_troubledMods)
     if len(self.NEM_troubledMods) == 0:
-        self.sendNotice(name, "No mods have had trouble polling so far.")
+        await self.sendNotice(name, "No mods have had trouble polling so far.")
     else:
         sortedMods = sorted(self.NEM_troubledMods, key=lambda x: self.NEM_troubledMods[x])
         newlist = []
@@ -199,20 +199,20 @@ def cmd_fail_count(self, name, params, channel, userdata, rank):
                 newlist.append((modName + " [{0}x]".format(self.NEM_troubledMods[modName])))
 
         if len(newlist) == 0:
-            self.sendNotice(name,
+            await self.sendNotice(name,
                             "{0} mod(s) had trouble being polled once. "
                             "If the mod(s) fail polling a second time, "
                             "they will be shown by this command.".format(len(sortedMods))
                             )
             return
 
-        self.sendNotice(name,
+        await self.sendNotice(name,
                         "The following mods have been having trouble being polled at least twice in a row so far: "
                         "{0}. {1} mod(s) total".format(", ".join(newlist), len(newlist))
                         )
 
         if len(sortedMods) - len(newlist) > 0:
-            self.sendNotice(name,
+            await self.sendNotice(name,
                             "{0} mod(s) had trouble being polled only a "
                             "single time and thus were not shown.".format(len(sortedMods) - len(newlist))
                             )
@@ -221,94 +221,87 @@ def cmd_fail_count(self, name, params, channel, userdata, rank):
 FailedModEntry = namedtuple('FailedModEntry', 'name exception')
 
 
-def PollingThread(self, pipe):
+async def PollingThread(self, pipe):
     NEM = self.base["NEM"]
     sleepTime = self.base["PollTime"]
 
-    while self.signal == False:
+    while not self.signal:
         nemp_logger.debug("PollingThread: I'm still running!")
 
         poll_results = []
         document_groups_done = []
         failed = []  # type: List[FailedModEntry]
 
-        for mod_name, mod_info in NEM.mods.items():
-            # Check if the thread was requested to terminate
-            if self.signal:
-                return
+        # Run the blocking polling work in a thread to avoid blocking the event loop
+        def _poll_all():
+            results = []
+            doc_groups_done = []
+            fail_list = []
 
-            if not mod_info["active"]:
-                continue
+            for mod_name, mod_info in NEM.mods.items():
+                if self.signal:
+                    return results, doc_groups_done, fail_list
 
-            document_group = mod_info.get('document_group', {}).get('id')
-
-            if document_group:
-                # Have we processed this document group before? If we have, skip mods from this group.
-                if document_group in document_groups_done:
-                    # nemp_logger.debug("Already polled document group {} before".format(document_group))
-                    # continue to next mod
+                if not mod_info["active"]:
                     continue
 
-                # Remember this poll cycle that we have processed this document group
-                document_groups_done.append(document_group)
+                document_group = mod_info.get('document_group', {}).get('id')
 
-                try:
-                    results = NEM.CheckMods(mod_name)
-                except Exception as e:
-                    # We got an exception when getting the document, so we mark every mod in this group as failed
-                    document_group_mods = NEM.document_groups[document_group]
-                    for document_group_mod in document_group_mods:
-                        failed.append(FailedModEntry(name=document_group_mod, exception=e))
-                    # drop out (to the next mod)
-                    continue
+                if document_group:
+                    if document_group in doc_groups_done:
+                        continue
+                    doc_groups_done.append(document_group)
 
-                for outputMod, outputInfo in results.items():
-                    result, exception = outputInfo
+                    try:
+                        mod_results = NEM.CheckMods(mod_name)
+                    except Exception as e:
+                        document_group_mods = NEM.document_groups[document_group]
+                        for document_group_mod in document_group_mods:
+                            fail_list.append(FailedModEntry(name=document_group_mod, exception=e))
+                        continue
 
-                    if exception:
-                        failed.append(FailedModEntry(name=outputMod, exception=exception))
-                    else:
-                        poll_results.append((outputMod, result))
-            else:
-                statuses, exception = NEM.CheckMod(mod_name)
-
-                if exception:
-                    failed.append(FailedModEntry(name=mod_name, exception=exception))
+                    for outputMod, outputInfo in mod_results.items():
+                        result, exception = outputInfo
+                        if exception:
+                            fail_list.append(FailedModEntry(name=outputMod, exception=exception))
+                        else:
+                            results.append((outputMod, result))
                 else:
-                    poll_results.append((mod_name, statuses))
+                    statuses, exception = NEM.CheckMod(mod_name)
+                    if exception:
+                        fail_list.append(FailedModEntry(name=mod_name, exception=exception))
+                    else:
+                        results.append((mod_name, statuses))
 
-        pipe.send((poll_results, failed))
+            return results, doc_groups_done, fail_list
 
-        # A more reasonable way of sleeping to quicken up the
-        # shutdown of the thread. Sleep in steps of 30 seconds
+        poll_results, document_groups_done, failed = await asyncio.to_thread(_poll_all)
+
+        await pipe.put((poll_results, failed))
+
+        # Sleep in steps of 30 seconds to allow quick shutdown
         for i in range(sleepTime // 30 + 1):
-            # print "Sleeping for 30s, step %s" % i
             if self.signal:
                 return
-            else:
-                time.sleep(30)
+            await asyncio.sleep(30)
 
 
 # This runs on a timer (once every minute)
-def NEMP_TimerEvent(self, channels):
+async def NEMP_TimerEvent(self, channels):
     # Check if we have any data from PollingThread to process
     if not self.threading.poll(THREAD_NAME):
         return
 
-    # nemp_data is either:
-    # - (poll_results, failed_mods)
-    # - { 'action': 'exceptionOccured', 'functionName': 'NEMP_TimerEvent', 'exception': exception, 'traceback': traceback }
-    # The latter comes from Renol thread handling
-    nemp_data = self.threading.recv(THREAD_NAME)
+    nemp_data = await self.threading.recv(THREAD_NAME)
 
     self.NEM_cycle_count += 1
 
     staff_channel = self.NEM.config.get('irc', {}).get('staff_channel')
 
     if staff_channel and self.NEM_cycle_count % 50 == 0:
-        self.sendMessage(staff_channel, 'Full cycles completed: {}'.format(self.NEM_cycle_count))
+        await self.sendMessage(staff_channel, 'Full cycles completed: {}'.format(self.NEM_cycle_count))
         if self.NEM_autodeactivatedMods:
-            self.sendMessage(staff_channel, 'There are {} failed mod(s)'.format(len(self.NEM_autodeactivatedMods)))
+            await self.sendMessage(staff_channel, 'There are {} failed mod(s)'.format(len(self.NEM_autodeactivatedMods)))
 
     if isinstance(nemp_data, dict) and "action" in nemp_data and nemp_data["action"] == "exceptionOccured":
         nemp_logger.error("NEMP Thread {0} encountered an unhandled exception: {1}".format(nemp_data["functionName"],
@@ -328,17 +321,9 @@ def NEMP_TimerEvent(self, channels):
     poll_results, failedMods = nemp_data
 
     for item in poll_results:
-        # item[0] = name of mod
-        # item[1] = list of versions
-        # assume status = item[1][x]:
-        # status[0] = mc version
-        # status[1] = dev version
-        # status[2] = release version
-        # status[3] = changelog
         mod_name = item[0]
         new_versions = item[1]
 
-        # Get the mod's NEM name, defaults to NEMP name
         nem_mod_name = self.NEM.mods[mod_name].get('name', mod_name)
 
         for new_version in new_versions:
@@ -348,11 +333,6 @@ def NEMP_TimerEvent(self, channels):
             last_release = self.NEM.get_nem_version(mod_name, mc_version)
 
             if not last_dev and not last_release:
-                # There's no previously known dev or release version in NEM, so it's new to this NEM list/MC version.
-                # This means we need to run the !clone command
-
-                # Check if we have a release version to use in the clone command
-                # Setting the dev version is handled later
                 if release_version:
                     clone_version = release_version
                 else:
@@ -362,44 +342,34 @@ def NEMP_TimerEvent(self, channels):
 
                 nemp_logger.debug('Cloning mod {} to {}, status: {}'.format(mod_name, mc_version, new_version))
                 for channel in channels:
-                    self.sendMessage(channel, '!clone {} {} {}'.format(nem_mod_name, mc_version, clone_version))
+                    await self.sendMessage(channel, '!clone {} {} {}'.format(nem_mod_name, mc_version, clone_version))
             elif release_version:
-                # The mod has a previous release/stable version in NEM, so we simply update that
                 nemp_logger.debug("Updating Mod {0}, status: {1}".format(mod_name, new_version))
                 self.NEM.set_nem_version(mod_name, release_version, mc_version)
                 for channel in channels:
-                    self.sendMessage(channel, "!lmod {} {} {}".format(mc_version, nem_mod_name, release_version))
+                    await self.sendMessage(channel, "!lmod {} {} {}".format(mc_version, nem_mod_name, release_version))
 
             if dev_version:
-                # If this version update has a release version, and the dev version is the same, we ignore it
                 if release_version and dev_version == release_version:
                     nemp_logger.debug("Would update mod {} to dev {}, but it matches the new release {}".format(
                         mod_name, dev_version, release_version
                     ))
-                # If the dev version in this version update matches the current NEM release/stable version, we ignore it
                 elif last_release and dev_version == last_release:
                     nemp_logger.debug("Would update mod {} to dev {}, but it matches the current release {}".format(
                         mod_name, dev_version, release_version
                     ))
-                # This mod is new to this NEM list/MC version (no last release version) and we have a dev version, so
-                # we set it here
                 else:
                     nemp_logger.debug("Updating mod {} to dev {}, status: {}".format(mod_name, dev_version, new_version))
                     self.NEM.set_nem_dev_version(mod_name, dev_version, mc_version)
                     for channel in channels:
-                        self.sendMessage(channel, "!ldev {} {} {}".format(mc_version, nem_mod_name, dev_version))
+                        await self.sendMessage(channel, "!ldev {} {} {}".format(mc_version, nem_mod_name, dev_version))
 
-            # If we have a changelog, and it's not explicitly disabled in the mod's configuration (via an existing
-            # "changelog" key), then we send it to the channel. The value of the "changelog" key is ignored entirely.
             if changelog and "changelog" not in self.NEM.mods[mod_name]:
                 nemp_logger.debug("Sending text for Mod {0}".format(mod_name))
                 for channel in channels:
-                    self.sendMessage(channel, " * " + ' | '.join(changelog.splitlines())[:300])
+                    await self.sendMessage(channel, " * " + ' | '.join(changelog.splitlines())[:300])
 
-    # A temporary list containing the mods that have failed to be polled so far.
-    # We use it to check if the same mods had trouble in the newest polling attempt.
-    # If not, the counter for each mod that succeeded to be polled will be reset.
-    current_troubled_mods = self.NEM_troubledMods.keys()
+    current_troubled_mods = list(self.NEM_troubledMods.keys())
 
     completely_failed_mods = []
 
@@ -422,7 +392,7 @@ def NEMP_TimerEvent(self, channels):
             self.NEM.mods[mod_name]['active'] = False
 
             if staff_channel:
-                self.sendMessage(staff_channel, 'Mod {} \00304failed\003 with a {}: {}'.format(mod_name, type(exception).__name__, exception))
+                await self.sendMessage(staff_channel, 'Mod {} \00304failed\003 with a {}: {}'.format(mod_name, type(exception).__name__, exception))
         else:
             if mod_name not in self.NEM_troubledMods:
                 self.NEM_troubledMods[mod_name] = 1
@@ -431,7 +401,6 @@ def NEMP_TimerEvent(self, channels):
             else:
                 self.NEM_troubledMods[mod_name] += 1
 
-                # We have checked the mod, so we remove it from our temporary list
                 current_troubled_mods.remove(mod_name)
 
                 if self.NEM_troubledMods[mod_name] >= 5:
@@ -446,18 +415,17 @@ def NEMP_TimerEvent(self, channels):
     self.NEM.buildHTML()
 
     if staff_channel and completely_failed_mods:
-        self.sendMessage(staff_channel, 'The following mod(s) \00304failed\003: {0}.'.format(', '.join(sorted(completely_failed_mods, key=lambda x: x.lower()))))
+        await self.sendMessage(staff_channel, 'The following mod(s) \00304failed\003: {0}.'.format(', '.join(sorted(completely_failed_mods, key=lambda x: x.lower()))))
 
-    # Reset counter for any mod that is still in the list.
     for mod_name in current_troubled_mods:
         nemp_logger.debug("Mod {0} is working again. Counter reset (Counter was at {1}) ".format(mod_name, self.NEM_troubledMods[mod_name]))
         del self.NEM_troubledMods[mod_name]
 
 
-def cmd_poll(self, name, params, channel, userdata, rank):
+async def cmd_poll(self, name, params, channel, userdata, rank):
     if len(params) < 3:
-        self.sendMessage(channel, name + ": Insufficient amount of parameters provided. Required: 2")
-        self.sendMessage(channel, name + ": " + helpDict["poll"][1])
+        await self.sendMessage(channel, name + ": Insufficient amount of parameters provided. Required: 2")
+        await self.sendMessage(channel, name + ": " + helpDict["poll"][1])
         return
 
     if params[2].lower() in ("true", "yes", "on"):
@@ -465,7 +433,7 @@ def cmd_poll(self, name, params, channel, userdata, rank):
     elif params[2].lower() in ("false", "no", "off"):
         setting = False
     else:
-        self.sendMessage(channel, '{}: Invalid value. Must be: on/yes/true, off/no/false')
+        await self.sendMessage(channel, '{}: Invalid value. Must be: on/yes/true, off/no/false')
         return
 
     # "c:" is the category operator
@@ -474,18 +442,16 @@ def cmd_poll(self, name, params, channel, userdata, rank):
         match_mods = {k: v for k, v in self.NEM.mods.items() if v.get('category', '').lower() == category}
 
         if not match_mods:
-            self.sendMessage(channel, '{}: Could not find any matches.'.format(name))
+            await self.sendMessage(channel, '{}: Could not find any matches.'.format(name))
         else:
             for mod, info in match_mods.items():
                 info["active"] = setting
 
-                # The mod has been manually activated or deactivated, so we remove it from the
-                # autodeactivatedMods dictionary.
                 if mod in self.NEM_autodeactivatedMods:
                     del self.NEM_autodeactivatedMods[mod]
                 if mod in self.NEM_troubledMods:
                     del self.NEM_troubledMods[mod]
-            self.sendMessage(channel, name + ": " + ', '.join(sorted(match_mods.keys(), key=lambda x: x.lower())) + "'s poll status is now " + str(setting))
+            await self.sendMessage(channel, name + ": " + ', '.join(sorted(match_mods.keys(), key=lambda x: x.lower())) + "'s poll status is now " + str(setting))
 
     # "p:" is the parser operator
     elif params[1].lower().startswith('p:'):
@@ -493,7 +459,7 @@ def cmd_poll(self, name, params, channel, userdata, rank):
         match_mods = {k: v for k, v in self.NEM.mods.items() if v['function'][5:].lower() == parser}
 
         if not match_mods:
-            self.sendMessage(channel, '{}: Could not find any matches.'.format(name))
+            await self.sendMessage(channel, '{}: Could not find any matches.'.format(name))
         else:
             for mod, info in match_mods.items():
                 info['active'] = setting
@@ -502,7 +468,7 @@ def cmd_poll(self, name, params, channel, userdata, rank):
                     del self.NEM_autodeactivatedMods[mod]
                 if mod in self.NEM_troubledMods:
                     del self.NEM_troubledMods[mod]
-            self.sendMessage(channel, name + ": " + ', '.join(sorted(match_mods.keys(), key=lambda x: x.lower())) + "'s poll status is now " + str(setting))
+            await self.sendMessage(channel, name + ": " + ', '.join(sorted(match_mods.keys(), key=lambda x: x.lower())) + "'s poll status is now " + str(setting))
 
     # "all" or "*" matches all mods
     elif params[1].lower() == "all" or params[1] == '*':
@@ -514,17 +480,17 @@ def cmd_poll(self, name, params, channel, userdata, rank):
             if mod in self.NEM_troubledMods:
                 del self.NEM_troubledMods[mod]
 
-        self.sendMessage(channel, name + ": All mods are now set to " + str(setting))
+        await self.sendMessage(channel, name + ": All mods are now set to " + str(setting))
 
     else:
         mod = self.NEM.get_proper_name(params[1])
 
         if not mod:
-            self.sendMessage(channel, name + ': No such mod in NEMP.')
+            await self.sendMessage(channel, name + ': No such mod in NEMP.')
             return
 
         self.NEM.mods[mod]["active"] = setting
-        self.sendMessage(channel, name + ": " + mod + "'s poll status is now " + str(setting))
+        await self.sendMessage(channel, name + ": " + mod + "'s poll status is now " + str(setting))
 
         if mod in self.NEM_autodeactivatedMods:
             del self.NEM_autodeactivatedMods[mod]
@@ -533,11 +499,11 @@ def cmd_poll(self, name, params, channel, userdata, rank):
     self.NEM.buildHTML()
 
 
-def cmd_list(self, name, params, channel, userdata, rank):
+async def cmd_list(self, name, params, channel, userdata, rank):
     dest = None
     if len(params) > 1:
         if rank != '@@':
-            self.sendMessage(channel, '{}: Access denied.'.format(name))
+            await self.sendMessage(channel, '{}: Access denied.'.format(name))
             return
 
         if params[1] == "pm":
@@ -546,7 +512,7 @@ def cmd_list(self, name, params, channel, userdata, rank):
             dest = channel
 
     if dest is None:
-        self.sendMessage(channel, "http://polling.notenoughmods.com/")
+        await self.sendMessage(channel, "http://polling.notenoughmods.com/")
         return
 
     darkgreen = "03"
@@ -572,14 +538,14 @@ def cmd_list(self, name, params, channel, userdata, rank):
     del mcver
     for mcver in sorted(tempList.keys()):
         tempList[mcver] = sorted(tempList[mcver], key=lambda s: s.lower())
-        self.sendMessage(dest, "Mods checked for {} ({}): {}".format(color + blue + bold + mcver + color + bold, len(tempList[mcver]), ', '.join(tempList[mcver])))
+        await self.sendMessage(dest, "Mods checked for {} ({}): {}".format(color + blue + bold + mcver + color + bold, len(tempList[mcver]), ', '.join(tempList[mcver])))
 
 
-def cmd_reload(self, name, params, channel, userdata, rank):
+async def cmd_reload(self, name, params, channel, userdata, rank):
     if is_running(self):
         stop_polling(self)
 
-        self.sendMessage(channel, "NEMP Polling has been deactivated")
+        await self.sendMessage(channel, "NEMP Polling has been deactivated")
 
     self.NEM_troubledMods = {}
     self.NEM_autodeactivatedMods = {}
@@ -589,18 +555,18 @@ def cmd_reload(self, name, params, channel, userdata, rank):
     self.NEM.init_nem_versions()
     self.NEM.buildHTML()
 
-    self.sendMessage(channel, "Reloaded the NEMP Database")
+    await self.sendMessage(channel, "Reloaded the NEMP Database")
 
 
-def cmd_test(self, name, params, channel, userdata, rank):
+async def cmd_test(self, name, params, channel, userdata, rank):
     if len(params) != 2:
-        self.sendMessage(channel, "{name}: Wrong number of parameters. This command accepts 1 parameter: the mod's name".format(name=name))
+        await self.sendMessage(channel, "{name}: Wrong number of parameters. This command accepts 1 parameter: the mod's name".format(name=name))
         return
 
     mod = self.NEM.get_proper_name(params[1])
 
     if not mod:
-        self.sendMessage(channel, name + ": Mod \"" + params[1] + "\" does not exist in the database.")
+        await self.sendMessage(channel, name + ": Mod \"" + params[1] + "\" does not exist in the database.")
         return
 
     try:
@@ -609,7 +575,7 @@ def cmd_test(self, name, params, channel, userdata, rank):
         else:
             document = None
     except Exception as exception:
-        self.sendMessage(channel, '{}: Failed to obtain document for mod: {}: {}'.format(
+        await self.sendMessage(channel, '{}: Failed to obtain document for mod: {}: {}'.format(
             name, type(exception).__name__, exception
         ))
         return
@@ -617,17 +583,17 @@ def cmd_test(self, name, params, channel, userdata, rank):
     statuses, exception = self.NEM.CheckMod(mod, document=document, simulation=True)
 
     if exception:
-        self.sendMessage(channel, 'Got an exception: {}: {}'.format(type(exception).__name__, exception))
+        await self.sendMessage(channel, 'Got an exception: {}: {}'.format(type(exception).__name__, exception))
         return
 
     if not statuses:
-        self.sendMessage(channel, name + ": Got no results from the parser")
+        await self.sendMessage(channel, name + ": Got no results from the parser")
 
     real_name = self.NEM.mods[mod].get('name', mod)
 
     print('{} {!r}'.format(mod, statuses))
 
-    commands = []
+    commands_list = []
 
     for status in statuses:
         mc_version, dev_version, release_version, changelog = status
@@ -641,38 +607,36 @@ def cmd_test(self, name, params, channel, userdata, rank):
             else:
                 clone_version = 'dev-only'
 
-            commands.append('clone {} {} {}'.format(real_name, mc_version, clone_version))
+            commands_list.append('clone {} {} {}'.format(real_name, mc_version, clone_version))
         elif release_version:
-            commands.append('lmod {} {} {}'.format(mc_version, real_name, release_version))
+            commands_list.append('lmod {} {} {}'.format(mc_version, real_name, release_version))
 
         if dev_version:
-            commands.append('ldev {} {} {}'.format(mc_version, real_name, dev_version))
+            commands_list.append('ldev {} {} {}'.format(mc_version, real_name, dev_version))
 
         if changelog and 'changelog' not in self.NEM.mods[mod]:
-            commands.append(' * ' + ' | '.join(changelog.splitlines())[:300])
+            commands_list.append(' * ' + ' | '.join(changelog.splitlines())[:300])
 
-    for line in textwrap.wrap(', '.join(commands), width=300):
-        self.sendMessage(channel, line)
+    for line in textwrap.wrap(', '.join(commands_list), width=300):
+        await self.sendMessage(channel, line)
 
 
-def cmd_html(self, name, params, channel, userdata, rank):
+async def cmd_html(self, name, params, channel, userdata, rank):
     self.NEM.buildHTML()
-    self.sendMessage(channel, name + ': Done.')
+    await self.sendMessage(channel, name + ': Done.')
 
 
-def cmd_set(self, name, params, channel, userdata, rank):
+async def cmd_set(self, name, params, channel, userdata, rank):
     if len(params) < 4:
-        self.sendMessage(channel, "This is not a toy!")
+        await self.sendMessage(channel, "This is not a toy!")
         return
 
-    # Split the arguments in a shell-like fashion
     try:
         args = shlex.split(' '.join(params[2:]))
     except:
-        self.sendMessage(channel, "That looks like invalid input (are there any unescaped quotes?). Try again.")
+        await self.sendMessage(channel, "That looks like invalid input (are there any unescaped quotes?). Try again.")
         return
 
-    # insert the mod's name as the first argument
     args.insert(0, params[1])
 
     available_casts = {
@@ -685,20 +649,19 @@ def cmd_set(self, name, params, channel, userdata, rank):
     if args and args[0] == '--type':
         if args[1] in available_casts:
             cast_to = available_casts[args[1]]
-            # Trim out these 2 args so the rest will work just fine
             args = args[2:]
         else:
-            self.sendMessage(channel, "Unknown type. Available types are: " + ', '.join(available_casts.keys()))
+            await self.sendMessage(channel, "Unknown type. Available types are: " + ', '.join(available_casts.keys()))
             return
 
     mod = self.NEM.get_proper_name(args[0])
 
     if not mod:
-        self.sendMessage(channel, name + ': No such mod in NEMP.')
+        await self.sendMessage(channel, name + ': No such mod in NEMP.')
         return
 
     if args[1] == 'active':
-        self.sendMessage(channel, "You want =nemp poll instead.")
+        await self.sendMessage(channel, "You want =nemp poll instead.")
         return
 
     try:
@@ -716,25 +679,24 @@ def cmd_set(self, name, params, channel, userdata, rank):
 
         elem[args[-2]] = new_value
 
-        # recompile the regex just in case it was changed manually
         self.NEM.compile_regex(mod)
 
-        self.sendMessage(channel, "done.")
+        await self.sendMessage(channel, "done.")
     except KeyError:
-        self.sendMessage(channel, name + ": No such element in that mod's configuration.")
+        await self.sendMessage(channel, name + ": No such element in that mod's configuration.")
     except Exception as e:
-        self.sendMessage(channel, "Error: " + str(e))
+        await self.sendMessage(channel, "Error: " + str(e))
 
 
-def cmd_show_info(self, name, params, channel, userdata, rank):
+async def cmd_show_info(self, name, params, channel, userdata, rank):
     if len(params) < 2:
-        self.sendMessage(channel, name + ": You have to specify at least the mod's name.")
+        await self.sendMessage(channel, name + ": You have to specify at least the mod's name.")
         return
 
     mod = self.NEM.get_proper_name(params[1])
 
     if not mod:
-        self.sendMessage(channel, name + ": No such mod in NEMP.")
+        await self.sendMessage(channel, name + ": No such mod in NEMP.")
         return
 
     if len(params) > 1:
@@ -749,20 +711,20 @@ def cmd_show_info(self, name, params, channel, userdata, rank):
                 raise KeyError()
             elem = elem[path_elem]
 
-        self.sendMessage(channel, name + ": " + repr(elem))
+        await self.sendMessage(channel, name + ": " + repr(elem))
     except KeyError:
-        self.sendMessage(channel, name + ": No such element in that mod's configuration.")
+        await self.sendMessage(channel, name + ": No such element in that mod's configuration.")
 
 
-def cmd_url(self, name, params, channel, userdata, rank):
+async def cmd_url(self, name, params, channel, userdata, rank):
     if len(params) < 2:
-        self.sendMessage(channel, name + ": You have to specify at least the mod's name.")
+        await self.sendMessage(channel, name + ": You have to specify at least the mod's name.")
         return
 
     modname = self.NEM.get_proper_name(params[1])
 
     if not modname:
-        self.sendMessage(channel, name + ": No such mod in NEMP.")
+        await self.sendMessage(channel, name + ": No such mod in NEMP.")
         return
 
     mod = self.NEM.mods[modname]
@@ -784,16 +746,16 @@ def cmd_url(self, name, params, channel, userdata, rank):
         url = None
 
     if url:
-        self.sendMessage(channel, name + ": " + url)
+        await self.sendMessage(channel, name + ": " + url)
     else:
-        self.sendMessage(channel, name + ": This mod doesn't have a well-defined URL")
+        await self.sendMessage(channel, name + ": This mod doesn't have a well-defined URL")
 
 
-def cmd_reload_blocklist(self, name, params, channel, userdata, rank):
+async def cmd_reload_blocklist(self, name, params, channel, userdata, rank):
     self.NEM.load_version_blocklist()
     self.NEM.load_mc_blocklist()
     self.NEM.load_mc_mapping()
-    self.sendMessage(channel, 'Done, blocklists reloaded.')
+    await self.sendMessage(channel, 'Done, blocklists reloaded.')
 
 
 # In each entry, the second value in the tuple is the

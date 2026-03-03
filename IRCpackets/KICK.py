@@ -1,6 +1,6 @@
 ID = "KICK"
 
-def execute(self, sendMsg, prefix, command, params):
+async def execute(self, sendMsg, prefix, command, params):
     print("SOMEBODY WAS KICKED:")
     print(prefix)
     print(params)
@@ -13,7 +13,7 @@ def execute(self, sendMsg, prefix, command, params):
     
     chan = self.retrieveTrueCase(channel)
     
-    self.events["channelkick"].tryAllEvents(self, name, chan, kickreason)
+    await self.events["channelkick"].tryAllEvents(self, name, chan, kickreason)
             
     if chan != False:
         for i in range(len(self.channelData[chan]["Userlist"])):

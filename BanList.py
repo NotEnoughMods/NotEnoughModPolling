@@ -292,7 +292,7 @@ class BanList:
         newString = StringIO()
         
         # Both flags should not be set at once.
-        assert not ( (hostname == True) and (ident == True) )  
+        assert not (hostname is True and ident is True)
         
         for pos, char in enumerate(string):
             # We try reverse-escaping: 

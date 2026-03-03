@@ -1,4 +1,4 @@
-import simplejson
+import json
 import traceback
 import logging
 import os
@@ -39,8 +39,6 @@ class NotEnoughClasses():
         except:
             print("Failed to get NEM versions, falling back to hard-coded")
             nem_logger.exception("Failed to get NEM versions, falling back to hard-coded.")
-            #traceb = str(traceback.format_exc())
-            # print(traceb)
             return ["1.4.5", "1.4.6-1.4.7", "1.5.1", "1.5.2", "1.6.1", "1.6.2", "1.6.4",
                     "1.7.2", "1.7.4", "1.7.5", "1.7.7", "1.7.9", "1.7.10"]
 
@@ -68,15 +66,12 @@ class NotEnoughClasses():
                 filepath = os.path.join(self.cache_dir, fname)
 
                 if os.path.exists(filepath):
-                    # get it (conditionally) and, if necessary, store the new version
                     headers = {}
 
-                    # set etag if it exists
                     etag = self.cache_etag.get(url)
                     if etag:
                         headers['If-None-Match'] = etag
 
-                    # set last-modified if it exists
                     last_modified = self.cache_last_modified.get(url)
                     if last_modified:
                         headers['If-Modified-Since'] = '"{}"'.format(last_modified)
@@ -84,28 +79,23 @@ class NotEnoughClasses():
                     request = self.requests_session.get(url, timeout=timeout, headers=headers)
 
                     if request.status_code == 304:
-                        # load from cache
                         with open(filepath, 'r') as f:
-                            # and return it
                             if decode_json:
-                                return simplejson.load(f)
+                                return json.load(f)
                             else:
                                 return f.read()
                     else:
-                        # cache the new version
                         with open(filepath, 'w') as f:
                             f.write(request.content)
 
                         self.cache_etag[url] = request.headers.get('etag')
                         self.cache_last_modified[url] = request.headers.get('last-modified')
 
-                        # and return it
                         if decode_json:
                             return request.json()
                         else:
                             return request.content
                 else:
-                    # get it and cache it
                     request = self.requests_session.get(url, timeout=timeout)
 
                     with open(filepath, 'w') as f:
@@ -119,7 +109,6 @@ class NotEnoughClasses():
                     else:
                         return request.content
             else:
-                # no caching
                 request = self.requests_session.get(url, timeout=timeout)
                 if decode_json:
                     return request.json()
@@ -128,7 +117,6 @@ class NotEnoughClasses():
         except:
             traceback.print_exc()
             pass
-            # most likely a timeout
 
     def fetch_json(self, *args, **kwargs):
         return self.fetch_page(*args, decode_json=True, **kwargs)
@@ -136,27 +124,27 @@ class NotEnoughClasses():
 NEM = NotEnoughClasses()
 
 
-def execute(self, name, params, channel, userdata, rank):
+async def execute(self, name, params, channel, userdata, rank):
     try:
         command = commands[params[0]]
-        command(self, name, params, channel, userdata, rank)
+        await command(self, name, params, channel, userdata, rank)
     except:
-        self.sendMessage(channel, "Invalid sub-command!")
-        self.sendMessage(channel, "See \"=nem help\" for help")
+        await self.sendMessage(channel, "Invalid sub-command!")
+        await self.sendMessage(channel, "See \"=nem help\" for help")
 
 
-def setlist(self, name, params, channel, userdata, rank):
+async def setlist(self, name, params, channel, userdata, rank):
     if len(params) != 2:
-        self.sendMessage(channel,
+        await self.sendMessage(channel,
                          "{name}: Insufficient amount of parameters provided.".format(name=name)
                          )
-        self.sendMessage(channel,
+        await self.sendMessage(channel,
                          "{name}: {setlistHelp}".format(name=name,
                                                         setlistHelp=help["setlist"][0])
                          )
     else:
         NEM.version = str(params[1])
-        self.sendMessage(channel,
+        await self.sendMessage(channel,
                          "switched list to: "
                          "{bold}{blue}{version}{colourEnd}".format(bold=BOLD,
                                                                    blue=BLUE,
@@ -165,11 +153,11 @@ def setlist(self, name, params, channel, userdata, rank):
                          )
 
 
-def multilist(self, name, params, channel, userdata, rank):
+async def multilist(self, name, params, channel, userdata, rank):
     if len(params) != 2:
-        self.sendMessage(channel,
+        await self.sendMessage(channel,
                          "{name}: Insufficient amount of parameters provided.".format(name=name))
-        self.sendMessage(channel,
+        await self.sendMessage(channel,
                          "{name}: {multilistHelp}".format(name=name,
                                                           multilistHelp=help["multilist"][0])
                          )
@@ -195,14 +183,14 @@ def multilist(self, name, params, channel, userdata, rank):
             count = len(results)
 
             if count == 0:
-                self.sendMessage(channel, name + ": mod not present in NEM.")
+                await self.sendMessage(channel, name + ": mod not present in NEM.")
                 return
             elif count == 1:
                 count = str(count) + " MC version"
             else:
                 count = str(count) + " MC versions"
 
-            self.sendMessage(channel, "Listing " + count + " for \"" + params[1] + "\":")
+            await self.sendMessage(channel, "Listing " + count + " for \"" + params[1] + "\":")
 
             for version in results.keys():
                 alias = ""
@@ -237,7 +225,7 @@ def multilist(self, name, params, channel, userdata, rank):
                     print(error)
                     traceback.print_exc()
 
-                self.sendMessage(channel,
+                await self.sendMessage(channel,
                                  "{bold}{blue}{mcversion}{colourEnd}{bold}: "
                                  "{purple}{name}{colourEnd} {aliasString}"
                                  "{darkgreen}{version}{colourEnd} {devString}"
@@ -258,15 +246,15 @@ def multilist(self, name, params, channel, userdata, rank):
                                  )
 
         except Exception as error:
-            self.sendMessage(channel, name + ": " + str(error))
+            await self.sendMessage(channel, name + ": " + str(error))
             traceback.print_exc()
 
 
-def list(self, name, params, channel, userdata, rank):
+async def list(self, name, params, channel, userdata, rank):
     if len(params) < 2:
-        self.sendMessage(channel,
+        await self.sendMessage(channel,
                          "{name}: Insufficient amount of parameters provided.".format(name=name))
-        self.sendMessage(channel,
+        await self.sendMessage(channel,
                          "{name}: {helpEntry}".format(name=name,
                                                       helpEntry=help["list"][0])
                          )
@@ -278,11 +266,11 @@ def list(self, name, params, channel, userdata, rank):
     try:
         result = NEM.fetch_page("https://bot.notenoughmods.com/" + requests.utils.quote(version) + ".json", cache=True)
         if not result:
-            self.sendMessage(channel,
+            await self.sendMessage(channel,
                              "{0}: Could not fetch the list. Are you sure it exists?".format(name)
                              )
             return
-        jsonres = simplejson.loads(result, strict=False)
+        jsonres = json.loads(result)
         results = []
         i = -1
         for mod in jsonres:
@@ -300,14 +288,14 @@ def list(self, name, params, channel, userdata, rank):
         count = len(results)
 
         if count == 0:
-            self.sendMessage(channel, name + ": no results found.")
+            await self.sendMessage(channel, name + ": no results found.")
             return
         elif count == 1:
             count = str(count) + " result"
         else:
             count = str(count) + " results"
 
-        self.sendMessage(channel,
+        await self.sendMessage(channel,
                          "Listing {count} for \"{term}\" in "
                          "{bold}{colour}{version}"
                          "{colourEnd}{bold}".format(count=count,
@@ -346,7 +334,7 @@ def list(self, name, params, channel, userdata, rank):
                 print(error)
                 traceback.print_exc()
 
-            self.sendMessage(channel,
+            await self.sendMessage(channel,
                              "{purple}{name}{colourEnd} {aliasString}"
                              "{darkgreen}{version}{colourEnd} {devString}"
                              "{comment}{orange}{shorturl}{colourEnd}".format(name=jsonres[line]["name"],
@@ -362,11 +350,11 @@ def list(self, name, params, channel, userdata, rank):
                                                                              colourEnd=COLOUREND)
                              )
     except Exception as error:
-        self.sendMessage(channel, "{0}: {1}".format(name, error))
+        await self.sendMessage(channel, "{0}: {1}".format(name, error))
         traceback.print_exc()
 
 
-def compare(self, name, params, channel, userdata, rank):
+async def compare(self, name, params, channel, userdata, rank):
     try:
         oldVersion, newVersion = params[1], params[2]
 
@@ -385,24 +373,24 @@ def compare(self, name, params, channel, userdata, rank):
 
         path = "commands/modbot.mca.d3s.co/htdocs/compare/{0}...{1}.json".format(oldVersion, newVersion)
         with open(path, "w") as f:
-            f.write(simplejson.dumps(missingMods, sort_keys=True, indent=4 * ' '))
+            f.write(json.dumps(missingMods, sort_keys=True, indent=4 * ' '))
 
-        self.sendMessage(channel,
+        await self.sendMessage(channel,
                          "{0} mods died trying to update to {1}".format(len(missingMods), newVersion)
                          )
 
     except Exception as error:
-        self.sendMessage(channel, "{0}: {1}".format(name, error))
+        await self.sendMessage(channel, "{0}: {1}".format(name, error))
         traceback.print_exc()
 
 
-def about(self, name, params, channel, userdata, rank):
-    self.sendMessage(channel, "Not Enough Mods toolkit for IRC by SinZ & Yoshi2 v4.0")
+async def about(self, name, params, channel, userdata, rank):
+    await self.sendMessage(channel, "Not Enough Mods toolkit for IRC by SinZ & Yoshi2 v4.0")
 
 
-def help(self, name, params, channel, userdata, rank):
+async def help(self, name, params, channel, userdata, rank):
     if len(params) == 1:
-        self.sendMessage(channel,
+        await self.sendMessage(channel,
                          "{0}: Available commands: {1}".format(name,
                                                                ", ".join(help))
                          )
@@ -410,12 +398,12 @@ def help(self, name, params, channel, userdata, rank):
         command = params[1]
         if command in help:
             for line in help[command]:
-                self.sendMessage(channel, name + ": " + line)
+                await self.sendMessage(channel, name + ": " + line)
         else:
-            self.sendMessage(channel, name + ": Invalid command provided")
+            await self.sendMessage(channel, name + ": Invalid command provided")
 
 
-def force_cacheRedownload(self, name, params, channel, userdata, rank):
+async def force_cacheRedownload(self, name, params, channel, userdata, rank):
     if self.rankconvert[rank] >= 3:
         for version in NEM.versions:
             url = "https://bot.notenoughmods.com/" + requests.utils.quote(version) + ".json"
@@ -424,7 +412,7 @@ def force_cacheRedownload(self, name, params, channel, userdata, rank):
             if os.path.exists(filepath):
                 NEM.cache_last_modified[normalized] = 0
 
-        self.sendMessage(channel, "Cache Timestamps have been reset. Cache will be redownloaded on the next fetching.")
+        await self.sendMessage(channel, "Cache Timestamps have been reset. Cache will be redownloaded on the next fetching.")
 
 commands = {
     "list": list,

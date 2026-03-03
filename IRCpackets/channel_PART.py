@@ -1,6 +1,6 @@
 ID = "PART"
 
-def execute(self, sendMsg, prefix, command, params):
+async def execute(self, sendMsg, prefix, command, params):
     print("SOMEBODY LEFT CHANNEL:")
     print(prefix)
     print(params)
@@ -22,7 +22,7 @@ def execute(self, sendMsg, prefix, command, params):
 
     channel = self.retrieveTrueCase(chan_string)
     
-    self.events["channelpart"].tryAllEvents(self, name, ident, host, channel)
+    await self.events["channelpart"].tryAllEvents(self, name, ident, host, channel)
             
     if channel != False:
         for i in range(len(self.channelData[channel]["Userlist"])):

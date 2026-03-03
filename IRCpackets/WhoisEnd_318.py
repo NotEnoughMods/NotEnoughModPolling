@@ -1,6 +1,6 @@
 ID = "318"
 
-def execute(self, sendMsg, prefix, command, params):
+async def execute(self, sendMsg, prefix, command, params):
     print("WHOIS RESULT: ",prefix, command, params)
     
     fields = params.split(":")

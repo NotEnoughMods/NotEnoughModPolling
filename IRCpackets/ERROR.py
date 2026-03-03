@@ -13,7 +13,7 @@ class ForceShutdown(Exception):
         Received command '{0}' with prefix '{1}' and params '{2}'.\n \
         Time: {3}".format(self.cmd, self.pref, self.params, self.time) 
 
-def execute(self, sendMsg, prefix, command, params):
+async def execute(self, sendMsg, prefix, command, params):
     print("~Server sent an ERROR packet~")
     print(prefix)
     print(params)

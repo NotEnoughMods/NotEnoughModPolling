@@ -1,6 +1,6 @@
 ID = "319"
 
-def execute(self, sendMsg, prefix, command, params):
+async def execute(self, sendMsg, prefix, command, params):
     #print "WHOIS WHAT", prefix, params
     print(params)
     

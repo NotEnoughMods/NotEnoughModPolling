@@ -12,7 +12,7 @@
         <th>Category</th>
     </tr></thead>
     <tbody>
-    {%- for mod_name, info in mods.iteritems() %}
+    {%- for mod_name, info in mods.items() %}
     <tr class="{{ 'active' if info['active'] else 'disabled' }}">
         <td class="name">{{ mod_name }}</td>
         <td class="function">{{ info['function'] }}</td>

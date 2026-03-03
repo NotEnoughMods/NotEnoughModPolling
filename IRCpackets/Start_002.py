@@ -8,7 +8,7 @@ def pinger(self, channels):
         #print "PING SENT TO "+self.server
         self.lastPing = time.time()
         
-def execute(self, sendMsg, prefix, command, params):
+async def execute(self, sendMsg, prefix, command, params):
     split = params.split(" ")
     
     server = split[1]

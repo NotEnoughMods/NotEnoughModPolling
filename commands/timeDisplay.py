@@ -5,8 +5,8 @@ permission = 2
 privmsgEnabled = True
 
 
-def execute(self, name, params, channel, userdata, rank, chan):
-    self.sendMessage(channel, __create_date())
+async def execute(self, name, params, channel, userdata, rank, chan):
+    await self.sendMessage(channel, __create_date())
     
 def __create_date():
     local_derp = time.localtime()

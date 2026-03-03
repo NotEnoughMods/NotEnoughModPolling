@@ -11,6 +11,6 @@ class Shutdown(Exception):
 
 
 
-def execute(self, name, params, channel, userdata, rank):
-    self.send("QUIT :Shutting down", 5)
+async def execute(self, name, params, channel, userdata, rank):
+    await self.send("QUIT :Shutting down", 5)
     raise Shutdown(name, channel)

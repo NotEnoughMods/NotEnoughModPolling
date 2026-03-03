@@ -1,4 +1,4 @@
 ID = "NOTICE"
 
-def execute(self, sendMsg, prefix, command, params):
+async def execute(self, sendMsg, prefix, command, params):
     print("NOTICE "+params)

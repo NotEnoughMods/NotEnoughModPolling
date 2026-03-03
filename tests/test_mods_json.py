@@ -1,5 +1,5 @@
 import unittest
-import simplejson
+import json
 
 from NEMP import NEMP_Class
 
@@ -19,16 +19,16 @@ class TestModsJson(unittest.TestCase):
         self.NEM = NEMP_Class.NotEnoughClasses
 
         with open('NEMP/mods.json', 'r') as f:
-            self.mods = simplejson.load(f, object_pairs_hook=dict_raise_on_duplicates)
+            self.mods = json.load(f, object_pairs_hook=dict_raise_on_duplicates)
 
     def test_parsers_exist(self):
-        for mod, mod_info in self.mods.iteritems():
+        for mod, mod_info in self.mods.items():
             parser = mod_info['function']
             self.assertTrue(parser.startswith('Check'), msg="Parser name {!r} for mod {!r} is invalid".format(parser, mod))
             self.assertTrue(hasattr(self.NEM, parser), msg="Parser {!r} for mod {!r} doesn't exist".format(parser, mod))
 
     def test_curse_parser(self):
-        for mod, mod_info in self.mods.iteritems():
+        for mod, mod_info in self.mods.items():
             parser = mod_info['function']
 
             if parser != 'CheckCurse':
@@ -43,7 +43,7 @@ class TestModsJson(unittest.TestCase):
             self.assertNotIn('base_path', mod_info['curse'])
 
     def test_forgejson_parser(self):
-        for mod, mod_info in self.mods.iteritems():
+        for mod, mod_info in self.mods.items():
             parser = mod_info['function']
 
             if parser != 'CheckForgeJson':

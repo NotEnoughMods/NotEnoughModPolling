@@ -46,7 +46,7 @@ class trackVerification():
     
     def isRegistered(self, user):
         user = user.lower()
-        if user in self.users and self.users[user] == True:
+        if user in self.users and self.users[user] is True:
             return True
         else:
             return False

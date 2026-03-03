@@ -1,7 +1,7 @@
 import logging
 import re
 import requests
-import simplejson
+import json
 import traceback
 import yaml
 
@@ -144,7 +144,7 @@ class NotEnoughClasses():
 
     def buildModDict(self):
         with open("commands/NEMP/mods.json", "rb") as modList:
-            self.mods = simplejson.load(modList)
+            self.mods = json.load(modList)
 
         for mod in self.mods:
             self.compile_regex(mod)
