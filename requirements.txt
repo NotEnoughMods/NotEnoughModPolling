@@ -1,5 +1,0 @@
-beautifulsoup4==4.9.3
-Jinja2==2.11.3
-PyYAML==5.4.1
-requests[security]==2.27.1
-simplejson==3.19.1
