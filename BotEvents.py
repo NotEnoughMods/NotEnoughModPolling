@@ -167,7 +167,7 @@ class TimerEvent(StandardEvent):
         
         if not isinstance(interval, (int, float)):
             raise TypeError(str(interval)+ " is not an integer/float!")
-        elif time < 0:
+        elif interval < 0:
             raise ValueError(str(interval) + " is smaller than 0!")
         elif not callable(function):
             raise TypeError(str(function)+ " is not a callable function!")
