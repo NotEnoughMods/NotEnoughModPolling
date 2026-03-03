@@ -68,7 +68,7 @@ class ModPoller:
             with open("mod_polling/config.yml") as f:
                 self.config = yaml.safe_load(f)
         except:
-            logger.error("You need to setup the NEMP/config.yml file")
+            logger.error("You need to setup the mod_polling/config.yml file")
             raise
 
         self._host_delay = self.config.get("polling", {}).get("host_delay", 0.5)
@@ -78,7 +78,7 @@ class ModPoller:
             with open("mod_polling/version_blocklist.yml") as f:
                 self.invalid_versions = yaml.safe_load(f)
         except:
-            logger.error("You need to setup the NEMP/version_blocklist.yml file")
+            logger.error("You need to setup the mod_polling/version_blocklist.yml file")
             raise
 
         # compile regexes for performance

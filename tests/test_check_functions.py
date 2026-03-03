@@ -1,104 +1,81 @@
-import unittest
-
-from mod_polling import poller
+from unittest.mock import AsyncMock
 
 
-class NotEnoughClassesMock(poller.ModPoller):
-    def __init__(self):
-        self.mods = {"testmod": {"forgejson": {"url": "testurl", "mcversion": "1.8.9"}}}
-        self.urls_data = {}
+async def test_forgejson_normal_version(mod_poller):
+    mod_poller.fetch_json = AsyncMock(
+        return_value={
+            "promos": {"1.8.9-recommended": "1.0.0"},
+            "1.8.9": {"1.0.0": "test changelog"},
+        }
+    )
+    result = await mod_poller.CheckForgeJson("TestMod")
+    assert "1.8.9" in result
+    assert result["1.8.9"]["version"] == "1.0.0"
+    assert "dev" not in result["1.8.9"]
 
-    def fetch_json(self, url):
-        if url not in self.urls_data:
-            raise RuntimeError("Invalid url")
-        return self.urls_data[url]
 
-    def set_url_json(self, url, data):
-        self.urls_data[url] = data
+async def test_forgejson_dev_version(mod_poller):
+    mod_poller.fetch_json = AsyncMock(
+        return_value={
+            "promos": {"1.8.9-latest": "1.0.0"},
+            "1.8.9": {"1.0.0": "test changelog"},
+        }
+    )
+    result = await mod_poller.CheckForgeJson("TestMod")
+    assert "1.8.9" in result
+    assert "version" not in result["1.8.9"]
+    assert result["1.8.9"]["dev"] == "1.0.0"
 
 
-class TestModsJson(unittest.TestCase):
-    def setUp(self):
-        self.nec = NotEnoughClassesMock()
+async def test_forgejson_both_versions_equal(mod_poller):
+    mod_poller.fetch_json = AsyncMock(
+        return_value={
+            "promos": {"1.8.9-latest": "1.0.0", "1.8.9-recommended": "1.0.0"},
+            "1.8.9": {"1.0.0": "test changelog"},
+        }
+    )
+    result = await mod_poller.CheckForgeJson("TestMod")
+    assert "1.8.9" in result
+    assert result["1.8.9"]["version"] == "1.0.0"
+    assert "dev" not in result["1.8.9"]
 
-    def test_forgejson_normal_version(self):
-        self.nec.set_url_json(
-            "testurl",
-            {
-                "promos": {"1.8.9-recommended": "1.0.0"},
-                "1.8.9": {"1.0.0": "test changelog"},
-            },
-        )
 
-        result = self.nec.CheckForgeJson("testmod")
+async def test_forgejson_both_versions_different(mod_poller):
+    mod_poller.fetch_json = AsyncMock(
+        return_value={
+            "promos": {"1.8.9-latest": "1.0.1", "1.8.9-recommended": "1.0.0"},
+            "1.8.9": {"1.0.0": "test changelog", "1.0.1": "other changelog"},
+        }
+    )
+    result = await mod_poller.CheckForgeJson("TestMod")
+    assert "1.8.9" in result
+    assert "version" in result["1.8.9"]
+    assert result["1.8.9"]["dev"] == "1.0.1"
 
-        self.assertIn("1.8.9", result)
-        self.assertEqual("1.0.0", result["1.8.9"]["version"])
-        self.assertNotIn("dev", result["1.8.9"])
 
-    def test_forgejson_dev_version(self):
-        self.nec.set_url_json(
-            "testurl",
-            {"promos": {"1.8.9-latest": "1.0.0"}, "1.8.9": {"1.0.0": "test changelog"}},
-        )
+async def test_forgejson_no_changelog(mod_poller):
+    mod_poller.fetch_json = AsyncMock(
+        return_value={"promos": {"1.8.9-recommended": "1.0.0"}, "1.8.9": {}}
+    )
+    result = await mod_poller.CheckForgeJson("TestMod")
+    assert "1.8.9" in result
+    assert result["1.8.9"]["version"] == "1.0.0"
+    assert "dev" not in result["1.8.9"]
 
-        result = self.nec.CheckForgeJson("testmod")
 
-        self.assertIn("1.8.9", result)
-        self.assertNotIn("version", result["1.8.9"])
-        self.assertEqual("1.0.0", result["1.8.9"]["dev"])
+async def test_forgejson_no_mcversion_data(mod_poller):
+    mod_poller.fetch_json = AsyncMock(
+        return_value={"promos": {"1.8.9-recommended": "1.0.0"}}
+    )
+    result = await mod_poller.CheckForgeJson("TestMod")
+    assert "1.8.9" in result
+    assert result["1.8.9"]["version"] == "1.0.0"
+    assert "dev" not in result["1.8.9"]
 
-    def test_forgejson_both_versions_equal(self):
-        self.nec.set_url_json(
-            "testurl",
-            {
-                "promos": {"1.8.9-latest": "1.0.0", "1.8.9-recommended": "1.0.0"},
-                "1.8.9": {"1.0.0": "test changelog"},
-            },
-        )
 
-        result = self.nec.CheckForgeJson("testmod")
-
-        self.assertIn("1.8.9", result)
-        self.assertEqual("1.0.0", result["1.8.9"]["version"])
-        self.assertNotIn("dev", result["1.8.9"])
-
-    def test_forgejson_both_versions_different(self):
-        self.nec.set_url_json(
-            "testurl",
-            {
-                "promos": {"1.8.9-latest": "1.0.1", "1.8.9-recommended": "1.0.0"},
-                "1.8.9": {"1.0.0": "test changelog", "1.0.1": "other changelog"},
-            },
-        )
-
-        result = self.nec.CheckForgeJson("testmod")
-
-        self.assertIn("1.8.9", result)
-        self.assertIn("version", result["1.8.9"])
-        self.assertEqual("1.0.1", result["1.8.9"]["dev"])
-
-    def test_forgejson_no_changelog(self):
-        self.nec.set_url_json("testurl", {"promos": {"1.8.9-recommended": "1.0.0"}, "1.8.9": {}})
-
-        result = self.nec.CheckForgeJson("testmod")
-
-        self.assertIn("1.8.9", result)
-        self.assertEqual("1.0.0", result["1.8.9"]["version"])
-        self.assertNotIn("dev", result["1.8.9"])
-
-    def test_forgejson_no_mcversion_data(self):
-        self.nec.set_url_json("testurl", {"promos": {"1.8.9-recommended": "1.0.0"}})
-
-        result = self.nec.CheckForgeJson("testmod")
-
-        self.assertIn("1.8.9", result)
-        self.assertEqual("1.0.0", result["1.8.9"]["version"])
-        self.assertNotIn("dev", result["1.8.9"])
-
-    def test_forgejson_no_promos(self):
-        self.nec.set_url_json("testurl", {"1.8.9": {"1.0.0": "test changelog"}})
-
-        result = self.nec.CheckForgeJson("testmod")
-
-        self.assertEqual({}, result)
+async def test_forgejson_no_promos(mod_poller):
+    mod_poller.fetch_json = AsyncMock(
+        return_value={"1.8.9": {"1.0.0": "test changelog"}}
+    )
+    result = await mod_poller.CheckForgeJson("TestMod")
+    assert result == {}

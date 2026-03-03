@@ -115,14 +115,17 @@ See `commands/example_*.py` for more patterns (timer events, background tasks, e
 
 ```bash
 # Install dev dependencies
-uv sync --group dev
+uv sync --dev
+
+# Run tests
+uv run pytest
 
 # Lint and format
 uv run ruff check .
 uv run ruff format .
 ```
 
-The project uses [ruff](https://docs.astral.sh/ruff/) for linting and formatting. See `pyproject.toml` for the enabled rule sets.
+Tests run automatically on push/PR via GitHub Actions. The project uses [ruff](https://docs.astral.sh/ruff/) for linting and formatting. See `pyproject.toml` for the enabled rule sets.
 
 ## Credits
 
