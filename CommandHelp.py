@@ -64,7 +64,7 @@ def __initialize__(self, Startup):
 # function for showing information about the command.
 
 def helpHandler(self, name, params, channel, userdata, rank):
-    print "Hi, I am an example for a custom help handler!"
+    print("Hi, I am an example for a custom help handler!")
     
 def __initialize__(self, Startup):
     entry = self.helper.newHelp(commandName)
@@ -92,24 +92,24 @@ class HelpEntity():
         help_log.debug("HelpEntry for '%s' initialized", cmdname)
         
     def addDescription(self, description):
-        if isinstance(description, basestring):
+        if isinstance(description, str):
             self.description.append(description)
         else:
-            raise TypeError("Wrong type! Should be subclass of basestring, but is {0}: {1}".format(type(description), description))
+            raise TypeError("Wrong type! Should be subclass of str, but is {0}: {1}".format(type(description), description))
     
     def addArgument(self, argument, description = None, optional = False):
-        if not isinstance(argument, basestring):
-            raise TypeError("Wrong type! Should be subclass of basestring, but is {0}: {1}".format(type(argument), argument))
+        if not isinstance(argument, str):
+            raise TypeError("Wrong type! Should be subclass of str, but is {0}: {1}".format(type(argument), argument))
         
         if optional != False and optional != True:
             raise TypeError("Wrong type! Variable 'optional' should be False or True, but is {0}: {1}".format(type(description), description))
         
         if description == None:
             self.arguments.append((argument, None, optional))
-        elif isinstance(description, basestring):
+        elif isinstance(description, str):
             self.arguments.append((argument, description, optional))
         else:
-            raise TypeError("Wrong type! Variable 'description' should be None or subclass of basestring, but is {0}: {1}".format(type(description), description))
+            raise TypeError("Wrong type! Variable 'description' should be None or subclass of str, but is {0}: {1}".format(type(description), description))
     
     def setCustomHandler(self, func):
         if not callable(func):
@@ -138,7 +138,7 @@ class HelpModule():
         elif helpObject.cmdname in self.helpDB and overwrite == False:
             raise RuntimeError("Conflict Error: A command with such a name already exists!")
         elif helpObject.cmdname in self.helpDB and overwrite == True:
-            print "ATTENTION: A command with such a name is already registered."
+            print("ATTENTION: A command with such a name is already registered.")
             self.helpDB[helpObject.cmdname] = helpObject
             help_log.debug("Registered Help for command '%s', but a help entry already exists.", helpObject.cmdname)
         else:

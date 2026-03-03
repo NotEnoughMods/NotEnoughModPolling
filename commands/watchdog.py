@@ -16,11 +16,11 @@ def execute(self, name, params, channel, userdata, rank, chan):
     if len(params) == 0:
         uptime = datetime.now() - self.startupTime
         
-        weeks = uptime.days / 7
+        weeks = uptime.days // 7
         days = uptime.days % 7
-        
-        hours = uptime.seconds / (60*60)
-        minutes = (uptime.seconds % (60*60)) / 60
+
+        hours = uptime.seconds // (60*60)
+        minutes = (uptime.seconds % (60*60)) // 60
         
         timeList = []
         
@@ -83,7 +83,7 @@ def execute(self, name, params, channel, userdata, rank, chan):
         self.sendMessage(channel, finalString)
 
         threadInfo = []
-        for threadName, threadData in self.threading.pool.iteritems():
+        for threadName, threadData in self.threading.pool.items():
             timeDelta = threadData["thread"].timeDelta
             if timeDelta == None:
                 timeDelta = 0
