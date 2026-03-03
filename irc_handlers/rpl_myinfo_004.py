@@ -3,9 +3,9 @@ import time
 ID = "004"
 
 
-def pinger(self, channels):
+async def pinger(self, channels):
     if self.server is not None:
-        self.send("PING " + self.server, 0)
+        await self.send("PING " + self.server, 0)
         # print "PING SENT TO "+self.server
         self.lastPing = time.time()
 
