@@ -10,10 +10,10 @@ from pyparsing import (
     Word,
     alphas,
     hexnums,
+    infix_notation,
     nums,
     oneOf,
     opAssoc,
-    operatorPrecedence,
 )
 
 
@@ -101,7 +101,6 @@ class EvalConstant:
 class EvalPow:
     def __init__(self, tokens):
         self.value = tokens[0]
-        print(self.value)
 
     def eval(self, vars_):
         prod = self.value[0].eval(vars_)
@@ -196,16 +195,13 @@ class EvalHexBinDisp:
 
     def __init__(self, tokens):
         self.value = tokens[0]
-        print(self.value)
 
     def eval(self, vars_):
         sign = self.value[0]
         if sign == "bin":
             return bin(int(self.value[1].eval(vars_)))
         if sign == "hex":
-            result = hex(int(self.value[1].eval(vars_)))
-            result = result.rstrip("L")
-            return result
+            return hex(int(self.value[1].eval(vars_)))
 
 
 class EvalBinOperators:
@@ -267,9 +263,6 @@ class Arith:
         | Word(alphas)
     )
 
-    print(Word(nums))
-    print(nums)
-
     operand = real
 
     expop = oneOf("**")
@@ -287,7 +280,7 @@ class Arith:
     # operand.setDebug(True)
     operand.setParseAction(EvalConstant)
 
-    arith_expr = operatorPrecedence(
+    arith_expr = infix_notation(
         operand,
         [
             (logOp, 1, opAssoc.RIGHT, EvalLog),
@@ -317,7 +310,6 @@ class Arith:
         setattr(self.arith_expr, "__startTime", timer())
 
         ret = self.arith_expr.parseString(strExpr, parseAll=False)[0]
-        print(ret)
         result = ret.eval(self.vars_)
         return result
 
@@ -327,7 +319,7 @@ arith = Arith({"pi": math.pi, "e": math.e})
 # Some monkeypatching is required to replace the method with our
 # wrapped one. That way we can break out of the parsing loop
 # easily if more than 10 seconds pass.
-modified_parse = MethodType(_parseNoCache, arith.arith_expr, ParserElement)
+modified_parse = MethodType(_parseNoCache, arith.arith_expr)
 arith.arith_expr._parseNoCache = modified_parse
 arith.arith_expr._parse = modified_parse
 
