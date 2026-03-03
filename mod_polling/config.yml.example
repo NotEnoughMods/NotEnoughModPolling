@@ -4,7 +4,7 @@ github:
 polling:
   host_delay: 0.5
   auto_start: false
-  interval: 300
+  interval: 1800
   channel: ""
 irc:
   staff_channel: '#test'

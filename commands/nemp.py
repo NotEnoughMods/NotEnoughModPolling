@@ -146,7 +146,7 @@ async def setup(self, startup):
     if startup:
         polling_config = self.NEM.config.get("polling", {})
         if polling_config.get("auto_start") and polling_config.get("channel"):
-            interval = polling_config.get("interval", 300)
+            interval = polling_config.get("interval", 1800)
             channel = polling_config["channel"]
             nemp_logger.info("Auto-starting polling (interval=%ds, channel=%s)", interval, channel)
             await start_polling(self, interval, channel)
@@ -159,7 +159,7 @@ async def cmd_enable(self, name, params, channel, userdata, rank):
 
     await self.send_message(channel, "Enabling NotEnoughModPolling")
 
-    timerForPolls = self.NEM.config.get("polling", {}).get("interval", 300)
+    timerForPolls = self.NEM.config.get("polling", {}).get("interval", 1800)
 
     if len(params) == 2:
         timerForPolls = int(params[1])
