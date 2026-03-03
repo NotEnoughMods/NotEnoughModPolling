@@ -10,13 +10,13 @@ class Plugin:
     def __init__(self):
         self._events = {}
         self._commands = {}
-        self._threads = {}
+        self._tasks = {}
 
-    def addCommand(self, cmdname, rank, function):
+    def add_command(self, cmdname, rank, function):
         pass
 
-    def addEvent(self, eventType, eventFunction, *args):
+    def add_event(self, eventType, eventFunction, *args):
         pass
 
-    def addThread(self, threadName, function):
+    def add_task(self, task_name, function):
         pass

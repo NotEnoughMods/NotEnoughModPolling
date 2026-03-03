@@ -608,7 +608,7 @@ class NotEnoughClasses:
             # If getting the document fails, we want to abort immediately
             print("Failed to poll document_group for " + mod)
             traceback.print_exc()
-            # Pass the exception along to the polling thread
+            # Pass the exception along to the polling task
             raise
 
         output = {}

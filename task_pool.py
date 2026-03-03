@@ -3,7 +3,7 @@ import logging
 import traceback
 from timeit import default_timer
 
-_threadlogger = logging.getLogger("ThreadPoolExceptions")
+_task_logger = logging.getLogger("TaskPoolExceptions")
 
 
 class FunctionNameAlreadyExists(Exception):
@@ -47,11 +47,11 @@ class TaskHandle:
 class TaskPool:
     def __init__(self):
         self.pool = {}
-        self._logger = logging.getLogger("ThreadPool")
+        self._logger = logging.getLogger("TaskPool")
 
     def add_task(self, name, function, baseReference=None):
         if name in self.pool:
-            raise FunctionNameAlreadyExists("The name is already used by a different thread function!")
+            raise FunctionNameAlreadyExists("The name is already used by a different task function!")
 
         queue = asyncio.Queue()
         handle = None
@@ -70,8 +70,8 @@ class TaskPool:
                         "traceback": exception,
                     }
                 )
-                _threadlogger.warning("Task '%s' crashed! Exception follows.", name)
-                _threadlogger.exception("Task exception of '%s':", name)
+                _task_logger.warning("Task '%s' crashed! Exception follows.", name)
+                _task_logger.exception("Task exception of '%s':", name)
             finally:
                 handle.running = False
 

@@ -91,18 +91,18 @@ async def execute(self, name, params, channel, userdata, rank, chan):
 
         await self.send_message(channel, finalString)
 
-        threadInfo = []
-        for threadName, threadData in self.task_pool.pool.items():
-            timeDelta = threadData["handle"].timeDelta
+        task_info = []
+        for task_name, task_data in self.task_pool.pool.items():
+            timeDelta = task_data["handle"].timeDelta
             if timeDelta is None:
                 timeDelta = 0
 
-            threadInfo.append(f"{threadName} [{round(timeDelta, 2)}\u00b5s]")
+            task_info.append(f"{task_name} [{round(timeDelta, 2)}\u00b5s]")
 
-        if len(threadInfo) == 0:
-            await self.send_message(channel, "No threads running right now.")
+        if len(task_info) == 0:
+            await self.send_message(channel, "No tasks running right now.")
         else:
-            finalString = "The following threads are running: " + ", ".join(threadInfo)
+            finalString = "The following tasks are running: " + ", ".join(task_info)
             await self.send_message(channel, finalString)
 
     else:

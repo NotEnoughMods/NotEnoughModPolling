@@ -94,7 +94,7 @@ async def execute(self, name, params, channel, userdata, rank, chan):
 
 
 TIME_EVENT_NAME = "NotEnoughModPolling"
-THREAD_NAME = "NEMP"
+TASK_NAME = "NEMP"
 
 
 def is_running(self):
@@ -105,7 +105,7 @@ async def start_polling(self, timer, channel):
     await self.NEM.init_nem_versions()
     self.NEM_cycle_count = 0
 
-    self.task_pool.add_task(THREAD_NAME, PollingThread, {"NEM": self.NEM, "PollTime": timer})
+    self.task_pool.add_task(TASK_NAME, polling_task, {"NEM": self.NEM, "PollTime": timer})
 
     self.events["time"].add_event(TIME_EVENT_NAME, 60, NEMP_TimerEvent, [channel])
 
@@ -113,8 +113,8 @@ async def start_polling(self, timer, channel):
 def stop_polling(self):
     self.events["time"].remove_event(TIME_EVENT_NAME)
     nemp_logger.debug("Removed NEM Polling Event")
-    self.task_pool.cancel_task(THREAD_NAME)
-    nemp_logger.debug("Sigquit to NEMP Thread sent")
+    self.task_pool.cancel_task(TASK_NAME)
+    nemp_logger.debug("Sigquit to NEMP task sent")
 
     self.NEM_troubledMods = {}
     # self.NEM_autodeactivatedMods = {}
@@ -124,7 +124,7 @@ async def setup(self, Startup):
     if Startup:
         self.NEM = await NEMP_Class.setup()
     else:
-        # kill events, threads
+        # kill events, tasks
         if is_running(self):
             stop_polling(self)
 
@@ -287,12 +287,12 @@ async def cmd_fail_count(self, name, params, channel, userdata, rank):
 FailedModEntry = namedtuple("FailedModEntry", "name exception")
 
 
-async def PollingThread(self, pipe):
+async def polling_task(self, pipe):
     NEM = self.base["NEM"]
     sleepTime = self.base["PollTime"]
 
     while not self.signal:
-        nemp_logger.debug("PollingThread: I'm still running!")
+        nemp_logger.debug("polling_task: I'm still running!")
 
         poll_results = []
         document_groups_done = []
@@ -344,11 +344,11 @@ async def PollingThread(self, pipe):
 
 # This runs on a timer (once every minute)
 async def NEMP_TimerEvent(self, channels):
-    # Check if we have any data from PollingThread to process
-    if not self.task_pool.poll(THREAD_NAME):
+    # Check if we have any data from polling_task to process
+    if not self.task_pool.poll(TASK_NAME):
         return
 
-    nemp_data = await self.task_pool.recv(THREAD_NAME)
+    nemp_data = await self.task_pool.recv(TASK_NAME)
 
     self.NEM_cycle_count += 1
 
@@ -364,7 +364,7 @@ async def NEMP_TimerEvent(self, channels):
 
     if isinstance(nemp_data, dict) and "action" in nemp_data and nemp_data["action"] == "exceptionOccured":
         nemp_logger.error(
-            "NEMP Thread {} encountered an unhandled exception: {}".format(
+            "NEMP task {} encountered an unhandled exception: {}".format(
                 nemp_data["functionName"], str(nemp_data["exception"])
             )
         )
