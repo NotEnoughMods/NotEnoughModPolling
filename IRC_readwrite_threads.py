@@ -1,13 +1,12 @@
 import random
 import socket
 import time
-import urllib
 import simplejson
 import re
 import traceback
 import sys
 import threading
-import Queue
+import queue
 
 class ThreadShuttingDown(Exception):
     def __init__(self, nameOfThread, time):
@@ -25,11 +24,11 @@ class IRC_reader(threading.Thread):
         #self.port = port
         self.sock = serverSock
         self.ready = True
-        self.linebuffer = ""
+        self.linebuffer = b""
         
         self.error = None
         
-        self.buffer = Queue.Queue()
+        self.buffer = queue.Queue()
         
     def run(self):
         #self.conn.connect(self.host, self.port)
@@ -39,26 +38,26 @@ class IRC_reader(threading.Thread):
                     data = self.sock.recv(1024)
                     time.sleep(0.01)
                 except Exception as error:
-                    print 
-                    print "ERROR: "+str(error)
-                    print
+                    print()
+                    print("ERROR: "+str(error))
+                    print()
                     self.error = traceback.format_exc()
-                    
+
                     self.ready = False
                     break
                 else:
-                    if data != "":
-                        # print "RAWIN: %s" % data
+                    if data != b"":
+                        # print("RAWIN: %s" % data)
                         self.linebuffer += data
 
-                    lines = self.linebuffer.split("\n")
+                    lines = self.linebuffer.split(b"\n")
                     self.linebuffer = lines.pop()
 
                     for line in lines:
                         # print "IN: %s" % line
                         line = line.rstrip()  # Strip whitespace to the right
                         self.buffer.put(line.decode("utf-8", errors="replace"), True)
-            print "ReadThread is down!"
+            print("ReadThread is down!")
         
     
     def readMsg(self):
@@ -83,7 +82,7 @@ class IRC_writer(threading.Thread):
         self.died = False
         
         self.error = None
-        self.buffer = Queue.Queue()
+        self.buffer = queue.Queue()
         
     def run(self):
         #self.conn.connect(self.host, self.port)
@@ -103,7 +102,7 @@ class IRC_writer(threading.Thread):
                 #print "SENT: "+toSend
                 
                 
-            except Queue.Empty:
+            except queue.Empty:
                 # an attempt to fix the bug that causes the writeThread to hang indefinitely because it receives no more data from the Queue
                 if self.signal == False:
                     # it's empty? oh well, better luck next time
@@ -114,9 +113,9 @@ class IRC_writer(threading.Thread):
                     break
                     
             except Exception as error:
-                print 
-                print "ERROR: "+str(error)
-                print
+                print()
+                print("ERROR: "+str(error))
+                print()
                 self.error = traceback.format_exc()
                 
                 self.ready = False
@@ -129,7 +128,7 @@ class IRC_writer(threading.Thread):
             #    self.ready = False
             #    self.sock.close()
             #    print "SHIT GOES LOSE, WE CAN'T SEND ANYTHING TO SERVER"
-        print "SendThread is down!"
+        print("SendThread is down!")
     
     def waitUntilEmpty(self):
         self.buffer.join()
@@ -137,4 +136,4 @@ class IRC_writer(threading.Thread):
     def sendMsg(self, msg, priority = False):
         msg = msg.replace(chr(13), " ")
         msg = msg.replace(chr(10), " ")
-        self.buffer.put(msg+unicode(chr(13))+unicode(chr(10)))
+        self.buffer.put(msg + "\r\n")

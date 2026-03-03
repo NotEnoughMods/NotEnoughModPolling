@@ -1,5 +1,5 @@
 import re
-import ConfigParser
+import configparser
 
 class invalidConfig(Exception):
     def __init__(self, key, line):
@@ -9,7 +9,7 @@ class invalidConfig(Exception):
         return "Invalid data on line {0}: {1}".format(self.line, self.key)
 
 def CreateDefaultConfig():
-    Parser = ConfigParser.SafeConfigParser(allow_no_value = True)
+    Parser = configparser.ConfigParser(allow_no_value = True)
     
     Parser.add_section("Connection Info")
     Parser.set("Connection Info", "nickname", "MyIRCBot")
@@ -63,8 +63,8 @@ class Configuration():
             raise RuntimeError("The '{0}' file was missing. A new config file has been created. "
                                "Please fill in the information.".format(self.configname))
         else:
-            self.config = ConfigParser.SafeConfigParser()
-            self.config.readfp(conFile)
+            self.config = configparser.ConfigParser()
+            self.config.read_file(conFile)
     
     def check_options(self):
         for section in self.mandatoryVariables:

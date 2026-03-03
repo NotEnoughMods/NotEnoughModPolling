@@ -1,7 +1,7 @@
 import sqlite3
 import re
 
-from cStringIO import StringIO
+from io import StringIO
 
 ALLOWEDCHARS = '-0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}'
 ALLOWEDCHARS_IDENT = ALLOWEDCHARS+"~"
@@ -204,8 +204,8 @@ class BanList:
                 
                 if closedBracket == "]":
                     finstring.write(nextchar)
-                    string_iter.next()
-                    string_iter.next()
+                    next(string_iter)
+                    next(string_iter)
                     continue
 
             if char in self.ESCAPE:
@@ -242,7 +242,7 @@ class BanList:
                             """, (groupName, banstring) )
         
         result = self.cursor.fetchone()
-        print result, type(result)
+        print(result, type(result))
         if result != None and result[0] == 1:
             return True
         else:
@@ -255,7 +255,7 @@ class BanList:
                             """, (groupName, ) )
         
         result = self.cursor.fetchone()
-        print result, type(result)
+        print(result, type(result))
         if result != None and result[0] == 1:
             return True
         else:

@@ -1,5 +1,5 @@
 
-from cStringIO import StringIO
+from io import StringIO
 from fnmatch import fnmatch
 
 from BanList import InvalidCharacterUsed, NoSuchBanGroup

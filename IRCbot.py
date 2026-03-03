@@ -4,7 +4,7 @@ warnings.simplefilter("ignore", RuntimeWarning)
 import socket
 import time
 import traceback
-import Queue
+import queue
 import datetime
 import logging
 
@@ -48,7 +48,7 @@ class IRC_Main():
                     # NOTE: Potential problem: Does it still work if the URL has no IPv6 address?
                     family, socktype, proto, canonname, sockaddr = info[0] 
                 except socket.gaierror as error:
-                    print "getaddrinfo failed! Maybe IPv6 isn't supported on this platform? Check your config!"
+                    print("getaddrinfo failed! Maybe IPv6 isn't supported on this platform? Check your config!")
                     raise error
                 
                 self.serverConn = socket.socket(socket.AF_INET6)
@@ -116,7 +116,7 @@ class IRC_Main():
                 
                 self.comHandle.handle(self.writeThread.sendMsg, prefix, command, commandParameters, self.nsAuth)
                 
-            except Queue.Empty:
+            except queue.Empty:
                 pass
             
             # Bugfix for when only the writeThread, i.e. the one that sends data to server, dies
@@ -163,11 +163,11 @@ except Exception as error:
         bot.__root_logger__.exception("The bot has encountered an exception and had to shut down.")
         log = True
     else:
-        print "Tried to log an error, but logger wasn't initialized."
+        print("Tried to log an error, but logger wasn't initialized.")
         log = False
-    print "OH NO I DIED: "+str(error)
+    print("OH NO I DIED: "+str(error))
     traceb = str(traceback.format_exc())
-    print traceb
+    print(traceb)
     excFile = open("exception.txt", "w")
     excFile.write("Oh no! The bot died! \n"+str(traceb)+"\nTime of death: "+str(datetime.datetime.today())+"\n")
     excFile.write("-----------------------------------------------------\n")
@@ -178,7 +178,7 @@ except Exception as error:
     if getattr(bot, "comHandle", None) != None: 
         for i in range(bot.comHandle.PacketsReceivedBeforeDeath.qsize()):
             msg = bot.comHandle.PacketsReceivedBeforeDeath.get(block = False)
-            excFile.write(msg.encode("utf-8", "replace"))
+            excFile.write(msg)
             excFile.write("\n")
         bot.comHandle.threading.sigquitAll()
         if log: bot.__root_logger__.debug("All threads were signaled to shut down.")

@@ -1,6 +1,6 @@
 import time
 import datetime
-import Queue
+import queue
 import os
 import logging
 import inspect
@@ -22,7 +22,7 @@ class LoggingModule():
         monthfoldername = self.date.strftime("%Y-%m")
         dayfilename = self.date.strftime("%d-%m-%Y")
         
-        print monthfoldername, dayfilename
+        print(monthfoldername, dayfilename)
         self.__create_directory__("BotLogs/{0}".format(monthfoldername))
         
         logging.basicConfig(filename="BotLogs/{0}/{1}.log".format(monthfoldername, dayfilename),level=self.logLevel,
@@ -52,11 +52,11 @@ class LoggingModule():
     def __create_directory__(self, dirpath):
         if not os.path.exists(dirpath):
             os.mkdir(dirpath)
-            print "created dir"
+            print("created dir")
         elif not os.path.isdir(dirpath):
             raise RuntimeError("A file with the path {0} already exists, please delete or rename it.".format(dirpath))
         else:
-            print "no dir needs to be created"
+            print("no dir needs to be created")
             pass
     
     def __switch_filehandle_daily__(self, *args):
@@ -79,7 +79,7 @@ class LoggingModule():
             #
             # POTENTIAL BUG: is handlers[0] always the file handler pointing to the log file?
             # Should be tested with more than one handler.
-            print logging.getLogger().handlers
+            print(logging.getLogger().handlers)
             logging.getLogger().handlers[0].stream.close()
             logging.getLogger().removeHandler(logging.getLogger().handlers[0])
             
@@ -113,9 +113,9 @@ class LoggingModule():
         t = time.time()
     
         if time.localtime(t).tm_isdst and time.daylight:
-            return -time.altzone/3600, time.tzname[1]
+            return -time.altzone // 3600, time.tzname[1]
         else:
-            return -time.timezone/3600, time.tzname[0]
+            return -time.timezone // 3600, time.tzname[0]
     
     
     # Modification of logging's appendHandler function
