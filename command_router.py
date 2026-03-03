@@ -60,6 +60,12 @@ class CommandRouter:
         self.helper = HelpModule()
         self.auth = None
 
+    async def close(self):
+        """Call teardown() on all command modules that define one."""
+        for cmd in self.commands:
+            if self.commands[cmd][0].teardown:
+                await self.commands[cmd][0].teardown(self)
+
     async def handle(self, send, prefix, command, params, auth):
         self.send = send
 
@@ -313,6 +319,12 @@ class CommandRouter:
             except AttributeError:
                 module.setup = False
                 self._logger.log(0, "File %s does not use a setup function", i)
+
+            try:
+                if not callable(module.teardown):
+                    module.teardown = False
+            except AttributeError:
+                module.teardown = False
 
             Packet[module.ID] = (module, path + "/" + i)
 

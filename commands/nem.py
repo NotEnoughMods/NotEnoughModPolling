@@ -145,6 +145,13 @@ async def setup(self, Startup):
     version = versions[-1]
 
 
+async def teardown(self):
+    global session
+    if session:
+        await session.close()
+        session = None
+
+
 async def execute(self, name, params, channel, userdata, rank):
     try:
         command = commands[params[0]]

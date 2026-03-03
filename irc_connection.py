@@ -66,6 +66,7 @@ class IrcConnection:
                 send_away = msg.encode("utf-8", "replace")
                 self.writer.write(send_away)
                 await self.writer.drain()
+                self._write_queue.task_done()
 
                 if len(send_away) > 250:
                     await asyncio.sleep(3)
@@ -85,6 +86,10 @@ class IrcConnection:
         msg = msg.replace(chr(10), " ")
         self._logger.debug(">> %s", msg)
         await self._write_queue.put(msg + "\r\n")
+
+    async def flush(self, timeout=2):
+        """Wait for all queued messages to be sent, with a timeout."""
+        await asyncio.wait_for(self._write_queue.join(), timeout=timeout)
 
     async def close(self):
         self.ready = False

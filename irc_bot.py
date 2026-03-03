@@ -106,10 +106,16 @@ class IrcBot:
             timer_task.cancel()
             with contextlib.suppress(asyncio.CancelledError):
                 await timer_task
-            await self.conn.close()
+            await self.command_router.close()
+            await self.conn.sendMsg("QUIT :Shutting down")
+            try:
+                await self.conn.flush(timeout=5)
+            except TimeoutError:
+                self._logger.warning("Timed out flushing write queue")
             write_task.cancel()
             with contextlib.suppress(asyncio.CancelledError):
                 await write_task
+            await self.conn.close()
             self._logger.info("Connection closed.")
 
     def _parse_message(self, msg):

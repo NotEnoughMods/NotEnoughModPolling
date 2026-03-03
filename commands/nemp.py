@@ -69,6 +69,11 @@ helpDict = {
 }
 
 
+async def teardown(self):
+    if hasattr(self, "NEM") and self.NEM and hasattr(self.NEM, "session") and self.NEM.session:
+        await self.NEM.session.close()
+
+
 async def execute(self, name, params, channel, userdata, rank, chan):
     if len(params) > 0:
         cmdName = params[0].lower()
