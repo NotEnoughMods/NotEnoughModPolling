@@ -18,7 +18,7 @@ async def execute(self, name, params, channel, userdata, rank, chan):
     else:
         await self.sendNotice(name, "Please specify a channel")
 
-async def __initialize__(self, Startup):
+async def setup(self, Startup):
     entry = self.helper.newHelp(ID)
 
     entry.addDescription("The command tells the bot to join one or several channels. Several channels are delimited with whitespace.")

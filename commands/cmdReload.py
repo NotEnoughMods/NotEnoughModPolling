@@ -18,13 +18,13 @@ async def execute(self, name, params, channel, userdata, rank):
         self.commands[cmd] = (self._load_source("RenolIRC_"+cmd, path), path)
 
         try:
-            if not callable(self.commands[cmd][0].__initialize__):
-                self.commands[cmd][0].__initialize__ = False
+            if not callable(self.commands[cmd][0].setup):
+                self.commands[cmd][0].setup = False
         except AttributeError:
-            self.commands[cmd][0].__initialize__ = False
+            self.commands[cmd][0].setup = False
         else:
-            if self.commands[cmd][0].__initialize__ != False:
-                await self.commands[cmd][0].__initialize__(self, False)
+            if self.commands[cmd][0].setup != False:
+                await self.commands[cmd][0].setup(self, False)
 
         await self.sendMessage(channel, "Done!")
 
@@ -33,7 +33,7 @@ async def execute(self, name, params, channel, userdata, rank):
     else:
         await self.sendMessage(channel, "Please specify a command.")
 
-async def __initialize__(self, Startup):
+async def setup(self, Startup):
     entry = self.helper.newHelp(ID)
 
     entry.addDescription("The 'reload' command allows you to reload specific commands. All changes made to the file will take effect.")

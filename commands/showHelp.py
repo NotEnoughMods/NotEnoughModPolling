@@ -79,7 +79,7 @@ async def execute(self, name, params, channel, userdata, rank):
 def test(self, name, params, channel, userdata, rank):
     print(name)
 
-async def __initialize__(self, Startup):
+async def setup(self, Startup):
     entry = self.helper.newHelp(ID)
 
     entry.addDescription("The 'help' command shows you the descriptions and arguments of commands that have added an entry to the internal Help Database.")

@@ -2,10 +2,11 @@ import json
 import traceback
 import logging
 import os
-import requests
+import aiohttp
 
 from collections import OrderedDict
 from string import ascii_letters, digits
+from urllib.parse import quote as urlquote
 
 ID = "nem"
 permission = 1
@@ -31,97 +32,104 @@ ALLOWED_IN_FILENAME = "-_.() %s%s" % (ascii_letters, digits)
 
 # Colour Constants End
 
-class NotEnoughClasses():
+# Module-level state (replaces NotEnoughClasses instance)
+session = None
+versions = []
+version = ""
+cache_dir = os.path.join("commands", "NEM", "cache")
+cache_last_modified = {}
+cache_etag = {}
 
-    def getLatestVersion(self):
-        try:
-            return self.fetch_json("https://bot.notenoughmods.com/?json")
-        except:
-            print("Failed to get NEM versions, falling back to hard-coded")
-            nem_logger.exception("Failed to get NEM versions, falling back to hard-coded.")
-            return ["1.4.5", "1.4.6-1.4.7", "1.5.1", "1.5.2", "1.6.1", "1.6.2", "1.6.4",
-                    "1.7.2", "1.7.4", "1.7.5", "1.7.7", "1.7.9", "1.7.10"]
 
-    def __init__(self):
-        self.requests_session = requests.Session()
-        self.requests_session.headers = {
-            'User-agent': 'NotEnoughMods:Tools/1.X (+https://github.com/NotEnoughMods/NotEnoughModPolling)'
-        }
-        self.requests_session.max_redirects = 5
+def normalize_filename(name):
+    return ''.join(c for c in name if c in ALLOWED_IN_FILENAME)
 
-        self.cache_dir = os.path.join("commands", "NEM", "cache")
-        self.cache_last_modified = {}
-        self.cache_etag = {}
 
-        self.versions = self.getLatestVersion()
-        self.version = self.versions[len(self.versions) - 1]
+async def get_latest_version():
+    try:
+        return await fetch_json("https://bot.notenoughmods.com/?json")
+    except:
+        print("Failed to get NEM versions, falling back to hard-coded")
+        nem_logger.exception("Failed to get NEM versions, falling back to hard-coded.")
+        return ["1.4.5", "1.4.6-1.4.7", "1.5.1", "1.5.2", "1.6.1", "1.6.2", "1.6.4",
+                "1.7.2", "1.7.4", "1.7.5", "1.7.7", "1.7.9", "1.7.10"]
 
-    def normalize_filename(self, name):
-        return ''.join(c for c in name if c in ALLOWED_IN_FILENAME)
 
-    def fetch_page(self, url, timeout=10, decode_json=False, cache=False):
-        try:
-            if cache:
-                fname = self.normalize_filename(url)
-                filepath = os.path.join(self.cache_dir, fname)
+async def fetch_page(url, timeout=10, decode_json=False, cache=False):
+    try:
+        if cache:
+            fname = normalize_filename(url)
+            filepath = os.path.join(cache_dir, fname)
 
-                if os.path.exists(filepath):
-                    headers = {}
+            if os.path.exists(filepath):
+                headers = {}
 
-                    etag = self.cache_etag.get(url)
-                    if etag:
-                        headers['If-None-Match'] = etag
+                etag = cache_etag.get(url)
+                if etag:
+                    headers['If-None-Match'] = etag
 
-                    last_modified = self.cache_last_modified.get(url)
-                    if last_modified:
-                        headers['If-Modified-Since'] = '"{}"'.format(last_modified)
+                last_modified = cache_last_modified.get(url)
+                if last_modified:
+                    headers['If-Modified-Since'] = '"{}"'.format(last_modified)
 
-                    request = self.requests_session.get(url, timeout=timeout, headers=headers)
-
-                    if request.status_code == 304:
+                async with session.get(url, timeout=aiohttp.ClientTimeout(total=timeout), headers=headers) as response:
+                    if response.status == 304:
                         with open(filepath, 'r') as f:
                             if decode_json:
                                 return json.load(f)
                             else:
                                 return f.read()
                     else:
-                        with open(filepath, 'w') as f:
-                            f.write(request.content)
+                        text = await response.text()
 
-                        self.cache_etag[url] = request.headers.get('etag')
-                        self.cache_last_modified[url] = request.headers.get('last-modified')
+                        with open(filepath, 'w') as f:
+                            f.write(text)
+
+                        cache_etag[url] = response.headers.get('etag')
+                        cache_last_modified[url] = response.headers.get('last-modified')
 
                         if decode_json:
-                            return request.json()
+                            return json.loads(text)
                         else:
-                            return request.content
-                else:
-                    request = self.requests_session.get(url, timeout=timeout)
+                            return text
+            else:
+                async with session.get(url, timeout=aiohttp.ClientTimeout(total=timeout)) as response:
+                    text = await response.text()
 
                     with open(filepath, 'w') as f:
-                        f.write(request.content)
+                        f.write(text)
 
-                    self.cache_etag[url] = request.headers.get('etag')
-                    self.cache_last_modified[url] = request.headers.get('last-modified')
+                    cache_etag[url] = response.headers.get('etag')
+                    cache_last_modified[url] = response.headers.get('last-modified')
 
                     if decode_json:
-                        return request.json()
+                        return json.loads(text)
                     else:
-                        return request.content
-            else:
-                request = self.requests_session.get(url, timeout=timeout)
+                        return text
+        else:
+            async with session.get(url, timeout=aiohttp.ClientTimeout(total=timeout)) as response:
                 if decode_json:
-                    return request.json()
+                    return await response.json(content_type=None)
                 else:
-                    return request.content
-        except:
-            traceback.print_exc()
-            pass
+                    return await response.text()
+    except:
+        traceback.print_exc()
+        pass
 
-    def fetch_json(self, *args, **kwargs):
-        return self.fetch_page(*args, decode_json=True, **kwargs)
 
-NEM = NotEnoughClasses()
+async def fetch_json(*args, **kwargs):
+    return await fetch_page(*args, decode_json=True, **kwargs)
+
+
+async def setup(self, Startup):
+    global session, versions, version
+    if session:
+        await session.close()
+    session = aiohttp.ClientSession(
+        headers={'User-agent': 'NotEnoughMods:Tools/1.X (+https://github.com/NotEnoughMods/NotEnoughModPolling)'},
+    )
+    versions = await get_latest_version()
+    version = versions[-1]
 
 
 async def execute(self, name, params, channel, userdata, rank):
@@ -134,6 +142,7 @@ async def execute(self, name, params, channel, userdata, rank):
 
 
 async def setlist(self, name, params, channel, userdata, rank):
+    global version
     if len(params) != 2:
         await self.sendMessage(channel,
                          "{name}: Insufficient amount of parameters provided.".format(name=name)
@@ -143,7 +152,7 @@ async def setlist(self, name, params, channel, userdata, rank):
                                                         setlistHelp=help["setlist"][0])
                          )
     else:
-        NEM.version = str(params[1])
+        version = str(params[1])
         await self.sendMessage(channel,
                          "switched list to: "
                          "{bold}{blue}{version}{colourEnd}".format(bold=BOLD,
@@ -168,17 +177,17 @@ async def multilist(self, name, params, channel, userdata, rank):
 
             modName = params[1]
 
-            for version in NEM.versions:
-                jsonres[version] = NEM.fetch_json("https://bot.notenoughmods.com/" + requests.utils.quote(version) + ".json", cache=True)
+            for ver in versions:
+                jsonres[ver] = await fetch_json("https://bot.notenoughmods.com/" + urlquote(ver) + ".json", cache=True)
 
-                for i, mod in enumerate(jsonres[version]):
+                for i, mod in enumerate(jsonres[ver]):
                     if modName.lower() == mod["name"].lower():
-                        results[version] = i
+                        results[ver] = i
                         break
                     else:
                         aliases = [mod_alias.lower() for mod_alias in mod["aliases"]]
                         if modName.lower() in aliases:
-                            results[version] = i
+                            results[ver] = i
 
             count = len(results)
 
@@ -192,9 +201,9 @@ async def multilist(self, name, params, channel, userdata, rank):
 
             await self.sendMessage(channel, "Listing " + count + " for \"" + params[1] + "\":")
 
-            for version in results.keys():
+            for ver in results.keys():
                 alias = ""
-                modData = jsonres[version][results[version]]
+                modData = jsonres[ver][results[ver]]
 
                 if modData["aliases"]:
                     alias_joinText = "{colourEnd}, {colour}".format(colourEnd=COLOUREND,
@@ -235,7 +244,7 @@ async def multilist(self, name, params, channel, userdata, rank):
                                                                                  comment=comment,
                                                                                  version=modData["version"],
                                                                                  shorturl=modData["shorturl"],
-                                                                                 mcversion=version,
+                                                                                 mcversion=ver,
 
                                                                                  bold=BOLD,
                                                                                  blue=BLUE,
@@ -260,11 +269,11 @@ async def list(self, name, params, channel, userdata, rank):
                          )
         return
     if len(params) >= 3:
-        version = params[2]
+        ver = params[2]
     else:
-        version = NEM.version
+        ver = version
     try:
-        result = NEM.fetch_page("https://bot.notenoughmods.com/" + requests.utils.quote(version) + ".json", cache=True)
+        result = await fetch_page("https://bot.notenoughmods.com/" + urlquote(ver) + ".json", cache=True)
         if not result:
             await self.sendMessage(channel,
                              "{0}: Could not fetch the list. Are you sure it exists?".format(name)
@@ -300,7 +309,7 @@ async def list(self, name, params, channel, userdata, rank):
                          "{bold}{colour}{version}"
                          "{colourEnd}{bold}".format(count=count,
                                                     term=params[1],
-                                                    version=version,
+                                                    version=ver,
                                                     bold=BOLD,
                                                     colourEnd=COLOUREND,
                                                     colour=BLUE)
@@ -358,9 +367,9 @@ async def compare(self, name, params, channel, userdata, rank):
     try:
         oldVersion, newVersion = params[1], params[2]
 
-        oldJson = NEM.fetch_json("https://bot.notenoughmods.com/" + requests.utils.quote(oldVersion) + ".json", cache=True)
+        oldJson = await fetch_json("https://bot.notenoughmods.com/" + urlquote(oldVersion) + ".json", cache=True)
 
-        newJson = NEM.fetch_json("https://bot.notenoughmods.com/" + requests.utils.quote(newVersion) + ".json", cache=True)
+        newJson = await fetch_json("https://bot.notenoughmods.com/" + urlquote(newVersion) + ".json", cache=True)
 
         newMods = {modInfo["name"].lower(): True for modInfo in newJson}
 
@@ -405,12 +414,12 @@ async def help(self, name, params, channel, userdata, rank):
 
 async def force_cacheRedownload(self, name, params, channel, userdata, rank):
     if self.rankconvert[rank] >= 3:
-        for version in NEM.versions:
-            url = "https://bot.notenoughmods.com/" + requests.utils.quote(version) + ".json"
-            normalized = NEM.normalize_filename(url)
-            filepath = os.path.join(NEM.cache_dir, normalized)
+        for ver in versions:
+            url = "https://bot.notenoughmods.com/" + urlquote(ver) + ".json"
+            normalized = normalize_filename(url)
+            filepath = os.path.join(cache_dir, normalized)
             if os.path.exists(filepath):
-                NEM.cache_last_modified[normalized] = 0
+                cache_last_modified[normalized] = 0
 
         await self.sendMessage(channel, "Cache Timestamps have been reset. Cache will be redownloaded on the next fetching.")
 

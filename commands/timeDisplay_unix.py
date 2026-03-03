@@ -88,7 +88,7 @@ def format_day_of_month(day):
     else:
         return day + choose_st_nd_rd_th(day)
 
-async def __initialize__(self, Startup):
+async def setup(self, Startup):
     entry = self.helper.newHelp(ID)
 
     entry.addDescription("The 'utc' command shows the current time in UTC. Optionally, you can set a offset according to which the time will be modified. ")

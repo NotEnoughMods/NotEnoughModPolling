@@ -27,21 +27,21 @@ async def execute(self, name, params, channel, userdata, rank):
             self.commands[cmd] = (module, path)
 
             try:
-                if not callable(module.__initialize__):
-                    module.__initialize__ = False
-                    self.__CMDHandler_log__.debug("File {0} does not use an initialize function".format(filename))
+                if not callable(module.setup):
+                    module.setup = False
+                    self.__CMDHandler_log__.debug("File {0} does not use a setup function".format(filename))
             except AttributeError:
-                module.__initialize__ = False
-                self.__CMDHandler_log__.debug("File {0} does not use an initialize function".format(filename))
+                module.setup = False
+                self.__CMDHandler_log__.debug("File {0} does not use a setup function".format(filename))
 
-            if module.__initialize__ != False:
-                await module.__initialize__(self, True)
+            if module.setup != False:
+                await module.setup(self, True)
 
             await self.sendMessage(channel, "{0} has been loaded.".format(path))
             self.__CMDHandler_log__.info("File {0} has been newly loaded.".format(filename))
 
 
-async def __initialize__(self, Startup):
+async def setup(self, Startup):
     entry = self.helper.newHelp(ID)
 
     entry.addDescription("The 'newload' command will load any newly added plugins that have not been loaded yet without reloading other plugins.")

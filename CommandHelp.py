@@ -9,8 +9,8 @@ resulting text accordingly.
 
 Example of usage in commands/showHelp.py, with added comments:
 
-#We need to define a __initialize__ function so that the code is executed on startup:
-def __initialize__(self, Startup):
+#We need to define a setup function so that the code is executed on startup:
+def setup(self, Startup):
 
     # self.helper is a HelpModule object.
     # Using help.newHelp, we are creating a new HelpEntity object with the ID, i.e. the name of the command,
@@ -66,7 +66,7 @@ def __initialize__(self, Startup):
 def helpHandler(self, name, params, channel, userdata, rank):
     print("Hi, I am an example for a custom help handler!")
     
-def __initialize__(self, Startup):
+def setup(self, Startup):
     entry = self.helper.newHelp(commandName)
     entry.setCustomHandler(helpHandler)
     entry.rank = 0

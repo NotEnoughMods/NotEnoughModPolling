@@ -24,7 +24,7 @@ async def execute(self, name, params, channel, userdata, rank):
 
     await self.joinChannel(self.send, channels)
 
-async def __initialize__(self, Startup):
+async def setup(self, Startup):
     entry = self.helper.newHelp(ID)
 
     entry.addDescription("The 'rejoin' command makes the bot rejoin either the current channel, or the channels you have specified.")

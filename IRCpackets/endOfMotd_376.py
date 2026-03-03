@@ -17,7 +17,7 @@ async def execute(self, sendMsg, prefix, command, params):
         await sendMsg(self.auth, 5)
 
     for cmd in self.commands:
-        if self.commands[cmd][0].__initialize__ != False:
-            await self.commands[cmd][0].__initialize__(self, True)
+        if self.commands[cmd][0].setup != False:
+            await self.commands[cmd][0].setup(self, True)
     
         

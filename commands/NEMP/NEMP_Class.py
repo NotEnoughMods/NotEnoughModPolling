@@ -1,6 +1,6 @@
 import logging
 import re
-import requests
+import aiohttp
 import json
 import traceback
 import yaml
@@ -8,8 +8,6 @@ import yaml
 from bs4 import BeautifulSoup
 from packaging.version import Version
 from jinja2 import Environment, FileSystemLoader, select_autoescape
-
-logging.getLogger('urllib3').setLevel(logging.WARNING)
 
 
 class NEMPException(Exception):
@@ -30,11 +28,7 @@ class NotEnoughClasses():
     invalid_versions = []
 
     def __init__(self):
-        self.requests_session = requests.Session()
-        self.requests_session.headers = {
-            'User-agent': 'NotEnoughMods:Polling/1.X (+https://github.com/NotEnoughMods/NotEnoughModPolling)'
-        }
-        self.requests_session.max_redirects = 5
+        self.session = None
 
         self.jinja_env = Environment(
             loader=FileSystemLoader('commands/NEMP'),
@@ -43,31 +37,22 @@ class NotEnoughClasses():
 
         self.load_config()
         self.load_version_blocklist()
-        self.load_mc_blocklist()
         self.load_mc_mapping()
         self.buildModDict()
-        self.QueryNEM()
-        self.init_nem_versions()
-        self.buildHTML()
 
-    def fetch_page(self, url, timeout=10, decode_json=False, *args, **kwargs):
-        request = self.requests_session.get(url, timeout=timeout, *args, **kwargs)
+    async def fetch_page(self, url, timeout=10, decode_json=False, **kwargs):
+        async with self.session.get(url, timeout=aiohttp.ClientTimeout(total=timeout), **kwargs) as response:
+            if 400 <= response.status < 500:
+                raise NEMPException(f"HTTP {response.status} for {url}")
+            response.raise_for_status()
 
-        try:
-            request.raise_for_status()
-        except requests.HTTPError as e:
-            if 400 <= request.status_code < 500:
-                raise NEMPException(e)
+            if decode_json:
+                return await response.json(content_type=None)
             else:
-                raise
+                return await response.text()
 
-        if decode_json:
-            return request.json()
-        else:
-            return request.text
-
-    def fetch_json(self, *args, **kwargs):
-        return self.fetch_page(*args, decode_json=True, **kwargs)
+    async def fetch_json(self, *args, **kwargs):
+        return await self.fetch_page(*args, decode_json=True, **kwargs)
 
     def load_config(self):
         try:
@@ -88,14 +73,15 @@ class NotEnoughClasses():
         # compile regexes for performance
         self.invalid_versions = [re.compile(regex, re.I) for regex in self.invalid_versions[:]]
 
-    def load_mc_blocklist(self):
+    async def load_mc_blocklist(self):
         with open('commands/NEMP/mc_blocklist.yml', 'r') as f:
             self.mc_blocklist = yaml.safe_load(f)  # type: list[str]
 
         # Load additional versions from the Mojang version manifest
         # It's ok if this happens to fail
         try:
-            r = self.requests_session.get('https://launchermeta.mojang.com/mc/game/version_manifest.json').json()
+            async with self.session.get('https://launchermeta.mojang.com/mc/game/version_manifest.json') as response:
+                r = await response.json(content_type=None)
 
             # Add anything that isn't a release to the blocklist
             additional = [version['id'] for version in r['versions'] if version['type'] != 'release']
@@ -160,10 +146,10 @@ class NotEnoughClasses():
     def buildHTML(self):
         self.jinja_env.get_template('index.jinja2').stream(mods=self.mods).dump('commands/NEMP/htdocs/index.html')
 
-    def QueryNEM(self):
-        self.nemVersions = self.fetch_json("https://bot.notenoughmods.com/?json")
+    async def QueryNEM(self):
+        self.nemVersions = await self.fetch_json("https://bot.notenoughmods.com/?json")
 
-    def init_nem_versions(self):
+    async def init_nem_versions(self):
         our_mods = {}
 
         for json_mod_name, json_info in self.mods.items():
@@ -180,7 +166,7 @@ class NotEnoughClasses():
                 continue
 
             # Get the NEM List for this MC Version
-            nem_list = self.fetch_json("https://bot.notenoughmods.com/" + nem_list_name + ".json")
+            nem_list = await self.fetch_json("https://bot.notenoughmods.com/" + nem_list_name + ".json")
 
             # For each NEM Mod...
             for nem_mod in nem_list:
@@ -200,8 +186,8 @@ class NotEnoughClasses():
                                 'version': nem_mod.get('version', '')
                             }
 
-    def CheckJenkins(self, mod, document=None, simulation=False):
-        jsonres = self.fetch_json(self.mods[mod]["jenkins"]["url"] + '?tree=changeSet[items[msg]],artifacts[fileName]')
+    async def CheckJenkins(self, mod, document=None, simulation=False):
+        jsonres = await self.fetch_json(self.mods[mod]["jenkins"]["url"] + '?tree=changeSet[items[msg]],artifacts[fileName]')
         filename = jsonres["artifacts"][self.mods[mod]["jenkins"]["item"]]["fileName"]
         match = self.match_mod_regex(mod, filename)
         output = match.groupdict()
@@ -211,8 +197,8 @@ class NotEnoughClasses():
             pass
         return output
 
-    def CheckMCForge2(self, mod, document=None, simulation=False):
-        jsonres = self.fetch_json(self.mods[mod]['mcforge']['url'])
+    async def CheckMCForge2(self, mod, document=None, simulation=False):
+        jsonres = await self.fetch_json(self.mods[mod]['mcforge']['url'])
 
         if self.mods[mod]['mcforge'].get('slim', False):
             result = {}
@@ -244,8 +230,8 @@ class NotEnoughClasses():
 
             return {}
 
-    def CheckForgeJson(self, mod, document=None, simulation=False):
-        jsonres = self.fetch_json(self.mods[mod]["forgejson"]["url"])
+    async def CheckForgeJson(self, mod, document=None, simulation=False):
+        jsonres = await self.fetch_json(self.mods[mod]["forgejson"]["url"])
 
         if "promos" not in jsonres:
             return {}
@@ -273,8 +259,8 @@ class NotEnoughClasses():
 
         return versions
 
-    def CheckHTML(self, mod, document=None, simulation=False):
-        page = self.fetch_page(self.mods[mod]['html']['url'])
+    async def CheckHTML(self, mod, document=None, simulation=False):
+        page = await self.fetch_page(self.mods[mod]['html']['url'])
 
         reverse = self.mods[mod]['html'].get('reverse', False)
         version_type = self.mods[mod]['html'].get('version_type', 'version')
@@ -296,8 +282,8 @@ class NotEnoughClasses():
 
         return result
 
-    def CheckSpacechase(self, mod, document=None, simulation=False):
-        jsonres = self.fetch_json("http://spacechase0.com/core/latest.php?obj=mods/minecraft/" + self.mods[mod]["spacechase"]["slug"])
+    async def CheckSpacechase(self, mod, document=None, simulation=False):
+        jsonres = await self.fetch_json("http://spacechase0.com/core/latest.php?obj=mods/minecraft/" + self.mods[mod]["spacechase"]["slug"])
 
         version = jsonres['version']
 
@@ -311,8 +297,8 @@ class NotEnoughClasses():
 
         return results
 
-    def CheckLunatrius(self, mod, document=None, simulation=False):
-        jsonres = self.fetch_json("http://mc.lunatri.us/json?latest&mod=" + mod + "&v=2")
+    async def CheckLunatrius(self, mod, document=None, simulation=False):
+        jsonres = await self.fetch_json("http://mc.lunatri.us/json?latest&mod=" + mod + "&v=2")
         info = jsonres["mods"][mod]["latest"]
         output = {
             "version": info["version"],
@@ -322,8 +308,8 @@ class NotEnoughClasses():
             output["change"] = info['changes'][0]
         return output
 
-    def CheckBigReactors(self, mod, document=None, simulation=False):
-        info = self.fetch_json("http://big-reactors.com/version.json")
+    async def CheckBigReactors(self, mod, document=None, simulation=False):
+        info = await self.fetch_json("http://big-reactors.com/version.json")
 
         ret = {
             'mc': info['mcVersion']
@@ -340,11 +326,11 @@ class NotEnoughClasses():
 
         return ret
 
-    def CheckCurse(self, mod, document=None, simulation=False):
+    async def CheckCurse(self, mod, document=None, simulation=False):
         # Field name from the JSON to be used against the regex (name or display, name by default)
         field_name = self.mods[mod]['curse'].get('field', 'name')
 
-        jsonres = self.fetch_json("https://api.cfwidget.com/" + self.mods[mod]['curse']['id'])
+        jsonres = await self.fetch_json("https://api.cfwidget.com/" + self.mods[mod]['curse']['id'])
 
         if jsonres.get('accepted'):
             # CFWidget doesn't have the information and queued up an update
@@ -400,7 +386,7 @@ class NotEnoughClasses():
 
         return versions
 
-    def CheckGitHubRelease(self, mod, document=None, simulation=False):
+    async def CheckGitHubRelease(self, mod, document=None, simulation=False):
         repo = self.mods[mod]['github'].get('repo')
 
         client_id = self.config.get('github', {}).get('client_id')
@@ -409,9 +395,9 @@ class NotEnoughClasses():
         url = 'https://api.github.com/repos/' + repo + '/releases'
 
         if client_id and client_secret:
-            releases = self.fetch_json(url, auth=(client_id, client_secret))
+            releases = await self.fetch_json(url, auth=aiohttp.BasicAuth(client_id, client_secret))
         else:
-            releases = self.fetch_json(url)
+            releases = await self.fetch_json(url)
 
         type_ = self.mods[mod]['github'].get('type', 'asset')
 
@@ -448,8 +434,8 @@ class NotEnoughClasses():
         else:
             raise ValueError('Invalid type {!r} for CheckGitHubRelease parser'.format(type_))
 
-    def CheckBuildCraft(self, mod, document=None, simulation=False):
-        page = self.fetch_page('https://raw.githubusercontent.com/BuildCraft/BuildCraft/master/buildcraft_resources/versions.txt')
+    async def CheckBuildCraft(self, mod, document=None, simulation=False):
+        page = await self.fetch_page('https://raw.githubusercontent.com/BuildCraft/BuildCraft/master/buildcraft_resources/versions.txt')
 
         # filter empty lines
         lines = [line for line in page.splitlines() if line]
@@ -529,9 +515,9 @@ class NotEnoughClasses():
 
         return None
 
-    def CheckMod(self, mod, document=None, simulation=False):
+    async def CheckMod(self, mod, document=None, simulation=False):
         try:
-            output = getattr(self, self.mods[mod]["function"])(mod, document=document, simulation=simulation)
+            output = await getattr(self, self.mods[mod]["function"])(mod, document=document, simulation=simulation)
 
             if output is None:
                 raise NEMPException('Parser returned null')
@@ -618,7 +604,7 @@ class NotEnoughClasses():
             traceback.print_exc()
             return ([], e)  # an exception was raised, so we return a True
 
-    def CheckMods(self, mod):
+    async def CheckMods(self, mod):
         # We need to know what mods this document_group uses
         group_mod_names = self.document_groups[self.mods[mod]["document_group"]["id"]]
 
@@ -633,7 +619,7 @@ class NotEnoughClasses():
         try:
             # Let's get the page/json/whatever all the mods want
             # TODO: Ensure the function is the same for all mods in the document group
-            document = getattr(self, func_name)(mod, document=None)
+            document = await getattr(self, func_name)(mod, document=None)
         except Exception as e:
             # If getting the document fails, we want to abort immediately
             print("Failed to poll document_group for " + mod)
@@ -646,10 +632,22 @@ class NotEnoughClasses():
         # Ok, time to parse it for each mod
         for tempMod in group_mod_names:
             try:
-                output[tempMod] = self.CheckMod(tempMod, document)
+                output[tempMod] = await self.CheckMod(tempMod, document)
             except Exception as e:
                 print(tempMod + " failed to be polled (document_group)")
                 traceback.print_exc()
                 output[tempMod] = ([], e)
 
         return output
+
+
+async def setup():
+    nem = NotEnoughClasses()
+    nem.session = aiohttp.ClientSession(
+        headers={'User-agent': 'NotEnoughMods:Polling/1.X (+https://github.com/NotEnoughMods/NotEnoughModPolling)'},
+    )
+    await nem.load_mc_blocklist()
+    await nem.QueryNEM()
+    await nem.init_nem_versions()
+    nem.buildHTML()
+    return nem

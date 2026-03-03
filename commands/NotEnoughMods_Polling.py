@@ -57,8 +57,8 @@ def is_running(self):
     return self.events["time"].doesExist(TIME_EVENT_NAME)
 
 
-def start_polling(self, timer, channel):
-    self.NEM.init_nem_versions()
+async def start_polling(self, timer, channel):
+    await self.NEM.init_nem_versions()
     self.NEM_cycle_count = 0
 
     self.threading.addThread(THREAD_NAME, PollingThread, {"NEM": self.NEM, "PollTime": timer})
@@ -76,9 +76,9 @@ def stop_polling(self):
     #self.NEM_autodeactivatedMods = {}
 
 
-async def __initialize__(self, Startup):
+async def setup(self, Startup):
     if Startup:
-        self.NEM = NEMP_Class.NotEnoughClasses()
+        self.NEM = await NEMP_Class.setup()
     else:
         # kill events, threads
         if is_running(self):
@@ -88,7 +88,7 @@ async def __initialize__(self, Startup):
 
         importlib.reload(NEMP_Class)
 
-        self.NEM = NEMP_Class.NotEnoughClasses()
+        self.NEM = await NEMP_Class.setup()
 
     self.NEM_troubledMods = {}
     self.NEM_autodeactivatedMods = {}
@@ -108,7 +108,7 @@ async def cmd_enable(self, name, params, channel, userdata, rank):
         timerForPolls = int(params[1])
         await self.sendMessage(channel, "Timer is set to {} seconds".format(timerForPolls))
 
-    start_polling(self, timerForPolls, channel)
+    await start_polling(self, timerForPolls, channel)
 
 
 async def cmd_disable(self, name, params, channel, userdata, rank):
@@ -232,50 +232,40 @@ async def PollingThread(self, pipe):
         document_groups_done = []
         failed = []  # type: List[FailedModEntry]
 
-        # Run the blocking polling work in a thread to avoid blocking the event loop
-        def _poll_all():
-            results = []
-            doc_groups_done = []
-            fail_list = []
+        for mod_name, mod_info in NEM.mods.items():
+            if self.signal:
+                break
 
-            for mod_name, mod_info in NEM.mods.items():
-                if self.signal:
-                    return results, doc_groups_done, fail_list
+            if not mod_info["active"]:
+                continue
 
-                if not mod_info["active"]:
+            document_group = mod_info.get('document_group', {}).get('id')
+
+            if document_group:
+                if document_group in document_groups_done:
+                    continue
+                document_groups_done.append(document_group)
+
+                try:
+                    mod_results = await NEM.CheckMods(mod_name)
+                except Exception as e:
+                    document_group_mods = NEM.document_groups[document_group]
+                    for document_group_mod in document_group_mods:
+                        failed.append(FailedModEntry(name=document_group_mod, exception=e))
                     continue
 
-                document_group = mod_info.get('document_group', {}).get('id')
-
-                if document_group:
-                    if document_group in doc_groups_done:
-                        continue
-                    doc_groups_done.append(document_group)
-
-                    try:
-                        mod_results = NEM.CheckMods(mod_name)
-                    except Exception as e:
-                        document_group_mods = NEM.document_groups[document_group]
-                        for document_group_mod in document_group_mods:
-                            fail_list.append(FailedModEntry(name=document_group_mod, exception=e))
-                        continue
-
-                    for outputMod, outputInfo in mod_results.items():
-                        result, exception = outputInfo
-                        if exception:
-                            fail_list.append(FailedModEntry(name=outputMod, exception=exception))
-                        else:
-                            results.append((outputMod, result))
-                else:
-                    statuses, exception = NEM.CheckMod(mod_name)
+                for outputMod, outputInfo in mod_results.items():
+                    result, exception = outputInfo
                     if exception:
-                        fail_list.append(FailedModEntry(name=mod_name, exception=exception))
+                        failed.append(FailedModEntry(name=outputMod, exception=exception))
                     else:
-                        results.append((mod_name, statuses))
-
-            return results, doc_groups_done, fail_list
-
-        poll_results, document_groups_done, failed = await asyncio.to_thread(_poll_all)
+                        poll_results.append((outputMod, result))
+            else:
+                statuses, exception = await NEM.CheckMod(mod_name)
+                if exception:
+                    failed.append(FailedModEntry(name=mod_name, exception=exception))
+                else:
+                    poll_results.append((mod_name, statuses))
 
         await pipe.put((poll_results, failed))
 
@@ -551,8 +541,8 @@ async def cmd_reload(self, name, params, channel, userdata, rank):
     self.NEM_autodeactivatedMods = {}
 
     self.NEM.buildModDict()
-    self.NEM.QueryNEM()
-    self.NEM.init_nem_versions()
+    await self.NEM.QueryNEM()
+    await self.NEM.init_nem_versions()
     self.NEM.buildHTML()
 
     await self.sendMessage(channel, "Reloaded the NEMP Database")
@@ -571,7 +561,7 @@ async def cmd_test(self, name, params, channel, userdata, rank):
 
     try:
         if 'document_group' in self.NEM.mods[mod]:
-            document = getattr(self.NEM, self.NEM.mods[mod]["function"])(mod, None)
+            document = await getattr(self.NEM, self.NEM.mods[mod]["function"])(mod, None)
         else:
             document = None
     except Exception as exception:
@@ -580,7 +570,7 @@ async def cmd_test(self, name, params, channel, userdata, rank):
         ))
         return
 
-    statuses, exception = self.NEM.CheckMod(mod, document=document, simulation=True)
+    statuses, exception = await self.NEM.CheckMod(mod, document=document, simulation=True)
 
     if exception:
         await self.sendMessage(channel, 'Got an exception: {}: {}'.format(type(exception).__name__, exception))
@@ -753,7 +743,7 @@ async def cmd_url(self, name, params, channel, userdata, rank):
 
 async def cmd_reload_blocklist(self, name, params, channel, userdata, rank):
     self.NEM.load_version_blocklist()
-    self.NEM.load_mc_blocklist()
+    await self.NEM.load_mc_blocklist()
     self.NEM.load_mc_mapping()
     await self.sendMessage(channel, 'Done, blocklists reloaded.')
 
