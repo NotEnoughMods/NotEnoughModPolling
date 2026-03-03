@@ -21,9 +21,9 @@ async def execute(self, sendMsg, prefix, command, params):
         param_list = params.split(" ")
         chan_string = param_list[0]
 
-    channel = self.retrieveTrueCase(chan_string)
+    channel = self.get_channel_true_case(chan_string)
 
-    await self.events["channelpart"].tryAllEvents(self, name, ident, host, channel)
+    await self.events["channelpart"].run_all_events(self, name, ident, host, channel)
 
     if channel:
         for i in range(len(self.channel_data[channel]["Userlist"])):
@@ -34,6 +34,6 @@ async def execute(self, sendMsg, prefix, command, params):
     else:
         self._logger.debug("Channel %s not found", params)
 
-    if self.auth_tracker.doesExist(name) and self.auth_tracker.isRegistered(name) and not self.userInSight(name):
+    if self.auth_tracker.user_exists(name) and self.auth_tracker.is_registered(name) and not self.is_user_visible(name):
         # print "OK, WE LOST SIGHT OF HIM"
-        self.auth_tracker.unregisterUser(name)
+        self.auth_tracker.unregister_user(name)

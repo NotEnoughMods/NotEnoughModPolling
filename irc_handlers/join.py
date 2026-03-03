@@ -19,12 +19,12 @@ async def execute(self, sendMsg, prefix, command, params):
     else:
         chan = params.lstrip(":")
 
-    channel = self.retrieveTrueCase(chan)
+    channel = self.get_channel_true_case(chan)
 
-    if self.auth_tracker.doesExist(name) and not self.auth_tracker.isRegistered(name):
-        await self.whoisUser(name)
+    if self.auth_tracker.user_exists(name) and not self.auth_tracker.is_registered(name):
+        await self.whois_user(name)
 
-    await self.events["channeljoin"].tryAllEvents(self, name, ident, host, channel)
+    await self.events["channeljoin"].run_all_events(self, name, ident, host, channel)
 
     if channel:
         nothere = True
@@ -43,7 +43,7 @@ async def execute(self, sendMsg, prefix, command, params):
             )
     else:
         self._logger.debug(
-            "Channel mismatch: %s has joined channel '%s', But retrieveTrueCase returned False.",
+            "Channel mismatch: %s has joined channel '%s', But get_channel_true_case returned False.",
             name,
             params,
         )

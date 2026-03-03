@@ -6,7 +6,7 @@ privmsgEnabled = True
 
 
 async def execute(self, name, params, channel, userdata, rank, chan):
-    await self.sendMessage(channel, __create_date())
+    await self.send_message(channel, __create_date())
 
 
 def __create_date():

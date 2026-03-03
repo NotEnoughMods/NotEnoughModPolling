@@ -49,14 +49,14 @@ class BanList:
                             CREATE TABLE IF NOT EXISTS Bangroups(groupName TEXT)
                             """)
 
-        self.defineGroup("Global")
+        self.define_group("Global")
 
     # You need to define a group name if you want
     # to have your own ban groups.
     # This should prevent accidents in which an user
     # is banned in a group that doesn't exist.
-    def defineGroup(self, groupName):
-        doesExist = self.__groupExists__(groupName)
+    def define_group(self, groupName):
+        doesExist = self._group_exists(groupName)
 
         if not doesExist:
             self.cursor.execute(
@@ -74,7 +74,7 @@ class BanList:
         # the group already exists.
         return False
 
-    def banUser(
+    def ban_user(
         self,
         user,
         ident="*",
@@ -85,13 +85,13 @@ class BanList:
         banlength=(-1),
     ):
 
-        banstring = self.__assembleBanstring__(user, ident, host).lower()
+        banstring = self._assemble_ban_string(user, ident, host).lower()
 
-        if not self.__groupExists__(groupName):
+        if not self._group_exists(groupName):
             raise NoSuchBanGroup(groupName)
 
-        if not self.__banExists__(groupName, banstring):
-            self.__ban__(banstring, groupName, ban_reason, timestamp, banlength)
+        if not self._ban_exists(groupName, banstring):
+            self._ban(banstring, groupName, ban_reason, timestamp, banlength)
 
             # The operation was successful, we banned the pattern.
             return True
@@ -99,14 +99,14 @@ class BanList:
             # We did not ban the pattern because it was already banned.
             return False
 
-    def unbanUser(self, user, ident="*", host="*", groupName="Global"):
-        banstring = self.__assembleBanstring__(user, ident, host).lower()
+    def unban_user(self, user, ident="*", host="*", groupName="Global"):
+        banstring = self._assemble_ban_string(user, ident, host).lower()
 
-        if not self.__groupExists__(groupName):
+        if not self._group_exists(groupName):
             raise NoSuchBanGroup(groupName)
 
-        if self.__banExists__(groupName, banstring):
-            self.__unban__(banstring, groupName)
+        if self._ban_exists(groupName, banstring):
+            self._unban(banstring, groupName)
 
             # The operation was successful, the pattern was unbanned.
             return True
@@ -114,13 +114,13 @@ class BanList:
             # We did not unban the pattern because it was never banned in the first place.
             return False
 
-    def clearBanlist_all(self):
+    def clear_all_bans(self):
         self.cursor.execute("""
                             DELETE FROM Banlist
                             """)
         self.conn.commit()
 
-    def clearBanlist_group(self, groupName):
+    def clear_group_bans(self, groupName):
         self.cursor.execute(
             """
                             DELETE FROM Banlist
@@ -130,7 +130,7 @@ class BanList:
         )
         self.conn.commit()
 
-    def getBans(self, groupName=None, matchingString=None):
+    def get_bans(self, groupName=None, matchingString=None):
         if groupName is None:
             if matchingString is None:
                 self.cursor.execute("""
@@ -148,7 +148,7 @@ class BanList:
             return self.cursor.fetchall()
 
         else:
-            if self.__groupExists__(groupName):
+            if self._group_exists(groupName):
                 if matchingString is None:
                     self.cursor.execute(
                         """
@@ -171,9 +171,9 @@ class BanList:
             else:
                 raise NoSuchBanGroup(groupName)
 
-    def checkBan(self, user, ident, host, groupName="Global"):
+    def check_ban(self, user, ident, host, groupName="Global"):
 
-        if not self.__groupExists__(groupName):
+        if not self._group_exists(groupName):
             raise NoSuchBanGroup(groupName)
         else:
             banstring = f"{user}!{ident}@{host}".lower()
@@ -193,7 +193,7 @@ class BanList:
             else:
                 return False, None
 
-    def getGroups(self):
+    def get_groups(self):
         self.cursor.execute("""
                             SELECT groupName FROM Bangroups
                             """)
@@ -202,12 +202,12 @@ class BanList:
         return [groupTuple[0] for groupTuple in groupTuples]
 
     def raw_ban(self, banstring, groupName, ban_reason, timestamp=(-1), banlength=(-1)):
-        self.__ban__(banstring, groupName, ban_reason, timestamp, banlength)
+        self._ban(banstring, groupName, ban_reason, timestamp, banlength)
 
     def raw_unban(self, banstring, groupName):
-        self.__unban__(banstring, groupName)
+        self._unban(banstring, groupName)
 
-    # We do the reverse of what __createString_forSQL__ is doing.
+    # We do the reverse of what _create_sql_pattern is doing.
     # The result is a string which should be correct for using the
     # banUser and unbanUser methods, and the ban/unban commands.
     def unescape_banstring(self, banstring):
@@ -240,7 +240,7 @@ class BanList:
     def __regex_return_unescaped__(self, match):
         pass
 
-    def __ban__(
+    def _ban(
         self,
         banstring,
         groupName="Global",
@@ -258,7 +258,7 @@ class BanList:
 
         self.conn.commit()
 
-    def __unban__(self, banstring, groupName="Global"):
+    def _unban(self, banstring, groupName="Global"):
         self.cursor.execute(
             """
                             DELETE FROM Banlist
@@ -269,7 +269,7 @@ class BanList:
 
         self.conn.commit()
 
-    def __banExists__(self, groupName, banstring):
+    def _ban_exists(self, groupName, banstring):
         self.cursor.execute(
             """
                             SELECT 1 FROM Banlist
@@ -282,7 +282,7 @@ class BanList:
         print(result, type(result))
         return bool(result is not None and result[0] == 1)
 
-    def __groupExists__(self, groupName):
+    def _group_exists(self, groupName):
         self.cursor.execute(
             """
                             SELECT 1 FROM Bangroups
@@ -295,13 +295,13 @@ class BanList:
         print(result, type(result))
         return bool(result is not None and result[0] == 1)
 
-    def __stringIsValid__(self, string):
+    def _is_valid_string(self, string):
         return all(char in ALLOWEDCHARS for char in string)
 
-    def __assembleBanstring__(self, user, ident, host):
-        escapedUser = self.__createString_forSQL__(user)
-        escapedIdent = self.__createString_forSQL__(ident, ident=True)
-        escapedHost = self.__createString_forSQL__(host, hostname=True)
+    def _assemble_ban_string(self, user, ident, host):
+        escapedUser = self._create_sql_pattern(user)
+        escapedIdent = self._create_sql_pattern(ident, ident=True)
+        escapedHost = self._create_sql_pattern(host, hostname=True)
 
         banstring = f"{escapedUser}!{escapedIdent}@{escapedHost}"
 
@@ -317,7 +317,7 @@ class BanList:
     # It is not very specific and is only useful for
     # very simple filtering so that unicode characters
     # or special characters aren't used.
-    def __createString_forSQL__(self, string, hostname=False, ident=False):
+    def _create_sql_pattern(self, string, hostname=False, ident=False):
 
         newString = StringIO()
 

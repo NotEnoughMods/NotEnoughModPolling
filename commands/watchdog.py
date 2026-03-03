@@ -43,7 +43,7 @@ async def execute(self, name, params, channel, userdata, rank, chan):
         if len(timeList) == 0:
             timeList.append("Just started")
 
-        await self.sendMessage(channel, "Uptime: " + ", ".join(timeList))
+        await self.send_message(channel, "Uptime: " + ", ".join(timeList))
 
         stats = {}
 
@@ -52,8 +52,8 @@ async def execute(self, name, params, channel, userdata, rank, chan):
             minimum = None
             maximum = None
 
-            for event in self.events[eventType].__events__:
-                eventStats = self.events[eventType].__events__[event]["stats"]
+            for event in self.events[eventType]._events:
+                eventStats = self.events[eventType]._events[event]["stats"]
 
                 if average is None:
                     average, minimum, maximum = (
@@ -89,21 +89,21 @@ async def execute(self, name, params, channel, userdata, rank, chan):
 
         finalString = "Event statistics: (min/max/average): " + ", ".join(dataOutput)
 
-        await self.sendMessage(channel, finalString)
+        await self.send_message(channel, finalString)
 
         threadInfo = []
         for threadName, threadData in self.task_pool.pool.items():
-            timeDelta = threadData["thread"].timeDelta
+            timeDelta = threadData["handle"].timeDelta
             if timeDelta is None:
                 timeDelta = 0
 
             threadInfo.append(f"{threadName} [{round(timeDelta, 2)}\u00b5s]")
 
         if len(threadInfo) == 0:
-            await self.sendMessage(channel, "No threads running right now.")
+            await self.send_message(channel, "No threads running right now.")
         else:
             finalString = "The following threads are running: " + ", ".join(threadInfo)
-            await self.sendMessage(channel, finalString)
+            await self.send_message(channel, finalString)
 
     else:
         eventType = params[0]
@@ -113,8 +113,8 @@ async def execute(self, name, params, channel, userdata, rank, chan):
 
             dataOutput = []
 
-            for event in self.events[eventType].__events__:
-                stats = self.events[eventType].__events__[event]["stats"]
+            for event in self.events[eventType]._events:
+                stats = self.events[eventType]._events[event]["stats"]
                 average, minimum, maximum = stats["average"], stats["min"], stats["max"]
 
                 if average is None:
@@ -127,10 +127,10 @@ async def execute(self, name, params, channel, userdata, rank, chan):
                     f"{round(average / (10**-6), 2)}\u00b5s]"
                 )
 
-            await self.sendMessage(
+            await self.send_message(
                 channel,
                 "Statistics for event type '{}': {}".format(eventType, ", ".join(dataOutput)),
             )
 
         else:
-            await self.sendMessage(channel, "No such event type.")
+            await self.send_message(channel, "No such event type.")

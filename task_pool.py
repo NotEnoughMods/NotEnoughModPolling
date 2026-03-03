@@ -49,7 +49,7 @@ class TaskPool:
         self.pool = {}
         self._logger = logging.getLogger("ThreadPool")
 
-    def addThread(self, name, function, baseReference=None):
+    def add_task(self, name, function, baseReference=None):
         if name in self.pool:
             raise FunctionNameAlreadyExists("The name is already used by a different thread function!")
 
@@ -80,7 +80,7 @@ class TaskPool:
         self.pool[name] = {"handle": handle, "queue": queue}
         self._logger.debug("New task '%s' started", name)
 
-    def sigquitThread(self, name):
+    def cancel_task(self, name):
         handle = self.pool[name]["handle"]
         handle.signal = True
         handle.task.cancel()
@@ -96,13 +96,13 @@ class TaskPool:
     def poll(self, name, timeout=0.0):
         return not self.pool[name]["queue"].empty()
 
-    def checkStatus(self, name):
+    def check_status(self, name):
         if name not in self.pool:
             return False, None
         isRunning = self.pool[name]["handle"].running
         return True, isRunning
 
-    def sigquitAll(self):
+    def cancel_all(self):
         self._logger.debug("Cancelling all running tasks")
         names = list(self.pool.keys())
         for name in names:

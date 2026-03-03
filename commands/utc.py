@@ -19,7 +19,7 @@ async def execute(self, name, params, channel, userdata, rank, chan):
         elif sign == "-":
             sign = -1
         else:
-            await self.sendChatMessage(
+            await self.send_chat_message(
                 self.send,
                 destination,
                 "Incorrect format. Check help about the command.",
@@ -32,7 +32,7 @@ async def execute(self, name, params, channel, userdata, rank, chan):
             hour, minute = timeoffset.split(":", 1)
 
             if not hour.isdigit() or not minute.isdigit():
-                await self.sendChatMessage(
+                await self.send_chat_message(
                     self.send,
                     destination,
                     "Incorrect time offset. Needs to be a number.",
@@ -44,7 +44,7 @@ async def execute(self, name, params, channel, userdata, rank, chan):
 
         else:
             if not timeoffset.isdigit():
-                await self.sendChatMessage(
+                await self.send_chat_message(
                     self.send,
                     destination,
                     "Incorrect time offset. Needs to be a number.",
@@ -64,13 +64,13 @@ async def execute(self, name, params, channel, userdata, rank, chan):
         offsetUTCtime = time.gmtime(offsetTime)
         datestring = __create_date(offsetUTCtime)
     except ValueError:
-        await self.sendMessage(
+        await self.send_message(
             destination,
             "Intergalactic timezones not supported. Please put in a smaller number.",
         )
         return
 
-    await self.sendMessage(destination, datestring)
+    await self.send_message(destination, datestring)
 
 
 def __create_date(time_arg):
@@ -104,16 +104,16 @@ def format_day_of_month(day):
 
 
 async def setup(self, Startup):
-    entry = self.helper.newHelp(ID)
+    entry = self.helper.new_help(ID)
 
-    entry.addDescription(
+    entry.add_description(
         "The 'utc' command shows the current time in UTC. Optionally, you can set a "
         "offset according to which the time will be modified. "
     )
-    entry.addDescription(
+    entry.add_description(
         "This allows you to check the time in different time zones, if you know the offset value for that time zone."
     )
-    entry.addArgument(
+    entry.add_argument(
         "UTC offset",
         "The offset value for the UTC time. Format needs to be +<hour> or -<hour>, "
         "where you replace <hour> with a hour value. You can also specify the minutes, "
@@ -122,4 +122,4 @@ async def setup(self, Startup):
     )
     entry.rank = 0
 
-    self.helper.registerHelp(entry, overwrite=True)
+    self.helper.register_help(entry, overwrite=True)

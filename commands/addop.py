@@ -14,8 +14,8 @@ async def execute(self, username, params, channel, userdata, rank):
     for name in names:
         if notInList(name, self.operators):
             self.operators.append(name)
-            self.auth_tracker.addUser(name)
-            await self.whoisUser(name)
+            self.auth_tracker.add_user(name)
+            await self.whois_user(name)
 
     logging.info("User '%s' has added user(s) '%s'", username, ", ".join(names))
-    await self.sendChatMessage(self.send, channel, "Added " + ", ".join(names))
+    await self.send_chat_message(self.send, channel, "Added " + ", ".join(names))

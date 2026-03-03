@@ -11,22 +11,22 @@ async def execute(self, name, params, channel, userdata, rank):
         cmdname = params[0]
 
         try:
-            help = self.helper.getCmdHelp(cmdname)
+            help = self.helper.get_command_help(cmdname)
         except KeyError as error:
             print(str(error))
-            await self.sendNotice(name, "No such command exists.")
+            await self.send_notice(name, "No such command exists.")
             return
     else:
-        await self.sendNotice(name, "Specify a command you want to know more about.")
+        await self.send_notice(name, "Specify a command you want to know more about.")
         return
 
     if self.rank_values[rank] < help.rank:
-        await self.sendNotice(name, "Command is restricted.")
+        await self.send_notice(name, "Command is restricted.")
         help_log.debug("Looking up command '%s', but it is restricted.", name, cmdname)
         return
 
     if help.custom_handler is not None:
-        help.__run_custom_handler__(self, name, params, channel, userdata, rank)
+        help._run_custom_handler(self, name, params, channel, userdata, rank)
 
     elif len(params) == 1:
         help_log.debug("Looking up command '%s'", name, cmdname)
@@ -41,16 +41,16 @@ async def execute(self, name, params, channel, userdata, rank):
             else:
                 arglist.append("(" + arg[0] + ")")
 
-        await self.sendNotice(name, "Command usage: " + " ".join(arglist))
+        await self.send_notice(name, "Command usage: " + " ".join(arglist))
 
         if len(help.description) == 1:
-            await self.sendNotice(name, "Command description: " + help.description[0])
+            await self.send_notice(name, "Command description: " + help.description[0])
         elif len(help.description) > 1:
-            await self.sendNotice(name, "Command description: " + help.description[0])
+            await self.send_notice(name, "Command description: " + help.description[0])
             for line in help.description[1:]:
-                await self.sendNotice(name, line)
+                await self.send_notice(name, line)
         else:
-            await self.sendNotice(name, "Command description: No description given.")
+            await self.send_notice(name, "Command description: No description given.")
 
     elif len(params) > 1:
         cmdname = params[0]
@@ -64,7 +64,7 @@ async def execute(self, name, params, channel, userdata, rank):
             if argname.lower() == arg[0].lower():
                 optional_or_required = (not arg[2] and "REQUIRED") or "OPTIONAL"
 
-                await self.sendNotice(
+                await self.send_notice(
                     name,
                     f"Argument description for '{arg[0]}' [{optional_or_required}]: {arg[1]}",
                 )
@@ -72,9 +72,9 @@ async def execute(self, name, params, channel, userdata, rank):
                 break
 
         if not found:
-            await self.sendNotice(name, "The command does not have such an argument")
+            await self.send_notice(name, "The command does not have such an argument")
     else:
-        await self.sendNotice(name, "No arguments provided.")
+        await self.send_notice(name, "No arguments provided.")
 
 
 def test(self, name, params, channel, userdata, rank):
@@ -82,19 +82,19 @@ def test(self, name, params, channel, userdata, rank):
 
 
 async def setup(self, Startup):
-    entry = self.helper.newHelp(ID)
+    entry = self.helper.new_help(ID)
 
-    entry.addDescription(
+    entry.add_description(
         "The 'help' command shows you the descriptions and arguments of commands that have "
         "added an entry to the internal Help Database."
     )
-    entry.addDescription("You can only view the help of a command if you are authorized to use the command.")
-    entry.addArgument("command name", "The name of the command you want to know about.")
-    entry.addArgument(
+    entry.add_description("You can only view the help of a command if you are authorized to use the command.")
+    entry.add_argument("command name", "The name of the command you want to know about.")
+    entry.add_argument(
         "argument name",
         "The name of the argument you want to know about.",
         optional=True,
     )
     entry.rank = 0
 
-    self.helper.registerHelp(entry, overwrite=True)
+    self.helper.register_help(entry, overwrite=True)

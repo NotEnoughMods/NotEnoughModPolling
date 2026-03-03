@@ -6,7 +6,7 @@ permission = 3
 
 async def execute(self, user, params, channel, userdata, rank):
     if len(params) == 0:
-        await self.sendNotice(user, "No user string specified.")
+        await self.send_notice(user, "No user string specified.")
         return
 
     elif len(params) >= 1:
@@ -18,7 +18,7 @@ async def execute(self, user, params, channel, userdata, rank):
         # 1. Exactly one ! and one @
         # 2. ! comes before @
         if (countExclamationMark != 1) or (countAt != 1) or (userstring.find("!") > userstring.find("@")):
-            await self.sendNotice(user, "User string should be formatted like this: username!ident@host")
+            await self.send_notice(user, "User string should be formatted like this: username!ident@host")
             return
         else:
             username, _, identAndHost = userstring.partition("!")
@@ -26,30 +26,30 @@ async def execute(self, user, params, channel, userdata, rank):
 
             try:
                 if len(params) == 1:
-                    result = self.ban_list.unbanUser(username, ident, host)
+                    result = self.ban_list.unban_user(username, ident, host)
                     if result:
-                        await self.sendNotice(user, f"Userstring {userstring} unbanned.")
+                        await self.send_notice(user, f"Userstring {userstring} unbanned.")
                     if not result:
-                        await self.sendNotice(user, f"Userstring {userstring} is not banned.")
+                        await self.send_notice(user, f"Userstring {userstring} is not banned.")
                 else:
                     group = params[1]
-                    result = self.ban_list.unbanUser(username, ident, host, group)
+                    result = self.ban_list.unban_user(username, ident, host, group)
                     if result:
-                        await self.sendNotice(
+                        await self.send_notice(
                             user,
                             f"Userstring {userstring} unbanned in group '{group}'.",
                         )
                     if not result:
-                        await self.sendNotice(
+                        await self.send_notice(
                             user,
                             f"Userstring {userstring} is not banned in group {group}.",
                         )
 
             except NoSuchBanGroup as error:
-                await self.sendNotice(user, f"Ban group '{error.group}' does not exist.")
+                await self.send_notice(user, f"Ban group '{error.group}' does not exist.")
                 return
             except InvalidCharacterUsed as error:
-                await self.sendNotice(
+                await self.send_notice(
                     user,
                     f"Invalid character '{error.char}' found in position {error.pos} of '{error.string}'.",
                 )

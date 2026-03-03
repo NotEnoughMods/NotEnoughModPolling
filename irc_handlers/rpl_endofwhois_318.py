@@ -12,13 +12,13 @@ async def execute(self, sendMsg, prefix, command, params):
     username = names[1]
     names[2]
 
-    if self.auth_tracker.isQueued(username) and self.auth_tracker.doesExist(username):
-        if not self.auth_tracker.isRegistered(username):
+    if self.auth_tracker.is_queued(username) and self.auth_tracker.user_exists(username):
+        if not self.auth_tracker.is_registered(username):
             # print "User is not registered"
-            self.auth_tracker.unregisterUser(username)
+            self.auth_tracker.unregister_user(username)
         else:
             pass
             # print "User is registered"
 
-    if self.auth_tracker.isQueued(username):
-        self.auth_tracker.unqueueUser(username)
+    if self.auth_tracker.is_queued(username):
+        self.auth_tracker.unqueue_user(username)

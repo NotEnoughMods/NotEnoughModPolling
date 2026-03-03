@@ -13,14 +13,14 @@ async def execute(self, sendMsg, prefix, command, params):
 
     if fields[1].strip() == "is logged in as":
         # print "OK, NOW I AM SUPPOSED TO DO SOMETHING"
-        if self.auth_tracker.doesExist(username) and self.auth_tracker.isQueued(username):
+        if self.auth_tracker.user_exists(username) and self.auth_tracker.is_queued(username):
             # print "OK, user is queued, we need to do something"
 
-            if self.auth_tracker.doesExist(registeredAs):
-                self.auth_tracker.registerUser(username)
+            if self.auth_tracker.user_exists(registeredAs):
+                self.auth_tracker.register_user(username)
                 # print "Yep, User is registered :D"
             else:
-                self.auth_tracker.unregisterUser(username)
+                self.auth_tracker.unregister_user(username)
                 # print "nope, User is not registered :("
     else:
         print("NONSTANDARD FIELD: " + fields[1])

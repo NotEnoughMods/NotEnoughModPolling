@@ -355,14 +355,14 @@ async def execute(self, name, params, channel, userdata, rank):
             raise RuntimeError(f"Result is too long ({len(fin)} characters)")
         else:
             if fancy:
-                await self.sendChatMessage(self.send, channel, f"{result:,}")
+                await self.send_chat_message(self.send, channel, f"{result:,}")
             else:
-                await self.sendChatMessage(self.send, channel, fin)
+                await self.send_chat_message(self.send, channel, fin)
 
     except CalcTimeoutException as error:
-        await self.sendMessage(channel, str(error))
+        await self.send_message(channel, str(error))
     except Exception as error:
         traceb = str(traceback.format_exc())
-        await self.sendMessage(channel, "ParseError: '" + str(error) + "'")
+        await self.send_message(channel, "ParseError: '" + str(error) + "'")
         print("error: " + str(error))
         print(traceb)

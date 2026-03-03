@@ -3,7 +3,6 @@ import importlib.util
 import logging
 import os
 from datetime import datetime
-from time import strftime
 
 import task_pool
 from ban_list import BanList
@@ -21,8 +20,8 @@ class CommandRouter:
 
         self.name = name
         self.ident = ident
-        self.protocol_handlers = self.__LoadModules__("irc_handlers")
-        self.commands = self.__LoadModules__("commands")
+        self.protocol_handlers = self._load_modules("irc_handlers")
+        self.commands = self._load_modules("commands")
 
         self.operators = adminlist
         self.auth_tracker = AuthTracker(adminlist)
@@ -43,7 +42,7 @@ class CommandRouter:
             "nickchange": StandardEvent(),
         }
 
-        self.events["time"].addEvent("LogfileSwitch", 60, self.logging_module.__switch_filehandle_daily__)
+        self.events["time"].add_event("LogfileSwitch", 60, self.logging_module._switch_filehandle_daily)
 
         self.server = None
         self.latency = None
@@ -81,16 +80,16 @@ class CommandRouter:
             self._logger.exception("Missing channel or other KeyError caught")
             print("Missing channel or other KeyError caught: " + str(error))
 
-    async def timeEventChecker(self):
-        await self.events["time"].tryAllEvents(self)
+    async def check_timer_events(self):
+        await self.events["time"].run_all_events(self)
 
-    def userGetRank(self, channel, username):
+    def get_user_rank(self, channel, username):
         for user in self.channel_data[channel]["Userlist"]:
             if user[0].lower() == username.lower():
                 return user[1]
 
-    def userGetRankNum(self, channel, username):
-        if username in self.operators and self.auth_tracker.isRegistered(username):
+    def get_user_rank_num(self, channel, username):
+        if username in self.operators and self.auth_tracker.is_registered(username):
             return 3
         else:
             for user in self.channel_data[channel]["Userlist"]:
@@ -102,19 +101,19 @@ class CommandRouter:
 
             return -1  # No user found
 
-    def retrieveTrueCase(self, channel):
+    def get_channel_true_case(self, channel):
         for chan in self.channel_data:
             if chan.lower() == channel.lower():
                 return chan
         return False
 
-    # A wrapper for sendChatMessage that does not require a send argument.
-    async def sendMessage(self, channel, msg, msgsplitter=None, splitAt=" "):
-        await self.sendChatMessage(self.send, channel, msg, msgsplitter, splitAt)
+    # A wrapper for send_chat_message that does not require a send argument.
+    async def send_message(self, channel, msg, msgsplitter=None, splitAt=" "):
+        await self.send_chat_message(self.send, channel, msg, msgsplitter, splitAt)
 
-    async def sendChatMessage(self, send, channel, msg, msgsplitter=None, splitAt=" "):
+    async def send_chat_message(self, send, channel, msg, msgsplitter=None, splitAt=" "):
         if msgsplitter is None:
-            msgsplitter = self.defaultsplitter
+            msgsplitter = self.default_splitter
 
         prefixLen = len(self.name) + len(self.ident) + 63 + 7 + len(channel) + 25
         remaining = 512 - prefixLen
@@ -130,9 +129,9 @@ class CommandRouter:
             await send(f"PRIVMSG {channel} :{msg}")
             self._logger.debug("Sending to channel/user %s: '%s'", channel, msg)
 
-    async def sendNotice(self, destination, msg, msgsplitter=None, splitAt=" "):
+    async def send_notice(self, destination, msg, msgsplitter=None, splitAt=" "):
         if msgsplitter is None:
-            msgsplitter = self.defaultsplitter
+            msgsplitter = self.default_splitter
         # NOTICE
         prefixLen = len(self.name) + len(self.ident) + 63 + 6 + len(destination) + 25
         remaining = 512 - prefixLen
@@ -148,7 +147,7 @@ class CommandRouter:
             await self.send(f"NOTICE {destination} :{msg}")
             self._logger.debug("Sending notice to channel/user %s: '%s'", destination, msg)
 
-    def defaultsplitter(self, msg, length, splitAt):
+    def default_splitter(self, msg, length, splitAt):
 
         start = 0
         end = length
@@ -174,16 +173,7 @@ class CommandRouter:
 
         return items
 
-    def writeQueue(self, string, modulename="no_name_given"):
-        entryString = "DebugEntry at {} [{!r}]: {!r}".format(strftime("%H:%M:%S (%z)"), modulename, string)
-        self._logger.debug("Added DebugEntry: '%s'", entryString)
-        try:
-            self.recent_messages.put_nowait(entryString)
-        except asyncio.QueueFull:
-            self.recent_messages.get_nowait()
-            self.recent_messages.put_nowait(entryString)
-
-    async def joinChannel(self, send, channel):
+    async def join_channel(self, send, channel):
         if isinstance(channel, str):
             if channel not in self.channel_data:
                 self.channel_data[channel] = {"Userlist": [], "Topic": "", "Mode": ""}
@@ -206,12 +196,12 @@ class CommandRouter:
             raise TypeError
         print(self.channel_data)
 
-    async def whoisUser(self, user):
+    async def whois_user(self, user):
         await self.send(f"WHOIS {user}")
-        self.auth_tracker.queueUser(user)
+        self.auth_tracker.queue_user(user)
         self._logger.debug("Sending WHOIS for user '%s'", user)
 
-    def userInSight(self, user):
+    def is_user_visible(self, user):
         print(self.channel_data)
         self._logger.debug(
             "Checking if user '%s' is in the following channels: %s",
@@ -224,7 +214,7 @@ class CommandRouter:
                     return True
         return False
 
-    def __ListDir__(self, dir):
+    def _list_dir(self, dir):
         files = os.listdir(dir)
         newlist = []
         self._logger.debug("Listing files in directory '%s'", dir)
@@ -241,13 +231,13 @@ class CommandRouter:
         spec.loader.exec_module(module)
         return module
 
-    def __LoadModules__(self, path):
-        ModuleList = self.__ListDir__(path)
+    def _load_modules(self, path):
+        ModuleList = self._list_dir(path)
         self._logger.info("Loading modules in path '%s'...", path)
         Packet = {}
         for i in ModuleList:
             self._logger.debug("Loading file %s in path '%s'", i, path)
-            module = self._load_source("RenolIRC_" + i[0:-3], path + "/" + i)
+            module = self._load_source("NEMP_" + i[0:-3], path + "/" + i)
             Packet[module.ID] = (module, path + "/" + i)
 
             try:

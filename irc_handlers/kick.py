@@ -12,9 +12,9 @@ async def execute(self, sendMsg, prefix, command, params):
     name = fields[1]
     kickreason = fields[2]
 
-    chan = self.retrieveTrueCase(channel)
+    chan = self.get_channel_true_case(channel)
 
-    await self.events["channelkick"].tryAllEvents(self, name, chan, kickreason)
+    await self.events["channelkick"].run_all_events(self, name, chan, kickreason)
 
     if chan:
         for i in range(len(self.channel_data[chan]["Userlist"])):
@@ -23,5 +23,5 @@ async def execute(self, sendMsg, prefix, command, params):
                 del self.channel_data[chan]["Userlist"][i]
                 break
 
-    if self.auth_tracker.doesExist(name) and self.auth_tracker.isRegistered(name) and not self.userInSight(name):
-        self.auth_tracker.unregisterUser(name)
+    if self.auth_tracker.user_exists(name) and self.auth_tracker.is_registered(name) and not self.is_user_visible(name):
+        self.auth_tracker.unregister_user(name)

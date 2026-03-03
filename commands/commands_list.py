@@ -17,7 +17,7 @@ async def execute(self, name, params, channel, userdata, rank):
         if perms >= cmdrank:
             group[cmdrank].append(cmd)
 
-    await self.sendNotice(name, "Available commands:")
+    await self.send_notice(name, "Available commands:")
     for i in group:
         group[i].sort()
-        await self.sendNotice(name, "{}: {}".format(rankname[i], " | ".join(group[i])))
+        await self.send_notice(name, "{}: {}".format(rankname[i], " | ".join(group[i])))

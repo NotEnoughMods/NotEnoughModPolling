@@ -3,7 +3,7 @@ permission = 3
 
 
 async def execute(self, name, params, channel, userdata, rank):
-    files = self.__ListDir__("commands")
+    files = self._list_dir("commands")
     currentlyLoaded = [self.commands[cmd][1] for cmd in self.commands]
 
     for item in currentlyLoaded:
@@ -11,16 +11,16 @@ async def execute(self, name, params, channel, userdata, rank):
         files.remove(filename)
 
     if len(files) == 0:
-        await self.sendMessage(channel, "No new commands found.")
+        await self.send_message(channel, "No new commands found.")
     else:
         if len(files) == 1:
-            await self.sendMessage(channel, "1 new command found.")
+            await self.send_message(channel, "1 new command found.")
         else:
-            await self.sendMessage(channel, f"{len(files)} new commands found.")
+            await self.send_message(channel, f"{len(files)} new commands found.")
 
         for filename in files:
             path = "commands/" + filename
-            module = self._load_source("RenolIRC_" + filename[0:-3], path)
+            module = self._load_source("NEMP_" + filename[0:-3], path)
             cmd = module.ID
 
             self.commands[cmd] = (module, path)
@@ -36,17 +36,17 @@ async def execute(self, name, params, channel, userdata, rank):
             if module.setup:
                 await module.setup(self, True)
 
-            await self.sendMessage(channel, f"{path} has been loaded.")
+            await self.send_message(channel, f"{path} has been loaded.")
             self._logger.info(f"File {filename} has been newly loaded.")
 
 
 async def setup(self, Startup):
-    entry = self.helper.newHelp(ID)
+    entry = self.helper.new_help(ID)
 
-    entry.addDescription(
+    entry.add_description(
         "The 'newload' command will load any newly added plugins that have not been "
         "loaded yet without reloading other plugins."
     )
     entry.rank = permission
 
-    self.helper.registerHelp(entry, overwrite=True)
+    self.helper.register_help(entry, overwrite=True)

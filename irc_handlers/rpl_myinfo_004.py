@@ -18,4 +18,4 @@ async def execute(self, sendMsg, prefix, command, params):
         server = server[1:]
 
     self.server = server
-    self.events["time"].addEvent("server pinger", 20, pinger)
+    self.events["time"].add_event("server pinger", 20, pinger)

@@ -29,8 +29,8 @@ async def execute(self, sendMsg, msgprefix, command, params):
         msg_log.info("Private message from '%s' [%s@%s]: %s", name, ident, host, chatMessage)
     else:
         is_channel = True
-        channel = self.retrieveTrueCase(channel)
-        perms = self.userGetRank(channel, name)
+        channel = self.get_channel_true_case(channel)
+        perms = self.get_user_rank(channel, name)
 
     # print splitted, channel()
 
@@ -51,7 +51,7 @@ async def execute(self, sendMsg, msgprefix, command, params):
         usedPrfx = ""
     # print "ok"
 
-    if name in self.operators and self.auth_tracker.isRegistered(name):  # and (perms == "@" or perms == "+"):
+    if name in self.operators and self.auth_tracker.is_registered(name):  # and (perms == "@" or perms == "+"):
         # print name + " is in Botlist"
         rank = 3
         perms = "@@"
@@ -65,11 +65,11 @@ async def execute(self, sendMsg, msgprefix, command, params):
         # print name + " is Nothing"
         rank = 0
 
-    # rank = {"@" : 2, "+" : 1, "" : 0}[self.userGetRank(channel, name)]
+    # rank = {"@" : 2, "+" : 1, "" : 0}[self.get_user_rank(channel, name)]
     # print self.commands
     # print chatCmd
     if usedPrfx == cmdprefix and chatCmd in self.commands:
-        bannedInfo = self.ban_list.checkBan(name, ident, host)
+        bannedInfo = self.ban_list.check_ban(name, ident, host)
 
         if bannedInfo[0]:
             msg_log.info(
@@ -150,4 +150,6 @@ async def execute(self, sendMsg, msgprefix, command, params):
                 chatMessage,
             )
 
-        await self.events["chat"].tryAllEvents(self, {"name": name, "ident": ident, "host": host}, chatMessage, channel)
+        await self.events["chat"].run_all_events(
+            self, {"name": name, "ident": ident, "host": host}, chatMessage, channel
+        )

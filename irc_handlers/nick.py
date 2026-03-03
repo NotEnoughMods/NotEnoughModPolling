@@ -12,11 +12,11 @@ async def execute(self, sendMsg, prefix, command, params):
     newName = params[1:]
     print("NICKCHANGE")
 
-    if self.auth_tracker.doesExist(name):
-        self.auth_tracker.unregisterUser(name)
+    if self.auth_tracker.user_exists(name):
+        self.auth_tracker.unregister_user(name)
 
-    if self.auth_tracker.doesExist(newName):
-        await self.whoisUser(newName)
+    if self.auth_tracker.user_exists(newName):
+        await self.whois_user(newName)
 
     affectedChannels = []
     for chan in self.channel_data:
@@ -27,4 +27,4 @@ async def execute(self, sendMsg, prefix, command, params):
                 affectedChannels.append(chan)
                 break
 
-    await self.events["nickchange"].tryAllEvents(self, name, newName, ident, host, affectedChannels)
+    await self.events["nickchange"].run_all_events(self, name, newName, ident, host, affectedChannels)

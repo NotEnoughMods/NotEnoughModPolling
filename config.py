@@ -61,7 +61,7 @@ class Configuration:
 
         self.found = []
 
-    def loadConfig(self):
+    def load_config(self):
         try:
             with open(self.configname) as conFile:
                 self.config = configparser.ConfigParser()
@@ -90,7 +90,7 @@ class Configuration:
                         "Please fill in the missing information."
                     )
 
-    def getChannels(self):
+    def get_channels(self):
         chans = self.config.get("Administration", "channels").split(",")
 
         newchans = []
@@ -103,7 +103,7 @@ class Configuration:
 
         return newchans
 
-    def getAdmins(self):
+    def get_admins(self):
         admins = self.config.get("Administration", "bot operators").split(",")
 
         newadmins = []

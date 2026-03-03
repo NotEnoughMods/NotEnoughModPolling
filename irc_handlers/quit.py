@@ -18,7 +18,7 @@ async def execute(self, sendMsg, prefix, command, params):
     print(name, ident, host)
     print(quitReason)
 
-    await self.events["userquit"].tryAllEvents(self, name, ident, host, quitReason)
+    await self.events["userquit"].run_all_events(self, name, ident, host, quitReason)
 
     for chan in self.channel_data:
         print(chan)
@@ -28,6 +28,6 @@ async def execute(self, sendMsg, prefix, command, params):
                 del self.channel_data[chan]["Userlist"][i]
                 break
 
-    if self.auth_tracker.doesExist(name) and self.auth_tracker.isRegistered(name):
+    if self.auth_tracker.user_exists(name) and self.auth_tracker.is_registered(name):
         print("HE DIED")
-        self.auth_tracker.unregisterUser(name)
+        self.auth_tracker.unregister_user(name)

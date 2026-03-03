@@ -20,13 +20,13 @@ class AuthTracker:
         self._logger = logging.getLogger("UserVerification")
         self._logger.info("Verification Module initialized; Current users: %s", self.users.keys())
 
-    def doesExist(self, user):
+    def user_exists(self, user):
         return user.lower() in self.users
 
-    def isQueued(self, user):
+    def is_queued(self, user):
         return user.lower() in self.userQueue
 
-    def queueUser(self, user):
+    def queue_user(self, user):
         user = user.lower()
         if user not in self.userQueue:
             self.userQueue.append(user.lower())
@@ -36,7 +36,7 @@ class AuthTracker:
             self._logger.debug("Didn't queue user; Already queued: %s", user)
             return False
 
-    def unqueueUser(self, user):
+    def unqueue_user(self, user):
         user = user.lower()
         if user in self.userQueue:
             self.userQueue.remove(user)
@@ -46,29 +46,29 @@ class AuthTracker:
             self._logger.debug("Didn't remove user from queue; Wasn't queued: %s", user)
             return False
 
-    def isRegistered(self, user):
+    def is_registered(self, user):
         user = user.lower()
         return bool(user in self.users and self.users[user] is True)
 
-    def unregisterUser(self, user):
+    def unregister_user(self, user):
         user = user.lower()
         self.users[user] = False
 
         self._logger.debug("Unregistered user: %s", user)
 
-    def registerUser(self, user):
+    def register_user(self, user):
         user = user.lower()
         self.users[user] = True
 
         self._logger.debug("Registered user: %s", user)
 
-    def addUser(self, user):
+    def add_user(self, user):
         user = user.lower()
         self.users[user] = False
 
         self._logger.debug("Added new user: %s", user)
 
-    def remUser(self, user):
+    def remove_user(self, user):
         user = user.lower()
         if user in self.users:
             del self.users[user]

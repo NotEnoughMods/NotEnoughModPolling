@@ -28,7 +28,7 @@ async def threadChecker(self, channels):
             print("EXCEPTION")
             print(msg["traceback"])
         else:
-            await self.sendChatMessage(self.send, channels[0], "Message from Thread: " + msg)
+            await self.send_chat_message(self.send, channels[0], "Message from Thread: " + msg)
             await self.task_pool.send("threadTest", random.choice(["0", "1", "2", "3"]))
         # print "sent message"
 
@@ -36,34 +36,34 @@ async def threadChecker(self, channels):
 async def execute(self, name, params, channel, userdata, rank):
     # print "running"
     if len(params) == 1 and params[0] == "on":
-        if not self.events["time"].doesExist("threadChecker"):
-            await self.sendChatMessage(self.send, channel, "Turning threadevent on.")
+        if not self.events["time"].event_exists("threadChecker"):
+            await self.send_chat_message(self.send, channel, "Turning threadevent on.")
             self.timerChannel = channel
-            self.events["time"].addEvent("threadChecker", 1, threadChecker, [channel])
+            self.events["time"].add_event("threadChecker", 1, threadChecker, [channel])
 
-            self.task_pool.addThread("threadTest", thread)
+            self.task_pool.add_task("threadTest", thread)
         else:
-            await self.sendChatMessage(self.send, channel, "threadevent is already running.")
+            await self.send_chat_message(self.send, channel, "threadevent is already running.")
 
     elif len(params) == 1 and params[0] == "off":
-        if self.events["time"].doesExist("threadChecker"):
-            await self.sendChatMessage(self.send, channel, "Turning threadevent off.")
-            self.events["time"].removeEvent("threadChecker")
+        if self.events["time"].event_exists("threadChecker"):
+            await self.send_chat_message(self.send, channel, "Turning threadevent off.")
+            self.events["time"].remove_event("threadChecker")
 
-            self.task_pool.sigquitThread("threadTest")
+            self.task_pool.cancel_task("threadTest")
         else:
-            await self.sendChatMessage(self.send, channel, "threadevent isn't running!")
+            await self.send_chat_message(self.send, channel, "threadevent isn't running!")
 
     elif len(params) == 2 and params[0] == "add":
-        channel = self.retrieveTrueCase(params[1])
+        channel = self.get_channel_true_case(params[1])
 
         if channel:
-            await self.sendChatMessage(self.send, channel, "added")
-            self.events["time"].addChannel("threadChecker", channel)
+            await self.send_chat_message(self.send, channel, "added")
+            self.events["time"].add_channel("threadChecker", channel)
 
     elif len(params) == 2 and params[0] == "rem":
-        channel = self.retrieveTrueCase(params[1])
+        channel = self.get_channel_true_case(params[1])
 
         if channel:
-            await self.sendChatMessage(self.send, channel, "removed")
-            self.events["time"].removeChannel("threadChecker", channel)
+            await self.send_chat_message(self.send, channel, "removed")
+            self.events["time"].remove_channel("threadChecker", channel)

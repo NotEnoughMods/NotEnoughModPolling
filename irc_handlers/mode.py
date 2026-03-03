@@ -7,15 +7,19 @@ async def execute(self, sendMsg, prefix, command, params):
 
     print(splitted)
     if len(splitted) == 3:
-        chan = self.retrieveTrueCase(splitted[0])
+        chan = self.get_channel_true_case(splitted[0])
         modes = splitted[1]
         name = splitted[2]
 
         add = modes[0] == "+"
         perm = ""
 
-        if self.auth_tracker.doesExist(name) and not self.auth_tracker.isRegistered(name) and not self.auth_tracker.isQueued(name):
-            await self.whoisUser(name)
+        if (
+            self.auth_tracker.user_exists(name)
+            and not self.auth_tracker.is_registered(name)
+            and not self.auth_tracker.is_queued(name)
+        ):
+            await self.whois_user(name)
 
         for char in modes[1:]:
             if char == "v" and perm == "":

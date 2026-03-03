@@ -17,7 +17,7 @@ class LoggingModule:
         }
         self.logLevel = self.typeDict[loglevel.upper()]
 
-        self.__create_directory__("BotLogs")
+        self._create_directory("BotLogs")
 
         self.date = datetime.date.today()
 
@@ -27,7 +27,7 @@ class LoggingModule:
         dayfilename = self.date.strftime("%d-%m-%Y")
 
         print(monthfoldername, dayfilename)
-        self.__create_directory__(f"BotLogs/{monthfoldername}")
+        self._create_directory(f"BotLogs/{monthfoldername}")
 
         logging.basicConfig(
             filename=f"BotLogs/{monthfoldername}/{dayfilename}.log",
@@ -49,17 +49,17 @@ class LoggingModule:
         logging.getLogger().addHandler(consoleHandler)
         ## console handler configured, we should be good to go
 
-        self.__log_logger__ = logging.getLogger("LoggingModule")
-        self.__log_logger__.info("IRC Bot Logging Interface initialised.")
+        self._logger = logging.getLogger("LoggingModule")
+        self._logger.info("IRC Bot Logging Interface initialised.")
 
         offset, tzname = self.local_time_offset()
         offset = "+" + str(offset) if offset >= 0 else str(offset)
 
-        self.__log_logger__.info("All time stamps are in UTC%s (%s)", offset, tzname)
+        self._logger.info("All time stamps are in UTC%s (%s)", offset, tzname)
 
         self.num = 0
 
-    def __create_directory__(self, dirpath):
+    def _create_directory(self, dirpath):
         if not os.path.exists(dirpath):
             os.mkdir(dirpath)
             print("created dir")
@@ -69,11 +69,11 @@ class LoggingModule:
             print("no dir needs to be created")
             pass
 
-    def __switch_filehandle_daily__(self, *args):
+    def _switch_filehandle_daily(self, *args):
         newDate = datetime.date.today()
 
         if self.date < newDate:
-            self.__log_logger__.info(
+            self._logger.info(
                 "Switching Logfile Handler because a new day begins. Old date: %s, new date: %s",
                 self.date,
                 newDate,
@@ -83,9 +83,9 @@ class LoggingModule:
             dayfilename = newDate.strftime("%d-%m-%Y")
 
             if self.date.month != newDate.month:
-                self.__log_logger__.info(f"Creating new folder BotLogs/{monthfoldername}")
-                self.__create_directory__(f"BotLogs/{monthfoldername}")
-            self.__log_logger__.info(f"Creating new file BotLogs/{monthfoldername}/{dayfilename}.log")
+                self._logger.info(f"Creating new folder BotLogs/{monthfoldername}")
+                self._create_directory(f"BotLogs/{monthfoldername}")
+            self._logger.info(f"Creating new file BotLogs/{monthfoldername}/{dayfilename}.log")
 
             # We close the file handle of the root logger.
             # This should also affect all child loggers
@@ -110,9 +110,9 @@ class LoggingModule:
             newfile_handler.setFormatter(msgformat)
 
             # logging.getLogger().addHandler(newfile_handler)
-            self.__prependHandler__(logging.getLogger(), newfile_handler)
+            self._prepend_handler(logging.getLogger(), newfile_handler)
 
-            self.__log_logger__.info(
+            self._logger.info(
                 "Logfile Handler switched. Continuing writing to new file. Old date: %s, new date: %s",
                 self.date,
                 newDate,
@@ -121,7 +121,7 @@ class LoggingModule:
             offset, tzname = self.local_time_offset()
             offset = "+" + str(offset) if offset >= 0 else str(offset)
 
-            self.__log_logger__.info("All time stamps are in UTC%s (%s)", offset, tzname)
+            self._logger.info("All time stamps are in UTC%s (%s)", offset, tzname)
             self.date = newDate
 
     # Returns UTC offset and name of time zone at current time
@@ -139,7 +139,7 @@ class LoggingModule:
     # It will add the handler to the front of the handler list
     # It is a bit of a hack, but it is required for making sure
     # that the main file handler is added to the front of the list
-    def __prependHandler__(self, logger, hdlr):
+    def _prepend_handler(self, logger, hdlr):
         logging._acquireLock()
         try:
             if hdlr not in logger.handlers:

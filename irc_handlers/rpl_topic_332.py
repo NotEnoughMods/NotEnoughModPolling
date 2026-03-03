@@ -11,6 +11,6 @@ async def execute(self, sendMsg, prefix, command, params):
     # timestamp = data[3]
 
     with contextlib.suppress(BaseException):
-        self.channel_data[self.retrieveTrueCase(channel)]["Topic"] = topic
+        self.channel_data[self.get_channel_true_case(channel)]["Topic"] = topic
 
     # print prefix, params

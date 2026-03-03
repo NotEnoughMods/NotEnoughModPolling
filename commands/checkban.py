@@ -4,12 +4,12 @@ permission = 3
 
 async def execute(self, user, params, channel, userdata, rank):
     if len(params) == 0:
-        await self.sendNotice(user, "Specify a user formated as username!ident@host.")
+        await self.send_notice(user, "Specify a user formated as username!ident@host.")
 
     if len(params) >= 1:
         userstring = params[0]
 
-        bans = self.ban_list.getBans(matchingString=userstring)
+        bans = self.ban_list.get_bans(matchingString=userstring)
 
         output = []
         for ban in bans:
@@ -19,9 +19,9 @@ async def execute(self, user, params, channel, userdata, rank):
         output = " | ".join(output)
 
         if len(output) == 0:
-            await self.sendNotice(user, "The user is not affected by any bans.")
+            await self.send_notice(user, "The user is not affected by any bans.")
         elif len(output) == 1:
-            await self.sendNotice(user, f"The user is affected by the following ban: {output}")
+            await self.send_notice(user, f"The user is affected by the following ban: {output}")
         elif len(output) > 1:
-            await self.sendNotice(user, "The user is affected by the following bans:")
-            await self.sendNotice(user, output)
+            await self.send_notice(user, "The user is affected by the following bans:")
+            await self.send_notice(user, output)

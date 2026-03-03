@@ -4,10 +4,10 @@ permission = 1
 
 async def execute(self, name, params, channel, userdata, rank):
     if len(params) == 0:
-        rank = self.userGetRankNum(channel, name)
+        rank = self.get_user_rank_num(channel, name)
         print(rank)
 
-        await self.sendChatMessage(
+        await self.send_chat_message(
             self.send,
             channel,
             "You "
@@ -20,19 +20,19 @@ async def execute(self, name, params, channel, userdata, rank):
         )
     else:
         name = params[0]
-        rank = self.userGetRankNum(channel, name)
+        rank = self.get_user_rank_num(channel, name)
 
         ranknames = ["User", "Voiced", "OP", "Bot OP"]
 
         if rank == -1:
             pass
         else:
-            await self.sendMessage(
+            await self.send_message(
                 channel,
                 f"User {name} has the rank {rank} ({ranknames[rank]})",
             )
-    # self.sendChatMessage(self.send, channel, "You "+{
+    # self.send_chat_message(self.send, channel, "You "+{
     #     "@" : "are OP", "+" : "are voiced",
     #     "" : "do not have a special rank",
     #     "@@" : "are Bot OP"
-    # }[self.userGetRank(channel, name)])
+    # }[self.get_user_rank(channel, name)])

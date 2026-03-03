@@ -22,15 +22,15 @@ async def execute(self, username, params, channel, userdata, rank):
         if not result and correctName != username:
             self.operators.remove(correctName)
             removed.append(correctName)
-            self.auth_tracker.unregisterUser(correctName)
-            self.auth_tracker.remUser(correctName)
-            if self.auth_tracker.isQueued(correctName):
-                self.auth_tracker.unqueueUser(correctName)
+            self.auth_tracker.unregister_user(correctName)
+            self.auth_tracker.remove_user(correctName)
+            if self.auth_tracker.is_queued(correctName):
+                self.auth_tracker.unqueue_user(correctName)
         else:
             notremoved.append(name)
 
     if len(removed) > 0:
         logging.info("User '%s' has removed user(s) '%s'", username, ", ".join(removed))
-        await self.sendChatMessage(self.send, channel, "Removed " + ", ".join(removed))
+        await self.send_chat_message(self.send, channel, "Removed " + ", ".join(removed))
     if len(notremoved) > 0:
-        await self.sendChatMessage(self.send, channel, "Didn't remove " + ", ".join(notremoved))
+        await self.send_chat_message(self.send, channel, "Didn't remove " + ", ".join(notremoved))

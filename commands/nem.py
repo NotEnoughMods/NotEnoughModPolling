@@ -150,24 +150,24 @@ async def execute(self, name, params, channel, userdata, rank):
         command = commands[params[0]]
         await command(self, name, params, channel, userdata, rank)
     except Exception:
-        await self.sendMessage(channel, "Invalid sub-command!")
-        await self.sendMessage(channel, 'See "=nem help" for help')
+        await self.send_message(channel, "Invalid sub-command!")
+        await self.send_message(channel, 'See "=nem help" for help')
 
 
 async def setlist(self, name, params, channel, userdata, rank):
     global version
     if len(params) != 2:
-        await self.sendMessage(
+        await self.send_message(
             channel,
             f"{name}: Insufficient amount of parameters provided.",
         )
-        await self.sendMessage(
+        await self.send_message(
             channel,
             "{name}: {setlistHelp}".format(name=name, setlistHelp=help["setlist"][0]),
         )
     else:
         version = str(params[1])
-        await self.sendMessage(
+        await self.send_message(
             channel,
             f"switched list to: {BOLD}{BLUE}{params[1]}{COLOUREND}",
         )
@@ -175,11 +175,11 @@ async def setlist(self, name, params, channel, userdata, rank):
 
 async def multilist(self, name, params, channel, userdata, rank):
     if len(params) != 2:
-        await self.sendMessage(
+        await self.send_message(
             channel,
             f"{name}: Insufficient amount of parameters provided.",
         )
-        await self.sendMessage(
+        await self.send_message(
             channel,
             "{name}: {multilistHelp}".format(name=name, multilistHelp=help["multilist"][0]),
         )
@@ -208,14 +208,14 @@ async def multilist(self, name, params, channel, userdata, rank):
             count = len(results)
 
             if count == 0:
-                await self.sendMessage(channel, name + ": mod not present in NEM.")
+                await self.send_message(channel, name + ": mod not present in NEM.")
                 return
             elif count == 1:
                 count = str(count) + " MC version"
             else:
                 count = str(count) + " MC versions"
 
-            await self.sendMessage(channel, "Listing " + count + ' for "' + params[1] + '":')
+            await self.send_message(channel, "Listing " + count + ' for "' + params[1] + '":')
 
             for ver in results:
                 alias = ""
@@ -247,7 +247,7 @@ async def multilist(self, name, params, channel, userdata, rank):
                     print(error)
                     traceback.print_exc()
 
-                await self.sendMessage(
+                await self.send_message(
                     channel,
                     "{bold}{blue}{mcversion}{colourEnd}{bold}: "
                     "{purple}{name}{colourEnd} {aliasString}"
@@ -270,23 +270,23 @@ async def multilist(self, name, params, channel, userdata, rank):
                 )
 
         except Exception as error:
-            await self.sendMessage(channel, name + ": " + str(error))
+            await self.send_message(channel, name + ": " + str(error))
             traceback.print_exc()
 
 
 async def list(self, name, params, channel, userdata, rank):
     if len(params) < 2:
-        await self.sendMessage(
+        await self.send_message(
             channel,
             f"{name}: Insufficient amount of parameters provided.",
         )
-        await self.sendMessage(channel, "{name}: {helpEntry}".format(name=name, helpEntry=help["list"][0]))
+        await self.send_message(channel, "{name}: {helpEntry}".format(name=name, helpEntry=help["list"][0]))
         return
     ver = params[2] if len(params) >= 3 else version
     try:
         result = await fetch_page("https://bot.notenoughmods.com/" + urlquote(ver) + ".json", cache=True)
         if not result:
-            await self.sendMessage(
+            await self.send_message(
                 channel,
                 f"{name}: Could not fetch the list. Are you sure it exists?",
             )
@@ -309,14 +309,14 @@ async def list(self, name, params, channel, userdata, rank):
         count = len(results)
 
         if count == 0:
-            await self.sendMessage(channel, name + ": no results found.")
+            await self.send_message(channel, name + ": no results found.")
             return
         elif count == 1:
             count = str(count) + " result"
         else:
             count = str(count) + " results"
 
-        await self.sendMessage(
+        await self.send_message(
             channel,
             f'Listing {count} for "{params[1]}" in {BOLD}{BLUE}{ver}{COLOUREND}{BOLD}',
         )
@@ -346,7 +346,7 @@ async def list(self, name, params, channel, userdata, rank):
                 print(error)
                 traceback.print_exc()
 
-            await self.sendMessage(
+            await self.send_message(
                 channel,
                 "{purple}{name}{colourEnd} {aliasString}"
                 "{darkgreen}{version}{colourEnd} {devString}"
@@ -364,7 +364,7 @@ async def list(self, name, params, channel, userdata, rank):
                 ),
             )
     except Exception as error:
-        await self.sendMessage(channel, f"{name}: {error}")
+        await self.send_message(channel, f"{name}: {error}")
         traceback.print_exc()
 
 
@@ -395,30 +395,30 @@ async def compare(self, name, params, channel, userdata, rank):
         with open(path, "w") as f:
             f.write(json.dumps(missingMods, sort_keys=True, indent=4 * " "))
 
-        await self.sendMessage(
+        await self.send_message(
             channel,
             f"{len(missingMods)} mods died trying to update to {newVersion}",
         )
 
     except Exception as error:
-        await self.sendMessage(channel, f"{name}: {error}")
+        await self.send_message(channel, f"{name}: {error}")
         traceback.print_exc()
 
 
 async def about(self, name, params, channel, userdata, rank):
-    await self.sendMessage(channel, "Not Enough Mods toolkit for IRC by SinZ & Yoshi2 v4.0")
+    await self.send_message(channel, "Not Enough Mods toolkit for IRC by SinZ & Yoshi2 v4.0")
 
 
 async def help(self, name, params, channel, userdata, rank):
     if len(params) == 1:
-        await self.sendMessage(channel, "{}: Available commands: {}".format(name, ", ".join(help)))
+        await self.send_message(channel, "{}: Available commands: {}".format(name, ", ".join(help)))
     else:
         command = params[1]
         if command in help:
             for line in help[command]:
-                await self.sendMessage(channel, name + ": " + line)
+                await self.send_message(channel, name + ": " + line)
         else:
-            await self.sendMessage(channel, name + ": Invalid command provided")
+            await self.send_message(channel, name + ": Invalid command provided")
 
 
 async def force_cacheRedownload(self, name, params, channel, userdata, rank):
@@ -430,7 +430,7 @@ async def force_cacheRedownload(self, name, params, channel, userdata, rank):
             if os.path.exists(filepath):
                 cache_last_modified[normalized] = 0
 
-        await self.sendMessage(
+        await self.send_message(
             channel,
             "Cache Timestamps have been reset. Cache will be redownloaded on the next fetching.",
         )

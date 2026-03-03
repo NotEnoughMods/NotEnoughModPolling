@@ -8,7 +8,7 @@ class PluginModule:
 
 class Plugin:
     def __init__(self):
-        self.__events__ = {}
+        self._events = {}
         self._commands = {}
         self._threads = {}
 

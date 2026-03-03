@@ -19,14 +19,14 @@ class IrcBot:
 
         self.name = config.get("Connection Info", "nickname")
         self.password = config.get("Connection Info", "password")
-        self.channels = configObj.getChannels()
+        self.channels = configObj.get_channels()
         self.ident = config.get("Connection Info", "ident")
         self.realname = config.get("Connection Info", "realname")
 
         self.forceIPv6 = config.getboolean("Networking", "force ipv6")
         self.bindIP = config.get("Networking", "bind address")
 
-        self.adminlist = configObj.getAdmins()
+        self.adminlist = configObj.get_admins()
         self.prefix = config.get("Administration", "command prefix")
         self.loglevel = config.get("Administration", "logging level")
 
@@ -97,7 +97,9 @@ class IrcBot:
                     except IndexError:
                         commandParameters = ""
 
-                await self.command_router.handle(self.conn.sendMsg, prefix, command, commandParameters, self.nickserv_auth)
+                await self.command_router.handle(
+                    self.conn.sendMsg, prefix, command, commandParameters, self.nickserv_auth
+                )
         finally:
             self._logger.info("Main loop has been stopped")
             timer_task.cancel()
@@ -113,7 +115,7 @@ class IrcBot:
         """Periodically check timer events."""
         try:
             while not self.shutdown:
-                await self.command_router.timeEventChecker()
+                await self.command_router.check_timer_events()
                 await asyncio.sleep(0.5)
         except asyncio.CancelledError:
             pass
@@ -134,7 +136,7 @@ async def async_main():
     write_starting_date()
 
     configObj = Configuration()
-    configObj.loadConfig()
+    configObj.load_config()
     configObj.check_options()
 
     bot = IrcBot(configObj)
@@ -164,7 +166,7 @@ async def async_main():
                     msg = bot.command_router.recent_messages.get_nowait()
                     excFile.write(msg)
                     excFile.write("\n")
-                bot.command_router.task_pool.sigquitAll()
+                bot.command_router.task_pool.cancel_all()
                 if log:
                     bot._logger.debug("All tasks were signaled to shut down.")
 

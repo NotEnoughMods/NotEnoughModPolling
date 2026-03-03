@@ -6,9 +6,9 @@ permission = 3
 
 async def execute(self, user, params, channel, userdata, rank):
     if len(params) == 0:
-        groups = self.ban_list.getGroups()
+        groups = self.ban_list.get_groups()
 
-        await self.sendNotice(
+        await self.send_notice(
             user,
             "Specify a group. The following groups are currently defined: {}".format(", ".join(groups)),
         )
@@ -17,22 +17,22 @@ async def execute(self, user, params, channel, userdata, rank):
         groupName = params[0]
 
         try:
-            bans = [self.ban_list.unescape_banstring(banTuple[1]) for banTuple in self.ban_list.getBans(groupName)]
+            bans = [self.ban_list.unescape_banstring(banTuple[1]) for banTuple in self.ban_list.get_bans(groupName)]
             output = ", ".join(bans)
 
             if len(bans) == 0:
-                await self.sendNotice(user, f"The group '{groupName}' contains no bans.")
+                await self.send_notice(user, f"The group '{groupName}' contains no bans.")
             elif len(bans) == 1:
-                await self.sendNotice(
+                await self.send_notice(
                     user,
                     f"The group '{groupName}' contains the following ban: {output}",
                 )
             elif len(bans) > 1:
-                await self.sendNotice(
+                await self.send_notice(
                     user,
                     f"The group '{groupName}' contains the following bans:",
                 )
-                await self.sendNotice(user, output)
+                await self.send_notice(user, output)
 
         except NoSuchBanGroup as error:
-            await self.sendNotice(user, f"Ban group '{error.group}' does not exist.")
+            await self.send_notice(user, f"Ban group '{error.group}' does not exist.")

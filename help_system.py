@@ -12,19 +12,19 @@ Example of usage in commands/showHelp.py, with added comments:
 def setup(self, Startup):
 
     # self.helper is a HelpModule object.
-    # Using help.newHelp, we are creating a new HelpEntity object with the ID, i.e. the name of the command,
+    # Using help.new_help, we are creating a new HelpEntity object with the ID, i.e. the name of the command,
     # as the first argument. In this case, ID is the string "help".
     # Using non-string values can have unforseen consequences, please use a string.
 
-    entry = self.helper.newHelp(ID)
+    entry = self.helper.new_help(ID)
 
 
     # We add two lines of descriptions to our help entry. They will be put out as seperate
     # NOTICE messages to the user when he looks up the help information.
 
-    entry.addDescription("The 'help' command shows you the descriptions and arguments of commands that have "
+    entry.add_description("The 'help' command shows you the descriptions and arguments of commands that have "
                          "added an entry to the internal Help Database.")
-    entry.addDescription("You can only view the help of a command if you are authorized to use the command.")
+    entry.add_description("You can only view the help of a command if you are authorized to use the command.")
 
 
     # We add two arguments, "command name" and "argument name", and their descriptions to the help entry.
@@ -34,8 +34,8 @@ def setup(self, Startup):
     # We flag the "argument name" argument as optional, this only has an aesthetic function so that the user
     # knows which arguments are required and which ones are optional and can be left out.
 
-    entry.addArgument("command name", "The name of the command you want to know about.")
-    entry.addArgument("argument name", "The name of the argument you want to know about.", optional = True)
+    entry.add_argument("command name", "The name of the command you want to know about.")
+    entry.add_argument("argument name", "The name of the argument you want to know about.", optional = True)
 
 
     # We set the rank for the command information. Per default, the rank is already 0 for every HelpEntity object,
@@ -51,7 +51,7 @@ def setup(self, Startup):
     # RuntimeError if the command entry already exists, you may want to set overwrite = True if you don't mind
     # overwriting the previous entry, e.g. on command reload.
 
-    self.helper.registerHelp(entry, overwrite = True)
+    self.helper.register_help(entry, overwrite = True)
 
 
 
@@ -67,10 +67,10 @@ def helpHandler(self, name, params, channel, userdata, rank):
     print("Hi, I am an example for a custom help handler!")
 
 def setup(self, Startup):
-    entry = self.helper.newHelp(commandName)
-    entry.setCustomHandler(helpHandler)
+    entry = self.helper.new_help(commandName)
+    entry.set_custom_handler(helpHandler)
     entry.rank = 0
-    self.helper.registerHelp(entry, overwrite = True)
+    self.helper.register_help(entry, overwrite = True)
 
 """
 
@@ -92,13 +92,13 @@ class HelpEntity:
         self.custom_handler = None
         help_log.debug("HelpEntry for '%s' initialized", cmdname)
 
-    def addDescription(self, description):
+    def add_description(self, description):
         if isinstance(description, str):
             self.description.append(description)
         else:
             raise TypeError(f"Wrong type! Should be subclass of str, but is {type(description)}: {description}")
 
-    def addArgument(self, argument, description=None, optional=False):
+    def add_argument(self, argument, description=None, optional=False):
         if not isinstance(argument, str):
             raise TypeError(f"Wrong type! Should be subclass of str, but is {type(argument)}: {argument}")
 
@@ -117,13 +117,13 @@ class HelpEntity:
                 f"but is {type(description)}: {description}"
             )
 
-    def setCustomHandler(self, func):
+    def set_custom_handler(self, func):
         if not callable(func):
             raise TypeError(f"Wrong type! Custom handler should be callable, but is {type(func)}: {func}")
         else:
             self.custom_handler = func
 
-    def __run_custom_handler__(self, bot_self, *args):
+    def _run_custom_handler(self, bot_self, *args):
         help_log.debug("Using custom handler for command '%s'", self.cmdname)
         self.custom_handler(bot_self, *args)
 
@@ -133,11 +133,11 @@ class HelpModule:
         self.helpDB = {}
         help_log.info("HelpModule Database initialized")
 
-    def newHelp(self, cmdname):
+    def new_help(self, cmdname):
         help_log.debug("New HelpEntity for '%s' initialized", cmdname)
         return HelpEntity(cmdname)
 
-    def registerHelp(self, helpObject, overwrite=False):
+    def register_help(self, helpObject, overwrite=False):
 
         if not isinstance(helpObject, HelpEntity):
             raise TypeError(f"Invalid Object provided: '{helpObject}' (type: {type(helpObject)})")
@@ -155,9 +155,9 @@ class HelpModule:
 
         help_log.debug("Registered Help for command '%s'", helpObject.cmdname)
 
-    def unregisterHelp(self, cmdname):
+    def unregister_help(self, cmdname):
         del self.helpDB[cmdname]
         help_log.debug("Deleted Help for command '%s'", cmdname)
 
-    def getCmdHelp(self, cmdname):
+    def get_command_help(self, cmdname):
         return self.helpDB[cmdname]

@@ -8,7 +8,7 @@ async def execute(self, name, params, channel, userdata, rank):
         channels.append(channel)
     else:
         for chan in params:
-            chan = self.retrieveTrueCase(chan)
+            chan = self.get_channel_true_case(chan)
             if chan:
                 if chan[0] != "#":
                     channels.append("#" + chan)
@@ -22,23 +22,23 @@ async def execute(self, name, params, channel, userdata, rank):
     for chan in channels:
         del self.channel_data[chan]
 
-    await self.joinChannel(self.send, channels)
+    await self.join_channel(self.send, channels)
 
 
 async def setup(self, Startup):
-    entry = self.helper.newHelp(ID)
+    entry = self.helper.new_help(ID)
 
-    entry.addDescription(
+    entry.add_description(
         "The 'rejoin' command makes the bot rejoin either the current channel, or the channels you have specified."
     )
-    entry.addDescription("When rejoining several channels, the channel names should be delimited by spaces. ")
-    entry.addDescription(
+    entry.add_description("When rejoining several channels, the channel names should be delimited by spaces. ")
+    entry.add_description(
         "There is no built-in limit on how many channels can be rejoined, but too many "
         "channels can cause the bot to exceed the 512 character limit on IRC."
     )
-    entry.addArgument("channel 1", "The first channel to be rejoined.", optional=True)
-    entry.addArgument("channel 2", "The second channel to be rejoined.", optional=True)
-    entry.addArgument("channel n", "The n-th channel to be rejoined.", optional=True)
+    entry.add_argument("channel 1", "The first channel to be rejoined.", optional=True)
+    entry.add_argument("channel 2", "The second channel to be rejoined.", optional=True)
+    entry.add_argument("channel n", "The n-th channel to be rejoined.", optional=True)
     entry.rank = permission
 
-    self.helper.registerHelp(entry, overwrite=True)
+    self.helper.register_help(entry, overwrite=True)
