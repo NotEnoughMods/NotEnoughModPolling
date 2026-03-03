@@ -1,7 +1,7 @@
 import json
 import unittest
 
-from NEMP import NEMP_Class
+from mod_polling import poller
 
 
 # From http://stackoverflow.com/a/14902564/134960
@@ -18,9 +18,9 @@ def dict_raise_on_duplicates(ordered_pairs):
 
 class TestModsJson(unittest.TestCase):
     def setUp(self):
-        self.NEM = NEMP_Class.NotEnoughClasses
+        self.NEM = poller.ModPoller
 
-        with open("NEMP/mods.json") as f:
+        with open("mod_polling/mods.json") as f:
             self.mods = json.load(f, object_pairs_hook=dict_raise_on_duplicates)
 
     def test_parsers_exist(self):

@@ -9,7 +9,7 @@ import aiohttp
 import yaml
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 
-logger = logging.getLogger("NEMP_Class")
+logger = logging.getLogger("mod_polling.poller")
 
 
 class NEMPException(Exception):
@@ -21,7 +21,7 @@ class InvalidVersion(NEMPException):
         return repr(self.args[0])
 
 
-class NotEnoughClasses:
+class ModPoller:
     def __init__(self):
         self.nemVersions = []
         self.mods = {}
@@ -32,7 +32,7 @@ class NotEnoughClasses:
         self._host_delay: float = 0.5
 
         self.jinja_env = Environment(
-            loader=FileSystemLoader("commands/NEMP"),
+            loader=FileSystemLoader("mod_polling"),
             autoescape=select_autoescape(["html"]),
         )
 
@@ -65,7 +65,7 @@ class NotEnoughClasses:
 
     def load_config(self):
         try:
-            with open("commands/NEMP/config.yml") as f:
+            with open("mod_polling/config.yml") as f:
                 self.config = yaml.safe_load(f)
         except:
             logger.error("You need to setup the NEMP/config.yml file")
@@ -75,7 +75,7 @@ class NotEnoughClasses:
 
     def load_version_blocklist(self):
         try:
-            with open("commands/NEMP/version_blocklist.yml") as f:
+            with open("mod_polling/version_blocklist.yml") as f:
                 self.invalid_versions = yaml.safe_load(f)
         except:
             logger.error("You need to setup the NEMP/version_blocklist.yml file")
@@ -85,7 +85,7 @@ class NotEnoughClasses:
         self.invalid_versions = [re.compile(regex, re.I) for regex in self.invalid_versions[:]]
 
     async def load_mc_blocklist(self):
-        with open("commands/NEMP/mc_blocklist.yml") as f:
+        with open("mod_polling/mc_blocklist.yml") as f:
             self.mc_blocklist = yaml.safe_load(f)  # type: list[str]
 
         # Load additional versions from the Mojang version manifest
@@ -104,7 +104,7 @@ class NotEnoughClasses:
         self.mc_blocklist = set(self.mc_blocklist)
 
     def load_mc_mapping(self):
-        with open("commands/NEMP/mc_mapping.yml") as f:
+        with open("mod_polling/mc_mapping.yml") as f:
             self.mc_mapping = yaml.safe_load(f)
 
     def _find_regex(self, data):
@@ -139,7 +139,7 @@ class NotEnoughClasses:
         return self.mods[mod]["_regex"].search(data)
 
     def buildModDict(self):
-        with open("commands/NEMP/mods.json", "rb") as modList:
+        with open("mod_polling/mods.json", "rb") as modList:
             self.mods = json.load(modList)
 
         for mod in self.mods:
@@ -154,7 +154,7 @@ class NotEnoughClasses:
                     self.document_groups[self.mods[mod]["document_group"]["id"]] = [mod]
 
     def buildHTML(self):
-        self.jinja_env.get_template("index.jinja2").stream(mods=self.mods).dump("commands/NEMP/htdocs/index.html")
+        self.jinja_env.get_template("index.jinja2").stream(mods=self.mods).dump("mod_polling/htdocs/index.html")
 
     async def QueryNEM(self):
         self.nemVersions = await self.fetch_json("https://bot.notenoughmods.com/?json")
@@ -638,7 +638,7 @@ class NotEnoughClasses:
 
 
 async def setup():
-    nem = NotEnoughClasses()
+    nem = ModPoller()
     nem.session = aiohttp.ClientSession(
         headers={"User-agent": "NotEnoughMods:Polling/2.0 (+https://github.com/NotEnoughMods/NotEnoughModPolling)"},
     )

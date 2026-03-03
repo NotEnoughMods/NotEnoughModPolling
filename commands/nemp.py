@@ -5,7 +5,7 @@ import shlex
 import textwrap
 from collections import namedtuple
 
-from commands.NEMP import NEMP_Class
+from mod_polling import poller
 
 ID = "nemp"
 permission = 1
@@ -127,7 +127,7 @@ def stop_polling(self):
 
 async def setup(self, Startup):
     if Startup:
-        self.NEM = await NEMP_Class.setup()
+        self.NEM = await poller.setup()
     else:
         # kill events, tasks
         if is_running(self):
@@ -135,9 +135,9 @@ async def setup(self, Startup):
 
             nemp_logger.info("NEMP Polling has been disabled.")
 
-        importlib.reload(NEMP_Class)
+        importlib.reload(poller)
 
-        self.NEM = await NEMP_Class.setup()
+        self.NEM = await poller.setup()
 
     self.NEM_troubledMods = {}
     self.NEM_autodeactivatedMods = {}
@@ -470,7 +470,7 @@ async def NEMP_TimerEvent(self, channels):
         mod_name = item.name
         exception = item.exception
 
-        if isinstance(exception, (NEMP_Class.NEMPException,)):
+        if isinstance(exception, (poller.NEMPException,)):
             nemp_logger.debug(f"Mod {mod_name} got a {type(exception).__name__}, failing immediately")
 
             if mod_name in self.NEM_troubledMods:

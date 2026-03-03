@@ -1,9 +1,9 @@
 import unittest
 
-from NEMP import NEMP_Class
+from mod_polling import poller
 
 
-class NotEnoughClassesMock(NEMP_Class.NotEnoughClasses):
+class NotEnoughClassesMock(poller.ModPoller):
     def __init__(self):
         self.mods = {"testmod": {"forgejson": {"url": "testurl", "mcversion": "1.8.9"}}}
         self.urls_data = {}

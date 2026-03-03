@@ -31,7 +31,7 @@ ALLOWED_IN_FILENAME = f"-_.() {ascii_letters}{digits}"
 
 # Colour Constants End
 
-# Module-level state (replaces NotEnoughClasses instance)
+# Module-level state (replaces ModPoller instance)
 session = None
 versions = []
 version = ""

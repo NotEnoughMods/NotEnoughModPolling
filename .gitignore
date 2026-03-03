@@ -6,7 +6,7 @@ exception.txt
 *.db
 scripts/regex_report.json
 BotLogs/
-commands/NEMP/htdocs/
+mod_polling/htdocs/
 
 # Python
 __pycache__/

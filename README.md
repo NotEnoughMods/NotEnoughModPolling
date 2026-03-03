@@ -39,7 +39,7 @@ uv sync
 2. **NEMP polling config** — only needed if you want mod-polling features:
 
    ```bash
-   cp commands/NEMP/config.example.yml commands/NEMP/config.yml
+   cp mod_polling/config.example.yml mod_polling/config.yml
    ```
 
    Add your GitHub API credentials (optional, increases rate limits) and set the staff IRC channel.
@@ -82,10 +82,10 @@ plugin_loader.py        Plugin interface definition
 
 irc_handlers/           IRC protocol handlers (PRIVMSG, JOIN, PING, etc.)
 commands/               Command plugins loaded dynamically at startup
-  NEMP/                 Mod-polling subsystem
-    NEMP_Class.py         Polling logic for all supported sources
-    mods.json             Registry of tracked mods, their checkers, and regexes
-    config.yml            GitHub API credentials and IRC settings
+mod_polling/            Mod-polling subsystem
+  poller.py               Polling logic for all supported sources
+  mods.json               Registry of tracked mods, their checkers, and regexes
+  config.yml              GitHub API credentials and IRC settings
 scripts/                Maintenance and testing utilities
   test_regexes.py         Test mod regexes against live API data
 ```

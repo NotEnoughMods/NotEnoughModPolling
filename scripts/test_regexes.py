@@ -10,8 +10,8 @@ from pathlib import Path
 import aiohttp
 import yaml
 
-MODS_JSON = Path("commands/NEMP/mods.json")
-CONFIG_YML = Path("commands/NEMP/config.yml")
+MODS_JSON = Path("mod_polling/mods.json")
+CONFIG_YML = Path("mod_polling/config.yml")
 REPORT_JSON = Path("scripts/regex_report.json")
 
 STALE_CUTOFF = datetime.now(UTC) - timedelta(days=3 * 365)  # 3+ years = stale
