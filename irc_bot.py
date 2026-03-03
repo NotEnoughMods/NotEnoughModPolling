@@ -32,6 +32,7 @@ class IrcBot:
 
         self.nickserv_auth = False
         self.shutdown = False
+        self._handler_tasks = set()
 
     async def start(self):
         self.conn = IrcConnection()
@@ -80,26 +81,21 @@ class IrcBot:
                 if self.shutdown:
                     break
 
-                msgParts = msg.split(" ", 2)
+                prefix, command, params = self._parse_message(msg)
 
-                prefix = msgParts[0][1:] if msgParts[0][0] == ":" else None
+                # Resolve waiters immediately (non-blocking)
+                self.command_router._dispatch_waiters(prefix, command, params)
 
-                if prefix is None:
-                    command = msgParts[0]
-                    try:
-                        commandParameters = msgParts[1]
-                    except IndexError:
-                        commandParameters = ""
+                # PING must respond instantly — run inline, no lock
+                if command == "PING":
+                    await self.command_router.handle(
+                        self.conn.sendMsg, prefix, command, params, self.nickserv_auth
+                    )
                 else:
-                    command = msgParts[1]
-                    try:
-                        commandParameters = msgParts[2]
-                    except IndexError:
-                        commandParameters = ""
-
-                await self.command_router.handle(
-                    self.conn.sendMsg, prefix, command, commandParameters, self.nickserv_auth
-                )
+                    # All other handlers run as tasks, serialized by lock
+                    task = asyncio.create_task(self._locked_handle(prefix, command, params))
+                    self._handler_tasks.add(task)
+                    task.add_done_callback(self._handler_tasks.discard)
         finally:
             self._logger.info("Main loop has been stopped")
             timer_task.cancel()
@@ -110,6 +106,23 @@ class IrcBot:
             with contextlib.suppress(asyncio.CancelledError):
                 await write_task
             self._logger.info("Connection closed.")
+
+    def _parse_message(self, msg):
+        msgParts = msg.split(" ", 2)
+        prefix = msgParts[0][1:] if msgParts[0][0] == ":" else None
+        if prefix is None:
+            command = msgParts[0]
+            params = msgParts[1] if len(msgParts) > 1 else ""
+        else:
+            command = msgParts[1]
+            params = msgParts[2] if len(msgParts) > 2 else ""
+        return prefix, command, params
+
+    async def _locked_handle(self, prefix, command, params):
+        async with self.command_router._handler_lock:
+            await self.command_router.handle(
+                self.conn.sendMsg, prefix, command, params, self.nickserv_auth
+            )
 
     async def _timer_loop(self):
         """Periodically check timer events."""

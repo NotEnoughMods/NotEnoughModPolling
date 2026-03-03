@@ -51,6 +51,9 @@ class CommandRouter:
 
         self.recent_messages = asyncio.Queue(maxsize=50)
 
+        self._waiters = []  # list of (event, check, future)
+        self._handler_lock = asyncio.Lock()
+
         self.task_pool = task_pool.TaskPool()
         self.ban_list = BanList("BannedUsers.db")
 
@@ -79,6 +82,33 @@ class CommandRouter:
         except KeyError as error:
             self._logger.exception("Missing channel or other KeyError caught")
             print("Missing channel or other KeyError caught: " + str(error))
+
+    async def wait_for(self, event, check=None, timeout=None):
+        """Wait for an IRC event matching the predicate.
+
+        Args:
+            event: IRC command/numeric to wait for (e.g. "318", "PRIVMSG")
+            check: Optional callable(prefix, command, params) -> bool
+            timeout: Seconds before TimeoutError (None = wait forever)
+
+        Returns:
+            Tuple of (prefix, command, params) from the matching event.
+        """
+        future = asyncio.get_event_loop().create_future()
+        entry = (event, check, future)
+        self._waiters.append(entry)
+        try:
+            return await asyncio.wait_for(future, timeout=timeout)
+        finally:
+            if entry in self._waiters:
+                self._waiters.remove(entry)
+
+    def _dispatch_waiters(self, prefix, command, params):
+        """Resolve any futures waiting for this event. Non-blocking."""
+        for entry in self._waiters[:]:
+            event, check, future = entry
+            if event == command and not future.done() and (check is None or check(prefix, command, params)):
+                future.set_result((prefix, command, params))
 
     async def check_timer_events(self):
         await self.events["time"].run_all_events(self)
@@ -197,9 +227,45 @@ class CommandRouter:
         print(self.channel_data)
 
     async def whois_user(self, user):
+        """Send WHOIS and wait for the response. Returns True if user is a registered operator."""
         await self.send(f"WHOIS {user}")
-        self.auth_tracker.queue_user(user)
         self._logger.debug("Sending WHOIS for user '%s'", user)
+
+        registered_as = None
+
+        def on_account(prefix, command, params):
+            nonlocal registered_as
+            if user.lower() not in params.lower():
+                return False
+            fields = params.split(":")
+            if fields[1].strip() == "is logged in as":
+                names = fields[0].split()
+                registered_as = names[2]
+            return True
+
+        # Listen for 330 (account info) — may or may not arrive depending on registration
+        account_entry = ("330", on_account, asyncio.get_event_loop().create_future())
+        self._waiters.append(account_entry)
+
+        try:
+            await self.wait_for(
+                "318",
+                check=lambda prefix, command, params: user.lower() in params.lower(),
+                timeout=10,
+            )
+        except TimeoutError:
+            self._logger.warning("WHOIS timeout for user: %s", user)
+            return False
+        finally:
+            if account_entry in self._waiters:
+                self._waiters.remove(account_entry)
+
+        if registered_as and self.auth_tracker.user_exists(registered_as):
+            self.auth_tracker.register_user(user)
+            return True
+        else:
+            self.auth_tracker.unregister_user(user)
+            return False
 
     def is_user_visible(self, user):
         print(self.channel_data)

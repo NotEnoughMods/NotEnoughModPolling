@@ -14,11 +14,7 @@ async def execute(self, sendMsg, prefix, command, params):
         add = modes[0] == "+"
         perm = ""
 
-        if (
-            self.auth_tracker.user_exists(name)
-            and not self.auth_tracker.is_registered(name)
-            and not self.auth_tracker.is_queued(name)
-        ):
+        if self.auth_tracker.user_exists(name) and not self.auth_tracker.is_registered(name):
             await self.whois_user(name)
 
         for char in modes[1:]:

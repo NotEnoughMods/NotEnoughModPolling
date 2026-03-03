@@ -13,11 +13,7 @@ async def execute(self, sendMsg, prefix, command, params):
         else:
             self.channel_data[self.get_channel_true_case(channel)]["Userlist"].append((name, ""))
 
-        if (
-            self.auth_tracker.user_exists(name)
-            and not self.auth_tracker.is_registered(name)
-            and not self.auth_tracker.is_queued(name)
-        ):
+        if self.auth_tracker.user_exists(name) and not self.auth_tracker.is_registered(name):
             # print "OK"
             await self.whois_user(name)
     # print params
