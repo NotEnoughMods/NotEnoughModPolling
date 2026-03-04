@@ -1,10 +1,16 @@
-ID = "topic"
-permission = 2
+from command_router import Permission
+
+PLUGIN_ID = "topic"
 
 
-async def execute(self, name, params, channel, userdata, rank):
+async def _topic(router, name, params, channel, userdata, rank, is_channel):
     chan = (len(params) > 0 and params[0]) or channel
     try:
-        await self.send_chat_message(self.send, channel, self.channel_data[chan]["Topic"])
+        await router.send_chat_message(router.send, channel, router.channel_data[chan]["Topic"])
     except KeyError:
-        await self.send_chat_message(self.send, channel, "Invalid channel name specified.")
+        await router.send_chat_message(router.send, channel, "Invalid channel name specified.")
+
+
+COMMANDS = {
+    "topic": {"execute": _topic, "permission": Permission.OP},
+}

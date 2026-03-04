@@ -32,9 +32,9 @@ async def execute(self, send_msg, prefix, command, params):
 
 
 async def _run_command_setups(router):
-    for cmd in router.commands:
-        if router.commands[cmd][0].setup:
+    for plugin_id, plugin in router.plugins.items():
+        if plugin.setup:
             try:
-                await router.commands[cmd][0].setup(router, True)
+                await plugin.setup(router, True)
             except Exception:
-                logger.exception("setup() failed for command module '%s'", cmd)
+                logger.exception("setup() failed for plugin '%s'", plugin_id)

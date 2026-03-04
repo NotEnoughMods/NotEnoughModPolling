@@ -2,7 +2,10 @@ import asyncio
 import importlib.util
 import logging
 import os
+from collections.abc import Callable
 from datetime import datetime
+from enum import IntEnum
+from typing import NamedTuple
 
 import task_pool
 from ban_list import BanList
@@ -10,6 +13,88 @@ from bot_events import MsgEvent, StandardEvent, TimerEvent
 from help_system import HelpModule
 from irc_logging import LoggingModule
 from user_auth import AuthTracker
+
+
+class Permission(IntEnum):
+    """Minimum rank required to use a command.
+
+    Each level corresponds to an IRC rank:
+
+    ========  =====  ========================================
+    Name      Value  IRC meaning
+    ========  =====  ========================================
+    GUEST       0    Anyone
+    VOICED      1    ``+`` and above
+    OP          2    ``@`` and above
+    ADMIN       3    ``@@`` — bot operator (admin list + registered)
+    HIDDEN      4    Not shown in command list, restricted access
+    ========  =====  ========================================
+    """
+
+    GUEST = 0
+    VOICED = 1
+    OP = 2
+    ADMIN = 3
+    HIDDEN = 4
+
+
+class PluginEntry(NamedTuple):
+    """Lifecycle record for a loaded plugin module.
+
+    Attributes:
+        module: The loaded Python module object.
+        path: Filesystem path the module was loaded from.
+        command_names: Tuple of command names registered by this plugin.
+        setup: ``async setup(router, startup)`` coroutine, or *None*.
+        teardown: ``async teardown(router)`` coroutine, or *None*.
+    """
+
+    module: object
+    path: str
+    command_names: tuple
+    setup: Callable | None
+    teardown: Callable | None
+
+
+class CommandEntry(NamedTuple):
+    """Dispatch record for a single command.
+
+    Attributes:
+        execute: Async callable — signature is
+            ``(router, name, params, channel, userdata, rank, is_channel)``.
+        permission: Minimum :class:`Permission` level required.
+        allow_private: If *True* the command works in PMs; if *False*
+            (the default) it is silently ignored outside channels.
+            ``is_channel`` is always passed to *execute* regardless.
+        plugin_id: The ``PLUGIN_ID`` of the owning plugin.
+    """
+
+    execute: Callable
+    permission: Permission
+    allow_private: bool
+    plugin_id: str
+
+
+class HandlerEntry(NamedTuple):
+    """Record for a loaded IRC protocol handler module.
+
+    Attributes:
+        module: The loaded module (must expose ``ID`` and ``async execute``).
+        path: Filesystem path the module was loaded from.
+    """
+
+    module: object
+    path: str
+
+
+# Maps IRC user-mode prefixes to Permission values.  "@@" in the channel
+# userlist means IRC-op but NOT bot-admin, so it maps to OP (2), not ADMIN.
+_RANK_FROM_PREFIX = {
+    "@@": Permission.OP,
+    "@": Permission.OP,
+    "+": Permission.VOICED,
+    "": Permission.GUEST,
+}
 
 
 class CommandRouter:
@@ -20,8 +105,8 @@ class CommandRouter:
 
         self.name = name
         self.ident = ident
-        self.protocol_handlers = self._load_modules("irc_handlers")
-        self.commands = self._load_modules("commands")
+        self.protocol_handlers = self._load_protocol_handlers("irc_handlers")
+        self.plugins, self.commands = self._load_plugins("commands")
 
         self.operators = adminlist
         self.auth_tracker = AuthTracker(adminlist)
@@ -46,7 +131,6 @@ class CommandRouter:
 
         self.server = None
         self.latency = None
-        self.rank_values = {"@@": 3, "@": 2, "+": 1, "": 0}
         self.startup_time = datetime.now()
 
         self.recent_messages = asyncio.Queue(maxsize=50)
@@ -63,10 +147,10 @@ class CommandRouter:
         self.auth = None
 
     async def close(self):
-        """Call teardown() on all command modules that define one."""
-        for cmd in self.commands:
-            if self.commands[cmd][0].teardown:
-                await self.commands[cmd][0].teardown(self)
+        """Call teardown() on all plugins that define one."""
+        for _plugin_id, plugin in self.plugins.items():
+            if plugin.teardown:
+                await plugin.teardown(self)
 
     async def handle(self, send, prefix, command, params, auth):
         self.send = send
@@ -82,7 +166,7 @@ class CommandRouter:
 
         try:
             if command in self.protocol_handlers:
-                await self.protocol_handlers[command][0].execute(self, send, prefix, command, params)
+                await self.protocol_handlers[command].module.execute(self, send, prefix, command, params)
             else:
                 # 0 is the lowest possible log level. Messages about unimplemented packets are
                 # very common, so they will clutter up the file even if logging is set to DEBUG
@@ -127,14 +211,11 @@ class CommandRouter:
 
     def get_user_rank_num(self, channel, username):
         if username in self.operators and self.auth_tracker.is_registered(username):
-            return 3
+            return Permission.ADMIN
         else:
             for user in self.channel_data[channel]["Userlist"]:
                 if user[0].lower() == username.lower():
-                    if user[1] == "@@":
-                        return 2
-                    else:
-                        return self.rank_values[user[1]]
+                    return _RANK_FROM_PREFIX[user[1]]
 
             return -1  # No user found
 
@@ -304,30 +385,83 @@ class CommandRouter:
         spec.loader.exec_module(module)
         return module
 
-    def _load_modules(self, path):
-        ModuleList = self._list_dir(path)
-        self._logger.info("Loading modules in path '%s'...", path)
-        Packet = {}
-        for i in ModuleList:
-            self._logger.debug("Loading file %s in path '%s'", i, path)
-            module = self._load_source("NEMP_" + i[0:-3], path + "/" + i)
-            Packet[module.ID] = (module, path + "/" + i)
+    def _load_plugins(self, path):
+        """Load all plugin modules from *path*.
 
-            try:
-                if not callable(module.setup):
-                    module.setup = False
-                    self._logger.log(0, "File %s does not use a setup function", i)
-            except AttributeError:
-                module.setup = False
-                self._logger.log(0, "File %s does not use a setup function", i)
+        Each plugin module must define ``PLUGIN_ID`` (str) and ``COMMANDS``
+        (dict mapping command names to dicts with keys ``execute``,
+        ``permission``, and optionally ``allow_private``).
 
-            try:
-                if not callable(module.teardown):
-                    module.teardown = False
-            except AttributeError:
-                module.teardown = False
+        A module may optionally define ``async setup(router, startup)``
+        and/or ``async teardown(router)`` for lifecycle hooks.
 
-            Packet[module.ID] = (module, path + "/" + i)
+        Returns:
+            ``(plugins_dict, commands_dict)`` — *plugins_dict* maps plugin
+            IDs to :class:`PluginEntry`; *commands_dict* maps command names
+            to :class:`CommandEntry`.
+        """
+        file_list = self._list_dir(path)
+        self._logger.info("Loading plugins in path '%s'...", path)
 
-        self._logger.info("Modules in path '%s' loaded.", path)
-        return Packet
+        plugins = {}
+        commands = {}
+
+        for filename in file_list:
+            filepath = path + "/" + filename
+            self._logger.debug("Loading file %s in path '%s'", filename, path)
+            module = self._load_source("NEMP_" + filename[:-3], filepath)
+
+            plugin_id = module.PLUGIN_ID
+            commands_dict = module.COMMANDS
+
+            setup_fn = getattr(module, "setup", None)
+            if setup_fn is not None and not callable(setup_fn):
+                setup_fn = None
+
+            teardown_fn = getattr(module, "teardown", None)
+            if teardown_fn is not None and not callable(teardown_fn):
+                teardown_fn = None
+
+            command_names = []
+            for cmd_name, cmd_info in commands_dict.items():
+                entry = CommandEntry(
+                    execute=cmd_info["execute"],
+                    permission=cmd_info["permission"],
+                    allow_private=cmd_info.get("allow_private", False),
+                    plugin_id=plugin_id,
+                )
+                commands[cmd_name] = entry
+                command_names.append(cmd_name)
+
+            plugins[plugin_id] = PluginEntry(
+                module=module,
+                path=filepath,
+                command_names=tuple(command_names),
+                setup=setup_fn,
+                teardown=teardown_fn,
+            )
+
+        self._logger.info("Plugins in path '%s' loaded.", path)
+        return plugins, commands
+
+    def _load_protocol_handlers(self, path):
+        """Load IRC protocol handler modules from *path*.
+
+        Each handler module must define ``ID`` (the IRC command/numeric it
+        handles) and ``async execute(router, send, prefix, command, params)``.
+
+        Returns:
+            A dict mapping IRC commands to :class:`HandlerEntry`.
+        """
+        file_list = self._list_dir(path)
+        self._logger.info("Loading protocol handlers in path '%s'...", path)
+
+        handlers = {}
+        for filename in file_list:
+            filepath = path + "/" + filename
+            self._logger.debug("Loading file %s in path '%s'", filename, path)
+            module = self._load_source("NEMP_" + filename[:-3], filepath)
+            handlers[module.ID] = HandlerEntry(module=module, path=filepath)
+
+        self._logger.info("Protocol handlers in path '%s' loaded.", path)
+        return handlers

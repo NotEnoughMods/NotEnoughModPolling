@@ -1,11 +1,16 @@
-ID = "latency"
-permission = 2
-privmsg_enabled = True
+from command_router import Permission
+
+PLUGIN_ID = "latency"
 
 
-async def execute(self, name, params, channel, userdata, rank, chan):
-    if self.latency is not None:
-        latency = round(self.latency, 2)
-        await self.send_chat_message(self.send, channel, f"My current latency is {latency} seconds.")
+async def _latency(router, name, params, channel, userdata, rank, is_channel):
+    if router.latency is not None:
+        latency = round(router.latency, 2)
+        await router.send_chat_message(router.send, channel, f"My current latency is {latency} seconds.")
     else:
-        await self.send(f"NOTICE {name} :Please wait a bit so I can measure the latency.")
+        await router.send(f"NOTICE {name} :Please wait a bit so I can measure the latency.")
+
+
+COMMANDS = {
+    "latency": {"execute": _latency, "permission": Permission.OP, "allow_private": True},
+}

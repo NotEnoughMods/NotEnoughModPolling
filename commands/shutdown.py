@@ -1,5 +1,6 @@
-ID = "shutdown"
-permission = 3
+from command_router import Permission
+
+PLUGIN_ID = "shutdown"
 
 
 class Shutdown(Exception):
@@ -11,6 +12,11 @@ class Shutdown(Exception):
         return f"Bot is shutting down! The Shutdown was triggered by '{self.name}' in the channel '{self.channel}'"
 
 
-async def execute(self, name, params, channel, userdata, rank):
-    await self.send("QUIT :Shutting down", 5)
+async def _shutdown(router, name, params, channel, userdata, rank, is_channel):
+    await router.send("QUIT :Shutting down", 5)
     raise Shutdown(name, channel)
+
+
+COMMANDS = {
+    "shutdown": {"execute": _shutdown, "permission": Permission.ADMIN},
+}

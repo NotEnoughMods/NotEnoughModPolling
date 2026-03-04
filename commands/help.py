@@ -1,36 +1,37 @@
 import logging
 
-ID = "help"
-permission = 0
+from command_router import Permission
+
+PLUGIN_ID = "help"
 
 help_log = logging.getLogger("HelpModule")
 
 
-async def execute(self, name, params, channel, userdata, rank):
+async def _help(router, name, params, channel, userdata, rank, is_channel):
     if len(params) > 0:
         cmdname = params[0]
 
         try:
-            help = self.helper.get_command_help(cmdname)
+            help = router.helper.get_command_help(cmdname)
         except KeyError:
             help_log.error("Command not found: %s", cmdname)
-            await self.send_notice(name, "No such command exists.")
+            await router.send_notice(name, "No such command exists.")
             return
     else:
-        await self.send_notice(name, "Specify a command you want to know more about.")
+        await router.send_notice(name, "Specify a command you want to know more about.")
         return
 
-    if self.rank_values[rank] < help.rank:
-        await self.send_notice(name, "Command is restricted.")
+    if rank < help.rank:
+        await router.send_notice(name, "Command is restricted.")
         help_log.debug("Looking up command '%s', but it is restricted.", name, cmdname)
         return
 
     if help.custom_handler is not None:
-        help._run_custom_handler(self, name, params, channel, userdata, rank)
+        help._run_custom_handler(router, name, params, channel, userdata, rank)
 
     elif len(params) == 1:
         help_log.debug("Looking up command '%s'", name, cmdname)
-        arglist = [self.cmdprefix + cmdname]
+        arglist = [router.cmdprefix + cmdname]
 
         for arg in help.arguments:
             argname = arg[0]
@@ -41,16 +42,16 @@ async def execute(self, name, params, channel, userdata, rank):
             else:
                 arglist.append("(" + arg[0] + ")")
 
-        await self.send_notice(name, "Command usage: " + " ".join(arglist))
+        await router.send_notice(name, "Command usage: " + " ".join(arglist))
 
         if len(help.description) == 1:
-            await self.send_notice(name, "Command description: " + help.description[0])
+            await router.send_notice(name, "Command description: " + help.description[0])
         elif len(help.description) > 1:
-            await self.send_notice(name, "Command description: " + help.description[0])
+            await router.send_notice(name, "Command description: " + help.description[0])
             for line in help.description[1:]:
-                await self.send_notice(name, line)
+                await router.send_notice(name, line)
         else:
-            await self.send_notice(name, "Command description: No description given.")
+            await router.send_notice(name, "Command description: No description given.")
 
     elif len(params) > 1:
         cmdname = params[0]
@@ -64,7 +65,7 @@ async def execute(self, name, params, channel, userdata, rank):
             if argname.lower() == arg[0].lower():
                 optional_or_required = (not arg[2] and "REQUIRED") or "OPTIONAL"
 
-                await self.send_notice(
+                await router.send_notice(
                     name,
                     f"Argument description for '{arg[0]}' [{optional_or_required}]: {arg[1]}",
                 )
@@ -72,17 +73,13 @@ async def execute(self, name, params, channel, userdata, rank):
                 break
 
         if not found:
-            await self.send_notice(name, "The command does not have such an argument")
+            await router.send_notice(name, "The command does not have such an argument")
     else:
-        await self.send_notice(name, "No arguments provided.")
+        await router.send_notice(name, "No arguments provided.")
 
 
-def test(self, name, params, channel, userdata, rank):
-    help_log.debug("test called for: %s", name)
-
-
-async def setup(self, startup):
-    entry = self.helper.new_help(ID)
+async def setup(router, startup):
+    entry = router.helper.new_help("help")
 
     entry.add_description(
         "The 'help' command shows you the descriptions and arguments of commands that have "
@@ -97,4 +94,9 @@ async def setup(self, startup):
     )
     entry.rank = 0
 
-    self.helper.register_help(entry, overwrite=True)
+    router.helper.register_help(entry, overwrite=True)
+
+
+COMMANDS = {
+    "help": {"execute": _help, "permission": Permission.GUEST},
+}

@@ -16,6 +16,8 @@ from pyparsing import (
     opAssoc,
 )
 
+from command_router import Permission
+
 
 class CalcTimeoutException(Exception):
     def __init__(self, time_limit, stopped_at):
@@ -26,8 +28,7 @@ class CalcTimeoutException(Exception):
         return f"Calculation took more than {self.timelimit} seconds, please simplify your term."
 
 
-ID = "pycalc"
-permission = 0
+PLUGIN_ID = "pycalc"
 
 pycalc_logger = logging.getLogger("cmd.pycalc")
 
@@ -330,7 +331,7 @@ arith.arith_expr._parse = modified_parse
 # And thanks to spacechase0 for rescuing us when we were fighting against the evil radians.
 
 
-async def execute(self, name, params, channel, userdata, rank):
+async def _pycalc(router, name, params, channel, userdata, rank, is_channel):
 
     if len(params) > 1 and params[0] == "#fancy":
         fancy = True
@@ -349,12 +350,17 @@ async def execute(self, name, params, channel, userdata, rank):
             raise RuntimeError(f"Result is too long ({len(fin)} characters)")
         else:
             if fancy:
-                await self.send_chat_message(self.send, channel, f"{result:,}")
+                await router.send_chat_message(router.send, channel, f"{result:,}")
             else:
-                await self.send_chat_message(self.send, channel, fin)
+                await router.send_chat_message(router.send, channel, fin)
 
     except CalcTimeoutException as error:
-        await self.send_message(channel, str(error))
+        await router.send_message(channel, str(error))
     except Exception as error:
-        await self.send_message(channel, "ParseError: '" + str(error) + "'")
+        await router.send_message(channel, "ParseError: '" + str(error) + "'")
         pycalc_logger.exception("Parse error in pycalc")
+
+
+COMMANDS = {
+    "pycalc": {"execute": _pycalc, "permission": Permission.GUEST},
+}

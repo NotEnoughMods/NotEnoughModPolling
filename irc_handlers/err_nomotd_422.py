@@ -27,6 +27,6 @@ async def execute(self, send_msg, prefix, command, params):
     if isinstance(self.auth, str):
         await send_msg(self.auth, 5)
 
-    for cmd in self.commands:
-        if self.commands[cmd][0].setup:
-            await self.commands[cmd][0].setup(self, True)
+    for _plugin_id, plugin in self.plugins.items():
+        if plugin.setup:
+            await plugin.setup(self, True)

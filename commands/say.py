@@ -1,13 +1,19 @@
 import logging
 
-ID = "say"
-permission = 4
+from command_router import Permission
+
+PLUGIN_ID = "say"
 
 logger = logging.getLogger("cmd.say")
 
 
-async def execute(self, name, params, channel, userdata, rank):
+async def _say(router, name, params, channel, userdata, rank, is_channel):
     logger.debug("Executing say command")
     result = " ".join(params)
     logger.debug("Say result: %s", result)
-    await self.send_chat_message(self.send, channel, result)
+    await router.send_chat_message(router.send, channel, result)
+
+
+COMMANDS = {
+    "say": {"execute": _say, "permission": Permission.HIDDEN},
+}

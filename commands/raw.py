@@ -1,6 +1,12 @@
-ID = "raw"
-permission = 3
+from command_router import Permission
+
+PLUGIN_ID = "raw"
 
 
-async def execute(self, name, params, channel, userdata, rank):
-    await self.send(" ".join(params), 4)
+async def _raw(router, name, params, channel, userdata, rank, is_channel):
+    await router.send(" ".join(params), 4)
+
+
+COMMANDS = {
+    "raw": {"execute": _raw, "permission": Permission.ADMIN},
+}

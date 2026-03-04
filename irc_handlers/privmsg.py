@@ -6,8 +6,6 @@ msg_log = logging.getLogger("PRIVMSG")
 
 
 async def execute(self, send_msg, msgprefix, command, params):
-    # print params, prefix
-
     part1 = msgprefix.partition("!")
     part2 = part1[2].partition("@")
 
@@ -24,17 +22,10 @@ async def execute(self, send_msg, msgprefix, command, params):
     if channel[0] not in "#&":
         channel = name
         is_channel = False
-        perms = ""
-        # print "HELP I'M GETTING PRIVMSGD BY ",name," : ",chat_message
         msg_log.info("Private message from '%s' [%s@%s]: %s", name, ident, host, chat_message)
     else:
         is_channel = True
         channel = self.get_channel_true_case(channel)
-        perms = self.get_user_rank(channel, name)
-
-    # print splitted, channel()
-
-    # print msgprefix, params
 
     msg_log.debug("<%s> %s", name, chat_message)
 
@@ -49,25 +40,14 @@ async def execute(self, send_msg, msgprefix, command, params):
     except IndexError:
         chat_cmd = ""
         used_prfx = ""
-    # print "ok"
 
-    if name in self.operators and self.auth_tracker.is_registered(name):  # and (perms == "@" or perms == "+"):
-        # print name + " is in Botlist"
+    if is_channel:
+        rank = self.get_user_rank_num(channel, name)
+    elif name in self.operators and self.auth_tracker.is_registered(name):
         rank = 3
-        perms = "@@"
-    elif perms == "@":
-        # print name + " is OP"
-        rank = 2
-    elif perms == "+":
-        # print name + " is Voiced"
-        rank = 1
     else:
-        # print name + " is Nothing"
         rank = 0
 
-    # rank = {"@" : 2, "+" : 1, "" : 0}[self.get_user_rank(channel, name)]
-    # print self.commands
-    # print chat_cmd
     if used_prfx == cmdprefix and chat_cmd in self.commands:
         banned_info = self.ban_list.check_ban(name, ident, host)
 
@@ -81,13 +61,13 @@ async def execute(self, send_msg, msgprefix, command, params):
 
             return
 
-        try:
-            support = self.commands[chat_cmd][0].privmsg_enabled
-        except AttributeError:
-            support = False
+        cmd = self.commands[chat_cmd]
+
+        if not is_channel and not cmd.allow_private:
+            return
 
         try:
-            if rank >= self.commands[chat_cmd][0].permission:
+            if rank >= cmd.permission:
                 if is_channel:
                     msg_log.info(
                         "User '%s' uses command '%s' in channel '%s'",
@@ -101,7 +81,7 @@ async def execute(self, send_msg, msgprefix, command, params):
                         ident,
                         host,
                         chat_params[1:],
-                        perms,
+                        rank,
                     )
                 else:
                     msg_log.info("User '%s' uses command '%s'", name, chat_cmd)
@@ -111,7 +91,7 @@ async def execute(self, send_msg, msgprefix, command, params):
                         ident,
                         host,
                         chat_params[1:],
-                        perms,
+                        rank,
                     )
                     msg_log.debug(
                         "User '%s' - destination: '%s' (should be the same)",
@@ -119,18 +99,7 @@ async def execute(self, send_msg, msgprefix, command, params):
                         channel,
                     )
 
-                if support:
-                    await self.commands[chat_cmd][0].execute(
-                        self,
-                        name,
-                        chat_params[1:],
-                        channel,
-                        (ident, host),
-                        perms,
-                        is_channel,
-                    )
-                elif not support and is_channel:
-                    await self.commands[chat_cmd][0].execute(self, name, chat_params[1:], channel, (ident, host), perms)
+                await cmd.execute(self, name, chat_params[1:], channel, (ident, host), rank, is_channel)
 
         except KeyError:
             msg_log.exception("KeyError for command")

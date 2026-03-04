@@ -7,8 +7,9 @@ from urllib.parse import quote as urlquote
 
 import aiohttp
 
-ID = "nem"
-permission = 1
+from command_router import Permission
+
+PLUGIN_ID = "nem"
 
 nem_logger = logging.getLogger("NEM_Tools")
 
@@ -131,7 +132,7 @@ async def fetch_json(*args, **kwargs):
     return await fetch_page(*args, decode_json=True, **kwargs)
 
 
-async def setup(self, startup):
+async def setup(router, startup):
     global session, versions, version
     if session:
         await session.close()
@@ -142,50 +143,50 @@ async def setup(self, startup):
     version = versions[-1]
 
 
-async def teardown(self):
+async def teardown(router):
     global session
     if session:
         await session.close()
         session = None
 
 
-async def execute(self, name, params, channel, userdata, rank):
+async def _nem(router, name, params, channel, userdata, rank, is_channel):
     try:
-        command = commands[params[0]]
-        await command(self, name, params, channel, userdata, rank)
+        command = _subcommands[params[0]]
+        await command(router, name, params, channel, userdata, rank)
     except Exception:
-        await self.send_message(channel, "Invalid sub-command!")
-        await self.send_message(channel, 'See "=nem help" for help')
+        await router.send_message(channel, "Invalid sub-command!")
+        await router.send_message(channel, 'See "=nem help" for help')
 
 
-async def setlist(self, name, params, channel, userdata, rank):
+async def setlist(router, name, params, channel, userdata, rank):
     global version
     if len(params) != 2:
-        await self.send_message(
+        await router.send_message(
             channel,
             f"{name}: Insufficient amount of parameters provided.",
         )
-        await self.send_message(
+        await router.send_message(
             channel,
-            "{name}: {setlist_help}".format(name=name, setlist_help=help["setlist"][0]),
+            "{name}: {setlist_help}".format(name=name, setlist_help=_help_dict["setlist"][0]),
         )
     else:
         version = str(params[1])
-        await self.send_message(
+        await router.send_message(
             channel,
             f"switched list to: {BOLD}{BLUE}{params[1]}{COLOUREND}",
         )
 
 
-async def multilist(self, name, params, channel, userdata, rank):
+async def multilist(router, name, params, channel, userdata, rank):
     if len(params) != 2:
-        await self.send_message(
+        await router.send_message(
             channel,
             f"{name}: Insufficient amount of parameters provided.",
         )
-        await self.send_message(
+        await router.send_message(
             channel,
-            "{name}: {multilist_help}".format(name=name, multilist_help=help["multilist"][0]),
+            "{name}: {multilist_help}".format(name=name, multilist_help=_help_dict["multilist"][0]),
         )
     else:
         try:
@@ -212,14 +213,14 @@ async def multilist(self, name, params, channel, userdata, rank):
             count = len(results)
 
             if count == 0:
-                await self.send_message(channel, name + ": mod not present in NEM.")
+                await router.send_message(channel, name + ": mod not present in NEM.")
                 return
             elif count == 1:
                 count = str(count) + " MC version"
             else:
                 count = str(count) + " MC versions"
 
-            await self.send_message(channel, "Listing " + count + ' for "' + params[1] + '":')
+            await router.send_message(channel, "Listing " + count + ' for "' + params[1] + '":')
 
             for ver in results:
                 alias = ""
@@ -250,7 +251,7 @@ async def multilist(self, name, params, channel, userdata, rank):
                 except Exception:
                     nem_logger.error("Error getting dev version for %s in %s", mod_name, ver, exc_info=True)
 
-                await self.send_message(
+                await router.send_message(
                     channel,
                     "{bold}{blue}{mcversion}{colour_end}{bold}: "
                     "{purple}{name}{colour_end} {alias_string}"
@@ -273,23 +274,23 @@ async def multilist(self, name, params, channel, userdata, rank):
                 )
 
         except Exception as error:
-            await self.send_message(channel, name + ": " + str(error))
+            await router.send_message(channel, name + ": " + str(error))
             nem_logger.exception("Error in multilist")
 
 
-async def list(self, name, params, channel, userdata, rank):
+async def list(router, name, params, channel, userdata, rank):
     if len(params) < 2:
-        await self.send_message(
+        await router.send_message(
             channel,
             f"{name}: Insufficient amount of parameters provided.",
         )
-        await self.send_message(channel, "{name}: {help_entry}".format(name=name, help_entry=help["list"][0]))
+        await router.send_message(channel, "{name}: {help_entry}".format(name=name, help_entry=_help_dict["list"][0]))
         return
     ver = params[2] if len(params) >= 3 else version
     try:
         result = await fetch_page("https://bot.notenoughmods.com/" + urlquote(ver) + ".json", cache=True)
         if not result:
-            await self.send_message(
+            await router.send_message(
                 channel,
                 f"{name}: Could not fetch the list. Are you sure it exists?",
             )
@@ -312,14 +313,14 @@ async def list(self, name, params, channel, userdata, rank):
         count = len(results)
 
         if count == 0:
-            await self.send_message(channel, name + ": no results found.")
+            await router.send_message(channel, name + ": no results found.")
             return
         elif count == 1:
             count = str(count) + " result"
         else:
             count = str(count) + " results"
 
-        await self.send_message(
+        await router.send_message(
             channel,
             f'Listing {count} for "{params[1]}" in {BOLD}{BLUE}{ver}{COLOUREND}{BOLD}',
         )
@@ -348,7 +349,7 @@ async def list(self, name, params, channel, userdata, rank):
             except Exception:
                 nem_logger.error("Error getting dev version for %s", params[1], exc_info=True)
 
-            await self.send_message(
+            await router.send_message(
                 channel,
                 "{purple}{name}{colour_end} {alias_string}"
                 "{darkgreen}{version}{colour_end} {dev_string}"
@@ -366,11 +367,11 @@ async def list(self, name, params, channel, userdata, rank):
                 ),
             )
     except Exception as error:
-        await self.send_message(channel, f"{name}: {error}")
+        await router.send_message(channel, f"{name}: {error}")
         nem_logger.exception("Error in list")
 
 
-async def compare(self, name, params, channel, userdata, rank):
+async def compare(router, name, params, channel, userdata, rank):
     try:
         old_version, new_version = params[1], params[2]
 
@@ -397,34 +398,34 @@ async def compare(self, name, params, channel, userdata, rank):
         with open(path, "w") as f:
             f.write(json.dumps(missing_mods, sort_keys=True, indent=4 * " "))
 
-        await self.send_message(
+        await router.send_message(
             channel,
             f"{len(missing_mods)} mods died trying to update to {new_version}",
         )
 
     except Exception as error:
-        await self.send_message(channel, f"{name}: {error}")
+        await router.send_message(channel, f"{name}: {error}")
         nem_logger.exception("Error in compare")
 
 
-async def about(self, name, params, channel, userdata, rank):
-    await self.send_message(channel, "Not Enough Mods toolkit for IRC by SinZ & Yoshi2 v4.0")
+async def about(router, name, params, channel, userdata, rank):
+    await router.send_message(channel, "Not Enough Mods toolkit for IRC by SinZ & Yoshi2 v4.0")
 
 
-async def help(self, name, params, channel, userdata, rank):
+async def help(router, name, params, channel, userdata, rank):
     if len(params) == 1:
-        await self.send_message(channel, "{}: Available commands: {}".format(name, ", ".join(help)))
+        await router.send_message(channel, "{}: Available commands: {}".format(name, ", ".join(_help_dict)))
     else:
         command = params[1]
-        if command in help:
-            for line in help[command]:
-                await self.send_message(channel, name + ": " + line)
+        if command in _help_dict:
+            for line in _help_dict[command]:
+                await router.send_message(channel, name + ": " + line)
         else:
-            await self.send_message(channel, name + ": Invalid command provided")
+            await router.send_message(channel, name + ": Invalid command provided")
 
 
-async def force_cache_redownload(self, name, params, channel, userdata, rank):
-    if self.rank_values[rank] >= 3:
+async def force_cache_redownload(router, name, params, channel, userdata, rank):
+    if rank >= Permission.ADMIN:
         for ver in versions:
             url = "https://bot.notenoughmods.com/" + urlquote(ver) + ".json"
             normalized = normalize_filename(url)
@@ -432,13 +433,13 @@ async def force_cache_redownload(self, name, params, channel, userdata, rank):
             if os.path.exists(filepath):
                 cache_last_modified[normalized] = 0
 
-        await self.send_message(
+        await router.send_message(
             channel,
             "Cache Timestamps have been reset. Cache will be redownloaded on the next fetching.",
         )
 
 
-commands = {
+_subcommands = {
     "list": list,
     "multilist": multilist,
     "about": about,
@@ -448,7 +449,7 @@ commands = {
     "forceredownload": force_cache_redownload,
 }
 
-help = {
+_help_dict = {
     "list": [
         "=nem list <search> <version>",
         "Searches the NotEnoughMods database for <search> and returns all results to IRC.",
@@ -471,4 +472,8 @@ help = {
         "Compares the NEMP entries for two different MC versions and says how many mods "
         "haven't been updated to the new version.",
     ],
+}
+
+COMMANDS = {
+    "nem": {"execute": _nem, "permission": Permission.VOICED},
 }

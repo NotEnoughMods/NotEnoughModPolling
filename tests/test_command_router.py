@@ -6,7 +6,8 @@ from command_router import CommandRouter
 def make_router():
     """Create a CommandRouter with patched module loading and BanList."""
     with (
-        patch.object(CommandRouter, "_load_modules", return_value={}),
+        patch.object(CommandRouter, "_load_plugins", return_value=({}, {})),
+        patch.object(CommandRouter, "_load_protocol_handlers", return_value={}),
         patch("command_router.BanList"),
         patch("command_router.LoggingModule"),
     ):

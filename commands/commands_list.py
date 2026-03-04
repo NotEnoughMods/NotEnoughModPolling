@@ -1,23 +1,24 @@
-ID = "commands"
-permission = 0
+from command_router import Permission
 
-rankdict = {"@@": 3, "@": 2, "+": 1, "": 0}
-rankname = ("Guest", "Voiced", "OP", "Owner")
+PLUGIN_ID = "commands_list"
 
 
-async def execute(self, name, params, channel, userdata, rank):
-
-    perms = rankdict[rank]
+async def _commands(router, name, params, channel, userdata, rank, is_channel):
     group = {}
-    for i in range(perms + 1):
+    for i in range(rank + 1):
         group[i] = []
 
-    for cmd in self.commands:
-        cmdrank = self.commands[cmd][0].permission
-        if perms >= cmdrank:
-            group[cmdrank].append(cmd)
+    for cmd_name, cmd_entry in router.commands.items():
+        cmdrank = cmd_entry.permission
+        if rank >= cmdrank:
+            group[cmdrank].append(cmd_name)
 
-    await self.send_notice(name, "Available commands:")
+    await router.send_notice(name, "Available commands:")
     for i in group:
         group[i].sort()
-        await self.send_notice(name, "{}: {}".format(rankname[i], " | ".join(group[i])))
+        await router.send_notice(name, "{}: {}".format(Permission(i).name.capitalize(), " | ".join(group[i])))
+
+
+COMMANDS = {
+    "commands": {"execute": _commands, "permission": Permission.GUEST},
+}
