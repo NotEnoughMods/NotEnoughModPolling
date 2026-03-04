@@ -2,7 +2,7 @@ from datetime import datetime
 
 ID = "watchdog"
 permission = 3
-privmsgEnabled = True
+privmsg_enabled = True
 
 
 def choose_singular_or_plural(num, singular, plural):
@@ -16,7 +16,7 @@ def choose_singular_or_plural(num, singular, plural):
 
 async def execute(self, name, params, channel, userdata, rank, chan):
     if len(params) == 0:
-        uptime = datetime.now() - self.startupTime
+        uptime = datetime.now() - self.startup_time
 
         weeks = uptime.days // 7
         days = uptime.days % 7
@@ -24,56 +24,56 @@ async def execute(self, name, params, channel, userdata, rank, chan):
         hours = uptime.seconds // (60 * 60)
         minutes = (uptime.seconds % (60 * 60)) // 60
 
-        timeList = []
+        time_list = []
 
-        weekString = choose_singular_or_plural(weeks, "week", "weeks")
-        dayString = choose_singular_or_plural(days, "day", "days")
-        hourString = choose_singular_or_plural(hours, "hour", "hours")
-        minString = choose_singular_or_plural(minutes, "minute", "minutes")
+        week_string = choose_singular_or_plural(weeks, "week", "weeks")
+        day_string = choose_singular_or_plural(days, "day", "days")
+        hour_string = choose_singular_or_plural(hours, "hour", "hours")
+        min_string = choose_singular_or_plural(minutes, "minute", "minutes")
 
-        if weekString is not None:
-            timeList.append(weekString)
-        if dayString is not None:
-            timeList.append(dayString)
-        if hourString is not None:
-            timeList.append(hourString)
-        if minString is not None:
-            timeList.append(minString)
+        if week_string is not None:
+            time_list.append(week_string)
+        if day_string is not None:
+            time_list.append(day_string)
+        if hour_string is not None:
+            time_list.append(hour_string)
+        if min_string is not None:
+            time_list.append(min_string)
 
-        if len(timeList) == 0:
-            timeList.append("Just started")
+        if len(time_list) == 0:
+            time_list.append("Just started")
 
-        await self.send_message(channel, "Uptime: " + ", ".join(timeList))
+        await self.send_message(channel, "Uptime: " + ", ".join(time_list))
 
         stats = {}
 
-        for eventType in self.events:
+        for event_type in self.events:
             average = None
             minimum = None
             maximum = None
 
-            for event in self.events[eventType]._events:
-                eventStats = self.events[eventType]._events[event]["stats"]
+            for event in self.events[event_type]._events:
+                event_stats = self.events[event_type]._events[event]["stats"]
 
                 if average is None:
                     average, minimum, maximum = (
-                        eventStats["average"],
-                        eventStats["min"],
-                        eventStats["max"],
+                        event_stats["average"],
+                        event_stats["min"],
+                        event_stats["max"],
                     )
                 else:
-                    if eventStats["average"] is None:
+                    if event_stats["average"] is None:
                         continue
 
-                    if eventStats["min"] < minimum:
-                        minimum = eventStats["min"]
-                    if eventStats["max"] > maximum:
-                        maximum = eventStats["max"]
-                    average = (average + eventStats["average"]) / 2
+                    if event_stats["min"] < minimum:
+                        minimum = event_stats["min"]
+                    if event_stats["max"] > maximum:
+                        maximum = event_stats["max"]
+                    average = (average + event_stats["average"]) / 2
 
-            stats[eventType] = [average, minimum, maximum]
+            stats[event_type] = [average, minimum, maximum]
 
-        dataOutput = []
+        data_output = []
 
         for event in stats:
             average, minimum, maximum = stats[event]
@@ -81,47 +81,47 @@ async def execute(self, name, params, channel, userdata, rank, chan):
                 average, minimum, maximum = 0, 0, 0
 
             # The micro prefix in unicode
-            dataOutput.append(
+            data_output.append(
                 f"{event}: [{round(minimum / (10**-6), 2)}\u00b5s/"
                 f"{round(maximum / (10**-6), 2)}\u00b5s/"
                 f"{round(average / (10**-6), 2)}\u00b5s]"
             )
 
-        finalString = "Event statistics: (min/max/average): " + ", ".join(dataOutput)
+        final_string = "Event statistics: (min/max/average): " + ", ".join(data_output)
 
-        await self.send_message(channel, finalString)
+        await self.send_message(channel, final_string)
 
         task_info = []
         for task_name, task_data in self.task_pool.pool.items():
-            timeDelta = task_data["handle"].timeDelta
-            if timeDelta is None:
-                timeDelta = 0
+            time_delta = task_data["handle"].time_delta
+            if time_delta is None:
+                time_delta = 0
 
-            task_info.append(f"{task_name} [{round(timeDelta, 2)}\u00b5s]")
+            task_info.append(f"{task_name} [{round(time_delta, 2)}\u00b5s]")
 
         if len(task_info) == 0:
             await self.send_message(channel, "No tasks running right now.")
         else:
-            finalString = "The following tasks are running: " + ", ".join(task_info)
-            await self.send_message(channel, finalString)
+            final_string = "The following tasks are running: " + ", ".join(task_info)
+            await self.send_message(channel, final_string)
 
     else:
-        eventType = params[0]
+        event_type = params[0]
 
-        if eventType in self.events:
-            eventStats = {}
+        if event_type in self.events:
+            event_stats = {}
 
-            dataOutput = []
+            data_output = []
 
-            for event in self.events[eventType]._events:
-                stats = self.events[eventType]._events[event]["stats"]
+            for event in self.events[event_type]._events:
+                stats = self.events[event_type]._events[event]["stats"]
                 average, minimum, maximum = stats["average"], stats["min"], stats["max"]
 
                 if average is None:
                     average, minimum, maximum = 0, 0, 0
 
                 # The micro prefix in unicode
-                dataOutput.append(
+                data_output.append(
                     f"{event}: [{round(minimum / (10**-6), 2)}\u00b5s/"
                     f"{round(maximum / (10**-6), 2)}\u00b5s/"
                     f"{round(average / (10**-6), 2)}\u00b5s]"
@@ -129,7 +129,7 @@ async def execute(self, name, params, channel, userdata, rank, chan):
 
             await self.send_message(
                 channel,
-                "Statistics for event type '{}': {}".format(eventType, ", ".join(dataOutput)),
+                "Statistics for event type '{}': {}".format(event_type, ", ".join(data_output)),
             )
 
         else:

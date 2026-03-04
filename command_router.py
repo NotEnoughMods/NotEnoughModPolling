@@ -47,7 +47,7 @@ class CommandRouter:
         self.server = None
         self.latency = None
         self.rank_values = {"@@": 3, "@": 2, "+": 1, "": 0}
-        self.startupTime = datetime.now()
+        self.startup_time = datetime.now()
 
         self.recent_messages = asyncio.Queue(maxsize=50)
 
@@ -143,18 +143,18 @@ class CommandRouter:
         return False
 
     # A wrapper for send_chat_message that does not require a send argument.
-    async def send_message(self, channel, msg, msgsplitter=None, splitAt=" "):
-        await self.send_chat_message(self.send, channel, msg, msgsplitter, splitAt)
+    async def send_message(self, channel, msg, msgsplitter=None, split_at=" "):
+        await self.send_chat_message(self.send, channel, msg, msgsplitter, split_at)
 
-    async def send_chat_message(self, send, channel, msg, msgsplitter=None, splitAt=" "):
+    async def send_chat_message(self, send, channel, msg, msgsplitter=None, split_at=" "):
         if msgsplitter is None:
             msgsplitter = self.default_splitter
 
-        prefixLen = len(self.name) + len(self.ident) + 63 + 7 + len(channel) + 25
-        remaining = 512 - prefixLen
+        prefix_len = len(self.name) + len(self.ident) + 63 + 7 + len(channel) + 25
+        remaining = 512 - prefix_len
 
-        if len(msg) + prefixLen > 512:
-            msgpart = msgsplitter(msg, remaining, splitAt)
+        if len(msg) + prefix_len > 512:
+            msgpart = msgsplitter(msg, remaining, split_at)
             self._logger.debug("Breaking message %s into parts %s", msg, msgpart)
 
             for part in msgpart:
@@ -164,15 +164,15 @@ class CommandRouter:
             await send(f"PRIVMSG {channel} :{msg}")
             self._logger.debug("Sending to channel/user %s: '%s'", channel, msg)
 
-    async def send_notice(self, destination, msg, msgsplitter=None, splitAt=" "):
+    async def send_notice(self, destination, msg, msgsplitter=None, split_at=" "):
         if msgsplitter is None:
             msgsplitter = self.default_splitter
         # NOTICE
-        prefixLen = len(self.name) + len(self.ident) + 63 + 6 + len(destination) + 25
-        remaining = 512 - prefixLen
+        prefix_len = len(self.name) + len(self.ident) + 63 + 6 + len(destination) + 25
+        remaining = 512 - prefix_len
 
-        if len(msg) + prefixLen > 512:
-            msgpart = msgsplitter(msg, remaining, splitAt)
+        if len(msg) + prefix_len > 512:
+            msgpart = msgsplitter(msg, remaining, split_at)
             self._logger.debug("Breaking message %s into parts %s", msg, msgpart)
 
             for part in msgpart:
@@ -182,21 +182,21 @@ class CommandRouter:
             await self.send(f"NOTICE {destination} :{msg}")
             self._logger.debug("Sending notice to channel/user %s: '%s'", destination, msg)
 
-    def default_splitter(self, msg, length, splitAt):
+    def default_splitter(self, msg, length, split_at):
 
         start = 0
         end = length
         items = []
 
         while end <= len(msg):
-            splitpos = msg[start:end].rfind(splitAt)
+            splitpos = msg[start:end].rfind(split_at)
 
             if splitpos < 0:
                 items.append(msg[start:end])
                 start = end
             else:
                 items.append(msg[start : start + splitpos])
-                start = start + splitpos + len(splitAt)
+                start = start + splitpos + len(split_at)
 
             end = start + length
 

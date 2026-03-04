@@ -77,7 +77,7 @@ class IrcConnection:
         finally:
             self._logger.debug("Write loop finished")
 
-    async def sendMsg(self, msg, priority=False):
+    async def send_msg(self, msg, priority=False):
         msg = msg.replace(chr(13), " ")
         msg = msg.replace(chr(10), " ")
         self._logger.debug(">> %s", msg)

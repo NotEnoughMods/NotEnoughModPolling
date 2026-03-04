@@ -2,35 +2,35 @@ import logging
 
 ID = "part"
 permission = 3
-privmsgEnabled = True
+privmsg_enabled = True
 
 logger = logging.getLogger("cmd.part")
 
 
-async def execute(self, name, params, channel, userdata, rank, isChannel):
+async def execute(self, name, params, channel, userdata, rank, is_channel):
     channels = []
 
-    if len(params) == 0 and isChannel:
+    if len(params) == 0 and is_channel:
         channels.append(channel)
-    elif len(params) == 0 and not isChannel:
+    elif len(params) == 0 and not is_channel:
         await self.send_notice(name, "Please specify a channel")
         return
     else:
-        for chanEntry in params:
-            if chanEntry[0] != "#":
-                chanEntry = "#" + chanEntry
+        for chan_entry in params:
+            if chan_entry[0] != "#":
+                chan_entry = "#" + chan_entry
 
-            chan = self.get_channel_true_case(chanEntry)
+            chan = self.get_channel_true_case(chan_entry)
             if chan:
                 channels.append(chan)
             else:
-                logger.debug("Unknown channel: %s", chanEntry)
+                logger.debug("Unknown channel: %s", chan_entry)
 
-    partParams = ",".join(channels)
-    logger.debug("Parting: %s (channels=%s)", partParams, channels)
+    part_params = ",".join(channels)
+    logger.debug("Parting: %s (channels=%s)", part_params, channels)
 
-    if len(partParams) > 0:
-        await self.send("PART :" + partParams + "", 4)
+    if len(part_params) > 0:
+        await self.send("PART :" + part_params + "", 4)
         for chan in channels:
             del self.channel_data[chan]
 

@@ -3,7 +3,7 @@ import contextlib
 ID = "332"
 
 
-async def execute(self, sendMsg, prefix, command, params):
+async def execute(self, send_msg, prefix, command, params):
     data = params.split(" ", 2)
 
     channel = data[1]

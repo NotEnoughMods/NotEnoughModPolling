@@ -4,9 +4,9 @@ permission = 3
 
 async def execute(self, name, params, channel, userdata, rank):
     files = self._list_dir("commands")
-    currentlyLoaded = [self.commands[cmd][1] for cmd in self.commands]
+    currently_loaded = [self.commands[cmd][1] for cmd in self.commands]
 
-    for item in currentlyLoaded:
+    for item in currently_loaded:
         filename = item.partition("/")[2]
         files.remove(filename)
 

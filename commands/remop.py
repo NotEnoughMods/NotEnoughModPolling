@@ -4,7 +4,7 @@ ID = "remop"
 permission = 3
 
 
-def notInList(user, userlist):
+def not_in_list(user, userlist):
     for name in userlist:
         if name.lower() == user.lower():
             return (False, name)
@@ -18,14 +18,14 @@ async def execute(self, username, params, channel, userdata, rank):
     removed = []
 
     for name in names:
-        result, correctName = notInList(name, self.operators)
-        if not result and correctName != username:
-            self.operators.remove(correctName)
-            removed.append(correctName)
-            self.auth_tracker.unregister_user(correctName)
-            self.auth_tracker.remove_user(correctName)
-            if self.auth_tracker.is_queued(correctName):
-                self.auth_tracker.unqueue_user(correctName)
+        result, correct_name = not_in_list(name, self.operators)
+        if not result and correct_name != username:
+            self.operators.remove(correct_name)
+            removed.append(correct_name)
+            self.auth_tracker.unregister_user(correct_name)
+            self.auth_tracker.remove_user(correct_name)
+            if self.auth_tracker.is_queued(correct_name):
+                self.auth_tracker.unqueue_user(correct_name)
         else:
             notremoved.append(name)
 

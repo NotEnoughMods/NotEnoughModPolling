@@ -48,17 +48,17 @@ class TestBanListBanCRUD:
 
     def test_ban_nonexistent_group_raises(self, ban_list):
         with pytest.raises(NoSuchBanGroup):
-            ban_list.ban_user("user", groupName="NoSuchGroup")
+            ban_list.ban_user("user", group_name="NoSuchGroup")
 
     def test_unban_nonexistent_group_raises(self, ban_list):
         with pytest.raises(NoSuchBanGroup):
-            ban_list.unban_user("user", groupName="NoSuchGroup")
+            ban_list.unban_user("user", group_name="NoSuchGroup")
 
     def test_ban_in_custom_group(self, ban_list):
         ban_list.define_group("Custom")
-        result = ban_list.ban_user("testuser", groupName="Custom")
+        result = ban_list.ban_user("testuser", group_name="Custom")
         assert result is True
-        bans = ban_list.get_bans(groupName="Custom")
+        bans = ban_list.get_bans(group_name="Custom")
         assert len(bans) == 1
 
 
@@ -82,7 +82,7 @@ class TestBanListCheckBan:
 
     def test_check_ban_nonexistent_group_raises(self, ban_list):
         with pytest.raises(NoSuchBanGroup):
-            ban_list.check_ban("user", "ident", "host", groupName="Nope")
+            ban_list.check_ban("user", "ident", "host", group_name="Nope")
 
 
 class TestBanListGetBans:
@@ -94,19 +94,19 @@ class TestBanListGetBans:
 
     def test_get_bans_by_group(self, ban_list):
         ban_list.define_group("A")
-        ban_list.ban_user("user1", groupName="Global")
-        ban_list.ban_user("user2", groupName="A")
-        bans = ban_list.get_bans(groupName="A")
+        ban_list.ban_user("user1", group_name="Global")
+        ban_list.ban_user("user2", group_name="A")
+        bans = ban_list.get_bans(group_name="A")
         assert len(bans) == 1
 
     def test_get_bans_nonexistent_group_raises(self, ban_list):
         with pytest.raises(NoSuchBanGroup):
-            ban_list.get_bans(groupName="Nope")
+            ban_list.get_bans(group_name="Nope")
 
     def test_get_bans_matching_string(self, ban_list):
         ban_list.ban_user("specific")
         ban_list.ban_user("other")
-        bans = ban_list.get_bans(matchingString="specific!*@*")
+        bans = ban_list.get_bans(matching_string="specific!*@*")
         assert len(bans) == 1
 
 
@@ -119,11 +119,11 @@ class TestBanListClear:
 
     def test_clear_group_bans(self, ban_list):
         ban_list.define_group("A")
-        ban_list.ban_user("user1", groupName="Global")
-        ban_list.ban_user("user2", groupName="A")
+        ban_list.ban_user("user1", group_name="Global")
+        ban_list.ban_user("user2", group_name="A")
         ban_list.clear_group_bans("A")
-        assert len(ban_list.get_bans(groupName="A")) == 0
-        assert len(ban_list.get_bans(groupName="Global")) == 1
+        assert len(ban_list.get_bans(group_name="A")) == 0
+        assert len(ban_list.get_bans(group_name="Global")) == 1
 
 
 class TestBanListValidation:

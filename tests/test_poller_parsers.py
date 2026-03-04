@@ -34,11 +34,7 @@ class TestCheckMCForge2:
             },
         }
         mod_poller.fetch_json = AsyncMock(
-            return_value={
-                "promos": {
-                    "recommended": {"version": "14.23.5.2854", "mcversion": "1.12.2"}
-                }
-            }
+            return_value={"promos": {"recommended": {"version": "14.23.5.2854", "mcversion": "1.12.2"}}}
         )
         result = await mod_poller.CheckMCForge2("ForgeMod")
         assert result["version"] == "14.23.5.2854"
@@ -161,9 +157,7 @@ class TestCheckCurse:
         assert result == {}
 
     async def test_error_raises(self, mod_poller):
-        mod_poller.fetch_json = AsyncMock(
-            return_value={"error": "Project not found"}
-        )
+        mod_poller.fetch_json = AsyncMock(return_value={"error": "Project not found"})
         with pytest.raises(NEMPException, match="cfwidget"):
             await mod_poller.CheckCurse("CurseMod")
 
@@ -240,9 +234,7 @@ class TestCheckGitHubRelease:
             "function": "CheckGitHubRelease",
             "github": {"repo": "owner/repo", "type": "tag"},
         }
-        mod_poller.fetch_json = AsyncMock(
-            return_value=[{"tag_name": "v2.0.0", "prerelease": False, "assets": []}]
-        )
+        mod_poller.fetch_json = AsyncMock(return_value=[{"tag_name": "v2.0.0", "prerelease": False, "assets": []}])
         result = await mod_poller.CheckGitHubRelease("GHMod")
         assert result["version"] == "v2.0.0"
 
@@ -256,9 +248,7 @@ class TestCheckGitHubRelease:
             },
         }
         mod_poller.compile_regex("GHMod")
-        mod_poller.fetch_json = AsyncMock(
-            return_value=[{"tag_name": "v2.0.0", "prerelease": False, "assets": []}]
-        )
+        mod_poller.fetch_json = AsyncMock(return_value=[{"tag_name": "v2.0.0", "prerelease": False, "assets": []}])
         result = await mod_poller.CheckGitHubRelease("GHMod")
         assert result["version"] == "2.0.0"
 
@@ -267,9 +257,7 @@ class TestCheckGitHubRelease:
             "function": "CheckGitHubRelease",
             "github": {"repo": "owner/repo", "type": "tag"},
         }
-        mod_poller.fetch_json = AsyncMock(
-            return_value=[{"tag_name": "v3.0-rc1", "prerelease": True, "assets": []}]
-        )
+        mod_poller.fetch_json = AsyncMock(return_value=[{"tag_name": "v3.0-rc1", "prerelease": True, "assets": []}])
         result = await mod_poller.CheckGitHubRelease("GHMod")
         assert result["dev"] == "v3.0-rc1"
         assert "version" not in result

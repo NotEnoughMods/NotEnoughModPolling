@@ -19,9 +19,9 @@ async def execute(self, name, params, channel, userdata, rank):
                 else:
                     channels.append(chan)
 
-    partParams = ",".join(channels)
-    logger.debug("Rejoining: %s (channels=%s)", partParams, channels)
-    await self.send("PART :" + partParams + "", 4)
+    part_params = ",".join(channels)
+    logger.debug("Rejoining: %s (channels=%s)", part_params, channels)
+    await self.send("PART :" + part_params + "", 4)
     for chan in channels:
         del self.channel_data[chan]
 

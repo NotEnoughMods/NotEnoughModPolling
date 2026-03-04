@@ -9,24 +9,24 @@ from task_pool import FunctionNameAlreadyExists, TaskHandle, TaskPool
 class TestTaskHandle:
     def test_set_stop_timer(self):
         handle = TaskHandle("test", MagicMock(), asyncio.Queue())
-        handle.setTimer()
-        handle.stopTimer()
-        assert handle.timeDelta is not None
-        assert handle.timeDelta >= 0
+        handle.set_timer()
+        handle.stop_timer()
+        assert handle.time_delta is not None
+        assert handle.time_delta >= 0
 
     def test_stop_timer_without_start_raises(self):
         handle = TaskHandle("test", MagicMock(), asyncio.Queue())
         with pytest.raises(RuntimeError):
-            handle.stopTimer()
+            handle.stop_timer()
 
     def test_get_time_diff_without_start_raises(self):
         handle = TaskHandle("test", MagicMock(), asyncio.Queue())
         with pytest.raises(RuntimeError):
-            handle.getTimeDiff()
+            handle.get_time_diff()
 
     def test_time_delta_none_before_stop(self):
         handle = TaskHandle("test", MagicMock(), asyncio.Queue())
-        assert handle.timeDelta is None
+        assert handle.time_delta is None
 
 
 class TestTaskPool:

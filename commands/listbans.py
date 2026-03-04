@@ -14,23 +14,23 @@ async def execute(self, user, params, channel, userdata, rank):
         )
 
     elif len(params) >= 1:
-        groupName = params[0]
+        group_name = params[0]
 
         try:
-            bans = [self.ban_list.unescape_banstring(banTuple[1]) for banTuple in self.ban_list.get_bans(groupName)]
+            bans = [self.ban_list.unescape_banstring(ban_tuple[1]) for ban_tuple in self.ban_list.get_bans(group_name)]
             output = ", ".join(bans)
 
             if len(bans) == 0:
-                await self.send_notice(user, f"The group '{groupName}' contains no bans.")
+                await self.send_notice(user, f"The group '{group_name}' contains no bans.")
             elif len(bans) == 1:
                 await self.send_notice(
                     user,
-                    f"The group '{groupName}' contains the following ban: {output}",
+                    f"The group '{group_name}' contains the following ban: {output}",
                 )
             elif len(bans) > 1:
                 await self.send_notice(
                     user,
-                    f"The group '{groupName}' contains the following bans:",
+                    f"The group '{group_name}' contains the following bans:",
                 )
                 await self.send_notice(user, output)
 

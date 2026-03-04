@@ -5,7 +5,7 @@ ID = "QUIT"
 logger = logging.getLogger("irc.quit")
 
 
-async def execute(self, sendMsg, prefix, command, params):
+async def execute(self, send_msg, prefix, command, params):
     part1 = prefix.partition("!")
     part2 = part1[2].partition("@")
 
@@ -13,10 +13,10 @@ async def execute(self, sendMsg, prefix, command, params):
     ident = part2[0]
     host = part2[2]
 
-    quitReason = params[1:]
-    logger.debug("User quit: %s (%s)", name, quitReason)
+    quit_reason = params[1:]
+    logger.debug("User quit: %s (%s)", name, quit_reason)
 
-    await self.events["userquit"].run_all_events(self, name, ident, host, quitReason)
+    await self.events["userquit"].run_all_events(self, name, ident, host, quit_reason)
 
     for chan in self.channel_data:
         for i in range(len(self.channel_data[chan]["Userlist"])):

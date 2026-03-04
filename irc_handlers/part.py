@@ -5,7 +5,7 @@ ID = "PART"
 logger = logging.getLogger("irc.part")
 
 
-async def execute(self, sendMsg, prefix, command, params):
+async def execute(self, send_msg, prefix, command, params):
     logger.debug("Channel part: %s %s", prefix, params)
 
     part1 = prefix.partition("!")

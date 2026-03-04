@@ -18,7 +18,7 @@ async def execute(self, name, params, channel, userdata, rank):
     if len(params) == 1 and params[0] == "on":
         if not self.events["time"].event_exists("TestFunc"):
             await self.send_chat_message(self.send, channel, "Turning timerevent on.")
-            self.timerChannel = channel
+            self.timer_channel = channel
             self.events["time"].add_event("TestFunc", 60, timer)
         else:
             await self.send_chat_message(self.send, channel, "Timerevent is already running.")

@@ -11,8 +11,8 @@ from irc_connection import IrcConnection
 
 
 class IrcBot:
-    def __init__(self, configObj):
-        config = configObj.config
+    def __init__(self, config_obj):
+        config = config_obj.config
 
         self.host = config["connection"]["server"]
         self.port = config["connection"]["port"]
@@ -21,8 +21,8 @@ class IrcBot:
         self.ident = config["connection"]["ident"]
         self.realname = config["connection"]["realname"]
 
-        self.forceIPv6 = config["networking"]["force_ipv6"]
-        self.bindIP = config["networking"]["bind_address"]
+        self.force_ipv6 = config["networking"]["force_ipv6"]
+        self.bind_ip = config["networking"]["bind_address"]
 
         self.adminlist = config["administration"]["operators"]
         self.prefix = config["administration"]["command_prefix"]
@@ -39,15 +39,15 @@ class IrcBot:
         local_addr = None
         family = 0
 
-        if self.forceIPv6:
+        if self.force_ipv6:
             if not socket.has_ipv6:
                 raise RuntimeError("IPv6 isn't supported on this platform. Please check the config file.")
             family = socket.AF_INET6
-            if self.bindIP:
-                local_addr = (self.bindIP, 0)
+            if self.bind_ip:
+                local_addr = (self.bind_ip, 0)
         else:
-            if self.bindIP:
-                local_addr = (self.bindIP, 0)
+            if self.bind_ip:
+                local_addr = (self.bind_ip, 0)
 
         await self.conn.connect(self.host, self.port, local_addr=local_addr, family=family)
 
@@ -55,9 +55,9 @@ class IrcBot:
         write_task = asyncio.create_task(self.conn.write_loop())
 
         if self.password:
-            await self.conn.sendMsg("PASS " + self.password)
-        await self.conn.sendMsg("NICK " + self.name)
-        await self.conn.sendMsg(f"USER {self.ident} * * {self.realname}")
+            await self.conn.send_msg("PASS " + self.password)
+        await self.conn.send_msg("NICK " + self.name)
+        await self.conn.send_msg(f"USER {self.ident} * * {self.realname}")
 
         self.command_router = CommandRouter(
             self.channels,
@@ -87,7 +87,7 @@ class IrcBot:
 
                 # PING must respond instantly — run inline, no lock
                 if command == "PING":
-                    await self.command_router.handle(self.conn.sendMsg, prefix, command, params, self.nickserv_auth)
+                    await self.command_router.handle(self.conn.send_msg, prefix, command, params, self.nickserv_auth)
                 else:
                     # All other handlers run as tasks, serialized by lock
                     task = asyncio.create_task(self._locked_handle(prefix, command, params))
@@ -104,7 +104,7 @@ class IrcBot:
             with contextlib.suppress(asyncio.CancelledError):
                 await timer_task
             await self.command_router.close()
-            await self.conn.sendMsg("QUIT :Shutting down")
+            await self.conn.send_msg("QUIT :Shutting down")
             try:
                 await self.conn.flush(timeout=5)
             except TimeoutError:
@@ -116,19 +116,19 @@ class IrcBot:
             self._logger.info("Connection closed.")
 
     def _parse_message(self, msg):
-        msgParts = msg.split(" ", 2)
-        prefix = msgParts[0][1:] if msgParts[0][0] == ":" else None
+        msg_parts = msg.split(" ", 2)
+        prefix = msg_parts[0][1:] if msg_parts[0][0] == ":" else None
         if prefix is None:
-            command = msgParts[0]
-            params = msgParts[1] if len(msgParts) > 1 else ""
+            command = msg_parts[0]
+            params = msg_parts[1] if len(msg_parts) > 1 else ""
         else:
-            command = msgParts[1]
-            params = msgParts[2] if len(msgParts) > 2 else ""
+            command = msg_parts[1]
+            params = msg_parts[2] if len(msg_parts) > 2 else ""
         return prefix, command, params
 
     async def _locked_handle(self, prefix, command, params):
         async with self.command_router._handler_lock:
-            await self.command_router.handle(self.conn.sendMsg, prefix, command, params, self.nickserv_auth)
+            await self.command_router.handle(self.conn.send_msg, prefix, command, params, self.nickserv_auth)
 
     async def _timer_loop(self):
         """Periodically check timer events."""
@@ -139,7 +139,7 @@ class IrcBot:
         except asyncio.CancelledError:
             pass
 
-    def customNickAuth(self, result):
+    def custom_nick_auth(self, result):
         if isinstance(result, str):
             self.nickserv_auth = result
         else:
@@ -154,11 +154,11 @@ def write_starting_date():
 async def async_main():
     write_starting_date()
 
-    configObj = Configuration()
-    configObj.load_config()
-    configObj.check_options()
+    config_obj = Configuration()
+    config_obj.load_config()
+    config_obj.check_options()
 
-    bot = IrcBot(configObj)
+    bot = IrcBot(config_obj)
     log = False
 
     try:

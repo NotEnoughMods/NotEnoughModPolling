@@ -18,9 +18,9 @@ from pyparsing import (
 
 
 class CalcTimeoutException(Exception):
-    def __init__(self, timelimit, stoppedAt):
-        self.timelimit = timelimit
-        self.stopped = stoppedAt
+    def __init__(self, time_limit, stopped_at):
+        self.timelimit = time_limit
+        self.stopped = stopped_at
 
     def __str__(self):
         return f"Calculation took more than {self.timelimit} seconds, please simplify your term."
@@ -107,7 +107,7 @@ class EvalPow:
     def eval(self, vars_):
         prod = self.value[0].eval(vars_)
 
-        for _op, val in operatorOperands(self.value[1:]):
+        for _op, val in operator_operands(self.value[1:]):
             prod = math.pow(prod, val.eval(vars_))
 
         return prod
@@ -124,7 +124,7 @@ class EvalSignOp:
         return mult * self.value.eval(vars_)
 
 
-def operatorOperands(tokenlist):
+def operator_operands(tokenlist):
     "generator to extract operators and operands in pairs"
     it = iter(tokenlist)
     while 1:
@@ -144,7 +144,7 @@ class EvalMultOp:
 
     def eval(self, vars_):
         prod = self.value[0].eval(vars_)
-        for op, val in operatorOperands(self.value[1:]):
+        for op, val in operator_operands(self.value[1:]):
             if op == "*":
                 prod *= val.eval(vars_)
             if op == "/":
@@ -164,7 +164,7 @@ class EvalAddOp:
 
     def eval(self, vars_):
         sum = self.value[0].eval(vars_)
-        for op, val in operatorOperands(self.value[1:]):
+        for op, val in operator_operands(self.value[1:]):
             if op == "+":
                 sum += val.eval(vars_)
             if op == "-":
@@ -172,7 +172,7 @@ class EvalAddOp:
         return sum
 
 
-trigFunctions = {
+trig_functions = {
     "sin": math.sin,
     "cos": math.cos,
     "tan": math.tan,
@@ -189,7 +189,7 @@ class EvalTrig:
         self.sign, self.value = tokens[0]
 
     def eval(self, vars_):
-        return trigFunctions[self.sign](math.radians(self.value.eval(vars_)))
+        return trig_functions[self.sign](math.radians(self.value.eval(vars_)))
 
 
 class EvalHexBinDisp:
@@ -214,7 +214,7 @@ class EvalBinOperators:
 
     def eval(self, vars_):
         prod = self.value[0].eval(vars_)
-        for op, val in operatorOperands(self.value[1:]):
+        for op, val in operator_operands(self.value[1:]):
             if op == "&":
                 prod = prod & val.eval(vars_)
             if op == "|":
@@ -273,9 +273,9 @@ class Arith:
     plusop = oneOf("+ -")
     trig = oneOf("sin cos tan asin acos atan")
     binary = oneOf("bin hex")
-    binOp = oneOf("& | ^ << >>")
-    logOp = oneOf("log ln")
-    binhexUse = oneOf("0x 0b")
+    bin_op = oneOf("& | ^ << >>")
+    log_op = oneOf("log ln")
+    binhex_use = oneOf("0x 0b")
     factorial = "!"
 
     # use parse actions to attach EvalXXX constructors to sub-expressions
@@ -285,13 +285,13 @@ class Arith:
     arith_expr = infix_notation(
         operand,
         [
-            (logOp, 1, opAssoc.RIGHT, EvalLog),
+            (log_op, 1, opAssoc.RIGHT, EvalLog),
             (signop, 1, opAssoc.RIGHT, EvalSignOp),
             (expop, 2, opAssoc.RIGHT, EvalPow),
             (multop, 2, opAssoc.LEFT, EvalMultOp),
             (plusop, 2, opAssoc.LEFT, EvalAddOp),
             (trig, 1, opAssoc.RIGHT, EvalTrig),
-            (binOp, 2, opAssoc.RIGHT, EvalBinOperators),
+            (bin_op, 2, opAssoc.RIGHT, EvalBinOperators),
             (binary, 1, opAssoc.RIGHT, EvalHexBinDisp),
             (factorial, 1, opAssoc.LEFT, EvalFactorial),
         ],
@@ -308,10 +308,10 @@ class Arith:
     def setvar(self, var, val):
         self.vars_[var] = val
 
-    def eval(self, strExpr):
+    def eval(self, str_expr):
         setattr(self.arith_expr, "__startTime", timer())
 
-        ret = self.arith_expr.parseString(strExpr, parseAll=False)[0]
+        ret = self.arith_expr.parseString(str_expr, parseAll=False)[0]
         result = ret.eval(self.vars_)
         return result
 

@@ -23,7 +23,7 @@ class InvalidVersion(NEMPException):
 
 class ModPoller:
     def __init__(self):
-        self.nemVersions = []
+        self.nem_versions = []
         self.mods = {}
         self.document_groups = {}
         self.invalid_versions = []
@@ -39,14 +39,16 @@ class ModPoller:
         self.load_config()
         self.load_version_blocklist()
         self.load_mc_mapping()
-        self.buildModDict()
+        self.build_mod_dict()
 
-    async def fetch_page(self, url, timeout=10, decode_json=False, **kwargs):
+    async def fetch_page(self, url, timeout=10, decode_json=False, ratelimit=True, **kwargs):
         host = urllib.parse.urlparse(url).hostname
         if host not in self._host_locks:
             self._host_locks[host] = asyncio.Lock()
 
-        async with self._host_locks[host]:
+        lock = self._host_locks[host] if ratelimit else contextlib.nullcontext()
+
+        async with lock:
             async with self.session.get(url, timeout=aiohttp.ClientTimeout(total=timeout), **kwargs) as response:
                 if 400 <= response.status < 500:
                     raise NEMPException(f"HTTP {response.status} for {url}")
@@ -57,7 +59,8 @@ class ModPoller:
                 else:
                     result = await response.text()
 
-            await asyncio.sleep(self._host_delay)
+            if ratelimit:
+                await asyncio.sleep(self._host_delay)
             return result
 
     async def fetch_json(self, *args, **kwargs):
@@ -138,7 +141,7 @@ class ModPoller:
     def match_mod_regex(self, mod, data):
         return self.mods[mod]["_regex"].search(data)
 
-    def buildModDict(self):
+    def build_mod_dict(self):
         with open("mod_polling/mods.json", "rb") as modList:
             self.mods = json.load(modList)
 
@@ -153,11 +156,11 @@ class ModPoller:
                 else:
                     self.document_groups[self.mods[mod]["document_group"]["id"]] = [mod]
 
-    def buildHTML(self):
+    def build_html(self):
         self.jinja_env.get_template("index.jinja2").stream(mods=self.mods).dump("mod_polling/htdocs/index.html")
 
-    async def QueryNEM(self):
-        self.nemVersions = await self.fetch_json("https://bot.notenoughmods.com/?json")
+    async def query_nem(self):
+        self.nem_versions = await self.fetch_json("https://bot.notenoughmods.com/?json")
 
     async def init_nem_versions(self):
         our_mods = {}
@@ -170,13 +173,15 @@ class ModPoller:
             our_mods.setdefault(nem_mod_name, []).append(json_mod_name)
 
         # for MC version in NEM's list
-        for nem_list_name in self.nemVersions:
+        for nem_list_name in self.nem_versions:
             if nem_list_name in self.mc_mapping:
                 # TODO
                 continue
 
             # Get the NEM List for this MC Version
-            nem_list = await self.fetch_json("https://bot.notenoughmods.com/" + nem_list_name + ".json")
+            nem_list = await self.fetch_json(
+                "https://bot.notenoughmods.com/" + nem_list_name + ".json", ratelimit=False
+            )
 
             # For each NEM Mod...
             for nem_mod in nem_list:
@@ -514,7 +519,7 @@ class ModPoller:
 
         return None
 
-    async def CheckMod(self, mod, document=None, simulation=False):
+    async def check_mod(self, mod, document=None, simulation=False):
         try:
             output = await getattr(self, self.mods[mod]["function"])(mod, document=document, simulation=simulation)
 
@@ -600,7 +605,7 @@ class ModPoller:
             logger.error("%s failed to be polled", mod, exc_info=True)
             return ([], e)  # an exception was raised, so we return a True
 
-    async def CheckMods(self, mod):
+    async def check_mods(self, mod):
         # We need to know what mods this document_group uses
         group_mod_names = self.document_groups[self.mods[mod]["document_group"]["id"]]
 
@@ -629,7 +634,7 @@ class ModPoller:
         # Ok, time to parse it for each mod
         for tempMod in group_mod_names:
             try:
-                output[tempMod] = await self.CheckMod(tempMod, document)
+                output[tempMod] = await self.check_mod(tempMod, document)
             except Exception as e:
                 logger.error("%s failed to be polled (document_group)", tempMod, exc_info=True)
                 output[tempMod] = ([], e)
@@ -643,7 +648,7 @@ async def setup():
         headers={"User-agent": "NotEnoughMods:Polling/2.0 (+https://github.com/NotEnoughMods/NotEnoughModPolling)"},
     )
     await nem.load_mc_blocklist()
-    await nem.QueryNEM()
+    await nem.query_nem()
     await nem.init_nem_versions()
-    nem.buildHTML()
+    nem.build_html()
     return nem

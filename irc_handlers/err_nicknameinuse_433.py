@@ -5,5 +5,5 @@ ID = "433"
 logger = logging.getLogger("irc.err.433")
 
 
-async def execute(self, sendMsg, msgprefix, command, params):
+async def execute(self, send_msg, msgprefix, command, params):
     logger.debug("ERR_NICKNAMEINUSE: %s %s", msgprefix, params)

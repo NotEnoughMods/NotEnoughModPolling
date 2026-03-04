@@ -63,12 +63,12 @@ def setup(self, startup):
 # if the user is allowed to read the help information, please consider that when you define a
 # function for showing information about the command.
 
-def helpHandler(self, name, params, channel, userdata, rank):
+def help_handler(self, name, params, channel, userdata, rank):
     help_log.debug("Hi, I am an example for a custom help handler!")
 
 def setup(self, startup):
     entry = self.helper.new_help(commandName)
-    entry.set_custom_handler(helpHandler)
+    entry.set_custom_handler(help_handler)
     entry.rank = 0
     self.helper.register_help(entry, overwrite = True)
 
@@ -129,34 +129,34 @@ class HelpEntity:
 
 class HelpModule:
     def __init__(self):
-        self.helpDB = {}
+        self.help_db = {}
         help_log.info("HelpModule Database initialized")
 
     def new_help(self, cmdname):
         help_log.debug("New HelpEntity for '%s' initialized", cmdname)
         return HelpEntity(cmdname)
 
-    def register_help(self, helpObject, overwrite=False):
+    def register_help(self, help_object, overwrite=False):
 
-        if not isinstance(helpObject, HelpEntity):
-            raise TypeError(f"Invalid Object provided: '{helpObject}' (type: {type(helpObject)})")
-        elif helpObject.cmdname in self.helpDB and not overwrite:
+        if not isinstance(help_object, HelpEntity):
+            raise TypeError(f"Invalid Object provided: '{help_object}' (type: {type(help_object)})")
+        elif help_object.cmdname in self.help_db and not overwrite:
             raise RuntimeError("Conflict Error: A command with such a name already exists!")
-        elif helpObject.cmdname in self.helpDB and overwrite:
-            help_log.warning("A command with such a name is already registered: '%s'", helpObject.cmdname)
-            self.helpDB[helpObject.cmdname] = helpObject
+        elif help_object.cmdname in self.help_db and overwrite:
+            help_log.warning("A command with such a name is already registered: '%s'", help_object.cmdname)
+            self.help_db[help_object.cmdname] = help_object
             help_log.debug(
                 "Registered Help for command '%s', but a help entry already exists.",
-                helpObject.cmdname,
+                help_object.cmdname,
             )
         else:
-            self.helpDB[helpObject.cmdname] = helpObject
+            self.help_db[help_object.cmdname] = help_object
 
-        help_log.debug("Registered Help for command '%s'", helpObject.cmdname)
+        help_log.debug("Registered Help for command '%s'", help_object.cmdname)
 
     def unregister_help(self, cmdname):
-        del self.helpDB[cmdname]
+        del self.help_db[cmdname]
         help_log.debug("Deleted Help for command '%s'", cmdname)
 
     def get_command_help(self, cmdname):
-        return self.helpDB[cmdname]
+        return self.help_db[cmdname]

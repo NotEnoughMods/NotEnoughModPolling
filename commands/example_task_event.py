@@ -4,7 +4,7 @@ import random
 
 ID = "taskevent"
 permission = 3
-privmsgEnabled = False
+privmsg_enabled = False
 
 logger = logging.getLogger("cmd.taskevent")
 
@@ -40,7 +40,7 @@ async def execute(self, name, params, channel, userdata, rank):
     if len(params) == 1 and params[0] == "on":
         if not self.events["time"].event_exists("taskChecker"):
             await self.send_chat_message(self.send, channel, "Turning task event on.")
-            self.timerChannel = channel
+            self.timer_channel = channel
             self.events["time"].add_event("taskChecker", 1, task_checker, [channel])
 
             self.task_pool.add_task("taskTest", example_task)

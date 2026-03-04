@@ -5,5 +5,5 @@ ID = "NOTICE"
 logger = logging.getLogger("irc.notice")
 
 
-async def execute(self, sendMsg, prefix, command, params):
+async def execute(self, send_msg, prefix, command, params):
     logger.debug("Notice: %s", params)

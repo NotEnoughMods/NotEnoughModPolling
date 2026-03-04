@@ -7,7 +7,7 @@ class TestSendMsg:
     async def test_sanitizes_cr_lf(self):
         conn = IrcConnection()
         msg = "PRIVMSG #chan :hello\r\nworld"
-        await conn.sendMsg(msg)
+        await conn.send_msg(msg)
         queued = await conn._write_queue.get()
         # CR and LF should be replaced with spaces, then \r\n appended
         assert queued == "PRIVMSG #chan :hello  world\r\n"

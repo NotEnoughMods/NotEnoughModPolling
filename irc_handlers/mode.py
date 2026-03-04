@@ -5,7 +5,7 @@ ID = "MODE"
 logger = logging.getLogger("irc.mode")
 
 
-async def execute(self, sendMsg, prefix, command, params):
+async def execute(self, send_msg, prefix, command, params):
     logger.debug("Mode change: %s %s", prefix, params)
     splitted = params.split(" ")
 

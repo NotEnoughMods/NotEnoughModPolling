@@ -2,7 +2,7 @@ import time
 
 ID = "time"
 permission = 2
-privmsgEnabled = True
+privmsg_enabled = True
 
 
 async def execute(self, name, params, channel, userdata, rank, chan):

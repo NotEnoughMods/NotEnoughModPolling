@@ -7,10 +7,10 @@ async def pinger(self, channels):
     if self.server is not None:
         await self.send("PING " + self.server, 0)
         # print "PING SENT TO "+self.server
-        self.lastPing = time.time()
+        self.last_ping = time.time()
 
 
-async def execute(self, sendMsg, prefix, command, params):
+async def execute(self, send_msg, prefix, command, params):
     split = params.split(" ")
 
     server = split[1]

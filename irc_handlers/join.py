@@ -5,7 +5,7 @@ ID = "JOIN"
 logger = logging.getLogger("irc.join")
 
 
-async def execute(self, sendMsg, prefix, command, params):
+async def execute(self, send_msg, prefix, command, params):
     logger.debug("Channel join: %s %s", prefix, params)
 
     part1 = prefix.partition("!")

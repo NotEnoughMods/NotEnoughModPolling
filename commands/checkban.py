@@ -9,7 +9,7 @@ async def execute(self, user, params, channel, userdata, rank):
     if len(params) >= 1:
         userstring = params[0]
 
-        bans = self.ban_list.get_bans(matchingString=userstring)
+        bans = self.ban_list.get_bans(matching_string=userstring)
 
         output = []
         for ban in bans:

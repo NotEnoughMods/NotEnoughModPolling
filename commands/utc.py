@@ -2,17 +2,17 @@ import time
 
 ID = "utc"
 permission = 0
-privmsgEnabled = True
+privmsg_enabled = True
 
 
 async def execute(self, name, params, channel, userdata, rank, chan):
-    UTCtime = time.time()
+    utc_time = time.time()
 
     destination = channel if chan else name
 
     if len(params) > 0:
-        tzParameter = params[0]
-        sign = tzParameter[0]
+        tz_parameter = params[0]
+        sign = tz_parameter[0]
 
         if sign == "+":
             sign = 1
@@ -26,7 +26,7 @@ async def execute(self, name, params, channel, userdata, rank, chan):
             )
             return
 
-        timeoffset = tzParameter[1:]
+        timeoffset = tz_parameter[1:]
 
         if ":" in timeoffset:
             hour, minute = timeoffset.split(":", 1)
@@ -39,8 +39,8 @@ async def execute(self, name, params, channel, userdata, rank, chan):
                 )
                 return
 
-            tzOffsetHour = sign * int(hour)
-            tzOffsetMinute = sign * int(minute)
+            tz_offset_hour = sign * int(hour)
+            tz_offset_minute = sign * int(minute)
 
         else:
             if not timeoffset.isdigit():
@@ -51,18 +51,18 @@ async def execute(self, name, params, channel, userdata, rank, chan):
                 )
                 return
 
-            tzOffsetHour = sign * int(timeoffset)
-            tzOffsetMinute = 0
+            tz_offset_hour = sign * int(timeoffset)
+            tz_offset_minute = 0
 
     else:
-        tzOffsetHour = 0
-        tzOffsetMinute = 0
+        tz_offset_hour = 0
+        tz_offset_minute = 0
 
-    offsetTime = UTCtime + 3600 * tzOffsetHour + 60 * tzOffsetMinute
+    offset_time = utc_time + 3600 * tz_offset_hour + 60 * tz_offset_minute
 
     try:
-        offsetUTCtime = time.gmtime(offsetTime)
-        datestring = __create_date(offsetUTCtime)
+        offset_utc_time = time.gmtime(offset_time)
+        datestring = __create_date(offset_utc_time)
     except ValueError:
         await self.send_message(
             destination,

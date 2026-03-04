@@ -5,7 +5,7 @@ ID = "PRIVMSG"
 msg_log = logging.getLogger("PRIVMSG")
 
 
-async def execute(self, sendMsg, msgprefix, command, params):
+async def execute(self, send_msg, msgprefix, command, params):
     # print params, prefix
 
     part1 = msgprefix.partition("!")
@@ -19,14 +19,14 @@ async def execute(self, sendMsg, msgprefix, command, params):
     splitted = params.split(" ", 1)
 
     channel = splitted[0]
-    chatMessage = splitted[1][1:]
+    chat_message = splitted[1][1:]
 
     if channel[0] not in "#&":
         channel = name
         is_channel = False
         perms = ""
-        # print "HELP I'M GETTING PRIVMSGD BY ",name," : ",chatMessage
-        msg_log.info("Private message from '%s' [%s@%s]: %s", name, ident, host, chatMessage)
+        # print "HELP I'M GETTING PRIVMSGD BY ",name," : ",chat_message
+        msg_log.info("Private message from '%s' [%s@%s]: %s", name, ident, host, chat_message)
     else:
         is_channel = True
         channel = self.get_channel_true_case(channel)
@@ -36,19 +36,19 @@ async def execute(self, sendMsg, msgprefix, command, params):
 
     # print msgprefix, params
 
-    msg_log.debug("<%s> %s", name, chatMessage)
+    msg_log.debug("<%s> %s", name, chat_message)
 
-    chatParams = chatMessage.rstrip().split(" ")
+    chat_params = chat_message.rstrip().split(" ")
 
-    for _i in range(chatParams.count("")):
-        chatParams.remove("")
+    for _i in range(chat_params.count("")):
+        chat_params.remove("")
 
     try:
-        chatCmd = chatParams[0][1:].lower()
-        usedPrfx = chatMessage[0]
+        chat_cmd = chat_params[0][1:].lower()
+        used_prfx = chat_message[0]
     except IndexError:
-        chatCmd = ""
-        usedPrfx = ""
+        chat_cmd = ""
+        used_prfx = ""
     # print "ok"
 
     if name in self.operators and self.auth_tracker.is_registered(name):  # and (perms == "@" or perms == "+"):
@@ -67,32 +67,32 @@ async def execute(self, sendMsg, msgprefix, command, params):
 
     # rank = {"@" : 2, "+" : 1, "" : 0}[self.get_user_rank(channel, name)]
     # print self.commands
-    # print chatCmd
-    if usedPrfx == cmdprefix and chatCmd in self.commands:
-        bannedInfo = self.ban_list.check_ban(name, ident, host)
+    # print chat_cmd
+    if used_prfx == cmdprefix and chat_cmd in self.commands:
+        banned_info = self.ban_list.check_ban(name, ident, host)
 
-        if bannedInfo[0]:
+        if banned_info[0]:
             msg_log.info(
                 "User '%s' uses command '%s', but user is globally banned.",
                 name,
-                chatCmd,
+                chat_cmd,
             )
-            msg_log.info("Ban information: %s", bannedInfo[1])
+            msg_log.info("Ban information: %s", banned_info[1])
 
             return
 
         try:
-            support = self.commands[chatCmd][0].privmsgEnabled
+            support = self.commands[chat_cmd][0].privmsg_enabled
         except AttributeError:
             support = False
 
         try:
-            if rank >= self.commands[chatCmd][0].permission:
+            if rank >= self.commands[chat_cmd][0].permission:
                 if is_channel:
                     msg_log.info(
                         "User '%s' uses command '%s' in channel '%s'",
                         name,
-                        chatCmd,
+                        chat_cmd,
                         channel,
                     )
                     msg_log.debug(
@@ -100,17 +100,17 @@ async def execute(self, sendMsg, msgprefix, command, params):
                         name,
                         ident,
                         host,
-                        chatParams[1:],
+                        chat_params[1:],
                         perms,
                     )
                 else:
-                    msg_log.info("User '%s' uses command '%s'", name, chatCmd)
+                    msg_log.info("User '%s' uses command '%s'", name, chat_cmd)
                     msg_log.debug(
                         "User info for '%s': [%s@%s] Used parameters: %s Rank: %s",
                         name,
                         ident,
                         host,
-                        chatParams[1:],
+                        chat_params[1:],
                         perms,
                     )
                     msg_log.debug(
@@ -120,17 +120,17 @@ async def execute(self, sendMsg, msgprefix, command, params):
                     )
 
                 if support:
-                    await self.commands[chatCmd][0].execute(
+                    await self.commands[chat_cmd][0].execute(
                         self,
                         name,
-                        chatParams[1:],
+                        chat_params[1:],
                         channel,
                         (ident, host),
                         perms,
                         is_channel,
                     )
                 elif not support and is_channel:
-                    await self.commands[chatCmd][0].execute(self, name, chatParams[1:], channel, (ident, host), perms)
+                    await self.commands[chat_cmd][0].execute(self, name, chat_params[1:], channel, (ident, host), perms)
 
         except KeyError:
             msg_log.exception("KeyError for command")
@@ -147,9 +147,9 @@ async def execute(self, sendMsg, msgprefix, command, params):
                 name,
                 ident,
                 host,
-                chatMessage,
+                chat_message,
             )
 
         await self.events["chat"].run_all_events(
-            self, {"name": name, "ident": ident, "host": host}, chatMessage, channel
+            self, {"name": name, "ident": ident, "host": host}, chat_message, channel
         )

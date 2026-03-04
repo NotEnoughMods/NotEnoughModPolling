@@ -19,7 +19,7 @@ MODS_JSON = Path(__file__).parent.parent / "mod_polling" / "mods.json"
 
 class TestModsJson:
     def setup_method(self):
-        self.NEM = poller.ModPoller
+        self.poller_cls = poller.ModPoller
 
         with open(MODS_JSON) as f:
             self.mods = json.load(f, object_pairs_hook=dict_raise_on_duplicates)
@@ -28,7 +28,7 @@ class TestModsJson:
         for mod, mod_info in self.mods.items():
             parser = mod_info["function"]
             assert parser.startswith("Check"), f"Parser name {parser!r} for mod {mod!r} is invalid"
-            assert hasattr(self.NEM, parser), f"Parser {parser!r} for mod {mod!r} doesn't exist"
+            assert hasattr(self.poller_cls, parser), f"Parser {parser!r} for mod {mod!r} doesn't exist"
 
     def test_curse_parser(self):
         for mod, mod_info in self.mods.items():

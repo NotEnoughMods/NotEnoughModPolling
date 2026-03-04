@@ -7,7 +7,7 @@ import time
 class LoggingModule:
     def __init__(self, loglevel="INFO"):
 
-        self.typeDict = {
+        self.type_dict = {
             "NOTSET": logging.NOTSET,
             "DEBUG": logging.DEBUG,
             "INFO": logging.INFO,
@@ -15,7 +15,7 @@ class LoggingModule:
             "ERROR": logging.ERROR,
             "CRITICAL": logging.CRITICAL,
         }
-        self.logLevel = self.typeDict[loglevel.upper()]
+        self.log_level = self.type_dict[loglevel.upper()]
 
         self._create_directory("BotLogs")
 
@@ -30,22 +30,22 @@ class LoggingModule:
 
         logging.basicConfig(
             filename=f"BotLogs/{monthfoldername}/{dayfilename}.log",
-            level=self.logLevel,
+            level=self.log_level,
             format="%(asctime)s [%(levelname)s] %(name)s:%(module)s/%(funcName)s: %(message)s",
             datefmt="%H:%M:%S",
         )
 
         ## We create a console handler and configure it
-        consoleHandler = logging.StreamHandler()
-        consoleHandler.setLevel(self.logLevel)
+        console_handler = logging.StreamHandler()
+        console_handler.setLevel(self.log_level)
 
         format = logging.Formatter(
             "%(asctime)s [%(levelname)s] %(name)s:%(module)s/%(funcName)s: %(message)s",
             datefmt="%H:%M:%S",
         )
-        consoleHandler.setFormatter(format)
+        console_handler.setFormatter(format)
 
-        logging.getLogger().addHandler(consoleHandler)
+        logging.getLogger().addHandler(console_handler)
         ## console handler configured, we should be good to go
 
         self._logger = logging.getLogger("LoggingModule")
@@ -65,19 +65,19 @@ class LoggingModule:
             raise RuntimeError(f"A file with the path {dirpath} already exists, please delete or rename it.")
 
     def _switch_filehandle_daily(self, *args):
-        newDate = datetime.date.today()
+        new_date = datetime.date.today()
 
-        if self.date < newDate:
+        if self.date < new_date:
             self._logger.info(
                 "Switching Logfile Handler because a new day begins. Old date: %s, new date: %s",
                 self.date,
-                newDate,
+                new_date,
             )
 
-            monthfoldername = newDate.strftime("%Y-%m")
-            dayfilename = newDate.strftime("%d-%m-%Y")
+            monthfoldername = new_date.strftime("%Y-%m")
+            dayfilename = new_date.strftime("%d-%m-%Y")
 
-            if self.date.month != newDate.month:
+            if self.date.month != new_date.month:
                 self._logger.info(f"Creating new folder BotLogs/{monthfoldername}")
                 self._create_directory(f"BotLogs/{monthfoldername}")
             self._logger.info(f"Creating new file BotLogs/{monthfoldername}/{dayfilename}.log")
@@ -96,7 +96,7 @@ class LoggingModule:
             # We create a new file handler with the options we used in __init__ which we add to the root logger
             # This should affect all custom loggers created in plugins, but it needs more testing
             newfile_handler = logging.FileHandler(filename)
-            newfile_handler.setLevel = self.logLevel
+            newfile_handler.setLevel = self.log_level
 
             msgformat = logging.Formatter(
                 "%(asctime)s [%(levelname)s] %(name)s:%(module)s/%(funcName)s: %(message)s",
@@ -110,14 +110,14 @@ class LoggingModule:
             self._logger.info(
                 "Logfile Handler switched. Continuing writing to new file. Old date: %s, new date: %s",
                 self.date,
-                newDate,
+                new_date,
             )
 
             offset, tzname = self.local_time_offset()
             offset = "+" + str(offset) if offset >= 0 else str(offset)
 
             self._logger.info("All time stamps are in UTC%s (%s)", offset, tzname)
-            self.date = newDate
+            self.date = new_date
 
     # Returns UTC offset and name of time zone at current time
     # Based on http://stackoverflow.com/a/13406277

@@ -6,16 +6,16 @@ from timeit import default_timer
 
 
 class EventAlreadyExists(Exception):
-    def __init__(self, eventName):
-        self.name = eventName
+    def __init__(self, event_name):
+        self.name = event_name
 
     def __str__(self):
         return self.name
 
 
 class ChannelAlreadyExists(Exception):
-    def __init__(self, chanName):
-        self.name = chanName
+    def __init__(self, chan_name):
+        self.name = chan_name
 
     def __str__(self):
         return self.name
@@ -24,10 +24,10 @@ class ChannelAlreadyExists(Exception):
 class StandardEvent:
     def __init__(self):
         self._events = {}
-        self.operationQueue = []
+        self.operation_queue = []
         self.comes_from_event = False
         self._logger = logging.getLogger("Event")
-        self.eventStats = {}
+        self.event_stats = {}
 
     def add_event(self, name, function, channel=None, from_event=False):
         if channel is None:
@@ -56,42 +56,42 @@ class StandardEvent:
                     "stats": {"average": None, "min": None, "max": None},
                 }
             else:
-                self.operationQueue.append(("add", name, function, channel))
+                self.operation_queue.append(("add", name, function, channel))
 
-    async def _execute_event(self, eventName, commandHandler, *args, **kargs):
+    async def _execute_event(self, event_name, command_handler, *args, **kargs):
         start = default_timer()
 
-        result = self._events[eventName]["function"](
-            commandHandler, self._events[eventName]["channels"], *args, **kargs
+        result = self._events[event_name]["function"](
+            command_handler, self._events[event_name]["channels"], *args, **kargs
         )
         if hasattr(result, "__await__"):
             await result
 
-        timeTaken = default_timer() - start
-        stats = self._events[eventName]["stats"]
+        time_taken = default_timer() - start
+        stats = self._events[event_name]["stats"]
 
         if stats["average"] is None:
-            stats["average"] = timeTaken
-            stats["min"] = timeTaken
-            stats["max"] = timeTaken
+            stats["average"] = time_taken
+            stats["min"] = time_taken
+            stats["max"] = time_taken
         else:
-            stats["average"] = (stats["average"] + timeTaken) / 2.0
-            if timeTaken < stats["min"]:
-                stats["min"] = timeTaken
-            if timeTaken > stats["max"]:
-                stats["max"] = timeTaken
+            stats["average"] = (stats["average"] + time_taken) / 2.0
+            if time_taken < stats["min"]:
+                stats["min"] = time_taken
+            if time_taken > stats["max"]:
+                stats["max"] = time_taken
 
-    async def run_all_events(self, commandHandler, *args, **kargs):
+    async def run_all_events(self, command_handler, *args, **kargs):
         self.comes_from_event = True
         events_snapshot = list(self._events)
         for event in events_snapshot:
             if event in self._events:
-                await self._execute_event(event, commandHandler, *args, **kargs)
+                await self._execute_event(event, command_handler, *args, **kargs)
         self.comes_from_event = False
 
-        if len(self.operationQueue) > 0:
-            for _i in range(len(self.operationQueue)):
-                oper = self.operationQueue.pop(0)
+        if len(self.operation_queue) > 0:
+            for _i in range(len(self.operation_queue)):
+                oper = self.operation_queue.pop(0)
                 if oper[0] == "add":
                     name, function, channels = oper[1], oper[2], oper[3]
                     self._events[name] = {
@@ -115,35 +115,35 @@ class StandardEvent:
             if not self.comes_from_event:
                 del self._events[event]
             else:
-                self.operationQueue.append(("del", event))
+                self.operation_queue.append(("del", event))
         else:
             raise KeyError("Trying to remove " + event + ", but it doesn't exist!")
 
     def event_exists(self, event):
         return event in self._events
 
-    def add_channel(self, eventName, channel):
-        self._logger.debug("Adding channels '%s' to event '%s'", channel, eventName)
-        if eventName not in self._events:
-            raise KeyError(str(eventName) + " does not exist!")
+    def add_channel(self, event_name, channel):
+        self._logger.debug("Adding channels '%s' to event '%s'", channel, event_name)
+        if event_name not in self._events:
+            raise KeyError(str(event_name) + " does not exist!")
         else:
-            if channel not in self._events[eventName]["channels"]:
-                self._events[eventName]["channels"].append(channel)
+            if channel not in self._events[event_name]["channels"]:
+                self._events[event_name]["channels"].append(channel)
             else:
                 raise ChannelAlreadyExists(channel)
 
-    def remove_channel(self, eventName, channel):
-        self._logger.debug("Removing channel '%s' from event '%s'", channel, eventName)
-        if eventName not in self._events:
-            raise KeyError(str(eventName) + " does not exist!")
+    def remove_channel(self, event_name, channel):
+        self._logger.debug("Removing channel '%s' from event '%s'", channel, event_name)
+        if event_name not in self._events:
+            raise KeyError(str(event_name) + " does not exist!")
         else:
-            self._events[eventName]["channels"].remove(channel)
+            self._events[event_name]["channels"].remove(channel)
 
-    def get_channels(self, eventName):
-        if eventName not in self._events:
-            raise KeyError(str(eventName) + " does not exist!")
+    def get_channels(self, event_name):
+        if event_name not in self._events:
+            raise KeyError(str(event_name) + " does not exist!")
         else:
-            return self._events[eventName]["channels"]
+            return self._events[event_name]["channels"]
 
 
 class TimerEvent(StandardEvent):
@@ -179,34 +179,34 @@ class TimerEvent(StandardEvent):
 
             if not self.comes_from_event:
                 self._events[name] = {
-                    "timeInterval": interval,
+                    "time_interval": interval,
                     "function": function,
-                    "lastExecTime": time.time(),
+                    "last_exec_time": time.time(),
                     "channels": list(channel),
                     "stats": {"average": None, "min": None, "max": None},
                 }
             else:
-                self.operationQueue.append(("add", name, function, channel, interval, time.time()))
+                self.operation_queue.append(("add", name, function, channel, interval, time.time()))
 
-    async def run_all_events(self, commandHandler):
+    async def run_all_events(self, command_handler):
         self.comes_from_event = True
-        currentTime = time.time()
+        current_time = time.time()
         events_snapshot = list(self._events)
         for event in events_snapshot:
             if event in self._events:
-                await self._execute_event(event, currentTime, commandHandler)
+                await self._execute_event(event, current_time, command_handler)
         self.comes_from_event = False
 
-        if len(self.operationQueue) > 0:
-            for _i in range(len(self.operationQueue)):
-                oper = self.operationQueue.pop(0)
+        if len(self.operation_queue) > 0:
+            for _i in range(len(self.operation_queue)):
+                oper = self.operation_queue.pop(0)
 
                 if oper[0] == "add":
                     self._events[oper[1]] = {
                         "function": oper[2],
                         "channels": list(oper[3]),
-                        "timeInterval": oper[4],
-                        "lastExecTime": oper[5],
+                        "time_interval": oper[4],
+                        "last_exec_time": oper[5],
                         "stats": {"average": None, "min": None, "max": None},
                     }
                 elif oper[0] == "del":
@@ -214,48 +214,48 @@ class TimerEvent(StandardEvent):
                 else:
                     raise RuntimeError("Whaaat?!? It is neither add nor del? EXCEPTION")
 
-    async def _execute_event(self, eventName, ntime, commandHandler):
-        last = self._events[eventName]["lastExecTime"]
-        timeInterval = self._events[eventName]["timeInterval"]
+    async def _execute_event(self, event_name, ntime, command_handler):
+        last = self._events[event_name]["last_exec_time"]
+        time_interval = self._events[event_name]["time_interval"]
 
-        if ntime - last >= timeInterval:
+        if ntime - last >= time_interval:
             start = default_timer()
 
-            result = self._events[eventName]["function"](commandHandler, self._events[eventName]["channels"])
+            result = self._events[event_name]["function"](command_handler, self._events[event_name]["channels"])
             if hasattr(result, "__await__"):
                 await result
 
-            timeTaken = default_timer() - start
-            stats = self._events[eventName]["stats"]
+            time_taken = default_timer() - start
+            stats = self._events[event_name]["stats"]
 
             if stats["average"] is None:
-                stats["average"] = timeTaken
-                stats["min"] = timeTaken
-                stats["max"] = timeTaken
+                stats["average"] = time_taken
+                stats["min"] = time_taken
+                stats["max"] = time_taken
             else:
-                stats["average"] = (stats["average"] + timeTaken) / 2.0
-                if timeTaken < stats["min"]:
-                    stats["min"] = timeTaken
-                if timeTaken > stats["max"]:
-                    stats["max"] = timeTaken
+                stats["average"] = (stats["average"] + time_taken) / 2.0
+                if time_taken < stats["min"]:
+                    stats["min"] = time_taken
+                if time_taken > stats["max"]:
+                    stats["max"] = time_taken
 
-            self._events[eventName]["lastExecTime"] = time.time()
+            self._events[event_name]["last_exec_time"] = time.time()
 
 
 class MsgEvent(StandardEvent):
-    async def run_all_events(self, commandHandler, userdata, message, channel):
+    async def run_all_events(self, command_handler, userdata, message, channel):
         self.comes_from_event = True
 
         events_snapshot = list(self._events)
         for event in events_snapshot:
             if event in self._events:
-                await self._execute_event(event, commandHandler, userdata, message, channel)
+                await self._execute_event(event, command_handler, userdata, message, channel)
 
         self.comes_from_event = False
 
-        if len(self.operationQueue) > 0:
-            for _i in range(len(self.operationQueue)):
-                oper = self.operationQueue.pop(0)
+        if len(self.operation_queue) > 0:
+            for _i in range(len(self.operation_queue)):
+                oper = self.operation_queue.pop(0)
 
                 if oper[0] == "add":
                     self._events[oper[1]] = {
@@ -268,12 +268,12 @@ class MsgEvent(StandardEvent):
                 else:
                     raise RuntimeError("Whaaat?!? It is neither add nor del? EXCEPTION")
 
-    async def _execute_event(self, eventName, commandHandler, userdata, message, channel):
+    async def _execute_event(self, event_name, command_handler, userdata, message, channel):
         start = default_timer()
 
-        result = self._events[eventName]["function"](
-            commandHandler,
-            self._events[eventName]["channels"],
+        result = self._events[event_name]["function"](
+            command_handler,
+            self._events[event_name]["channels"],
             userdata,
             message,
             channel,
@@ -281,16 +281,16 @@ class MsgEvent(StandardEvent):
         if hasattr(result, "__await__"):
             await result
 
-        timeTaken = default_timer() - start
-        stats = self._events[eventName]["stats"]
+        time_taken = default_timer() - start
+        stats = self._events[event_name]["stats"]
 
         if stats["average"] is None:
-            stats["average"] = timeTaken
-            stats["min"] = timeTaken
-            stats["max"] = timeTaken
+            stats["average"] = time_taken
+            stats["min"] = time_taken
+            stats["max"] = time_taken
         else:
-            stats["average"] = (stats["average"] + timeTaken) / 2.0
-            if timeTaken < stats["min"]:
-                stats["min"] = timeTaken
-            if timeTaken > stats["max"]:
-                stats["max"] = timeTaken
+            stats["average"] = (stats["average"] + time_taken) / 2.0
+            if time_taken < stats["min"]:
+                stats["min"] = time_taken
+            if time_taken > stats["max"]:
+                stats["max"] = time_taken

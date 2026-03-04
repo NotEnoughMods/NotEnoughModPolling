@@ -2,8 +2,8 @@ import logging
 
 
 class NameAlreadyExists(Exception):
-    def __init__(self, eventName):
-        self.name = eventName
+    def __init__(self, event_name):
+        self.name = event_name
 
     def __str__(self):
         return self.name

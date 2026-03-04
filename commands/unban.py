@@ -11,18 +11,18 @@ async def execute(self, user, params, channel, userdata, rank):
 
     elif len(params) >= 1:
         userstring = params[0]
-        countExclamationMark = userstring.count("!")
-        countAt = userstring.count("@")
+        count_exclamation_mark = userstring.count("!")
+        count_at = userstring.count("@")
 
         # We need to confirm that the string is formatted correctly:
         # 1. Exactly one ! and one @
         # 2. ! comes before @
-        if (countExclamationMark != 1) or (countAt != 1) or (userstring.find("!") > userstring.find("@")):
+        if (count_exclamation_mark != 1) or (count_at != 1) or (userstring.find("!") > userstring.find("@")):
             await self.send_notice(user, "User string should be formatted like this: username!ident@host")
             return
         else:
-            username, _, identAndHost = userstring.partition("!")
-            ident, _sep, host = identAndHost.partition("@")
+            username, _, ident_and_host = userstring.partition("!")
+            ident, _sep, host = ident_and_host.partition("@")
 
             try:
                 if len(params) == 1:

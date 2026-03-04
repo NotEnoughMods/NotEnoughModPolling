@@ -1,7 +1,7 @@
 ID = "324"
 
 
-async def execute(self, sendMsg, prefix, command, params):
+async def execute(self, send_msg, prefix, command, params):
     data = params.split(" ")
 
     channel = data[1]

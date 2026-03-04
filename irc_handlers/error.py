@@ -19,6 +19,6 @@ class ForceShutdown(Exception):
         Time: {self.time}"
 
 
-async def execute(self, sendMsg, prefix, command, params):
+async def execute(self, send_msg, prefix, command, params):
     logger.warning("Server sent an ERROR packet: %s %s", prefix, params)
     raise ForceShutdown(prefix, command, params)

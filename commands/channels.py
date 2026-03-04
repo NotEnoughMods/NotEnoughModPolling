@@ -1,6 +1,6 @@
 ID = "channels"
 permission = 3
-privmsgEnabled = True
+privmsg_enabled = True
 
 
 async def execute(self, name, params, channel, userdata, rank, chan):
