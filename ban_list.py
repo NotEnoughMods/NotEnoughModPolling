@@ -37,9 +37,11 @@ class BanList:
         self.conn = sqlite3.connect(filename)
         self.cursor = self.conn.cursor()
 
+        self._migrate_schema()
+
         # Create table for bans
         self.cursor.execute("""
-                            CREATE TABLE IF NOT EXISTS Banlist(group_name TEXT, pattern TEXT,
+                            CREATE TABLE IF NOT EXISTS ban_list(group_name TEXT, pattern TEXT,
                                                                ban_reason TEXT,
                                                                timestamp INTEGER, banlength INTEGER
                                                                )
@@ -49,10 +51,27 @@ class BanList:
         # This will be used to check if a group exists
         # when checking if a user is banned in that group.
         self.cursor.execute("""
-                            CREATE TABLE IF NOT EXISTS Bangroups(group_name TEXT)
+                            CREATE TABLE IF NOT EXISTS ban_groups(group_name TEXT)
                             """)
 
         self.define_group("Global")
+
+    def _migrate_schema(self):
+        """Migrate pre-snake_case database schema."""
+        tables = {row[0] for row in self.cursor.execute("SELECT name FROM sqlite_master WHERE type='table'").fetchall()}
+
+        for old, new in [("Banlist", "ban_list"), ("Bangroups", "ban_groups")]:
+            if old in tables and new not in tables:
+                self.cursor.execute(f"ALTER TABLE {old} RENAME TO {new}")
+                logger.info("Migrated table %s -> %s", old, new)
+
+        for table in ["ban_list", "ban_groups"]:
+            columns = [row[1] for row in self.cursor.execute(f"PRAGMA table_info({table})").fetchall()]
+            if "groupName" in columns and "group_name" not in columns:
+                self.cursor.execute(f"ALTER TABLE {table} RENAME COLUMN groupName TO group_name")
+                logger.info("Migrated column %s.groupName -> group_name", table)
+
+        self.conn.commit()
 
     # You need to define a group name if you want
     # to have your own ban groups.
@@ -64,7 +83,7 @@ class BanList:
         if not does_exist:
             self.cursor.execute(
                 """
-                                INSERT INTO Bangroups(group_name)
+                                INSERT INTO ban_groups(group_name)
                                 VALUES (?)
                                 """,
                 (group_name,),
@@ -119,14 +138,14 @@ class BanList:
 
     def clear_all_bans(self):
         self.cursor.execute("""
-                            DELETE FROM Banlist
+                            DELETE FROM ban_list
                             """)
         self.conn.commit()
 
     def clear_group_bans(self, group_name):
         self.cursor.execute(
             """
-                            DELETE FROM Banlist
+                            DELETE FROM ban_list
                             WHERE group_name = ?
                             """,
             (group_name,),
@@ -137,12 +156,12 @@ class BanList:
         if group_name is None:
             if matching_string is None:
                 self.cursor.execute("""
-                                    SELECT * FROM Banlist
+                                    SELECT * FROM ban_list
                                     """)
             else:
                 self.cursor.execute(
                     """
-                                    SELECT * FROM Banlist
+                                    SELECT * FROM ban_list
                                     WHERE ? GLOB pattern
                                     """,
                     (matching_string.lower(),),
@@ -155,7 +174,7 @@ class BanList:
                 if matching_string is None:
                     self.cursor.execute(
                         """
-                                        SELECT * FROM Banlist
+                                        SELECT * FROM ban_list
                                         WHERE group_name = ?
                                         """,
                         (group_name,),
@@ -163,7 +182,7 @@ class BanList:
                 else:
                     self.cursor.execute(
                         """
-                                        SELECT * FROM Banlist
+                                        SELECT * FROM ban_list
                                         WHERE group_name = ? AND ? GLOB pattern
                                         """,
                         (group_name, matching_string.lower()),
@@ -183,7 +202,7 @@ class BanList:
 
             self.cursor.execute(
                 """
-                                SELECT * FROM Banlist
+                                SELECT * FROM ban_list
                                 WHERE group_name = ? AND ? GLOB pattern
                                 """,
                 (group_name, banstring),
@@ -198,7 +217,7 @@ class BanList:
 
     def get_groups(self):
         self.cursor.execute("""
-                            SELECT group_name FROM Bangroups
+                            SELECT group_name FROM ban_groups
                             """)
 
         group_tuples = self.cursor.fetchall()
@@ -240,9 +259,6 @@ class BanList:
 
         return finstring.getvalue()
 
-    def __regex_return_unescaped__(self, match):
-        pass
-
     def _ban(
         self,
         banstring,
@@ -253,7 +269,7 @@ class BanList:
     ):
         self.cursor.execute(
             """
-                            INSERT INTO Banlist(group_name, pattern, ban_reason, timestamp, banlength)
+                            INSERT INTO ban_list(group_name, pattern, ban_reason, timestamp, banlength)
                             VALUES (?, ?, ?, ?, ?)
                             """,
             (group_name, banstring, ban_reason, timestamp, banlength),
@@ -264,7 +280,7 @@ class BanList:
     def _unban(self, banstring, group_name="Global"):
         self.cursor.execute(
             """
-                            DELETE FROM Banlist
+                            DELETE FROM ban_list
                             WHERE group_name = ? AND pattern = ?
                             """,
             (group_name, banstring),
@@ -275,7 +291,7 @@ class BanList:
     def _ban_exists(self, group_name, banstring):
         self.cursor.execute(
             """
-                            SELECT 1 FROM Banlist
+                            SELECT 1 FROM ban_list
                             WHERE group_name = ? AND pattern = ?
                             """,
             (group_name, banstring),
@@ -288,7 +304,7 @@ class BanList:
     def _group_exists(self, group_name):
         self.cursor.execute(
             """
-                            SELECT 1 FROM Bangroups
+                            SELECT 1 FROM ban_groups
                             WHERE group_name = ?
                             """,
             (group_name,),

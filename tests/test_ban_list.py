@@ -1,6 +1,8 @@
+import sqlite3
+
 import pytest
 
-from ban_list import InvalidCharacterUsed, NoSuchBanGroup
+from ban_list import BanList, InvalidCharacterUsed, NoSuchBanGroup
 
 
 class TestBanListGroups:
@@ -141,3 +143,33 @@ class TestBanListEscaping:
 
     def test_unescape_plain_string(self, ban_list):
         assert ban_list.unescape_banstring("plainuser") == "plainuser"
+
+
+class TestBanListMigration:
+    def test_migrate_old_schema(self, tmp_path):
+        """BanList migrates PascalCase tables and groupName columns."""
+        db_path = tmp_path / "legacy.db"
+        conn = sqlite3.connect(db_path)
+        cur = conn.cursor()
+        cur.execute(
+            "CREATE TABLE Banlist(groupName TEXT, pattern TEXT, ban_reason TEXT, timestamp INTEGER, banlength INTEGER)"
+        )
+        cur.execute("INSERT INTO Banlist VALUES ('Global', 'bad!*@*', 'test', -1, -1)")
+        cur.execute("CREATE TABLE Bangroups(groupName TEXT)")
+        cur.execute("INSERT INTO Bangroups VALUES ('Global')")
+        conn.commit()
+        conn.close()
+
+        bl = BanList(db_path)
+
+        # Old tables should no longer exist
+        tables = {row[0] for row in bl.cursor.execute("SELECT name FROM sqlite_master WHERE type='table'").fetchall()}
+        assert "Banlist" not in tables
+        assert "Bangroups" not in tables
+        assert "ban_list" in tables
+        assert "ban_groups" in tables
+
+        # Data should be accessible via the new schema
+        assert bl.get_groups() == ["Global"]
+        is_banned, _ = bl.check_ban("bad", "*", "*")
+        assert is_banned is True

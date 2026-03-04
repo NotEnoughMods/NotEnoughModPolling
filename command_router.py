@@ -55,7 +55,9 @@ class CommandRouter:
         self._handler_lock = asyncio.Lock()
 
         self.task_pool = task_pool.TaskPool()
-        self.ban_list = BanList("BannedUsers.db")
+        if os.path.exists("BannedUsers.db") and not os.path.exists("banned_users.db"):
+            os.rename("BannedUsers.db", "banned_users.db")
+        self.ban_list = BanList("banned_users.db")
 
         self.helper = HelpModule()
         self.auth = None
