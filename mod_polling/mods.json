@@ -108,7 +108,7 @@
         "active": true,
         "curse": {
             "id": "74072",
-            "regex": "TConstruct-(?P<mc>.+?)-(?P<version>.+?).jar"
+            "regex": "TConstruct-(?P<mc>.+?)-(?P<version>.+?)\\.jar"
         }
     },
     "AppliedEnergistics2": {
@@ -124,7 +124,7 @@
         "active": true,
         "curse": {
             "id": "224791",
-            "regex": "BloodMagic-(?P<mc>.+?)-(?P<version>.+?).jar"
+            "regex": "BloodMagic-(?P<mc>.+?)-(?P<version>.+?)\\.jar"
         }
     },
     "DynIMC": {
@@ -187,7 +187,7 @@
         "active": true,
         "curse": {
             "id": "64578",
-            "regex": "EnderIO ?- ?(?P<mc>.+?)-(?P<version>.+?)(?:.jar|$)"
+            "regex": "EnderIO ?- ?(?:(?P<mc>1\\.[0-9]+(?:\\.[0-9]+)*)-)?(?P<version>[0-9]+(?:\\.[0-9]+)+(?:-[a-z]+)?)\\.jar"
         }
     },
     "ProjectRed": {
@@ -195,7 +195,7 @@
         "active": true,
         "curse": {
             "id": "228702",
-            "regex": "ProjectRed-(?P<mc>.+?)-(?P<version>.+?)-.+?.jar"
+            "regex": "ProjectRed-(?P<mc>.+?)-(?P<version>.+?)-.+?\\.jar"
         }
     },
     "CoFHCore": {
@@ -243,7 +243,7 @@
         "active": true,
         "curse": {
             "id": "60028",
-            "regex": "-.+?-(?P<version>.+?).jar"
+            "regex": "-.+?-(?P<version>.+?)\\.jar"
         }
     },
     "HardcoreQuestingMode": {
@@ -251,7 +251,7 @@
         "active": true,
         "curse": {
             "id": "77027",
-            "regex": "HQM-[0-9.]+[+\\-](?P<version>[0-9]+(?:\\.[0-9]+)+(?:.+)?)\\.jar"
+            "regex": "HQM-[0-9.]+[+\\-](?P<version>[0-9]+(?:\\.[0-9]+)+)(?:-(?:(?:neo)?forge|fabric))?\\.jar"
         }
     },
     "MineMenu": {
@@ -267,7 +267,7 @@
         "active": true,
         "curse": {
             "id": "222967",
-            "regex": "Ping-.+?-(?P<version>.+?)(?:-universal)?\\.jar"
+            "regex": "Ping-(?:(?:neo)?forge-|fabric-)?(?P<mc>[0-9]+(?:\\.[0-9]+)+)-(?P<version>[0-9]+(?:\\.[0-9]+)+)(?:-universal)?\\.jar"
         }
     },
     "SecurityCraft": {
@@ -284,7 +284,7 @@
         "curse": {
             "id": "238551",
             "field": "display",
-            "regex": "\\[[0-9.]+\\] Gravestone Mod +(?P<version>[0-9.-]+)$"
+            "regex": "\\[[0-9.]+\\] Gravestone Mod +(?:(?P<mc>[0-9]+(?:\\.[0-9]+)+)-)?(?P<version>[0-9]+(?:\\.[0-9]+)+)$"
         }
     },
     "Botania": {
@@ -316,7 +316,7 @@
         "active": true,
         "curse": {
             "id": "74610",
-            "regex": "EvilCraft-(?P<mc>.+?)-(?P<version>.+?)\\.jar"
+            "regex": "EvilCraft-(?P<mc>[0-9]+(?:\\.[0-9]+)+)-(?:(?:(?:neo)?forge|fabric)-)?(?P<version>[0-9]+(?:\\.[0-9]+)+(?:-[0-9]+)?)\\.jar"
         }
     },
     "CyclopsCore": {
@@ -324,7 +324,7 @@
         "active": true,
         "curse": {
             "id": "232758",
-            "regex": "CyclopsCore-(?P<mc>.+?)-(?P<version>.+?)\\.jar"
+            "regex": "CyclopsCore-(?P<mc>[0-9]+(?:\\.[0-9]+)+)-(?:(?:(?:neo)?forge|fabric)-)?(?P<version>[0-9]+(?:\\.[0-9]+)+(?:-[0-9]+)?)\\.jar"
         }
     },
     "EverlastingAbilities": {
@@ -332,7 +332,7 @@
         "active": true,
         "curse": {
             "id": "248353",
-            "regex": "EverlastingAbilities-(?P<mc>.+?)-(?P<version>.+?)\\.jar"
+            "regex": "EverlastingAbilities-(?P<mc>[0-9]+(?:\\.[0-9]+)+)-(?:(?:(?:neo)?forge|fabric)-)?(?P<version>[0-9]+(?:\\.[0-9]+)+(?:-[0-9]+)?)\\.jar"
         }
     },
     "IntegratedTunnels": {
@@ -340,7 +340,7 @@
         "active": true,
         "curse": {
             "id": "251389",
-            "regex": "IntegratedTunnels-(?P<mc>.+?)-(?P<version>.+?)\\.jar"
+            "regex": "IntegratedTunnels-(?P<mc>[0-9]+(?:\\.[0-9]+)+)-(?:(?:(?:neo)?forge|fabric)-)?(?P<version>[0-9]+(?:\\.[0-9]+)+(?:-[0-9]+)?)\\.jar"
         }
     },
     "CapabilityProxy": {
@@ -348,7 +348,7 @@
         "active": true,
         "curse": {
             "id": "266479",
-            "regex": "CapabilityProxy-(?P<mc>.+?)-(?P<version>.+?)\\.jar"
+            "regex": "CapabilityProxy-(?P<mc>[0-9]+(?:\\.[0-9]+)+)-(?:(?:(?:neo)?forge|fabric)-)?(?P<version>[0-9]+(?:\\.[0-9]+)+(?:-[0-9]+)?)\\.jar"
         }
     },
     "StructuredCrafting": {
@@ -356,7 +356,7 @@
         "active": true,
         "curse": {
             "id": "233151",
-            "regex": "StructuredCrafting-(?P<mc>.+?)-(?P<version>.+?)\\.jar"
+            "regex": "StructuredCrafting-(?P<mc>[0-9]+(?:\\.[0-9]+)+)-(?:(?:(?:neo)?forge|fabric)-)?(?P<version>[0-9]+(?:\\.[0-9]+)+(?:-[0-9]+)?)\\.jar"
         }
     },
     "ColossalChests": {
@@ -364,7 +364,7 @@
         "active": true,
         "curse": {
             "id": "237875",
-            "regex": "ColossalChests-(?P<mc>.+?)-(?P<version>.+?)\\.jar"
+            "regex": "ColossalChests-(?P<mc>[0-9]+(?:\\.[0-9]+)+)-(?:(?:(?:neo)?forge|fabric)-)?(?P<version>[0-9]+(?:\\.[0-9]+)+(?:-[0-9]+)?)\\.jar"
         }
     },
     "IntegratedDynamics": {
@@ -372,7 +372,7 @@
         "active": true,
         "curse": {
             "id": "236307",
-            "regex": "IntegratedDynamics-(?P<mc>.+?)-(?P<version>.+?)\\.jar"
+            "regex": "IntegratedDynamics-(?P<mc>[0-9]+(?:\\.[0-9]+)+)-(?:(?:(?:neo)?forge|fabric)-)?(?P<version>[0-9]+(?:\\.[0-9]+)+(?:-[0-9]+)?)\\.jar"
         }
     },
     "CommonCapabilities": {
@@ -380,7 +380,7 @@
         "active": true,
         "curse": {
             "id": "247007",
-            "regex": "CommonCapabilities-(?P<mc>.+?)-(?P<version>.+?)\\.jar"
+            "regex": "CommonCapabilities-(?P<mc>[0-9]+(?:\\.[0-9]+)+)-(?:(?:(?:neo)?forge|fabric)-)?(?P<version>[0-9]+(?:\\.[0-9]+)+(?:-[0-9]+)?)\\.jar"
         }
     },
     "JourneyMap": {
@@ -396,7 +396,7 @@
         "active": true,
         "curse": {
             "id": "226410",
-            "regex": "ProjectE-(?P<version>.+?).jar"
+            "regex": "ProjectE-(?P<mc>[0-9]+(?:\\.[0-9]+)+)-(?P<version>.+?)\\.jar"
         }
     },
     "WorldEdit": {
@@ -412,7 +412,7 @@
         "active": true,
         "curse": {
             "id": "68528",
-            "regex": "(?:ModularSystems|modular_systems)-(?P<mc>[^-]+)-(?P<version>.+?)\\.jar"
+            "regex": "(?:Modular[_ ]?Systems|modular_systems)-(?P<mc>[^-]+)-(?P<version>.+?)\\.jar"
         }
     },
     "OpenModularTurrets": {
@@ -420,7 +420,7 @@
         "active": true,
         "curse": {
             "id": "224663",
-            "regex": "OpenModularTurrets-(?P<mc>.+?)-(?P<version>.+).jar"
+            "regex": "OpenModularTurrets-(?P<mc>.+?)-(?P<version>.+)\\.jar"
         }
     },
     "PlaceableItems": {
@@ -555,7 +555,7 @@
         "active": true,
         "curse": {
             "id": "231868",
-            "regex": "EnderCore ?- ?(?P<version>.+?)(?:\\.jar)?$"
+            "regex": "EnderCore ?- ?(?P<mc>[0-9]+(?:\\.[0-9]+)+)-(?P<version>[0-9]+(?:\\.[0-9]+)+(?:[_-]beta)?)(?:\\.jar)?$"
         }
     },
     "McJtyLib": {
@@ -563,7 +563,7 @@
         "active": true,
         "curse": {
             "id": "233105",
-            "regex": "mcjtylib-(?P<version>.+)\\.jar"
+            "regex": "mcjtylib-(?P<mc>[0-9]+(?:\\.[0-9]+)+)-(?P<version>[0-9]+(?:\\.[0-9]+)+)\\.jar"
         }
     },
     "DeepResonance": {
@@ -587,7 +587,7 @@
         "active": true,
         "curse": {
             "id": "79616",
-            "regex": "[Dd]ecocraft-(?P<version>[0-9]+(?:\\.[0-9]+)+)[_-](?P<mc>[0-9]+(?:\\.[0-9]+)+)(?:-(?:(?:neo)?forge|fabric))?\\.jar"
+            "regex": "[Dd]ecocraft-(?P<version>[0-9]+(?:\\.[0-9]+)+)[_-](?P<mc>[0-9]+(?:\\.[0-9]+)+)(?:-(?:(?:neo)?forge|fabric|slim))?\\.jar"
         }
     },
     "ImmersiveEngineering": {
@@ -595,7 +595,7 @@
         "active": true,
         "curse": {
             "id": "231951",
-            "regex": "ImmersiveEngineering-(?P<version>.+)\\.jar"
+            "regex": "ImmersiveEngineering-(?:(?P<mc>[0-9]+(?:\\.[0-9]+){1,})-)?(?P<version>[0-9]+(?:\\.[0-9]+)+(?:-[0-9]+)?)\\.jar"
         }
     },
     "VoltzEngine": {
@@ -619,7 +619,7 @@
         "active": true,
         "curse": {
             "id": "238222",
-            "regex": "jei[_-](?P<mc>.+)-(?P<version>.+)\\.jar"
+            "regex": "jei[_-](?P<mc>[0-9]+(?:\\.[0-9]+)+)-(?:(?:neo)?forge-|fabric-)?(?P<version>[0-9]+(?:\\.[0-9]+)+)\\.jar"
         }
     },
     "CookingForBlockheads": {
@@ -643,7 +643,7 @@
         "active": true,
         "curse": {
             "id": "226212",
-            "regex": "Mob-Rebirth-(?P<version>[0-9]+(?:\\.[0-9]+)+)\\+[0-9.]+\\.jar"
+            "regex": "Mob-?Rebirth-(?:(?:Fabric|Forge)-)?(?:(?P<mc>[0-9]+(?:\\.[0-9]+)+)-)?(?P<version>[0-9]+(?:\\.[0-9]+)+)(?:\\+[0-9.]+)?\\.jar"
         }
     },
     "Fire'sSurvivalTweaks": {
@@ -651,7 +651,7 @@
         "active": true,
         "curse": {
             "id": "232464",
-            "regex": "(?:Fires-?Survival-?Tweaks|Real ?Stone ?Tools)(?:-Forge)?-(?P<version>[0-9]+(?:\\.[0-9]+)+)(?:\\+|-|\\.jar)"
+            "regex": "(?:Fires-?Survival-?Tweaks|Real ?Stone ?Tools)(?:-(?:Forge|Fabric))?-(?P<version>[0-9]+(?:\\.[0-9]+)+)(?:\\+|-|\\.jar)"
         }
     },
     "SimplyCaterpillar": {
@@ -659,7 +659,7 @@
         "active": true,
         "curse": {
             "id": "245437",
-            "regex": "SimplyCaterpillar(?:-Forge)?(?:-(?P<mc>.+?))?-(?P<version>[0-9]+(?:\\.[0-9]+)+)"
+            "regex": "SimplyCaterpillar-(?:(?:Forge|Fabric|NeoForge)-)?(?P<mc>[0-9]+(?:\\.[0-9]+)+)-(?P<version>[0-9]+(?:\\.[0-9]+)+)"
         }
     },
     "Tinkers'Defense": {
@@ -667,7 +667,7 @@
         "active": true,
         "curse": {
             "id": "226910",
-            "regex": ".+?-(?P<version>.+?).jar"
+            "regex": ".+?-(?P<version>.+?)\\.jar"
         }
     },
     "MmmMmmMmmMmm": {
@@ -675,7 +675,7 @@
         "active": true,
         "curse": {
             "id": "225738",
-            "regex": ".+?-(?P<version>.+?).jar"
+            "regex": ".+?-(?P<mc>[0-9]+(?:\\.[0-9]+)*)-(?P<version>[0-9]+(?:\\.[0-9]+)+)(?:-(?:fabric|(?:neo)?forge))?\\.jar"
         }
     },
     "Pandora'sBox": {
@@ -683,7 +683,7 @@
         "active": true,
         "curse": {
             "id": "222896",
-            "regex": "-(?P<version>.+?).jar"
+            "regex": "pandorasbox-(?P<mc>[0-9]+(?:\\.[0-9]+)+)-(?:(?:Fabric|(?:Neo)?Forge)-)?(?P<version>[0-9]+(?:\\.[0-9]+)+(?:\\.release)?)\\.jar"
         }
     },
     "RecurrentComplex": {
@@ -691,7 +691,7 @@
         "active": true,
         "curse": {
             "id": "223150",
-            "regex": "-(?P<version>.+?).jar"
+            "regex": "-(?P<version>.+?)\\.jar"
         }
     },
     "BiomeTweaker": {
@@ -707,7 +707,7 @@
         "active": true,
         "curse": {
             "id": "223852",
-            "regex": "-.+?-(?P<version>.+)\\.jar"
+            "regex": "StorageDrawers-(?:(?:fabric|(?:neo)?forge)-)?(?P<mc>[0-9]+(?:\\.[0-9]+)+)-(?P<version>[0-9]+(?:\\.[0-9]+)+)\\.jar"
         }
     },
     "RealisticTorches": {
@@ -723,7 +723,7 @@
         "active": true,
         "curse": {
             "id": "241291",
-            "regex": "ExtraPlanets-(?P<version>.+?)\\.jar"
+            "regex": "ExtraPlanets-(?P<mc>[0-9]+(?:\\.[0-9]+)+)-(?P<version>[0-9]+(?:\\.[0-9]+)+)\\.jar"
         }
     },
     "Chisels&Bits": {
@@ -774,7 +774,7 @@
         "active": true,
         "curse": {
             "id": "237903",
-            "regex": "RebornCore-(?P<version>[0-9]+(?:\\.[0-9]+)+(?:-beta(?:\\.[0-9]+)?)?)\\.jar"
+            "regex": "RebornCore-(?:project\\.)?(?P<version>[0-9]+(?:\\.[0-9]+)+(?:-beta(?:\\.[0-9]+)?)?)(?:\\+build\\.[0-9]+)?\\.jar"
         }
     },
     "TechReborn": {
@@ -863,7 +863,7 @@
         "active": true,
         "curse": {
             "id": "250577",
-            "regex": "AkashicTome-(?P<version>.+).jar"
+            "regex": "AkashicTome-(?P<version>.+)\\.jar"
         }
     },
     "Morph-o-Tool": {
@@ -871,7 +871,7 @@
         "active": true,
         "curse": {
             "id": "245287",
-            "regex": "Morph-o-Tool-(?P<version>.+).jar"
+            "regex": "Morph-o-Tool-(?P<version>.+)\\.jar"
         }
     },
     "ActuallyAdditions": {
@@ -879,7 +879,7 @@
         "active": true,
         "curse": {
             "id": "228404",
-            "regex": "ActuallyAdditions-(?P<version>[0-9]+(?:\\.[0-9]+)+)(?:\\+mc[0-9.]+)?\\.jar"
+            "regex": "ActuallyAdditions-(?:(?P<mc>[0-9]+(?:\\.[0-9]+)+)-)?(?P<version>r?[0-9]+(?:\\.[0-9]+)*(?:-[0-9]+)?)(?:\\+mc[0-9.]+)?\\.jar"
         }
     },
     "XNet": {
@@ -887,7 +887,7 @@
         "active": true,
         "curse": {
             "id": "260912",
-            "regex": "xnet-(?P<version>[0-9]+(?:\\.[0-9]+)+)"
+            "regex": "xnet-(?P<mc>[0-9]+(?:\\.[0-9]+)+)-(?P<version>[0-9]+(?:\\.[0-9]+)+)"
         }
     },
     "MoreCraft": {
@@ -946,7 +946,7 @@
         "active": true,
         "curse": {
             "id": "246760",
-            "regex": "BetterWithMods-.+?-(?P<version>.+)\\.jar"
+            "regex": "Better ?With ?Mods-(?P<mc>1\\.[0-9]+(?:\\.[0-9]+)*)-(?P<version>[0-9]+(?:\\.[0-9]+)+(?:-[0-9]+)?)\\.jar"
         }
     },
     "Totemic": {
@@ -954,7 +954,7 @@
         "active": true,
         "curse": {
             "id": "237541",
-            "regex": "Totemic-.+?-(?P<version>.+)\\.jar"
+            "regex": "Totemic-(?:(?:fabric|(?:neo)?forge)-)?(?P<mc>[0-9]+(?:\\.[0-9]+)+)-(?P<version>[0-9]+(?:\\.[0-9]+)+)\\.jar"
         }
     },
     "Cyclic": {
@@ -969,7 +969,7 @@
         "active": true,
         "curse": {
             "id": "231275",
-            "regex": "Ding-.+?-(?P<version>.+)\\.jar"
+            "regex": "Ding-[0-9.]+-(?:(?:(?:Neo)?Forge|Fabric|LiteLoader)-)?(?P<version>[0-9]+(?:\\.[0-9]+)+)\\.jar"
         }
     },
     "BetterThanBunnies": {
@@ -977,7 +977,7 @@
         "active": true,
         "curse": {
             "id": "241015",
-            "regex": "BetterThanBunnies-.+?-(?P<version>.+)\\.jar"
+            "regex": "BetterThanBunnies-[0-9.]+-(?:(?:(?:Neo)?Forge|Fabric|LiteLoader)-)?(?P<version>[0-9]+(?:\\.[0-9]+)+)\\.jar"
         }
     },
     "BetterThanLlamas": {
@@ -985,7 +985,7 @@
         "active": true,
         "curse": {
             "id": "264161",
-            "regex": "BetterThanLlamas-.+?-(?P<version>.+)\\.jar"
+            "regex": "BetterThanLlamas-[0-9.]+-(?:(?:(?:Neo)?Forge|Fabric|LiteLoader)-)?(?P<version>[0-9]+(?:\\.[0-9]+)+)\\.jar"
         }
     },
     "DeathCounter": {
@@ -993,7 +993,7 @@
         "active": true,
         "curse": {
             "id": "229068",
-            "regex": "DeathCounter-.+?-(?P<version>.+)\\.jar"
+            "regex": "DeathCounter-[0-9.]+-(?:(?:(?:Neo)?Forge|Fabric|LiteLoader)-)?(?P<version>[0-9]+(?:\\.[0-9]+)+)\\.jar"
         }
     },
     "LimitedLives": {
@@ -1001,7 +1001,7 @@
         "active": true,
         "curse": {
             "id": "233040",
-            "regex": "LimitedLives-.+?-(?P<version>.+)\\.jar"
+            "regex": "LimitedLives-[0-9.]+-(?:(?:(?:Neo)?Forge|Fabric|LiteLoader)-)?(?P<version>[0-9]+(?:\\.[0-9]+)+)\\.jar"
         }
     },
     "PartyParrots": {
@@ -1009,7 +1009,7 @@
         "active": true,
         "curse": {
             "id": "277681",
-            "regex": "PartyParrots-.+?-(?P<version>.+)\\.jar"
+            "regex": "PartyParrots-[0-9.]+-(?:(?:(?:Neo)?Forge|Fabric|LiteLoader)-)?(?P<version>[0-9]+(?:\\.[0-9]+)+)\\.jar"
         }
     },
     "iChunUtil": {
@@ -1017,7 +1017,7 @@
         "active": true,
         "curse": {
             "id": "229060",
-            "regex": "iChunUtil-.+?-(?P<version>.+)\\.jar"
+            "regex": "iChunUtil-[0-9.]+-(?:(?:(?:Neo)?Forge|Fabric|LiteLoader)-)?(?P<version>[0-9]+(?:\\.[0-9]+)+)\\.jar"
         }
     },
     "AdventOfAscension": {
@@ -1025,7 +1025,7 @@
         "active": true,
         "curse": {
             "id": "311054",
-            "regex": "AoA3?-(?P<version>.+)\\.jar"
+            "regex": "AoA3?-(?P<mc>[0-9]+(?:\\.[0-9]+)+)-(?P<version>[0-9]+(?:\\.[0-9]+)*(?:-.+)?)\\.jar"
         }
     },
     "Flan'sMod": {
@@ -1049,7 +1049,7 @@
         "active": true,
         "curse": {
             "id": "288957",
-            "regex": "LumySkinPatch-(?P<version>[0-9]+(?:\\.[0-9]+)+)\\.jar"
+            "regex": "LumySkinPatch-(?:for-MC-[0-9]+(?:\\.[0-9]+)+-)?(?P<version>[0-9]+(?:\\.[0-9]+)+)\\.jar"
         }
     },
     "Silent'sGems": {
@@ -1161,7 +1161,7 @@
         "active": true,
         "curse": {
             "id": "246795",
-            "regex": "ViesCraft-[0-9]+(?:\\.[0-9]+)+(?:\\.X)?-(?P<version>[0-9]+(?:\\.[0-9]+)+(?:-.+)?)\\.jar"
+            "regex": "(?:ViesCraft|viescraftmachines|vc)[_-]+[0-9]+(?:\\.[0-9]+)+(?:\\.X)?[_-](?P<version>[0-9]+(?:\\.[0-9]+)+(?:-.+)?)\\.jar"
         }
     },
     "Macaw'sBridges": {
