@@ -7,7 +7,7 @@ Parsers are methods on `ModPoller` that fetch version information for a mod from
 When a mod is polled, `check_mod()` calls:
 
 ```python
-getattr(self, "check_" + self.mods[mod]["parser"])(mod, document=document)
+getattr(self, "check_" + self.mods[mod]["parser"])(mod)
 ```
 
 So `"parser": "cfwidget"` dispatches to `check_cfwidget()`, `"parser": "forge_json"` dispatches to `check_forge_json()`, and so on.
@@ -56,7 +56,6 @@ These keys can appear on any mod entry regardless of parser:
 | `mc` | string | Default Minecraft version (fallback when a legacy parser doesn't return one) |
 | `category` | string | Organizational category (e.g. `"forge"`) |
 | `changelog` | string | Static changelog URL (suppresses per-poll changelog from parsers) |
-| `document_group` | object | See [Document groups](#document-groups) below |
 
 ---
 
@@ -337,47 +336,3 @@ A hardcoded parser for BuildCraft specifically. Takes no configuration.
 ```
 
 No additional configuration or regex needed.
-
----
-
-## Document groups
-
-Document groups let multiple mods share a single HTTP fetch. This is useful when several mods publish their versions on the same page or JSON endpoint.
-
-### How it works
-
-1. At startup, `build_mod_dict()` collects all mods with a `"document_group"` key and groups them by `document_group.id`.
-2. When polling, `check_mods()` is called instead of `check_mod()`:
-   - It verifies all mods in the group use the same parser.
-   - It calls the parser once to fetch the document.
-   - It then calls `check_mod()` for each mod in the group, passing the fetched document via the `document` parameter.
-3. Each mod's own regex is applied individually to the shared document.
-
-### `mods.json` format
-
-```json
-{
-    "ModA": {
-        "parser": "html",
-        "html": {
-            "url": "https://example.com/versions",
-            "regex": "ModA-(?P<version>[0-9.]+) for (?P<mc>[0-9.]+)"
-        },
-        "document_group": {
-            "id": "example-versions-page"
-        }
-    },
-    "ModB": {
-        "parser": "html",
-        "html": {
-            "url": "https://example.com/versions",
-            "regex": "ModB-(?P<version>[0-9.]+) for (?P<mc>[0-9.]+)"
-        },
-        "document_group": {
-            "id": "example-versions-page"
-        }
-    }
-}
-```
-
-All mods sharing a `document_group.id` **must** use the same parser. The URL only needs to match on the mod that triggers the initial fetch (in practice they should all have the same URL).

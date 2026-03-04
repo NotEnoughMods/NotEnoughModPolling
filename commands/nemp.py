@@ -308,25 +308,6 @@ async def _poll_single_mod(poller, mod_name):
     return ([(mod_name, statuses)], [])
 
 
-async def _poll_document_group(poller, mod_name, document_group):
-    """Poll a document group, returning (poll_results, failed)."""
-    try:
-        mod_results = await poller.check_mods(mod_name)
-    except Exception as e:
-        document_group_mods = poller.document_groups[document_group]
-        return ([], [FailedModEntry(name=m, exception=e) for m in document_group_mods])
-
-    poll_results = []
-    failed = []
-    for output_mod, output_info in mod_results.items():
-        result, exception = output_info
-        if exception:
-            failed.append(FailedModEntry(name=output_mod, exception=exception))
-        else:
-            poll_results.append((output_mod, result))
-    return (poll_results, failed)
-
-
 async def polling_task(self, pipe):
     poller = self.base["poller"]
     sleep_time = self.base["poll_time"]
@@ -335,21 +316,12 @@ async def polling_task(self, pipe):
         nemp_logger.debug("polling_task: I'm still running!")
 
         coros = []
-        document_groups_done = set()
 
         for mod_name, mod_info in poller.mods.items():
             if not mod_info["active"]:
                 continue
 
-            document_group = mod_info.get("document_group", {}).get("id")
-
-            if document_group:
-                if document_group in document_groups_done:
-                    continue
-                document_groups_done.add(document_group)
-                coros.append(_poll_document_group(poller, mod_name, document_group))
-            else:
-                coros.append(_poll_single_mod(poller, mod_name))
+            coros.append(_poll_single_mod(poller, mod_name))
 
         results = await asyncio.gather(*coros, return_exceptions=True)
 
@@ -700,19 +672,7 @@ async def cmd_test(self, name, params, channel, userdata, rank):
         await self.send_message(channel, name + ': Mod "' + params[1] + '" does not exist in the database.')
         return
 
-    try:
-        if "document_group" in self.poller.mods[mod]:
-            document = await getattr(self.poller, "check_" + self.poller.mods[mod]["parser"])(mod, None)
-        else:
-            document = None
-    except Exception as exception:
-        await self.send_message(
-            channel,
-            f"{name}: Failed to obtain document for mod: {type(exception).__name__}: {exception}",
-        )
-        return
-
-    statuses, exception = await self.poller.check_mod(mod, document=document, simulation=True)
+    statuses, exception = await self.poller.check_mod(mod, simulation=True)
 
     if exception:
         await self.send_message(

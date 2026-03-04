@@ -25,7 +25,6 @@ class ModPoller:
     def __init__(self):
         self.nem_versions = []
         self.mods = {}
-        self.document_groups = {}
         self.invalid_versions = []
         self.session = None
         self._host_locks: dict[str, asyncio.Lock] = {}
@@ -150,12 +149,6 @@ class ModPoller:
 
             self.mods[mod]["nem_versions"] = {}
 
-            if "document_group" in self.mods[mod]:
-                if self.mods[mod]["document_group"]["id"] in self.document_groups:
-                    self.document_groups[self.mods[mod]["document_group"]["id"]].append(mod)
-                else:
-                    self.document_groups[self.mods[mod]["document_group"]["id"]] = [mod]
-
     def build_html(self):
         self.jinja_env.get_template("index.jinja2").stream(mods=self.mods).dump("mod_polling/htdocs/index.html")
 
@@ -201,7 +194,7 @@ class ModPoller:
                                 "version": nem_mod.get("version", ""),
                             }
 
-    async def check_jenkins(self, mod, document=None, simulation=False):
+    async def check_jenkins(self, mod):
         jsonres = await self.fetch_json(
             self.mods[mod]["jenkins"]["url"] + "?tree=changeSet[items[msg]],artifacts[fileName]"
         )
@@ -212,7 +205,7 @@ class ModPoller:
             output["change"] = jsonres["changeSet"]["items"][0]["msg"]
         return output
 
-    async def check_mcforge_v2(self, mod, document=None, simulation=False):
+    async def check_mcforge_v2(self, mod):
         jsonres = await self.fetch_json(self.mods[mod]["mcforge"]["url"])
 
         if self.mods[mod]["mcforge"].get("slim", False):
@@ -245,7 +238,7 @@ class ModPoller:
 
             return {}
 
-    async def check_forge_json(self, mod, document=None, simulation=False):
+    async def check_forge_json(self, mod):
         jsonres = await self.fetch_json(self.mods[mod]["forgejson"]["url"])
 
         if "promos" not in jsonres:
@@ -271,7 +264,7 @@ class ModPoller:
 
         return versions
 
-    async def check_html(self, mod, document=None, simulation=False):
+    async def check_html(self, mod):
         page = await self.fetch_page(self.mods[mod]["html"]["url"])
 
         reverse = self.mods[mod]["html"].get("reverse", False)
@@ -294,7 +287,7 @@ class ModPoller:
 
         return result
 
-    async def check_cfwidget(self, mod, document=None, simulation=False):
+    async def check_cfwidget(self, mod):
         # Field name from the JSON to be used against the regex (name or display, name by default)
         field_name = self.mods[mod]["curse"].get("field", "name")
 
@@ -356,7 +349,7 @@ class ModPoller:
 
         return versions
 
-    async def check_github_release(self, mod, document=None, simulation=False):
+    async def check_github_release(self, mod):
         repo = self.mods[mod]["github"].get("repo")
 
         client_id = self.config.get("github", {}).get("client_id")
@@ -404,7 +397,7 @@ class ModPoller:
         else:
             raise ValueError(f"Invalid type {type_!r} for check_github_release parser")
 
-    async def check_buildcraft(self, mod, document=None, simulation=False):
+    async def check_buildcraft(self, mod):
         page = await self.fetch_page(
             "https://raw.githubusercontent.com/BuildCraft/BuildCraft/master/buildcraft_resources/versions.txt"
         )
@@ -481,9 +474,9 @@ class ModPoller:
 
         return None
 
-    async def check_mod(self, mod, document=None, simulation=False):
+    async def check_mod(self, mod, simulation=False):
         try:
-            output = await getattr(self, "check_" + self.mods[mod]["parser"])(mod, document=document, simulation=simulation)
+            output = await getattr(self, "check_" + self.mods[mod]["parser"])(mod)
 
             if output is None:
                 raise NEMPException("Parser returned null")
@@ -566,43 +559,6 @@ class ModPoller:
         except Exception as e:
             logger.error("%s failed to be polled", mod, exc_info=True)
             return ([], e)  # an exception was raised, so we return a True
-
-    async def check_mods(self, mod):
-        # We need to know what mods this document_group uses
-        group_mod_names = self.document_groups[self.mods[mod]["document_group"]["id"]]
-
-        # Get all parsers (check_*) this document_group uses
-        function_names = set(self.mods[group_mod_name]["parser"] for group_mod_name in group_mod_names)
-        # Sanity check: a document_group should only use one function
-        if len(function_names) != 1:
-            raise NEMPException(
-                "Failed to poll document_group for " + mod + ": Too many functions: " + str(function_names)
-            )
-
-        func_name = next(iter(function_names))
-
-        try:
-            # Let's get the page/json/whatever all the mods want
-            # TODO: Ensure the function is the same for all mods in the document group
-            document = await getattr(self, "check_" + func_name)(mod, document=None)
-        except Exception:
-            # If getting the document fails, we want to abort immediately
-            logger.error("Failed to poll document_group for %s", mod, exc_info=True)
-            # Pass the exception along to the polling task
-            raise
-
-        output = {}
-
-        # Ok, time to parse it for each mod
-        for tempMod in group_mod_names:
-            try:
-                output[tempMod] = await self.check_mod(tempMod, document)
-            except Exception as e:
-                logger.error("%s failed to be polled (document_group)", tempMod, exc_info=True)
-                output[tempMod] = ([], e)
-
-        return output
-
 
 async def setup():
     nem = ModPoller()
