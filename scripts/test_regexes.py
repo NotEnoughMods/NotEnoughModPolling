@@ -354,27 +354,24 @@ async def check_custom_dead(session, mod_name, mod_data, compiled_regex, *, use_
 
 
 PARSER_MAP = {
-    "CheckCurse": check_curse,
-    "CheckJenkins": check_jenkins,
-    "CheckGitHubRelease": check_github_release,
-    "CheckForgeJson": check_forge_json,
-    "CheckMCForge2": check_mcforge2,
-    "CheckHTML": check_html,
-    "CheckBuildCraft": check_buildcraft,
-    "CheckSpacechase": check_custom_dead,
-    "CheckLunatrius": check_custom_dead,
-    "CheckBigReactors": check_custom_dead,
+    "cfwidget": check_curse,
+    "jenkins": check_jenkins,
+    "github_release": check_github_release,
+    "forge_json": check_forge_json,
+    "mcforge_v2": check_mcforge2,
+    "html": check_html,
+    "buildcraft": check_buildcraft,
 }
 
 
 async def test_mod(session, mod_name, mod_data, config, *, use_cache=False, all_files=False):
-    function = mod_data.get("function", "")
+    function = mod_data.get("parser", "")
 
     if not mod_data.get("active", True):
         return {
             "name": mod_name,
             "status": SKIP,
-            "function": function,
+            "parser": function,
             "detail": "Marked inactive",
             "last_update": None,
             "samples": [],
@@ -389,7 +386,7 @@ async def test_mod(session, mod_name, mod_data, config, *, use_cache=False, all_
         return {
             "name": mod_name,
             "status": DEAD,
-            "function": function,
+            "parser": function,
             "detail": f"Unknown parser: {function}",
             "last_update": None,
             "samples": [],
@@ -397,7 +394,7 @@ async def test_mod(session, mod_name, mod_data, config, *, use_cache=False, all_
         }
 
     try:
-        if function == "CheckGitHubRelease":
+        if function == "github_release":
             status, detail, last_update, samples, quality_warnings = await checker(
                 session, mod_name, mod_data, compiled_regex, config,
                 use_cache=use_cache, all_files=all_files,
@@ -417,7 +414,7 @@ async def test_mod(session, mod_name, mod_data, config, *, use_cache=False, all_
     return {
         "name": mod_name,
         "status": status,
-        "function": function,
+        "parser": function,
         "detail": detail,
         "last_update": last_update.isoformat() if last_update else None,
         "samples": samples,
@@ -456,13 +453,13 @@ async def main():
 
         for i, (mod_name, mod_data) in enumerate(mods.items(), 1):
             active = mod_data.get("active", True)
-            function = mod_data.get("function", "?")
+            function = mod_data.get("parser", "?")
 
             if not active:
                 result = {
                     "name": mod_name,
                     "status": SKIP,
-                    "function": function,
+                    "parser": function,
                     "detail": "Marked inactive",
                     "last_update": None,
                     "samples": [],

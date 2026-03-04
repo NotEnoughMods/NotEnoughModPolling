@@ -46,7 +46,7 @@ async def main():
     curse_mods = [
         (name, info["curse"]["id"])
         for name, info in mods.items()
-        if info.get("function") == "CheckCurse" and info.get("active", True)
+        if info.get("parser") == "cfwidget" and info.get("active", True)
     ]
 
     semaphore = asyncio.Semaphore(5)

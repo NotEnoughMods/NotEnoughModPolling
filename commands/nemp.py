@@ -570,7 +570,7 @@ async def cmd_poll(self, name, params, channel, userdata, rank):
     # "p:" is the parser operator
     elif params[1].lower().startswith("p:"):
         parser = params[1][2:].lower()
-        match_mods = {k: v for k, v in self.poller.mods.items() if v["function"][5:].lower() == parser}
+        match_mods = {k: v for k, v in self.poller.mods.items() if v["parser"].lower() == parser}
 
         if not match_mods:
             await self.send_message(channel, f"{name}: Could not find any matches.")
@@ -702,7 +702,7 @@ async def cmd_test(self, name, params, channel, userdata, rank):
 
     try:
         if "document_group" in self.poller.mods[mod]:
-            document = await getattr(self.poller, self.poller.mods[mod]["function"])(mod, None)
+            document = await getattr(self.poller, "check_" + self.poller.mods[mod]["parser"])(mod, None)
         else:
             document = None
     except Exception as exception:
@@ -857,19 +857,17 @@ async def cmd_url(self, name, params, channel, userdata, rank):
         return
 
     mod = self.poller.mods[modname]
-    func = mod["function"]
+    func = mod["parser"]
 
-    if func == "CheckGitHubRelease":
+    if func == "github_release":
         url = "https://github.com/" + mod["github"]["repo"]
-    elif func == "CheckCurse":
+    elif func == "cfwidget":
         url = "https://api.cfwidget.com/" + mod["curse"]["id"]
-    elif func == "CheckJenkins":
+    elif func == "jenkins":
         url = mod["jenkins"]["url"][:-28]
-    elif func == "CheckChickenBones":
-        url = "http://www.chickenbones.net/Files/notification/version.php?version=" + mod["mc"] + "&file=" + modname
-    elif func == "CheckForgeJson":
+    elif func == "forge_json":
         url = mod["forgejson"]["url"]
-    elif func == "CheckHTML":
+    elif func == "html":
         url = mod["html"]["url"]
     else:
         url = None

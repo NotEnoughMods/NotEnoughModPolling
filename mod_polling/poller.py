@@ -201,7 +201,7 @@ class ModPoller:
                                 "version": nem_mod.get("version", ""),
                             }
 
-    async def CheckJenkins(self, mod, document=None, simulation=False):
+    async def check_jenkins(self, mod, document=None, simulation=False):
         jsonres = await self.fetch_json(
             self.mods[mod]["jenkins"]["url"] + "?tree=changeSet[items[msg]],artifacts[fileName]"
         )
@@ -212,7 +212,7 @@ class ModPoller:
             output["change"] = jsonres["changeSet"]["items"][0]["msg"]
         return output
 
-    async def CheckMCForge2(self, mod, document=None, simulation=False):
+    async def check_mcforge_v2(self, mod, document=None, simulation=False):
         jsonres = await self.fetch_json(self.mods[mod]["mcforge"]["url"])
 
         if self.mods[mod]["mcforge"].get("slim", False):
@@ -245,7 +245,7 @@ class ModPoller:
 
             return {}
 
-    async def CheckForgeJson(self, mod, document=None, simulation=False):
+    async def check_forge_json(self, mod, document=None, simulation=False):
         jsonres = await self.fetch_json(self.mods[mod]["forgejson"]["url"])
 
         if "promos" not in jsonres:
@@ -271,7 +271,7 @@ class ModPoller:
 
         return versions
 
-    async def CheckHTML(self, mod, document=None, simulation=False):
+    async def check_html(self, mod, document=None, simulation=False):
         page = await self.fetch_page(self.mods[mod]["html"]["url"])
 
         reverse = self.mods[mod]["html"].get("reverse", False)
@@ -294,45 +294,7 @@ class ModPoller:
 
         return result
 
-    async def CheckSpacechase(self, mod, document=None, simulation=False):
-        jsonres = await self.fetch_json(
-            "http://spacechase0.com/core/latest.php?obj=mods/minecraft/" + self.mods[mod]["spacechase"]["slug"]
-        )
-
-        version = jsonres["version"]
-
-        results = {}
-
-        for mc in jsonres["downloads"]:
-            results[mc] = {"version": version, "changelog": jsonres["summary"]}
-
-        return results
-
-    async def CheckLunatrius(self, mod, document=None, simulation=False):
-        jsonres = await self.fetch_json("http://mc.lunatri.us/json?latest&mod=" + mod + "&v=2")
-        info = jsonres["mods"][mod]["latest"]
-        output = {"version": info["version"], "mc": info["mc"]}
-        if len(info["changes"]) > 0:
-            output["change"] = info["changes"][0]
-        return output
-
-    async def CheckBigReactors(self, mod, document=None, simulation=False):
-        info = await self.fetch_json("http://big-reactors.com/version.json")
-
-        ret = {"mc": info["mcVersion"]}
-
-        if info["stable"]:
-            ret["version"] = info["version"]
-        else:
-            ret["dev"] = info["version"]
-
-        if info["changelog"]:
-            # send only the first line of the changelog
-            ret["change"] = info["changelog"][0]
-
-        return ret
-
-    async def CheckCurse(self, mod, document=None, simulation=False):
+    async def check_cfwidget(self, mod, document=None, simulation=False):
         # Field name from the JSON to be used against the regex (name or display, name by default)
         field_name = self.mods[mod]["curse"].get("field", "name")
 
@@ -394,7 +356,7 @@ class ModPoller:
 
         return versions
 
-    async def CheckGitHubRelease(self, mod, document=None, simulation=False):
+    async def check_github_release(self, mod, document=None, simulation=False):
         repo = self.mods[mod]["github"].get("repo")
 
         client_id = self.config.get("github", {}).get("client_id")
@@ -440,9 +402,9 @@ class ModPoller:
                 else:
                     return {"version": tag_name}
         else:
-            raise ValueError(f"Invalid type {type_!r} for CheckGitHubRelease parser")
+            raise ValueError(f"Invalid type {type_!r} for check_github_release parser")
 
-    async def CheckBuildCraft(self, mod, document=None, simulation=False):
+    async def check_buildcraft(self, mod, document=None, simulation=False):
         page = await self.fetch_page(
             "https://raw.githubusercontent.com/BuildCraft/BuildCraft/master/buildcraft_resources/versions.txt"
         )
@@ -521,7 +483,7 @@ class ModPoller:
 
     async def check_mod(self, mod, document=None, simulation=False):
         try:
-            output = await getattr(self, self.mods[mod]["function"])(mod, document=document, simulation=simulation)
+            output = await getattr(self, "check_" + self.mods[mod]["parser"])(mod, document=document, simulation=simulation)
 
             if output is None:
                 raise NEMPException("Parser returned null")
@@ -609,8 +571,8 @@ class ModPoller:
         # We need to know what mods this document_group uses
         group_mod_names = self.document_groups[self.mods[mod]["document_group"]["id"]]
 
-        # Get all functions (Check*) this document_group uses
-        function_names = set(self.mods[group_mod_name]["function"] for group_mod_name in group_mod_names)
+        # Get all parsers (check_*) this document_group uses
+        function_names = set(self.mods[group_mod_name]["parser"] for group_mod_name in group_mod_names)
         # Sanity check: a document_group should only use one function
         if len(function_names) != 1:
             raise NEMPException(
@@ -622,7 +584,7 @@ class ModPoller:
         try:
             # Let's get the page/json/whatever all the mods want
             # TODO: Ensure the function is the same for all mods in the document group
-            document = await getattr(self, func_name)(mod, document=None)
+            document = await getattr(self, "check_" + func_name)(mod, document=None)
         except Exception:
             # If getting the document fails, we want to abort immediately
             logger.error("Failed to poll document_group for %s", mod, exc_info=True)

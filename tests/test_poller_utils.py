@@ -51,7 +51,7 @@ class TestGetProperName:
 class TestCompileAndMatchRegex:
     def test_compile_regex(self, mod_poller):
         mod_poller.mods["RegexMod"] = {
-            "function": "CheckCurse",
+            "parser": "cfwidget",
             "curse": {"id": "1", "regex": r"RegexMod-(?P<version>[0-9.]+)\.jar"},
         }
         mod_poller.compile_regex("RegexMod")
@@ -59,7 +59,7 @@ class TestCompileAndMatchRegex:
 
     def test_match_mod_regex(self, mod_poller):
         mod_poller.mods["RegexMod"] = {
-            "function": "CheckCurse",
+            "parser": "cfwidget",
             "curse": {"id": "1", "regex": r"RegexMod-(?P<version>[0-9.]+)\.jar"},
         }
         mod_poller.compile_regex("RegexMod")
@@ -68,7 +68,7 @@ class TestCompileAndMatchRegex:
         assert match.group("version") == "1.2.3"
 
     def test_no_regex(self, mod_poller):
-        mod_poller.mods["NoRegex"] = {"function": "CheckForgeJson", "forgejson": {"url": "http://x"}}
+        mod_poller.mods["NoRegex"] = {"parser": "forge_json", "forgejson": {"url": "http://x"}}
         mod_poller.compile_regex("NoRegex")
         assert mod_poller.get_mod_regex("NoRegex") is None
 

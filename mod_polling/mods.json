@@ -1,6 +1,6 @@
 {
     "IronChests": {
-        "function": "CheckCurse",
+        "parser": "cfwidget",
         "active": true,
         "curse": {
             "id": "228756",
@@ -8,7 +8,7 @@
         }
     },
     "BiomesOPlenty": {
-        "function": "CheckMCForge2",
+        "parser": "mcforge_v2",
         "category": "forge",
         "active": true,
         "mcforge": {
@@ -17,7 +17,7 @@
         }
     },
     "FML": {
-        "function": "CheckMCForge2",
+        "parser": "mcforge_v2",
         "category": "forge",
         "active": true,
         "mcforge": {
@@ -26,7 +26,7 @@
         }
     },
     "MinecraftForge": {
-        "function": "CheckMCForge2",
+        "parser": "mcforge_v2",
         "category": "forge",
         "active": true,
         "mcforge": {
@@ -35,7 +35,7 @@
         }
     },
     "OpenComputers": {
-        "function": "CheckCurse",
+        "parser": "cfwidget",
         "active": true,
         "curse": {
             "id": "223008",
@@ -43,11 +43,11 @@
         }
     },
     "BuildCraft": {
-        "function": "CheckBuildCraft",
+        "parser": "buildcraft",
         "active": true
     },
     "LogisticsPipes": {
-        "function": "CheckCurse",
+        "parser": "cfwidget",
         "active": true,
         "curse": {
             "id": "232838",
@@ -55,7 +55,7 @@
         }
     },
     "Mekanism": {
-        "function": "CheckCurse",
+        "parser": "cfwidget",
         "active": true,
         "curse": {
             "id": "268560",
@@ -63,7 +63,7 @@
         }
     },
     "CodeChickenLib": {
-        "function": "CheckCurse",
+        "parser": "cfwidget",
         "active": true,
         "curse": {
             "id": "242818",
@@ -71,7 +71,7 @@
         }
     },
     "ChickenChunks": {
-        "function": "CheckCurse",
+        "parser": "cfwidget",
         "active": true,
         "curse": {
             "id": "243883",
@@ -79,7 +79,7 @@
         }
     },
     "EnderStorage": {
-        "function": "CheckCurse",
+        "parser": "cfwidget",
         "active": true,
         "curse": {
             "id": "245174",
@@ -87,7 +87,7 @@
         }
     },
     "Translocators": {
-        "function": "CheckCurse",
+        "parser": "cfwidget",
         "active": true,
         "curse": {
             "id": "247695",
@@ -95,7 +95,7 @@
         }
     },
     "ForgeMultipart": {
-        "function": "CheckCurse",
+        "parser": "cfwidget",
         "active": true,
         "curse": {
             "id": "258426",
@@ -103,7 +103,7 @@
         }
     },
     "TinkersConstruct": {
-        "function": "CheckCurse",
+        "parser": "cfwidget",
         "category": "mdiyo",
         "active": true,
         "curse": {
@@ -112,7 +112,7 @@
         }
     },
     "AppliedEnergistics2": {
-        "function": "CheckCurse",
+        "parser": "cfwidget",
         "active": true,
         "curse": {
             "id": "223794",
@@ -120,70 +120,15 @@
         }
     },
     "BloodMagic": {
-        "function": "CheckCurse",
+        "parser": "cfwidget",
         "active": true,
         "curse": {
             "id": "224791",
             "regex": "BloodMagic-(?P<mc>.+?)-(?P<version>.+?)\\.jar"
         }
     },
-    "DynIMC": {
-        "function": "CheckLunatrius",
-        "category": "lunatrius",
-        "active": false
-    },
-    "ExtensionFixer": {
-        "function": "CheckLunatrius",
-        "category": "lunatrius",
-        "active": false
-    },
-    "LunatriusCore": {
-        "function": "CheckLunatrius",
-        "category": "lunatrius",
-        "active": false
-    },
-    "InGameInfoXML": {
-        "function": "CheckLunatrius",
-        "category": "lunatrius",
-        "active": false
-    },
-    "InGameModConfigs": {
-        "function": "CheckLunatrius",
-        "category": "lunatrius",
-        "active": false
-    },
-    "LaserLevel": {
-        "function": "CheckLunatrius",
-        "category": "lunatrius",
-        "active": false
-    },
-    "MonsterSpawnHighlighter": {
-        "function": "CheckLunatrius",
-        "category": "lunatrius",
-        "active": false
-    },
-    "Profiles": {
-        "function": "CheckLunatrius",
-        "category": "lunatrius",
-        "active": false
-    },
-    "Stackie": {
-        "function": "CheckLunatrius",
-        "category": "lunatrius",
-        "active": false
-    },
-    "Schematica": {
-        "function": "CheckLunatrius",
-        "category": "lunatrius",
-        "active": false
-    },
-    "Tracer": {
-        "function": "CheckLunatrius",
-        "category": "lunatrius",
-        "active": false
-    },
     "EnderIO": {
-        "function": "CheckCurse",
+        "parser": "cfwidget",
         "active": true,
         "curse": {
             "id": "64578",
@@ -191,7 +136,7 @@
         }
     },
     "ProjectRed": {
-        "function": "CheckCurse",
+        "parser": "cfwidget",
         "active": true,
         "curse": {
             "id": "228702",
@@ -199,7 +144,7 @@
         }
     },
     "CoFHCore": {
-        "function": "CheckCurse",
+        "parser": "cfwidget",
         "active": true,
         "curse": {
             "id": "69162",
@@ -207,7 +152,7 @@
         }
     },
     "ThermalExpansion": {
-        "function": "CheckCurse",
+        "parser": "cfwidget",
         "active": true,
         "curse": {
             "id": "69163",
@@ -215,7 +160,7 @@
         }
     },
     "ThermalFoundation": {
-        "function": "CheckCurse",
+        "parser": "cfwidget",
         "active": true,
         "curse": {
             "id": "222880",
@@ -223,7 +168,7 @@
         }
     },
     "ThermalDynamics": {
-        "function": "CheckCurse",
+        "parser": "cfwidget",
         "active": true,
         "curse": {
             "id": "227443",
@@ -231,7 +176,7 @@
         }
     },
     "RedstoneArsenal": {
-        "function": "CheckCurse",
+        "parser": "cfwidget",
         "active": true,
         "curse": {
             "id": "70631",
@@ -239,7 +184,7 @@
         }
     },
     "Aquaculture": {
-        "function": "CheckCurse",
+        "parser": "cfwidget",
         "active": true,
         "curse": {
             "id": "60028",
@@ -247,7 +192,7 @@
         }
     },
     "HardcoreQuestingMode": {
-        "function": "CheckCurse",
+        "parser": "cfwidget",
         "active": true,
         "curse": {
             "id": "77027",
@@ -255,7 +200,7 @@
         }
     },
     "MineMenu": {
-        "function": "CheckCurse",
+        "parser": "cfwidget",
         "active": true,
         "curse": {
             "id": "222378",
@@ -263,7 +208,7 @@
         }
     },
     "Ping": {
-        "function": "CheckCurse",
+        "parser": "cfwidget",
         "active": true,
         "curse": {
             "id": "222967",
@@ -271,7 +216,7 @@
         }
     },
     "SecurityCraft": {
-        "function": "CheckCurse",
+        "parser": "cfwidget",
         "active": true,
         "curse": {
             "id": "64760",
@@ -279,7 +224,7 @@
         }
     },
     "GravestoneMod": {
-        "function": "CheckCurse",
+        "parser": "cfwidget",
         "active": true,
         "curse": {
             "id": "238551",
@@ -288,7 +233,7 @@
         }
     },
     "Botania": {
-        "function": "CheckCurse",
+        "parser": "cfwidget",
         "active": true,
         "curse": {
             "id": "225643",
@@ -296,7 +241,7 @@
         }
     },
     "Lumberjack": {
-        "function": "CheckCurse",
+        "parser": "cfwidget",
         "active": true,
         "curse": {
             "id": "223439",
@@ -304,7 +249,7 @@
         }
     },
     "DraconicEvolution": {
-        "function": "CheckCurse",
+        "parser": "cfwidget",
         "active": true,
         "curse": {
             "id": "223565",
@@ -312,7 +257,7 @@
         }
     },
     "EvilCraft": {
-        "function": "CheckCurse",
+        "parser": "cfwidget",
         "active": true,
         "curse": {
             "id": "74610",
@@ -320,7 +265,7 @@
         }
     },
     "CyclopsCore": {
-        "function": "CheckCurse",
+        "parser": "cfwidget",
         "active": true,
         "curse": {
             "id": "232758",
@@ -328,7 +273,7 @@
         }
     },
     "EverlastingAbilities": {
-        "function": "CheckCurse",
+        "parser": "cfwidget",
         "active": true,
         "curse": {
             "id": "248353",
@@ -336,7 +281,7 @@
         }
     },
     "IntegratedTunnels": {
-        "function": "CheckCurse",
+        "parser": "cfwidget",
         "active": true,
         "curse": {
             "id": "251389",
@@ -344,7 +289,7 @@
         }
     },
     "CapabilityProxy": {
-        "function": "CheckCurse",
+        "parser": "cfwidget",
         "active": true,
         "curse": {
             "id": "266479",
@@ -352,7 +297,7 @@
         }
     },
     "StructuredCrafting": {
-        "function": "CheckCurse",
+        "parser": "cfwidget",
         "active": true,
         "curse": {
             "id": "233151",
@@ -360,7 +305,7 @@
         }
     },
     "ColossalChests": {
-        "function": "CheckCurse",
+        "parser": "cfwidget",
         "active": true,
         "curse": {
             "id": "237875",
@@ -368,7 +313,7 @@
         }
     },
     "IntegratedDynamics": {
-        "function": "CheckCurse",
+        "parser": "cfwidget",
         "active": true,
         "curse": {
             "id": "236307",
@@ -376,7 +321,7 @@
         }
     },
     "CommonCapabilities": {
-        "function": "CheckCurse",
+        "parser": "cfwidget",
         "active": true,
         "curse": {
             "id": "247007",
@@ -384,7 +329,7 @@
         }
     },
     "JourneyMap": {
-        "function": "CheckCurse",
+        "parser": "cfwidget",
         "active": true,
         "curse": {
             "id": "32274",
@@ -392,7 +337,7 @@
         }
     },
     "ProjectE": {
-        "function": "CheckCurse",
+        "parser": "cfwidget",
         "active": true,
         "curse": {
             "id": "226410",
@@ -400,7 +345,7 @@
         }
     },
     "WorldEdit": {
-        "function": "CheckCurse",
+        "parser": "cfwidget",
         "active": true,
         "curse": {
             "id": "225608",
@@ -408,7 +353,7 @@
         }
     },
     "ModularSystems": {
-        "function": "CheckCurse",
+        "parser": "cfwidget",
         "active": true,
         "curse": {
             "id": "68528",
@@ -416,7 +361,7 @@
         }
     },
     "OpenModularTurrets": {
-        "function": "CheckCurse",
+        "parser": "cfwidget",
         "active": true,
         "curse": {
             "id": "224663",
@@ -424,14 +369,14 @@
         }
     },
     "PlaceableItems": {
-        "function": "CheckForgeJson",
+        "parser": "forge_json",
         "active": true,
         "forgejson": {
             "url": "https://raw.githubusercontent.com/Ferdzz/PlaceableItems/master/update.json"
         }
     },
     "FancyFluidStorage": {
-        "function": "CheckCurse",
+        "parser": "cfwidget",
         "active": true,
         "curse": {
             "id": "232683",
@@ -439,7 +384,7 @@
         }
     },
     "DragonAPI": {
-        "function": "CheckCurse",
+        "parser": "cfwidget",
         "active": true,
         "curse": {
             "id": "235591",
@@ -447,7 +392,7 @@
         }
     },
     "ChromatiCraft": {
-        "function": "CheckCurse",
+        "parser": "cfwidget",
         "active": true,
         "curse": {
             "id": "235590",
@@ -455,7 +400,7 @@
         }
     },
     "RotaryCraft": {
-        "function": "CheckCurse",
+        "parser": "cfwidget",
         "active": true,
         "curse": {
             "id": "235596",
@@ -463,7 +408,7 @@
         }
     },
     "ReactorCraft": {
-        "function": "CheckCurse",
+        "parser": "cfwidget",
         "active": true,
         "curse": {
             "id": "235593",
@@ -471,7 +416,7 @@
         }
     },
     "ElectriCraft": {
-        "function": "CheckCurse",
+        "parser": "cfwidget",
         "active": true,
         "curse": {
             "id": "235594",
@@ -479,7 +424,7 @@
         }
     },
     "ExpandedRedstone": {
-        "function": "CheckCurse",
+        "parser": "cfwidget",
         "active": true,
         "curse": {
             "id": "235602",
@@ -487,7 +432,7 @@
         }
     },
     "GeoStrata": {
-        "function": "CheckCurse",
+        "parser": "cfwidget",
         "active": true,
         "curse": {
             "id": "235601",
@@ -495,7 +440,7 @@
         }
     },
     "TerritoryZone": {
-        "function": "CheckCurse",
+        "parser": "cfwidget",
         "active": true,
         "curse": {
             "id": "235610",
@@ -503,7 +448,7 @@
         }
     },
     "MeteorCraft": {
-        "function": "CheckCurse",
+        "parser": "cfwidget",
         "active": true,
         "curse": {
             "id": "235604",
@@ -511,7 +456,7 @@
         }
     },
     "CaveControl": {
-        "function": "CheckCurse",
+        "parser": "cfwidget",
         "active": true,
         "curse": {
             "id": "235605",
@@ -519,7 +464,7 @@
         }
     },
     "CritterPet": {
-        "function": "CheckCurse",
+        "parser": "cfwidget",
         "active": true,
         "curse": {
             "id": "235608",
@@ -527,7 +472,7 @@
         }
     },
     "UsefulTNT": {
-        "function": "CheckCurse",
+        "parser": "cfwidget",
         "active": true,
         "curse": {
             "id": "235612",
@@ -535,7 +480,7 @@
         }
     },
     "LegacyCraft": {
-        "function": "CheckCurse",
+        "parser": "cfwidget",
         "active": true,
         "curse": {
             "id": "235611",
@@ -543,7 +488,7 @@
         }
     },
     "VoidMonster": {
-        "function": "CheckCurse",
+        "parser": "cfwidget",
         "active": true,
         "curse": {
             "id": "235609",
@@ -551,7 +496,7 @@
         }
     },
     "EnderCore": {
-        "function": "CheckCurse",
+        "parser": "cfwidget",
         "active": true,
         "curse": {
             "id": "231868",
@@ -559,7 +504,7 @@
         }
     },
     "McJtyLib": {
-        "function": "CheckCurse",
+        "parser": "cfwidget",
         "active": true,
         "curse": {
             "id": "233105",
@@ -567,7 +512,7 @@
         }
     },
     "DeepResonance": {
-        "function": "CheckCurse",
+        "parser": "cfwidget",
         "active": true,
         "curse": {
             "id": "233398",
@@ -575,7 +520,7 @@
         }
     },
     "Mantle": {
-        "function": "CheckCurse",
+        "parser": "cfwidget",
         "active": true,
         "curse": {
             "id": "74924",
@@ -583,7 +528,7 @@
         }
     },
     "Decocraft": {
-        "function": "CheckCurse",
+        "parser": "cfwidget",
         "active": true,
         "curse": {
             "id": "79616",
@@ -591,7 +536,7 @@
         }
     },
     "ImmersiveEngineering": {
-        "function": "CheckCurse",
+        "parser": "cfwidget",
         "active": true,
         "curse": {
             "id": "231951",
@@ -599,7 +544,7 @@
         }
     },
     "VoltzEngine": {
-        "function": "CheckCurse",
+        "parser": "cfwidget",
         "active": true,
         "curse": {
             "id": "227048",
@@ -607,7 +552,7 @@
         }
     },
     "AI-Improvements": {
-        "function": "CheckCurse",
+        "parser": "cfwidget",
         "active": true,
         "curse": {
             "id": "233019",
@@ -615,7 +560,7 @@
         }
     },
     "JustEnoughItems": {
-        "function": "CheckCurse",
+        "parser": "cfwidget",
         "active": true,
         "curse": {
             "id": "238222",
@@ -623,7 +568,7 @@
         }
     },
     "CookingForBlockheads": {
-        "function": "CheckCurse",
+        "parser": "cfwidget",
         "active": true,
         "curse": {
             "id": "231484",
@@ -631,7 +576,7 @@
         }
     },
     "InGameAccountSwitcher": {
-        "function": "CheckCurse",
+        "parser": "cfwidget",
         "active": true,
         "curse": {
             "id": "232676",
@@ -639,7 +584,7 @@
         }
     },
     "MobRebirth": {
-        "function": "CheckCurse",
+        "parser": "cfwidget",
         "active": true,
         "curse": {
             "id": "226212",
@@ -647,7 +592,7 @@
         }
     },
     "Fire'sSurvivalTweaks": {
-        "function": "CheckCurse",
+        "parser": "cfwidget",
         "active": true,
         "curse": {
             "id": "232464",
@@ -655,7 +600,7 @@
         }
     },
     "SimplyCaterpillar": {
-        "function": "CheckCurse",
+        "parser": "cfwidget",
         "active": true,
         "curse": {
             "id": "245437",
@@ -663,7 +608,7 @@
         }
     },
     "Tinkers'Defense": {
-        "function": "CheckCurse",
+        "parser": "cfwidget",
         "active": true,
         "curse": {
             "id": "226910",
@@ -671,7 +616,7 @@
         }
     },
     "MmmMmmMmmMmm": {
-        "function": "CheckCurse",
+        "parser": "cfwidget",
         "active": true,
         "curse": {
             "id": "225738",
@@ -679,7 +624,7 @@
         }
     },
     "Pandora'sBox": {
-        "function": "CheckCurse",
+        "parser": "cfwidget",
         "active": true,
         "curse": {
             "id": "222896",
@@ -687,7 +632,7 @@
         }
     },
     "RecurrentComplex": {
-        "function": "CheckCurse",
+        "parser": "cfwidget",
         "active": true,
         "curse": {
             "id": "223150",
@@ -695,7 +640,7 @@
         }
     },
     "BiomeTweaker": {
-        "function": "CheckCurse",
+        "parser": "cfwidget",
         "active": true,
         "curse": {
             "id": "228895",
@@ -703,7 +648,7 @@
         }
     },
     "StorageDrawers": {
-        "function": "CheckCurse",
+        "parser": "cfwidget",
         "active": true,
         "curse": {
             "id": "223852",
@@ -711,7 +656,7 @@
         }
     },
     "RealisticTorches": {
-        "function": "CheckCurse",
+        "parser": "cfwidget",
         "active": true,
         "curse": {
             "id": "235729",
@@ -719,7 +664,7 @@
         }
     },
     "ExtraPlanets": {
-        "function": "CheckCurse",
+        "parser": "cfwidget",
         "active": true,
         "curse": {
             "id": "241291",
@@ -727,7 +672,7 @@
         }
     },
     "Chisels&Bits": {
-        "function": "CheckCurse",
+        "parser": "cfwidget",
         "active": true,
         "curse": {
             "id": "231095",
@@ -735,42 +680,42 @@
         }
     },
     "BuildingBricks": {
-        "function": "CheckForgeJson",
+        "parser": "forge_json",
         "active": true,
         "forgejson": {
             "url": "https://raw.githubusercontent.com/hea3ven/BuildingBricks/master/media/update.json"
         }
     },
     "Malleable": {
-        "function": "CheckForgeJson",
+        "parser": "forge_json",
         "active": true,
         "forgejson": {
             "url": "https://raw.githubusercontent.com/hea3ven/Malleable/version/media/update.json"
         }
     },
     "HardModeTweaks": {
-        "function": "CheckForgeJson",
+        "parser": "forge_json",
         "active": true,
         "forgejson": {
             "url": "https://raw.githubusercontent.com/hea3ven/HardModeTweaks/version/media/update.json"
         }
     },
     "TwinTails": {
-        "function": "CheckForgeJson",
+        "parser": "forge_json",
         "active": true,
         "forgejson": {
             "url": "https://raw.githubusercontent.com/hea3ven/TwinTails/version/media/update.json"
         }
     },
     "DulceDeLeche": {
-        "function": "CheckForgeJson",
+        "parser": "forge_json",
         "active": true,
         "forgejson": {
             "url": "https://raw.githubusercontent.com/hea3ven/DulceDeLeche/version/media/update.json"
         }
     },
     "RebornCore": {
-        "function": "CheckCurse",
+        "parser": "cfwidget",
         "active": true,
         "curse": {
             "id": "237903",
@@ -778,7 +723,7 @@
         }
     },
     "TechReborn": {
-        "function": "CheckCurse",
+        "parser": "cfwidget",
         "active": true,
         "curse": {
             "id": "233564",
@@ -786,7 +731,7 @@
         }
     },
     "EnvironmentalCreepers": {
-        "function": "CheckCurse",
+        "parser": "cfwidget",
         "active": true,
         "curse": {
             "id": "246320",
@@ -794,7 +739,7 @@
         }
     },
     "ItemScroller": {
-        "function": "CheckCurse",
+        "parser": "cfwidget",
         "active": true,
         "curse": {
             "id": "242064",
@@ -802,7 +747,7 @@
         }
     },
     "MiniHUD": {
-        "function": "CheckCurse",
+        "parser": "cfwidget",
         "active": true,
         "curse": {
             "id": "244260",
@@ -810,7 +755,7 @@
         }
     },
     "TellMe": {
-        "function": "CheckCurse",
+        "parser": "cfwidget",
         "active": true,
         "curse": {
             "id": "225781",
@@ -818,7 +763,7 @@
         }
     },
     "ArmorPlus": {
-        "function": "CheckCurse",
+        "parser": "cfwidget",
         "active": true,
         "curse": {
             "id": "237366",
@@ -826,7 +771,7 @@
         }
     },
     "TheDragonLib": {
-        "function": "CheckCurse",
+        "parser": "cfwidget",
         "active": true,
         "curse": {
             "id": "248055",
@@ -834,7 +779,7 @@
         }
     },
     "ThutCore": {
-        "function": "CheckCurse",
+        "parser": "cfwidget",
         "active": true,
         "curse": {
             "id": "224428",
@@ -842,7 +787,7 @@
         }
     },
     "CraftTweaker": {
-        "function": "CheckCurse",
+        "parser": "cfwidget",
         "active": true,
         "curse": {
             "id": "239197",
@@ -850,7 +795,7 @@
         }
     },
     "SpongeForge": {
-        "function": "CheckMCForge2",
+        "parser": "mcforge_v2",
         "category": "forge",
         "active": true,
         "mcforge": {
@@ -859,7 +804,7 @@
         }
     },
     "AkashicTome": {
-        "function": "CheckCurse",
+        "parser": "cfwidget",
         "active": true,
         "curse": {
             "id": "250577",
@@ -867,7 +812,7 @@
         }
     },
     "Morph-o-Tool": {
-        "function": "CheckCurse",
+        "parser": "cfwidget",
         "active": true,
         "curse": {
             "id": "245287",
@@ -875,7 +820,7 @@
         }
     },
     "ActuallyAdditions": {
-        "function": "CheckCurse",
+        "parser": "cfwidget",
         "active": true,
         "curse": {
             "id": "228404",
@@ -883,7 +828,7 @@
         }
     },
     "XNet": {
-        "function": "CheckCurse",
+        "parser": "cfwidget",
         "active": true,
         "curse": {
             "id": "260912",
@@ -891,7 +836,7 @@
         }
     },
     "MoreCraft": {
-        "function": "CheckCurse",
+        "parser": "cfwidget",
         "active": true,
         "curse": {
             "id": "59648",
@@ -899,7 +844,7 @@
         }
     },
     "AppleSkin": {
-        "function": "CheckCurse",
+        "parser": "cfwidget",
         "active": true,
         "curse": {
             "id": "248787",
@@ -907,42 +852,42 @@
         }
     },
     "UnlimitedChiselWorks": {
-        "function": "CheckForgeJson",
+        "parser": "forge_json",
         "active": true,
         "forgejson": {
             "url": "https://asie.pl/files/minecraft/update/unlimitedchiselworks.json"
         }
     },
     "PonySocks": {
-        "function": "CheckForgeJson",
+        "parser": "forge_json",
         "active": true,
         "forgejson": {
             "url": "https://asie.pl/files/minecraft/update/ponysocks.json"
         }
     },
     "Charset": {
-        "function": "CheckForgeJson",
+        "parser": "forge_json",
         "active": true,
         "forgejson": {
             "url": "https://asie.pl/files/minecraft/update/charset.json"
         }
     },
     "FoamFix": {
-        "function": "CheckForgeJson",
+        "parser": "forge_json",
         "active": true,
         "forgejson": {
             "url": "https://asie.pl/files/minecraft/update/foamfix.json"
         }
     },
     "YNot": {
-        "function": "CheckForgeJson",
+        "parser": "forge_json",
         "active": true,
         "forgejson": {
             "url": "http://asie.pl/files/minecraft/update/ynot.json"
         }
     },
     "BetterWithMods": {
-        "function": "CheckCurse",
+        "parser": "cfwidget",
         "active": true,
         "curse": {
             "id": "246760",
@@ -950,7 +895,7 @@
         }
     },
     "Totemic": {
-        "function": "CheckCurse",
+        "parser": "cfwidget",
         "active": true,
         "curse": {
             "id": "237541",
@@ -958,14 +903,14 @@
         }
     },
     "Cyclic": {
-        "function": "CheckForgeJson",
+        "parser": "forge_json",
         "active": true,
         "forgejson": {
             "url": "https://raw.githubusercontent.com/Lothrazar/Cyclic/trunk/1.12/update.json"
         }
     },
     "Ding": {
-        "function": "CheckCurse",
+        "parser": "cfwidget",
         "active": true,
         "curse": {
             "id": "231275",
@@ -973,7 +918,7 @@
         }
     },
     "BetterThanBunnies": {
-        "function": "CheckCurse",
+        "parser": "cfwidget",
         "active": true,
         "curse": {
             "id": "241015",
@@ -981,7 +926,7 @@
         }
     },
     "BetterThanLlamas": {
-        "function": "CheckCurse",
+        "parser": "cfwidget",
         "active": true,
         "curse": {
             "id": "264161",
@@ -989,7 +934,7 @@
         }
     },
     "DeathCounter": {
-        "function": "CheckCurse",
+        "parser": "cfwidget",
         "active": true,
         "curse": {
             "id": "229068",
@@ -997,7 +942,7 @@
         }
     },
     "LimitedLives": {
-        "function": "CheckCurse",
+        "parser": "cfwidget",
         "active": true,
         "curse": {
             "id": "233040",
@@ -1005,7 +950,7 @@
         }
     },
     "PartyParrots": {
-        "function": "CheckCurse",
+        "parser": "cfwidget",
         "active": true,
         "curse": {
             "id": "277681",
@@ -1013,7 +958,7 @@
         }
     },
     "iChunUtil": {
-        "function": "CheckCurse",
+        "parser": "cfwidget",
         "active": true,
         "curse": {
             "id": "229060",
@@ -1021,7 +966,7 @@
         }
     },
     "AdventOfAscension": {
-        "function": "CheckCurse",
+        "parser": "cfwidget",
         "active": true,
         "curse": {
             "id": "311054",
@@ -1029,7 +974,7 @@
         }
     },
     "Flan'sMod": {
-        "function": "CheckHTML",
+        "parser": "html",
         "active": true,
         "html": {
             "url": "https://flansmod.com/download",
@@ -1037,7 +982,7 @@
         }
     },
     "LagGoggles": {
-        "function": "CheckCurse",
+        "parser": "cfwidget",
         "active": true,
         "curse": {
             "id": "283525",
@@ -1045,7 +990,7 @@
         }
     },
     "LumySkinPatch": {
-        "function": "CheckCurse",
+        "parser": "cfwidget",
         "active": true,
         "curse": {
             "id": "288957",
@@ -1053,7 +998,7 @@
         }
     },
     "Silent'sGems": {
-        "function": "CheckCurse",
+        "parser": "cfwidget",
         "active": true,
         "curse": {
             "id": "220311",
@@ -1061,7 +1006,7 @@
         }
     },
     "NGTLib": {
-        "function": "CheckCurse",
+        "parser": "cfwidget",
         "active": true,
         "curse": {
             "id": "288989",
@@ -1069,7 +1014,7 @@
         }
     },
     "EpicSiegeMod": {
-        "function": "CheckCurse",
+        "parser": "cfwidget",
         "active": true,
         "curse": {
             "id": "229449",
@@ -1077,7 +1022,7 @@
         }
     },
     "MCTerrainEditor": {
-        "function": "CheckCurse",
+        "parser": "cfwidget",
         "active": true,
         "curse": {
             "id": "289840",
@@ -1085,7 +1030,7 @@
         }
     },
     "RealTrainMod": {
-        "function": "CheckCurse",
+        "parser": "cfwidget",
         "active": true,
         "curse": {
             "id": "288988",
@@ -1093,7 +1038,7 @@
         }
     },
     "IceAndFire": {
-        "function": "CheckCurse",
+        "parser": "cfwidget",
         "active": true,
         "curse": {
             "id": "264231",
@@ -1101,7 +1046,7 @@
         }
     },
     "MysticalAgriculture": {
-        "function": "CheckCurse",
+        "parser": "cfwidget",
         "active": true,
         "curse": {
             "id": "246640",
@@ -1109,7 +1054,7 @@
         }
     },
     "Roots": {
-        "function": "CheckCurse",
+        "parser": "cfwidget",
         "active": true,
         "curse": {
             "id": "246183",
@@ -1117,7 +1062,7 @@
         }
     },
     "MysticalAgradditions": {
-        "function": "CheckCurse",
+        "parser": "cfwidget",
         "active": true,
         "curse": {
             "id": "256247",
@@ -1125,7 +1070,7 @@
         }
     },
     "ExtremeReactors": {
-        "function": "CheckCurse",
+        "parser": "cfwidget",
         "active": true,
         "curse": {
             "id": "250277",
@@ -1133,7 +1078,7 @@
         }
     },
     "ZeroCore": {
-        "function": "CheckCurse",
+        "parser": "cfwidget",
         "active": true,
         "curse": {
             "id": "247921",
@@ -1141,7 +1086,7 @@
         }
     },
     "LittleTiles": {
-        "function": "CheckCurse",
+        "parser": "cfwidget",
         "active": true,
         "curse": {
             "id": "257818",
@@ -1149,7 +1094,7 @@
         }
     },
     "CreativeCore": {
-        "function": "CheckCurse",
+        "parser": "cfwidget",
         "active": true,
         "curse": {
             "id": "257814",
@@ -1157,7 +1102,7 @@
         }
     },
     "ViesCraft": {
-        "function": "CheckCurse",
+        "parser": "cfwidget",
         "active": true,
         "curse": {
             "id": "246795",
@@ -1165,7 +1110,7 @@
         }
     },
     "Macaw'sBridges": {
-        "function": "CheckCurse",
+        "parser": "cfwidget",
         "active": true,
         "curse": {
             "id": "351725",
@@ -1173,7 +1118,7 @@
         }
     },
     "Macaw'sRoofs": {
-        "function": "CheckCurse",
+        "parser": "cfwidget",
         "active": true,
         "curse": {
             "id": "352039",
@@ -1181,7 +1126,7 @@
         }
     },
     "Macaw'sFurniture": {
-        "function": "CheckCurse",
+        "parser": "cfwidget",
         "active": true,
         "curse": {
             "id": "359540",
@@ -1189,7 +1134,7 @@
         }
     },
     "AdvancedRocketry": {
-        "function": "CheckCurse",
+        "parser": "cfwidget",
         "active": true,
         "curse": {
             "id": "236542",
@@ -1197,7 +1142,7 @@
         }
     },
     "Curios": {
-        "function": "CheckCurse",
+        "parser": "cfwidget",
         "active": true,
         "curse": {
             "id": "309927",

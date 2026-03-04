@@ -30,12 +30,12 @@ def minimal_config_yml(tmp_path):
 def minimal_mods_json(tmp_path):
     mods = {
         "TestMod": {
-            "function": "CheckForgeJson",
+            "parser": "forge_json",
             "active": True,
             "forgejson": {"url": "https://example.com/forge.json", "mcversion": "1.12.2"},
         },
         "CurseMod": {
-            "function": "CheckCurse",
+            "parser": "cfwidget",
             "active": True,
             "curse": {
                 "id": "12345",

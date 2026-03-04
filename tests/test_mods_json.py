@@ -26,13 +26,12 @@ class TestModsJson:
 
     def test_parsers_exist(self):
         for mod, mod_info in self.mods.items():
-            parser = mod_info["function"]
-            assert parser.startswith("Check"), f"Parser name {parser!r} for mod {mod!r} is invalid"
-            assert hasattr(self.poller_cls, parser), f"Parser {parser!r} for mod {mod!r} doesn't exist"
+            parser = mod_info["parser"]
+            assert hasattr(self.poller_cls, "check_" + parser), f"Parser {parser!r} for mod {mod!r} doesn't exist"
 
     def test_curse_parser(self):
         for mod, mod_info in self.mods.items():
-            if mod_info["function"] != "CheckCurse":
+            if mod_info["parser"] != "cfwidget":
                 continue
 
             msg = f"Mod {mod!r} has missing Curse parser information"
@@ -45,7 +44,7 @@ class TestModsJson:
 
     def test_forgejson_parser(self):
         for mod, mod_info in self.mods.items():
-            if mod_info["function"] != "CheckForgeJson":
+            if mod_info["parser"] != "forge_json":
                 continue
 
             msg = f"Mod {mod!r} has missing ForgeJson parser information"
