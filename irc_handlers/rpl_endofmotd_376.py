@@ -28,7 +28,7 @@ async def execute(self, send_msg, prefix, command, params):
     if isinstance(self.auth, str):
         await send_msg(self.auth, 5)
 
-    asyncio.create_task(_run_command_setups(self))
+    self._setup_task = asyncio.create_task(_run_command_setups(self))
 
 
 async def _run_command_setups(router):
