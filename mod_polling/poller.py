@@ -167,9 +167,9 @@ class ModPoller:
 
         # for MC version in NEM's list
         for nem_list_name in self.nem_versions:
-            if nem_list_name in self.mc_mapping:
-                # TODO
-                continue
+            # Resolve mapped MC versions (e.g. 1.4.6 -> 1.4.7) so data is
+            # stored under the canonical name used by get/set_nem_version.
+            storage_key = self.mc_mapping.get(nem_list_name, nem_list_name)
 
             # Get the NEM List for this MC Version
             nem_list = await self.fetch_json(
@@ -189,7 +189,7 @@ class ModPoller:
                     if our_names:
                         # Grab the dev and release version
                         for our_name in our_names:
-                            self.mods[our_name]["nem_versions"][nem_list_name] = {
+                            self.mods[our_name]["nem_versions"][storage_key] = {
                                 "dev": nem_mod.get("dev", ""),
                                 "version": nem_mod.get("version", ""),
                             }
@@ -559,6 +559,7 @@ class ModPoller:
         except Exception as e:
             logger.error("%s failed to be polled", mod, exc_info=True)
             return ([], e)  # an exception was raised, so we return a True
+
 
 async def setup():
     nem = ModPoller()

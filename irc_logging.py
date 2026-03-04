@@ -82,14 +82,14 @@ class LoggingModule:
                 self._create_directory(f"BotLogs/{monthfoldername}")
             self._logger.info(f"Creating new file BotLogs/{monthfoldername}/{dayfilename}.log")
 
-            # We close the file handle of the root logger.
-            # This should also affect all child loggers
-            #
-            # POTENTIAL BUG: is handlers[0] always the file handler pointing to the log file?
-            # Should be tested with more than one handler.
-            self._logger.debug("Current root handlers: %s", logging.getLogger().handlers)
-            logging.getLogger().handlers[0].stream.close()
-            logging.getLogger().removeHandler(logging.getLogger().handlers[0])
+            # Close and remove the current file handler from the root logger
+            root_logger = logging.getLogger()
+            self._logger.debug("Current root handlers: %s", root_logger.handlers)
+            for handler in root_logger.handlers:
+                if isinstance(handler, logging.FileHandler):
+                    handler.close()
+                    root_logger.removeHandler(handler)
+                    break
 
             filename = f"BotLogs/{monthfoldername}/{dayfilename}.log"
 
@@ -104,8 +104,7 @@ class LoggingModule:
             )
             newfile_handler.setFormatter(msgformat)
 
-            # logging.getLogger().addHandler(newfile_handler)
-            self._prepend_handler(logging.getLogger(), newfile_handler)
+            root_logger.addHandler(newfile_handler)
 
             self._logger.info(
                 "Logfile Handler switched. Continuing writing to new file. Old date: %s, new date: %s",
@@ -129,15 +128,3 @@ class LoggingModule:
             return -time.altzone // 3600, time.tzname[1]
         else:
             return -time.timezone // 3600, time.tzname[0]
-
-    # Modification of logging's appendHandler function
-    # It will add the handler to the front of the handler list
-    # It is a bit of a hack, but it is required for making sure
-    # that the main file handler is added to the front of the list
-    def _prepend_handler(self, logger, hdlr):
-        logging._acquireLock()
-        try:
-            if hdlr not in logger.handlers:
-                logger.handlers.insert(0, hdlr)
-        finally:
-            logging._releaseLock()
