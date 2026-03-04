@@ -1,3 +1,4 @@
+import asyncio
 import logging
 
 ID = "376"
@@ -27,6 +28,13 @@ async def execute(self, send_msg, prefix, command, params):
     if isinstance(self.auth, str):
         await send_msg(self.auth, 5)
 
-    for cmd in self.commands:
-        if self.commands[cmd][0].setup:
-            await self.commands[cmd][0].setup(self, True)
+    asyncio.create_task(_run_command_setups(self))
+
+
+async def _run_command_setups(router):
+    for cmd in router.commands:
+        if router.commands[cmd][0].setup:
+            try:
+                await router.commands[cmd][0].setup(router, True)
+            except Exception:
+                logger.exception("setup() failed for command module '%s'", cmd)
