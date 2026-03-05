@@ -77,21 +77,18 @@ def check_group_quality(match, regex_str):
     mc = groups.get("mc")
     version = groups.get("version")
 
-    if mc:
-        # mc group should only contain version-like characters (digits and dots)
-        if re.search(r"[a-zA-Z]", mc):
-            warnings.append(f"mc group contains non-version chars: '{mc}'")
+    # mc group should only contain version-like characters (digits and dots)
+    if mc and re.search(r"[a-zA-Z]", mc):
+        warnings.append(f"mc group contains non-version chars: '{mc}'")
 
-    if version and mc:
-        # version should not contain the MC version
-        if mc in version:
-            warnings.append(f"version group contains MC version '{mc}': '{version}'")
+    # version should not contain the MC version
+    if version and mc and mc in version:
+        warnings.append(f"version group contains MC version '{mc}': '{version}'")
 
-    if version:
-        # version starting with MC version pattern (1.X.Y-...) followed by a separator
-        # and another digit is suspicious if there's no mc group
-        if not mc and re.match(r"1\.\d{2,}(?:\.\d+)*[-+]\d", version):
-            warnings.append(f"version may contain MC version (no mc group): '{version}'")
+    # version starting with MC version pattern (1.X.Y-...) followed by a separator
+    # and another digit is suspicious if there's no mc group
+    if version and not mc and re.match(r"1\.\d{2,}(?:\.\d+)*[-+]\d", version):
+        warnings.append(f"version may contain MC version (no mc group): '{version}'")
 
     return warnings
 
@@ -172,8 +169,20 @@ async def check_curse(session, mod_name, mod_data, compiled_regex, *, use_cache=
                 all_files_info.append(f"Non-matching: {non_matching}")
 
         if last_update and last_update < STALE_CUTOFF:
-            return STALE, f"Match: {latest} -> {match.groupdict()}", last_update, filenames[:5] + all_files_info, quality_warnings
-        return PASS, f"Match: {latest} -> {match.groupdict()}", last_update, filenames[:5] + all_files_info, quality_warnings
+            return (
+                STALE,
+                f"Match: {latest} -> {match.groupdict()}",
+                last_update,
+                filenames[:5] + all_files_info,
+                quality_warnings,
+            )
+        return (
+            PASS,
+            f"Match: {latest} -> {match.groupdict()}",
+            last_update,
+            filenames[:5] + all_files_info,
+            quality_warnings,
+        )
 
     return FAIL, "No filenames found", last_update, [], quality_warnings
 
@@ -212,7 +221,9 @@ async def check_jenkins(session, mod_name, mod_data, compiled_regex, *, use_cach
     return FAIL, f"Artifact index {item_idx} out of range ({len(filenames)} artifacts)", last_update, filenames, []
 
 
-async def check_github_release(session, mod_name, mod_data, compiled_regex, config, *, use_cache=False, all_files=False):
+async def check_github_release(
+    session, mod_name, mod_data, compiled_regex, config, *, use_cache=False, all_files=False
+):
     github = mod_data["github"]
     repo = github["repo"]
     type_ = github.get("type", "asset")
@@ -247,7 +258,13 @@ async def check_github_release(session, mod_name, mod_data, compiled_regex, conf
             if match:
                 quality_warnings = check_group_quality(match, compiled_regex.pattern)
                 if last_update and last_update < STALE_CUTOFF:
-                    return STALE, f"Match tag: {tag_name} -> {match.groupdict()}", last_update, [tag_name], quality_warnings
+                    return (
+                        STALE,
+                        f"Match tag: {tag_name} -> {match.groupdict()}",
+                        last_update,
+                        [tag_name],
+                        quality_warnings,
+                    )
                 return PASS, f"Match tag: {tag_name} -> {match.groupdict()}", last_update, [tag_name], quality_warnings
             return FAIL, f"No match on tag: {tag_name}", last_update, [tag_name], []
         else:
@@ -262,14 +279,26 @@ async def check_github_release(session, mod_name, mod_data, compiled_regex, conf
             if match:
                 quality_warnings = check_group_quality(match, compiled_regex.pattern)
                 if last_update and last_update < STALE_CUTOFF:
-                    return STALE, f"Match: {name} -> {match.groupdict()}", last_update, asset_names[:5], quality_warnings
+                    return (
+                        STALE,
+                        f"Match: {name} -> {match.groupdict()}",
+                        last_update,
+                        asset_names[:5],
+                        quality_warnings,
+                    )
                 return PASS, f"Match: {name} -> {match.groupdict()}", last_update, asset_names[:5], quality_warnings
 
     all_assets = []
     for release in releases[:3]:
         all_assets.extend(a["name"] for a in release.get("assets", []))
     total_releases = min(3, len(releases))
-    return FAIL, f"No match in {len(all_assets)} assets across {total_releases} releases", last_update, all_assets[:10], []
+    return (
+        FAIL,
+        f"No match in {len(all_assets)} assets across {total_releases} releases",
+        last_update,
+        all_assets[:10],
+        [],
+    )
 
 
 async def check_forge_json(session, mod_name, mod_data, compiled_regex, *, use_cache=False, all_files=False):
@@ -396,13 +425,22 @@ async def test_mod(session, mod_name, mod_data, config, *, use_cache=False, all_
     try:
         if function == "github_release":
             status, detail, last_update, samples, quality_warnings = await checker(
-                session, mod_name, mod_data, compiled_regex, config,
-                use_cache=use_cache, all_files=all_files,
+                session,
+                mod_name,
+                mod_data,
+                compiled_regex,
+                config,
+                use_cache=use_cache,
+                all_files=all_files,
             )
         else:
             status, detail, last_update, samples, quality_warnings = await checker(
-                session, mod_name, mod_data, compiled_regex,
-                use_cache=use_cache, all_files=all_files,
+                session,
+                mod_name,
+                mod_data,
+                compiled_regex,
+                use_cache=use_cache,
+                all_files=all_files,
             )
     except Exception as e:
         status = DEAD
@@ -470,8 +508,12 @@ async def main():
                 continue
 
             result = await test_mod(
-                session, mod_name, mod_data, config,
-                use_cache=args.cache, all_files=args.all_files,
+                session,
+                mod_name,
+                mod_data,
+                config,
+                use_cache=args.cache,
+                all_files=args.all_files,
             )
             results.append(result)
 
