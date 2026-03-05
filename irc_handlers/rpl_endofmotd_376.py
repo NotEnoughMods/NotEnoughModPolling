@@ -11,14 +11,19 @@ async def execute(self, send_msg, prefix, command, params):
     logger.info("End of MOTD, starting post-connection setup")
     await self.join_channel(send_msg, self.channels)
 
-    for chan in self.channels:
-        try:
-            await self.wait_for(
+    results = await asyncio.gather(
+        *(
+            self.wait_for(
                 "366",
                 check=lambda p, c, params, ch=chan: ch.lower() in params.lower(),
                 timeout=30,
             )
-        except TimeoutError:
+            for chan in self.channels
+        ),
+        return_exceptions=True,
+    )
+    for chan, result in zip(self.channels, results):
+        if isinstance(result, TimeoutError):
             logger.warning("Timed out waiting for JOIN confirmation on %s", chan)
 
     await send_msg("MODE " + ",".join(self.channels), 4)
