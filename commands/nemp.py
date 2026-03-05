@@ -397,8 +397,6 @@ async def polling_task(self, _pipe):
     staff_channel = the_poller.config.get("irc", {}).get("staff_channel")
 
     while True:
-        nemp_logger.debug("polling_task: I'm still running!")
-
         try:
             coros = [
                 _poll_single_mod(the_poller, mod_name)
