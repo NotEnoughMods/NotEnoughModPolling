@@ -1,4 +1,5 @@
 import asyncio
+import contextlib
 import importlib
 import logging
 import shlex
@@ -97,31 +98,51 @@ async def _nemp(router, name, params, channel, userdata, rank, is_channel):
         )
 
 
-TIME_EVENT_NAME = "NotEnoughModPolling"
 TASK_NAME = "NEMP"
+DRAIN_TASK_NAME = "NEMP_DRAIN"
 
 
 def is_running(router):
-    return router.events["time"].event_exists(TIME_EVENT_NAME)
+    exists, running = router.task_pool.check_status(TASK_NAME)
+    return exists and running
 
 
 async def start_polling(router, timer, channel):
     await router.poller.init_nem_versions()
     router.poll_cycle_count = 0
+    router.announcement_queue = asyncio.Queue()
 
-    router.task_pool.add_task(TASK_NAME, polling_task, {"poller": router.poller, "poll_time": timer})
+    # Clean up leftover tasks from a previous crash
+    for task_name in (TASK_NAME, DRAIN_TASK_NAME):
+        exists, _ = router.task_pool.check_status(task_name)
+        if exists:
+            router.task_pool.cancel_task(task_name)
 
-    router.events["time"].add_event(TIME_EVENT_NAME, 60, nemp_timer_event, [channel])
+    router.task_pool.add_task(
+        TASK_NAME,
+        polling_task,
+        {
+            "poller": router.poller,
+            "poll_time": timer,
+            "announcement_queue": router.announcement_queue,
+            "router": router,
+            "channels": [channel],
+        },
+    )
+    router.task_pool.add_task(
+        DRAIN_TASK_NAME,
+        announcement_drain_task,
+        {"router": router},
+    )
 
 
 def stop_polling(router):
-    router.events["time"].remove_event(TIME_EVENT_NAME)
-    nemp_logger.debug("Removed NEM Polling Event")
     router.task_pool.cancel_task(TASK_NAME)
-    nemp_logger.debug("Sigquit to NEMP task sent")
+    nemp_logger.debug("Cancelled NEMP polling task")
+    router.task_pool.cancel_task(DRAIN_TASK_NAME)
+    nemp_logger.debug("Cancelled NEMP drain task")
 
     router.troubled_mods = {}
-    # router.auto_disabled_mods = {}
 
 
 async def setup(router, startup):
@@ -214,7 +235,8 @@ async def cmd_help(router, name, params, channel, userdata, rank):
 
 async def cmd_status(router, name, params, channel, userdata, rank):
     if is_running(router):
-        channels = ", ".join(router.events["time"].get_channels(TIME_EVENT_NAME))
+        handle = router.task_pool.pool[TASK_NAME]["handle"]
+        channels = ", ".join(handle.base.get("channels", []))
         await router.send_message(
             channel,
             "NEM Polling is currently running "
@@ -307,197 +329,176 @@ async def _poll_single_mod(poller, mod_name):
     return ([(mod_name, statuses)], [])
 
 
-async def polling_task(self, pipe):
-    poller = self.base["poller"]
+async def announcement_drain_task(self, _pipe):
+    """Drains the NEMP announcement queue at a safe IRC rate."""
+    router = self.base["router"]
+    queue = router.announcement_queue
+
+    while True:
+        channel, msg = await queue.get()
+        await router.send_message(channel, msg)
+        await asyncio.sleep(2)
+
+
+async def _announce_mod_update(announcement_queue, the_poller, mod_name, new_versions, channels):
+    """Queue announcement messages for a single mod's version updates."""
+    nem_mod_name = the_poller.mods[mod_name].get("name", mod_name)
+
+    for new_version in new_versions:
+        mc_version, dev_version, release_version, changelog = new_version
+
+        last_dev = the_poller.get_nem_dev_version(mod_name, mc_version)
+        last_release = the_poller.get_nem_version(mod_name, mc_version)
+
+        if not last_dev and not last_release:
+            clone_version = release_version or "dev-only"
+
+            the_poller.set_nem_version(mod_name, clone_version, mc_version)
+
+            nemp_logger.debug(f"Cloning mod {mod_name} to {mc_version}, status: {new_version}")
+            for channel in channels:
+                await announcement_queue.put((channel, f"!clone {nem_mod_name} {mc_version} {clone_version}"))
+        elif release_version:
+            nemp_logger.debug(f"Updating Mod {mod_name}, status: {new_version}")
+            the_poller.set_nem_version(mod_name, release_version, mc_version)
+            for channel in channels:
+                await announcement_queue.put((channel, f"!lmod {mc_version} {nem_mod_name} {release_version}"))
+
+        if dev_version:
+            if release_version and dev_version == release_version:
+                nemp_logger.debug(
+                    f"Would update mod {mod_name} to dev {dev_version}, "
+                    f"but it matches the new release {release_version}"
+                )
+            elif last_release and dev_version == last_release:
+                nemp_logger.debug(
+                    f"Would update mod {mod_name} to dev {dev_version}, "
+                    f"but it matches the current release {last_release}"
+                )
+            else:
+                nemp_logger.debug(f"Updating mod {mod_name} to dev {dev_version}, status: {new_version}")
+                the_poller.set_nem_dev_version(mod_name, dev_version, mc_version)
+                for channel in channels:
+                    await announcement_queue.put((channel, f"!ldev {mc_version} {nem_mod_name} {dev_version}"))
+
+        if changelog and "changelog" not in the_poller.mods[mod_name]:
+            nemp_logger.debug(f"Sending text for Mod {mod_name}")
+            for channel in channels:
+                await announcement_queue.put((channel, " * " + " | ".join(changelog.splitlines())[:300]))
+
+
+async def polling_task(self, _pipe):
+    the_poller = self.base["poller"]
+    announcement_queue = self.base["announcement_queue"]
+    channels = self.base["channels"]
+    router = self.base["router"]
     sleep_time = self.base["poll_time"]
+
+    staff_channel = the_poller.config.get("irc", {}).get("staff_channel")
 
     while True:
         nemp_logger.debug("polling_task: I'm still running!")
 
-        coros = []
+        try:
+            coros = [
+                _poll_single_mod(the_poller, mod_name)
+                for mod_name, mod_info in the_poller.mods.items()
+                if mod_info["active"]
+            ]
 
-        for mod_name, mod_info in poller.mods.items():
-            if not mod_info["active"]:
-                continue
+            failed = []
+            for fut in asyncio.as_completed(coros):
+                try:
+                    result = await fut
+                except Exception:
+                    nemp_logger.error("Unexpected exception in polling coroutine", exc_info=True)
+                    continue
+                successes, failures = result
+                failed.extend(failures)
+                for mod_name, new_versions in successes:
+                    if new_versions:
+                        await _announce_mod_update(announcement_queue, the_poller, mod_name, new_versions, channels)
 
-            coros.append(_poll_single_mod(poller, mod_name))
+            # --- End-of-cycle bookkeeping ---
+            router.poll_cycle_count += 1
 
-        results = await asyncio.gather(*coros, return_exceptions=True)
-
-        poll_results = []
-        failed = []
-
-        for result in results:
-            if isinstance(result, BaseException):
-                nemp_logger.error("Unexpected exception in polling coroutine", exc_info=result)
-                continue
-            successes, failures = result
-            poll_results.extend(successes)
-            failed.extend(failures)
-
-        await pipe.put((poll_results, failed))
-
-        await asyncio.sleep(sleep_time)
-
-
-# This runs on a timer (once every minute)
-async def nemp_timer_event(router, channels):
-    # Check if we have any data from polling_task to process
-    if not router.task_pool.poll(TASK_NAME):
-        return
-
-    nemp_data = await router.task_pool.recv(TASK_NAME)
-
-    router.poll_cycle_count += 1
-
-    staff_channel = router.poller.config.get("irc", {}).get("staff_channel")
-
-    if staff_channel and router.poll_cycle_count % 50 == 0:
-        await router.send_message(staff_channel, f"Full cycles completed: {router.poll_cycle_count}")
-        if router.auto_disabled_mods:
-            await router.send_message(
-                staff_channel,
-                f"There are {len(router.auto_disabled_mods)} failed mod(s)",
-            )
-
-    if isinstance(nemp_data, dict) and "action" in nemp_data and nemp_data["action"] == "exceptionOccured":
-        nemp_logger.error(
-            "NEMP task {} encountered an unhandled exception: {}".format(
-                nemp_data["functionName"], str(nemp_data["exception"])
-            )
-        )
-        nemp_logger.error("Traceback Start")
-        nemp_logger.error(nemp_data["traceback"])
-        nemp_logger.error("Traceback End")
-
-        nemp_logger.error("Shutting down NEMP Events and Polling")
-        stop_polling(router)
-
-        router.troubled_mods = {}
-        router.auto_disabled_mods = {}
-
-        return
-
-    poll_results, failed_mods = nemp_data
-
-    for item in poll_results:
-        mod_name = item[0]
-        new_versions = item[1]
-
-        nem_mod_name = router.poller.mods[mod_name].get("name", mod_name)
-
-        for new_version in new_versions:
-            mc_version, dev_version, release_version, changelog = new_version
-
-            last_dev = router.poller.get_nem_dev_version(mod_name, mc_version)
-            last_release = router.poller.get_nem_version(mod_name, mc_version)
-
-            if not last_dev and not last_release:
-                clone_version = release_version or "dev-only"
-
-                router.poller.set_nem_version(mod_name, clone_version, mc_version)
-
-                nemp_logger.debug(f"Cloning mod {mod_name} to {mc_version}, status: {new_version}")
-                for channel in channels:
+            if staff_channel and router.poll_cycle_count % 50 == 0:
+                await router.send_message(staff_channel, f"Full cycles completed: {router.poll_cycle_count}")
+                if router.auto_disabled_mods:
                     await router.send_message(
-                        channel,
-                        f"!clone {nem_mod_name} {mc_version} {clone_version}",
-                    )
-            elif release_version:
-                nemp_logger.debug(f"Updating Mod {mod_name}, status: {new_version}")
-                router.poller.set_nem_version(mod_name, release_version, mc_version)
-                for channel in channels:
-                    await router.send_message(
-                        channel,
-                        f"!lmod {mc_version} {nem_mod_name} {release_version}",
+                        staff_channel,
+                        f"There are {len(router.auto_disabled_mods)} failed mod(s)",
                     )
 
-            if dev_version:
-                if release_version and dev_version == release_version:
-                    nemp_logger.debug(
-                        f"Would update mod {mod_name} to dev {dev_version}, "
-                        f"but it matches the new release {release_version}"
-                    )
-                elif last_release and dev_version == last_release:
-                    nemp_logger.debug(
-                        f"Would update mod {mod_name} to dev {dev_version}, "
-                        f"but it matches the current release {release_version}"
-                    )
-                else:
-                    nemp_logger.debug(f"Updating mod {mod_name} to dev {dev_version}, status: {new_version}")
-                    router.poller.set_nem_dev_version(mod_name, dev_version, mc_version)
-                    for channel in channels:
+            # --- Failed mods tracking ---
+            current_troubled_mods = list(router.troubled_mods.keys())
+            completely_failed_mods = []
+
+            for item in failed:  # type: FailedModEntry
+                nemp_logger.debug(f"Processing failed_mods entry {item!r}")
+                assert isinstance(item, FailedModEntry)
+
+                mod_name = item.name
+                exception = item.exception
+
+                if isinstance(exception, (poller.NEMPException,)):
+                    nemp_logger.debug(f"Mod {mod_name} got a {type(exception).__name__}, failing immediately")
+
+                    if mod_name in router.troubled_mods:
+                        del router.troubled_mods[mod_name]
+                        current_troubled_mods.remove(mod_name)
+
+                    router.auto_disabled_mods[mod_name] = True
+                    the_poller.mods[mod_name]["active"] = False
+
+                    if staff_channel:
                         await router.send_message(
-                            channel,
-                            f"!ldev {mc_version} {nem_mod_name} {dev_version}",
+                            staff_channel,
+                            f"Mod {mod_name} \00304failed\003 with a {type(exception).__name__}: {exception}",
                         )
+                else:
+                    if mod_name not in router.troubled_mods:
+                        router.troubled_mods[mod_name] = 1
+                        nemp_logger.debug(f"Mod {mod_name} had trouble being polled once. Counter set to 1")
+                    else:
+                        router.troubled_mods[mod_name] += 1
+                        current_troubled_mods.remove(mod_name)
 
-            if changelog and "changelog" not in router.poller.mods[mod_name]:
-                nemp_logger.debug(f"Sending text for Mod {mod_name}")
-                for channel in channels:
-                    await router.send_message(channel, " * " + " | ".join(changelog.splitlines())[:300])
+                        if router.troubled_mods[mod_name] >= 5:
+                            router.auto_disabled_mods[mod_name] = True
+                            the_poller.mods[mod_name]["active"] = False
+                            del router.troubled_mods[mod_name]
 
-    current_troubled_mods = list(router.troubled_mods.keys())
+                            completely_failed_mods.append(mod_name)
 
-    completely_failed_mods = []
+                            nemp_logger.debug(
+                                f"Mod {mod_name} has failed to be polled at least 5 times, it has been disabled."
+                            )
 
-    for item in failed_mods:  # type: FailedModEntry
-        nemp_logger.debug(f"Processing failed_mods entry {item!r}")
+            the_poller.build_html()
 
-        assert isinstance(item, FailedModEntry)
-
-        mod_name = item.name
-        exception = item.exception
-
-        if isinstance(exception, (poller.NEMPException,)):
-            nemp_logger.debug(f"Mod {mod_name} got a {type(exception).__name__}, failing immediately")
-
-            if mod_name in router.troubled_mods:
-                del router.troubled_mods[mod_name]
-                current_troubled_mods.remove(mod_name)
-
-            router.auto_disabled_mods[mod_name] = True
-            router.poller.mods[mod_name]["active"] = False
-
-            if staff_channel:
+            if staff_channel and completely_failed_mods:
                 await router.send_message(
                     staff_channel,
-                    f"Mod {mod_name} \00304failed\003 with a {type(exception).__name__}: {exception}",
+                    "The following mod(s) \00304failed\003: {}.".format(
+                        ", ".join(sorted(completely_failed_mods, key=lambda x: x.lower()))
+                    ),
                 )
-        else:
-            if mod_name not in router.troubled_mods:
-                router.troubled_mods[mod_name] = 1
-                nemp_logger.debug(f"Mod {mod_name} had trouble being polled once. Counter set to 1")
 
-            else:
-                router.troubled_mods[mod_name] += 1
+            for mod_name in current_troubled_mods:
+                nemp_logger.debug(
+                    f"Mod {mod_name} is working again. Counter reset (Counter was at {router.troubled_mods[mod_name]}) "
+                )
+                del router.troubled_mods[mod_name]
 
-                current_troubled_mods.remove(mod_name)
+        except Exception as e:
+            nemp_logger.exception("NEMP polling cycle crashed")
+            if staff_channel:
+                with contextlib.suppress(Exception):
+                    await router.send_message(staff_channel, f"NEMP polling \x0304crashed\x03: {e}")
+            raise
 
-                if router.troubled_mods[mod_name] >= 5:
-                    router.auto_disabled_mods[mod_name] = True
-                    router.poller.mods[mod_name]["active"] = False
-                    del router.troubled_mods[mod_name]
-
-                    completely_failed_mods.append(mod_name)
-
-                    nemp_logger.debug(f"Mod {mod_name} has failed to be polled at least 5 times, it has been disabled.")
-
-    router.poller.build_html()
-
-    if staff_channel and completely_failed_mods:
-        await router.send_message(
-            staff_channel,
-            "The following mod(s) \00304failed\003: {}.".format(
-                ", ".join(sorted(completely_failed_mods, key=lambda x: x.lower()))
-            ),
-        )
-
-    for mod_name in current_troubled_mods:
-        nemp_logger.debug(
-            f"Mod {mod_name} is working again. Counter reset (Counter was at {router.troubled_mods[mod_name]}) "
-        )
-        del router.troubled_mods[mod_name]
+        await asyncio.sleep(sleep_time)
 
 
 async def cmd_poll(router, name, params, channel, userdata, rank):
