@@ -11,9 +11,12 @@ jobs:
     if: github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
     steps:
-      - run: |
+      - name: Set up SSH
+        run: |
           mkdir -p ~/.ssh
           echo "${{ secrets.DEPLOY_SSH_KEY }}" > ~/.ssh/id_ed25519
           chmod 600 ~/.ssh/id_ed25519
-          ssh-keyscan -H ${{ secrets.DEPLOY_HOST }} >> ~/.ssh/known_hosts
-          ssh ${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_HOST }}
+          ssh-keyscan -H ${{ secrets.DEPLOY_HOST }} >> ~/.ssh/known_hosts 2>/dev/null
+
+      - name: Deploy
+        run: ssh ${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_HOST }}
