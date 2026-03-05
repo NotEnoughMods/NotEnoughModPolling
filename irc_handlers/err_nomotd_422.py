@@ -22,7 +22,7 @@ async def execute(self, send_msg, prefix, command, params):
         ),
         return_exceptions=True,
     )
-    for chan, result in zip(self.channels, results):
+    for chan, result in zip(self.channels, results, strict=True):
         if isinstance(result, TimeoutError):
             logger.warning("Timed out waiting for JOIN confirmation on %s", chan)
 
