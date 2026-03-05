@@ -156,6 +156,8 @@ _shutdown_logger = logging.getLogger("IRCMainLoop")
 
 
 def _handle_signal(sig, loop):
+    for s in (signal.SIGTERM, signal.SIGINT):
+        loop.remove_signal_handler(s)
     _shutdown_logger.info("Received %s, shutting down...", sig.name)
     for task in asyncio.all_tasks(loop):
         if task is not asyncio.current_task():
