@@ -1,0 +1,5 @@
+discord:
+  webhook_url: ""
+nem:
+  listen_channel: "#notenoughmods"
+  listen_nick: "ModBot"

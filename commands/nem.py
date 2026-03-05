@@ -424,6 +424,120 @@ async def help(router, name, params, channel, userdata, rank):
             await router.send_message(channel, name + ": Invalid command provided")
 
 
+async def total(router, name, params, channel, userdata, rank):
+    if len(params) == 2:
+        ver = params[1]
+        if ver not in versions:
+            await router.send_message(channel, f"{name}: MC version not found in NEM.")
+            return
+        jsonres = await fetch_json(f"https://bot.notenoughmods.com/{urlquote(ver)}.json", cache=True)
+        if jsonres is None:
+            await router.send_message(channel, f"{name}: Could not fetch the list.")
+            return
+        count_msg = f"{PURPLE}{len(jsonres)}{COLOUREND} mods in {BOLD}{BLUE}{ver}{COLOUREND}{BOLD}"
+        await router.send_message(channel, count_msg)
+    else:
+        count = 0
+        for ver in versions:
+            jsonres = await fetch_json(f"https://bot.notenoughmods.com/{urlquote(ver)}.json", cache=True)
+            if jsonres is not None:
+                count += len(jsonres)
+        await router.send_message(channel, f"{PURPLE}{count}{COLOUREND} mods total across {len(versions)} versions")
+
+
+async def missmodid(router, name, params, channel, userdata, rank):
+    if len(params) != 2:
+        await router.send_message(channel, f"{name}: Usage: =nem missmodid <version>")
+        return
+
+    ver = params[1]
+    if ver not in versions:
+        await router.send_message(channel, f"{name}: MC version not found in NEM.")
+        return
+
+    jsonres = await fetch_json(f"https://bot.notenoughmods.com/{urlquote(ver)}.json", cache=True)
+    if jsonres is None:
+        await router.send_message(channel, f"{name}: Could not fetch the list.")
+        return
+
+    missing = [mod["name"] for mod in jsonres if mod.get("modid", "") == ""]
+
+    if not missing:
+        await router.send_message(channel, f"{name}: All mods in {BOLD}{BLUE}{ver}{COLOUREND}{BOLD} have a modid set.")
+    elif len(missing) <= 5:
+        for mod_name in missing:
+            await router.send_message(channel, f"[{BLUE}{ver}{COLOUREND}] {mod_name}")
+    elif len(missing) <= 20:
+        await router.send_message(channel, f"{len(missing)} mod(s) missing modid. Sending via notice...")
+        for mod_name in missing:
+            await router.send_notice(name, f"[{BLUE}{ver}{COLOUREND}] {mod_name}")
+    else:
+        msg = f"{len(missing)} mod(s) missing modid in {BOLD}{BLUE}{ver}{COLOUREND}{BOLD}."
+        await router.send_message(channel, msg)
+
+
+async def blinks(router, name, params, channel, userdata, rank):
+    if len(params) != 2:
+        await router.send_message(channel, f"{name}: Usage: =nem blinks <version>")
+        return
+
+    ver = params[1]
+    if ver not in versions:
+        await router.send_message(channel, f"{name}: MC version not found in NEM.")
+        return
+
+    jsonres = await fetch_json(f"https://bot.notenoughmods.com/{urlquote(ver)}.json", cache=True)
+    if jsonres is None:
+        await router.send_message(channel, f"{name}: Could not fetch the list.")
+        return
+
+    await router.send_message(channel, f"[{BLUE}{ver}{COLOUREND}] Checking {len(jsonres)} mod links...")
+
+    counts = {}
+    badmods = []
+    index = 0
+
+    for mod in jsonres:
+        if mod.get("longurl", "") != "":
+            try:
+                async with session.head(
+                    mod["longurl"],
+                    timeout=aiohttp.ClientTimeout(total=10),
+                    allow_redirects=True,
+                ) as resp:
+                    code = resp.status
+                    counts[code] = counts.get(code, 0) + 1
+                    if code >= 400:
+                        badmods.append({"name": mod["name"], "reason": code})
+            except Exception as e:
+                reason = type(e).__name__
+                counts[reason] = counts.get(reason, 0) + 1
+                badmods.append({"name": mod["name"], "reason": reason})
+
+        index += 1
+        if index % 50 == 0:
+            await router.send_message(channel, f"[{BLUE}{ver}{COLOUREND}] {index} mods processed...")
+
+    if not badmods:
+        await router.send_message(channel, f"[{BLUE}{ver}{COLOUREND}] No broken links found.")
+    elif len(badmods) <= 5:
+        await router.send_message(channel, f"{len(badmods)} broken link(s) found:")
+        for mod in badmods:
+            await router.send_message(channel, f"[{BLUE}{ver}{COLOUREND}] {mod['name']} ({mod['reason']})")
+    elif len(badmods) <= 20:
+        await router.send_message(channel, f"{len(badmods)} broken link(s) found. Sending via notice...")
+        for mod in badmods:
+            await router.send_notice(name, f"[{BLUE}{ver}{COLOUREND}] {mod['name']} ({mod['reason']})")
+    else:
+        msg = f"{len(badmods)} broken link(s) found in {BOLD}{BLUE}{ver}{COLOUREND}{BOLD}."
+        await router.send_message(channel, msg)
+
+    await router.send_message(
+        channel,
+        f"[{BLUE}{ver}{COLOUREND}] Complete. {index} mods processed. Results: {counts}",
+    )
+
+
 async def force_cache_redownload(router, name, params, channel, userdata, rank):
     if rank >= Permission.ADMIN:
         for ver in versions:
@@ -446,6 +560,9 @@ _subcommands = {
     "help": help,
     "setlist": setlist,
     "compare": compare,
+    "total": total,
+    "missmodid": missmodid,
+    "blinks": blinks,
     "forceredownload": force_cache_redownload,
 }
 
@@ -471,6 +588,18 @@ _help_dict = {
         "=nem compare <oldVersion> <newVersion>",
         "Compares the NEMP entries for two different MC versions and says how many mods "
         "haven't been updated to the new version.",
+    ],
+    "total": [
+        "=nem total [version]",
+        "Returns the total number of mods, optionally for a specific MC version.",
+    ],
+    "missmodid": [
+        "=nem missmodid <version>",
+        "Returns mods without a modid set for the given MC version.",
+    ],
+    "blinks": [
+        "=nem blinks <version>",
+        "Checks each mod link for broken URLs (non-OK HTTP status codes).",
     ],
 }
 
