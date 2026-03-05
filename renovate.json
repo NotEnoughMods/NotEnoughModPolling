@@ -1,0 +1,28 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:recommended",
+    "helpers:pinGitHubActionDigests",
+    ":gitSignOff"
+  ],
+  "labels": ["dependencies"],
+  "packageRules": [
+    {
+      "description": "Group dev dependency updates together",
+      "matchDepTypes": ["devDependencies"],
+      "matchManagers": ["pep621"],
+      "groupName": "dev dependencies"
+    },
+    {
+      "description": "Automerge minor and patch updates after 3-day cooldown",
+      "matchUpdateTypes": ["minor", "patch", "digest"],
+      "minimumReleaseAge": "3 days",
+      "automerge": true
+    },
+    {
+      "description": "Group GitHub Actions updates together",
+      "matchManagers": ["github-actions"],
+      "groupName": "github actions"
+    }
+  ]
+}
