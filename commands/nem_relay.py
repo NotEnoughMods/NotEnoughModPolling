@@ -29,8 +29,10 @@ def _load_config():
     if not CONFIG_FILE.exists():
         if CONFIG_EXAMPLE.exists():
             shutil.copy(CONFIG_EXAMPLE, CONFIG_FILE)
-        relay_logger.warning("No config at %s — relay will be disabled.", CONFIG_FILE)
-        return {}
+            relay_logger.info("Created %s from example. Please fill in the webhook URL.", CONFIG_FILE)
+        else:
+            relay_logger.warning("No config at %s — relay will be disabled.", CONFIG_FILE)
+            return {}
 
     with open(CONFIG_FILE) as f:
         return yaml.safe_load(f) or {}
