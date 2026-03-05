@@ -420,7 +420,7 @@ async def polling_task(self, _pipe):
             # --- End-of-cycle bookkeeping ---
             router.poll_cycle_count += 1
 
-            if staff_channel and router.poll_cycle_count % 50 == 0:
+            if staff_channel and router.poll_cycle_count % 10 == 0:
                 await router.send_message(staff_channel, f"Full cycles completed: {router.poll_cycle_count}")
                 if router.auto_disabled_mods:
                     await router.send_message(
