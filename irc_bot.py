@@ -153,18 +153,21 @@ def write_starting_date():
 
 
 _shutdown_logger = logging.getLogger("IRCMainLoop")
+_main_task = None
 
 
 def _handle_signal(sig, loop):
     for s in (signal.SIGTERM, signal.SIGINT):
         loop.remove_signal_handler(s)
     _shutdown_logger.info("Received %s, shutting down...", sig.name)
-    for task in asyncio.all_tasks(loop):
-        if task is not asyncio.current_task():
-            task.cancel()
+    if _main_task and not _main_task.done():
+        _main_task.cancel()
 
 
 async def async_main():
+    global _main_task
+    _main_task = asyncio.current_task()
+
     loop = asyncio.get_running_loop()
     for sig in (signal.SIGTERM, signal.SIGINT):
         loop.add_signal_handler(sig, _handle_signal, sig, loop)
