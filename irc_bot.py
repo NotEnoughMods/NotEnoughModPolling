@@ -2,6 +2,7 @@ import asyncio
 import contextlib
 import datetime
 import logging
+import signal
 import socket
 import traceback
 
@@ -151,7 +152,21 @@ def write_starting_date():
         f.write("Started at: " + str(datetime.datetime.today()))
 
 
+_shutdown_logger = logging.getLogger("IRCMainLoop")
+
+
+def _handle_signal(sig, loop):
+    _shutdown_logger.info("Received %s, shutting down...", sig.name)
+    for task in asyncio.all_tasks(loop):
+        if task is not asyncio.current_task():
+            task.cancel()
+
+
 async def async_main():
+    loop = asyncio.get_running_loop()
+    for sig in (signal.SIGTERM, signal.SIGINT):
+        loop.add_signal_handler(sig, _handle_signal, sig, loop)
+
     write_starting_date()
 
     config_obj = Configuration()
@@ -204,5 +219,4 @@ async def async_main():
 
 
 if __name__ == "__main__":
-    with contextlib.suppress(KeyboardInterrupt):
-        asyncio.run(async_main())
+    asyncio.run(async_main())
