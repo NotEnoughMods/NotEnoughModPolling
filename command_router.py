@@ -15,6 +15,37 @@ from irc_logging import LoggingModule
 from user_auth import AuthTracker
 
 
+def command(name, permission, allow_private=False):
+    """Decorator that marks a Plugin method as a bot command."""
+
+    def decorator(func):
+        func._command_info = {
+            "name": name,
+            "permission": permission,
+            "allow_private": allow_private,
+        }
+        return func
+
+    return decorator
+
+
+def subcommand(group, name, permission=None):
+    """Decorator that marks a Plugin method as a subcommand of a command group.
+
+    If permission is None, the group's permission is used.
+    """
+
+    def decorator(func):
+        func._subcommand_info = {
+            "group": group,
+            "name": name,
+            "permission": permission,
+        }
+        return func
+
+    return decorator
+
+
 class Permission(IntEnum):
     """Minimum rank required to use a command.
 
@@ -47,6 +78,7 @@ class PluginEntry(NamedTuple):
         command_names: Tuple of command names registered by this plugin.
         setup: ``async setup(router, startup)`` coroutine, or *None*.
         teardown: ``async teardown(router)`` coroutine, or *None*.
+        instance: For new-style plugins, the ``Plugin`` class instance.
     """
 
     module: object
@@ -54,6 +86,7 @@ class PluginEntry(NamedTuple):
     command_names: tuple
     setup: Callable | None
     teardown: Callable | None
+    instance: object | None = None
 
 
 class CommandEntry(NamedTuple):
@@ -106,7 +139,7 @@ class CommandRouter:
         self.name = name
         self.ident = ident
         self.protocol_handlers = self._load_protocol_handlers("irc_handlers")
-        self.plugins, self.commands = self._load_plugins("commands")
+        self.plugins, self.commands = self._load_plugins("plugins")
 
         self.operators = adminlist
         self.auth_tracker = AuthTracker(adminlist)
@@ -385,15 +418,93 @@ class CommandRouter:
         spec.loader.exec_module(module)
         return module
 
+    def add_plugin(self, plugin_id, instance, module, path):
+        """Register a new-style Plugin instance. Discovers decorated methods."""
+        command_names = []
+        group_commands = {}
+        subcommands = {}
+
+        for attr_name in dir(instance):
+            method = getattr(instance, attr_name, None)
+            if method is None:
+                continue
+
+            cmd_info = getattr(method, "_command_info", None)
+            if cmd_info is not None:
+                group_commands[cmd_info["name"]] = (method, cmd_info)
+
+            sub_info = getattr(method, "_subcommand_info", None)
+            if sub_info is not None:
+                group = sub_info["group"]
+                subcommands.setdefault(group, {})[sub_info["name"]] = (
+                    method,
+                    sub_info["permission"],
+                )
+
+        for cmd_name, (method, cmd_info) in group_commands.items():
+            subs = subcommands.get(cmd_name)
+            execute = self._make_group_dispatch(method, subs, cmd_info["permission"]) if subs else method
+
+            self.commands[cmd_name] = CommandEntry(
+                execute=execute,
+                permission=cmd_info["permission"],
+                allow_private=cmd_info.get("allow_private", False),
+                plugin_id=plugin_id,
+            )
+            command_names.append(cmd_name)
+
+        setup_fn = getattr(instance, "setup", None)
+        teardown_fn = getattr(instance, "teardown", None)
+
+        self.plugins[plugin_id] = PluginEntry(
+            module=module,
+            path=path,
+            command_names=tuple(command_names),
+            setup=setup_fn,
+            teardown=teardown_fn,
+            instance=instance,
+        )
+
+    def _make_group_dispatch(self, fallback, subcommands, group_permission):
+        """Create an auto-dispatch function for a command group."""
+
+        async def dispatch(router, name, params, channel, userdata, rank, is_channel):
+            if params:
+                sub_name = params[0].lower()
+                if sub_name in subcommands:
+                    method, sub_perm = subcommands[sub_name]
+                    required = sub_perm if sub_perm is not None else group_permission
+                    if rank >= required:
+                        await method(router, name, params, channel, userdata, rank)
+                    else:
+                        await router.send_message(channel, "You're not authorized to use this command.")
+                    return
+            await fallback(router, name, params, channel, userdata, rank, is_channel)
+
+        return dispatch
+
+    def remove_plugin(self, plugin_id):
+        """Unregister a plugin and all its commands."""
+        plugin = self.plugins.get(plugin_id)
+        if not plugin:
+            return
+        for name in plugin.command_names:
+            self.commands.pop(name, None)
+        del self.plugins[plugin_id]
+
     def _load_plugins(self, path):
         """Load all plugin modules from *path*.
 
-        Each plugin module must define ``PLUGIN_ID`` (str) and ``COMMANDS``
-        (dict mapping command names to dicts with keys ``execute``,
-        ``permission``, and optionally ``allow_private``).
+        Each plugin module must define ``PLUGIN_ID`` (str).
+
+        **New-style** plugins define a ``Plugin`` class with ``@command``
+        and ``@subcommand`` decorated methods.  **Old-style** plugins
+        define a ``COMMANDS`` dict mapping command names to dicts with
+        keys ``execute``, ``permission``, and optionally ``allow_private``.
 
         A module may optionally define ``async setup(router, startup)``
-        and/or ``async teardown(router)`` for lifecycle hooks.
+        and/or ``async teardown(router)`` for lifecycle hooks (old-style),
+        or the ``Plugin`` class may define those methods (new-style).
 
         Returns:
             ``(plugins_dict, commands_dict)`` — *plugins_dict* maps plugin
@@ -403,8 +514,10 @@ class CommandRouter:
         file_list = self._list_dir(path)
         self._logger.info("Loading plugins in path '%s'...", path)
 
-        plugins = {}
-        commands = {}
+        # add_plugin() writes directly to self.plugins / self.commands,
+        # so we initialize them here and return them at the end.
+        self.plugins = {}
+        self.commands = {}
 
         for filename in file_list:
             filepath = path + "/" + filename
@@ -412,37 +525,43 @@ class CommandRouter:
             module = self._load_source("NEMP_" + filename[:-3], filepath)
 
             plugin_id = module.PLUGIN_ID
-            commands_dict = module.COMMANDS
+            plugin_cls = getattr(module, "Plugin", None)
 
-            setup_fn = getattr(module, "setup", None)
-            if setup_fn is not None and not callable(setup_fn):
-                setup_fn = None
+            if plugin_cls is not None:
+                instance = plugin_cls()
+                self.add_plugin(plugin_id, instance, module, filepath)
+            else:
+                commands_dict = module.COMMANDS
 
-            teardown_fn = getattr(module, "teardown", None)
-            if teardown_fn is not None and not callable(teardown_fn):
-                teardown_fn = None
+                setup_fn = getattr(module, "setup", None)
+                if setup_fn is not None and not callable(setup_fn):
+                    setup_fn = None
 
-            command_names = []
-            for cmd_name, cmd_info in commands_dict.items():
-                entry = CommandEntry(
-                    execute=cmd_info["execute"],
-                    permission=cmd_info["permission"],
-                    allow_private=cmd_info.get("allow_private", False),
-                    plugin_id=plugin_id,
+                teardown_fn = getattr(module, "teardown", None)
+                if teardown_fn is not None and not callable(teardown_fn):
+                    teardown_fn = None
+
+                command_names = []
+                for cmd_name, cmd_info in commands_dict.items():
+                    entry = CommandEntry(
+                        execute=cmd_info["execute"],
+                        permission=cmd_info["permission"],
+                        allow_private=cmd_info.get("allow_private", False),
+                        plugin_id=plugin_id,
+                    )
+                    self.commands[cmd_name] = entry
+                    command_names.append(cmd_name)
+
+                self.plugins[plugin_id] = PluginEntry(
+                    module=module,
+                    path=filepath,
+                    command_names=tuple(command_names),
+                    setup=setup_fn,
+                    teardown=teardown_fn,
                 )
-                commands[cmd_name] = entry
-                command_names.append(cmd_name)
-
-            plugins[plugin_id] = PluginEntry(
-                module=module,
-                path=filepath,
-                command_names=tuple(command_names),
-                setup=setup_fn,
-                teardown=teardown_fn,
-            )
 
         self._logger.info("Plugins in path '%s' loaded.", path)
-        return plugins, commands
+        return self.plugins, self.commands
 
     def _load_protocol_handlers(self, path):
         """Load IRC protocol handler modules from *path*.

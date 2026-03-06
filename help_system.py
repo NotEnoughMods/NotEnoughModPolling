@@ -6,7 +6,7 @@ Users can also define descriptions for each argument their command takes, and th
 the argument as optional or not. The help command will use this information to format the
 resulting text accordingly.
 
-Example of usage in commands/showHelp.py, with added comments:
+Example of usage in plugins/showHelp.py, with added comments:
 
 #We need to define a setup function so that the code is executed on startup:
 def setup(self, startup):
