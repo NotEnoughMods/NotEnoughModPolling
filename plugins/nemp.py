@@ -13,6 +13,8 @@ PLUGIN_ID = "nemp"
 
 nemp_logger = logging.getLogger("NEMPolling")
 
+MAX_POLL_FAILURES = 3
+
 help_dict = {
     "running": [
         "{0} running <true/false>",
@@ -50,12 +52,14 @@ help_dict = {
     ],
     "failedmods": [
         "{0} failedmods",
-        "Shows a list of mods that have failed to be polled at least 5 times in a row and were disabled automatically.",
+        f"Shows a list of mods that have failed to be polled at least {MAX_POLL_FAILURES} times in a row"
+        " and were disabled automatically.",
     ],
     "failcount": [
         "{0} failcount",
         "Shows how many times mods have failed to be polled so far. At least two failures in a row required.",
-        "Mods that have failed being polled 5 times are excluded from this list. Check {0} failedmods for those mods.",
+        f"Mods that have failed being polled {MAX_POLL_FAILURES} times are excluded from this list."
+        " Check {0} failedmods for those mods.",
     ],
     "showinfo": [
         "{0} showinfo <mod> [<path> [...]]",
@@ -217,7 +221,7 @@ async def polling_task(handle, _pipe):
                         plugin.troubled_mods[mod_name] += 1
                         current_troubled_mods.remove(mod_name)
 
-                        if plugin.troubled_mods[mod_name] >= 5:
+                        if plugin.troubled_mods[mod_name] >= MAX_POLL_FAILURES:
                             plugin.auto_disabled_mods[mod_name] = True
                             the_poller.mods[mod_name]["active"] = False
                             del plugin.troubled_mods[mod_name]
@@ -225,7 +229,8 @@ async def polling_task(handle, _pipe):
                             completely_failed_mods.append(mod_name)
 
                             nemp_logger.debug(
-                                f"Mod {mod_name} has failed to be polled at least 5 times, it has been disabled."
+                                "Mod %s has failed to be polled at least %d times, it has been disabled.",
+                                mod_name, MAX_POLL_FAILURES,
                             )
 
             the_poller.build_html()
