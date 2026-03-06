@@ -41,4 +41,4 @@ select = [
 ]
 
 [tool.ruff.lint.isort]
-known-first-party = ["commands", "irc_handlers"]
+known-first-party = ["plugins", "irc_handlers"]
