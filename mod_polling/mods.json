@@ -628,7 +628,7 @@
         "active": true,
         "curse": {
             "id": "222896",
-            "regex": "pandorasbox-(?P<mc>[0-9]+(?:\\.[0-9]+)+)-(?:(?:Fabric|(?:Neo)?Forge)-)?(?P<version>[0-9]+(?:\\.[0-9]+)+(?:\\.release)?)\\.jar"
+            "regex": "pandorasbox-(?:.*-)?(?P<version>[2-9]\\.[0-9]+(?:\\.[0-9]+)*)(?:-.+)?(?:\\.release)?\\.jar"
         }
     },
     "RecurrentComplex": {
