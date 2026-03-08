@@ -230,7 +230,8 @@ async def polling_task(handle, _pipe):
 
                             nemp_logger.debug(
                                 "Mod %s has failed to be polled at least %d times, it has been disabled.",
-                                mod_name, MAX_POLL_FAILURES,
+                                mod_name,
+                                MAX_POLL_FAILURES,
                             )
 
             the_poller.build_html()
