@@ -8,7 +8,7 @@ import traceback
 
 from command_router import CommandRouter
 from config import Configuration
-from irc_connection import IrcConnection
+from irc_connection import ConnectionDown, IrcConnection
 
 
 class IrcBot:
@@ -36,6 +36,9 @@ class IrcBot:
         self._logger = logging.getLogger("IRCMainLoop")
 
     async def start(self):
+        self.shutdown = False
+        self.nickserv_auth = False
+        self._handler_tasks = set()
         self.conn = IrcConnection()
 
         local_addr = None
@@ -96,6 +99,7 @@ class IrcBot:
                     task.add_done_callback(self._handler_tasks.discard)
         except asyncio.CancelledError:
             self._logger.info("Main loop cancelled (shutdown)")
+            self.shutdown = True
         finally:
             self._logger.info("Main loop has been stopped")
             self.command_router.task_pool.cancel_all()
@@ -105,16 +109,20 @@ class IrcBot:
             with contextlib.suppress(asyncio.CancelledError):
                 await timer_task
             await self.command_router.close()
-            await self.conn.send_msg("QUIT :Shutting down")
-            try:
-                await self.conn.flush(timeout=5)
-            except TimeoutError:
-                self._logger.warning("Timed out flushing write queue")
+            if self.shutdown:
+                await self.conn.send_msg("QUIT :Shutting down")
+                try:
+                    await self.conn.flush(timeout=5)
+                except TimeoutError:
+                    self._logger.warning("Timed out flushing write queue")
             write_task.cancel()
             with contextlib.suppress(asyncio.CancelledError):
                 await write_task
             await self.conn.close()
             self._logger.info("Connection closed.")
+
+        if not self.shutdown:
+            raise ConnectionDown(self.host, datetime.datetime.now())
 
     def _parse_message(self, msg):
         msg_parts = msg.split(" ", 2)
