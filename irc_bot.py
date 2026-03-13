@@ -33,6 +33,7 @@ class IrcBot:
         self.nickserv_auth = False
         self.shutdown = False
         self._handler_tasks = set()
+        self._logger = logging.getLogger("IRCMainLoop")
 
     async def start(self):
         self.conn = IrcConnection()
@@ -69,7 +70,6 @@ class IrcBot:
             self.loglevel,
         )
 
-        self._logger = logging.getLogger("IRCMainLoop")
         self._logger.info("Connected to %s", self.host)
         self._logger.info("BOT IS NOW ONLINE: Starting to listen for server responses.")
 
