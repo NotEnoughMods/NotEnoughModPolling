@@ -4,6 +4,7 @@ import datetime
 import logging
 import signal
 import socket
+import time
 import traceback
 
 from command_router import CommandRouter
@@ -185,46 +186,66 @@ async def async_main():
     config_obj.check_options()
 
     bot = IrcBot(config_obj)
-    log = False
 
-    try:
-        await bot.start()
-    except Exception as error:
-        if getattr(bot, "_logger", None) is not None:
-            bot._logger.exception("Fatal error during startup or runtime.")
-            log = True
-        else:
-            print("Logger was not initialized, cannot write to log file.")
+    initial_backoff = 5
+    max_backoff = 300
+    stable_threshold = 60
+    backoff = initial_backoff
 
-        print(f"Fatal error: {type(error).__name__}: {error}")
-        traceb = traceback.format_exc()
-        print(traceb)
+    while True:
+        start_time = time.monotonic()
+        try:
+            await bot.start()
+            break
 
-        with open("exception.txt", "w") as excFile:
-            excFile.write(f"Fatal error at {datetime.datetime.today()}\n")
-            excFile.write(traceb + "\n")
-            excFile.write("-----------------------------------------------------\n")
+        except (ConnectionDown, OSError, TimeoutError) as error:
+            elapsed = time.monotonic() - start_time
+            if elapsed > stable_threshold:
+                backoff = initial_backoff
+            bot._logger.warning("Connection lost: %s. Reconnecting in %ds...", error, backoff)
+            await asyncio.sleep(backoff)
+            backoff = min(backoff * 2, max_backoff)
 
-            if getattr(bot, "command_router", None) is not None:
-                while not bot.command_router.recent_messages.empty():
-                    msg = bot.command_router.recent_messages.get_nowait()
-                    excFile.write(msg)
-                    excFile.write("\n")
-                bot.command_router.task_pool.cancel_all()
-                if log:
-                    bot._logger.debug("All tasks were signaled to shut down.")
+        except asyncio.CancelledError:
+            break
 
-            excFile.write("-----------------------------------------------------\n")
-            excFile.write("Connection Exception: \n")
-
-            if getattr(bot, "conn", None) is not None:
-                excFile.write(str(bot.conn.error) + " \n")
+        except Exception as error:
+            if getattr(bot, "_logger", None) is not None:
+                bot._logger.exception("Fatal error during startup or runtime.")
             else:
-                excFile.write("Connection not initialized\n")
+                print("Logger was not initialized, cannot write to log file.")
 
-            excFile.write("-----------------------------------------------------\n")
+            print(f"Fatal error: {type(error).__name__}: {error}")
+            traceb = traceback.format_exc()
+            print(traceb)
 
-    if log:
+            with open("exception.txt", "w") as excFile:
+                excFile.write(f"Fatal error at {datetime.datetime.today()}\n")
+                excFile.write(traceb + "\n")
+                excFile.write("-----------------------------------------------------\n")
+
+                if getattr(bot, "command_router", None) is not None:
+                    while not bot.command_router.recent_messages.empty():
+                        msg = bot.command_router.recent_messages.get_nowait()
+                        excFile.write(msg)
+                        excFile.write("\n")
+                    bot.command_router.task_pool.cancel_all()
+                    if getattr(bot, "_logger", None) is not None:
+                        bot._logger.debug("All tasks were signaled to shut down.")
+
+                excFile.write("-----------------------------------------------------\n")
+                excFile.write("Connection Exception: \n")
+
+                if getattr(bot, "conn", None) is not None:
+                    excFile.write(str(bot.conn.error) + " \n")
+                else:
+                    excFile.write("Connection not initialized\n")
+
+                excFile.write("-----------------------------------------------------\n")
+
+            break
+
+    if getattr(bot, "_logger", None) is not None:
         bot._logger.info("End of Session\n\n\n\n")
     logging.shutdown()
 

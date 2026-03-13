@@ -201,3 +201,170 @@ class TestStartReconnectSignaling:
             await bot.start()
 
         assert bot.nickserv_auth is False
+
+
+class TestAsyncMainReconnect:
+    def _mock_config(self):
+        """Mock Configuration so async_main doesn't need config.yml."""
+        config_obj = MagicMock()
+        config_obj.config = {
+            "connection": {
+                "server": "irc.example.com",
+                "port": 6667,
+                "nickname": "TestBot",
+                "password": "",
+                "ident": "testbot",
+                "realname": "Test",
+            },
+            "administration": {
+                "operators": [],
+                "channels": [],
+                "command_prefix": "!",
+                "logging_level": "INFO",
+            },
+            "networking": {"force_ipv6": False, "bind_address": ""},
+        }
+        return config_obj
+
+    async def test_retries_on_connection_down(self):
+        from irc_bot import async_main
+
+        config_obj = self._mock_config()
+        call_count = 0
+
+        async def fake_start(self):
+            nonlocal call_count
+            call_count += 1
+            if call_count < 3:
+                raise ConnectionDown("irc.example.com", "now")
+            # Third call: simulate graceful shutdown
+            self.shutdown = True
+
+        with (
+            patch("irc_bot.Configuration") as MockConfig,
+            patch.object(IrcBot, "start", fake_start),
+            patch("irc_bot.write_starting_date"),
+            patch("irc_bot.asyncio.sleep", new_callable=AsyncMock) as mock_sleep,
+            patch("irc_bot.time") as mock_time,
+        ):
+            MockConfig.return_value = config_obj
+            mock_time.monotonic.return_value = 0  # Elapsed < stable_threshold
+            await async_main()
+
+        assert call_count == 3
+        assert mock_sleep.await_count == 2  # Two retries before success
+
+    async def test_backoff_doubles(self):
+        from irc_bot import async_main
+
+        config_obj = self._mock_config()
+        call_count = 0
+
+        async def fake_start(self):
+            nonlocal call_count
+            call_count += 1
+            if call_count < 4:
+                raise ConnectionDown("irc.example.com", "now")
+            self.shutdown = True
+
+        with (
+            patch("irc_bot.Configuration") as MockConfig,
+            patch.object(IrcBot, "start", fake_start),
+            patch("irc_bot.write_starting_date"),
+            patch("irc_bot.asyncio.sleep", new_callable=AsyncMock) as mock_sleep,
+            patch("irc_bot.time") as mock_time,
+        ):
+            MockConfig.return_value = config_obj
+            mock_time.monotonic.return_value = 0
+            await async_main()
+
+        # Backoff: 5, 10, 20
+        sleep_values = [c.args[0] for c in mock_sleep.call_args_list]
+        assert sleep_values == [5, 10, 20]
+
+    async def test_backoff_caps_at_300(self):
+        from irc_bot import async_main
+
+        config_obj = self._mock_config()
+        call_count = 0
+
+        async def fake_start(self):
+            nonlocal call_count
+            call_count += 1
+            if call_count < 10:
+                raise ConnectionDown("irc.example.com", "now")
+            self.shutdown = True
+
+        with (
+            patch("irc_bot.Configuration") as MockConfig,
+            patch.object(IrcBot, "start", fake_start),
+            patch("irc_bot.write_starting_date"),
+            patch("irc_bot.asyncio.sleep", new_callable=AsyncMock) as mock_sleep,
+            patch("irc_bot.time") as mock_time,
+        ):
+            MockConfig.return_value = config_obj
+            mock_time.monotonic.return_value = 0
+            await async_main()
+
+        sleep_values = [c.args[0] for c in mock_sleep.call_args_list]
+        # 5, 10, 20, 40, 80, 160, 300, 300, 300
+        assert sleep_values[-1] == 300
+        assert all(v <= 300 for v in sleep_values)
+
+    async def test_backoff_resets_after_stable_connection(self):
+        from irc_bot import async_main
+
+        config_obj = self._mock_config()
+        call_count = 0
+        # 9 monotonic() calls: 5 for start_time + 4 for elapsed.
+        # Iteration 3's elapsed = 100 - 0 = 100 > stable_threshold, triggers reset.
+        times = iter([0, 0, 0, 0, 0, 100, 0, 0, 0])
+
+        async def fake_start(self):
+            nonlocal call_count
+            call_count += 1
+            if call_count < 5:
+                raise ConnectionDown("irc.example.com", "now")
+            self.shutdown = True
+
+        with (
+            patch("irc_bot.Configuration") as MockConfig,
+            patch.object(IrcBot, "start", fake_start),
+            patch("irc_bot.write_starting_date"),
+            patch("irc_bot.asyncio.sleep", new_callable=AsyncMock) as mock_sleep,
+            patch("irc_bot.time") as mock_time,
+        ):
+            MockConfig.return_value = config_obj
+            mock_time.monotonic.side_effect = times
+            await async_main()
+
+        sleep_values = [c.args[0] for c in mock_sleep.call_args_list]
+        # First two failures: 5, 10. Third was stable (100s elapsed), resets to 5. Fourth: 10.
+        assert sleep_values == [5, 10, 5, 10]
+
+    async def test_retries_on_oserror(self):
+        from irc_bot import async_main
+
+        config_obj = self._mock_config()
+        call_count = 0
+
+        async def fake_start(self):
+            nonlocal call_count
+            call_count += 1
+            if call_count == 1:
+                raise ConnectionRefusedError("Connection refused")
+            self.shutdown = True
+
+        with (
+            patch("irc_bot.Configuration") as MockConfig,
+            patch.object(IrcBot, "start", fake_start),
+            patch("irc_bot.write_starting_date"),
+            patch("irc_bot.asyncio.sleep", new_callable=AsyncMock) as mock_sleep,
+            patch("irc_bot.time") as mock_time,
+        ):
+            MockConfig.return_value = config_obj
+            mock_time.monotonic.return_value = 0
+            await async_main()
+
+        assert call_count == 2
+        assert mock_sleep.await_count == 1
