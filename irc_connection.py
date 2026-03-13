@@ -1,4 +1,5 @@
 import asyncio
+import contextlib
 import logging
 import traceback
 
@@ -91,4 +92,5 @@ class IrcConnection:
         self.ready = False
         if self.writer:
             self.writer.close()
-            await self.writer.wait_closed()
+            with contextlib.suppress(OSError):
+                await self.writer.wait_closed()

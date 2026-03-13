@@ -1,4 +1,4 @@
-from unittest.mock import MagicMock
+from unittest.mock import AsyncMock, MagicMock
 
 from irc_connection import IrcConnection
 
@@ -75,4 +75,37 @@ class TestReadLines:
             lines.append(line)
 
         assert lines == []
+        assert conn.ready is False
+
+
+class TestClose:
+    async def test_close_suppresses_oserror_from_wait_closed(self):
+        conn = IrcConnection()
+        conn.writer = MagicMock()
+        conn.writer.close = MagicMock()
+        conn.writer.wait_closed = AsyncMock(side_effect=ConnectionResetError("Connection reset by peer"))
+
+        await conn.close()  # Should not raise
+
+        assert conn.ready is False
+        conn.writer.close.assert_called_once()
+
+    async def test_close_works_normally(self):
+        conn = IrcConnection()
+        conn.writer = MagicMock()
+        conn.writer.close = MagicMock()
+        conn.writer.wait_closed = AsyncMock()
+
+        await conn.close()
+
+        assert conn.ready is False
+        conn.writer.close.assert_called_once()
+        conn.writer.wait_closed.assert_awaited_once()
+
+    async def test_close_no_writer(self):
+        conn = IrcConnection()
+        conn.writer = None
+
+        await conn.close()  # Should not raise
+
         assert conn.ready is False
