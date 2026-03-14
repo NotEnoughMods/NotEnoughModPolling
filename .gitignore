@@ -10,3 +10,4 @@ mod_polling/htdocs/
 # Python
 __pycache__/
 *.py[co]
+pytest-of-*/
