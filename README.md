@@ -35,6 +35,7 @@ uv sync
    | administration | `operators` | Users with admin privileges |
    | administration | `command_prefix` | Command trigger (default: `=`) |
    | administration | `logging_level` | `DEBUG`, `INFO`, `WARNING`, etc. |
+   | networking | `force_ipv6`, `bind_address` | Network options |
 
 2. **NEMP polling config** — only needed if you want mod-polling features:
 
@@ -42,7 +43,15 @@ uv sync
    cp mod_polling/config.yml.example mod_polling/config.yml
    ```
 
-   Add your GitHub API credentials (optional, increases rate limits) and set the staff IRC channel.
+   Settings include GitHub API credentials (increases rate limits), polling interval (default 1800s), auto-start behavior, and the staff IRC channel.
+
+3. **NEM relay config** (optional) — forwards mod update announcements to Discord:
+
+   ```bash
+   cp config/nem_relay.yml.example config/nem_relay.yml
+   ```
+
+   Set the Discord webhook URL and the IRC channel/nick to listen on.
 
 ## Running
 
@@ -50,7 +59,7 @@ uv sync
 uv run irc_bot.py
 ```
 
-Logs are written to `BotLogs/` and the last crash traceback is saved to `exception.txt`.
+The bot automatically reconnects on disconnection with exponential backoff (5s to 300s). Logs are written to `BotLogs/` and the last crash traceback is saved to `exception.txt`.
 
 ## Usage
 
@@ -58,58 +67,102 @@ All commands use the configured prefix (default `=`). Examples:
 
 | Command | Permission | Description |
 |---------|-----------|-------------|
-| `=help` | everyone | List available commands |
-| `=help <cmd>` | everyone | Show help for a command |
-| `=nemp running true` | op | Start polling for mod updates |
-| `=nemp list` | everyone | List tracked mods |
-| `=nemp status <mod>` | everyone | Check a specific mod's status |
-| `=reload <cmd>` | admin | Reload a command module |
-| `=join #channel` | admin | Join a channel |
-| `=part #channel` | admin | Leave a channel |
+| `=help` | GUEST | List available commands |
+| `=help <cmd>` | GUEST | Show help for a command |
+| `=nemp enable` | OP | Start polling for mod updates |
+| `=nemp list` | OP | List tracked mods |
+| `=nemp status` | VOICED | Check if polling is running |
+| `=reload <plugin>` | ADMIN | Reload a plugin module |
+| `=join #channel` | ADMIN | Join a channel |
+| `=part #channel` | ADMIN | Leave a channel |
 
-Permission levels: 0 = everyone, 1 = voiced+, 2 = channel op, 3 = bot admin.
+Permission levels (from `command_router.Permission`):
+
+| Level | Name | Description |
+|-------|------|-------------|
+| 0 | GUEST | Anyone |
+| 1 | VOICED | `+` and above |
+| 2 | OP | `@` and above |
+| 3 | ADMIN | Bot operator (admin list + registered) |
+| 4 | HIDDEN | Not shown in command list |
 
 ## Project structure
 
 ```
 irc_bot.py              Main entry point — async IRC event loop
-command_router.py       Command dispatch and dynamic plugin loading
 irc_connection.py       Low-level async IRC read/write with rate limiting
+command_router.py       Command dispatch, plugin/handler loading, messaging helpers
 config.py               YAML configuration loader
 bot_events.py           Timer, message, and channel event system
+ban_list.py             SQLite-backed ban system
+user_auth.py            Auth/registration tracking
+help_system.py          Self-documenting help system
 task_pool.py            Background async task manager
-plugin_loader.py        Plugin interface definition
+irc_logging.py          Logging with daily file rotation
 
-irc_handlers/           IRC protocol handlers (PRIVMSG, JOIN, PING, etc.)
-commands/               Command plugins loaded dynamically at startup
+plugins/                Bot command plugins (dynamically loaded at startup)
+irc_handlers/           IRC protocol handlers (PRIVMSG, JOIN, PING, numerics, etc.)
 mod_polling/            Mod-polling subsystem
-  poller.py               Polling logic for all supported sources
-  mods.json               Registry of tracked mods, their checkers, and regexes
-  config.yml              GitHub API credentials and IRC settings
-scripts/                Maintenance and testing utilities
-  test_regexes.py         Test mod regexes against live API data
+  poller.py               Polling engine for all supported sources
+  mods.json               Registry of tracked mods and their parser configs
+  config.yml.example      GitHub API, polling interval, staff channel settings
+config/                 Supplementary config files (e.g., nem_relay.yml)
+scripts/                Maintenance utilities (regex testing, release cadence analysis)
+docs/                   Additional documentation
+tests/                  Test suite
 ```
 
-## Writing commands
+## Writing plugins
 
-Commands are Python files in `commands/` that are loaded automatically. Minimal example:
+Plugins are Python files in `plugins/` that are loaded automatically at startup. There are two styles; the **new-style** (class-based) is preferred for new plugins.
+
+### New-style (class-based)
 
 ```python
-ID = "greet"
-permission = 0
-privmsgEnabled = True
+from command_router import Permission, command, subcommand
 
-async def execute(self, name, params, channel, userdata, rank, chan):
-    await self.send_message(channel, f"Hello, {name}!")
+PLUGIN_ID = "greet"
+
+class Plugin:
+    async def setup(self, router, startup):
+        """Called on load (startup=True) or reload (startup=False)."""
+        pass
+
+    async def teardown(self, router):
+        """Called on shutdown or before reload."""
+        pass
+
+    @command("greet", permission=Permission.GUEST, allow_private=True)
+    async def greet(self, router, name, params, channel, userdata, rank, is_channel):
+        await router.send_message(channel, f"Hello, {name}!")
+
+    @subcommand("greet", "loud", permission=Permission.VOICED)
+    async def cmd_loud(self, router, name, params, channel, userdata, rank):
+        await router.send_message(channel, f"HELLO, {name.upper()}!")
 ```
 
-- `ID` — the command name users type after the prefix
-- `permission` — minimum rank required (0–3)
-- `execute()` — called when the command is invoked; `self` is the `CommandRouter`
-- `setup(self, startup)` — optional, called on load/reload
-- `teardown(self)` — optional, called on unload
+- The `@command` method is the fallback when no subcommand matches.
+- Subcommands inherit the group's permission when `permission=None`.
+- `setup()` and `teardown()` are optional lifecycle hooks.
 
-See `commands/example_*.py` for more patterns (timer events, background tasks, etc.).
+### Old-style (function-based)
+
+```python
+from command_router import Permission
+
+PLUGIN_ID = "say"
+
+async def _say(router, name, params, channel, userdata, rank, is_channel):
+    await router.send_chat_message(router.send, channel, " ".join(params))
+
+COMMANDS = {
+    "say": {"execute": _say, "permission": Permission.HIDDEN},
+}
+```
+
+See `plugins/examples.py` for patterns using timer events, chat events, and background tasks.
+
+For the full plugin development guide, see [docs/plugins.md](docs/plugins.md).
 
 ## Contributing
 

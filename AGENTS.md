@@ -6,8 +6,8 @@ Python 3.14+, managed with `uv`, linted/formatted with `ruff`, tested with `pyte
 ## Build & Run
 
 ```bash
-uv sync --dev          # Install all dependencies (including dev)
-uv run python irc_bot.py  # Start the bot (requires config.yml)
+uv sync --dev              # Install all dependencies (including dev)
+uv run python irc_bot.py   # Start the bot (requires config.yml)
 ```
 
 ## Lint
@@ -36,37 +36,26 @@ All async tests run automatically via `pytest-asyncio` with `asyncio_mode = "aut
 
 ## Project Structure
 
-Flat layout (no `src/` directory). All primary modules live at the repo root:
+Flat layout (no `src/` directory). Primary modules live at the repo root:
 
-```
-irc_bot.py          # Entry point, IrcBot class
-irc_connection.py   # TCP/IRC connection handling
-irc_logging.py      # Logging configuration (file + console)
-config.py           # YAML config loading
-command_router.py   # Central command dispatch, plugin loading
-bot_events.py       # Event system (timer, chat, join events)
-help_system.py      # Help database
-user_auth.py        # Auth/registration tracking
-ban_list.py         # SQLite-backed ban system
-task_pool.py        # Async task management
-plugins/            # Bot command plugins (dynamically loaded)
-irc_handlers/       # IRC protocol handlers (one per command/numeric)
-mod_polling/        # Mod polling engine, parsers, data files
-config/             # Supplementary YAML config files
-tests/              # All tests, with conftest.py for shared fixtures
-```
-
-Plugins and IRC handlers are discovered at runtime via `os.listdir()` and loaded
-with `importlib.util.spec_from_file_location()`.
+- `irc_bot.py` — Entry point, `IrcBot` class
+- `irc_connection.py` — TCP/IRC connection handling
+- `command_router.py` — Central command dispatch, plugin loading
+- `bot_events.py` — Event system (timer, chat, join events)
+- `ban_list.py` — SQLite-backed ban system
+- `config.py`, `irc_logging.py`, `help_system.py`, `user_auth.py`, `task_pool.py`
+- `plugins/` — Bot command plugins (dynamically loaded via `importlib`)
+- `irc_handlers/` — IRC protocol handlers (one per command/numeric)
+- `mod_polling/` — Mod polling engine, parsers, data files
+- `tests/` — All tests, with `conftest.py` for shared fixtures
 
 ## Code Style
 
 ### Formatting
 
-- **Line length**: 120 characters (configured in `pyproject.toml` under `[tool.ruff]`)
-- **Indentation**: 4 spaces for Python, 2 spaces for YAML (see `.editorconfig`)
-- **Final newline**: Always insert
-- **Trailing whitespace**: Always trim
+- **Line length**: 120 characters (`pyproject.toml` `[tool.ruff]`)
+- **Indentation**: 4 spaces for Python, 2 spaces for YAML (`.editorconfig`)
+- **Final newline**: Always. **Trailing whitespace**: Always trim.
 
 ### Imports
 
@@ -74,25 +63,13 @@ with `importlib.util.spec_from_file_location()`.
 - **Ordering** (enforced by ruff/isort): stdlib → third-party → local, separated by blank lines
 - `plugins` and `irc_handlers` are configured as known first-party in isort
 - Use `import module` for broad usage; `from module import Name` for specific items
-- Standard library modules are typically imported whole (`import asyncio`, `import logging`)
-
-```python
-import asyncio
-import logging
-
-import aiohttp
-import yaml
-
-from bot_events import MsgEvent, StandardEvent
-from command_router import Permission, command
-```
 
 ### Naming Conventions
 
 | Element              | Convention         | Example                                    |
 |----------------------|--------------------|--------------------------------------------|
 | Modules              | `snake_case`       | `irc_connection.py`, `bot_events.py`       |
-| IRC handler modules  | include numeric    | `rpl_endofmotd_376.py`, `err_nicknameinuse_433.py` |
+| IRC handler modules  | include numeric    | `rpl_endofmotd_376.py`                     |
 | Classes              | `PascalCase`       | `IrcBot`, `ModPoller`, `CommandRouter`     |
 | Functions/methods    | `snake_case`       | `fetch_page`, `check_mod`, `add_event`     |
 | Private members      | `_underscore`      | `_parse_message`, `_handler_lock`          |
@@ -105,70 +82,50 @@ from command_router import Permission, command
 
 ### Type Annotations
 
-Type annotations are used **sparingly** — only on `NamedTuple` fields and occasional
-instance variable declarations. Function signatures do not carry type hints.
+Used **sparingly** — only on `NamedTuple` fields and occasional instance variables.
+Function signatures do **not** carry type hints.
 
 - Use modern union syntax: `X | Y` (not `Optional[X]` or `Union[X, Y]`)
 - Annotate `NamedTuple` fields and complex instance variables where it aids clarity
-
-```python
-class PluginEntry(NamedTuple):
-    module: object
-    path: str
-    setup: Callable | None
-    teardown: Callable | None
-    instance: object | None = None
-
-self._host_locks: dict[str, asyncio.Lock] = {}
-```
 
 ### String Formatting
 
 - **f-strings** for most string construction
 - **`.format()`** only for complex IRC messages with many color-code variables
-- **`%`-style** only inside `logging` calls (standard practice for lazy interpolation)
-
-```python
-f"PRIVMSG {channel} :{msg}"                          # general use
-logger.info("Connected to %s", self.host)             # logging only
-"{purple}{name}{end}".format(name=n, purple=P, end=E) # complex IRC messages
-```
+- **`%`-style** only inside `logging` calls (lazy interpolation)
 
 ### Error Handling
 
-- **Custom exceptions** inherit from `Exception`, define `__init__` and `__str__`:
-  `ConnectionDown`, `NEMPException`, `InvalidVersion`, `EventAlreadyExists`, etc.
-- `NEMPException` is a base class; `InvalidVersion` inherits from it
-- **Top-level loops** use broad `except Exception` with `logger.exception()`
-- **Specific catches** where meaningful: `KeyError`, `TimeoutError`, `asyncio.CancelledError`
+- Custom exceptions inherit from `Exception` with `__init__` and `__str__`
+- `NEMPException` is the base for polling exceptions; `InvalidVersion` inherits from it
+- `ConnectionDown` inherits directly from `Exception` (not `NEMPException`)
+- Top-level loops use broad `except Exception` with `logger.exception()`
+- Specific catches where meaningful: `KeyError`, `TimeoutError`, `asyncio.CancelledError`
 - Use `contextlib.suppress(ExcType)` instead of bare `try/except pass`
-- Validate inputs eagerly with `isinstance` checks, raising `TypeError`/`ValueError`
+- Validate inputs eagerly with `isinstance`, raising `TypeError`/`ValueError`
 
 ### Async Patterns
 
-The codebase is fully async, built on `asyncio`:
+Fully async on `asyncio`. Entry point: `asyncio.run(async_main())` in `irc_bot.py`.
 
-- Entry point: `asyncio.run(async_main())` in `irc_bot.py`
 - Background tasks via `asyncio.create_task()` with done-callback cleanup
 - `asyncio.Lock` for serialized handler execution and per-host rate limiting
 - `asyncio.Queue` for inter-task communication (with `queue.shutdown()` for cleanup)
 - `asyncio.gather`, `asyncio.as_completed`, `asyncio.wait_for` for concurrency
-- `async for` with async generators (`IrcConnection.read_lines()`)
 - aiohttp sessions: explicit `User-Agent` header, `aiohttp.ClientTimeout`, `async with`
 
 ### Logging
 
-- **Module-level** loggers: `logger = logging.getLogger("BanList")`
-- **Instance-level** loggers: `self._logger = logging.getLogger("IRCConnection")`
-- Hierarchical naming: `irc.ping`, `irc.rpl.353`, `irc.err.433`, `cmd.say`, `cmd.pycalc`
-- Always use `%`-style formatting in log calls (lazy interpolation)
-- Use `.exception()` for logging with tracebacks
+- Module-level loggers: `logger = logging.getLogger("BanList")`
+- Instance-level loggers: `self._logger = logging.getLogger("IRCConnection")`
+- Hierarchical naming: `irc.ping`, `irc.rpl.353`, `cmd.say`, `cmd.pycalc`
+- Always `%`-style formatting in log calls. Use `.exception()` for tracebacks.
 
 ### Plugin Architecture
 
-Two plugin styles coexist:
+Two styles coexist. Prefer **new-style** (class-based) for new plugins.
 
-**Old-style** (function-based): module-level `COMMANDS` dict + underscore-prefixed async functions:
+**Old-style** (function-based): `COMMANDS` dict + underscore-prefixed async functions:
 ```python
 PLUGIN_ID = "say"
 async def _say(router, name, params, channel, userdata, rank, is_channel): ...
@@ -187,18 +144,16 @@ class Plugin:
     async def cmd_enable(self, router, ...): ...
 ```
 
-Prefer the **new-style** class-based pattern for new plugins.
-
 ## Testing Conventions
 
 - Test files: `tests/test_<module>.py`
 - Group tests in `class TestXxx` with `test_xxx` methods
-- Use `pytest.raises(ExcType, match="pattern")` for exception testing
-- Use `tmp_path` fixture for file/database isolation
+- `pytest.raises(ExcType, match="pattern")` for exception testing
+- `tmp_path` fixture for file/database isolation
 - Mocking: `MagicMock` (sync), `AsyncMock` (async), `patch`/`patch.object`
 - HTTP mocking: `aioresponses` library for `aiohttp` requests
 - Plain `assert` statements (pytest-style, no `unittest` assertions)
-- Shared fixtures in `tests/conftest.py` (e.g., `mod_poller`, `ban_list`, event fixtures)
+- Shared fixtures in `tests/conftest.py` (e.g., `mod_poller`, `ban_list`)
 
 ## Key Configuration
 
