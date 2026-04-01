@@ -745,6 +745,8 @@ class Plugin:
             url = mod["forgejson"]["url"]
         elif func == "html":
             url = mod["html"]["url"]
+        elif func == "neoforge":
+            url = mod["neoforge"]["url"]
         else:
             url = None
 

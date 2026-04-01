@@ -382,6 +382,34 @@ async def check_custom_dead(session, mod_name, mod_data, compiled_regex, *, use_
     return DEAD, "Custom parser endpoint (likely dead)", None, [], []
 
 
+async def check_neoforge(session, mod_name, mod_data, compiled_regex, *, use_cache=False, all_files=False):
+    url = mod_data["neoforge"]["url"]
+    fallback_url = mod_data["neoforge"].get("fallback_url")
+
+    data = None
+    for attempt_url in [url, fallback_url]:
+        if not attempt_url:
+            continue
+        try:
+            async with session.get(attempt_url) as resp:
+                if resp.status >= 400:
+                    continue
+                data = await resp.json(content_type=None)
+                break
+        except Exception:
+            continue
+
+    if data is None:
+        return DEAD, "Both primary and fallback URLs failed", None, [], []
+
+    versions = data.get("versions", [])
+    if not versions:
+        return DEAD, "Empty versions list", None, [], []
+
+    samples = versions[-5:]
+    return PASS, f"Found {len(versions)} NeoForge versions", None, samples, []
+
+
 PARSER_MAP = {
     "cfwidget": check_curse,
     "jenkins": check_jenkins,
@@ -390,6 +418,7 @@ PARSER_MAP = {
     "mcforge_v2": check_mcforge2,
     "html": check_html,
     "buildcraft": check_buildcraft,
+    "neoforge": check_neoforge,
 }
 
 

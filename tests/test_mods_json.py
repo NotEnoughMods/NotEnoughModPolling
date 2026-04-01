@@ -51,3 +51,14 @@ class TestModsJson:
 
             assert "forgejson" in mod_info, msg
             assert "url" in mod_info["forgejson"], msg
+
+    def test_neoforge_parser(self):
+        for mod, mod_info in self.mods.items():
+            if mod_info["parser"] != "neoforge":
+                continue
+
+            msg = f"Mod {mod!r} has missing NeoForge parser information"
+
+            assert "neoforge" in mod_info, msg
+            assert "url" in mod_info["neoforge"], msg
+            assert "fallback_url" in mod_info["neoforge"], msg

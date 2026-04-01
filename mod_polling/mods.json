@@ -34,6 +34,15 @@
             "slim": true
         }
     },
+    "NeoForge": {
+        "parser": "neoforge",
+        "category": "forge",
+        "active": true,
+        "neoforge": {
+            "url": "https://maven.neoforged.net/api/maven/versions/releases/net%2Fneoforged%2Fneoforge",
+            "fallback_url": "https://maven.creeperhost.net/api/maven/versions/releases/net%2Fneoforged%2Fneoforge"
+        }
+    },
     "OpenComputers": {
         "parser": "cfwidget",
         "active": true,

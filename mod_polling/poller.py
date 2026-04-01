@@ -409,6 +409,69 @@ class ModPoller:
 
         return {"mc": mc, "version": version}
 
+    async def check_neoforge(self, mod):
+        url = self.mods[mod]["neoforge"]["url"]
+        fallback_url = self.mods[mod]["neoforge"].get("fallback_url")
+
+        try:
+            jsonres = await self.fetch_json(url)
+        except Exception:
+            if not fallback_url:
+                raise
+            jsonres = await self.fetch_json(fallback_url)
+
+        result = {}
+
+        # Iterate newest first (API returns oldest first)
+        for neoforge_version in reversed(jsonres.get("versions", [])):
+            # Skip 0.x joke/test versions
+            if neoforge_version.startswith("0"):
+                continue
+
+            # Skip alpha versions
+            if "-alpha" in neoforge_version:
+                continue
+
+            # Skip snapshot builds (+ denotes MC snapshot identifier)
+            if "+" in neoforge_version:
+                continue
+
+            mc_version = self._neoforge_mc_version(neoforge_version)
+            is_beta = "-beta" in neoforge_version
+
+            if mc_version not in result:
+                result[mc_version] = {}
+
+            mc_entry = result[mc_version]
+
+            if is_beta:
+                # Only store beta as dev if no same-or-newer stable exists
+                if "dev" not in mc_entry and "version" not in mc_entry:
+                    mc_entry["dev"] = neoforge_version
+            else:
+                if "version" not in mc_entry:
+                    mc_entry["version"] = neoforge_version
+
+        return result
+
+    @staticmethod
+    def _neoforge_mc_version(neoforge_version):
+        """Derive the Minecraft version from a NeoForge version string.
+
+        <26: prepend "1." to first two parts (e.g. 21.1.222 -> 1.21.1)
+        >=26: first three parts, drop trailing .0 (e.g. 26.1.1.0-beta -> 26.1.1)
+        """
+        base = neoforge_version.split("-")[0]
+        parts = base.split(".")
+
+        if int(parts[0]) >= 26:
+            mc = parts[0] + "." + parts[1]
+            if parts[2] != "0":
+                mc += "." + parts[2]
+            return mc
+        else:
+            return "1." + parts[0] + "." + parts[1]
+
     def is_version_valid(self, version):
         return all(not regex.search(version) for regex in self.invalid_versions)
 

@@ -2,7 +2,7 @@ from unittest.mock import AsyncMock
 
 import pytest
 
-from mod_polling.poller import NEMPException
+from mod_polling.poller import ModPoller, NEMPException
 
 
 class TestCheckMCForge2:
@@ -270,3 +270,126 @@ class TestCheckBuildCraft:
         result = await mod_poller.check_buildcraft("BuildCraft")
         assert result["mc"] == "1.12.2"
         assert result["version"] == "7.99.24"
+
+
+class TestCheckNeoForge:
+    NEOFORGE_MOD = {
+        "parser": "neoforge",
+        "neoforge": {
+            "url": "https://maven.neoforged.net/api/maven/versions/releases/net%2Fneoforged%2Fneoforge",
+            "fallback_url": "https://maven.creeperhost.net/api/maven/versions/releases/net%2Fneoforged%2Fneoforge",
+        },
+    }
+
+    async def test_multi_mc_versions(self, mod_poller):
+        """Both <26 and >=26 version schemes resolve correctly."""
+        mod_poller.mods["NeoForge"] = self.NEOFORGE_MOD
+        mod_poller.fetch_json = AsyncMock(
+            return_value={
+                "versions": [
+                    "20.2.3-beta",
+                    "20.2.86",
+                    "21.1.0-beta",
+                    "21.1.222",
+                    "26.1.0.1-beta",
+                    "26.1.1.0-beta",
+                ]
+            }
+        )
+        result = await mod_poller.check_neoforge("NeoForge")
+        assert result["1.20.2"]["version"] == "20.2.86"
+        assert result["1.21.1"]["version"] == "21.1.222"
+        assert result["26.1"]["dev"] == "26.1.0.1-beta"
+        assert result["26.1.1"]["dev"] == "26.1.1.0-beta"
+
+    async def test_beta_only(self, mod_poller):
+        """MC version with only beta releases gets dev, no version."""
+        mod_poller.mods["NeoForge"] = self.NEOFORGE_MOD
+        mod_poller.fetch_json = AsyncMock(
+            return_value={"versions": ["26.1.1.0-beta"]}
+        )
+        result = await mod_poller.check_neoforge("NeoForge")
+        assert result["26.1.1"] == {"dev": "26.1.1.0-beta"}
+
+    async def test_stable_suppresses_older_beta(self, mod_poller):
+        """When a stable release exists, older betas are not stored as dev."""
+        mod_poller.mods["NeoForge"] = self.NEOFORGE_MOD
+        mod_poller.fetch_json = AsyncMock(
+            return_value={
+                "versions": [
+                    "21.1.0-beta",
+                    "21.1.1-beta",
+                    "21.1.50",
+                    "21.1.100",
+                ]
+            }
+        )
+        result = await mod_poller.check_neoforge("NeoForge")
+        assert result["1.21.1"]["version"] == "21.1.100"
+        assert "dev" not in result["1.21.1"]
+
+    async def test_skips_alpha_zero_and_snapshot(self, mod_poller):
+        """Alpha, 0.x, and + (snapshot) versions are excluded."""
+        mod_poller.mods["NeoForge"] = self.NEOFORGE_MOD
+        mod_poller.fetch_json = AsyncMock(
+            return_value={
+                "versions": [
+                    "0.25w14craftmine.3-beta",
+                    "21.1.0-alpha.1",
+                    "21.1.5+snapshot-1",
+                    "21.1.100",
+                ]
+            }
+        )
+        result = await mod_poller.check_neoforge("NeoForge")
+        assert "0.25" not in result
+        assert result == {"1.21.1": {"version": "21.1.100"}}
+
+    async def test_fallback_on_primary_failure(self, mod_poller):
+        """Falls back to CreeperHost mirror when primary fails."""
+        mod_poller.mods["NeoForge"] = self.NEOFORGE_MOD
+        mod_poller.fetch_json = AsyncMock(
+            side_effect=[
+                Exception("primary down"),
+                {"versions": ["21.1.50"]},
+            ]
+        )
+        result = await mod_poller.check_neoforge("NeoForge")
+        assert result["1.21.1"]["version"] == "21.1.50"
+        assert mod_poller.fetch_json.call_count == 2
+
+    async def test_fallback_not_attempted_without_url(self, mod_poller):
+        """Without fallback_url, primary failure propagates."""
+        mod_poller.mods["NeoForge"] = {
+            "parser": "neoforge",
+            "neoforge": {"url": "https://maven.neoforged.net/..."},
+        }
+        mod_poller.fetch_json = AsyncMock(side_effect=Exception("primary down"))
+        with pytest.raises(Exception, match="primary down"):
+            await mod_poller.check_neoforge("NeoForge")
+
+    async def test_empty_versions(self, mod_poller):
+        """Empty versions list returns empty result."""
+        mod_poller.mods["NeoForge"] = self.NEOFORGE_MOD
+        mod_poller.fetch_json = AsyncMock(return_value={"versions": []})
+        result = await mod_poller.check_neoforge("NeoForge")
+        assert result == {}
+
+
+class TestNeoForgeMcVersion:
+    """Unit tests for the MC version derivation helper."""
+
+    def test_old_scheme(self):
+        assert ModPoller._neoforge_mc_version("21.1.222") == "1.21.1"
+
+    def test_old_scheme_beta(self):
+        assert ModPoller._neoforge_mc_version("20.2.3-beta") == "1.20.2"
+
+    def test_new_scheme_minor_zero(self):
+        assert ModPoller._neoforge_mc_version("26.1.0.19-beta") == "26.1"
+
+    def test_new_scheme_minor_nonzero(self):
+        assert ModPoller._neoforge_mc_version("26.1.1.0-beta") == "26.1.1"
+
+    def test_new_scheme_stable(self):
+        assert ModPoller._neoforge_mc_version("26.1.1.5") == "26.1.1"
