@@ -1,3 +1,4 @@
+from typing import ClassVar
 from unittest.mock import AsyncMock
 
 import pytest
@@ -273,7 +274,7 @@ class TestCheckBuildCraft:
 
 
 class TestCheckNeoForge:
-    NEOFORGE_MOD = {
+    NEOFORGE_MOD: ClassVar[dict] = {
         "parser": "neoforge",
         "neoforge": {
             "url": "https://maven.neoforged.net/api/maven/versions/releases/net%2Fneoforged%2Fneoforge",
