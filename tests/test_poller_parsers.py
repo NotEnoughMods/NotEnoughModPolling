@@ -306,9 +306,7 @@ class TestCheckNeoForge:
     async def test_beta_only(self, mod_poller):
         """MC version with only beta releases gets dev, no version."""
         mod_poller.mods["NeoForge"] = self.NEOFORGE_MOD
-        mod_poller.fetch_json = AsyncMock(
-            return_value={"versions": ["26.1.1.0-beta"]}
-        )
+        mod_poller.fetch_json = AsyncMock(return_value={"versions": ["26.1.1.0-beta"]})
         result = await mod_poller.check_neoforge("NeoForge")
         assert result["26.1.1"] == {"dev": "26.1.1.0-beta"}
 
