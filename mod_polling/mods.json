@@ -213,7 +213,7 @@
         "active": true,
         "curse": {
             "id": "222378",
-            "regex": "MineMenu-(?:(?:neo)?forge-)?[0-9.]+-(?P<version>[0-9]+(?:\\.[0-9]+)+)(?:-universal)?\\.jar"
+            "regex": "MineMenu-(?:(?:fabric|(?:neo)?forge)-)?[0-9.]+-(?P<version>[0-9]+(?:\\.[0-9]+)+)(?:-universal)?\\.jar"
         }
     },
     "Ping": {
@@ -342,7 +342,7 @@
         "active": true,
         "curse": {
             "id": "32274",
-            "regex": "journeymap-(?:(?:fabric|(?:neo)?forge)-)?(?P<mc>[0-9]+(?:\\.[0-9]+)+)-(?P<version>[0-9]+(?:\\.[0-9]+)+(?:[a-z]+[0-9]*)?(?:-[a-z]+(?:\\.[0-9]+)?)?(?:-(?:fabric|(?:neo)?forge|unlimited))?)\\.jar"
+            "regex": "journeymap-(?:(?:fabric|(?:neo)?forge)-)?(?P<mc>[0-9]+(?:\\.[0-9]+)+)-v?(?P<version>[0-9]+(?:\\.[0-9]+)+(?:[a-z]+[0-9]*)?(?:-[a-z]+(?:\\.[0-9]+)?)?(?:-(?:fabric|(?:neo)?forge|unlimited))?)\\.jar"
         }
     },
     "ProjectE": {
@@ -358,7 +358,7 @@
         "active": true,
         "curse": {
             "id": "225608",
-            "regex": "worldedit-(?:mod|(?:neo)?forge|fabric)(?:-mc[0-9.]+)?-(?P<version>[0-9]+(\\.[0-9]+)+)(?:-dist)?\\.jar"
+            "regex": "worldedit-(?:mod|(?:neo)?forge|fabric)(?:-mc[0-9.]+)?-(?P<version>[0-9]+(\\.[0-9]+)+)(?:-dist|-(?:beta|rc)-[0-9]+)?\\.jar"
         }
     },
     "ModularSystems": {
@@ -541,7 +541,7 @@
         "active": true,
         "curse": {
             "id": "79616",
-            "regex": "[Dd]ecocraft-(?P<version>[0-9]+(?:\\.[0-9]+)+)[_-](?P<mc>[0-9]+(?:\\.[0-9]+)+)(?:-(?:(?:neo)?forge|fabric|slim))?\\.jar"
+            "regex": "[Dd]ecocraft-(?P<version>[0-9]+(?:\\.[0-9]+)+)(?:-beta)?[_-](?P<mc>[0-9]+(?:\\.[0-9]+)+)(?:-(?:(?:neo)?forge|fabric|slim))?\\.jar"
         }
     },
     "ImmersiveEngineering": {
@@ -661,7 +661,7 @@
         "active": true,
         "curse": {
             "id": "223852",
-            "regex": "StorageDrawers-(?:(?:fabric|(?:neo)?forge)-)?(?P<mc>[0-9]+(?:\\.[0-9]+)+)-(?P<version>[0-9]+(?:\\.[0-9]+)+)\\.jar"
+            "regex": "Storage ?Drawers-(?:(?:fabric|(?:neo)?forge)-)?(?P<mc>[0-9]+(?:\\.[0-9]+)+)-(?P<version>[0-9]+(?:\\.[0-9]+)+)\\.jar"
         }
     },
     "RealisticTorches": {
@@ -685,7 +685,7 @@
         "active": true,
         "curse": {
             "id": "231095",
-            "regex": "(?:ChiselsBits|chisels-and-bits)-(?:(?:neo)?forge-)?(?:[0-9.]+-)?(?P<version>[0-9]+(?:\\.[0-9]+)+)(?:-universal)?\\.jar"
+            "regex": "(?:ChiselsBits|chisels-and-bits)-(?:(?:neo)?forge-)?(?:[0-9.]+(?:-snapshot)?-)?(?P<version>[0-9]+(?:\\.[0-9]+)+)(?:-universal)?\\.jar"
         }
     },
     "BuildingBricks": {
@@ -1123,7 +1123,7 @@
         "active": true,
         "curse": {
             "id": "351725",
-            "regex": "mcw-bridges-(?P<version>[0-9]+(?:\\.[0-9]+)+)-mc[0-9.]+(?:fabric|(?:neo)?forge)?\\.jar"
+            "regex": "mcw-bridges-(?P<version>[0-9]+(?:\\.[0-9]+)+)-mc[0-9.]+(?:-[0-9]+)?(?:fabric|(?:neo)?forge)?\\.jar"
         }
     },
     "Macaw'sRoofs": {
