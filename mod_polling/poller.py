@@ -4,9 +4,11 @@ import json
 import logging
 import re
 import urllib.parse
+from datetime import UTC, datetime
 
 import aiohttp
 import yaml
+from aiohttp.helpers import parse_http_date
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 
 logger = logging.getLogger("mod_polling.poller")
@@ -19,6 +21,29 @@ class NEMPException(Exception):
 class InvalidVersion(NEMPException):
     def __str__(self):
         return repr(self.args[0])
+
+
+MAX_FETCH_ATTEMPTS = 3
+RETRY_AFTER_FALLBACK_CAP = 60.0
+
+
+def _retry_after_seconds(value: str | None) -> float | None:
+    """Parse a Retry-After header value (RFC 9110 §10.2.3) into a non-negative
+    seconds delta, or ``None`` if missing/unparseable.
+
+    Accepts delta-seconds or HTTP-date in any of the three forms allowed by
+    §5.6.7 (IMF-fixdate, RFC 850, or asctime).
+    """
+    if not value:
+        return None
+    try:
+        return max(0.0, float(value))
+    except ValueError:
+        pass
+    dt = parse_http_date(value)
+    if dt is None:
+        return None
+    return max(0.0, (dt - datetime.now(UTC)).total_seconds())
 
 
 class ModPoller:
@@ -48,19 +73,44 @@ class ModPoller:
         lock = self._host_locks[host] if ratelimit else contextlib.nullcontext()
 
         async with lock:
-            async with self.session.get(url, timeout=aiohttp.ClientTimeout(total=timeout), **kwargs) as response:
-                if 400 <= response.status < 500:
-                    raise NEMPException(f"HTTP {response.status} for {url}")
-                response.raise_for_status()
+            for attempt in range(MAX_FETCH_ATTEMPTS):
+                delay = None
+                async with self.session.get(url, timeout=aiohttp.ClientTimeout(total=timeout), **kwargs) as response:
+                    if response.status == 429:
+                        if attempt == MAX_FETCH_ATTEMPTS - 1:
+                            logger.warning(
+                                "Got HTTP 429 for %s and exhausted %d attempts; giving up",
+                                url,
+                                MAX_FETCH_ATTEMPTS,
+                            )
+                            raise NEMPException(f"HTTP 429 for {url}")
+                        delay = _retry_after_seconds(response.headers.get("Retry-After"))
+                        if delay is None:
+                            delay = min(self._host_delay * (2**attempt), RETRY_AFTER_FALLBACK_CAP)
+                        logger.info(
+                            "Got HTTP 429 for %s; sleeping %.1fs before retry (attempt %d/%d)",
+                            url,
+                            delay,
+                            attempt + 1,
+                            MAX_FETCH_ATTEMPTS,
+                        )
+                    elif 400 <= response.status < 500:
+                        raise NEMPException(f"HTTP {response.status} for {url}")
+                    else:
+                        response.raise_for_status()
 
-                if decode_json:
-                    result = await response.json(content_type=None)
-                else:
-                    result = await response.text()
+                        if decode_json:
+                            result = await response.json(content_type=None)
+                        else:
+                            result = await response.text()
 
-            if ratelimit:
-                await asyncio.sleep(self._host_delay)
-            return result
+                        if ratelimit:
+                            await asyncio.sleep(self._host_delay)
+                        return result
+
+                # Outside response context (socket returned to pool); only
+                # reached via the 429 branch above, which always sets `delay`.
+                await asyncio.sleep(delay)
 
     async def fetch_json(self, *args, **kwargs):
         return await self.fetch_page(*args, decode_json=True, **kwargs)
