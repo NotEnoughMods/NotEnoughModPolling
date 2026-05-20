@@ -48,6 +48,9 @@ Flat layout (no `src/` directory). Primary modules live at the repo root:
 - `irc_handlers/` — IRC protocol handlers (one per command/numeric)
 - `mod_polling/` — Mod polling engine, parsers, data files
 - `tests/` — All tests, with `conftest.py` for shared fixtures
+- `config/` — Example config templates (e.g. `nem_relay.yml.example`)
+- `docs/` — Developer docs (`architecture.md`, `plugins.md`, `mod_polling/`)
+- `scripts/` — Maintenance/analysis tooling (regex testing, release-cadence reports)
 
 ## Code Style
 
@@ -157,8 +160,8 @@ class Plugin:
 
 ## Key Configuration
 
-- `ruff` config: `pyproject.toml` — rules: F, E, W, I, UP, B, SIM, RUF
-- `pytest` config: `pyproject.toml` — `asyncio_mode = "auto"`, `testpaths = ["tests"]`
-- `.editorconfig`: charset utf-8, trim whitespace, final newlines
-- `.gitignore`: `config.yml`, `*.db`, `__pycache__/`, `BotLogs/`, `mod_polling/htdocs/`
-- CI: `.github/workflows/tests.yml` — runs lint + tests on push/PR to `master`
+- `ruff` / `pytest` config: `pyproject.toml` (`[tool.ruff]`, `[tool.pytest.ini_options]`) — read it for the current rule set and options
+- `.editorconfig`: 2-space YAML, 4-space everything else (see the file)
+- `.gitignore`: never commit `config.yml` (secrets) or `*.db` (local databases); see the file for the full list
+- CI: `.github/workflows/tests.yml` — separate `test` and `lint` jobs on push/PR to `master` (both must pass)
+- CD: `.github/workflows/deploy.yml` — chains off a successful Tests run on `master` (`workflow_run`), then SSH-deploys. Pushing to `master` auto-deploys when CI is green.
