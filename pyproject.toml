@@ -4,7 +4,7 @@ version = "2.0.0"
 description = "An IRC bot that automatically keeps mods in Not Enough Mods up-to-date"
 requires-python = ">=3.14"
 dependencies = [
-    "aiohttp>=3.9",
+    "aiohttp>=3.14.0",
     "beautifulsoup4>=4.12",
     "Jinja2>=3.1",
     "PyYAML>=6.0",
