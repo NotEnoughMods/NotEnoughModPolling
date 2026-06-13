@@ -235,7 +235,7 @@ async def check_github_release(
 
     kwargs = {}
     if client_id and client_secret:
-        kwargs["auth"] = aiohttp.BasicAuth(client_id, client_secret)
+        kwargs["headers"] = {"Authorization": aiohttp.encode_basic_auth(client_id, client_secret)}
 
     async with session.get(url, **kwargs) as resp:
         if resp.status >= 400:
