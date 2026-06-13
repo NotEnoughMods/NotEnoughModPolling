@@ -7,6 +7,10 @@
   ],
   "labels": ["dependencies"],
   "minimumReleaseAge": "7 days",
+  "lockFileMaintenance": {
+    "enabled": true,
+    "automerge": true
+  },
   "packageRules": [
     {
       "description": "Group dev dependency updates together",
