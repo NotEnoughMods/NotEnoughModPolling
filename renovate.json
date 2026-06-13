@@ -6,6 +6,7 @@
     ":gitSignOff"
   ],
   "labels": ["dependencies"],
+  "minimumReleaseAge": "7 days",
   "packageRules": [
     {
       "description": "Group dev dependency updates together",
@@ -14,9 +15,8 @@
       "groupName": "dev dependencies"
     },
     {
-      "description": "Automerge minor and patch updates after 3-day cooldown",
+      "description": "Automerge minor, patch, and digest updates (subject to the global 7-day cooldown)",
       "matchUpdateTypes": ["minor", "patch", "digest"],
-      "minimumReleaseAge": "3 days",
       "automerge": true
     },
     {

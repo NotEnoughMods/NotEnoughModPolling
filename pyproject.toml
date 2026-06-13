@@ -20,6 +20,12 @@ dev = [
     "aioresponses>=0.7",
 ]
 
+[tool.uv]
+# Dependency cooldown: when resolving, ignore releases younger than 7 days so a
+# malicious or broken upload has time to be reported/yanked before it reaches the
+# lockfile. Re-evaluated on each `uv lock --upgrade`/`--refresh`.
+exclude-newer = "7 days"
+
 [tool.pytest.ini_options]
 asyncio_mode = "auto"
 testpaths = ["tests"]
