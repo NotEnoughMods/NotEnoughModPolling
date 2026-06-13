@@ -408,7 +408,8 @@ class ModPoller:
         url = "https://api.github.com/repos/" + repo + "/releases"
 
         if client_id and client_secret:
-            releases = await self.fetch_json(url, auth=aiohttp.BasicAuth(client_id, client_secret))
+            headers = {"Authorization": aiohttp.encode_basic_auth(client_id, client_secret)}
+            releases = await self.fetch_json(url, headers=headers)
         else:
             releases = await self.fetch_json(url)
 
