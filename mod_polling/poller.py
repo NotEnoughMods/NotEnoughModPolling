@@ -95,6 +95,13 @@ class ModPoller:
                             MAX_FETCH_ATTEMPTS,
                         )
                     elif 400 <= response.status < 500:
+                        if response.status == 404 and host == "api.cfwidget.com":
+                            body = await response.text()
+                            logger.warning(
+                                "CFWidget returned HTTP 404 for %s: %s",
+                                url,
+                                json.dumps({"headers": dict(response.headers), "body": body}),
+                            )
                         raise NEMPException(f"HTTP {response.status} for {url}")
                     else:
                         response.raise_for_status()
