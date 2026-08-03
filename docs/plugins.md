@@ -136,11 +136,11 @@ The `Permission` enum is defined in `command_router.py`:
 
 ```python
 class Permission(IntEnum):
-    GUEST = 0     # Anyone
-    VOICED = 1    # + and above
-    OP = 2        # @ and above
-    ADMIN = 3     # Bot operator (admin list + registered)
-    HIDDEN = 4    # Not shown in command list
+    GUEST = 0  # Anyone
+    VOICED = 1  # + and above
+    OP = 2  # @ and above
+    ADMIN = 3  # Bot operator (admin list + registered)
+    HIDDEN = 4  # Not shown in command list
 ```
 
 When a user invokes a command, the PRIVMSG handler checks `rank >= cmd.permission`. The user's rank is determined by their channel mode (`+`, `@`) or admin status.
@@ -166,6 +166,7 @@ async def _my_timer(router, channels):
     for channel in channels:
         await router.send_message(channel, "Tick!")
 
+
 # In setup() or a command handler:
 router.events["time"].add_event("MyTimer", 60, _my_timer, ["#mychannel"])
 ```
@@ -185,6 +186,7 @@ async def _on_chat(router, channels, userdata, message, channel):
     if "hello" in message.lower():
         await router.send_message(channel, "Hi there!")
 
+
 router.events["chat"].add_event("Greeter", _on_chat, channel=[])
 ```
 
@@ -197,7 +199,7 @@ Note: `userdata` in chat event callbacks is a `dict` with keys `name`, `ident`, 
 ### Event management
 
 ```python
-router.events["time"].event_exists("MyTimer")       # bool
+router.events["time"].event_exists("MyTimer")  # bool
 router.events["time"].remove_event("MyTimer")
 router.events["time"].add_channel("MyTimer", "#new")
 router.events["time"].remove_channel("MyTimer", "#old")
@@ -241,6 +243,7 @@ async def _my_worker(handle, pipe):
             break
         # Do work...
         await pipe.put({"result": "done"})
+
 
 # Start the task:
 router.task_pool.add_task("myWorker", _my_worker)

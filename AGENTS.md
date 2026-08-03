@@ -131,7 +131,11 @@ Two styles coexist. Prefer **new-style** (class-based) for new plugins.
 **Old-style** (function-based): `COMMANDS` dict + underscore-prefixed async functions:
 ```python
 PLUGIN_ID = "say"
+
+
 async def _say(router, name, params, channel, userdata, rank, is_channel): ...
+
+
 COMMANDS = {"say": {"execute": _say, "permission": Permission.HIDDEN}}
 ```
 
