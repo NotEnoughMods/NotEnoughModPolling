@@ -152,8 +152,8 @@ Registered in `CommandRouter.__init__()`:
 
 ```python
 self.events = {
-    "time": TimerEvent(),         # Periodic timers
-    "chat": MsgEvent(),           # Channel messages
+    "time": TimerEvent(),  # Periodic timers
+    "chat": MsgEvent(),  # Channel messages
     "channeljoin": StandardEvent(),
     "channelpart": StandardEvent(),
     "channelkick": StandardEvent(),

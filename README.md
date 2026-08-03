@@ -123,6 +123,7 @@ from command_router import Permission, command, subcommand
 
 PLUGIN_ID = "greet"
 
+
 class Plugin:
     async def setup(self, router, startup):
         """Called on load (startup=True) or reload (startup=False)."""
@@ -152,8 +153,10 @@ from command_router import Permission
 
 PLUGIN_ID = "say"
 
+
 async def _say(router, name, params, channel, userdata, rank, is_channel):
     await router.send_chat_message(router.send, channel, " ".join(params))
+
 
 COMMANDS = {
     "say": {"execute": _say, "permission": Permission.HIDDEN},
