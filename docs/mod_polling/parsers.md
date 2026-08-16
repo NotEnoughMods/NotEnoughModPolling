@@ -248,8 +248,8 @@ Scrapes a web page and extracts versions using regex.
 {
     "parser": "html",
     "html": {
-        "url": "https://flansmod.com/download",
-        "regex": "(?P<version>[0-9]+(?:\\.[0-9]+)+) for(?: MC)? (?P<mc>[0-9]+(\\.[0-9]+)+)"
+        "url": "https://example.com/downloads",
+        "regex": "Mod (?P<version>[0-9]+(?:\\.[0-9]+)+) for MC (?P<mc>[0-9]+(?:\\.[0-9]+)+)"
     }
 }
 ```
