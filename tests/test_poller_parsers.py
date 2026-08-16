@@ -133,6 +133,49 @@ class TestCheckHTML:
         assert result["1.12.2"] == {"dev": "1.0.0"}
 
 
+class TestCheckSpongeMaven:
+    async def test_latest_release_and_dev_per_mc_version(self, mod_poller):
+        mod_poller.mods["SpongeForge"] = {
+            "parser": "sponge_maven",
+            "sponge_maven": {"url": "https://example.com/maven-metadata.xml"},
+        }
+        mod_poller.fetch_page = AsyncMock(
+            return_value="""
+                <metadata>
+                  <versioning>
+                    <versions>
+                      <version>1.12.2-2838-7.4.7</version>
+                      <version>1.12.2-2838-7.4.8-RC4138</version>
+                      <version>1.12.2-2838-7.4.8</version>
+                      <version>1.12.2-2838-7.4.9-RC4142</version>
+                      <version>1.21.1-52.0.0-12.0.0</version>
+                      <version>1.21.1-52.0.0-12.0.1-RC1</version>
+                    </versions>
+                  </versioning>
+                </metadata>
+            """
+        )
+
+        result = await mod_poller.check_sponge_maven("SpongeForge")
+
+        assert result == {
+            "1.12.2": {"version": "7.4.8", "dev": "7.4.9-RC4142"},
+            "1.21.1": {"version": "12.0.0", "dev": "12.0.1-RC1"},
+        }
+
+    async def test_rejects_malformed_version(self, mod_poller):
+        mod_poller.mods["SpongeForge"] = {
+            "parser": "sponge_maven",
+            "sponge_maven": {"url": "https://example.com/maven-metadata.xml"},
+        }
+        mod_poller.fetch_page = AsyncMock(
+            return_value="<metadata><versioning><versions><version>invalid</version></versions></versioning></metadata>"
+        )
+
+        with pytest.raises(NEMPException, match="Unexpected SpongeForge version"):
+            await mod_poller.check_sponge_maven("SpongeForge")
+
+
 class TestCheckCurse:
     async def test_normal_release(self, mod_poller):
         mod_poller.fetch_json = AsyncMock(

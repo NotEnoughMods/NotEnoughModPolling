@@ -4,6 +4,7 @@ import json
 import logging
 import re
 import urllib.parse
+import xml.etree.ElementTree as ElementTree
 from datetime import UTC, datetime
 
 import aiohttp
@@ -343,6 +344,24 @@ class ModPoller:
             result[mc_version] = {version_type: mod_version}
 
         return result
+
+    async def check_sponge_maven(self, mod):
+        page = await self.fetch_page(self.mods[mod]["sponge_maven"]["url"])
+        metadata = ElementTree.fromstring(page)
+        versions = {}
+
+        for version_element in metadata.findall("./versioning/versions/version"):
+            coordinate = version_element.text
+            components = coordinate.split("-", 2) if coordinate else []
+
+            if len(components) != 3 or not all(components):
+                raise NEMPException(f"Unexpected SpongeForge version: {coordinate!r}")
+
+            mc_version, _forge_version, sponge_version = components
+            version_type = "dev" if "-" in sponge_version else "version"
+            versions.setdefault(mc_version, {})[version_type] = sponge_version
+
+        return versions
 
     async def check_cfwidget(self, mod):
         # Field name from the JSON to be used against the regex (name or display, name by default)

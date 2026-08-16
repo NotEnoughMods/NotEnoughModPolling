@@ -8,21 +8,12 @@
         }
     },
     "BiomesOPlenty": {
-        "parser": "mcforge_v2",
+        "parser": "cfwidget",
         "category": "forge",
         "active": true,
-        "mcforge": {
-            "url": "https://files.minecraftforge.net/com/github/glitchfiend/biomesoplenty/BiomesOPlenty/promotions_slim.json",
-            "slim": true
-        }
-    },
-    "FML": {
-        "parser": "mcforge_v2",
-        "category": "forge",
-        "active": true,
-        "mcforge": {
-            "url": "https://files.minecraftforge.net/net/minecraftforge/fml/promotions_slim.json",
-            "slim": true
+        "curse": {
+            "id": "220318",
+            "regex": "BiomesOPlenty-(?:(?:fabric|neoforge|forge)-)?[0-9]+(?:\\.[0-9]+)+-(?P<version>[0-9]+(?:\\.[0-9]+)+)(?:-universal)?\\.jar"
         }
     },
     "MinecraftForge": {
@@ -688,41 +679,6 @@
             "regex": "(?:ChiselsBits|chisels-and-bits)-(?:(?:neo)?forge-)?(?:[0-9.]+(?:-snapshot)?-)?(?P<version>[0-9]+(?:\\.[0-9]+)+)(?:-universal)?\\.jar"
         }
     },
-    "BuildingBricks": {
-        "parser": "forge_json",
-        "active": true,
-        "forgejson": {
-            "url": "https://raw.githubusercontent.com/hea3ven/BuildingBricks/master/media/update.json"
-        }
-    },
-    "Malleable": {
-        "parser": "forge_json",
-        "active": true,
-        "forgejson": {
-            "url": "https://raw.githubusercontent.com/hea3ven/Malleable/version/media/update.json"
-        }
-    },
-    "HardModeTweaks": {
-        "parser": "forge_json",
-        "active": true,
-        "forgejson": {
-            "url": "https://raw.githubusercontent.com/hea3ven/HardModeTweaks/version/media/update.json"
-        }
-    },
-    "TwinTails": {
-        "parser": "forge_json",
-        "active": true,
-        "forgejson": {
-            "url": "https://raw.githubusercontent.com/hea3ven/TwinTails/version/media/update.json"
-        }
-    },
-    "DulceDeLeche": {
-        "parser": "forge_json",
-        "active": true,
-        "forgejson": {
-            "url": "https://raw.githubusercontent.com/hea3ven/DulceDeLeche/version/media/update.json"
-        }
-    },
     "RebornCore": {
         "parser": "cfwidget",
         "active": true,
@@ -804,12 +760,11 @@
         }
     },
     "SpongeForge": {
-        "parser": "mcforge_v2",
+        "parser": "sponge_maven",
         "category": "forge",
         "active": true,
-        "mcforge": {
-            "url": "https://files.minecraftforge.net/org/spongepowered/spongeforge/promotions_slim.json",
-            "slim": true
+        "sponge_maven": {
+            "url": "https://repo.spongepowered.org/repository/maven-releases/org/spongepowered/spongeforge/maven-metadata.xml"
         }
     },
     "AkashicTome": {
@@ -860,39 +815,11 @@
             "regex": "AppleSkin-(?:(?:neo)?forge|fabric)-mc.+?-(?P<version>.+)\\.jar"
         }
     },
-    "UnlimitedChiselWorks": {
-        "parser": "forge_json",
-        "active": true,
-        "forgejson": {
-            "url": "https://asie.pl/files/minecraft/update/unlimitedchiselworks.json"
-        }
-    },
-    "PonySocks": {
-        "parser": "forge_json",
-        "active": true,
-        "forgejson": {
-            "url": "https://asie.pl/files/minecraft/update/ponysocks.json"
-        }
-    },
     "Charset": {
         "parser": "forge_json",
         "active": true,
         "forgejson": {
             "url": "https://asie.pl/files/minecraft/update/charset.json"
-        }
-    },
-    "FoamFix": {
-        "parser": "forge_json",
-        "active": true,
-        "forgejson": {
-            "url": "https://asie.pl/files/minecraft/update/foamfix.json"
-        }
-    },
-    "YNot": {
-        "parser": "forge_json",
-        "active": true,
-        "forgejson": {
-            "url": "http://asie.pl/files/minecraft/update/ynot.json"
         }
     },
     "BetterWithMods": {
@@ -980,14 +907,6 @@
         "curse": {
             "id": "311054",
             "regex": "AoA3?-(?P<mc>[0-9]+(?:\\.[0-9]+)+)-(?P<version>[0-9]+(?:\\.[0-9]+)*(?:-.+)?)\\.jar"
-        }
-    },
-    "Flan'sMod": {
-        "parser": "cfwidget",
-        "active": true,
-        "curse": {
-            "id": "317310",
-            "regex": "Flan(?:'s Mod|\\.s\\.Mod)-[0-9]+(?:\\.[0-9]+)+-(?P<version>[0-9]+(?:\\.[0-9]+)+(?:-[a-z]+(?:\\.[0-9]+)?)?)(?:-all)?\\.jar"
         }
     },
     "LagGoggles": {
