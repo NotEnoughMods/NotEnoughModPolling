@@ -336,3 +336,44 @@ A hardcoded parser for BuildCraft specifically. Takes no configuration.
 ```
 
 No additional configuration or regex needed.
+
+---
+
+### `neoforge`
+
+Fetches NeoForge releases from the project's Maven version APIs.
+
+**Method:** `check_neoforge`
+**Return format:** multi-version
+
+**How it works:**
+1. Fetches modern `net.neoforged:neoforge` versions through the configured primary and fallback URLs.
+2. Fetches legacy `net.neoforged:forge` versions independently when `legacy_url` is configured.
+3. Derives the Minecraft version from modern NeoForge coordinates.
+4. Parses legacy coordinates such as `1.20.1-47.1.106` into Minecraft `1.20.1` and NeoForge `47.1.106`.
+5. Keeps the newest stable version for each Minecraft version. A beta is returned as `dev` only when no same-or-newer stable exists.
+6. Ignores alpha, snapshot, joke/test, and malformed legacy versions.
+
+Modern source failures fail the poll. If both legacy endpoints fail, the parser logs a warning and continues with modern
+versions so a legacy outage cannot interrupt current NeoForge updates.
+
+**Required keys:**
+
+```json
+{
+    "parser": "neoforge",
+    "neoforge": {
+        "url": "https://maven.neoforged.net/api/maven/versions/releases/net%2Fneoforged%2Fneoforge",
+        "fallback_url": "https://maven.creeperhost.net/api/maven/versions/releases/net%2Fneoforged%2Fneoforge",
+        "legacy_url": "https://maven.neoforged.net/api/maven/versions/releases/net%2Fneoforged%2Fforge",
+        "legacy_fallback_url": "https://maven.creeperhost.net/api/maven/versions/releases/net%2Fneoforged%2Fforge"
+    }
+}
+```
+
+| Key | Type | Required | Description |
+|---|---|---|---|
+| `neoforge.url` | string | yes | Primary modern artifact endpoint |
+| `neoforge.fallback_url` | string | no | Modern mirror used when the primary fails |
+| `neoforge.legacy_url` | string | no | Primary legacy Forge artifact endpoint |
+| `neoforge.legacy_fallback_url` | string | no | Legacy mirror used when the primary fails |

@@ -487,15 +487,31 @@ class ModPoller:
         return {"mc": mc, "version": version}
 
     async def check_neoforge(self, mod):
-        url = self.mods[mod]["neoforge"]["url"]
-        fallback_url = self.mods[mod]["neoforge"].get("fallback_url")
+        neoforge = self.mods[mod]["neoforge"]
 
-        try:
-            jsonres = await self.fetch_json(url)
-        except Exception:
-            if not fallback_url:
-                raise
-            jsonres = await self.fetch_json(fallback_url)
+        async def fetch_with_fallback(url, fallback_url):
+            try:
+                return await self.fetch_json(url)
+            except Exception:
+                if not fallback_url:
+                    raise
+                return await self.fetch_json(fallback_url)
+
+        async def fetch_legacy():
+            legacy_url = neoforge.get("legacy_url")
+            if not legacy_url:
+                return {}
+
+            try:
+                return await fetch_with_fallback(legacy_url, neoforge.get("legacy_fallback_url"))
+            except Exception:
+                logger.warning("Failed to fetch legacy NeoForge versions", exc_info=True)
+                return {}
+
+        jsonres, legacy_jsonres = await asyncio.gather(
+            fetch_with_fallback(neoforge["url"], neoforge.get("fallback_url")),
+            fetch_legacy(),
+        )
 
         result = {}
 
@@ -525,9 +541,19 @@ class ModPoller:
                 # Only store beta as dev if no same-or-newer stable exists
                 if "dev" not in mc_entry and "version" not in mc_entry:
                     mc_entry["dev"] = neoforge_version
-            else:
-                if "version" not in mc_entry:
-                    mc_entry["version"] = neoforge_version
+            elif "version" not in mc_entry:
+                mc_entry["version"] = neoforge_version
+
+        for coordinate in reversed(legacy_jsonres.get("versions", [])):
+            match = re.fullmatch(
+                r"(?P<mc>[0-9]+(?:\.[0-9]+)+)-(?P<version>[0-9]+(?:\.[0-9]+)+)",
+                coordinate,
+            )
+            if not match:
+                continue
+
+            version_info = match.groupdict()
+            result.setdefault(version_info["mc"], {}).setdefault("version", version_info["version"])
 
         return result
 

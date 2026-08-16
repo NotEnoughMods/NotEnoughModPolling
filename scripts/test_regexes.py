@@ -383,31 +383,42 @@ async def check_custom_dead(session, mod_name, mod_data, compiled_regex, *, use_
 
 
 async def check_neoforge(session, mod_name, mod_data, compiled_regex, *, use_cache=False, all_files=False):
-    url = mod_data["neoforge"]["url"]
-    fallback_url = mod_data["neoforge"].get("fallback_url")
+    async def fetch_with_fallback(url, fallback_url):
+        for attempt_url in [url, fallback_url]:
+            if not attempt_url:
+                continue
+            try:
+                async with session.get(attempt_url) as resp:
+                    if resp.status < 400:
+                        return await resp.json(content_type=None)
+            except Exception:
+                continue
+        return None
 
-    data = None
-    for attempt_url in [url, fallback_url]:
-        if not attempt_url:
-            continue
-        try:
-            async with session.get(attempt_url) as resp:
-                if resp.status >= 400:
-                    continue
-                data = await resp.json(content_type=None)
-                break
-        except Exception:
-            continue
-
+    neoforge = mod_data["neoforge"]
+    data = await fetch_with_fallback(neoforge["url"], neoforge.get("fallback_url"))
     if data is None:
         return DEAD, "Both primary and fallback URLs failed", None, [], []
 
     versions = data.get("versions", [])
     if not versions:
-        return DEAD, "Empty versions list", None, [], []
+        return DEAD, "Empty modern versions list", None, [], []
 
-    samples = versions[-5:]
-    return PASS, f"Found {len(versions)} NeoForge versions", None, samples, []
+    warnings = []
+    legacy_versions = []
+    legacy_url = neoforge.get("legacy_url")
+    if legacy_url:
+        legacy_data = await fetch_with_fallback(legacy_url, neoforge.get("legacy_fallback_url"))
+        if legacy_data is None:
+            warnings.append("Both legacy primary and fallback URLs failed")
+        else:
+            legacy_versions = legacy_data.get("versions", [])
+            if not legacy_versions:
+                warnings.append("Empty legacy versions list")
+
+    samples = versions[-3:] + legacy_versions[-3:]
+    detail = f"Found {len(versions)} modern and {len(legacy_versions)} legacy NeoForge versions"
+    return PASS, detail, None, samples, warnings
 
 
 PARSER_MAP = {

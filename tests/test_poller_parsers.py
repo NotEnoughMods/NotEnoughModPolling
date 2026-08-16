@@ -325,6 +325,16 @@ class TestCheckNeoForge:
         },
     }
 
+    NEOFORGE_WITH_LEGACY_MOD: ClassVar[dict] = {
+        "parser": "neoforge",
+        "neoforge": {
+            "url": "https://maven.neoforged.net/modern",
+            "fallback_url": "https://maven.creeperhost.net/modern",
+            "legacy_url": "https://maven.neoforged.net/legacy",
+            "legacy_fallback_url": "https://maven.creeperhost.net/legacy",
+        },
+    }
+
     async def test_multi_mc_versions(self, mod_poller):
         """Both <26 and >=26 version schemes resolve correctly."""
         mod_poller.mods["NeoForge"] = self.NEOFORGE_MOD
@@ -409,6 +419,62 @@ class TestCheckNeoForge:
         mod_poller.fetch_json = AsyncMock(side_effect=Exception("primary down"))
         with pytest.raises(Exception, match="primary down"):
             await mod_poller.check_neoforge("NeoForge")
+
+    async def test_legacy_versions_are_merged(self, mod_poller):
+        mod_poller.mods["NeoForge"] = self.NEOFORGE_WITH_LEGACY_MOD
+        mod_poller.fetch_json = AsyncMock(
+            side_effect=[
+                {"versions": ["21.1.222"]},
+                {"versions": ["1.20.1-47.1.5", "1.20.1-47.1.106"]},
+            ]
+        )
+
+        result = await mod_poller.check_neoforge("NeoForge")
+
+        assert result["1.20.1"] == {"version": "47.1.106"}
+        assert result["1.21.1"] == {"version": "21.1.222"}
+
+    async def test_legacy_fallback_on_primary_failure(self, mod_poller):
+        mod_poller.mods["NeoForge"] = self.NEOFORGE_WITH_LEGACY_MOD
+        mod_poller.fetch_json = AsyncMock(
+            side_effect=[
+                {"versions": ["21.1.222"]},
+                Exception("legacy primary down"),
+                {"versions": ["1.20.1-47.1.106"]},
+            ]
+        )
+
+        result = await mod_poller.check_neoforge("NeoForge")
+
+        assert result["1.20.1"] == {"version": "47.1.106"}
+        assert mod_poller.fetch_json.call_count == 3
+
+    async def test_legacy_failure_preserves_modern_results(self, mod_poller):
+        mod_poller.mods["NeoForge"] = self.NEOFORGE_WITH_LEGACY_MOD
+        mod_poller.fetch_json = AsyncMock(
+            side_effect=[
+                {"versions": ["21.1.222"]},
+                Exception("legacy primary down"),
+                Exception("legacy fallback down"),
+            ]
+        )
+
+        result = await mod_poller.check_neoforge("NeoForge")
+
+        assert result == {"1.21.1": {"version": "21.1.222"}}
+
+    async def test_malformed_legacy_version_is_ignored(self, mod_poller):
+        mod_poller.mods["NeoForge"] = self.NEOFORGE_WITH_LEGACY_MOD
+        mod_poller.fetch_json = AsyncMock(
+            side_effect=[
+                {"versions": []},
+                {"versions": ["1.20.1-47.1.106", "47.1.82"]},
+            ]
+        )
+
+        result = await mod_poller.check_neoforge("NeoForge")
+
+        assert result == {"1.20.1": {"version": "47.1.106"}}
 
     async def test_empty_versions(self, mod_poller):
         """Empty versions list returns empty result."""

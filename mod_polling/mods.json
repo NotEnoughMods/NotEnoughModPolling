@@ -31,7 +31,9 @@
         "active": true,
         "neoforge": {
             "url": "https://maven.neoforged.net/api/maven/versions/releases/net%2Fneoforged%2Fneoforge",
-            "fallback_url": "https://maven.creeperhost.net/api/maven/versions/releases/net%2Fneoforged%2Fneoforge"
+            "fallback_url": "https://maven.creeperhost.net/api/maven/versions/releases/net%2Fneoforged%2Fneoforge",
+            "legacy_url": "https://maven.neoforged.net/api/maven/versions/releases/net%2Fneoforged%2Fforge",
+            "legacy_fallback_url": "https://maven.creeperhost.net/api/maven/versions/releases/net%2Fneoforged%2Fforge"
         }
     },
     "OpenComputers": {
