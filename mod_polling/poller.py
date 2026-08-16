@@ -375,53 +375,39 @@ class ModPoller:
         elif "error" in jsonres:
             raise NEMPException("cfwidget: " + jsonres.get("error"))
 
-        release_type = "release"
-
         # Sometimes CFWidget returns no files, but the issue resolves itself after a while,
         # so we just temporarily return an empty result
         if not jsonres["files"]:
             return {}
 
         sorted_files = sorted(jsonres["files"], key=lambda x: x["id"], reverse=True)
-
         latest_release_id = sorted_files[0]["id"]
-
         versions = {}
-
-        MC_VERSION_REGEX = re.compile(r"^[0-9]+(?:\.[0-9]+)+$")
+        mc_version_regex = re.compile(r"^[0-9]+(?:\.[0-9]+)+$")
 
         for release in sorted_files:
-            for mc_version in release["versions"]:
-                # Skip this "mc version" if it's not actually a MC version (Forge, snapshots, Java, etc)
-                if not MC_VERSION_REGEX.match(mc_version):
-                    continue
+            mc_versions = [version for version in release["versions"] if mc_version_regex.match(version)]
+            if not mc_versions:
+                continue
 
-                if mc_version in versions:
-                    continue
+            match = self.match_mod_regex(mod, release[field_name])
+            if not match:
+                if release["id"] == latest_release_id:
+                    raise NEMPException(
+                        "Regex is outdated (doesn't match against latest release). Latest: "
+                        + release[field_name]
+                        + ", Regex: "
+                        + self.get_mod_regex(mod).pattern
+                    )
 
-                match = self.match_mod_regex(mod, release[field_name])
+                # If this release isn't the latest one, we just assume it's an old one and skip it
+                continue
 
-                if not match:
-                    if release["id"] == latest_release_id:
-                        raise NEMPException(
-                            "Regex is outdated (doesn't match against latest release). Latest: "
-                            + release[field_name]
-                            + ", Regex: "
-                            + self.get_mod_regex(mod).pattern
-                        )
+            version_type = "version" if release["type"].lower() == "release" else "dev"
+            mod_version = match.groupdict()["version"]
 
-                    # If this release isn't the latest one, we just assume it's an old one and skip it
-                    continue
-
-                output = match.groupdict()
-
-                res = {}
-
-                version_type = "version" if release["type"].lower() == release_type else "dev"
-
-                res[version_type] = output["version"]
-
-                versions[mc_version] = res
+            for mc_version in mc_versions:
+                versions.setdefault(mc_version, {}).setdefault(version_type, mod_version)
 
         return versions
 

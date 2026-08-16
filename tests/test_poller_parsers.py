@@ -195,6 +195,127 @@ class TestCheckCurse:
         assert "1.12.2" in result
         assert result["1.12.2"]["version"] == "1.5.0"
 
+    async def test_newer_dev_and_older_release_are_both_returned(self, mod_poller):
+        mod_poller.fetch_json = AsyncMock(
+            return_value={
+                "files": [
+                    {
+                        "id": 300,
+                        "name": "CurseMod-1.5.0.jar",
+                        "type": "release",
+                        "versions": ["1.12.2"],
+                    },
+                    {
+                        "id": 200,
+                        "name": "CurseMod-1.4.0.jar",
+                        "type": "beta",
+                        "versions": ["1.12.2"],
+                    },
+                    {
+                        "id": 400,
+                        "name": "CurseMod-1.6.0.jar",
+                        "type": "beta",
+                        "versions": ["1.12.2"],
+                    },
+                ]
+            }
+        )
+
+        result = await mod_poller.check_cfwidget("CurseMod")
+
+        assert result["1.12.2"] == {"version": "1.5.0", "dev": "1.6.0"}
+
+    async def test_newer_release_and_older_dev_are_both_returned(self, mod_poller):
+        mod_poller.fetch_json = AsyncMock(
+            return_value={
+                "files": [
+                    {
+                        "id": 400,
+                        "name": "CurseMod-1.6.0.jar",
+                        "type": "release",
+                        "versions": ["1.12.2"],
+                    },
+                    {
+                        "id": 300,
+                        "name": "CurseMod-1.5.0.jar",
+                        "type": "beta",
+                        "versions": ["1.12.2"],
+                    },
+                ]
+            }
+        )
+
+        result = await mod_poller.check_cfwidget("CurseMod")
+
+        assert result["1.12.2"] == {"version": "1.6.0", "dev": "1.5.0"}
+
+    async def test_file_can_supply_multiple_mc_versions(self, mod_poller):
+        mod_poller.fetch_json = AsyncMock(
+            return_value={
+                "files": [
+                    {
+                        "id": 200,
+                        "name": "CurseMod-2.0.0.jar",
+                        "type": "release",
+                        "versions": ["1.12.2", "1.16.5", "Forge"],
+                    },
+                    {
+                        "id": 100,
+                        "name": "CurseMod-2.1.0.jar",
+                        "type": "beta",
+                        "versions": ["1.12.2", "1.16.5"],
+                    },
+                ]
+            }
+        )
+
+        result = await mod_poller.check_cfwidget("CurseMod")
+
+        expected = {"version": "2.0.0", "dev": "2.1.0"}
+        assert result == {"1.12.2": expected, "1.16.5": expected}
+
+    async def test_older_regex_mismatch_is_skipped(self, mod_poller):
+        mod_poller.fetch_json = AsyncMock(
+            return_value={
+                "files": [
+                    {
+                        "id": 200,
+                        "name": "CurseMod-2.0.0.jar",
+                        "type": "release",
+                        "versions": ["1.12.2"],
+                    },
+                    {
+                        "id": 100,
+                        "name": "old-name.jar",
+                        "type": "beta",
+                        "versions": ["1.12.2"],
+                    },
+                ]
+            }
+        )
+
+        result = await mod_poller.check_cfwidget("CurseMod")
+
+        assert result == {"1.12.2": {"version": "2.0.0"}}
+
+    async def test_dev_only(self, mod_poller):
+        mod_poller.fetch_json = AsyncMock(
+            return_value={
+                "files": [
+                    {
+                        "id": 100,
+                        "name": "CurseMod-2.0.0.jar",
+                        "type": "alpha",
+                        "versions": ["1.12.2"],
+                    }
+                ]
+            }
+        )
+
+        result = await mod_poller.check_cfwidget("CurseMod")
+
+        assert result == {"1.12.2": {"dev": "2.0.0"}}
+
     async def test_accepted_status_returns_empty(self, mod_poller):
         mod_poller.fetch_json = AsyncMock(return_value={"accepted": True})
         result = await mod_poller.check_cfwidget("CurseMod")

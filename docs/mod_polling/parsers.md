@@ -71,10 +71,12 @@ Fetches mod info from the CurseForge CFWidget API.
 **How it works:**
 1. Fetches `https://api.cfwidget.com/{curse.id}` as JSON.
 2. Sorts files by ID (descending = newest first).
-3. For each file, iterates its `versions` list, skipping non-MC-version strings (e.g. "Forge", "Java 17").
+3. For each file, filters its `versions` list to Minecraft versions, skipping labels such as "Forge" and "Java 17".
 4. Matches the regex against the file's `name` (or `display` if `curse.field` is set).
-5. If the regex doesn't match the *latest* file, raises an error (regex is outdated). Older non-matching files are skipped.
-6. Release type determines whether the version is stored as `"version"` (release) or `"dev"` (anything else).
+5. If the regex does not match the newest file, raises an error because the configured regex is outdated. Older
+   non-matching files are skipped.
+6. Retains the newest stable release as `"version"` and the newest alpha, beta, or other prerelease as `"dev"`
+   independently for each Minecraft version.
 
 **Required keys:**
 
