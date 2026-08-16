@@ -852,7 +852,7 @@
         "active": true,
         "curse": {
             "id": "231275",
-            "regex": "Ding-(?:[0-9.]+-(?:(?:Neo)?Forge|Fabric|LiteLoader)-)?(?P<version>(?:MC)?[0-9]+(?:\\.[0-9]+)+(?:v[0-9]+)?)\\.jar"
+            "regex": "Ding-(?:[0-9.]+-(?:(?:(?:Neo)?Forge|Fabric|LiteLoader)-)?)?(?P<version>(?:MC)?[0-9]+(?:\\.[0-9]+)+(?:v[0-9]+)?)\\.jar"
         }
     },
     "BetterThanBunnies": {
@@ -876,7 +876,7 @@
         "active": true,
         "curse": {
             "id": "229068",
-            "regex": "DeathCounter-(?:[0-9.]+-(?:(?:Neo)?Forge|Fabric|LiteLoader)-)?(?P<version>[0-9]+(?:\\.[0-9]+)+)\\.jar"
+            "regex": "DeathCounter-(?:[0-9.]+-(?:(?:(?:Neo)?Forge|Fabric|LiteLoader)-)?)?(?P<version>[0-9]+(?:\\.[0-9]+)+)\\.jar"
         }
     },
     "LimitedLives": {
@@ -884,7 +884,7 @@
         "active": true,
         "curse": {
             "id": "233040",
-            "regex": "LimitedLives-(?:[0-9.]+-(?:(?:Neo)?Forge|Fabric|LiteLoader)-)?(?P<version>[0-9]+(?:\\.[0-9]+)+)\\.jar"
+            "regex": "LimitedLives-(?:[0-9.]+-(?:(?:(?:Neo)?Forge|Fabric|LiteLoader)-)?)?(?P<version>[0-9]+(?:\\.[0-9]+)+)\\.jar"
         }
     },
     "PartyParrots": {
@@ -900,7 +900,7 @@
         "active": true,
         "curse": {
             "id": "229060",
-            "regex": "iChunUtil-(?:[0-9.]+-(?:(?:Neo)?Forge|Fabric|LiteLoader)-)?(?P<version>[0-9]+(?:\\.[0-9]+)+)\\.jar"
+            "regex": "iChunUtil-(?:[0-9.]+-(?:(?:(?:Neo)?Forge|Fabric|LiteLoader)-)?)?(?P<version>[0-9]+(?:\\.[0-9]+)+)\\.jar"
         }
     },
     "AdventOfAscension": {

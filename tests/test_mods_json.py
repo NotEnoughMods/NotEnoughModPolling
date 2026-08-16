@@ -30,11 +30,14 @@ LEGACY_CURSE_FILENAMES = (
     ("CookingForBlockheads", "cookingbook-mc1.7.10-1.0.140.jar", "1.0.140"),
     ("CookingForBlockheads", "CookingForBlockheads_1.12.2-6.5.0.jar", "6.5.0"),
     ("DeathCounter", "DeathCounter-4.0.0.jar", "4.0.0"),
+    ("DeathCounter", "DeathCounter-1.12.2-1.1.0.jar", "1.1.0"),
     ("Ding", "Ding-MC1.7.10v2.jar", "MC1.7.10v2"),
+    ("Ding", "Ding-1.12.2-1.0.2.jar", "1.0.2"),
     ("ForgeMultipart", "ForgeMultipart-1.12.2-2.6.2.83-universal.jar", "2.6.2.83"),
     ("HardcoreQuestingMode", "HQM-The Journey-4.4.4.jar", "4.4.4"),
     ("IronChests", "ironchest-1.7.10-6.0.62.742-universal.jar", "6.0.62.742"),
     ("LimitedLives", "LimitedLives-4.0.0.jar", "4.0.0"),
+    ("LimitedLives", "LimitedLives-1.12.1-1.0.1.jar", "1.0.1"),
     ("McJtyLib", "mcjtylib-1.8.1.jar", "1.8.1"),
     ("Ping", "Ping-1.7.X-1.0.3.B7-universal.jar", "1.0.3.B7"),
     ("RebornCore", "RebornCore-1.1.0.15-universal.jar", "1.1.0.15"),
@@ -44,6 +47,7 @@ LEGACY_CURSE_FILENAMES = (
     ("ThermalExpansion", "ThermalExpansion-[1.7.10]4.1.5-248.jar", "4.1.5-248"),
     ("ThermalFoundation", "ThermalFoundation-[1.7.10]1.2.6-118.jar", "1.2.6-118"),
     ("iChunUtil", "iChunUtil-4.2.3.jar", "4.2.3"),
+    ("iChunUtil", "iChunUtil-1.12.2-7.2.2.jar", "7.2.2"),
 )
 
 CURRENT_CURSE_FILENAMES = (
