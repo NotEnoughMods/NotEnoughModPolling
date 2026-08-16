@@ -4,7 +4,7 @@
         "active": true,
         "curse": {
             "id": "228756",
-            "regex": "ironchest-[0-9.]+-(?:(?:neo)?forge-)?(?P<version>[0-9]+(?:\\.[0-9]+)+)\\.jar"
+            "regex": "ironchest-[0-9.]+-(?:(?:neo)?forge-)?(?P<version>[0-9]+(?:\\.[0-9]+)+)(?:-universal)?\\.jar"
         }
     },
     "BiomesOPlenty": {
@@ -101,7 +101,7 @@
         "active": true,
         "curse": {
             "id": "258426",
-            "regex": "CBMultipart-(?:[0-9]+(?:\\.[0-9]+)+)-(?P<version>[0-9]+(?:\\.[0-9]+)+)(?:-universal)?\\.jar"
+            "regex": "(?:CBMultipart|ForgeMultipart)-(?:[0-9]+(?:\\.[0-9]+)+)-(?P<version>[0-9]+(?:\\.[0-9]+)+)(?:-universal)?\\.jar"
         }
     },
     "TinkersConstruct": {
@@ -150,7 +150,7 @@
         "active": true,
         "curse": {
             "id": "69162",
-            "regex": "cofh_?core-.+?-(?P<version>[0-9]+(?:\\.[0-9]+)+[a-z]?)(?:-universal)?\\.jar"
+            "regex": "cofh_?core-\\[?[0-9.]+\\]?-?(?P<version>[0-9]+(?:\\.[0-9]+)+(?:[a-z]+[0-9]*)?(?:-[0-9]+)?)(?:-universal)?\\.jar"
         }
     },
     "ThermalExpansion": {
@@ -158,7 +158,7 @@
         "active": true,
         "curse": {
             "id": "69163",
-            "regex": "(?:ThermalExpansion|thermal_expansion)-[0-9.]+-(?P<version>[0-9]+(?:\\.[0-9]+)+[a-z]*)(?:-universal)?\\.jar"
+            "regex": "(?:ThermalExpansion|thermal_expansion)-\\[?[0-9.]+\\]?-?(?P<version>[0-9]+(?:\\.[0-9]+)+[a-z0-9]*(?:-[0-9]+)?)(?:-universal)?\\.jar"
         }
     },
     "ThermalFoundation": {
@@ -166,7 +166,7 @@
         "active": true,
         "curse": {
             "id": "222880",
-            "regex": "(?:Thermal_?Foundation|thermal)-\\[?[0-9.]+\\]?-(?P<version>[0-9]+(?:\\.[0-9]+)+)(?:-universal)?\\.jar"
+            "regex": "(?:Thermal_?Foundation|thermal)-\\[?[0-9.]+\\]?-?(?P<version>[0-9]+(?:\\.[0-9]+)+[a-z0-9]*(?:-[0-9]+)?)(?:-universal)?\\.jar"
         }
     },
     "ThermalDynamics": {
@@ -174,7 +174,7 @@
         "active": true,
         "curse": {
             "id": "227443",
-            "regex": "(?:ThermalDynamics|thermal_dynamics)-.+?-(?P<version>[0-9]+(?:\\.[0-9]+)+)(?:-universal)?\\.jar"
+            "regex": "(?:ThermalDynamics|thermal_dynamics)-\\[?[0-9.]+\\]?-?(?P<version>[0-9]+(?:\\.[0-9]+)+(?:-[0-9]+)?)(?:-universal)?\\.jar"
         }
     },
     "RedstoneArsenal": {
@@ -182,7 +182,7 @@
         "active": true,
         "curse": {
             "id": "70631",
-            "regex": "Redstone_?Arsenal-[0-9.]+-(?P<version>[0-9]+(?:\\.[0-9]+)+(?:b\\.[0-9]+)?)(?:-universal)?\\.jar"
+            "regex": "Redstone_?Arsenal-\\[?[0-9.]+\\]?-?(?P<version>[0-9]+(?:\\.[0-9]+)+(?:b\\.[0-9]+)?(?:-[0-9]+)?)(?:-universal)?\\.jar"
         }
     },
     "Aquaculture": {
@@ -198,7 +198,7 @@
         "active": true,
         "curse": {
             "id": "77027",
-            "regex": "HQM-[0-9.]+[+\\-](?P<version>[0-9]+(?:\\.[0-9]+)+)(?:-(?:(?:neo)?forge|fabric))?\\.jar"
+            "regex": "HQM-(?:[0-9.]+[+\\-]|The Journey-)(?P<version>[0-9]+(?:\\.[0-9]+)+)(?:-(?:(?:neo)?forge|fabric))?\\.jar"
         }
     },
     "MineMenu": {
@@ -214,7 +214,7 @@
         "active": true,
         "curse": {
             "id": "222967",
-            "regex": "Ping-(?:(?:neo)?forge-|fabric-)?(?P<mc>[0-9]+(?:\\.[0-9]+)+)-(?P<version>[0-9]+(?:\\.[0-9]+)+)(?:-universal)?\\.jar"
+            "regex": "Ping-(?:(?:neo)?forge-|fabric-)?(?P<mc>[0-9]+(?:\\.(?:[0-9]+|X))+)-(?P<version>[0-9]+(?:\\.[A-Za-z0-9]+)+)(?:-universal)?\\.jar"
         }
     },
     "SecurityCraft": {
@@ -510,7 +510,7 @@
         "active": true,
         "curse": {
             "id": "233105",
-            "regex": "mcjtylib-(?P<mc>[0-9]+(?:\\.[0-9]+)+)-(?P<version>[0-9]+(?:\\.[0-9]+)+)\\.jar"
+            "regex": "mcjtylib-(?:(?P<mc>[0-9]+(?:\\.[0-9]+)+)-)?(?P<version>[0-9]+(?:\\.[0-9]+)+)\\.jar"
         }
     },
     "DeepResonance": {
@@ -558,7 +558,7 @@
         "active": true,
         "curse": {
             "id": "233019",
-            "regex": "AI-Improvements-[0-9.]+-(?P<version>[0-9]+(?:\\.[0-9]+)+)\\.jar"
+            "regex": "AI-?Improvements-[0-9.]+-(?P<version>[0-9]+(?:\\.[0-9]+)+(?:[a-z][0-9]+)?(?:-dev)?)\\.jar"
         }
     },
     "JustEnoughItems": {
@@ -574,7 +574,7 @@
         "active": true,
         "curse": {
             "id": "231484",
-            "regex": "cookingforblockheads-(?:(?:neo)?forge|fabric)-[0-9.]+-(?P<version>[0-9]+(?:\\.[0-9]+)+)\\.jar"
+            "regex": "(?:cookingforblockheads[_-](?:(?:(?:neo)?forge|fabric)-)?[0-9.]+|cookingbook-mc[0-9.]+)-(?P<version>[0-9]+(?:\\.[0-9]+)+)\\.jar"
         }
     },
     "InGameAccountSwitcher": {
@@ -678,7 +678,7 @@
         "active": true,
         "curse": {
             "id": "231095",
-            "regex": "(?:ChiselsBits|chisels-and-bits)-(?:(?:neo)?forge-)?(?:[0-9.]+(?:-snapshot)?-)?(?P<version>[0-9]+(?:\\.[0-9]+)+)(?:-universal)?\\.jar"
+            "regex": "(?:ChiselsBits|chiselsandbits|chisels-and-bits)-(?:(?:neo)?forge-)?(?:[0-9.]+(?:-snapshot)?-)?(?P<version>[0-9]+(?:\\.[0-9]+)+)(?:-universal)?\\.jar"
         }
     },
     "RebornCore": {
@@ -686,7 +686,7 @@
         "active": true,
         "curse": {
             "id": "237903",
-            "regex": "RebornCore-(?:project\\.)?(?P<version>[0-9]+(?:\\.[0-9]+)+(?:-beta(?:\\.[0-9]+)?)?)(?:\\+build\\.[0-9]+)?\\.jar"
+            "regex": "RebornCore-(?:(?:project\\.)|[0-9]+(?:\\.[0-9]+)+-)?(?P<version>[0-9]+(?:\\.[0-9]+)+(?:-beta(?:\\.[0-9]+)?)?)(?:\\+build\\.[0-9]+)?(?:-universal)?\\.jar"
         }
     },
     "TechReborn": {
@@ -814,7 +814,7 @@
         "active": true,
         "curse": {
             "id": "248787",
-            "regex": "AppleSkin-(?:(?:neo)?forge|fabric)-mc.+?-(?P<version>.+)\\.jar"
+            "regex": "AppleSkin-(?:(?:(?:neo)?forge|fabric)-)?mc.+?-(?P<version>.+)\\.jar"
         }
     },
     "Charset": {
@@ -852,7 +852,7 @@
         "active": true,
         "curse": {
             "id": "231275",
-            "regex": "Ding-[0-9.]+-(?:(?:(?:Neo)?Forge|Fabric|LiteLoader)-)?(?P<version>[0-9]+(?:\\.[0-9]+)+)\\.jar"
+            "regex": "Ding-(?:[0-9.]+-(?:(?:Neo)?Forge|Fabric|LiteLoader)-)?(?P<version>(?:MC)?[0-9]+(?:\\.[0-9]+)+(?:v[0-9]+)?)\\.jar"
         }
     },
     "BetterThanBunnies": {
@@ -876,7 +876,7 @@
         "active": true,
         "curse": {
             "id": "229068",
-            "regex": "DeathCounter-[0-9.]+-(?:(?:(?:Neo)?Forge|Fabric|LiteLoader)-)?(?P<version>[0-9]+(?:\\.[0-9]+)+)\\.jar"
+            "regex": "DeathCounter-(?:[0-9.]+-(?:(?:Neo)?Forge|Fabric|LiteLoader)-)?(?P<version>[0-9]+(?:\\.[0-9]+)+)\\.jar"
         }
     },
     "LimitedLives": {
@@ -884,7 +884,7 @@
         "active": true,
         "curse": {
             "id": "233040",
-            "regex": "LimitedLives-[0-9.]+-(?:(?:(?:Neo)?Forge|Fabric|LiteLoader)-)?(?P<version>[0-9]+(?:\\.[0-9]+)+)\\.jar"
+            "regex": "LimitedLives-(?:[0-9.]+-(?:(?:Neo)?Forge|Fabric|LiteLoader)-)?(?P<version>[0-9]+(?:\\.[0-9]+)+)\\.jar"
         }
     },
     "PartyParrots": {
@@ -900,7 +900,7 @@
         "active": true,
         "curse": {
             "id": "229060",
-            "regex": "iChunUtil-[0-9.]+-(?:(?:(?:Neo)?Forge|Fabric|LiteLoader)-)?(?P<version>[0-9]+(?:\\.[0-9]+)+)\\.jar"
+            "regex": "iChunUtil-(?:[0-9.]+-(?:(?:Neo)?Forge|Fabric|LiteLoader)-)?(?P<version>[0-9]+(?:\\.[0-9]+)+)\\.jar"
         }
     },
     "AdventOfAscension": {
@@ -908,7 +908,7 @@
         "active": true,
         "curse": {
             "id": "311054",
-            "regex": "AoA3?-(?P<mc>[0-9]+(?:\\.[0-9]+)+)-(?P<version>[0-9]+(?:\\.[0-9]+)*(?:-.+)?)\\.jar"
+            "regex": "AoA3?-(?:(?P<mc>[0-9]+(?:\\.[0-9]+)+)-)?(?P<version>(?:Tslat-)?[0-9]+(?:\\.[0-9]+)*(?:[A-Za-z]|-.+)?)\\.jar"
         }
     },
     "LagGoggles": {
