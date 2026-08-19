@@ -16,7 +16,8 @@ def dict_raise_on_duplicates(ordered_pairs):
     return d
 
 
-MODS_JSON = Path(__file__).parent.parent / "mod_polling" / "mods.json"
+REPO_ROOT = Path(__file__).parent.parent
+MODS_JSON = REPO_ROOT / "mod_polling" / "mods.json"
 
 LEGACY_CURSE_FILENAMES = (
     ("AdventOfAscension", "AoA-Tslat-1.1.3.jar", "Tslat-1.1.3"),
@@ -30,7 +31,6 @@ LEGACY_CURSE_FILENAMES = (
     ("CookingForBlockheads", "CookingForBlockheads_1.12.2-6.5.0.jar", "6.5.0"),
     ("DeathCounter", "DeathCounter-4.0.0.jar", "4.0.0"),
     ("DeathCounter", "DeathCounter-1.12.2-1.1.0.jar", "1.1.0"),
-    ("Ding", "Ding-MC1.7.10v2.jar", "MC1.7.10v2"),
     ("Ding", "Ding-1.12.2-1.0.2.jar", "1.0.2"),
     ("ForgeMultipart", "ForgeMultipart-1.12.2-2.6.2.83-universal.jar", "2.6.2.83"),
     ("HardcoreQuestingMode", "HQM-The Journey-4.4.4.jar", "4.4.4"),
@@ -70,6 +70,13 @@ CURRENT_CURSE_FILENAMES = (
     ("ThermalExpansion", "thermal_expansion-1.20.1-11.0.1.29.jar", "11.0.1.29"),
     ("ThermalFoundation", "thermal_foundation-1.20.1-11.0.6.70.jar", "11.0.6.70"),
     ("iChunUtil", "iChunUtil-1.21.5-Fabric-1.0.7.jar", "1.0.7"),
+)
+
+# Filenames whose mod version is inseparable from the Minecraft version. A regex that matches these
+# yields a version containing "mc", which version_blocklist.yml rejects, aborting the whole mod's poll.
+UNPARSEABLE_CURSE_FILENAMES = (
+    ("Ding", "Ding-MC1.7.10v2.jar"),
+    ("Ding", "Ding-MC1.9.0v2.jar"),
 )
 
 
@@ -123,12 +130,27 @@ class TestModsJson:
         ("mod", "filename", "expected_version"),
         LEGACY_CURSE_FILENAMES + CURRENT_CURSE_FILENAMES,
     )
-    def test_curse_filename_regressions(self, mod_poller, mod, filename, expected_version):
+    def test_curse_filename_regressions(self, mod_poller, monkeypatch, mod, filename, expected_version):
         # Match through the poller's own compile/search path so flag or matching changes fail here too.
         mod_poller.mods[mod] = self.mods[mod]
         mod_poller.compile_regex(mod)
 
+        # Load the real blocklist so a regex cannot capture a version the poller would reject.
+        monkeypatch.chdir(REPO_ROOT)
+        mod_poller.load_version_blocklist()
+
         match = mod_poller.match_mod_regex(mod, filename)
 
         assert match, f"{mod} regex did not match {filename!r}"
-        assert match.group("version") == expected_version
+
+        version = match.group("version")
+
+        assert version == expected_version
+        assert mod_poller.is_version_valid(version), f"{mod} version {version!r} is rejected by version_blocklist.yml"
+
+    @pytest.mark.parametrize(("mod", "filename"), UNPARSEABLE_CURSE_FILENAMES)
+    def test_curse_filenames_without_usable_version_are_not_matched(self, mod_poller, mod, filename):
+        mod_poller.mods[mod] = self.mods[mod]
+        mod_poller.compile_regex(mod)
+
+        assert mod_poller.match_mod_regex(mod, filename) is None

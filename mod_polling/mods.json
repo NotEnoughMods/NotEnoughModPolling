@@ -852,7 +852,7 @@
         "active": true,
         "curse": {
             "id": "231275",
-            "regex": "Ding-(?:[0-9.]+-(?:(?:(?:Neo)?Forge|Fabric|LiteLoader)-)?)?(?P<version>(?:MC)?[0-9]+(?:\\.[0-9]+)+(?:v[0-9]+)?)\\.jar"
+            "regex": "Ding-[0-9.]+-(?:(?:(?:Neo)?Forge|Fabric|LiteLoader)-)?(?P<version>[0-9]+(?:\\.[0-9]+)+)\\.jar"
         }
     },
     "BetterThanBunnies": {
