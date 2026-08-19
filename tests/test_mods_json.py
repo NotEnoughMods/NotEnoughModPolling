@@ -1,5 +1,4 @@
 import json
-import re
 from pathlib import Path
 
 import pytest
@@ -124,10 +123,12 @@ class TestModsJson:
         ("mod", "filename", "expected_version"),
         LEGACY_CURSE_FILENAMES + CURRENT_CURSE_FILENAMES,
     )
-    def test_curse_filename_regressions(self, mod, filename, expected_version):
-        regex = re.compile(self.mods[mod]["curse"]["regex"], re.IGNORECASE)
+    def test_curse_filename_regressions(self, mod_poller, mod, filename, expected_version):
+        # Match through the poller's own compile/search path so flag or matching changes fail here too.
+        mod_poller.mods[mod] = self.mods[mod]
+        mod_poller.compile_regex(mod)
 
-        match = regex.search(filename)
+        match = mod_poller.match_mod_regex(mod, filename)
 
         assert match, f"{mod} regex did not match {filename!r}"
         assert match.group("version") == expected_version
