@@ -1,3 +1,5 @@
+import json
+from pathlib import Path
 from typing import ClassVar
 from unittest.mock import AsyncMock
 
@@ -177,6 +179,34 @@ class TestCheckSpongeMaven:
 
 
 class TestCheckCurse:
+    async def test_storage_drawers_with_and_without_mc_in_filename(self, mod_poller):
+        mods_path = Path(__file__).resolve().parents[1] / "mod_polling" / "mods.json"
+        mod_poller.mods["StorageDrawers"] = json.loads(mods_path.read_text())["StorageDrawers"]
+        mod_poller.compile_regex("StorageDrawers")
+        mod_poller.fetch_json = AsyncMock(
+            return_value={
+                "files": [
+                    {
+                        "id": 200,
+                        "name": "StorageDrawers-neoforge-26.1.0.0.jar",
+                        "type": "release",
+                        "versions": ["26.1", "NeoForge"],
+                    },
+                    {
+                        "id": 100,
+                        "name": "StorageDrawers-1.12.2-5.4.2.jar",
+                        "type": "release",
+                        "versions": ["1.12.2", "Forge"],
+                    },
+                ]
+            }
+        )
+
+        assert await mod_poller.check_cfwidget("StorageDrawers") == {
+            "26.1": {"version": "26.1.0.0"},
+            "1.12.2": {"version": "5.4.2"},
+        }
+
     async def test_normal_release(self, mod_poller):
         mod_poller.fetch_json = AsyncMock(
             return_value={
