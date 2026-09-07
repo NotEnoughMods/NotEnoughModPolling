@@ -173,6 +173,9 @@ For the full plugin development guide, see [docs/plugins.md](docs/plugins.md).
 # Install dev dependencies
 uv sync --dev
 
+# Install the commit-message hook (once per clone)
+uv run pre-commit install --install-hooks
+
 # Run tests
 uv run pytest
 
@@ -182,6 +185,11 @@ uv run ruff format .
 ```
 
 Tests run automatically on push/PR via GitHub Actions. The project uses [ruff](https://docs.astral.sh/ruff/) for linting and formatting. See `pyproject.toml` for the enabled rule sets.
+
+Commit messages use [Conventional Commits](https://www.conventionalcommits.org/), for example
+`fix: handle StorageDrawers filenames without Minecraft version` or `chore(deps): update dependencies`.
+The commit-message hook checks this format before creating a commit. Scopes are optional; merge and
+autosquash messages are allowed. Hooks run locally and can be bypassed; they do not enforce GitHub branch rules.
 
 ## Credits
 

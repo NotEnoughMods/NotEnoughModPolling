@@ -1,0 +1,9 @@
+default_install_hook_types: [commit-msg]
+
+repos:
+  - repo: https://github.com/compilerla/conventional-pre-commit
+    rev: 5c3f3c61b143a94e9ab5d767ff4d0dc9d6801aa3  # v4.3.0
+    hooks:
+      - id: conventional-pre-commit
+        stages: [commit-msg]
+        args: [--verbose]
