@@ -14,7 +14,7 @@ dependencies = [
 
 [dependency-groups]
 dev = [
-    "ruff>=0.15.4",
+    "ruff>=0.16.0",
     "pytest>=8.0",
     "pytest-asyncio>=1.0",
     "pre-commit>=4.6.2",
@@ -35,7 +35,8 @@ target-version = "py314"
 line-length = 120
 
 [tool.ruff.lint]
-select = [
+# Keep Ruff's default safety checks alongside the project's existing rule families.
+extend-select = [
     "F",     # pyflakes
     "E",     # pycodestyle errors
     "W",     # pycodestyle warnings
@@ -44,6 +45,12 @@ select = [
     "B",     # flake8-bugbear
     "SIM",   # flake8-simplify
     "RUF",   # ruff-specific rules
+]
+ignore = [
+    "ASYNC230", # Existing async paths use synchronous local file I/O.
+    "BLE001",   # Bot/plugin boundaries also report exceptions to IRC or result collectors.
+    "DTZ",      # Existing logs and uptime calculations use naive local timestamps.
+    "S112",     # Maintenance scripts intentionally skip failed remote lookups.
 ]
 
 [tool.ruff.lint.isort]

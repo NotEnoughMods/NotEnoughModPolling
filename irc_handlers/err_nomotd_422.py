@@ -33,6 +33,6 @@ async def execute(self, send_msg, prefix, command, params):
     if isinstance(self.auth, str):
         await send_msg(self.auth, 5)
 
-    for _plugin_id, plugin in self.plugins.items():
+    for plugin in self.plugins.values():
         if plugin.setup:
             await plugin.setup(self, True)

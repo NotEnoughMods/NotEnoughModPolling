@@ -52,14 +52,18 @@ help_dict = {
     ],
     "failedmods": [
         "{0} failedmods",
-        f"Shows a list of mods that have failed to be polled at least {MAX_POLL_FAILURES} times in a row"
-        " and were disabled automatically.",
+        (
+            f"Shows a list of mods that have failed to be polled at least {MAX_POLL_FAILURES} times in a row"
+            " and were disabled automatically."
+        ),
     ],
     "failcount": [
         "{0} failcount",
         "Shows how many times mods have failed to be polled so far. At least two failures in a row required.",
-        f"Mods that have failed being polled {MAX_POLL_FAILURES} times are excluded from this list."
-        " Check {0} failedmods for those mods.",
+        (
+            f"Mods that have failed being polled {MAX_POLL_FAILURES} times are excluded from this list."
+            " Check {0} failedmods for those mods."
+        ),
     ],
     "showinfo": [
         "{0} showinfo <mod> [<path> [...]]",
@@ -168,7 +172,7 @@ async def polling_task(handle, _pipe):
                 try:
                     result = await fut
                 except Exception:
-                    nemp_logger.error("Unexpected exception in polling coroutine", exc_info=True)
+                    nemp_logger.exception("Unexpected exception in polling coroutine")
                     continue
                 successes, failures = result
                 failed.extend(failures)

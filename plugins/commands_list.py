@@ -14,9 +14,9 @@ async def _commands(router, name, params, channel, userdata, rank, is_channel):
             group[cmdrank].append(cmd_name)
 
     await router.send_notice(name, "Available commands:")
-    for i in group:
-        group[i].sort()
-        await router.send_notice(name, "{}: {}".format(Permission(i).name.capitalize(), " | ".join(group[i])))
+    for i, commands in group.items():
+        commands.sort()
+        await router.send_notice(name, "{}: {}".format(Permission(i).name.capitalize(), " | ".join(commands)))
 
 
 COMMANDS = {

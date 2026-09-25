@@ -4,8 +4,8 @@ import json
 import logging
 import re
 import urllib.parse
-import xml.etree.ElementTree as ElementTree
 from datetime import UTC, datetime
+from xml.etree import ElementTree
 
 import aiohttp
 import yaml
@@ -142,7 +142,7 @@ class ModPoller:
             raise
 
         # compile regexes for performance
-        self.invalid_versions = [re.compile(regex, re.I) for regex in self.invalid_versions[:]]
+        self.invalid_versions = [re.compile(regex, re.IGNORECASE) for regex in self.invalid_versions[:]]
 
     async def load_mc_blocklist(self):
         with open("mod_polling/mc_blocklist.yml") as f:
@@ -178,7 +178,7 @@ class ModPoller:
             if "regex" in data:
                 return data["regex"]
             else:
-                for _k, v in data.items():
+                for v in data.values():
                     ret = self._find_regex(v)
                     if ret:
                         return ret
@@ -190,7 +190,7 @@ class ModPoller:
         regex = self._find_regex(self.mods[mod])
 
         if regex:
-            self.mods[mod]["_regex"] = re.compile(regex, re.I)
+            self.mods[mod]["_regex"] = re.compile(regex, re.IGNORECASE)
 
     def get_mod_regex(self, mod):
         return self.mods[mod].get("_regex")
@@ -709,7 +709,7 @@ class ModPoller:
 
             return (statuses, None)
         except Exception as e:
-            logger.error("%s failed to be polled", mod, exc_info=True)
+            logger.exception("%s failed to be polled", mod)
             return ([], e)  # an exception was raised, so we return a True
 
 

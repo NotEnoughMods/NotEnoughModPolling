@@ -65,18 +65,15 @@ async def _watchdog(router, name, params, channel, userdata, rank, is_channel):
                     if event_stats["average"] is None:
                         continue
 
-                    if event_stats["min"] < minimum:
-                        minimum = event_stats["min"]
-                    if event_stats["max"] > maximum:
-                        maximum = event_stats["max"]
+                    minimum = min(minimum, event_stats["min"])
+                    maximum = max(maximum, event_stats["max"])
                     average = (average + event_stats["average"]) / 2
 
             stats[event_type] = [average, minimum, maximum]
 
         data_output = []
 
-        for event in stats:
-            average, minimum, maximum = stats[event]
+        for event, (average, minimum, maximum) in stats.items():
             if average is None:
                 average, minimum, maximum = 0, 0, 0
 

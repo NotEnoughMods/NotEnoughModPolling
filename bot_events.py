@@ -76,10 +76,8 @@ class StandardEvent:
             stats["max"] = time_taken
         else:
             stats["average"] = (stats["average"] + time_taken) / 2.0
-            if time_taken < stats["min"]:
-                stats["min"] = time_taken
-            if time_taken > stats["max"]:
-                stats["max"] = time_taken
+            stats["min"] = min(stats["min"], time_taken)
+            stats["max"] = max(stats["max"], time_taken)
 
     async def run_all_events(self, command_handler, *args, **kargs):
         self.comes_from_event = True
@@ -234,10 +232,8 @@ class TimerEvent(StandardEvent):
                 stats["max"] = time_taken
             else:
                 stats["average"] = (stats["average"] + time_taken) / 2.0
-                if time_taken < stats["min"]:
-                    stats["min"] = time_taken
-                if time_taken > stats["max"]:
-                    stats["max"] = time_taken
+                stats["min"] = min(stats["min"], time_taken)
+                stats["max"] = max(stats["max"], time_taken)
 
             self._events[event_name]["last_exec_time"] = time.time()
 
@@ -290,7 +286,5 @@ class MsgEvent(StandardEvent):
             stats["max"] = time_taken
         else:
             stats["average"] = (stats["average"] + time_taken) / 2.0
-            if time_taken < stats["min"]:
-                stats["min"] = time_taken
-            if time_taken > stats["max"]:
-                stats["max"] = time_taken
+            stats["min"] = min(stats["min"], time_taken)
+            stats["max"] = max(stats["max"], time_taken)

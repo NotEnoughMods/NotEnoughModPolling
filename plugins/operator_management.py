@@ -4,6 +4,8 @@ from command_router import Permission
 
 PLUGIN_ID = "operator_management"
 
+logger = logging.getLogger("cmd.operator_management")
+
 
 def _find_in_list(user, userlist):
     """Return the matching name from userlist (case-insensitive), or None."""
@@ -22,7 +24,7 @@ async def _addop(router, username, params, channel, userdata, rank, is_channel):
             router.auth_tracker.add_user(name)
             await router.whois_user(name)
 
-    logging.info("User '%s' has added user(s) '%s'", username, ", ".join(names))
+    logger.info("User '%s' has added user(s) '%s'", username, ", ".join(names))
     await router.send_chat_message(router.send, channel, "Added " + ", ".join(names))
 
 
@@ -44,7 +46,7 @@ async def _remop(router, username, params, channel, userdata, rank, is_channel):
             notremoved.append(name)
 
     if len(removed) > 0:
-        logging.info("User '%s' has removed user(s) '%s'", username, ", ".join(removed))
+        logger.info("User '%s' has removed user(s) '%s'", username, ", ".join(removed))
         await router.send_chat_message(router.send, channel, "Removed " + ", ".join(removed))
     if len(notremoved) > 0:
         await router.send_chat_message(router.send, channel, "Didn't remove " + ", ".join(notremoved))

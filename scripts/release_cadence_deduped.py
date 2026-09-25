@@ -31,7 +31,7 @@ async def fetch_mod(session, name, curse_id, semaphore):
                 for f in files:
                     uploaded = f.get("uploaded_at")
                     if uploaded:
-                        dt = datetime.fromisoformat(uploaded.replace("Z", "+00:00"))
+                        dt = datetime.fromisoformat(uploaded)
                         dates.append(dt)
                 dates.sort(reverse=True)
                 return (name, curse_id, dates, None)

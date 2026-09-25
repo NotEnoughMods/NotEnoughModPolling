@@ -181,7 +181,7 @@ class CommandRouter:
 
     async def close(self):
         """Call teardown() on all plugins that define one."""
-        for _plugin_id, plugin in self.plugins.items():
+        for plugin in self.plugins.values():
             if plugin.teardown:
                 await plugin.teardown(self)
 

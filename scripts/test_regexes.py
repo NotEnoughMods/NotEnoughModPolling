@@ -136,7 +136,7 @@ async def check_curse(session, mod_name, mod_data, compiled_regex, *, use_cache=
         uploaded = f.get("uploaded_at")
         if uploaded:
             with contextlib.suppress(ValueError, TypeError):
-                last_update = datetime.fromisoformat(uploaded.replace("Z", "+00:00"))
+                last_update = datetime.fromisoformat(uploaded)
             break
 
     quality_warnings = []
@@ -249,7 +249,7 @@ async def check_github_release(
     published = releases[0].get("published_at")
     if published:
         with contextlib.suppress(ValueError, TypeError):
-            last_update = datetime.fromisoformat(published.replace("Z", "+00:00"))
+            last_update = datetime.fromisoformat(published)
 
     if type_ == "tag":
         tag_name = releases[0]["tag_name"]
@@ -448,7 +448,7 @@ async def test_mod(session, mod_name, mod_data, config, *, use_cache=False, all_
         }
 
     regex_str = find_regex(mod_data)
-    compiled_regex = re.compile(regex_str, re.I) if regex_str else None
+    compiled_regex = re.compile(regex_str, re.IGNORECASE) if regex_str else None
 
     checker = PARSER_MAP.get(function)
     if not checker:

@@ -51,8 +51,10 @@ _help_dict = {
     ],
     "compare": [
         "=nem compare <oldVersion> <newVersion>",
-        "Compares the NEMP entries for two different MC versions and says how many mods "
-        "haven't been updated to the new version.",
+        (
+            "Compares the NEMP entries for two different MC versions and says how many mods "
+            "haven't been updated to the new version."
+        ),
     ],
     "total": [
         "=nem total [version]",
@@ -258,7 +260,7 @@ class Plugin:
                             version=jsonres[line]["dev"],
                         )
                 except Exception:
-                    nem_logger.error("Error getting dev version for %s", params[1], exc_info=True)
+                    nem_logger.exception("Error getting dev version for %s", params[1])
 
                 await router.send_message(
                     channel,
@@ -371,7 +373,7 @@ class Plugin:
                             )
 
                     except Exception:
-                        nem_logger.error("Error getting dev version for %s in %s", mod_name, ver, exc_info=True)
+                        nem_logger.exception("Error getting dev version for %s in %s", mod_name, ver)
 
                     await router.send_message(
                         channel,
