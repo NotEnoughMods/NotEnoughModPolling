@@ -63,6 +63,8 @@ CURRENT_CURSE_FILENAMES = (
     ("IronChests", "ironchest-1.21.11-neoforge-16.7.3.jar", "16.7.3"),
     ("LimitedLives", "LimitedLives-1.21.5-NeoForge-1.4.1.jar", "1.4.1"),
     ("McJtyLib", "mcjtylib-1.21-9.0.21.jar", "9.0.21"),
+    ("McJtyLib", "mcjtylib-fabric-26.1.2-10.0.1-fabric.jar", "10.0.1"),
+    ("McJtyLib", "mcjtylib-26.3-11.0.1.jar", "11.0.1"),
     ("Ping", "Ping-fabric-26.1.1-1.15.1.jar", "1.15.1"),
     ("RebornCore", "RebornCore-6.1.0.jar", "6.1.0"),
     ("RedstoneArsenal", "redstone_arsenal-1.20.1-8.0.1.24.jar", "8.0.1.24"),
@@ -70,6 +72,8 @@ CURRENT_CURSE_FILENAMES = (
     ("ThermalExpansion", "thermal_expansion-1.20.1-11.0.1.29.jar", "11.0.1.29"),
     ("ThermalFoundation", "thermal_foundation-1.20.1-11.0.6.70.jar", "11.0.6.70"),
     ("iChunUtil", "iChunUtil-1.21.5-Fabric-1.0.7.jar", "1.0.7"),
+    ("XNet", "xnet-fabric-26.2-9.0.0-fabric.jar", "9.0.0"),
+    ("XNet", "xnet-1.21-7.0.7.jar", "7.0.7"),
 )
 
 # Filenames whose mod version is inseparable from the Minecraft version. A regex that matches these
