@@ -25,6 +25,9 @@ dev = [
 # malicious or broken upload has time to be reported/yanked before it reaches the
 # lockfile. Re-evaluated on each `uv lock --upgrade`/`--refresh`.
 exclude-newer = "7 days"
+# GHSA-cx6f-vjhg-g3cc: allow the patched virtualenv release before its cooldown expires.
+constraint-dependencies = ["virtualenv>=21.14.13"]
+exclude-newer-package = { virtualenv = false }
 
 [tool.pytest.ini_options]
 asyncio_mode = "auto"

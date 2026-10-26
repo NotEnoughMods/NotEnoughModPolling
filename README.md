@@ -184,6 +184,15 @@ uv run ruff check .
 uv run ruff format .
 ```
 
+To update dependencies, run `uv lock --upgrade` followed by `uv sync --dev --locked`, then run the checks above.
+Run `uv audit --locked --preview-features audit-command` as well: a successful upgrade can still retain vulnerable
+versions because resolution respects the seven-day release cooldown in `pyproject.toml`. Commit the updated `uv.lock`.
+
+`virtualenv` has a package-specific cooldown exception and a minimum version of `21.14.13` for
+[GHSA-cx6f-vjhg-g3cc](https://github.com/pypa/virtualenv/security/advisories/GHSA-cx6f-vjhg-g3cc).
+Other packages retain the cooldown. Remove the `virtualenv` entry from `exclude-newer-package` once the patched release
+has aged seven days; retain the security constraint.
+
 Tests run automatically on push/PR via GitHub Actions. The project uses [ruff](https://docs.astral.sh/ruff/) for linting and formatting. See `pyproject.toml` for the enabled rule sets.
 
 Commit messages use [Conventional Commits](https://www.conventionalcommits.org/), for example
