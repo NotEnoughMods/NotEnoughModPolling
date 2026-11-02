@@ -742,7 +742,7 @@
         "active": true,
         "curse": {
             "id": "248055",
-            "regex": "thedragonlib-(?:(?:neo)?forge-)?(?P<mc>[0-9\\.]+)-(?P<version>.+?)\\.jar"
+            "regex": "thedragonlib-(?:(?:neo)?forge-)?(?:(?P<mc>[0-9\\.]+)-)?(?P<version>.+?)\\.jar"
         }
     },
     "ThutCore": {
